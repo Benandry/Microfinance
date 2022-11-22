@@ -132,13 +132,22 @@ class AllApiController extends AbstractController
 
     #######API code epargne ================================
 
-    #[Route('/api/epargne/{code}', name: 'code_compte_eprgne')]
+    #[Route('/api/epargne', name: 'code_compte_eprgne')]
 
-    public function api_compte_epargne(CompteEpargneRepository $repo,$code): Response
+    public function api_compte_epargne(CompteEpargneRepository $repo): Response
     {
 
-        $api = $repo->codeCompteEpargne($code); 
+        $api = $repo->codeCompteEpargne(); 
         return new JsonResponse($api);
     }
 
+
+    #[Route('/info/{code}', name: 'code_compte_eprgne_nom_et_prenom')]
+
+    public function api_compte_epargne_client(CompteEpargneRepository $repo,$code): Response
+    {
+
+        $api = $repo->codeCompteEpargneInfo($code); 
+        return new JsonResponse($api);
+    }
 }

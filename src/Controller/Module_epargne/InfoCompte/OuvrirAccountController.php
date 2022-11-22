@@ -140,11 +140,24 @@ class OuvrirAccountController extends AbstractController
         
         $form = $this->createFormBuilder()
         ->add('code', TextType::class,[
-            'label' => "Code epargne client  : ",
+            'label' => "Compte epargne client  : ",
             'attr' =>[
                 'class' => 'form-control',
-                'maxlength' => 10,
-                'minLength' => 10
+                'maxlength' => 15,
+                'minLength' => 15
+            ]
+        ])
+        ->add('code_client', TextType::class,[
+            'label' => "Code client : ",
+            'attr' =>[
+                'class' => 'form-control',
+            ]
+        ])
+
+        ->add('produit', TextType::class,[
+            'label' => "Produit : ",
+            'attr' =>[
+                'class' => 'form-control',
             ]
         ])
         ->add('nom', TextType::class,[
@@ -153,8 +166,9 @@ class OuvrirAccountController extends AbstractController
                 'class' => 'form-control',
             ]
         ])
+
         ->add('prenom', TextType::class,[
-            'label' => "Adresse email : ",
+            'label' => "Preno, du client : ",
             'attr' =>[
                 'class' => 'form-control',
             ]
