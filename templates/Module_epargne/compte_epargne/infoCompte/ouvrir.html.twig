@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Ouvrir une compte epargne Client
+{% endblock %}
+
+{% block head %}
+    Ouvrir une compte epargne Client
+{% endblock %}
+
+{% block body %}
+    <div class="rounded g-0 m-5 p-4 shadow-sm">
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-4 col-sm-4">
+                    {{ form_row(form.code)}}
+                    <div id="code_suggest"></div>
+
+                    <div id="info_client">
+                        {{ form_row(form.nom)}}
+                        {{ form_row(form.prenom)}}
+                    </div>
+                </div>
+                <div class="col-auto col-sm-auto mt-3 ms-5" >
+                    <p class="fw-bold"> Code Client : <span id="code_cli"></span> </p>
+                    <p class="fw-bold"> Nom Client : <span id="nom_cli"></span> </p>
+                    <p class="fw-bold"> Prenom Client : <span id="prenom_cli"></span> </p>
+                </div>
+            </div>
+            <div class="row">
+                {{ form_row(form.submit)}}
+            </div>
+        {{ form_end(form)}}
+    </div>
+{% endblock %}

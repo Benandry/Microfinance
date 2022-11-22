@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'inscription</title>
+
+        {{ encore_entry_link_tags('app') }}
+
+        {{ encore_entry_script_tags('app') }}
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="card " style="width: 29rem; padding: 20px;box-shadow: 5px 10px 8px #888888;">
+
+                            <h5 class="fw-bold text-center">Page d'inscription</h5>
+                        {{ form_start(registrationForm) }}
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ form_row(registrationForm.prenom) }}
+                                    {{ form_row(registrationForm.nom) }}
+                                    {{ form_row(registrationForm.email) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ form_row(registrationForm.responsabilite) }}
+                                    {{ form_row(registrationForm.password, {
+                                        label: 'Password'
+                                    }) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ form_row(registrationForm.agreeTerms) }}
+                                </div>
+                                <div class="col-6">
+                                    <a href="{{path('app_connexion_')}}"><i class="fa fa-pencil"></i>Connexion</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary btn-sm">Register</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,110 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+        <h2 style="color:black;">Rapport solde :</h2>
+        {% if showTable == false %}
+        
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-primary">
+                            <h4 class="modal-title text-center">Recherche solde par date</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        {{ form_start(form1) }}
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            
+                                    <div class="text-center" id="one_date">
+                                        <h4 class="text-center"> Date arrêtée </h4>
+                                        {{ form_row(form1.date1) }}
+                                    </div>
+
+                                    <div class="text-center" id="two_date">
+                                        <h4 class="text-center">Entre deux dates </h4>
+                                        {{ form_row(form1.Du) }}
+                                        {{ form_row(form1.Au) }}
+                                    </div>
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                {{ form_row(form1.Filtre) }}
+                            </div>
+                            {{ form_end(form1) }}
+                        
+                    </div>
+                </div>
+            </div>
+            {# /***********Fin modal *********** #}
+
+        {% else %}
+            <table class="table1 table table-bordered" style="margin-top:25px;">
+                <thead class="alert alert-success">
+                    <tr>
+                        <th>Date transaction</th>
+                        <th>Compte Epargne</th>
+                        <th>Description</th> 
+                        <th>Nom et prenom</th>
+                        <th>Nom Produit</th>
+                        <th>Solde</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                {% for CompteEpargne in compte_epargnes %}
+                    <tr>
+                        <td>{{ CompteEpargne.DateTransaction | date('Y-m-d') }}</td>
+                        <td>{{ CompteEpargne.codeepargne }}</td>
+                        <td>{{ CompteEpargne.Description }}</td> 
+                        <td>{{ CompteEpargne.nomclient }} {{ CompteEpargne.prenomclient }}</td>
+                        <td> {{ CompteEpargne.nomproduit }}</td>
+                        <td>
+                            {% if CompteEpargne.Description == 'RETRAIT' %}
+                                <span style="color: red;"> <i class="fa fa-long-arrow-up"></i> {{ CompteEpargne.soldes }}</span>
+                            {% else %}
+                                <span style="color: green;"> <i class="fa fa-long-arrow-down"></i> {{ CompteEpargne.soldes }}</span>
+                            {% endif %}
+                        </td>
+                        <td> 
+                            {# <div class="col-sm-2">
+                                <a href="{{ path('app_devise_show', {'id': devise.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Afficher</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="{{ path('app_devise_edit', {'id': devise.id}) }}" class="btn btn-success"> <i class="fa fa-eye"></i> editer</a>
+                            </div> #}
+                        </td>
+                    </tr>
+                {%  endfor %}
+                </tbody>
+            </table>
+    {% endif %}
+
+    {% block javascript %}
+
+        <script>
+                $(document).ready(function(){
+                    $(window).on('load',()=>{
+                        $('#myModal').modal('show')
+                    })
+                    $("#filtre_rapport_solde_date1").on('change',function(){
+                        
+                        $('#two_date').hide();
+                    });
+
+                    $("#filtre_rapport_solde_Du").on('change',function(){
+                        $('#one_date').hide(); 
+                    });
+                    
+                    $("#filtre_rapport_solde_Au").on('change',function(){
+                        $('#one_date').hide(); 
+                    });
+                });
+        </script>
+    {% endblock %}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Listes des groupes
+{% endblock %}
+
+{% block head %}
+    Listes des groupes
+{% endblock %}
+
+{% block body %}
+    <div class="row mb-3">
+        <div class="col-2 col-sm-3 col-md-3">
+            <a href="{{ path('app_groupe_new') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter nouveau </a>  
+        </div>
+    </div>
+{{ include('modal.html.twig') }}
+
+    <table class="table1 table">
+        <thead>
+            <tr>
+                <th>Code groupe</th>
+                <th>Date de creation</th>
+                <th>Nom Groupe</th>
+                <th>Numero Mobile</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for Groupe in groupes %}
+            <tr>
+                <td class="fw-bold">{{ Groupe.codegroupe }}</td>
+                <td>{{ Groupe.dateInscription ? Groupe.dateInscription|date('Y-m-d') : '' }}</td>
+                <td>{{ Groupe.nomGroupe }}</td>
+                <td>{{ Groupe.numeroMobile }}</td>
+                <td>{{ Groupe.email }}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-3 col-sm-3">
+                            <a href="{{ path('app_groupe_show', {'id': Groupe.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-3 col-sm-3">
+                            <a href="{{ path('app_groupe_edit', {'id': Groupe.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                        <div class="col-auto col-sm-auto">
+                            {{ include('Module_client/groupe/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

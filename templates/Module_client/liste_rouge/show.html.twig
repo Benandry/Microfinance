@@ -1,0 +1,28 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>ListeRouge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ liste_rouge.id }}</td>
+            </tr>
+            <tr>
+                <th>Dateliste</th>
+                <td>{{ liste_rouge.dateliste ? liste_rouge.dateliste|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Raison</th>
+                <td>{{ liste_rouge.raison }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_liste_rouge_index') }}">back to list</a>
+
+    <a href="{{ path('app_liste_rouge_edit', {'id': liste_rouge.id}) }}">edit</a>
+
+    {{ include('Module_client/liste_rouge/_delete_form.html.twig') }}
+{% endblock %}

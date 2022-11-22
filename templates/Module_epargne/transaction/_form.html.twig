@@ -1,0 +1,81 @@
+{{ form_start(form) }}
+     <div class="row" >
+        <div class="col-sm-5" style="display:none;">
+            {{ form_row(form.typeClient) }}
+            {{ form_row(form.codeepargneclient) }}
+            <div id="commune_suggest"> </div>
+        </div>
+        <div class="col-6 col-sm-6">
+
+        {# /*********debut ******************************* #}
+
+
+            <div class="card m-3">
+                <div class="card-title text-center p-2" > Information du client </div>
+                <hr>
+                <div class="card-body">
+                    <p class="fw-bold">Code client : <span id="code_client"> {{ code }}</span></p>
+                    <p class="fw-bold"> Nom Client : <span id="nom"> {{ nom }}</span></p>
+                    <p class="fw-bold"> Prenom client :  <span id="prenom"> {{ prenom }}</span></p>
+                    <p class="fw-bold"> Solde client :  
+                        {% if solde != '' %}
+                            <span id="solde_cli">{{ solde }}</span>     
+                        {% else %}
+                            <span id="solde_cli">0</span>  
+                        {% endif %} 
+                    </p>
+                </div>
+            </div>
+
+            <div style="display: none">
+                <span id="ind">{{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}</span>
+                <span id="grp">{{ form_row(form.nomgroupe) }}</span>
+                {{ form_row(form.donneessolde) }}
+                {{ form_row(form.Description) }}
+            </div>
+
+            {# ********************fin ***************************** #}
+        </div>
+    </div>
+<hr>
+    <div class="row alert alert-secondary" style="color:black;">
+        <div class="col-sm-5">
+            {{ form_row(form.PieceComptable) }}
+            {{ form_row(form.DateTransaction) }}
+        </div>
+        <div class="col-sm-5">
+            {{ form_row(form.montant_bruite) }}
+            {{ form_row(form.commission) }}
+            {{ form_row(form.papeterie) }}
+            {{ form_row(form.Montant) }}
+            <div style="display: none;">
+                {{ form_row(form.solde) }}
+            </div>
+        </div>
+    </div><br>
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+{# {{ form_start(form) }}
+    <div class="row jumbotron jumbotron-fluid" style="color:black;">
+        <div class="col-sm-5">
+            {{ form_row(form.typeClient) }}
+            {{ form_row(form.codeepargneclient) }}
+            <div id="commune_suggest"> </div>
+            {{ form_row(form.Description) }}
+            {{ form_row(form.PieceComptable) }}
+        </div>
+        <div class="col-sm-5">
+            {{ form_row(form.DateTransaction) }}
+            {{ form_row(form.montant_bruite) }}
+            {{ form_row(form.commission) }}
+            {{ form_row(form.papeterie) }}
+            {{ form_row(form.Montant) }}
+            <div style="display: none;">
+                {{ form_row(form.solde) }}
+            </div>
+        </div>
+    </div><br>
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}

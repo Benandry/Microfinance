@@ -1,0 +1,127 @@
+@import './custom/custom';
+@import '~bootstrap/scss/bootstrap';
+
+.sidebar_body{
+    background-color: #275d71;
+}
+
+#text-paragraphe{
+    display: none;
+}
+
+#inputEmail,#inputPassword,#login,#registration_form_prenom,#registration_form_nom,#registration_form_email,#registration_form_responsabilite,#registration_form_password_first,#registration_form_password_second{
+    font-size: small;
+    height: 30px;
+}
+
+.card{
+    font-size: 13px;
+}
+
+#age{
+    color: #000;
+    padding: 2px;
+}
+
+#login{
+    background-color: #4786a5;
+}
+
+#login:hover{
+    background-color: #275d71;
+}
+
+.menu{
+    font-size:14px;
+    color: #fff;
+}
+
+.menu:hover{
+    color: #000;
+    font-size: 15px;
+}
+.lien,.rapport{
+    font-size: 13px;
+    color: #fff;
+}
+
+.lien:hover,.rapport:hover{
+    font-size: 14px;
+    color: #000;
+}
+.rapport:active{
+    color: #000;
+}
+.down{
+    font-size: 13px;
+    color: #fff;
+}
+
+.down:hover{
+    font-size: 13px;
+    color: #000;
+}
+.dropmenu{
+    background-color: #275d71;
+}
+
+// *******************Tabs ******************/
+.nav-tabs .active {
+    color: #0a5eb1;
+    border: 1px solid #3c71bf;
+}
+
+.nav-tabs .nav-link{
+    color: #0a5eb1;
+    background-color: #fff;
+    margin-right: 1rem;
+    border: 2px solid #0a5eb1;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: 14px;
+}
+
+.nav-tabs{
+    border-bottom: 2px solid #275d71;
+}
+
+.tab-content{
+    border: 1px solid #275d71;
+    padding: 25px;
+}
+
+/******************Information individuel client **********************/
+div input ,div select, option{
+    font-size: small;
+    height: 30px;
+}
+label{
+    font-size: 13px;
+} 
+
+span #age{
+    font-size: 12px;
+}
+
+thead{
+    background-color: #275d71;
+    color: #fff;
+}
+
+p,td,th{
+    font-size: 13px;
+}
+
+.suggestion{
+    font-size: 14px;
+}
+.suggestion:hover{
+    background-color: #275d71;
+    color: #fff;
+}
+#code_cli,#nom_cli,#prenom_cli{
+    font-style: italic;
+}
+.nav-link .rapport .dropdown-toggle{
+    color: red;
+}

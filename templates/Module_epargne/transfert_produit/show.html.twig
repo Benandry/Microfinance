@@ -1,0 +1,30 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>TransfertProduit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ transfert_produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Datetransfert</th>
+                <td>{{ transfert_produit.datetransfert ? transfert_produit.datetransfert|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ transfert_produit.Montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transfert_produit_index') }}">back to list</a>
+
+    <a href="{{ path('app_transfert_produit_edit', {'id': transfert_produit.id}) }}">edit</a>
+
+    {{ include('Module_epargne/transfert_produit/_delete_form.html.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

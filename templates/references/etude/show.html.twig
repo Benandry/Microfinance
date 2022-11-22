@@ -1,0 +1,23 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Etude</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etude.id }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ etude.niveau }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('app_etude_index', {'id': etude.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>
+        <a href="{{ path('app_etude_edit', {'id': etude.id}) }}" class="btn btn-success"><i class="fa fa-eye"></i>editer</a>
+{% endblock %}
+
+{{ include('footer.html.twig') }}

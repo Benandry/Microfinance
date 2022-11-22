@@ -1,0 +1,91 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+        <h2 style="color:black;">Rapport Compte epargne :</h2>
+        {% if showTable == false %}
+        
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-primary">
+                            <h4 class="modal-title text-center">Recherche par date</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        {{ form_start(form) }}
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            
+                                    <div class="text-center" id="one_date">
+                                        <h4 class="text-center"> Date arrêtée </h4>
+                                        {{ form_row(form.datearrete) }}
+                                    </div>
+
+                                    <div class="text-center" id="two_date">
+                                        <h4 class="text-center">Entre deux dates </h4>
+                                        {{ form_row(form.datedebut) }}
+                                        {{ form_row(form.datefin) }}
+                                    </div>
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                {{ form_row(form.Filtre) }}
+                            </div>
+                            {{ form_end(form) }}
+                        
+                    </div>
+                </div>
+            </div>
+            {# /***********Fin modal *********** #}
+
+         {% else %} 
+            <table class="table1 table table-bordered" style="margin-top:25px;">
+                <thead class="alert alert-success">
+                    <tr>
+                        <th>Date d'ouverture</th>
+                        <th>Compte Epargne</th>
+                        <th>Nom</th>
+                        <th>Nom Produit</th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                {% for CompteEpargne in rapportcompteep %}
+                    <tr>
+                        <td>{{ CompteEpargne.datedebut | date('Y-m-d') }}</td>
+                        <td>{{ CompteEpargne.codeepargne }}</td>
+                        <td>{{ CompteEpargne.nom_client }} {{ CompteEpargne.prenom_client }}</td>
+                        <td> {{ CompteEpargne.nomproduit }}</td>
+                    </tr>
+                {%  endfor %}
+                </tbody>
+            </table>
+    {% endif %}
+
+    {% block javascript %}
+
+        <script>
+                $(document).ready(function(){
+                    $(window).on('load',()=>{
+                        $('#myModal').modal('show')
+                    })
+                    $("#rapportcompteepargnetrie_datearrete").on('change',function(){
+                        
+                        $('#two_date').hide();
+                    });
+
+                    $("#rapportcompteepargnetrie_datedebut").on('change',function(){
+                        $('#one_date').hide(); 
+                    });
+                    
+                    $("#rapportcompteepargnetrie_datefin").on('change',function(){
+                        $('#one_date').hide(); 
+                    });
+                });
+        </script>
+    {% endblock %}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

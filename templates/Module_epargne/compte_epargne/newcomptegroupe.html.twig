@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Compte epargne du groupe {{ nom }} 
+{% endblock %}
+
+{% block head %}
+    Compte epargne du groupe {{ nom }}
+{% endblock %}
+{% block body %}
+
+       {% for message in app.flashes('success') %}>
+             <strong>{{ message }}</strong>
+       {% endfor %}
+
+    <div class="row">
+        <div class="col-4 col-sm-4 col-md-4">
+            <div class="card m-3">
+                <div class="card-title text-center p-2" > Information du Groupe </div>
+                <hr>
+                <div class="card-body">
+                        <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
+                        <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>
+                        <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto col-sm-auto">
+
+        </div>
+    </div>
+    <div id="information">
+        <p> Text ecrit : <span id="text"> </span> </p>
+        <p> Text ecrit : <span id="code"> </span> </p>
+    </div>
+    {# <a href="{{ path('app_liste_groupe') }}" class="btn btn-success"> <i class="fa fa-eye"></i> Voir Liste</a> #}
+
+{{ form_start(form) }}
+    <div class="row jumbotron jumbotron-fluid">
+       <div class="col-4 col-sm-4">
+             {{ form_row(form.produit) }}
+        </div>
+       <div class="col-4 col-sm-4"> 
+             {{ form_row(form.datedebut) }}
+        </div>
+        <div class="col-4 col-sm-4">
+            {{ form_row(form.typeClient) }} 
+        </div>
+    </div> 
+    <div id="code_ep_Gr">
+            {{ form_row(form.codegroupe) }}
+            {{ form_row(form.codegroupeepargne) }}
+    </div> 
+    <div class="row">
+            {{ form_row(form.Valider) }}
+        </div>
+{{ form_end(form) }}
+
+    <h6 class="text-primary"> Compte existant du {{ nom }} </h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date d'ouverture </th>
+                <th>Produits</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+            {% for compte in compte_exist %}
+            <tr>
+                <td> {{ compte.datedebut|date('Y-m-d') }}</td>
+                <td> {{ compte.nomproduit }}</td>
+                <td> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('/api/api_codeepargne_groupe.js') }}"><script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1 style="color:black;">Transfert</h1>
+    <a href="{{ path('app_transfertep_new') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nouveau transfert</a>
+
+    <table class="container table table-stripped">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Description</th>
+                <th>Piece comptable</th>
+                <th>Date transaction</th>
+                <th>Montant destinataire</th>
+                <th>Papeterie</th>
+                <th>Commission</th>
+                <th>Type client</th>
+                <th>Solde destinataire</th>
+                <th>Solde envoyeur</th>
+                <th>Code transaction</th>
+                <th>Code destinateur</th>
+                <th>Code envoyeur</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transfertep in transferteps %}
+            <tr>
+                <td>{{ transfertep.descriptionT }}</td>
+                <td>{{ transfertep.pieceComptableT }}</td>
+                <td>{{ transfertep.dateTransactionT ? transfertep.dateTransactionT|date('Y-m-d') : '' }}</td>
+                <td>{{ transfertep.montantdestinataire }}</td>
+                <td>{{ transfertep.papeterie }}</td>
+                <td>{{ transfertep.commission }}</td>
+                <td>{{ transfertep.typeClientT }}</td>
+                <td>{{ transfertep.soldedestinataire }}</td>
+                <td>{{ transfertep.soldeenvoyeur }}</td>
+                <td>{{ transfertep.codetransactionT }}</td>
+                <td>{{ transfertep.codedestinateur }}</td>
+                <td>{{ transfertep.codeenvoyeur }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

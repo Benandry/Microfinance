@@ -1,0 +1,76 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+
+    {# /***************Messages succes ******************/#}
+    {% for message in app.flashes('success') %}
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <strong>{{ message }}</strong>
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <table class="table table-bordered">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Code type</th>
+                <th>Nom type epargne</th>
+                <th>Abreviation</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid text-ligth">
+        {% for type_epargne in type_epargnes %}
+            <tr>
+                <td>{{ type_epargne.id }}</td>
+                <td>{{ type_epargne.NomTypeEp }}</td>
+                <td>{{ type_epargne.abreviation }}</td>
+                <td>{{ type_epargne.description }}</td>
+                <td>
+                    <div class="col-sm-3">
+                        <a href="{{ path('app_type_epargne_show', {'id': type_epargne.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Afficher</a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="{{ path('app_type_epargne_edit', {'id': type_epargne.id}) }}" class="btn btn-success"> <i class="fa fa-eye"></i> editer</a>
+                    </div>
+                    <div class="col-sm-6">
+                        {{ include('Configuration/type_epargne/_delete_form.html.twig') }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+    <a href="{{ path('app_type_epargne_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajputer nouveau</a>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        $(window).on('load',() =>{
+            $('#myModal').modal('show')
+        })
+    </script>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

@@ -1,0 +1,47 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    {% for Agence in agences  %}
+      <div class="card jumbotron jumbotron-fluid" style="width: 550px;margin-left:200px;">
+        <div class="card-body" style-"width:200px;">
+          <h5 class="card-title"></h5><br>
+          <p class="card-text">Code Epargne :{{ Groupes.codegroupeepargne }}</p>
+          <p class="card-text">Nom : {{ Groupes.nomGroupe }}</p>
+          <p class="card-text">Date de creation : {{ Groupes.dateInscription | date('d-m-y') }}</p>
+          <p class="card-text">Numero mobile : {{ Groupes.numeroMobile }}</p>
+          <p class="card-text">Eamil : {{ Groupes.email }}</p>
+        </div>
+        </ul>
+      </div>
+    {% endfor %}
+
+    <ul class="list-group list-group-flush alert alert-success" style="padding:50px;">
+    {# Type et profuit epargne #}
+       <div class="container">
+            <h2 class="card-title">Type et Produit Epargne</h2>
+            <div class="row">
+                <div class="col-md-5">
+                  <p>Nom Produit<p>
+                  <li class="list-group-item" style="color:black;">{{produits.nomproduit}}</li></a><br>
+                </div>
+                {% for compte_epargne in solde %}
+                {% if compte_epargne.Description == 'DEPOT' %}
+              <div class="col-md-5">
+                  <p>Solde</p>
+                    <li class="list-group-item" style="color:black;">{{ compte_epargne.soldes }}</li></a><br>
+              </div>
+              {% else %}
+               <div class="col-md-5">
+                  <p>Solde</p>
+                    <li class="list-group-item" style="color:black;">0</li></a><br>
+              </div>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+      </div>
+    </ul>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

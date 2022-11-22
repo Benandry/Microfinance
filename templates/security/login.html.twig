@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification </title>
+    {% block stylesheet %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock  %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <section class="container">
+        <div class="row align-items-center h-100">
+            <div class="col-12">
+
+                <div class="d-flex justify-content-center auto mt-5">
+                    <div class="card " style="width: 29rem;padding: 20px;box-shadow: 5px 10px 8px #888888;">
+                        <div class="card-body">
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error.messageKey|trans(error.messageData, 'security') }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    </div>
+                                {% endif %}
+
+                                   {# /***************Messages succes ******************/#}
+                                {% for message in app.flashes('success') %}
+                                    <div class="alert text-center alert-success">
+                                        <!-- The Modal -->
+                                        <div class="modal fade" id="myModal">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                        <!-- Modal body -->
+                                                        <div class="modal-body">
+                                                            <p class="alert alert-success text-center">
+                                                                {{ message }}
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Modal footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                                                        </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            
+                                <h5 class="fw-bold text-center">  <img class="img-fluid avatar" src="{{ asset('images/img_avatar.png') }}" width="150" alt="AVATAR" style="border-radius: 50%;" ></h6>
+                                <div class="form-group m-3">
+                                    <label for="inputEmail" class="fw-bolder mb-1"> Nom d'utilisateur :</label>
+                                    <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                </div>
+                                <div class="form-group m-3">
+                                    <label for="inputPassword" class="fw-bolder mb-1">Mot de passe :  </label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                </div>
+                                <input type="hidden" name="_csrf_token"
+                                    value="{{ csrf_token('authenticate') }}"
+                                >
+                            
+                                
+                                {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                    See https://symfony.com/doc/current/security/remember_me.html #}
+                            
+                                    {# <div class="checkbox mb-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>
+                                                    <input type="checkbox" name="_remember_me"> Remember me
+                                                </label>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="{{path('app_inscription_')}}"><i class="fa fa-pencil"></i>Créer un compte</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div> #}
+                                
+                                    <div class="row m-3 ">
+                                        <button id="login" class="btn btn-lg btn-primary btn-sm" type="submit"> Connexion</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+

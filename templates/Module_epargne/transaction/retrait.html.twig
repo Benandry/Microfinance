@@ -1,0 +1,175 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+
+{{ form_start(form) }}
+  <div style="display:none;">
+            <p> Text ecrit : <span id="text"> </span> </p>
+    </div>
+
+     {# /***************Messages succes ******************/#}
+    
+     {% for message in app.flashes('success') %}
+            <div class="alert text-center alert-success">
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <p class="alert alert-success text-center">
+                                        {{ message }}
+                                    </p>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {# *************************************#}
+
+
+        <div class="row jumbotron jumbotron-fluid" style="color:black;">
+        <div class="col-sm-5">
+            {{ form_row(form.typeClient) }}
+            {{ form_row(form.codeepargneclient) }}
+            <div id="commune_suggest"> </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row jumbotron jumbotron-fluid" style="color:black;">
+        <div class="col-sm-5">
+            {{ form_row(form.Description) }}
+            {{ form_row(form.PieceComptable) }}
+            {{ form_row(form.DateTransaction) }}
+        </div>
+        <div class="col-sm-5">
+            {{ form_row(form.montant_bruite) }}
+            {{ form_row(form.commission) }}
+            {{ form_row(form.papeterie) }}
+            {{ form_row(form.Montant) }}
+        </div>
+    </div>
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<table class="table table-bordered">
+    <thead class="alert alert-success"> 
+        <tr>
+            <th>Compte Epargne</th>
+            <th>Nom et prenom client</th>
+            <th>Solde</th>
+        </tr>
+    </thead> 
+    <tbody class="jumbotron jumbotron-fluid">
+        <tr>
+            <td><span id="code"> </span> </td>
+            <td><span id="nom"> </span> </td>
+            <td><span id="solde"> </span> </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
+      <script src="{{ asset('/api/retrait.js')}}"></script>
+
+{{ include('footer.html.twig') }}
+
+
+{# {{ include('header.html.twig') }}
+{% block stylesheet %}
+  <style>
+    .suggestion{
+      font-size: 14px;
+    }
+    .suggestion:hover{
+      background-color: cornflowerblue;
+      color: #fff;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+  <div>
+            <p> Text ecrit : <span id="text"> </span> </p>
+    </div>
+
+     {# /***************Messages succes ******************/#}
+            {# /***************Messages succes ******************/#}
+            {# {% for message in app.flashes('success') %}
+            <div class="alert text-center alert-success">
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <p class="alert alert-success text-center">
+                                        {{ message }}
+                                    </p>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %} #} 
+
+{# 
+    <div class="row jumbotron jumbotron-fluid" style="color:black;">
+        <div class="col-sm-5">
+            {{ form_row(form.Description) }}
+            {{ form_row(form.PieceComptable) }}
+            {{ form_row(form.typeClient) }}
+            {{ form_row(form.codeepargneclient) }}
+            <div id="commune_suggest"> </div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_row(form.DateTransaction) }}
+            {{ form_row(form.montant_bruite) }}
+            {{ form_row(form.commission) }}
+            {{ form_row(form.papeterie) }}
+            {{ form_row(form.Montant) }}
+        </div>
+    </div><br>
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<table class="table table-bordered">
+    <thead class="alert alert-success"> 
+        <tr>
+            <th>Code Epargne</th>
+            <th>Nom et prenom client</th>
+            <th>Solde</th>
+        </tr>
+    </thead> 
+    <tbody class="jumbotron jumbotron-fluid">
+        <tr>
+            <td><span id="code"> </span> </td>
+            <td><span id="nom"> </span> </td>
+            <td><span id="solde"> </span> </td>
+        </tr>
+    </tbody>
+</table> #}
+{# 
+    {% block javascript %}
+        <script src="{{ asset('/api/retrait.js')}}"></script>
+    {% endblock %}
+
+{% endblock %}
+  
+{{ include('footer.html.twig') }} #}
+

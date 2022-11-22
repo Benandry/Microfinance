@@ -1,0 +1,13 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Edit ListeRouge</h1>
+
+    {{ include('Module_client/liste_rouge/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_liste_rouge_index') }}">back to list</a>
+
+    {{ include('Module_client/liste_rouge/_delete_form.html.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

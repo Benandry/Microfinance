@@ -1,0 +1,24 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+  <!-- Button to Open the Modal -->
+  <a class="btn btn-success" data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-plus"></i>Approuver
+  </a>
+  <a href="{{ path('app_approuver_client_index') }}" class="btn btn-success"><i class="fa fa-book"></i> Liste Approuver</a>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">        
+        <!-- Modal body -->
+        <div class="modal-body">
+                {{ include('Module_client/approuver_client/_form.HTML.twig') }}
+        </div>
+        
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

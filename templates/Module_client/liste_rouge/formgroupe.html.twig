@@ -1,0 +1,22 @@
+
+    <a href="{{ path('app_liste_rougegroupe_index') }}"  class="btn btn-info btn-sm"><i class="fa fa-search"></i> Recherche</a>
+
+{{ form_start(form) }}
+<div class="row m-5">
+    <div class="col-6 col-sm-6 col-md-6  jumbotron jumbotron-fluid">
+        {{ form_row(form.codeclient) }}
+        {{ form_row(form.codegroupe) }}
+        {{ form_row(form.raison) }}
+    </div>
+    <div class="col-6 col-sm-6 col-md-6  jumbotron jumbotron-fluid">
+        {{ form_row(form.dateliste) }}
+        {{ form_row(form.TypeClient) }}
+    </div>
+    <div class="row">
+        <div class="col-2 col-sm-2"> 
+            <button class="btn btn-primary btn-sm">{{ button_label|default('Ajouter') }}</button>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}

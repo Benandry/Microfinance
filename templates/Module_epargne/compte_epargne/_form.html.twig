@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-sm-4">
+                {{ form_row(form.produit) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_row(form.typeClient) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_row(form.datedebut) }}
+                
+            </div>
+        </div>
+        <div class="row" id="client_current">
+            <div class="col-sm-4">
+                {{ form_row(form.codeep) }}
+                <div id="commune_suggest"> </div>
+            </div>
+            <div class="col-sm-4">
+                {{ form_row(form.nom) }}
+            </div>
+            <div class="col-sm-4">
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.codeepargne) }}
+            </div>
+        </div>
+        <div style="margin-top: 12px; margin-left: 80%;" class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
+            </div>
+        </div>
+{{ form_end(form) }}
+            
+    {# /***********Fin modal *********** #}

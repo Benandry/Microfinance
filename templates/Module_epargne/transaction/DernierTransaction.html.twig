@@ -1,0 +1,98 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+<h2 style="color:black;">Rapport de dernier transaction :</h2>
+   
+    {% if  affiche_tab_  == false%}
+
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-primary">
+                            <h4 class="modal-title text-center">Recherche par date</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        {{ form_start(form) }}
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            
+                                    <div class="text-center" id="one_date">
+                                        <h4 class="text-center"> Date arrêtée </h4>
+                                        {{ form_row(form.date1) }}
+                                    </div>
+
+                                    <div class="text-center" id="two_date">
+                                        <h4 class="text-center">Entre deux dates </h4>
+                                        {{ form_row(form.Du) }}
+                                
+                                        {{ form_row(form.Au) }}
+                                    </div>
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                {{ form_row(form.Filtre) }}
+                            </div>
+                            {{ form_end(form) }}
+                        
+                    </div>
+                </div>
+            </div>
+            {# /***********Fin modal *********** #}
+    {% else %}
+            <table class="table1 table table-bordered" style="margin-top:25px;">
+                <thead class="alert alert-success">
+                    <tr>
+                        <th>Date Transaction</th>
+                        <th>Code transaction</th>
+                        <th>Compte epargne</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Piece Comptable</th>
+                        <th>Produit</th>
+                        <th>Montant</th>
+                        <th>Solde</th>
+
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.DateTransaction ? transaction.DateTransaction|date('Y-m-d') : '' }}</td>
+                        <td>{{transaction.codetransaction}}</td>
+                        <td>{{ transaction.codeepargneclient }}</td>
+                        <td>{{ transaction.nomclient }} {{ transaction.prenomclient }}</td>
+                        <td>{{ transaction.Description }}</td>
+                        <td>{{ transaction.PieceComptable }}</td>
+                        <td>{{ transaction.nomproduit }}</td>
+                        <td>
+                            {% if transaction.Description == 'RETRAIT' %}
+                            <span style="color: red;">{{ transaction.Montant }}</span>
+                            {% else %}
+                                <span style="color: green;">{{ transaction.Montant }}</span>
+                            {% endif %}    
+                        </td>
+                        <td>{{ transaction.solde }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {% block javascript %}
+            <script> 
+                $(window).on('load',() =>{
+                    $('#myModal').modal('show')
+                })
+            </script>
+        {% endblock %}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

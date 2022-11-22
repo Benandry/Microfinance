@@ -1,0 +1,10 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <div class="container jumbotron jumbotron-fluid" style="margin-top:10px;padding:100px;">
+        <a  href="{{ path('app_compte_epargne_new')}}" class="btn btn-success" style="height:50px;margin-left:100px;"> <i class="fa fa-user"></i> Compte pour Individuel</a>
+        {# <a  href="{{ path('app_compte_epargne_new_groupe')}}" class="btn btn-success" style="height:50px;margin-left:150px;"> <i class="fa fa-group"></i> Compte pour groupe</a> #}
+    </div>
+{% endblock %}
+
+{{ include('footer.html.twig') }}

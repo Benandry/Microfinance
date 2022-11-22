@@ -1,0 +1,203 @@
+
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <div style="display:none;">
+            <p>Text<span id="text"></span></p>
+            <p>Other<span id="other"></span></p>
+    </div>
+    {% if showTable == false %}
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title text-center"> Rapport releve </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    {{ form_start(form) }}
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <h2 style="color:black;">A propos :</h2>
+                            <div class="row" style="color:black;">
+                                <div class="col-sm-4">
+                                    {{ form_row((form.Codeclient)) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_row((form.NomClient)) }}
+                                </div>
+                                    <div class="col-sm-4">
+                                    {{ form_row((form.PrenomClient)) }}
+                                </div>
+                            </div>
+
+                            <h2 style="color:black;">Releve du :</h2>
+                                <div class="row" style="color:black;">
+                                    <div class="col-sm-4">
+                                        {{ form_row(form.Du) }}
+                                    </div>
+                                    <div class="col-sm-4">
+                                        {{ form_row(form.Au) }}
+                                    </div>
+                                </div>
+    
+                        </div>
+                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            {{ form_row(form.Filtre) }}
+                        </div>
+                    {{ form_end(form) }}
+                    
+            </div>
+            </div>
+        </div>
+    {% else %}
+               
+        <table class="table1 table table-bordered" style="margin-top:25px;">
+            <thead class="alert alert-success">
+                <tr>
+                    <th>Date Transaction</th>
+                    <th>Code transaction</th>
+                    <th>Code Epargne</th>
+                    <th>Description</th>
+                    <th>Piece Comptable</th>
+                    <th>Montant</th>
+                    <th>Solde</th>
+                </tr>
+            </thead>
+            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+            {% for Transaction in releves %}
+                <tr>
+                    <td>{{ Transaction.DateTransaction ? Transaction.DateTransaction|date('Y-m-d') : '' }}</td>
+                    <td>{{ Transaction.codetransaction }}</td>
+                    <td>{{ Transaction.codeepargneclient }}</td>
+                    <td>{{ Transaction.Description }}</td>
+                    <td>{{ Transaction.PieceComptable }}</td>
+                    <td>{{ Transaction.Montant }}</td>
+                      <td>
+                            {% if Transaction.Montant < 0 %}
+                                <span style="color: red;">{{ Transaction.solde }}</span>
+                            {% else %}
+                                <span style="color: green;">{{ Transaction.solde }}</span>
+                            {% endif %}
+                        </td>
+                    {# <td>{{ Transaction.solde }}</td> #}
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('/api/api_rapport_releve.js') }}" ></script>
+{% endblock %}
+
+{{ include('footer.html.twig') }}
+
+{# {{ include('header.html.twig') }}
+
+{% block body %}
+
+    {% if showTable == false %}
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title text-center">Relevee client</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                {{ form_start(form) }}
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    
+                            <div class="text-center" id="one_date">
+                                <h2 style="color:black;">A propos :</h2>
+                                <div class="row" style="color:black;">
+                                    <div class="col-sm-4">
+                                        {{ form_row((form.Codeclient)) }}
+                                    </div>
+                                    <div class="col-sm-4">
+                                        {{ form_row((form.NomClient)) }}
+                                    </div>
+                                    <div class="col-sm-4">
+                                        {{ form_row((form.PrenomClient)) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center" id="two_date">
+                                <h4 class="text-center">Entre deux dates </h4>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {{ form_row(form.Du) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_row(form.Au) }}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        {{ form_row(form.Filtre) }}
+                    </div>
+                    {{ form_end(form) }}
+                
+            </div>
+        </div>
+    </div>
+    {# /***********Fin modal *********** #}
+
+    {# {% else %}
+        <table class="table table-bordered" style="margin-top:25px;">
+            <thead class="alert alert-success">
+                <tr>
+                    <th>Date Transaction</th>
+                    <th>Code transaction</th>
+                    <th>Description</th>
+                    <th>PieceComptable</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+            {% for Transaction in releves %}
+                <tr>
+                    <td>{{ Transaction.DateTransaction ? Transaction.DateTransaction|date('Y-m-d') : '' }}</td>
+                    <td>{{ Transaction.codetransaction }}</td>
+                    <td>{{ Transaction.Description }}</td>
+                    <td>{{ Transaction.PieceComptable }}</td>
+                    <td>{{ Transaction.Montant }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% endif %}
+
+    {% block javascript %}
+    <script>
+        $(document).ready(function(){
+            $(window).on('load',()=>{
+                $('#myModal').modal('show')
+            })
+        })
+    </script>
+    {% endblock %}
+
+{% endblock %}
+
+{{ include('footer.html.twig') }} #} #}

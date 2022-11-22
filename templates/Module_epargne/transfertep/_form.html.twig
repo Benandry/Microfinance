@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+<div style="margin-left:100px;">
+        <div class=" jumbotron row">
+          <div class="col-sm-3">
+            {{ form_row(form.codeenvoyeur) }}
+            {{ form_row(form.soldeenvoyeur	) }}
+            {{ form_row(form.nomenvoyeur	) }}
+            {{ form_row(form.prenomenvoyeur	) }}
+        </div>
+          <div class="col-sm-3">
+            {{ form_row(form.codedestinateur) }}
+            {{ form_row(form.soldedestinataire) }}
+            {{ form_row(form.nomdestinatare	) }}
+            {{ form_row(form.prenomdestinataire	) }}
+        </div>
+    </div>
+    <hr>
+           <div class="col-sm-3">
+            {{ form_row(form.papeterie) }}
+            {{ form_row(form.commission) }}
+            {{ form_row(form.montantdestinataire) }}
+        </div>
+        <div class="col-sm-3">
+        </div>
+           <div class="col-sm-3">
+            {{ form_row(form.date_transaction_t) }}
+            {{ form_row(form.type_client_t	) }}
+            {{ form_row(form.piece_comptable_t) }}
+        </div>
+        <div class="col-sm-3">
+        </div>
+    </div>
+</div>
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

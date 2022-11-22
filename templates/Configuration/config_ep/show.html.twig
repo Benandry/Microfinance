@@ -1,0 +1,58 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Configuration Epargne</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Negatif</th>
+                <td>{{ configs.IsNegatif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Devise</th>
+                <td>{{ configs.devise }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de jour inactif</th>
+                <td>{{ configs.nbrjInactif }}</td>
+            </tr>
+            <tr>
+                <th>Nombre minimum retrait</th>
+                <td>{{ configs.nbMinRet }}</td>
+            </tr>
+            <tr>
+                <th>Nombre jour maximum depot</th>
+                <td>{{ configs.NbrJrMaxDep }}</td>
+            </tr>
+            <tr>
+                <th>Age minimum ouverture compte</th>
+                <td>{{ configs.ageMinCpt }}</td>
+            </tr>
+            <tr>
+                <th>Frais tenu compte</th>
+                <td>{{ configs.fraisTenuCpt }}</td>
+            </tr>
+            <tr>
+                <th>Commission retrait cash</th>
+                <td>{{ configs.commissionRetCash }}</td>
+            </tr>
+            <tr>
+                <th>Commission de transaction</th>
+                <td>{{ configs.commissionTransf }}</td>
+            </tr>
+            <tr>
+                <th>Frais fermeture compte</th>
+                <td>{{ configs.fraisFermCpt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_config_ep_index') }}">back to list</a>
+
+    <a href="{{ path('app_config_ep_edit', {'id': configs.id}) }}">edit</a>
+
+    {{ include('Configuration/config_ep/_delete_form.html.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

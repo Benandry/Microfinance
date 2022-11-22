@@ -1,0 +1,28 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Devise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ devise.id }}</td>
+            </tr>
+            <tr>
+                <th>Devise</th>
+                <td>{{ devise.devise }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ devise.pays }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_devise_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>
+    <a href="{{ path('app_devise_edit', {'id': devise.id}) }}" class="btn btn-success"><i class="fa fa-eye"></i>editer</a>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

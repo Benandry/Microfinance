@@ -1,0 +1,29 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+
+    <table class="table1 table">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Code Client</th>
+                <th>Nom et prenom</th>
+                <th>Date approbation</th>
+            </tr>
+        </thead>
+        {% for ApprouverClient in approuvers %}
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+            <tr>
+            <td>
+            I
+            {% for Agence in agences %}{{ "%02d" | format(Agence.id) }}{% endfor %}
+            {{ "%06d" | format(ApprouverClient.codecl) }}</td>
+            <td>{{ ApprouverClient.nom }} {{ ApprouverClient.prenom }}</td>
+            <td>{{ ApprouverClient.dateapp | date('d-m-y') }}</td>
+            </tr>
+        </tbody>
+         {% endfor %}
+    </table>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

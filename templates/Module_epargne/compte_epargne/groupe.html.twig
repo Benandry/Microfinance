@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Groupe 
+{% endblock %}
+
+{% block head %}
+    Groupe 
+{% endblock %}
+
+{% block body %}
+
+    <table class="table table-bordered">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Code Epargne</th>
+                <th>Nom Groupe</th>
+                <th>Produits</th>
+                <th>Date d'ouverture </th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for compte_epargne in compteGroupes %}
+            <tr>
+                <td>{{ compte_epargne.codegroupeepargne }}</td>
+                    
+                </td>
+                <td>{{compte_epargne.nomGroupe }}</td>
+                <td>{{compte_epargne.nomprod }}</td>
+                <td>{{ compte_epargne.datedebut ? compte_epargne.datedebut|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte_epargne.codeep}) }}" class="btn btn-success"><i class="fa fa-eye"></i> Details</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ form_start(trierGroupeEp) }}
+            <div class="row">
+                <div class="col-sm-5">
+                    {{ form_row(trierGroupeEp.Date1) }}
+                </div>
+                <div class="col-sm-5">
+                    {{ form_row(trierGroupeEp.Date2) }}
+                </div>
+                <div class="col-sm" style="margin-top:24px;">
+                    {{ form_row(trierGroupeEp.Filtre) }}
+                </div>
+            </div>
+    {{ form_end(trierGroupeEp) }}
+    
+{% endblock %}
+

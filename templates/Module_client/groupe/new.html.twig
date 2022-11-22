@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Ajout de nouveau groupe
+{% endblock %}
+
+{% block head %}
+    Ajout de nouveau groupe
+{% endblock %}
+
+{% block body %}
+    {# <a class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Nouveau Groupe</a> #}
+
+    {{ include('modal.html.twig') }}
+   
+    <div class="container">
+            <div style="display:none;"> <span id="id_groupe">{{ last_id_gropue }}</span> <span id="id_agence">{{ id_agence }}</span></div>
+
+              {{ include('Module_client/groupe/_form.html.twig') }}
+    </div>
+
+{% endblock %}
+

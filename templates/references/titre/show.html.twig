@@ -1,0 +1,24 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Titre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ titre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ titre.titre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('app_titre_index', {'id': titre.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>    
+        <a href="{{ path('app_titre_edit', {'id': titre.id}) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Editer</a>
+    </div>
+{% endblock %}
+
+{{ include('footer.html.twig') }}

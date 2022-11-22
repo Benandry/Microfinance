@@ -1,0 +1,10 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Edit Devise</h1>
+
+    {{ include('references/devise/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

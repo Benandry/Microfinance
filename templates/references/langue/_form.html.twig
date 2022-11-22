@@ -1,0 +1,38 @@
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+        
+            <!-- Modal Header -->
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-center"> Nouveau langue </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+               {{ form_start(form) }}
+                   <!-- Modal body -->
+                   <div class="modal-body">
+                      {{ form_widget(form) }}
+                   </div>
+                   
+                   <!-- Modal footer -->
+                   <div class="modal-footer">
+                      <button t class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+                      <a href="{{ path('app_langue_index') }}" class="btn btn-success"><i class="fa fa-eye"></i> Voir Liste</a>
+                   </div>
+               {{ form_end(form) }}
+            
+       </div>
+    </div>
+</div>
+    {# /***********Fin modal *********** #}
+    {% block javascript %}
+
+    <script>
+          $(document).ready(function(){
+              $(window).on('load',()=>{
+                  $('#myModal').modal('show')
+              })
+          });
+    </script>
+    {% endblock %}

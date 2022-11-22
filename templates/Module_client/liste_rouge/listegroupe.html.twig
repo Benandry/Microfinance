@@ -1,0 +1,49 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+
+    <a href="{{ path('app_liste_rouge_new') }}" class="btn btn-success"> <i class="fa fa-plus"></i> Ajouter</a>
+    <h2 style="color:black;"> Liste des groupes liste rouge :</h2>
+        {{ form_start(form) }}
+            <div class="row" style="color:black;">
+                <div class="col-sm-2">
+                    {{ form_row(form.Du) }}
+                </div>
+                <div class="col-sm-2">
+                    {{ form_row(form.Au) }}
+                </div>
+                <div class="col-sm" style="margin-top:25px;">
+                    {{ form_row(form.Filtre) }}
+                </div>
+            </div>
+        {{ form_end(form) }}<br>
+    <table class="table table-bordered">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Date</th>
+                <th>Code Groupe</th>
+                <th>Nom Groupe</th>
+                <th>Raison</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for ListeRouge in listerouge %}
+            <tr>
+                <td>{{ ListeRouge.dateliste ? ListeRouge.dateliste|date('Y-m-d') : '' }}</td>
+                <td>
+                I{% for Agence in agences %}{{  "%02d" | format(Agence.id) }}{% endfor %}{{ "%06d" | format(ListeRouge.codegroupe) }}
+                </td>
+                <td>{{ ListeRouge.nomgroupe }}</td>
+                <td>{{ ListeRouge.raison }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

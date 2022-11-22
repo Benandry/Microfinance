@@ -1,0 +1,23 @@
+app_dashboard:
+   path: /
+   controller: App\Controller\Dashboard\dashboard::index
+
+# app_validation:
+#    path: /validation
+#    controller: App\Controller\ValidationController::index
+
+# app_rapport_client:
+#    path: /rapport/client
+#    controller: App\Controller\RapportClientController::index
+
+# app_liste_rouge:
+#   path: /liste/rouge
+#   controller: App\Controller\ListeRougeController::index
+
+#   app_liste_noir:
+#   path: /liste/noir
+#   controller: App\Controller\ListeNoirController::index
+
+
+
+

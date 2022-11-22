@@ -1,0 +1,10 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+
+   <a href="{{path('app_groupe_index')}}"><button class="btn btn-primary">Groupe</button></a>
+   <a href="{{path('app_groupe_new')}}"><button class="btn btn-primary">Nouveau</button></a>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

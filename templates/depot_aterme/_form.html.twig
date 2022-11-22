@@ -1,0 +1,41 @@
+{{ form_start(form) }}
+    {# {{ form_widget(form) }} #}
+    <div style="padding:70px;">
+        <div class="col" style="width:300px;">
+            <div class="row">
+                {{form_row(form.compte)}}
+                {{form_row(form.produit)}}
+                {{form_row(form.datedepot)}}
+                {{form_row(form.piececomptable)}}
+                {{form_row(form.tauxinteret)}}
+                {{form_row(form.periodemois)}}
+                {{form_row(form.is_interetcapitalise)}}
+            </div>
+        </div>
+
+               <div class="col" style="width:300px;margin-left:350px;margin-top:-330px;">
+            <div class="row">
+                {{form_row(form.date_echeance)}}
+                {{form_row(form.valeurecheance)}}
+                {{form_row(form.taxeretenue)}}
+                {{form_row(form.retenuetaxe)}}
+                {{form_row(form.TVA)}}
+                {{form_row(form.is_depotcall)}}
+                {{form_row(form.is_interetecheance)}}
+            </div>
+        </div>
+
+               <div class="col" style="width:300px;margin-left:700px;margin-top:-300px;">
+            <div class="row">
+                {{form_row(form.is_interetmois)}}
+                {{form_row(form.is_interettrimestrielle)}}
+                {{form_row(form.is_interetsemestrielle)}}
+                {{form_row(form.is_interetpayelorscalcul)}}
+                {{form_row(form._is_interettransferercptep)}}
+                {{form_row(form.is_retirealecheance)}}
+                {{form_row(form.is_remetreaucptalecheance)}}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_langue_delete', {'id': langue.id}) }}" onsubmit="return confirm('Vous etes sur pour supprimer la langue {{ langue.langue}}');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ langue.id) }}">
+    <button class="btn btn-danger btn-sm">Supprimer</button>
+</form>

@@ -1,0 +1,40 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Suivi saisie Client</h1>
+
+    <table class="table">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Id</th>
+                <th>DateEntre</th>
+                <th>DateSortie</th>
+                <th>Utilisateur</th>
+                <th>Menu_utiliser</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid">
+        {% for suivi_client in suivi_clients %}
+            <tr>
+                <td>{{ suivi_client.id }}</td>
+                <td>{{ suivi_client.DateEntre ? suivi_client.DateEntre|date('Y-m-d') : '' }}</td>
+                <td>{{ suivi_client.DateSortie ? suivi_client.DateSortie|date('Y-m-d') : '' }}</td>
+                <td>{{ suivi_client.Utilisateur }}</td>
+                <td>{{ suivi_client.menuUtiliser }}</td>
+                <td>
+                    <a href="{{ path('app_suivi_client_show', {'id': suivi_client.id}) }}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_suivi_client_edit', {'id': suivi_client.id}) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

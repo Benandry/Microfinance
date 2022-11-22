@@ -1,0 +1,13 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Approbation</h1>
+
+    {{ include('Module_client/approuver_client/_form.HTML.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_approuver_client_index') }}">back to list</a>
+
+    {{ include('Module_client/approuver_client/_delete_form.HTML.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

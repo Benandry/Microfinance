@@ -1,0 +1,27 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>transfert</h1>
+    <div  style="display:none;">
+        <p>Solde dest:<span id="textdest"></span></p>
+        <p>nom dest:<span id="nomdest"></span></p>
+        <p>prenom dest:<span id="prenomdest"></span></p>
+        <p>Solde env:<span id="text3"></span></p>
+        <p>nom env:<span id="nomenv"></span></p>
+        <p>prenom env:<span id="prenomenv"></span></p>
+    </div>
+                 {# /***************Messages succes ******************/#}
+    {% for message in app.flashes('success') %}
+        <div class="alert text-center alert-success">
+           <p> {{ message }} </p>
+        </div>
+    {% endfor %}
+    {# *************************************#}
+
+    {{ include('Module_epargne/transfertep/_form.html.twig') }}
+
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('/api/api_transfert.js')}}"></script>
+{% endblock %}
+{{ include('footer.html.twig') }}

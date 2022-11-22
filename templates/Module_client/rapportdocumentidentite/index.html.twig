@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+    {% block title %}
+        {% if affiche_table  == false %}
+            Rapport client par Identite
+        {% else %}
+            Liste des client par Identite {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+    {% block head %}
+        {% if affiche_table  == false %}
+            Rapport client par Identite
+        {% else %}
+            Liste client par Identite {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+{% block body %}
+    {% if affiche_table == false %}
+
+                <h4 class="modal-title text-center">Recherche par date</h4>
+                {{ form_start(trierDocs) }}
+                            <div class="text-center" id="one_date">
+                                <h4 class="text-center"> Date arrêtée </h4>
+                                {{ form_row(trierDocs.one_date_search) }}
+                            </div>
+
+                            <div class="row text-center" id="two_date">
+                                    <h4 class="text-center">Entre deux dates </h4>
+                                    <div class="col-sm-6">
+                                        {{ form_row(trierDocs.Date1) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_row(trierDocs.Date2) }}
+                                    </div>
+                            </div>
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="row">
+                        {{ form_row(trierDocs.Filtre) }}
+                    </div>
+                {{ form_end(trierDocs) }}
+    {# /*********Fin modal ************ #}
+
+           
+               
+    {% else %}
+        <table class="table1 table">
+            <thead>
+                <tr>
+                    <th>Numero CIN</th>
+                    <th>Nom et Prenom</th>
+                    <th>Date de naissance</th>
+                    <th>Lieu de naissance</th>
+                    <th>Date de livrance</th>
+                    <th>Date expiration</th>
+                    <th>Delivré à</th>
+                </tr>
+            </thead>
+                {% for Individuelclient in documents %}
+            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                    <tr>
+                        <td class="fw-bold">{{ Individuelclient.getCin() }}</td>
+                        <td>{{ Individuelclient.getNomclient() }} {{ Individuelclient.getPrenomclient() }} </td>
+                        <td>{{ Individuelclient.getDatenaissance()| date('d/m/Y') }}</td>
+                        <td>{{ Individuelclient.getLieunaissance() }}</td>
+                        <td>{{ Individuelclient.getDatecin()| date('d/m/Y') }}</td>
+                        <td>{{ Individuelclient.getDateexpiration()| date('d/m/Y') }}</td>
+                        <td>{{ Individuelclient.lieudelivrance }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                    <td colspan="8" class="text-center">Pas de resultats</td>
+                    </tr>
+            </tbody>
+                {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

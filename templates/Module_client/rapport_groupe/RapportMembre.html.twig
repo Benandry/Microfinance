@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+
+    {% block title %}
+        {% if affiche_tab  == false %}
+            Rapport membre groupe 
+        {% else %}
+            Liste des membre groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+    {% block head %}
+        {% if affiche_tab  == false %}
+            Rapport membre groupe 
+        {% else %}
+            Liste des membres groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+{% block body %}
+
+    {% if affiche_tab == false %}
+        <!-- The Modal -->
+                        <h4 class="modal-title text-center">Recherche par date</h4>
+                    {{ form_start(form) }}
+                        <div class="text-center" id="one_date">
+                            <h4 class="text-center"> Date arrêtée </h4>
+                            {{ form_row(form.search_on_date) }}
+                        </div>
+
+                        <div class=" row text-center" id="two_date">
+                                <h4 class="text-center">Entre deux dates </h4>
+                                <div class="col-sm-6">
+                                    {{ form_row(form.Du) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form_row(form.Au) }}
+                                </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="row">
+                            {{ form_row(form.Filtre) }}
+                        </div>
+                    {{ form_end(form) }}
+
+    {% else %}
+            <table class="table1 table alert alert-primary">
+            <thead>
+                <tr>
+                    <th>Code Groupe</th>
+                    <th>Code Client</th>
+                    <th>Date d'adhesion</th>
+                    <th>Nom Client</th>
+                    <th>Nom Groupe</th>
+                    <th>Adresse Email</th>
+                    <th>Date de creation </th>
+                </tr>
+            </thead>
+            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+            {% for Groupe in rapportMembre %}
+                    <tr>
+                        <td class="fw-bold"> {{ Groupe.codegroupe }}</td>
+                        <td> {{ Groupe.codeclient}}</td>
+                        <td>{{ Groupe.dateadhesion | date('d-m-Y') }}</td>
+                        <td>{{ Groupe.nom_client }} {{ Groupe.prenom_client }}</td>
+                        <td>{{ Groupe.nomGroupe }}</td>
+                        <td>{{ Groupe.email }}</td>
+                        <td>{{ Groupe.dateInscription | date('d-m-Y') }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">Pas de resultats</td>
+                    </tr>
+            {% endfor %} 
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% block javascript %}
+
+            <script>
+                    $(document).ready(function(){
+
+                        $(window).on('load',function(){
+                     
+                            $('#myModal').modal('show')
+                        })
+
+                        $("#filtre_rapport_membre_search_on_date").on('change',function(){
+                            
+                            $('#two_date').hide();
+                        });
+
+                        $("#filtre_rapport_membre_Du").on('change',function(){
+                            $('#one_date').hide(); 
+                        });
+                        
+                        $("#filtre_rapport_membre_Au").on('change',function(){
+                            $('#one_date').hide(); 
+                        });
+                    });
+            </script>
+    {% endblock %}
+
+{% endblock %}
+

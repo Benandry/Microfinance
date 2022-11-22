@@ -1,0 +1,13 @@
+{# {{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Edit Mobile</h1>
+
+    {{ include('base.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_mobile_index') }}">back to list</a>
+
+    {{ include('mobile/_delete_form.html.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }} #}

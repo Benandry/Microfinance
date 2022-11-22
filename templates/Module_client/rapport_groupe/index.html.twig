@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+
+    {% block title %}
+        {% if affiche_tab  == false %}
+            Rapport groupe 
+        {% else %}
+            Liste des groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+    {% block head %}
+        {% if affiche_tab  == false %}
+            Rapport groupe 
+        {% else %}
+            Liste des groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+{% block body %}
+
+    {% if affiche_tab == false %}
+
+
+    <!-- The Modal -->
+                    <h4 class="modal-title text-center">Recherche groupe par date</h4>
+                {{ form_start(trierGroupe)}}
+
+                <div class="text-center" id="one_date">
+                    <h4 class="text-center"> Date arrêtée </h4>
+                    {{ form_row(trierGroupe.one_date_search)}}
+                </div>
+
+                            <div class="text-center" id="two_date">
+                                <h4 class="text-center">Entre deux dates </h4>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {{ form_row(trierGroupe.Date1) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_row(trierGroupe.Date2)}}
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="modal-footer">
+                        {{ form_row(trierGroupe.Filtre) }}
+                    </div>
+                    {{ form_end(trierGroupe)}}
+
+    {% else %}
+        <table class="table1 table  alert-primary">
+        <thead>
+            <tr>
+                <th>Code Groupe</th>
+                <th>Date de creation</th>
+                <th>Nom Groupe</th>
+                <th>Adresse Email</th>
+                <th>Nombre Membre</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for Groupe in groupe %}
+                <tr>
+                    <td class="fw-bold">{{ Groupe.codegroupe }}</td>
+                    <td>{{ Groupe.dateInscription | date('d-m-Y') }}</td>
+                    <td>{{ Groupe.nomGroupe }}</td>
+                    <td>{{ Groupe.email }}</td>
+                    <td> {{ Groupe.nombre_par_membre }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Pas de resultats</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+{% endblock %}

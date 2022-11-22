@@ -1,0 +1,30 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+ <table class="table1 table table-bordered">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Code Client</th>
+                <th>Nom client</th>
+                <th>Prenom client</th>
+                <th>Cin</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid">
+        {% for individuelclient in listrouge %}
+            <tr>
+                <td>{{ individuelclient.id }}</td>
+                <td>{{ individuelclient.getCodeInd() }}</td>
+                <td>{{ individuelclient.nomClient }}</td>
+                <td>{{ individuelclient.prenomClient }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="28">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{{ include('footer.html.twig') }}
