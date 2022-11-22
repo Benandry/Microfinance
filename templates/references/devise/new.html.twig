@@ -1,9 +1,20 @@
-{{ include('header.html.twig') }}
-
+{% extends "base.html.twig" %}
+{% block title %} Devise {% endblock %}
+{% block head %} Devise {% endblock %}
 {% block body %}
     
   {{ include('references/devise/_form.html.twig') }}
-     
-{% endblock %}
+         {% block javascript %}
 
-{{ include('footer.html.twig') }}
+    <script>
+          $(document).ready(function(){
+              $(window).on('load',()=>{
+                  $('#myModal').modal('show')
+              })
+          });
+    </script>
+    {% endblock %}
+
+{% endblock %}
+    {# /***********Fin modal *********** #}
+
