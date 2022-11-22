@@ -1,4 +1,5 @@
 import $ from 'jquery'
+//import 'jquery-modal'
 
 var path = window.location.pathname
 
@@ -47,6 +48,96 @@ $(document).ready(() =>{
     }
 
     if(path === '/CompteEpargneDepot'){
-        alert("Bonjour nareo ee")
+
+        /***MOdal */
+        //************************* api_suggestion **************************
+        /******************************************************************** */
+        const code_rechercher = document.getElementById('form_code');
+
+        const url_api = '/api/epargne'
+        code_rechercher.addEventListener('keyup',()=>{
+            const value_input = code_rechercher.value
+            
+            $.ajax({
+                url: url_api,
+                method: "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify(),
+                success: function(result){
+                    
+                    const getValue = result.filter(i => i.code.toLocaleLowerCase().includes(value_input.toLocaleLowerCase()))
+
+                    var suggestion = ''
+
+                    if( value_input != '' ){
+                        getValue.forEach(resultItem =>{
+                        
+                        suggestion += `<div class="suggestion">${resultItem.code}</div>`
+                        })
+                    }else{
+                        suggestion = '<div class="suggestion"> Pas de commune</div>'
+                    }
+                    
+                    document.getElementById('code_suggest').innerHTML = suggestion
+                
+            
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+
+            });    
+        })
+
+
+
+        
+        $('#form_code').on('keyup',()=>{
+            var code = $('#form_code').val()
+            console.log(code);
+
+            if (code.length === 15) {
+                var url = '/info/'+code
+                $.ajax({
+                    url: url,
+                    method: "GET",
+                    dataType : "json",
+                    contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify(code),
+                    success: function(result){
+                        for(let i = 0; i < result.length; i++){
+                            var element = result[i]
+                            
+                            console.log(element);
+                            if(element !== '' ){
+                                console.log(element)
+                                $('#form_nom').val(element.nom_client)
+                                $('#form_prenom').val(element.prenom_client)
+                                $('#form_produit').val(element.nomproduit)
+                                $('#form_code_client').val(element.client_code)
+                    
+                                $('#code_cli').text(element.client_code)
+                                $('#code_ep').text(element.code)
+                                $('#produit').text(element.nomproduit)
+                                $('#nom_cli').text(element.nom_client)
+                                $('#prenom_cli').text(element.prenom_client)
+                            }else{
+                                console.log(element)
+                                $('#form_nom').val("Pas de client")
+                                $('#form_prenom').val("Pas de client")
+                            }
+                               
+                        }
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+            
+                })    
+            }
+        
+        })
+
     }
 })

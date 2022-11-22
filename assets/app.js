@@ -25,6 +25,7 @@ import './api/compte_epargne/depot'
 
 //import les api pour les compte epargne
 //import './api/api_compte_epargne'
+import 'jquery-modal'
 
 import $ from 'jquery';
 
@@ -45,6 +46,13 @@ window.JSZip = jsZip;
 const path = window.location.pathname;
 
 $(document).ready(function(){
+
+    /*******Lancer modal  */
+    $(window).on('load',function(){
+
+        $('#myModal').modal('show');
+
+    });
 
     $(".table1").DataTable({
         dom: 'Bltp',

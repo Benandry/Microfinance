@@ -627,21 +627,42 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
 
     //   api code epargne
-      public function codeCompteEpargne($code)
+      public function codeCompteEpargne()
       {
         
-        $query = " SELECT 
-        ce.codeep code,
-        ce.codeepargne 
-        
-        FROM App\Entity\CompteEpargne ce 
-        WHERE ce.codeepargne = '$code'
-       ";
+        $query = " SELECT DISTINCT(ce.codeepargne) code  FROM App\Entity\CompteEpargne ce WHERE ce.codeepargne != 'null'";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
   
         return $stmt;
 
       }
+
+
+      public function codeCompteEpargneInfo($code)
+      {
+        
+        $query = " SELECT DISTINCT(ce.codeepargne) code ,
+         ce.codeep client_code, 
+         i.nom_client,
+         i.prenom_client,
+         pe.nomproduit
+         FROM App\Entity\CompteEpargne ce
+         INNER JOIN
+         App\Entity\ProduitEpargne pe
+         with ce.produit = pe.id
+
+         INNER JOIN   App\Entity\Individuelclient i
+         with ce.codeep = i.codeclient
+
+          WHERE ce.codeepargne = '$code'";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+  
+        return $stmt;
+
+      }
+
+      
     
 }
