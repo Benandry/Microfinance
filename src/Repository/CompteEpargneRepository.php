@@ -367,8 +367,6 @@ class CompteEpargneRepository extends ServiceEntityRepository
   
     // Cette fonction est pour les client epargne d'aujjourd'hui
     public function compteClientCourant($code){
-
-        $dateNow = date("Y/m/d");
         
         $entityManager=$this->getEntityManager();
 
@@ -382,7 +380,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         -- -- Compte epargne
         ce.datedebut,
         ce.id,
-
+           
         -- -- i.prenom_client,
         
         
@@ -400,6 +398,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         -- App\Entity\Individuelclient i
         -- WITH ce.codeep = i.codeclient
         WHERE ce.codeep = '$code'
+        AND t.id = (SELECT MAX(tr.id) FROM App\Entity\Transaction tr INNER JOIN App\Entity\CompteEpargne c  WITH tr.codeepargneclient = c.codeepargne  WHERE ce.codeep = '$code' )
         "
         );
         return $query->getResult();
@@ -606,19 +605,25 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
     public function compteEpargneExist($code){
         $query = " SELECT 
-        ce.codegroupe,
+        g.codegroupe,
         g.nomGroupe nom,
         pe.nomproduit,
-        ce.datedebut 
-        
+        ce.datedebut ,
+        ce.codegroupeepargne,
+        t.solde
         FROM App\Entity\CompteEpargne ce 
+        LEFT JOIN
+        App\Entity\Transaction t
+        WITH t.codeepargneclient = ce.codeepargne
         INNER JOIN
         App\Entity\ProduitEpargne pe
         with ce.produit = pe.id
         INNER JOIN 
         App\Entity\Groupe g
         WITH ce.codegroupe = g.codegroupe
-        WHERE ce.codegroupe = '$code'";
+        WHERE ce.codegroupe = '$code' 
+        --AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c RIGHT JOIN App\Entity\Transaction tr  WITH tr.codeepargnegroupe = c.codegroupeepargne  WHERE ce.codeep = '$code' )
+       ";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
   

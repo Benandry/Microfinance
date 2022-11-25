@@ -24,19 +24,13 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <h5 class="my-3" style="color:black;"><b>{{ groupe.nomGroupe }}</b></h5>
-            <p class="text-muted mb-1" style="color:black;"><b>{{ groupe.codegroupe }}</b></p>
-            <p class="text-muted mb-4"></p>
-
-            <div class="d-flex justify-content-center mb-2">
+      <div class="col-4 col-lg-4">
+        <div class="card mb-4"  >
+          <div class="card-body">
+            <div class="text-center">
+              <h5 class="my-3" style="color:black;"><b>{{ groupe.nomGroupe }}</b></h5>
+              <p class="text-muted mb-1" style="color:black;"><b>{{ groupe.codegroupe }}</b></p>
             </div>
-          </div>
-        </div>
-        <div class="card mb-4 mb-lg-0">
-          <div class="card-body p-0">
             <ul class="list-group list-group-flush rounded-3">
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="" style="color:black;">Date de creation</i>
@@ -54,79 +48,83 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-8 col-lg-8">
         <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0" style="color:black;">President</p>
-              </div>
-            {% for Individuelclient in membre %}
-              <div class="col-sm-5">
-                <p class="text-muted mb-0">   
-                        <a href="{{ path('app_individuel_show',{'id':Individuelclient.id }) }}"><li class="list-group-item"><img src="{{ asset('uploads/photo/' ~ Individuelclient.getPhoto()  ) }}" alt="avatar"class="" style="width: 50px;border-radius:100%;"> {{ Individuelclient.codeclient }} {{ Individuelclient.nomClient }} {{ Individuelclient.prenomClient }}</li></a>
-                </p>
-              </div>
-            {% endfor %}
+          
+            <div class="card-body">
+
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="mb-0" style="color:black;">President : </p>
+                  </div>
+                  <div class="col-sm-6">
+                      {% for membre in membreGroupe %}
+                        <p class="text-muted mb-0"> {% if membre.TitreGroupe == 'President' %} {{ membre.nom_client }}  {{ membre.prenom_client }}  {% endif%} </p>
+                      {% endfor %}
+                  </div>
+                </div>
+                <hr/>
+
+                 <div class="row">
+                  <div class="col-sm-6">
+                    <p class="mb-0" style="color:black;">Secretaire : </p>
+                  </div>
+                  <div class="col-sm-6">
+                      {% for membre in membreGroupe %}
+                        <p class="text-muted mb-0">{% if membre.TitreGroupe == 'Secretaire' %} {{ membre.nom_client }} {{ membre.prenom_client }} {% endif%} </p>
+                      {% endfor %}
+                  </div>
+                </div>
+                <hr/>
+
+                 <div class="row">
+                  <div class="col-sm-6">
+                    <p class="mb-0" style="color:black;">Tresorerie : </p>
+                  </div>
+                  <div class="col-sm-6">
+                        {% for membre in membreGroupe %}
+                          <p class="text-muted mb-0">{% if membre.TitreGroupe == 'Tresorerie' %} {{ membre.nom_client }} {{ membre.prenom_client }} {% endif%} </p>
+                        {% endfor %}
+                  </div>
+                </div>
+                <hr/>
+
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0" style="color:black;">Secretaire</p>
-              </div>
-                {% for Individuelclient in membre %}
-              <div class="col-sm-5">
-                <p class="text-muted mb-0">   
-                        <a href="{{ path('app_individuel_show',{'id':Individuelclient.id }) }}"><li class="list-group-item"><img src="{{ asset('uploads/photo/' ~ Individuelclient.getPhoto()  ) }}" alt="avatar"class="" style="width: 50px;border-radius:100%;"> {{ Individuelclient.codeclient }} {{ Individuelclient.nomClient }} {{ Individuelclient.prenomClient }}</li></a>
-                </p>
-              </div>
-            {% endfor %}
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0" style="color:black;">Tresorier</p>
-              </div>
-                  {% for Individuelclient in membre %}
-              <div class="col-sm-5">
-                <p class="text-muted mb-0">   
-                        <a href="{{ path('app_individuel_show',{'id':Individuelclient.id }) }}"><li class="list-group-item"><img src="{{ asset('uploads/photo/' ~ Individuelclient.getPhoto()  ) }}" alt="avatar"class="" style="width: 50px;border-radius:100%;"> {{ Individuelclient.codeclient }} {{ Individuelclient.nomClient }} {{ Individuelclient.prenomClient }}</li></a>
-                </p>
-              </div>
-            {% endfor %}
-            </div>
-            <hr>
-            <div class="row">
-            <hr>
-          </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
+      </div>
+        <div class="row mt-3">
+          <div class="col-md-12 col-12">
             <div class="card mb-4 mb-md-0">
               <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1" style="color:black;">Membre</span> 
+                <p class="mb-4"><span class="text-primary font-italic text-center">Membre du {{ groupe.nomGroupe }} </span> 
                 </p>
                 <p class="mb-1" style="font-size: .77rem;"></p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+                  <table class="table">
+                    <thead>
+                      <th>Code client</th>
+                      <th>Nom du membre</th>
+                      <th>Prenom du membre</th>
+                      <th>Place</th>
+                    </thead>
+                    <tbody>
+                        {% for membre in membreGroupe %}
+                          <tr>
+                              <td> {{ membre.codeclient }}</td>
+                              <td> {{ membre.nom_client }}</td>
+                              <td> {{ membre.prenom_client }}</td>
+                              <td> {{ membre.TitreGroupe }}</td>
+                          </tr>
+                      {% else %}
+                        <tr colspan="4">
+                            <td> Pas de membres</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1" style="color:black;"></span> 
-                </p>
-                <p class="mb-1" style="font-size: .77rem;"></p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

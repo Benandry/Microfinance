@@ -9,28 +9,45 @@
 {% endblock %}
 
 {% block body %}
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                <div class="modal-header titre_modal">
+                    <h4 class="modal-title text-center">Info Groupe </h4>
+                </div>
+                {{ form_start(form) }} 
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 mt-1 m-1" >
+                                <p class="fw-bold"> Code groupe : <span id="code_grp"></span> </p>
+                                <p class="fw-bold"> Nom groupe : <span id="nom_grp"></span> </p>
+                                <p class="fw-bold"> Adresse email du groupe: <span id="email_grp"></span> </p>
+                            </div>
+                        </div>
 
-    <div class="rounded g-0 m-5 p-4 shadow-sm">
-        {{ form_start(form) }}
-            <div class="row">
-                <div class="col-4 col-sm-4">
-                    {{ form_row(form.code)}}
-                    <div id="code_suggest"></div>
+                        <div class="row">
+                            <div class="col-6 col-sm-6">
+                                {{ form_row(form.code)}}
+                                <div id="code_suggest"></div>
 
-                    <div id="info_groupe">
-                        {{ form_row(form.nomgroupe)}}
-                        {{ form_row(form.email)}}
+                                <div id="info_groupe">
+                                    {{ form_row(form.nomgroupe)}}
+                                    {{ form_row(form.email)}}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="col-auto col-sm-auto mt-3 ms-5" >
-                    <p class="fw-bold"> Code groupe : <span id="code_grp"></span> </p>
-                    <p class="fw-bold"> Nom groupe : <span id="nom_grp"></span> </p>
-                    <p class="fw-bold"> Adresse email du groupe: <span id="email_grp"></span> </p>
-                </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                             {{ form_row(form.submit)}}
+                    </div>
+                {{ form_end(form) }}
             </div>
-            <div class="row">
-                {{ form_row(form.submit)}}
-            </div>
-        {{ form_end(form)}}
+        </div>
     </div>
 {% endblock %}

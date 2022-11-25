@@ -79,4 +79,5 @@ class IndividuelRepository extends ServiceEntityRepository
             return $query->getResult();
 
    }
+   
 }

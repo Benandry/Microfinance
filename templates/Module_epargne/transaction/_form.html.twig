@@ -14,7 +14,8 @@
                 <div class="card-title text-center p-2" > Information du client </div>
                 <hr>
                 <div class="card-body">
-                    <p class="fw-bold">Code client : <span id="code_client"> {{ code }}</span></p>
+                    <p class="fw-bold">Compte epargne : <span id="code_client"> {{ code }}</span></p>
+                    <p class="fw-bold">Code client : <span id="code_client"> {{ code_client }}</span></p>
                     <p class="fw-bold"> Nom Client : <span id="nom"> {{ nom }}</span></p>
                     <p class="fw-bold"> Prenom client :  <span id="prenom"> {{ prenom }}</span></p>
                     <p class="fw-bold"> Solde client :  
@@ -39,7 +40,7 @@
         </div>
     </div>
 <hr>
-    <div class="row alert alert-secondary" style="color:black;">
+    <div class="row alert alert-secondary" style="color:none;">
         <div class="col-sm-5">
             {{ form_row(form.PieceComptable) }}
             {{ form_row(form.DateTransaction) }}
@@ -49,11 +50,11 @@
             {{ form_row(form.commission) }}
             {{ form_row(form.papeterie) }}
             {{ form_row(form.Montant) }}
+        </div>
+    </div><br>
             <div style="display: none;">
                 {{ form_row(form.solde) }}
             </div>
-        </div>
-    </div><br>
             <button class="btn btn-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 

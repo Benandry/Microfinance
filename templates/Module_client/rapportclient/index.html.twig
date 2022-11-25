@@ -19,35 +19,46 @@
 {% block body %}
     {% if affiche_tab  == false %}
 
-                <div class="card m-5 p-4">
-                    {{ form_start(trier) }}
-                    <h4 class="text-primary text-center">Recherche client par date</h4>
-                    <div class="row">
-                        <div class="col-12 col-sm-12"> 
+     <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                        <h4 class="modal-title text-center">Recherche client par date</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    {{ form_start(trier) }} 
+                        <!-- Modal body -->
+                        <div class="modal-body">
                             <div class="text-center" id="one_date">
                                 <h4 class="text-center"> Dans une date arrêtée </h4>
                                 {{ form_row(trier.search_one_date) }}
                             </div>
-                        </div>
-                    </div>
-                    <div class="row text-center" id="two_date">
-                            <h4 class="text-center">Entre deux dates </h4>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    {{ form_row(trier.date1) }}
-                                </div>
-                                <div class="col-6 col-sm-6"> 
-                                    {{ form_row(trier.date2) }}
-                                </div>
+
+                            <div class="row text-center" id="two_date">
+                                    <h4 class="text-center">Entre deux dates </h4>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            {{ form_row(trier.date1) }}
+                                        </div>
+                                        <div class="col-6 col-sm-6"> 
+                                            {{ form_row(trier.date2) }}
+                                        </div>
+                                    </div>
                             </div>
-                    </div>
-                        
-                        
-                        <div class="row">
+
+                        </div>
+                
+                        <!-- Modal footer -->
+                        <div class="modal-footer mb-0">
                             {{ form_row(trier.Chercher) }}
                         </div>
                     {{ form_end(trier) }}
                 </div>
+            </div>
+        </div>
 
  <p id="test">  <p>
     {% else %}

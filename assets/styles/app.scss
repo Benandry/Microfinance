@@ -1,5 +1,6 @@
 @import './custom/custom';
 @import '~bootstrap/scss/bootstrap';
+//@import '~jquery/jquerymodal.css';
 
 .sidebar_body{
     background-color: #275d71;
@@ -38,7 +39,7 @@
 
 .menu:hover{
     color: #000;
-    font-size: 15px;
+    font-size: 13px;
 }
 .lien,.rapport{
     font-size: 13px;
@@ -46,7 +47,7 @@
 }
 
 .lien:hover,.rapport:hover{
-    font-size: 14px;
+    font-size: 13px;
     color: #000;
 }
 .rapport:active{
@@ -128,4 +129,14 @@ p,td,th{
 .titre_modal{
     background-color: #275d71;
     color: #fff;
+}
+
+.head{
+    background-color: #275d71;
+    color: #fff;
+    margin-top: 0rem;
+}
+
+.nav-link .rapport .dropdown-toggle:active {
+    color: #000;
 }

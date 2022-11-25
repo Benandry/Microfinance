@@ -178,4 +178,18 @@ class IndividuelclientRepository extends ServiceEntityRepository
 
             return $query->getResult();   
     }
+
+    /*****Information adresse du client ********* */
+   public function InfoCommuneClient($id)
+   {
+        $query = " SELECT  client.id,client.nom_client, commune.NomCommune ,commune.CodeCommune,client.adressephysique
+        FROM App\Entity\Individuelclient client
+        LEFT JOIN App\Entity\Commune commune
+        WITH client.commune = commune.NomCommune 
+        WHERE client.id = '$id'";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+        return $stmt;
+   }
 }

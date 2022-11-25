@@ -65,12 +65,19 @@ class TransactionController extends AbstractController
     {
         $transaction = new Transaction();
         $code = $request->query->get('code');
+        $code_client = $request->query->get('cod_client');
         $nom = $request->query->get('nom');
         $prenom = $request->query->get('prenom');
 
+        #dd($code);
         $soldeCurrent = $transactionRepository->soldeCurrent($code);
+        #dd($soldeCurrent);
 
-        //dd($soldeCurrent[0]['solde']);
+        if($soldeCurrent == null ){
+            $soldeCurrent[0]['solde'] = 0;
+        }
+
+       //dd($soldeCurrent);
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
@@ -119,13 +126,20 @@ class TransactionController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', " Transaction depot compte epargne '" .$transaction->getCodeepargneclient()."'réussite!!!");
-            //return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_transaction_new', [
+                'code' => $code,
+                'cod_client' => $code_client,
+                'code' => $code,
+                'nom' => $nom,
+                'prenom' => $prenom,
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transaction/new.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
             'code' => $code,
+            'code_client' => $code_client,
             'nom' => $nom,
             'prenom' => $prenom,
             'solde' => $soldeCurrent[0]['solde'],

@@ -127,27 +127,16 @@ class GroupeRepository extends ServiceEntityRepository
    }
 
       // Filtre entre deux date transaction
-      public function FiltreMembre($Du,$Au){
-        return $this->createQueryBuilder('g')
-                    ->select( 'g.id,
-                    i.codeclient,
-                    g.codegroupe,
-                    g.nomGroupe,
-                    g.email,
-                    g.dateInscription,
-                    i.id as client,
-                    i.nom_client,
-                    i.prenom_client,
-                    i.dateadhesion')
-                    ->innerJoin('g.IndividuelMembre','i')
-                    ->where('g.id = i.MembreGroupe')
-                    ->andWhere('i.dateadhesion BETWEEN :Du AND :Au')
-                    ->setParameter(':Du',$Du)
-                    ->setParameter(':Au',$Au)
-                    ->getQuery()
-                    ->getResult()
-                    ;
-     }
+       // Filtre entre deux date transaction
+       public function filtreMembre($groupe,$date1,$date2){
+
+        $query = "SELECT  g.codegroupe, client.codeclient,client.dateadhesion , client.nom_client ,client.prenom_client,g.email ,g.nomGroupe ,g.dateInscription FROM App\Entity\Groupe g
+                  LEFT JOIN App\Entity\Individuelclient client WITH g.id = client.MembreGroupe
+                  WHERE client.dateadhesion  BETWEEN :au AND :du AND g.nomGroupe = '$groupe' ";
+                $statement = $this->getEntityManager()->createQuery($query)->setParameter(':du',$date1)->setParameter(':au',$date2)->execute();
+
+            return $statement;
+      }
 
      public function findByGroupId(){
 
@@ -166,11 +155,11 @@ class GroupeRepository extends ServiceEntityRepository
         
         return $statement;
      }
-     public function filtreByOneDate($date){
+     public function filtreByOneDate($groupe,$date){
 
         $query = "SELECT  g.codegroupe, client.codeclient,client.dateadhesion , client.nom_client ,client.prenom_client,g.email ,g.nomGroupe ,g.dateInscription FROM App\Entity\Groupe g
                   LEFT JOIN App\Entity\Individuelclient client WITH g.id = client.MembreGroupe
-                  WHERE client.dateadhesion <=  :one_date ";
+                  WHERE client.dateadhesion <=  :one_date AND g.nomGroupe = '$groupe' ";
                 $statement = $this->getEntityManager()->createQuery($query)->setParameter(':one_date',$date)->execute();
 
             return $statement;
@@ -197,4 +186,20 @@ class GroupeRepository extends ServiceEntityRepository
     }
 
   /********************************************************************************* */
+
+  /******************Liste de membre dans un groupe */
+  public function membreGroupe($id){
+    $query = " SELECT groupe.codegroupe code,groupe.nomGroupe nom, groupe.email,client.nom_client,client.prenom_client, client.codeclient,client.TitreGroupe 
+    FROM App\Entity\Groupe groupe
+    LEFT JOIN App\Entity\Individuelclient client
+     WITH groupe.id = client.MembreGroupe 
+    WHERE groupe.id = '$id'";
+    
+    $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+    return $stmt;
+  }
+  
+
+  /**********************Pr */
 }

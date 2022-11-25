@@ -188,12 +188,16 @@ class OuvrirAccountController extends AbstractController
             #dd($data);
             /*****Inforamtion via lees formulaire************************ */
             $code = $data['code'];
+            $code_client  = $data['code_client'];
+            $produit = $data['produit'];
             $nom = $data['nom'];
-            $email = $data['prenom'];
+            $prenom = $data['prenom'];
             return $this->redirectToRoute('app_transaction_new', [
-                    'code' => $code,
-                    'nom' => $nom,
-                    'prenom' => $email,
+                'code' => $code,
+                'cod_client' => $code_client,
+                'code' => $code,
+                'nom' => $nom,
+                'prenom' => $prenom,
 
                 ], 
             Response::HTTP_SEE_OTHER);

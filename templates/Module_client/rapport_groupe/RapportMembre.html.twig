@@ -2,17 +2,17 @@
 
     {% block title %}
         {% if affiche_tab  == false %}
-            Rapport membre groupe 
+            Rapport membre
         {% else %}
-            Liste des membre groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des membre {{ nom }} {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
     {% block head %}
         {% if affiche_tab  == false %}
-            Rapport membre groupe 
+          
         {% else %}
-            Liste des membres groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des membres {{ nom }} {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
@@ -20,50 +20,71 @@
 
     {% if affiche_tab == false %}
         <!-- The Modal -->
-                        <h4 class="modal-title text-center">Recherche par date</h4>
-                    {{ form_start(form) }}
-                        <div class="text-center" id="one_date">
-                            <h4 class="text-center"> Date arrêtée </h4>
-                            {{ form_row(form.search_on_date) }}
-                        </div>
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                        <h4 class="modal-title text-center">Rapport membres groupe</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    {{ form_start(form) }} 
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="text-center" id="nom_groupe">
+                                <h4 class="text-center"> Date arrêtée </h4>
+                                {{ form_row(form.groupe) }}
+                            </div>
+
+                            <div class="text-center" id="one_date">
+                                <h4 class="text-center"> Date arrêtée </h4>
+                                {{ form_row(form.search_on_date) }}
+                            </div>
 
                         <div class=" row text-center" id="two_date">
-                                <h4 class="text-center">Entre deux dates </h4>
-                                <div class="col-sm-6">
-                                    {{ form_row(form.Du) }}
-                                </div>
-                                <div class="col-sm-6">
-                                    {{ form_row(form.Au) }}
-                                </div>
+                            <h4 class="text-center">Entre deux dates </h4>
+                            <div class="col-sm-6">
+                                {{ form_row(form.Du) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(form.Au) }}
+                            </div>
                         </div>
+
+                        </div>
+                
                         <!-- Modal footer -->
-                        <div class="row">
+                        <div class="modal-footer mb-0">
                             {{ form_row(form.Filtre) }}
                         </div>
                     {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
 
     {% else %}
+            <div class="row m-2">
+                <p class="col-4 col-sm-4"> <span class="fw-bold"> Code groupe : </span>  <span> {{ code }} </span></p>
+                <p class="col-4 col-sm-4"> <span class="fw-bold"> Nom du groupe : </span> <span> {{ nom }}  </span></p>
+                <p class="col-4 col-sm-4"> <span class="fw-bold">Email groupe :  </span> <span> {{ email }} </span> </p>
+            </div>
             <table class="table1 table alert alert-primary">
             <thead>
                 <tr>
-                    <th>Code Groupe</th>
                     <th>Code Client</th>
                     <th>Date d'adhesion</th>
                     <th>Nom Client</th>
-                    <th>Nom Groupe</th>
-                    <th>Adresse Email</th>
                     <th>Date de creation </th>
                 </tr>
             </thead>
             <tbody class="jumbotron jumbotron-fluid" style="color:black;">
             {% for Groupe in rapportMembre %}
                     <tr>
-                        <td class="fw-bold"> {{ Groupe.codegroupe }}</td>
                         <td> {{ Groupe.codeclient}}</td>
                         <td>{{ Groupe.dateadhesion | date('d-m-Y') }}</td>
                         <td>{{ Groupe.nom_client }} {{ Groupe.prenom_client }}</td>
-                        <td>{{ Groupe.nomGroupe }}</td>
-                        <td>{{ Groupe.email }}</td>
                         <td>{{ Groupe.dateInscription | date('d-m-Y') }}</td>
                     </tr>
                 {% else %}
