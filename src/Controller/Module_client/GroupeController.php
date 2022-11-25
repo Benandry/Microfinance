@@ -79,11 +79,17 @@ class GroupeController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'app_groupe_show')]
-    public function show(ManagerRegistry $doctrine,$id): Response
+    public function show(GroupeRepository $groupeRepo, ManagerRegistry $doctrine,$id): Response
     {        
         $groupes=$doctrine->getRepository(Groupe::class)->find($id);
+
+
         $membre=$groupes->getIndividuelMembre();
 
+        $membreGroupe = $groupeRepo->membreGroupe($id);
+
+        #dd($membreGroupe);
+        #dd($membre);
         // Agence
         $agence=$doctrine->getRepository(Agence::class)->findAll();
 
@@ -92,6 +98,7 @@ class GroupeController extends AbstractController
                     'agences'=>$agence,
                     'membre'=>$membre,
                     'groupe'=>$groupes,
+                    'membreGroupe' => $membreGroupe
                 ]);
     }
 

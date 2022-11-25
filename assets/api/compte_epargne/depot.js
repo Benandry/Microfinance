@@ -4,6 +4,7 @@ import $ from 'jquery'
 var path = window.location.pathname
 
 $(document).ready(() =>{
+
     if (path === '/transaction/new') {
         
         var code_client = $('#code_client').text()
@@ -21,28 +22,34 @@ $(document).ready(() =>{
 
 
         var montant_bruit_ = 0
-        var commission=0
-        var papeterie =0
+        var commission= 0
+        var papeterie = 0
 
-        $('#transaction_montant_bruite').on('keyup',(e)=>{
-            montant_bruit_=e.target.value;
-        //    alert(montant_bruit_);
+        $('#transaction_montant_bruite').on('keyup',()=>{
+            montant_bruit_= $('#transaction_montant_bruite').val();
+           // alert(": I010000015")
+            console.log(montant_bruit_);
         })
 
         $('#transaction_commission').val(0)
-        $('#transaction_commission').on('change',(e)=>{
-            commission=e.target.value;
+        $('#transaction_commission').on('change',()=>{
+            commission=$('#transaction_commission').val();
             // alert(commission);
         })
 
         $('#transaction_papeterie').val(0)
-        $('#transaction_papeterie').on('change',(e) =>{
-            papeterie = e.target.value
-            montant_total = parseInt(montant_bruit_) -(parseInt(commission) + parseInt(papeterie))
+        $('#transaction_papeterie').on('keyup',() =>{
+            papeterie = $('#transaction_papeterie').val()
+            var montant_total = parseInt(montant_bruit_) -(parseInt(commission) + parseInt(papeterie))
 
+                //lert("mETY VEE")
             $('#transaction_Montant').val(montant_total)
+            
+            //Ajouter valeur sur la formulaire solde
+            var solde = montant_total + parseInt($('#solde_cli').text())
+
+            $('#transaction_solde').val(solde)
         })
-        //Ajouter valeur sur la formulaire solde
 
 
     }

@@ -118,12 +118,12 @@ class IndividuelController extends AbstractController
 
     #[Route('/{id}', name: 'app_individuel_show', methods: ['GET'])]
     // #[ParamConverter('get',class:'SensioBlogBundle:Get')]
-    public function show(ManagerRegistry $docrtine,Individuelclient $individuelclient,AgenceRepository $agenceRepository,int $id): Response
+    public function show(ManagerRegistry $docrtine,Individuelclient $individuelclient,AgenceRepository $agenceRepository,int $id,IndividuelclientRepository $individuelRepo ): Response
     {
         $individuelclient=$docrtine->getRepository(Individuelclient::class)->find($id);
-        $Commune=$individuelclient->getCommune();
+        $Commune= $individuelRepo->InfoCommuneClient($id) ;
 
-        //dd($Commune);
+        #dd($Commune[0]);
         $etude=$individuelclient->getEtude();
         $titre=$individuelclient->getTitre();
         $etatcivile=$individuelclient->getEtatcivile();
@@ -132,7 +132,7 @@ class IndividuelController extends AbstractController
 
         return $this->render('Module_client/individuel/show.html.twig', [
             'individuelclients' => $individuelclient,
-            'Commune'=>$Commune,
+            'communes'=>$Commune,
             'agences' => $agence,
             'etudes' => $etude,
             'titres' => $titre,

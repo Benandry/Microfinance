@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,6 +38,13 @@ class FiltreRapportMembreType extends AbstractType
                     'html5'=>true,
                     'required' => false,
                 ])
+
+                ->add('groupe',TextType::class,[
+                    'label'=>'Nom du groupe : ',
+                    'mapped'=>true,
+                    'required' => true,
+                ])
+
             ->add('Filtre',SubmitType::class,[
                 'attr'=>[
                     'class'=>'btn btn-success'

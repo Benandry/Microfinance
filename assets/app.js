@@ -24,8 +24,10 @@ import './api/compte_epargne/compte_epargne_individuel'
 import './api/compte_epargne/depot'
 
 //import les api pour les compte epargne
-//import './api/api_compte_epargne'
+//import './api/api_compte_epargne'//
 import 'jquery-modal'
+import 'jquery-modal/jquery.modal'
+
 
 import $ from 'jquery';
 
@@ -35,7 +37,6 @@ import 'datatables.net-buttons-dt';
 import 'datatables.net-dt';
 import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.print';
-import 'datatables.net-buttons/js/buttons.html5.js';
 import 'datatables.net-bs5';
 import '@fortawesome/fontawesome-free/js/all';
 
@@ -48,11 +49,9 @@ const path = window.location.pathname;
 $(document).ready(function(){
 
     /*******Lancer modal  */
-    $(window).on('load',function(){
+
 
         $('#myModal').modal('show');
-
-    });
 
     $(".table1").DataTable({
         dom: 'Bltp',

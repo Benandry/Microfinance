@@ -131,7 +131,8 @@ class CompteEpargneController extends AbstractController
         $prenom = $request->query->get('prenom');
         // affichage du client du jour
         $compte_existe=$compteEpargneRepository->compteClientCourant($code);
-        #dd($compte_existe);
+        
+       # dd($compte_existe);
         
         $compteEpargne = new CompteEpargne();
         $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
@@ -143,7 +144,11 @@ class CompteEpargneController extends AbstractController
             $compteEpargneRepository->add($compteEpargne, true);
 
             $this->addFlash('success', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
-            //return $this->redirectToRoute('app_compte_epargne_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_compte_epargne_new', [
+                'code' => $code,
+                'nom' => $nom,
+                'prenom' => $prenom,
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/compte_epargne/new.html.twig', [
@@ -166,7 +171,7 @@ class CompteEpargneController extends AbstractController
         $email = $request->query->get('email');
 
         $compteEpargneExiste = $compteEpargneRepository->compteEpargneExist($code);
-        #dd($compteEpargneExiste);
+       #dd($compteEpargneExiste);
 
 
         $compteEpargne = new CompteEpargne();
