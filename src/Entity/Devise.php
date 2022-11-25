@@ -24,9 +24,13 @@ class Devise
     #[ORM\OneToMany(mappedBy: 'deviseutiliser', targetEntity: ConfigEp::class)]
     private Collection $ConfigDevise;
 
+    #[ORM\OneToMany(mappedBy: 'Devise', targetEntity: ConfigurationGeneralCredit::class)]
+    private Collection $configurationGeneralCredits;
+
     public function __construct()
     {
         $this->ConfigDevise = new ArrayCollection();
+        $this->configurationGeneralCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,5 +95,35 @@ class Devise
     public function __toString()
     {
         return (string) $this->getId();
+    }
+
+    /**
+     * @return Collection<int, ConfigurationGeneralCredit>
+     */
+    public function getConfigurationGeneralCredits(): Collection
+    {
+        return $this->configurationGeneralCredits;
+    }
+
+    public function addConfigurationGeneralCredit(ConfigurationGeneralCredit $configurationGeneralCredit): self
+    {
+        if (!$this->configurationGeneralCredits->contains($configurationGeneralCredit)) {
+            $this->configurationGeneralCredits[] = $configurationGeneralCredit;
+            $configurationGeneralCredit->setDevise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfigurationGeneralCredit(ConfigurationGeneralCredit $configurationGeneralCredit): self
+    {
+        if ($this->configurationGeneralCredits->removeElement($configurationGeneralCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($configurationGeneralCredit->getDevise() === $this) {
+                $configurationGeneralCredit->setDevise(null);
+            }
+        }
+
+        return $this;
     }
 }
