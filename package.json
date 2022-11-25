@@ -24,12 +24,8 @@
         "datatables.net-bs5": "^1.13.1",
         "datatables.net-buttons-dt": "^2.2.3",
         "datatables.net-dt": "^1.12.1",
-<<<<<<< HEAD
-=======
         "jquery": "^3.6.1",
->>>>>>> a09eea13f1effc231de8034fd9222fecab6d7de9
-        "jquery-modal": "^0.9.2",
-        "jszip": "^3.10.1",
+        "jquery-modal": "^0.9.2",        "jszip": "^3.10.1",
         "pdfmake": "^0.2.6",
         "postcss-loader": "^7.0.1"
     }
