@@ -65,7 +65,7 @@ $(document).ready(() =>{
                                 suggestion += `<div class="suggestion">${resultItem.Commune}</div>`
                             })
                         }else{
-                            suggestion = '<div class="suggestion"> Pas de commune</div>'
+                            suggestion = '<div class="suggestion"> Pas de client</div>'
                         }
 
                         document.getElementById('commune_suggest').innerHTML = suggestion

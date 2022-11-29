@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ConfigurationGeneralCredit{% endblock %}
+
+{% block body %}
+    <h1>ConfigurationGeneralCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ configuration_general_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>ProduitLieEpargne</th>
+                <td>{{ configuration_general_credit.ProduitLieEpargne ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>NombreJourInteretAnnee</th>
+                <td>{{ configuration_general_credit.NombreJourInteretAnnee }}</td>
+            </tr>
+            <tr>
+                <th>NombreSemaineAnnee</th>
+                <td>{{ configuration_general_credit.NombreSemaineAnnee }}</td>
+            </tr>
+            <tr>
+                <th>RecalculDateEcheanceDecaissement</th>
+                <td>{{ configuration_general_credit.RecalculDateEcheanceDecaissement }}</td>
+            </tr>
+            <tr>
+                <th>TauxInteretVariableSoldeDegressif</th>
+                <td>{{ configuration_general_credit.TauxInteretVariableSoldeDegressif }}</td>
+            </tr>
+            <tr>
+                <th>RecalculInteretRemboursementAmortissementDegressif</th>
+                <td>{{ configuration_general_credit.RecalculInteretRemboursementAmortissementDegressif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>MethodeSoldeDegressifComposeCalculInteret</th>
+                <td>{{ configuration_general_credit.MethodeSoldeDegressifComposeCalculInteret ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt</th>
+                <td>{{ configuration_general_credit.ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AutorisationDecaissementPartiellement</th>
+                <td>{{ configuration_general_credit.AutorisationDecaissementPartiellement ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AcrivePrioriteRemboursementCredit</th>
+                <td>{{ configuration_general_credit.AcrivePrioriteRemboursementCredit ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_configuration_general_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_configuration_general_credit_edit', {'id': configuration_general_credit.id}) }}">edit</a>
+
+    {{ include('configuration_general_credit/_delete_form.html.twig') }}
+{% endblock %}

@@ -39,6 +39,20 @@ class DemandeCreditRepository extends ServiceEntityRepository
         }
     }
 
+    // Cette fonction permet de creer des numero credits
+    public function DernierNumeroCredit(){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+             MAX(demande.id)
+             FROM 
+             App\Entity\DemandeCredit demande'
+        );
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return DemandeCredit[] Returns an array of DemandeCredit objects
 //     */

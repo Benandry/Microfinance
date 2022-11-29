@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeCredit index{% endblock %}
+
+{% block body %}
+    <h1>DemandeCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codeclient</th>
+                <th>TypeClient</th>
+                <th>NumeroCredit</th>
+                <th>DateDemande</th>
+                <th>Montant</th>
+                <th>TauxInteretAnnuel</th>
+                <th>NombreTranche</th>
+                <th>TypeTranche</th>
+                <th>MethodeCalculInteret</th>
+                <th>DiffereDePaiement</th>
+                <th>CapitalDerniereEcheance</th>
+                <th>FondCredit</th>
+                <th>MontantEpargneTranche</th>
+                <th>MontantFixe</th>
+                <th>SoldeEpargne</th>
+                <th>Agent</th>
+                <th>ButCredit</th>
+                <th>Categorie1Credit</th>
+                <th>Categorie2Credit</th>
+                <th>Categorie3Credit</th>
+                <th>Categorie4Credit</th>
+                <th>CalculInteretDiffere</th>
+                <th>InteretDifferePaiementCapitalise</th>
+                <th>InteretPayeMemePourDiffere</th>
+                <th>TrancheDistinctInteretPeriodeDiffere</th>
+                <th>PaiementPrealableInteret</th>
+                <th>InteretDeduitDecaissement</th>
+                <th>CalculInteretJours</th>
+                <th>ForfaitPaiementPrealableInteret</th>
+                <th>CreditLieUSD</th>
+                <th>MettreJourCalendrierNonOuvrable</th>
+                <th>ReporterPremierTranche</th>
+                <th>CommissionPourcentageMontantCredit</th>
+                <th>PourcentageCapitalEnCoursInteretCommission</th>
+                <th>MontantFixeParTranche</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande_credit in demande_credits %}
+            <tr>
+                <td>{{ demande_credit.id }}</td>
+                <td>{{ demande_credit.codeclient }}</td>
+                <td>{{ demande_credit.TypeClient }}</td>
+                <td>{{ demande_credit.NumeroCredit }}</td>
+                <td>{{ demande_credit.DateDemande ? demande_credit.DateDemande|date('Y-m-d') : '' }}</td>
+                <td>{{ demande_credit.Montant }}</td>
+                <td>{{ demande_credit.TauxInteretAnnuel }}</td>
+                <td>{{ demande_credit.NombreTranche }}</td>
+                <td>{{ demande_credit.TypeTranche }}</td>
+                <td>{{ demande_credit.MethodeCalculInteret }}</td>
+                <td>{{ demande_credit.DiffereDePaiement }}</td>
+                <td>{{ demande_credit.CapitalDerniereEcheance }}</td>
+                <td>{{ demande_credit.FondCredit }}</td>
+                <td>{{ demande_credit.MontantEpargneTranche }}</td>
+                <td>{{ demande_credit.MontantFixe }}</td>
+                <td>{{ demande_credit.SoldeEpargne }}</td>
+                <td>{{ demande_credit.Agent }}</td>
+                <td>{{ demande_credit.ButCredit }}</td>
+                <td>{{ demande_credit.Categorie1Credit }}</td>
+                <td>{{ demande_credit.Categorie2Credit }}</td>
+                <td>{{ demande_credit.Categorie3Credit }}</td>
+                <td>{{ demande_credit.Categorie4Credit }}</td>
+                <td>{{ demande_credit.CalculInteretDiffere ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.InteretDifferePaiementCapitalise ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.InteretPayeMemePourDiffere ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.TrancheDistinctInteretPeriodeDiffere ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.PaiementPrealableInteret ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.InteretDeduitDecaissement ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.CalculInteretJours ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.ForfaitPaiementPrealableInteret ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.CreditLieUSD ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.MettreJourCalendrierNonOuvrable ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.ReporterPremierTranche ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.CommissionPourcentageMontantCredit ? 'Yes' : 'No' }}</td>
+                <td>{{ demande_credit.PourcentageCapitalEnCoursInteretCommission }}</td>
+                <td>{{ demande_credit.MontantFixeParTranche }}</td>
+                <td>
+                    <a href="{{ path('app_demande_credit_show', {'id': demande_credit.id}) }}">show</a>
+                    <a href="{{ path('app_demande_credit_edit', {'id': demande_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="37">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_demande_credit_new') }}">Create new</a>
+{% endblock %}

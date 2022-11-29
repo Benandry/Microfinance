@@ -112,6 +112,18 @@
                                 </ul>
                             </li>
 
+                            {# Module credit #}
+
+                            <li>
+                                <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span></a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande de credit </span></a>
+                                    </li>
+                                </ul>
+                            </li>
+
                             <!-- Configuration -->
                             <li>
                                 <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -125,6 +137,16 @@
                                     </li>
                                     <li>
                                         <a href="{{path('app_config_ep_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Epargne </span></a>
+                                    </li>
+                                    {# Configuration credit #}
+                                    <li>
+                                        <a href="{{path('app_credit_individuel_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Credit Individuel </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('app_produit_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Credit </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('app_configuration_general_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration general du credit</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -179,7 +201,7 @@
                         <div class="row">
                             <div class="col-12 col-md-12 col sm-12">
                                 <div class="row head">
-                                    <h5 class="text_head m-3">{% block head %}  {% endblock %}</h5>
+                                    <h5 class="text_head m-3">{% block head %} Fidev {% endblock %}</h5>
                                     <hr class="fw-bold">
                                 </div>
                                 <div class="row">
@@ -192,7 +214,6 @@
                             </div>
                         </div>
                        
-                      
                 </div>
             </div>
         </div>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration credit Individuel{% endblock %}
+
+{% block body %}
+    
+    <h1>Configuration Credit Individuel</h1>
+    {# Message de confihuration #}
+          {% for message in app.flashes('success') %}
+            <strong class='text-alert alert-primary'>{{ message }}</strong>
+        {% endfor %}
+
+    {{ include('credit_individuel/_form.html.twig') }}
+
+{% endblock %}

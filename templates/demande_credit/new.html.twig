@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande de credit{% endblock %}
+
+{# {% block head %}
+{% endblock %} #}
+
+{% block body %}
+    Agent de credit : <p id="prenom"> {{ app.user.prenom }}</p>
+    <p style="display:none">Code agence</p><p id="codeagence"  style="display:none"> {{ app.user.codeagence }}</p>
+    <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none"> {{ numeros }}</p>
+    <h1>Demande de credit</h1>
+        {% for message in app.flashes('success') %}
+            <strong class='text-alert alert-primary'>{{ message }}</strong>
+        {% endfor %}
+
+    {{ include('demande_credit/_form.html.twig') }}
+
+{% endblock %}

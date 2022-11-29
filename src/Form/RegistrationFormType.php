@@ -88,6 +88,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 
             ])
+            ->add('codeagence')
+            ->add('nomagence')
         ;
     }
 

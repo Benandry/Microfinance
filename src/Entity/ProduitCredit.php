@@ -87,4 +87,9 @@ class ProduitCredit
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getId();
+    }
 }
