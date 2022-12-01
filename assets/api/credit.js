@@ -32,5 +32,38 @@ $(document).ready(function(){
                 $('#demande_credit_NumeroCredit').val('G'+codeagence+pad_last_id);
             }
         })
+
+        // Ici on utilise l'api pour recuperer tous les informatins du configuraion dans
+        // la base de donnees
+        
+        $('#demande_credit_ProduitCredit').on('change',function(){
+
+            var url ='/api/credit/'+$(this).val();
+
+            $.ajax({
+                url:url,
+                method:"GET",
+                dataType:"json",
+                contentType : "application/json; charset=utf-8",
+                success : function(result){
+                    for(let i=0;i<result.length;i++){
+
+                        var element= result[i];
+
+                        console.log(element);
+
+                        // document.getElementById('demande_credit_NombreTranche').innerHTML=parseInt(element.Tranche)
+                        var tranche=parseInt(element.Tranche);
+                        var montantminimum=parseInt(element.MontantMinimumCredit)
+                        var montantmaximum=parseInt(element.MontantMaximumCredit)
+                        var tauxinteretannuel=parseInt(element.TauxInteretAnnuel)
+                        console.log(tranche);
+                        $('#demande_credit_NombreTranche').val(tranche);
+                        $('#demande_credit_Montant').val('Min: '+montantminimum+' || Max:'+montantmaximum);
+                        $('#demande_credit_TauxInteretAnnuel').val(tauxinteretannuel + ' %');
+                    }
+                }
+            })
+        })
         
 })

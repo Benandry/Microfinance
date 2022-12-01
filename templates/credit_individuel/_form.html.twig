@@ -9,6 +9,11 @@
             <div class="row shadow-sm p-3">
                 <div class="col-12 col-sm-12 col-md-12">
                 <h6 class="text-center text-primary">Etape 1</h6>
+                    <div class="col-sm-5">
+                        {{ form_row(form.ProduitCredit) }}
+                    </div>
+                   <hr>
+                   <hr>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6">
                         {{ form_row(form.TauxInteretAnnuel) }}
@@ -55,6 +60,5 @@
       </div>
 
   </div>
-    {# {{ form_widget(form) }} #}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

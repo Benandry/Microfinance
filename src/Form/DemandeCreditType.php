@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\DemandeCredit;
+use App\Entity\ProduitCredit;
 use App\Entity\ProduitEpargne;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -70,6 +71,13 @@ class DemandeCreditType extends AbstractType
             ->add('ProduitEpargne',EntityType::class,[
                 'class'=>ProduitEpargne::class,
                 'choice_label'=>'nomproduit'
+            ])
+            ->add('ProduitCredit',EntityType::class,[
+                'class'=>ProduitCredit::class,
+                'choice_label'=>'NomProduitCredit',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Choisir Produit Credit'
             ])
         ;
     }

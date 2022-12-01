@@ -24,9 +24,17 @@ class ProduitCredit
     #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: ConfigurationGeneralCredit::class)]
     private Collection $configurationGeneralCredits;
 
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: CreditIndividuel::class)]
+    private Collection $creditIndividuels;
+
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: DemandeCredit::class)]
+    private Collection $demandeCredits;
+
     public function __construct()
     {
         $this->configurationGeneralCredits = new ArrayCollection();
+        $this->creditIndividuels = new ArrayCollection();
+        $this->demandeCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,5 +99,65 @@ class ProduitCredit
     public function __toString()
     {
         return $this->getId();
+    }
+
+    /**
+     * @return Collection<int, CreditIndividuel>
+     */
+    public function getCreditIndividuels(): Collection
+    {
+        return $this->creditIndividuels;
+    }
+
+    public function addCreditIndividuel(CreditIndividuel $creditIndividuel): self
+    {
+        if (!$this->creditIndividuels->contains($creditIndividuel)) {
+            $this->creditIndividuels[] = $creditIndividuel;
+            $creditIndividuel->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreditIndividuel(CreditIndividuel $creditIndividuel): self
+    {
+        if ($this->creditIndividuels->removeElement($creditIndividuel)) {
+            // set the owning side to null (unless already changed)
+            if ($creditIndividuel->getProduitCredit() === $this) {
+                $creditIndividuel->setProduitCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeCredit>
+     */
+    public function getDemandeCredits(): Collection
+    {
+        return $this->demandeCredits;
+    }
+
+    public function addDemandeCredit(DemandeCredit $demandeCredit): self
+    {
+        if (!$this->demandeCredits->contains($demandeCredit)) {
+            $this->demandeCredits[] = $demandeCredit;
+            $demandeCredit->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeCredit(DemandeCredit $demandeCredit): self
+    {
+        if ($this->demandeCredits->removeElement($demandeCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeCredit->getProduitCredit() === $this) {
+                $demandeCredit->setProduitCredit(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -122,6 +122,9 @@ class DemandeCredit
     #[ORM\Column]
     private ?float $MontantFixeParTranche = null;
 
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?ProduitCredit $ProduitCredit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -562,5 +565,17 @@ class DemandeCredit
     public function __toString()
     {
         return $this->getId();
+    }
+
+    public function getProduitCredit(): ?ProduitCredit
+    {
+        return $this->ProduitCredit;
+    }
+
+    public function setProduitCredit(?ProduitCredit $ProduitCredit): self
+    {
+        $this->ProduitCredit = $ProduitCredit;
+
+        return $this;
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\ConfigurationGeneralCredit;
+use App\Entity\ProduitCredit;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +24,13 @@ class ConfigurationGeneralCreditType extends AbstractType
             ->add('ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt')
             ->add('AutorisationDecaissementPartiellement')
             ->add('AcrivePrioriteRemboursementCredit')
-            ->add('ProduitCredit')
+            ->add('ProduitCredit',EntityType::class,[
+                'class'=>ProduitCredit::class,
+                'choice_label'=>'NomProduitCredit',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Produit Credit'
+            ])
             ->add('Devise')
         ;
     }
