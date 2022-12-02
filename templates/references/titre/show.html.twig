@@ -1,4 +1,12 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur le titre {{ titre.titre }}
+{% endblock %}
+
+{% block head %}
+    Info sur le titre {{ titre.titre }}
+{% endblock %}
 
 {% block body %}
     <h1>Titre</h1>
@@ -16,9 +24,7 @@
         </tbody>
     </table>
 
-        <a href="{{ path('app_titre_index', {'id': titre.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>    
-        <a href="{{ path('app_titre_edit', {'id': titre.id}) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Editer</a>
+        <a href="{{ path('app_titre_index', {'id': titre.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i> Voir liste</a>    
+        <a href="{{ path('app_titre_edit', {'id': titre.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
     </div>
 {% endblock %}
-
-{{ include('footer.html.twig') }}

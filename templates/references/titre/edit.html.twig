@@ -1,10 +1,12 @@
-{{ include('header.html.twig') }}
-
-{% block body %}
-    <h1>Edit Titre</h1>
-
-    {{ include('references/titre/_form.html.twig', {'button_label': 'Update'}) }}
-    
+{% extends "base.html.twig" %}
+{% block title %}
+    Modifier le titre 
 {% endblock %}
 
-{{ include('footer.html.twig') }}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    {{ include('references/titre/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}
+

@@ -150,4 +150,13 @@ class AllApiController extends AbstractController
         $api = $repo->codeCompteEpargneInfo($code); 
         return new JsonResponse($api);
     }
+
+
+    #[Route('/releve/client/{code}', name: 'relever_recherche_cli')]
+    public  function rechercheReleveClientFunc(TransactionRepository $repo,$code)
+    {
+        $api= $repo->rechercheReleveClient($code);
+       // dd($api);
+        return new JsonResponse($api);
+    }
 }

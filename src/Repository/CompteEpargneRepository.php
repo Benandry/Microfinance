@@ -628,7 +628,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
   
         return $stmt;
-      }
+    }
 
 
     //   api code epargne

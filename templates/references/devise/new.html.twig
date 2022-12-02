@@ -4,17 +4,6 @@
 {% block body %}
     
   {{ include('references/devise/_form.html.twig') }}
-         {% block javascript %}
-
-    <script>
-          $(document).ready(function(){
-              $(window).on('load',()=>{
-                  $('#myModal').modal('show')
-              })
-          });
-    </script>
-    {% endblock %}
-
 {% endblock %}
     {# /***********Fin modal *********** #}
 

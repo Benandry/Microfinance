@@ -1,4 +1,11 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+{% block title %}
+    Info {{ devise.devise}}
+{% endblock %}
+
+{% block head %}
+    Info {{ devise.devise}}
+{% endblock %}
 
 {% block body %}
     <h1>Devise</h1>
@@ -20,9 +27,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_devise_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>
-    <a href="{{ path('app_devise_edit', {'id': devise.id}) }}" class="btn btn-success"><i class="fa fa-eye"></i>editer</a>
+    <a href="{{ path('app_devise_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i></a>
+    <a href="{{ path('app_devise_edit', {'id': devise.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
 
 {% endblock %}
-
-{{ include('footer.html.twig') }}

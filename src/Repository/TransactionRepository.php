@@ -342,6 +342,39 @@ class TransactionRepository extends ServiceEntityRepository
    }
 
 
+/***************************Relever *********************** */
+
+    public function rechercheReleveClient($code){
+        $query = " SELECT 
+         g.codegroupe,
+         g.nomGroupe,
+        client.nom_client nom_client,
+        client.prenom_client prenom_client,
+        client.codeclient,
+        ce.datedebut ,
+        ce.codegroupeepargne,
+        ce.codeepargne,
+        t.solde
+        FROM
+         App\Entity\CompteEpargne ce 
+        LEFT JOIN
+        App\Entity\Transaction t
+        WITH t.codeepargneclient = ce.codeepargne
+        LEFT JOIN
+        App\Entity\Groupe g
+        WITH ce.codegroupe = g.codegroupe
+       LEFT JOIN
+        App\Entity\Individuelclient client
+        WITH client.codeclient = ce.codeep
+        WHERE ce.codeepargne = '$code' ";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+        return $stmt;
+    }
+
+
+/************************** *************************/
 
    // cette fonction permet de recupere le nom
         public function api_releve_transac($codeepargne)

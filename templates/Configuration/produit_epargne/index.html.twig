@@ -1,15 +1,23 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Produits epargnes
+{% endblock %}
+
+{% block head %}
+    Produits epargnes
+{% endblock %}
 
 {% block body %}
 
     <table class="table table-bordered">
-        <thead class="alert alert-success">
+        <thead>
             <tr>
                 <th>Code type</th>
                 <th>Code produit</th>
                 <th>Type produit</th>
                 <th>Nom produit</th>
-                <th>Description produit</th>
+                <th>Status produit</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,15 +32,16 @@
                     <a class="btn btn-success btn-sm">{{ produit_epargne.isdesactive ? 'Active':'Desactive' }}</a>
                 </td>
                 <td>
-
-                    <div class="col-sm-3">
-                        <a href="{{ path('app_produit_epargne_show', {'id': produit_epargne.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Afficher</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="{{ path('app_produit_epargne_edit', {'id': produit_epargne.id}) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> editer</a>
-                    </div>
-                    <div class="col-sm-6">
-                        {{ include('Configuration/produit_epargne/_delete_form.html.twig') }}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a href="{{ path('app_produit_epargne_show', {'id': produit_epargne.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="{{ path('app_produit_epargne_edit', {'id': produit_epargne.id}) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                        <div class="col-sm-8">
+                            {{ include('Configuration/produit_epargne/_delete_form.html.twig') }}
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -46,4 +55,3 @@
 
 {% endblock %}
 
-{{ include('footer.html.twig') }}

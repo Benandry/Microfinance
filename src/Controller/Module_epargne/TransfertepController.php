@@ -34,7 +34,7 @@ class TransfertepController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $transfertepRepository->add($transfertep, true);
-
+           // dd($form->getData());
            
             $entityManager=$doctrine->getManager();
 
@@ -78,9 +78,9 @@ class TransfertepController extends AbstractController
             
             $entityManager->flush();
             //dd($form->getData());
-            $this->addFlash('success', " Transfert réussite!!!");
+            $this->addFlash('success', " Transfert "+$montantdest+" Ar du  réussite!!!");
 
-            // return $this->redirectToRoute('app_transfertep_index', [], Response::HTTP_SEE_OTHER);
+             return $this->redirectToRoute('app_transfertep_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transfertep/new.html.twig', [

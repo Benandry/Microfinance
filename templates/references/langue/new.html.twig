@@ -1,8 +1,14 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
 
-{% block body %}
-              {{ include('references/langue/_form.html.twig') }}
-
+{% block title %}
+    Ajout nouveau langue
 {% endblock %}
 
-{{ include('footer.html.twig') }}
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+    {{ include('references/langue/_form.html.twig') }}
+{% endblock %}
+

@@ -1,4 +1,12 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur langue {{  langue.langue }}
+{% endblock %}
+
+{% block head %}
+    Info sur langue {{  langue.langue }}
+{% endblock %}
 
 {% block body %}
     <h1>Langue</h1>
@@ -20,10 +28,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_langue_index') }}" class="btn btn-primary btn-sm">Voir  listes </a>
+    <a href="{{ path('app_langue_index') }}" class="btn btn-primary btn-sm"> <i class="fa fa-list"></i>Voir listes </a>
 
-    <a href="{{ path('app_langue_edit', {'id': langue.id}) }}" class="btn btn-warning btn-sm" >Modifier</a>
+    <a href="{{ path('app_langue_edit', {'id': langue.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
 
 {% endblock %}
-
-{{ include('footer.html.twig') }}

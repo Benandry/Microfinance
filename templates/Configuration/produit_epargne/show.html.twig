@@ -1,8 +1,14 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur le {{ produit_epargne.nomproduit }}
+{% endblock %}
+
+{% block head %}
+    Info sur le {{ produit_epargne.nomproduit }} 
+{% endblock %}
 
 {% block body %}
-    <h1>Produit Epargne</h1>
-
     <table class="table">
         <tbody>
             <tr>
@@ -25,9 +31,7 @@
     </table>
 
 
-    <a href="{{ path('app_produit_epargne_index') }}" class="btn btn-primary btn-sm">Voir  listes </a>
+    <a href="{{ path('app_produit_epargne_index') }}" class="btn btn-primary btn-sm"> <i class="fa fa-list"></i>Voir  listes </a>
 
-    <a href="{{ path('app_produit_epargne_edit', {'id': produit_epargne.id}) }}" class="btn btn-warning btn-sm" >Modifier</a>
+    <a href="{{ path('app_produit_epargne_edit', {'id': produit_epargne.id}) }}" class="btn btn-warning btn-sm" ><i class="fa fa-edit"></i></a>
 {% endblock %}
-
-{{ include('footer.html.twig') }}

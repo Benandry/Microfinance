@@ -29,6 +29,11 @@ class RapportController extends AbstractController
         // Filtre entre deux date
 
         $showTable_ = false;
+        $date_du_ = '';
+        $date_au_ = '';
+        $date1 = '';
+        $date_2 = false;
+        $date_1 = false;
 
         $form1=$this->createForm(FiltreRapportSoldeType::class);
         $rapportsolde=$form1->handleRequest($request);
@@ -36,21 +41,25 @@ class RapportController extends AbstractController
         if ($form1->isSubmitted() && $form1->isValid()){
             $showTable_ = true;
 
-            if ($rapportsolde->getData()['date1']) {
-               
-                $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete(
-                    $rapportsolde->getData()['date1'],
-                );
+            $data = $form1->getData();
+            $date_du_ = $data['Du'];
+            $date_au_ = $data['Au'];
+            $date1 = $data['date1'];
+
+            
+            if ($date1 != null) {
+               $date_1 = true;
+                $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete($date1);
                 
             }
             else {
-                $rapporttransaction=$compteEpargneRepository->FiltreRapportSolde(
-                    $rapportsolde->getData()['Du'],
-                    $rapportsolde->getData()['Au']
-                );
+                $date_2 = true;
+                $rapporttransaction=$compteEpargneRepository->FiltreRapportSolde($date_du_,$date_au_);
             }
           
         }
+
+        //dd($date_1);
 
         // Filtre pandant une journee
         return $this->renderForm('rapport/RapportSolde.html.twig', [
@@ -58,6 +67,11 @@ class RapportController extends AbstractController
             'agences'=>$agenceRepos->findAll(),
             'form1'=>$form1,
             'showTable' => $showTable_,
+            'du' => $date_du_,
+            'au' => $date_au_,
+            'one_date' => $date1,
+            'date_1' => $date_1,
+            'date_2' => $date_2,
         ]);
     }
 
@@ -71,10 +85,25 @@ class RapportController extends AbstractController
         $filtrereleve = $form->handleRequest($request);
 
         $showTable_=false;
+        /************Date **** */
+        $du = 0;
+        $au = 0;
+        $code = '';
+        $nom = '';
+        $prenom = '';
+        $code_cli = ' ';
+        /******* */
 
         if($form->isSubmitted() && $form->isValid()){
 
             $showTable_=true;
+            $data = $filtrereleve->getData();
+            $du = $data['Du'];
+            $au = $data['Au'];
+            $code = $data['Codeclient'];
+            $nom = $data['NomClient'];
+            $prenom = $data['PrenomClient'];
+            $code_cli = $data['code'];
             $releve=$transactionRepository->filtreReleve(
                 $filtrereleve->getData()['Du'],
                 $filtrereleve->getData()['Au'],
@@ -86,7 +115,13 @@ class RapportController extends AbstractController
             'agences' =>$agenceRepository->findAll(),
             'releves'=>$releve,
             'form'=>$form,
-            'showTable'=>$showTable_
+            'showTable'=>$showTable_,
+            'du' =>$du,
+            'au'=> $au,
+            'Codeclient'=>$code,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'code_cli' => $code_cli
         ]);
     }  
 
@@ -96,6 +131,7 @@ class RapportController extends AbstractController
     {
 
         $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne();
+
         
         $compteepargne = new CompteEpargne();
         $form=$this->createForm(RapportcompteepargnetrieType::class);
@@ -103,23 +139,30 @@ class RapportController extends AbstractController
 
         $showTable_=false;
 
+        
+        $date_du_ = '';
+        $date_au_ = '';
+        $date1 = '';
+        $date_2 = false;
+        $date_1 = false;
+
         if($form->isSubmitted() && $form->isValid()){
             $showTable_=true;
 
-            if($filtrecompteep->getData()['datearrete']){
+            $data = $form->getData();
+            $date_du_ = $data['datedebut'];
+            $date_au_ = $data['datefin'];
+            $date1 = $data['datearrete'];
 
-                $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_arrete(
-                    $filtrecompteep->getData()['datearrete']
-                );
+           
+            if ($date1 != null){
+                $date_1 = true;
+                $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
 
             }
             else{
-
-                $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_triedate(
-                    $filtrecompteep->getData()['datedebut'],
-                    $filtrecompteep->getData()['datefin'],
-                );
-                
+                $date_2 = true;
+                $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_triedate($date_du_,$date_au_);   
             }
 
         }
@@ -128,7 +171,12 @@ class RapportController extends AbstractController
             'rapportcompteep'=>$rapport_compteepargne,
             'showTable'=>$showTable_,
             'form'=>$form,
-            'compteepargne'=>$compteepargne
+            'compteepargne'=>$compteepargne,
+            'du' => $date_du_,
+            'au' => $date_au_,
+            'one_date' => $date1,
+            'date_1' => $date_1,
+            'date_2' => $date_2,
         ]);
     }
  

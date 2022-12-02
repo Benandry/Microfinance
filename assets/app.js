@@ -12,6 +12,7 @@ import './styles/app.scss';
 import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+import './api/retrait'
 import './api/individuel'
 import './api/groupe'
 import './api/agence'
@@ -19,6 +20,8 @@ import './api/all_rapport'
 import './api/compte_epargne/compt_epargne_groupe'
 import './api/compte_epargne/ouvrir_compte_epargne_client'
 import './api/compte_epargne/compte_epargne_individuel'
+import './api/compte_epargne/api_rapport_releve'
+import './api/compte_epargne/api_transfert'
 
 //Import les api retrait ////
 import './api/compte_epargne/depot'
@@ -107,5 +110,31 @@ $(document).ready(function(){
 
         // {# Cacher le champ code client#}
         $('#code').attr("style", "display: none");
+
+        $("#filtre_rapport_solde_date1").on('change',function(){
+            $('#two_date').hide();
+        });
+
+        $("#filtre_rapport_solde_Du").on('change',function(){
+            $('#one_date').hide(); 
+        });
+        
+        $("#filtre_rapport_solde_Au").on('change',function(){
+            $('#one_date').hide(); 
+        });
+
+
+        $("#rapportcompteepargnetrie_datearrete").on('change',function(){
+                        
+            $('#two_date').hide();
+        });
+
+        $("#rapportcompteepargnetrie_datedebut").on('change',function(){
+            $('#one_date').hide(); 
+        });
+        
+        $("#rapportcompteepargnetrie_datefin").on('change',function(){
+            $('#one_date').hide(); 
+        });
 });
 

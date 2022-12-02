@@ -63,7 +63,7 @@ $(document).ready(() =>{
 
         const url_api = '/api/epargne'
         code_rechercher.addEventListener('keyup',()=>{
-            const value_input = code_rechercher.value
+        const value_input = code_rechercher.value
             
             $.ajax({
                 url: url_api,

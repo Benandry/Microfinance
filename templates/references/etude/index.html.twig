@@ -1,27 +1,20 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Liste de niveau d'etude
+{% endblock %}
+
+{% block head %}
+    Liste de niveau d'etude
+{% endblock %}
 
 {% block body %}
     <h1>Etude</h1>
 
       {# /***************Messages succes ******************/#}
       {% for message in app.flashes('success') %}
-        <!-- The Modal -->
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <strong>{{ message }}</strong>
-                    </div>
-                    
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+        <strong>{{ message }}</strong>
+      {% endfor %}
 
     <table class="table table-bordered">
         <thead class="alert alert-success">
@@ -35,14 +28,16 @@
             <tr>
                 <td>{{ etude.niveau }}</td>
                 <td>
-                    <div class="col-sm-2">
-                        <a href="{{ path('app_etude_show', {'id': etude.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Afficher</a>
-                    </div>
-                    <div class="col-sm-2">
-                        <a href="{{ path('app_etude_edit', {'id': etude.id}) }}" class="btn btn-success"><i class="fa fa-eye"></i>edit</a>
-                    </div>
-                    <div class="col-sm-8">
-                        {{ include('references/etude/_delete_form.html.twig') }}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a href="{{ path('app_etude_show', {'id': etude.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="{{ path('app_etude_edit', {'id': etude.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-sm-8">
+                            {{ include('references/etude/_delete_form.html.twig') }}
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -54,16 +49,7 @@
         </tbody>
     </table>
     <div>
-        <a href="{{ path('app_etude_new') }}" class="btn btn-primary btn-sm">Ajouter nouveau</a>
+        <a href="{{ path('app_etude_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajouter nouveau</a>
     </div>
 
 {% endblock %}
-{% block javascript %}
-<script>
-    $(window).on('load',() =>{
-        $('#myModal').modal('show')
-    })
-</script>
-{% endblock %}
-
-{{ include('footer.html.twig') }}

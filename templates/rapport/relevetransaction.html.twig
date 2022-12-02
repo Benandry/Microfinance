@@ -1,65 +1,111 @@
+{% extends "base.html.twig" %}
 
-{{ include('header.html.twig') }}
+{% block title %}
+    Relevé transaction 
+{% endblock %}
+
+{% block head %}
+    Relevé transaction 
+{% endblock %}
+
 
 {% block body %}
-    <div style="display:none;">
-            <p>Text<span id="text"></span></p>
-            <p>Other<span id="other"></span></p>
-    </div>
     {% if showTable == false %}
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                    <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                        <div class="modal-header titre_modal">
+                        <h4 class="modal-title text-center"> Rapport releve</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        {{ form_start(form) }} 
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <h5>A propos :</h5>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        {{ form_row((form.Codeclient)) }}
+                                        <div id="code_suggest"></div>
+                                    </div>
 
-        <!-- The Modal -->
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                
-                    <!-- Modal Header -->
-                    <div class="modal-header bg-primary">
-                        <h4 class="modal-title text-center"> Rapport releve </h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    {{ form_start(form) }}
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <h2 style="color:black;">A propos :</h2>
-                            <div class="row" style="color:black;">
-                                <div class="col-sm-4">
-                                    {{ form_row((form.Codeclient)) }}
+                                    <div style="display: none">
+                                        <div class="col-sm-4">
+                                            {{ form_row((form.NomClient)) }}
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {{ form_row((form.PrenomClient)) }}
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {{ form_row((form.code)) }}
+                                        </div>
+                                    </div>
+
+                                        <div class="col-sm-7">
+                                            <p class="fw-bolder">Compte epargne  : <span id="compte_epargne"></span></p>
+                                            <p class="fw-bolder">Code  : <span id="codeclient"></span></p>
+                                            <p class="fw-bolder">Nom  : <span id="nom"></span></p>
+                                            <p class="fw-bolder">Prenom : <span id="prenom"></span></p>
+                                        </div>
+                                    
                                 </div>
-                                <div class="col-sm-4">
-                                    {{ form_row((form.NomClient)) }}
-                                </div>
-                                    <div class="col-sm-4">
-                                    {{ form_row((form.PrenomClient)) }}
-                                </div>
+
+                                <h5>Releve du :</h5>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            {{ form_row(form.Du) }}
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {{ form_row(form.Au) }}
+                                        </div>
+                                    </div>
                             </div>
-
-                            <h2 style="color:black;">Releve du :</h2>
-                                <div class="row" style="color:black;">
-                                    <div class="col-sm-4">
-                                        {{ form_row(form.Du) }}
-                                    </div>
-                                    <div class="col-sm-4">
-                                        {{ form_row(form.Au) }}
-                                    </div>
-                                </div>
-    
-                        </div>
-                        
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            {{ form_row(form.Filtre) }}
-                        </div>
-                    {{ form_end(form) }}
                     
-            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer mb-0">
+                                {{ form_row(form.Filtre) }}
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
             </div>
         </div>
     {% else %}
                
         <table class="table1 table table-bordered" style="margin-top:25px;">
-            <thead class="alert alert-success">
+            <thead>
                 <tr>
+                    <td colspan="7" style="background-color: #fff; color: #000;">
+                        <div class="row">
+                           <h5 class="ms-2 ">
+                             Relevé transaction
+                           </h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-sm-6">
+                                <div class="p-2">
+                                    Nom du client : {{ nom }}
+                                </div>
+                                <div class="p-2">
+                                    Prenom du client : {{ prenom }}
+                                </div>
+                                <div class="p-2">
+                                    Code client : {{ code_cli }}
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                <div class="p-2">
+                                    Compte Epargne :  {{ Codeclient }}
+                                </div>
+                                <div class="p-2">
+                                    Du : {{ du| date('d-m-Y') }} 
+                                    Au : {{ au| date('d-m-Y')  }}
+                                </div>
+                            </div>
+                        </div>
+                    </td> 
+                </tr>
+                <tr class="tr_head">
                     <th>Date Transaction</th>
                     <th>Code transaction</th>
                     <th>Code Epargne</th>
@@ -68,6 +114,7 @@
                     <th>Montant</th>
                     <th>Solde</th>
                 </tr>
+                
             </thead>
             <tbody class="jumbotron jumbotron-fluid" style="color:black;">
             {% for Transaction in releves %}
@@ -95,109 +142,3 @@
     {% endif %}
 
 {% endblock %}
-
-{% block javascript %}
-    <script src="{{ asset('/api/api_rapport_releve.js') }}" ></script>
-{% endblock %}
-
-{{ include('footer.html.twig') }}
-
-{# {{ include('header.html.twig') }}
-
-{% block body %}
-
-    {% if showTable == false %}
-
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            
-                <!-- Modal Header -->
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title text-center">Relevee client</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                {{ form_start(form) }}
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                    
-                            <div class="text-center" id="one_date">
-                                <h2 style="color:black;">A propos :</h2>
-                                <div class="row" style="color:black;">
-                                    <div class="col-sm-4">
-                                        {{ form_row((form.Codeclient)) }}
-                                    </div>
-                                    <div class="col-sm-4">
-                                        {{ form_row((form.NomClient)) }}
-                                    </div>
-                                    <div class="col-sm-4">
-                                        {{ form_row((form.PrenomClient)) }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="text-center" id="two_date">
-                                <h4 class="text-center">Entre deux dates </h4>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        {{ form_row(form.Du) }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ form_row(form.Au) }}
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        {{ form_row(form.Filtre) }}
-                    </div>
-                    {{ form_end(form) }}
-                
-            </div>
-        </div>
-    </div>
-    {# /***********Fin modal *********** #}
-
-    {# {% else %}
-        <table class="table table-bordered" style="margin-top:25px;">
-            <thead class="alert alert-success">
-                <tr>
-                    <th>Date Transaction</th>
-                    <th>Code transaction</th>
-                    <th>Description</th>
-                    <th>PieceComptable</th>
-                    <th>Montant</th>
-                </tr>
-            </thead>
-            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
-            {% for Transaction in releves %}
-                <tr>
-                    <td>{{ Transaction.DateTransaction ? Transaction.DateTransaction|date('Y-m-d') : '' }}</td>
-                    <td>{{ Transaction.codetransaction }}</td>
-                    <td>{{ Transaction.Description }}</td>
-                    <td>{{ Transaction.PieceComptable }}</td>
-                    <td>{{ Transaction.Montant }}</td>
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-
-    {% endif %}
-
-    {% block javascript %}
-    <script>
-        $(document).ready(function(){
-            $(window).on('load',()=>{
-                $('#myModal').modal('show')
-            })
-        })
-    </script>
-    {% endblock %}
-
-{% endblock %}
-
-{{ include('footer.html.twig') }} #} #}

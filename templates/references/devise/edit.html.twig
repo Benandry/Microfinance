@@ -1,10 +1,14 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modifier devise
+{% endblock %}
+
+{% block head %}
+    Modifier devise
+{% endblock %} 
 
 {% block body %}
-    <h1>Edit Devise</h1>
-
     {{ include('references/devise/_form.html.twig', {'button_label': 'Modifier'}) }}
 
 {% endblock %}
-
-{{ include('footer.html.twig') }}

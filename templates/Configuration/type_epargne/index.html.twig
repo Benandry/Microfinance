@@ -1,29 +1,24 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Types epargne 
+{% endblock %}
+
+{% block head %}
+    Types epargne 
+{% endblock %}
 
 {% block body %}
 
     {# /***************Messages succes ******************/#}
-    {% for message in app.flashes('success') %}
-        <!-- The Modal -->
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <strong>{{ message }}</strong>
-                    </div>
-                    
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="text-center">
+        {% for message in app.flashes('success') %}
+            <strong class="alert alert-success">{{ message }}</strong>
+        {% endfor %}
+    </div>
 
     <table class="table table-bordered">
-        <thead class="alert alert-success">
+        <thead>
             <tr>
                 <th>Code type</th>
                 <th>Nom type epargne</th>
@@ -40,14 +35,16 @@
                 <td>{{ type_epargne.abreviation }}</td>
                 <td>{{ type_epargne.description }}</td>
                 <td>
-                    <div class="col-sm-3">
-                        <a href="{{ path('app_type_epargne_show', {'id': type_epargne.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Afficher</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="{{ path('app_type_epargne_edit', {'id': type_epargne.id}) }}" class="btn btn-success"> <i class="fa fa-eye"></i> editer</a>
-                    </div>
-                    <div class="col-sm-6">
-                        {{ include('Configuration/type_epargne/_delete_form.html.twig') }}
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a href="{{ path('app_type_epargne_show', {'id': type_epargne.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="{{ path('app_type_epargne_edit', {'id': type_epargne.id}) }}" class="btn btn-info btn-sm"> <i class="fa fa-edit"></i></a>
+                        </div>
+                        <div class="col-sm-6">
+                            {{ include('Configuration/type_epargne/_delete_form.html.twig') }}
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -62,15 +59,3 @@
     <a href="{{ path('app_type_epargne_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajputer nouveau</a>
     </div>
 {% endblock %}
-
-
-{% block javascript %}
-    <script>
-        $(window).on('load',() =>{
-            $('#myModal').modal('show')
-        })
-    </script>
-
-{% endblock %}
-
-{{ include('footer.html.twig') }}

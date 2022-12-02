@@ -1,8 +1,14 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modifier l'etat civile
+{% endblock %}
+
+{% block head %}
+    Modifier l'etat civile
+{% endblock %}
 
 {% block body %}
     {{ include('references/etatcivile/_form.html.twig', {'button_label': 'Modifier'}) }}
 
 {% endblock %}
-
-{{ include('footer.html.twig') }}

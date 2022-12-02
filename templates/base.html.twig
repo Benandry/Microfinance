@@ -30,7 +30,7 @@
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user"></i> Client  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
-                                <ul class="collapse nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-2" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="{{path('app_individuel_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
                                     </li>
@@ -61,7 +61,7 @@
                             <!-- Module Epargne -->
                             <li>
                                 <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"><i class="fa fa-database"></i>  Epargne <span class="fa fa-chevron-down"></span> </span> </a>
+                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"><i class="fa fa-database"></i>  Epargne <span class="fa fa-chevron-down"></span> </span> </a>
                                 <ul class="collapse show nav flex-column ms-2" id="submenu2" data-bs-parent="#menu">
                                     <li class="w-100">
 
@@ -112,20 +112,67 @@
                                 </ul>
                             </li>
 
+                            {# -------------------------------------Credit ------------------------- #}
+
+                            <li>
+                                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-gear"></i> Credits <span class="fa fa-chevron-down"></span>  </span></a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu3" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{path('app_langue_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-pencil"> </i> Demande credit </span></a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {# ---------------------------------------------------------------------- #}
                             <!-- Configuration -->
                             <li>
-                                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-toolbox"></i> Configuration <span class="fa fa-chevron-down"></span> </span> </a>
-                                <ul class="collapse show nav flex-column ms-4" id="submenu3" data-bs-parent="#menu">
+                                <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> 
+                                    <i class="fa fa-toolbox"></i> Configuration 
+                                    <span class="fa fa-chevron-down"></span> </span> 
+                                </a>
+
+                                <ul class="collapse show nav flex-column ms-4" id="submenu4" data-bs-parent="#menu">
+
                                     <li class="w-100">
-                                        <a href="{{path('app_type_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Type epargne</span></a>
+                                        <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
+                                            <i class="fa fa-bars"></i> Epargnes 
+                                            <span class="fa fa-chevron-down"></span> </span> 
+                                        </a>   
+                                        <ul class="collapse show nav flex-column ms-4" id="submenu6" data-bs-parent="#menu">
+                                                <li class="w-100">
+                                                    <a href="{{path('app_type_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Type epargne</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{path('app_produit_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Epargne </span> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{path('app_config_ep_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Epargne </span></a>
+                                                </li>
+                                        </ul> 
                                     </li>
-                                    <li>
-                                        <a href="{{path('app_produit_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Epargne </span> </a>
+
+                                    <li class="w-100">
+                                        <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
+                                            <i class="fa fa-coins"></i> Credits 
+                                            <span class="fa fa-chevron-down"></span> </span> 
+                                        </a>   
+                                        <ul class="collapse show nav flex-column ms-4" id="submenu7" data-bs-parent="#menu">
+                                                <li class="w-100">
+                                                    <a href="#"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Type Credit</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Credit </span> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Credit </span></a>
+                                                </li>
+                                        </ul> 
                                     </li>
-                                    <li>
-                                        <a href="{{path('app_config_ep_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Epargne </span></a>
-                                    </li>
+
                                 </ul>
                             </li>
 
@@ -133,9 +180,9 @@
                             <!-- Reference    -->
 
                             <li>
-                                <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-gear"></i> Reference <span class="fa fa-chevron-down"></span>  </span></a>
-                                <ul class="collapse nav flex-column ms-4" id="submenu4" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="{{path('app_langue_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-pencil"> </i> Langue </span></a>
                                     </li>

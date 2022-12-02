@@ -1,49 +1,65 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% if showTable == false %}
+        Rapport solde
+    {% else %}
+        Rapport solde  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    {% if showTable == false %}
+
+    {% else %}
+        Rapport solde  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
+    {% endif %}
+{% endblock %}
 
 {% block body %}
-        <h2 style="color:black;">Rapport solde :</h2>
-        {% if showTable == false %}
-        
-            <!-- The Modal -->
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                    
-                        <!-- Modal Header -->
-                        <div class="modal-header bg-primary">
-                            <h4 class="modal-title text-center">Recherche solde par date</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        {{ form_start(form1) }}
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                            
-                                    <div class="text-center" id="one_date">
-                                        <h4 class="text-center"> Date arrêtée </h4>
-                                        {{ form_row(form1.date1) }}
-                                    </div>
 
-                                    <div class="text-center" id="two_date">
-                                        <h4 class="text-center">Entre deux dates </h4>
-                                        {{ form_row(form1.Du) }}
-                                        {{ form_row(form1.Au) }}
-                                    </div>
-                            </div>
-                            
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                {{ form_row(form1.Filtre) }}
-                            </div>
-                            {{ form_end(form1) }}
-                        
+        {% if showTable == false %}
+              <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                    <h4 class="modal-title text-center"> Rapport solde compte epargne  </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
+                    {{ form_start(form1) }} 
+                    <!-- Modal body -->
+                     <div class="modal-body">    
+                        <div class="text-center ps-5 pe-5" id="one_date">
+                            <h4 class="text-center"> Date arrêtée </h4>
+                            {{ form_row(form1.date1) }}
+                        </div>
+
+                        <div class="row text-center" id="two_date">
+                            <h4 class="text-center">Entre deux dates </h4>
+                            <div class="col-6 col-sm-6">
+                                {{ form_row(form1.Du) }}
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                {{ form_row(form1.Au) }}
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                        {{ form_row(form1.Filtre) }}       
+                     </div>
+                    {{ form_end(form1) }}
                 </div>
             </div>
-            {# /***********Fin modal *********** #}
+        </div>
 
         {% else %}
             <table class="table1 table table-bordered" style="margin-top:25px;">
-                <thead class="alert alert-success">
+                <thead>
                     <tr>
                         <th>Date transaction</th>
                         <th>Compte Epargne</th>
@@ -51,7 +67,6 @@
                         <th>Nom et prenom</th>
                         <th>Nom Produit</th>
                         <th>Solde</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody class="jumbotron jumbotron-fluid" style="color:black;">
@@ -69,42 +84,9 @@
                                 <span style="color: green;"> <i class="fa fa-long-arrow-down"></i> {{ CompteEpargne.soldes }}</span>
                             {% endif %}
                         </td>
-                        <td> 
-                            {# <div class="col-sm-2">
-                                <a href="{{ path('app_devise_show', {'id': devise.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Afficher</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a href="{{ path('app_devise_edit', {'id': devise.id}) }}" class="btn btn-success"> <i class="fa fa-eye"></i> editer</a>
-                            </div> #}
-                        </td>
                     </tr>
                 {%  endfor %}
                 </tbody>
             </table>
     {% endif %}
-
-    {% block javascript %}
-
-        <script>
-                $(document).ready(function(){
-                    $(window).on('load',()=>{
-                        $('#myModal').modal('show')
-                    })
-                    $("#filtre_rapport_solde_date1").on('change',function(){
-                        
-                        $('#two_date').hide();
-                    });
-
-                    $("#filtre_rapport_solde_Du").on('change',function(){
-                        $('#one_date').hide(); 
-                    });
-                    
-                    $("#filtre_rapport_solde_Au").on('change',function(){
-                        $('#one_date').hide(); 
-                    });
-                });
-        </script>
-    {% endblock %}
 {% endblock %}
-
-{{ include('footer.html.twig') }}

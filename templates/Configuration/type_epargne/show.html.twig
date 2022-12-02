@@ -1,4 +1,12 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur type epargne : {{ type_epargne.NomTypeEp }} 
+{% endblock %}
+
+{% block head %}
+    Info sur type epargne : {{ type_epargne.NomTypeEp }} 
+{% endblock %}
 
 {% block body %}
     <h1>Type Epargne</h1>
@@ -25,10 +33,7 @@
     </table>
 
 
-    <a href="{{ path('app_type_epargne_index') }}" class="btn btn-primary btn-sm">Voir  listes </a>
-
-    <a href="{{ path('app_type_epargne_edit', {'id': type_epargne.id}) }}" class="btn btn-warning btn-sm" >Modifier</a>
+    <a href="{{ path('app_type_epargne_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i> Voir  listes </a>
+    <a href="{{ path('app_type_epargne_edit', {'id': type_epargne.id}) }}" class="btn btn-info btn-sm" > <i class="fa fa-edit"></i></a>
 
 {% endblock %}
-
-{{ include('footer.html.twig') }}

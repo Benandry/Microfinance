@@ -1,8 +1,14 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur l'etat {{ etatcivile.etatcivile }}
+{% endblock %}
+
+{% block head %}
+    Info sur l'etat {{ etatcivile.etatcivile }}
+{% endblock %}
 
 {% block body %}
-    <h1>Etat civile</h1>
-
     <table class="table">
         <tbody>
             <tr>
@@ -17,9 +23,6 @@
     </table>
 
     <a href="{{ path('app_etatcivile_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>
-    <a href="{{ path('app_etatcivile_edit', {'id': etatcivile.id}) }}" class="btn btn-success"><i class="fa fa-eye"></i>editer</a>
-
-
+    <a href="{{ path('app_etatcivile_edit', {'id': etatcivile.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>editer</a>
 {% endblock %}
 
-{{ include('footer.html.twig') }}

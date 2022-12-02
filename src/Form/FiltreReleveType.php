@@ -16,25 +16,17 @@ class FiltreReleveType extends AbstractType
     {
         $builder
             ->add('Codeclient',SearchType::class,[
-                'attr'=>[
-                    'placeholder'=>'Code client . . .'
-                ],
                 'label'=>'Compte epargne '
             ])
             ->add('NomClient',TextType::class,[
-                'attr'=>[
-                    'placeholder'=>'Code client . . .'
-                ],
                 'label'=>'Nom Client',
-                'disabled'=>true,
                 ])
-                ->add('PrenomClient',TextType::class,[
-                    'attr'=>[
-                        'placeholder'=>'Code client . . .'
-                    ],
-                    'label'=>'Prenom Client',
-                    'disabled'=>true,
-                        ])
+            ->add('PrenomClient',TextType::class,[
+                'label'=>'Prenom Client'
+            ])
+            ->add('code',TextType::class,[
+                'label'=>'code'
+            ])
             ->add('Du',DateType::class,[
                 'widget'=>'single_text'
                 ])
@@ -43,7 +35,7 @@ class FiltreReleveType extends AbstractType
                 ])
             ->add('Filtre',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-success'
+                    'class'=>'btn btn-primary btn-sm'
                 ],
                 'label' => 'Recherche'
             ])

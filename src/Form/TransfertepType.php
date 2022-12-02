@@ -24,20 +24,23 @@ class TransfertepType extends AbstractType
                 'choices'=>[
                     'TRANSFERT'=>'TRANSFERT'
                 ],
-                'label'=>false
+                'label'=>'Description'
             ])
             ->add('piece_comptable_t',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control'
-                ]
+                ],
+                'label' => 'Piece comptable :'
             ])
             ->add('date_transaction_t',DateType::class,[
-                    'widget'=>'single_text'
+                    'widget'=>'single_text',
+                    'label' => 'Date transaction :'
             ])
             ->add('montantdestinataire',IntegerType::class,[
                 'attr'=>[
                     'class'=>'form-control'
-                ]
+                ],
+                'label' => 'Montant a transfert :'
             ])
            
             ->add('papeterie',IntegerType::class,[
@@ -57,26 +60,28 @@ class TransfertepType extends AbstractType
                 ],
                 'attr'=>[
                     'class'=>'form-control'
-                ]
+                ],
+                'label' => 'Type client'
             ])
             ->add('soldedestinataire',IntegerType::class,[
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'disabled'=>false,
+                'label' => 'Solde de destinataire :'
+
             ])
             ->add('soldeenvoyeur',IntegerType::class,[
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'disabled'=>false,
+                'label' => 'Solde de envoyeur :'
             ])
             ->add('codetransaction_t',IntegerType::class,[
                 'attr'=>[
                     'class'=>'hidden'
                 ],
-                'label'=>false,
-                'required'=>false
+                'required'=>false,
+                'label' => 'Code transaction:'
             ])
             ->add('codedestinateur',TextType::class,[
 
@@ -91,7 +96,8 @@ class TransfertepType extends AbstractType
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'required'=>false
+                'required'=>false,
+                'label' => 'Nom du destinataire :'
             ])
             ->add('prenomdestinataire',TextType::class,[
                 'mapped'=>false,
@@ -99,28 +105,32 @@ class TransfertepType extends AbstractType
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'required'=>false
+                'required'=>false,
+                'label' => 'Prenom du destinataire :'
             ])
             ->add('codeenvoyeur',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control',
                     'label' => 'Compte epargne Envoyeur'
                 ],
-                'required'=>false
+                'required'=>false,
+                'label' => 'Code envoyeur :'
             ])
             ->add('nomenvoyeur',TextType::class,[
                 'mapped'=>false,
                 'disabled'=>true,
                 'attr'=>[
                     'class'=>'form-control'
-                ]
+                ],
+                'label' => 'Nom envoyeur :'
             ])
             ->add('prenomenvoyeur',TextType::class,[
                 'mapped'=>false,
                 'disabled'=>true,
                 'attr'=>[
                     'class'=>'form-control'
-                ]
+                ],
+                'label' => 'Prenom envoyeur :'
             ])
         ;
     }
