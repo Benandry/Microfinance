@@ -1,0 +1,64 @@
+{{ form_start(form) }}
+<ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
+  </ul>
+  <div class="tab-content">
+    {# Etape 1 #}
+        <div class="tab-pane active" id="etape1">
+            <div class="row shadow-sm p-3">
+                <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Etape 1</h6>
+                    <div class="col-sm-5">
+                        {{ form_row(form.ProduitCredit) }}
+                    </div>
+                   <hr>
+                   <hr>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                        {{ form_row(form.TauxInteretAnnuel) }}
+                        {{ form_row(form.DifferementPayement) }}
+                        {{ form_row(form.Tranche) }}
+                        {{ form_row(form.TypeTranche) }}
+                        {{ form_row(form.CalculInteret) }}
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6">
+                        {{ form_row(form.MontantMinimumCredit) }}
+                        {{ form_row(form.MontantMaximumCredit) }}
+                        {{ form_row(form.DelaisDeGraceMaxi) }}
+                        {{ form_row(form.PeriodeMinimumCredit) }}
+                        {{ form_row(form.PeriodeMaximumCredit) }}
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+
+        {# Etape 2 #}
+                    <div class="tab-pane" id="etape2">
+        <div class="row shadow-sm p-3">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Etape 2</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                        {{ form_row(form.TrancheDistinctInteret) }}
+                        {{ form_row(form.InteretDeductDecaissement) }}
+                        {{ form_row(form.CalculInteretJours) }}
+                        {{ form_row(form.PaiementPrealableInteret) }}
+
+                    </div>
+                    <div class="col-6 col-sm-6">
+                    {{ form_row(form.CalculIntertPourDiffere) }}
+                    {{ form_row(form.IntaretDifferePaiementCapitalise) }}
+                    {{ form_row(form.InteretPayerDiffere) }}
+                    {{ form_row(form.ForfaitPaiementPrealableInteret) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+  </div>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

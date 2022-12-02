@@ -67,6 +67,9 @@ class CreditIndividuel
     #[ORM\Column]
     private ?int $PeriodeMaximumCredit = null;
 
+    #[ORM\ManyToOne(inversedBy: 'creditIndividuels')]
+    private ?ProduitCredit $ProduitCredit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -284,6 +287,18 @@ class CreditIndividuel
     public function setPeriodeMaximumCredit(int $PeriodeMaximumCredit): self
     {
         $this->PeriodeMaximumCredit = $PeriodeMaximumCredit;
+
+        return $this;
+    }
+
+    public function getProduitCredit(): ?ProduitCredit
+    {
+        return $this->ProduitCredit;
+    }
+
+    public function setProduitCredit(?ProduitCredit $ProduitCredit): self
+    {
+        $this->ProduitCredit = $ProduitCredit;
 
         return $this;
     }

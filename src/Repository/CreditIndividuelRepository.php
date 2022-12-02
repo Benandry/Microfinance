@@ -39,6 +39,66 @@ class CreditIndividuelRepository extends ServiceEntityRepository
         }
     }
 
+    // Cette fonction permet de recuperer les informations sur les configuration credit
+    public function api_configuration($produit){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT 
+            -- credit individuel
+            creditindividuel.TauxInteretAnnuel,
+            creditindividuel.DifferementPayement,
+            creditindividuel.Tranche,
+            creditindividuel.TypeTranche,
+            creditindividuel.CalculInteret,
+            creditindividuel.MontantMaximumCredit,
+            creditindividuel.MontantMinimumCredit,
+            creditindividuel.DelaisDeGraceMaxi,
+            creditindividuel.PaiementPrealableInteret,
+            creditindividuel.CalculIntertPourDiffere,
+            creditindividuel.IntaretDifferePaiementCapitalise,
+            creditindividuel.InteretPayerDiffere,
+            creditindividuel.TrancheDistinctInteret,
+            creditindividuel.InteretDeductDecaissement,
+            creditindividuel.CalculInteretJours,
+            creditindividuel.ForfaitPaiementPrealableInteret,
+            creditindividuel.PeriodeMinimumCredit,
+            creditindividuel.PeriodeMaximumCredit,
+            -- configuration general
+            configeneralcredit.ProduitLieEpargne,
+            configeneralcredit.NombreJourInteretAnnee,
+            configeneralcredit.NombreSemaineAnnee,
+            configeneralcredit.ProduitLieEpargne,
+            configeneralcredit.NombreJourInteretAnnee,
+            configeneralcredit.NombreSemaineAnnee,
+            configeneralcredit.RecalculDateEcheanceDecaissement,
+            configeneralcredit.TauxInteretVariableSoldeDegressif,
+            configeneralcredit.RecalculInteretRemboursementAmortissementDegressif,
+            configeneralcredit.MethodeSoldeDegressifComposeCalculInteret,
+            configeneralcredit.ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt,
+            configeneralcredit.AutorisationDecaissementPartiellement,
+            -- produit credit
+            produitcredit.NomProduitCredit
+            FROM
+            App\Entity\CreditIndividuel creditindividuel
+              INNER JOIN
+            App\Entity\ConfigurationGeneralCredit configeneralcredit
+              INNER JOIN
+            App\Entity\ProduitCredit produitcredit
+               WITH
+            produitcredit.id = configeneralcredit.ProduitCredit
+               AND
+            produitcredit.id = creditindividuel.ProduitCredit
+                WHERE
+             creditindividuel.ProduitCredit= :produit
+            '
+        )
+        ->setParameter(':produit',$produit);
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return CreditIndividuel[] Returns an array of CreditIndividuel objects
 //     */

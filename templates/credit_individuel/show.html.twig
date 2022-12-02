@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CreditIndividuel{% endblock %}
+
+{% block body %}
+    <h1>CreditIndividuel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ credit_individuel.id }}</td>
+            </tr>
+            <tr>
+                <th>TauxInteretAnnuel</th>
+                <td>{{ credit_individuel.TauxInteretAnnuel }}</td>
+            </tr>
+            <tr>
+                <th>DifferementPayement</th>
+                <td>{{ credit_individuel.DifferementPayement }}</td>
+            </tr>
+            <tr>
+                <th>Tranche</th>
+                <td>{{ credit_individuel.Tranche }}</td>
+            </tr>
+            <tr>
+                <th>TypeTranche</th>
+                <td>{{ credit_individuel.TypeTranche }}</td>
+            </tr>
+            <tr>
+                <th>CalculInteret</th>
+                <td>{{ credit_individuel.CalculInteret }}</td>
+            </tr>
+            <tr>
+                <th>MontantMinimumCredit</th>
+                <td>{{ credit_individuel.MontantMinimumCredit }}</td>
+            </tr>
+            <tr>
+                <th>MontantMaximumCredit</th>
+                <td>{{ credit_individuel.MontantMaximumCredit }}</td>
+            </tr>
+            <tr>
+                <th>DelaisDeGraceMaxi</th>
+                <td>{{ credit_individuel.DelaisDeGraceMaxi }}</td>
+            </tr>
+            <tr>
+                <th>PaiementPrealableInteret</th>
+                <td>{{ credit_individuel.PaiementPrealableInteret ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CalculIntertPourDiffere</th>
+                <td>{{ credit_individuel.CalculIntertPourDiffere ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IntaretDifferePaiementCapitalise</th>
+                <td>{{ credit_individuel.IntaretDifferePaiementCapitalise ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>InteretPayerDiffere</th>
+                <td>{{ credit_individuel.InteretPayerDiffere ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TrancheDistinctInteret</th>
+                <td>{{ credit_individuel.TrancheDistinctInteret ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>InteretDeductDecaissement</th>
+                <td>{{ credit_individuel.InteretDeductDecaissement ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CalculInteretJours</th>
+                <td>{{ credit_individuel.CalculInteretJours ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ForfaitPaiementPrealableInteret</th>
+                <td>{{ credit_individuel.ForfaitPaiementPrealableInteret ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PeriodeMinimumCredit</th>
+                <td>{{ credit_individuel.PeriodeMinimumCredit }}</td>
+            </tr>
+            <tr>
+                <th>PeriodeMaximumCredit</th>
+                <td>{{ credit_individuel.PeriodeMaximumCredit }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_credit_individuel_index') }}">back to list</a>
+
+    <a href="{{ path('app_credit_individuel_edit', {'id': credit_individuel.id}) }}">edit</a>
+
+    {{ include('credit_individuel/_delete_form.html.twig') }}
+{% endblock %}

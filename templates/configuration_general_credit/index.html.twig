@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ConfigurationGeneralCredit index{% endblock %}
+
+{% block body %}
+    <h1>ConfigurationGeneralCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ProduitLieEpargne</th>
+                <th>NombreJourInteretAnnee</th>
+                <th>NombreSemaineAnnee</th>
+                <th>RecalculDateEcheanceDecaissement</th>
+                <th>TauxInteretVariableSoldeDegressif</th>
+                <th>RecalculInteretRemboursementAmortissementDegressif</th>
+                <th>MethodeSoldeDegressifComposeCalculInteret</th>
+                <th>ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt</th>
+                <th>AutorisationDecaissementPartiellement</th>
+                <th>AcrivePrioriteRemboursementCredit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for configuration_general_credit in configuration_general_credits %}
+            <tr>
+                <td>{{ configuration_general_credit.id }}</td>
+                <td>{{ configuration_general_credit.ProduitLieEpargne ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_general_credit.NombreJourInteretAnnee }}</td>
+                <td>{{ configuration_general_credit.NombreSemaineAnnee }}</td>
+                <td>{{ configuration_general_credit.RecalculDateEcheanceDecaissement }}</td>
+                <td>{{ configuration_general_credit.TauxInteretVariableSoldeDegressif }}</td>
+                <td>{{ configuration_general_credit.RecalculInteretRemboursementAmortissementDegressif ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_general_credit.MethodeSoldeDegressifComposeCalculInteret ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_general_credit.ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_general_credit.AutorisationDecaissementPartiellement ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_general_credit.AcrivePrioriteRemboursementCredit ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_configuration_general_credit_show', {'id': configuration_general_credit.id}) }}">show</a>
+                    <a href="{{ path('app_configuration_general_credit_edit', {'id': configuration_general_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_configuration_general_credit_new') }}">Create new</a>
+{% endblock %}

@@ -43,6 +43,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Individuelclient::class)]
     private Collection $individuelclients;
 
+    #[ORM\Column(length: 10)]
+    private ?string $codeagence = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nomagence = null;
+
     public function __construct()
     {
         $this->individuelclients = new ArrayCollection();
@@ -204,6 +210,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $individuelclient->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCodeagence(): ?string
+    {
+        return $this->codeagence;
+    }
+
+    public function setCodeagence(string $codeagence): self
+    {
+        $this->codeagence = $codeagence;
+
+        return $this;
+    }
+
+    public function getNomagence(): ?string
+    {
+        return $this->nomagence;
+    }
+
+    public function setNomagence(string $nomagence): self
+    {
+        $this->nomagence = $nomagence;
 
         return $this;
     }

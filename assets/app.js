@@ -15,6 +15,7 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 import './api/retrait'
 import './api/individuel'
 import './api/groupe'
+import './api/credit'
 import './api/agence'
 import './api/all_rapport'
 import './api/compte_epargne/compt_epargne_groupe'
