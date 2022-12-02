@@ -30,11 +30,15 @@ class ProduitCredit
     #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: DemandeCredit::class)]
     private Collection $demandeCredits;
 
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: FraisConfigCredit::class)]
+    private Collection $fraisConfigCredits;
+
     public function __construct()
     {
         $this->configurationGeneralCredits = new ArrayCollection();
         $this->creditIndividuels = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
+        $this->fraisConfigCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +159,36 @@ class ProduitCredit
             // set the owning side to null (unless already changed)
             if ($demandeCredit->getProduitCredit() === $this) {
                 $demandeCredit->setProduitCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FraisConfigCredit>
+     */
+    public function getFraisConfigCredits(): Collection
+    {
+        return $this->fraisConfigCredits;
+    }
+
+    public function addFraisConfigCredit(FraisConfigCredit $fraisConfigCredit): self
+    {
+        if (!$this->fraisConfigCredits->contains($fraisConfigCredit)) {
+            $this->fraisConfigCredits[] = $fraisConfigCredit;
+            $fraisConfigCredit->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFraisConfigCredit(FraisConfigCredit $fraisConfigCredit): self
+    {
+        if ($this->fraisConfigCredits->removeElement($fraisConfigCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($fraisConfigCredit->getProduitCredit() === $this) {
+                $fraisConfigCredit->setProduitCredit(null);
             }
         }
 

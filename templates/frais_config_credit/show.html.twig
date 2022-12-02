@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FraisConfigCredit{% endblock %}
+
+{% block body %}
+    <h1>FraisConfigCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ frais_config_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>TypeClient</th>
+                <td>{{ frais_config_credit.TypeClient }}</td>
+            </tr>
+            <tr>
+                <th>Papeterie</th>
+                <td>{{ frais_config_credit.Papeterie }}</td>
+            </tr>
+            <tr>
+                <th>Commission</th>
+                <td>{{ frais_config_credit.Commission }}</td>
+            </tr>
+            <tr>
+                <th>FraisDeDeveloppement</th>
+                <td>{{ frais_config_credit.FraisDeDeveloppement }}</td>
+            </tr>
+            <tr>
+                <th>FraisDeRefinancement</th>
+                <td>{{ frais_config_credit.FraisDeRefinancement }}</td>
+            </tr>
+            <tr>
+                <th>CommissionCreditChaqueTrancheInd</th>
+                <td>{{ frais_config_credit.CommissionCreditChaqueTrancheInd }}</td>
+            </tr>
+            <tr>
+                <th>DroitTimbreSurCapital</th>
+                <td>{{ frais_config_credit.DroitTimbreSurCapital }}</td>
+            </tr>
+            <tr>
+                <th>SurInteretCours</th>
+                <td>{{ frais_config_credit.SurInteretCours }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_frais_config_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_frais_config_credit_edit', {'id': frais_config_credit.id}) }}">edit</a>
+
+    {{ include('frais_config_credit/_delete_form.html.twig') }}
+{% endblock %}

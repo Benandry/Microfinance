@@ -57,10 +57,18 @@ $(document).ready(function(){
                         var montantminimum=parseInt(element.MontantMinimumCredit)
                         var montantmaximum=parseInt(element.MontantMaximumCredit)
                         var tauxinteretannuel=parseInt(element.TauxInteretAnnuel)
-                        console.log(tranche);
+                        var nombretranche=parseInt(element.Tranche)
+                        var typetranche=(element.TypeTranche)
+                        var caclulInteret=(element.CalculInteret)
+                        var Differepaiemement=(element.CalculIntertPourDiffere)
+                        console.log(Differepaiemement);
+                        
                         $('#demande_credit_NombreTranche').val(tranche);
                         $('#demande_credit_Montant').val('Min: '+montantminimum+' || Max:'+montantmaximum);
-                        $('#demande_credit_TauxInteretAnnuel').val(tauxinteretannuel + ' %');
+                        $('#demande_credit_TauxInteretAnnuel').val(tauxinteretannuel);
+                        $('#demande_credit_Tranche').val(nombretranche);
+                        $('#demande_credit_TypeTranche').val(typetranche);
+                        $('#demande_credit_MethodeCalculInteret').val(caclulInteret)
                     }
                 }
             })

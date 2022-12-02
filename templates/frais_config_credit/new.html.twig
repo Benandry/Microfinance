@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration frais credit{% endblock %}
+{% block head %}Configuration frais credit{% endblock %}
+
+{% block body %}
+
+          {% for message in app.flashes('success') %}
+            <strong class='text-alert alert-primary'>{{ message }}</strong>
+        {% endfor %}
+
+    {{ include('frais_config_credit/_form.html.twig') }}
+
+    <a href="{{ path('app_frais_config_credit_index') }}">back to list</a>
+{% endblock %}

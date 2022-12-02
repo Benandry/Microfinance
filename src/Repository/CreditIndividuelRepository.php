@@ -78,6 +78,15 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             configeneralcredit.MethodeSoldeDegressifComposeCalculInteret,
             configeneralcredit.ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt,
             configeneralcredit.AutorisationDecaissementPartiellement,
+            -- configuration frais
+            frais.TypeClient,
+            frais.Papeterie,
+            frais.Commission,
+            frais.FraisDeDeveloppement,
+            frais.FraisDeRefinancement,
+            frais.CommissionCreditChaqueTrancheInd,
+            frais.DroitTimbreSurCapital,
+            frais.SurInteretCours,
             -- produit credit
             produitcredit.NomProduitCredit
             FROM
@@ -86,10 +95,14 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             App\Entity\ConfigurationGeneralCredit configeneralcredit
               INNER JOIN
             App\Entity\ProduitCredit produitcredit
+                INNER JOIN
+            App\Entity\FraisConfigCredit frais
                WITH
             produitcredit.id = configeneralcredit.ProduitCredit
                AND
             produitcredit.id = creditindividuel.ProduitCredit
+                AND
+            produitcredit.id = frais.ProduitCredit
                 WHERE
              creditindividuel.ProduitCredit= :produit
             '
