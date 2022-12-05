@@ -3,7 +3,7 @@ import $ from 'jquery'
 $(document).ready(function(){
 
         // Ici on recuper le nom de l'agent de credit
-    
+
         $('#demande_credit_codeclient').on('keyup',function(){
             $('#demande_credit_Agent').val($('#prenom').text())
     

@@ -29,12 +29,21 @@ class DemandeCreditController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $demandeCreditRepository->add($demandeCredit, true);
+
+           //dd($demandeCredit);
+           $montant = $demandeCredit->getMontant();
+           $tranche =  $demandeCredit->getNombreTranche();
+           $taux =  $demandeCredit->getTauxInteretAnnuel();
+           $demandeCreditRepository->add($demandeCredit, true);
 
             $this->addFlash('success', "Demende de credit de'".$demandeCredit->getCodeclient()."' reussite!!");
 
 
-            // return $this->redirectToRoute('app_demande_credit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_tableau_amortissement', [
+                'montant' => $montant,
+                'tranche' => $tranche,
+                'taux' => $taux
+            ], Response::HTTP_SEE_OTHER);
         }
 
         // Recupere la derniere ID pour creer la numero credit

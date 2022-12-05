@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau d'amortissement {% endblock %}
+{% block head %}Tableau d'Amortissement {% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <strong class="alert alert-success text-center" >{{ message }}</strong>
+{% endfor %}
+<div class="card p-3">
+    <div class="card-title"> <h5>Tableau d 'amortissement </h5></div>
+    <div class="row">
+        <div class="col-4 col-sm-4 col-sm-4">
+            Montant a emprunter :  {{ montant }}
+        </div>
+        <div class="col-4 col-sm-4 col-sm-4">
+            Taux annuelle : {{ taux }}
+        </div>
+        <div class="col-4 col-sm-4 col-sm-4">
+            Nombre tranche : {{ tranche }}
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Periode(N)</th>
+                    <th>Date de remboursement</th>
+                    <th>Principale </th>
+                    <th>Interet </th>
+                    <th>Total </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tab in amortissement %}
+                    <tr>
+                        <td> {{ tab.periode + 1 }} </td>
+                        <td>{{ tab.dateRemb|date("d/m/Y")}}</td>
+                        <td>{{ tab.CapitalDu }}</td>
+                        <td>{{ tab.interet }}</td>
+                        <td>{{ tab.montantPayer }}</td>
+                    </tr>
+                {% endfor %}
+               {# <!-- {% endfor %} -->#}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"> Total</td>
+                    <td > {{ totalMontant }}</td>
+                    <td > {{ totalInteret }}</td>
+                    <td > {{ totalNet }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        {{ form_start(form) }}
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.submit) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+       {# <!-- <div class="row">
+            <div class="col-6 col-xl-6 col-sm-6"> 
+               <p> Montant Total :</p>
+               <p> Interet total : </p>
+               <p>Nombre tranche :</p>
+            </div>
+            <div class="col-6 col-xl-6 col-sm-6">
+                 <p>{{ montant}}</p>
+                 <p> {{ interet }} </p>
+                 <p>{{  tranche }}</p>
+            </div>
+        </div> -->#}
+    </div>
+</div>
+{% endblock %}

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Configuration General Credit{% endblock %}
+{% block head %} Configuration General Credit{% endblock %}
 
 {% block body %}
-    <h1>Configuration General Credit</h1>
         {# Message de confihuration #}
           {% for message in app.flashes('success') %}
             <strong class='text-alert alert-primary'>{{ message }}</strong>

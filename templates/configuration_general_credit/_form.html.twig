@@ -47,10 +47,8 @@
             </div>
         </div>
       </div>
-
-
-
+        <button class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
     </div>
         {# {{ form_widget(form) }} #}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+   
 {{ form_end(form) }}

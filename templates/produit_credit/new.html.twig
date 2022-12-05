@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Produit Credit{% endblock %}
+{% block head %}Produit Credit{% endblock %}
 
 {% block body %}
-    <h1>Produit Credit</h1>
 
     {% for message in app.flashes('success') %}
         <strong class='text-alert alert-primary'>{{ message }}</strong>
