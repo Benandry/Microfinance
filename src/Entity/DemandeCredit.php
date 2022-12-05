@@ -50,11 +50,11 @@ class DemandeCredit
     #[ORM\Column(length: 255)]
     private ?string $FondCredit = null;
 
-    #[ORM\Column]
-    private ?float $MontantEpargneTranche = null;
+    // #[ORM\Column]
+    // private ?float $MontantEpargneTranche = null;
 
-    #[ORM\Column]
-    private ?float $MontantFixe = null;
+    // #[ORM\Column]
+    // private ?float $MontantFixe = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitEpargne $ProduitEpargne = null;
@@ -65,8 +65,8 @@ class DemandeCredit
     #[ORM\Column(length: 255)]
     private ?string $Agent = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $ButCredit = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $ButCredit = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Categorie1Credit = null;
@@ -274,29 +274,29 @@ class DemandeCredit
         return $this;
     }
 
-    public function getMontantEpargneTranche(): ?float
-    {
-        return $this->MontantEpargneTranche;
-    }
+    // public function getMontantEpargneTranche(): ?float
+    // {
+    //     return $this->MontantEpargneTranche;
+    // }
 
-    public function setMontantEpargneTranche(float $MontantEpargneTranche): self
-    {
-        $this->MontantEpargneTranche = $MontantEpargneTranche;
+    // public function setMontantEpargneTranche(float $MontantEpargneTranche): self
+    // {
+    //     $this->MontantEpargneTranche = $MontantEpargneTranche;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getMontantFixe(): ?float
-    {
-        return $this->MontantFixe;
-    }
+    // public function getMontantFixe(): ?float
+    // {
+    //     return $this->MontantFixe;
+    // }
 
-    public function setMontantFixe(float $MontantFixe): self
-    {
-        $this->MontantFixe = $MontantFixe;
+    // public function setMontantFixe(float $MontantFixe): self
+    // {
+    //     $this->MontantFixe = $MontantFixe;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getProduitEpargne(): ?ProduitEpargne
     {

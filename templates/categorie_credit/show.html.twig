@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieCredit{% endblock %}
+
+{% block body %}
+    <h1>CategorieCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>NomCategorieCredit</th>
+                <td>{{ categorie_credit.NomCategorieCredit }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_categorie_credit_edit', {'id': categorie_credit.id}) }}">edit</a>
+
+    {{ include('categorie_credit/_delete_form.html.twig') }}
+{% endblock %}

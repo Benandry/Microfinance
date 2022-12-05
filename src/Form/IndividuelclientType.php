@@ -73,7 +73,10 @@ class IndividuelclientType extends AbstractType
             ->add('commune',TextType::class,[
                 'label'=>'Commune',
                 'by_reference'=>true,
-                'attr'=>['class'=>'form-control']
+                'attr'=>[
+                    'class'=>'form-control',
+                    'id'=>'commune'
+                    ]
             ])
             ->add('etatcivile',EntityType::class,[
                 'class'=>Etatcivile::class,

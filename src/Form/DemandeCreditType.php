@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\CategorieCredit;
 use App\Entity\DemandeCredit;
 use App\Entity\ProduitCredit;
 use App\Entity\ProduitEpargne;
@@ -40,8 +41,8 @@ class DemandeCreditType extends AbstractType
             ->add('DiffereDePaiement')
             ->add('CapitalDerniereEcheance')
             ->add('FondCredit')
-            ->add('MontantEpargneTranche')
-            ->add('MontantFixe')
+            // ->add('MontantEpargneTranche')
+            // ->add('MontantFixe')
             ->add('SoldeEpargne')
             ->add('Agent',TextType::class,[
                     'attr'=>[
@@ -49,11 +50,35 @@ class DemandeCreditType extends AbstractType
                     ],
                     'label'=>false
             ])
-            ->add('ButCredit')
-            ->add('Categorie1Credit')
-            ->add('Categorie2Credit')
-            ->add('Categorie3Credit')
-            ->add('Categorie4Credit')
+            // ->add('ButCredit')
+            ->add('Categorie1Credit',EntityType::class,[
+                'class'=>CategorieCredit::class,
+                'choice_label'=>'NomCategorieCredit',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Choix Categorie'
+            ])
+            ->add('Categorie2Credit',EntityType::class,[
+                'class'=>CategorieCredit::class,
+                'choice_label'=>'NomCategorieCredit',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Choix Categorie'
+            ])
+            ->add('Categorie3Credit',EntityType::class,[
+                'class'=>CategorieCredit::class,
+                'choice_label'=>'NomCategorieCredit',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Choix Categorie'
+            ])
+            ->add('Categorie4Credit',EntityType::class,[
+                'class'=>CategorieCredit::class,
+                'choice_label'=>'NomCategorieCredit',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Choix Categorie'
+            ])
             ->add('CalculInteretDiffere')
             ->add('InteretDifferePaiementCapitalise')
             ->add('InteretPayeMemePourDiffere')

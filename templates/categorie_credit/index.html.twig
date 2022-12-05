@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieCredit index{% endblock %}
+
+{% block body %}
+    <h1>CategorieCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomCategorieCredit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_credit in categorie_credits %}
+            <tr>
+                <td>{{ categorie_credit.id }}</td>
+                <td>{{ categorie_credit.NomCategorieCredit }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_credit_show', {'id': categorie_credit.id}) }}">show</a>
+                    <a href="{{ path('app_categorie_credit_edit', {'id': categorie_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_credit_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie Credit{% endblock %}
+{% block head %}Categorie Credit{% endblock %}
+
+{% block body %}
+    <h1>Categorie Credit</h1>
+
+    {{ include('categorie_credit/_form.html.twig') }}
+
+    <a href="{{ path('app_categorie_credit_index') }}">back to list</a>
+{% endblock %}
