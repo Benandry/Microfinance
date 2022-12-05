@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+  <ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
+      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 3</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape4">Etape 4</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape5">Etape 5</a></li> #}
+  </ul>
+
+    <div class="tab-content">
+                {# Etape 1 #}
+
+        <div class="tab-pane active" id="etape1">
+        <div class="row shadow-sm p-3">
+            <div class="col-12 col-sm-12 col-md-12">
+              <h6 class="text-center text-primary">Etape 1</h6>
+              <div class="row">
+                  <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.ProduitCredit) }}
+                      {{ form_row(form.TypeClient) }}
+                      {{ form_row(form.Papeterie) }}
+                  </div>
+                  <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.Commission) }}
+                      {{ form_row(form.FraisDeDeveloppement) }}
+                      {{ form_row(form.FraisDeRefinancement) }}
+                  </div>
+              </div>
+
+              <div  class="row">
+                  <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.CommissionCreditChaqueTrancheInd) }}
+                      {{ form_row(form.DroitTimbreSurCapital) }}
+                      {{ form_row(form.SurInteretCours) }}
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

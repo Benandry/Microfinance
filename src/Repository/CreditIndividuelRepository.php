@@ -78,18 +78,33 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             configeneralcredit.MethodeSoldeDegressifComposeCalculInteret,
             configeneralcredit.ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt,
             configeneralcredit.AutorisationDecaissementPartiellement,
+            -- configuration frais
+            frais.TypeClient,
+            frais.Papeterie,
+            frais.Commission,
+            frais.FraisDeDeveloppement,
+            frais.FraisDeRefinancement,
+            frais.CommissionCreditChaqueTrancheInd,
+            frais.DroitTimbreSurCapital,
+            frais.SurInteretCours
             -- produit credit
-            produitcredit.NomProduitCredit
+            -- produitcredit.NomProduitCredit,
+            -- compte epargne
+            compteepargne
             FROM
-            App\Entity\CreditIndividuel creditindividuel
+            App\Entity\CreditIndividuel creditindividuel  
               INNER JOIN
             App\Entity\ConfigurationGeneralCredit configeneralcredit
               INNER JOIN
             App\Entity\ProduitCredit produitcredit
+                INNER JOIN
+            App\Entity\FraisConfigCredit frais
                WITH
             produitcredit.id = configeneralcredit.ProduitCredit
                AND
             produitcredit.id = creditindividuel.ProduitCredit
+                AND
+            produitcredit.id = frais.ProduitCredit
                 WHERE
              creditindividuel.ProduitCredit= :produit
             '
@@ -97,6 +112,27 @@ class CreditIndividuelRepository extends ServiceEntityRepository
         ->setParameter(':produit',$produit);
 
         return $query->execute();
+    }
+
+    // API pour les clients
+    public function api_client_individuel($codeclient){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+        'SELECT 
+            individuel.nom_client nom,
+            individuel.codeclient codeindividuel,
+            compteepargne.codeepargne codeepargne
+         FROM
+         App\Entity\IndividuelClient individuel
+         LEFT JOIN
+         App\Entity\CompteEpargne compteepargne
+            WITH
+            compteepargne.codeep = individuel.codeclient
+         WHERE individuel.codeclient =:codeclient')
+         ->setParameter(':codeclient',$codeclient);
+
+        return $query->getResult();
     }
 
 //    /**
