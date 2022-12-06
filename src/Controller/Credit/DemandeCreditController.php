@@ -35,11 +35,12 @@ class DemandeCreditController extends AbstractController
            $tranche =  $demandeCredit->getNombreTranche();
            $taux =  $demandeCredit->getTauxInteretAnnuel();
            $codeclient =  $demandeCredit->getCodeclient();
+           $demandeCredit->setStatusApp("en attente ");
 
            //dd($codeclient);
            $demandeCreditRepository->add($demandeCredit, true);
 
-            $this->addFlash('success', "Demande de credit du clisnt ".$codeclient. " '".$demandeCredit->getCodeclient()."' !!");
+            $this->addFlash('success', "Demande de credit du client ".$codeclient. " '".$demandeCredit->getCodeclient()."' !!");
 
 
             return $this->redirectToRoute('app_tableau_amortissement', [

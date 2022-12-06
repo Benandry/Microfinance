@@ -2,35 +2,47 @@
 
 namespace App\Form;
 
-use App\Entity\Approbationcredit;
+use App\Entity\DemandeCredit;
+use App\Entity\ApprobationCredit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ApprobationcreditType extends AbstractType
+class ApprobationCreditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateap',DateType::class, [
+            ->add('dateApprobation',DateType :: class,[
+                'label' => "Date d'approbation :",
                 'widget' => 'single_text',
-                'label'=>'Date validation'])
+            ])
             ->add('description')
-            ->add('montantapprouver',TextType::class,[
-                'label'=>'Montant approuver',])
-            ->add('personneap',TextType::class,[
-                'label'=>'Personne approuver',])
-            ->add('num_credit',TextType::class,[
-                'label'=>'Numero Credit',])
+            ->add('statusApprobation',ChoiceType:: class,[
+                'choices'  => [
+                    'approuvé' => "approuvé",
+                    'Rejeté' => 'Rejeté',
+                    'Différée' => "Différée",
+                ],
+                'label' => "Status"
+            ])
+            ->add('montant',TextType::class,[
+                'label' => 'Montant du credit',
+            ])
+            
+            ->add('codecredit',TextType::class,[
+                'label' => 'Code credit',
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Approbationcredit::class,
+            'data_class' => ApprobationCredit::class,
         ]);
     }
 }

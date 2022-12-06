@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-4 col-sm-4">
+            {{ form_row(form.montant) }}
+            {{ form_row(form.statusApprobation) }}
+            {{ form_row(form.codecredit) }}
+        </div>
+        <div class="col-4 col-sm-4">
+            {{ form_row(form.description) }}
+            {{ form_row(form.dateApprobation) }}
+        </div>
+        <div class="col-4 col-sm-4 mt-5">
+            <button class="btn btn-sm btn-primary m-2">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    </div>
+{{ form_end(form) }}

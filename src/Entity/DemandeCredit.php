@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DemandeCreditRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -124,6 +126,10 @@ class DemandeCredit
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $statusApp = null;
+
 
     public function getId(): ?int
     {
@@ -575,6 +581,18 @@ class DemandeCredit
     public function setProduitCredit(?ProduitCredit $ProduitCredit): self
     {
         $this->ProduitCredit = $ProduitCredit;
+
+        return $this;
+    }
+
+    public function getStatusApp(): ?string
+    {
+        return $this->statusApp;
+    }
+
+    public function setStatusApp(string $statusApp): self
+    {
+        $this->statusApp = $statusApp;
 
         return $this;
     }

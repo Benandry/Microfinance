@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ApprobationcreditRepository;
+use App\Repository\ApprobationCreditRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ApprobationcreditRepository::class)]
-class Approbationcredit
+#[ORM\Entity(repositoryClass: ApprobationCreditRepository::class)]
+class ApprobationCredit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,33 +15,34 @@ class Approbationcredit
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateap = null;
+    private ?\DateTimeInterface $dateApprobation = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $statusApprobation = null;
+
     #[ORM\Column]
-    private ?float $montantapprouver = null;
+    private ?float $montant = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $personneap = null;
+    private ?string $codecredit = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $num_credit = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateap(): ?\DateTimeInterface
+    public function getDateApprobation(): ?\DateTimeInterface
     {
-        return $this->dateap;
+        return $this->dateApprobation;
     }
 
-    public function setDateap(\DateTimeInterface $dateap): self
+    public function setDateApprobation(\DateTimeInterface $dateApprobation): self
     {
-        $this->dateap = $dateap;
+        $this->dateApprobation = $dateApprobation;
 
         return $this;
     }
@@ -58,38 +59,38 @@ class Approbationcredit
         return $this;
     }
 
-    public function getMontantapprouver(): ?float
+    public function getStatusApprobation(): ?string
     {
-        return $this->montantapprouver;
+        return $this->statusApprobation;
     }
 
-    public function setMontantapprouver(float $montantapprouver): self
+    public function setStatusApprobation(string $statusApprobation): self
     {
-        $this->montantapprouver = $montantapprouver;
+        $this->statusApprobation = $statusApprobation;
 
         return $this;
     }
 
-    public function getPersonneap(): ?string
+    public function getMontant(): ?float
     {
-        return $this->personneap;
+        return $this->montant;
     }
 
-    public function setPersonneap(string $personneap): self
+    public function setMontant(float $montant): self
     {
-        $this->personneap = $personneap;
+        $this->montant = $montant;
 
         return $this;
     }
 
-    public function getNumCredit(): ?string
+    public function getCodecredit(): ?string
     {
-        return $this->num_credit;
+        return $this->codecredit;
     }
 
-    public function setNumCredit(string $num_credit): self
+    public function setCodecredit(string $codecredit): self
     {
-        $this->num_credit = $num_credit;
+        $this->codecredit = $codecredit;
 
         return $this;
     }
