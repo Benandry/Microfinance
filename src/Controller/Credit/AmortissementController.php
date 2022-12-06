@@ -78,12 +78,7 @@ class AmortissementController extends AbstractController
            // dd("Fin d'ajout");
             $this->addFlash('success', "Terminée !!!!");
 
-            return $this->redirectToRoute('app_tableau_amortissement', [
-                'montant' => $montant,
-                'tranche' => $tranche,
-                'taux' => $tauxInteret,
-                'codeclient' => $codeclient
-            ], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_approbation_credit', [], Response::HTTP_SEE_OTHER);
 
         }
         return $this->render('demande_credit/amortissement/index.html.twig', [

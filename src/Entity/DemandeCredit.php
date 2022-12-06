@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DemandeCreditRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -124,6 +126,14 @@ class DemandeCredit
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
+
+    #[ORM\OneToMany(mappedBy: 'demande', targetEntity: ApprobationCredit::class)]
+    private Collection $approbationCredits;
+
+    public function __construct()
+    {
+        $this->approbationCredits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -575,6 +585,36 @@ class DemandeCredit
     public function setProduitCredit(?ProduitCredit $ProduitCredit): self
     {
         $this->ProduitCredit = $ProduitCredit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ApprobationCredit>
+     */
+    public function getApprobationCredits(): Collection
+    {
+        return $this->approbationCredits;
+    }
+
+    public function addApprobationCredit(ApprobationCredit $approbationCredit): self
+    {
+        if (!$this->approbationCredits->contains($approbationCredit)) {
+            $this->approbationCredits[] = $approbationCredit;
+            $approbationCredit->setDemande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprobationCredit(ApprobationCredit $approbationCredit): self
+    {
+        if ($this->approbationCredits->removeElement($approbationCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($approbationCredit->getDemande() === $this) {
+                $approbationCredit->setDemande(null);
+            }
+        }
 
         return $this;
     }

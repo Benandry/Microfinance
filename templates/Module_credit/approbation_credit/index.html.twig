@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ApprobationCredit{% endblock %}
+{% block head %}ApprobationCredit{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateApprobation</th>
+                <th>Description</th>
+                <th>StatusApprobation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for approbation_credit in approbation_credits %}
+            <tr>
+                <td>{{ approbation_credit.id }}</td>
+                <td>{{ approbation_credit.dateApprobation ? approbation_credit.dateApprobation|date('Y-m-d') : '' }}</td>
+                <td>{{ approbation_credit.description }}</td>
+                <td>{{ approbation_credit.statusApprobation }}</td>
+                <td>
+                    <a href="{{ path('app_approbation_credit_show', {'id': approbation_credit.id}) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_approbation_credit_edit', {'id': approbation_credit.id}) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_approbation_credit_new') }}">Ajouter nouveau </a>
+{% endblock %}

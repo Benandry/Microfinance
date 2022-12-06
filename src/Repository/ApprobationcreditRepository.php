@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Approbationcredit;
+use App\Entity\ApprobationCredit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Approbationcredit>
+ * @extends ServiceEntityRepository<ApprobationCredit>
  *
- * @method Approbationcredit|null find($id, $lockMode = null, $lockVersion = null)
- * @method Approbationcredit|null findOneBy(array $criteria, array $orderBy = null)
- * @method Approbationcredit[]    findAll()
- * @method Approbationcredit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ApprobationCredit|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ApprobationCredit|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ApprobationCredit[]    findAll()
+ * @method ApprobationCredit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ApprobationcreditRepository extends ServiceEntityRepository
+class ApprobationCreditRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Approbationcredit::class);
+        parent::__construct($registry, ApprobationCredit::class);
     }
 
-    public function add(Approbationcredit $entity, bool $flush = false): void
+    public function add(ApprobationCredit $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ApprobationcreditRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Approbationcredit $entity, bool $flush = false): void
+    public function remove(ApprobationCredit $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ApprobationcreditRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Approbationcredit[] Returns an array of Approbationcredit objects
+//     * @return ApprobationCredit[] Returns an array of ApprobationCredit objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ApprobationcreditRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Approbationcredit
+//    public function findOneBySomeField($value): ?ApprobationCredit
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')
