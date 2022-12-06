@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau ApprobationCredit{% endblock %}
-{% block head %}Nouveau ApprobationCredit{% endblock %}
+{% block title %}Nouveau Approbation Credit{% endblock %}
+{% block head %}Nouveau Approbation Credit{% endblock %}
 
 {% block body %}
 
+    <div id="demande" >
+        {% for demande in demandes %}
+            <span id="nom"> {{ demande.nom_client }}</span>
+            <span id="prenom"> {{ demande.prenom_client }}</span>
+            <span id="codecredit"> {{ demande.NumeroCredit }}</span>
+            <span id="montant"> {{ demande.Montant }}</span>
+            <span id="nombreTranche"> {{ demande.NombreTranche }}</span>
+            <span id="typeTranche"> {{ demande.TypeTranche }}</span>
+        {% endfor %}
+    </div>
+
+
     {{ include('Module_credit/approbation_credit/_form.html.twig') }}
 
-    <a href="{{ path('app_approbation_credit_index') }}">back to list</a>
+    <a href="{{ path('app_approbation_credit_index') }}" class="btn btn-sm btn-primary"><i class="fa fa-list"></i></a>
 {% endblock %}

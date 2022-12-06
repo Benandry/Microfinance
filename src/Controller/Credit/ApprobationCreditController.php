@@ -16,7 +16,11 @@ class ApprobationCreditController extends AbstractController
     #[Route('/', name: 'app_approbation_credit_index', methods: ['GET'])]
     public function index(ApprobationCreditRepository $approbationCreditRepository): Response
     {
+        $demandes = $approbationCreditRepository->findDemandeNonApprouver();
+        //dd($demandes);
+        
         return $this->render('Module_credit/approbation_credit/index.html.twig', [
+            'demandes' => $demandes,
             'approbation_credits' => $approbationCreditRepository->findAll(),
         ]);
     }
@@ -24,6 +28,8 @@ class ApprobationCreditController extends AbstractController
     #[Route('/new', name: 'app_approbation_credit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
     {
+        $demande = $request->query->all();
+
         $approbationCredit = new ApprobationCredit();
         $form = $this->createForm(ApprobationCreditType::class, $approbationCredit);
         $form->handleRequest($request);
@@ -36,6 +42,7 @@ class ApprobationCreditController extends AbstractController
 
         return $this->renderForm('Module_credit/approbation_credit/new.html.twig', [
             'approbation_credit' => $approbationCredit,
+            'demandes' => $demande,
             'form' => $form,
         ]);
     }

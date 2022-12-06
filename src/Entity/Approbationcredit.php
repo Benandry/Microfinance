@@ -14,10 +14,6 @@ class ApprobationCredit
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'approbationCredits')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?DemandeCredit $demande = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateApprobation = null;
 
@@ -27,21 +23,16 @@ class ApprobationCredit
     #[ORM\Column(length: 255)]
     private ?string $statusApprobation = null;
 
+    #[ORM\Column]
+    private ?float $montant = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $codecredit = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDemande(): ?DemandeCredit
-    {
-        return $this->demande;
-    }
-
-    public function setDemande(?DemandeCredit $demande): self
-    {
-        $this->demande = $demande;
-
-        return $this;
     }
 
     public function getDateApprobation(): ?\DateTimeInterface
@@ -76,6 +67,30 @@ class ApprobationCredit
     public function setStatusApprobation(string $statusApprobation): self
     {
         $this->statusApprobation = $statusApprobation;
+
+        return $this;
+    }
+
+    public function getMontant(): ?float
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(float $montant): self
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getCodecredit(): ?string
+    {
+        return $this->codecredit;
+    }
+
+    public function setCodecredit(string $codecredit): self
+    {
+        $this->codecredit = $codecredit;
 
         return $this;
     }

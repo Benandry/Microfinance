@@ -127,13 +127,9 @@ class DemandeCredit
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
 
-    #[ORM\OneToMany(mappedBy: 'demande', targetEntity: ApprobationCredit::class)]
-    private Collection $approbationCredits;
+    #[ORM\Column(length: 255)]
+    private ?string $statusApp = null;
 
-    public function __construct()
-    {
-        $this->approbationCredits = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -589,32 +585,14 @@ class DemandeCredit
         return $this;
     }
 
-    /**
-     * @return Collection<int, ApprobationCredit>
-     */
-    public function getApprobationCredits(): Collection
+    public function getStatusApp(): ?string
     {
-        return $this->approbationCredits;
+        return $this->statusApp;
     }
 
-    public function addApprobationCredit(ApprobationCredit $approbationCredit): self
+    public function setStatusApp(string $statusApp): self
     {
-        if (!$this->approbationCredits->contains($approbationCredit)) {
-            $this->approbationCredits[] = $approbationCredit;
-            $approbationCredit->setDemande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeApprobationCredit(ApprobationCredit $approbationCredit): self
-    {
-        if ($this->approbationCredits->removeElement($approbationCredit)) {
-            // set the owning side to null (unless already changed)
-            if ($approbationCredit->getDemande() === $this) {
-                $approbationCredit->setDemande(null);
-            }
-        }
+        $this->statusApp = $statusApp;
 
         return $this;
     }

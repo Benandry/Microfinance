@@ -41,7 +41,7 @@ class AmortissementController extends AbstractController
         $sumNet = array_sum(array_column($tableau_amort,'montantPayer'));
 
         // dd($sumInteret);
-            $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class,[
                 'label' => 'Suivant ',
                 'attr' => [

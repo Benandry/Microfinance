@@ -1,30 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ApprobationCredit{% endblock %}
-{% block head %}ApprobationCredit{% endblock %}
+{% block title %}Approbation demende credit{% endblock %}
+{% block head %}Liste demande credit{% endblock %}
 
 {% block body %}
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>DateApprobation</th>
-                <th>Description</th>
-                <th>StatusApprobation</th>
-                <th>actions</th>
+                <th>Numero credit </th>
+                <th>Nom et prenom </th>
+                <th>Montant du credit </th>
+                <th>Date du demande </th>
+                <th>Nombre tranche </th>
+                <th>Type de tranche </th>
+                <th>Operation </th>
             </tr>
         </thead>
         <tbody>
-        {% for approbation_credit in approbation_credits %}
+        {% for demande in demandes %}
             <tr>
-                <td>{{ approbation_credit.id }}</td>
-                <td>{{ approbation_credit.dateApprobation ? approbation_credit.dateApprobation|date('Y-m-d') : '' }}</td>
-                <td>{{ approbation_credit.description }}</td>
-                <td>{{ approbation_credit.statusApprobation }}</td>
+                <td class="fw-bold">{{ demande.NumeroCredit }}</td>
+                <td>{{ demande.nom_client }} {{ demande.prenom_client }}</td>
+                <td>{{ demande.Montant }}</td>
+                <td>{{ demande.DateDemande  ? demande.DateDemande |date('Y-m-d') : '' }}</td>
+                <td>{{ demande.NombreTranche }}</td>
+                <td>{{ demande.TypeTranche }}</td>
                 <td>
+                    <a href="{{ path('app_approbation_credit_new',{'demande': demande }) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Ajouter nouveau </a>
+                </td>
+                {# <td>
                     <a href="{{ path('app_approbation_credit_show', {'id': approbation_credit.id}) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_approbation_credit_edit', {'id': approbation_credit.id}) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
-                </td>
+                </td> #}
             </tr>
         {% else %}
             <tr>
@@ -33,6 +40,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_approbation_credit_new') }}">Ajouter nouveau </a>
 {% endblock %}
