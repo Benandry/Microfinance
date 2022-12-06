@@ -120,15 +120,24 @@ class CreditIndividuelRepository extends ServiceEntityRepository
 
         $query=$entityManager->createQuery(
         'SELECT 
+            -- individuel
             individuel.nom_client nom,
             individuel.codeclient codeindividuel,
-            compteepargne.codeepargne codeepargne
+            -- compte epargne
+            compteepargne.codeepargne codeepargne,
+            -- transaction
+            max(transaction.id),
+            transaction.solde soldeepargne
          FROM
          App\Entity\IndividuelClient individuel
-         LEFT JOIN
+         INNER JOIN
          App\Entity\CompteEpargne compteepargne
+         INNER JOIN
+         App\Entity\Transaction transaction
             WITH
             compteepargne.codeep = individuel.codeclient
+            AND
+            transaction.codeepargneclient = compteepargne.codeepargne
          WHERE individuel.codeclient =:codeclient')
          ->setParameter(':codeclient',$codeclient);
 

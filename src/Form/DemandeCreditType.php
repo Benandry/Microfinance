@@ -46,23 +46,23 @@ class DemandeCreditType extends AbstractType
             ->add('SoldeEpargne')
             ->add('Agent',TextType::class,[
                     'attr'=>[
-                        'class'=>'hidden'
+                        'class'=>'hidden',
+                        'label'=>false
                     ],
-                    'label'=>false
             ])
             // ->add('ButCredit')
             ->add('Categorie1Credit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
-                'by_reference'=>true,
+                'by_reference'=>false,
                 'placeholder'=>'Choix Categorie'
             ])
             ->add('Categorie2Credit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
-                'by_reference'=>true,
+                'by_reference'=>false,
                 'placeholder'=>'Choix Categorie'
             ])
             ->add('Categorie3Credit',EntityType::class,[
@@ -93,10 +93,10 @@ class DemandeCreditType extends AbstractType
             ->add('CommissionPourcentageMontantCredit')
             ->add('PourcentageCapitalEnCoursInteretCommission')
             ->add('MontantFixeParTranche')
-            ->add('ProduitEpargne',EntityType::class,[
-                'class'=>ProduitEpargne::class,
-                'choice_label'=>'nomproduit'
-            ])
+            // ->add('ProduitEpargne',EntityType::class,[
+            //     'class'=>ProduitEpargne::class,
+            //     'choice_label'=>'nomproduit'
+            // ])
             ->add('ProduitCredit',EntityType::class,[
                 'class'=>ProduitCredit::class,
                 'choice_label'=>'NomProduitCredit',

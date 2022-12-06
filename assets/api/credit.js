@@ -4,7 +4,7 @@ $(document).ready(function(){
 
         // Ici on recuper le nom de l'agent de credit
 
-        $('#demande_credit_codeclient').on('keyup',function(){
+        $('#demande_credit_codeclient').on('blur',function(){
             $('#demande_credit_Agent').val($('#prenom').text())
     
             // Creation du numero credit
@@ -13,7 +13,7 @@ $(document).ready(function(){
 
             // recuperation du code agence
             var codeagence=$('#codeagence').text();
-            // console.log(codeagence)
+            console.log(codeagence)
 
             // on va boucler le maxId dans la derniere 
             
@@ -42,33 +42,26 @@ $(document).ready(function(){
                 success : function(content){
                     for(let j=0;j<content.length;j++){
                         var el=content[j];
-                        // console.log(el);
-                        document.getElementById('test1').innerHTML=el.codeepargne;
-                        // if(el.codeepargne == null){
-                        //     alert(el.nom+" Vous n'avez pas de depot de garantie")
-                        // }
+                        console.log(el);
+                        
+                        var codeepargneclient=el.codeepargne
+
+                        console.log(codeepargneclient)
+                        
+                        // Ici on verra si le client possede une epargne ou non
+                        
+                        if(codeepargneclient == null){
+                            console.log("vous n'avez pas de compte epargne")
+                        }else{
+                            console.log("vous avez de compte epargne")
+                        }
+
+                        $('#demande_credit_SoldeEpargne').val(el.soldeepargne)
+                        
                     }
                 }
             })            
         })
-                    // Test si le client a des compte epargne ou pas
-                    $('#demande_credit_codeclient').on('keyup',function(){
-                        var codeepargne=$('#test1').val();
-                        var lieepargne=$('#lieep').text();
-
-                        console.log(codeepargne);
-                        console.log(lieepargne);
-
-                        // if(lieepargne == 1){
-                        //     alert(lieepargne)
-                        // }
-                        // else{
-                        //     alert(codeepargne)
-                        // }
-            
-                        // alert(codeepargne+''+lieepargne);
-                    })
-        
         
         // Ici on utilise l'api pour recuperer tous les informatins du configuraion dans
         // la base de donnees
@@ -87,9 +80,10 @@ $(document).ready(function(){
 
                         var element= result[i];
 
-                        // console.log(element);
+                        console.log(element);
 
-                        // document.getElementById('demande_credit_NombreTranche').innerHTML=parseInt(element.Tranche)
+                        // On recupere ici les configuration semblable au choix du client
+                        
                         var tranche=parseInt(element.Tranche);
                         var montantminimum=parseInt(element.MontantMinimumCredit)
                         var montantmaximum=parseInt(element.MontantMaximumCredit)
@@ -109,17 +103,6 @@ $(document).ready(function(){
 
                         // Test lie epargne
                         document.getElementById('lieep').innerHTML=element.ProduitLieEpargne
-
-                                // Ici , on fera une test si le config exige une compte epargne ou non
-                                if(element.ProduitLieEpargne == 1){
-                                    // console.log('produit lie epargne :'+element.ProduitLieEpargne)
-                                    $('#epargne').show();
-                                }
-                                else{
-                                    // console.log('produit lie epargne :'+element.ProduitLieEpargne)
-                                    $('#epargne').hide();
-                                }
-                        // $('#etape2').
 
                     }
                 }

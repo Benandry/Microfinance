@@ -1,10 +1,10 @@
 {{ form_start(form) }}
   <ul class="nav nav-tabs">
       <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2" id="epargne">Etape 2</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 3</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape4">Etape 4</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape5">Etape 5</a></li>
+      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2" id="epargne">Etape 2</a></li> #}
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 2</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape4">Etape 3</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape5">Etape 4</a></li>
   </ul>
 
     <div class="tab-content">
@@ -32,6 +32,7 @@
                       {{ form_row(form.DiffereDePaiement) }}
                       {{ form_row(form.CapitalDerniereEcheance) }}
                       {{ form_row(form.FondCredit) }}
+                      {{ form_row(form.SoldeEpargne) }}
                   </div>
 
               </div>
@@ -40,23 +41,22 @@
       </div>
 
         {# Etape 2 #}
-          <div class="tab-pane" id="etape2">
+          {# <div class="tab-pane" id="etape2">
         <div class="row shadow-sm p-3">
             <div class="col-12 col-sm-12 col-md-12">
                 <h6 class="text-center text-primary">Etape 3</h6>
                 <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6">
+                    <div class="col-6 col-sm-6 col-md-6"> #}
                       {# {{ form_row(form.MontantEpargneTranche) }}
                       {{ form_row(form.MontantFixe) }} #}
-                      {{ form_row(form.SoldeEpargne) }}
-                    </div>
+                    {# </div> #}
                     {# <div class="col-6 col-sm-6">
                       {{ form_row(form.ButCredit) }}
                     </div> #}
-                </div>
+                {# </div>
             </div>
         </div>
-      </div>
+      </div> #}
         {# Etape 3 #}
 
             <div class="tab-pane" id="etape3">
@@ -116,9 +116,9 @@
                       {{ form_row(form.MontantFixeParTranche) }}
                       <div id="commune_suggest"></div>
                     </div>
-                    <div class="col-6 col-sm-6">
-                      {{ form_row(form.ProduitEpargne) }}
-              </div>
+                    <div class="col-6 col-sm-6" style="display:none">
+                      {{ form_row(form.Agent) }}
+                    </div>
               </div>
             </div>
         </div>
