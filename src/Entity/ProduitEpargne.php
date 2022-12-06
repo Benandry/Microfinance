@@ -37,6 +37,9 @@ class ProduitEpargne
     #[ORM\OneToMany(mappedBy: 'ProduitEpargne', targetEntity: DemandeCredit::class)]
     private Collection $demandeCredits;
 
+    #[ORM\OneToMany(mappedBy: 'ProduitEpargne', targetEntity: GarantieCredit::class)]
+    private Collection $garantieCredits;
+
     // #[ORM\OneToMany(mappedBy: 'Produit1', targetEntity: Produittransfert::class)]
     // private Collection $produitepargne1;
 
@@ -51,6 +54,7 @@ class ProduitEpargne
         $this->produitepargne1 = new ArrayCollection();
         $this->produitepargne2 = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
+        $this->garantieCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,6 +278,36 @@ class ProduitEpargne
             // set the owning side to null (unless already changed)
             if ($demandeCredit->getProduitEpargne() === $this) {
                 $demandeCredit->setProduitEpargne(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GarantieCredit>
+     */
+    public function getGarantieCredits(): Collection
+    {
+        return $this->garantieCredits;
+    }
+
+    public function addGarantieCredit(GarantieCredit $garantieCredit): self
+    {
+        if (!$this->garantieCredits->contains($garantieCredit)) {
+            $this->garantieCredits[] = $garantieCredit;
+            $garantieCredit->setProduitEpargne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGarantieCredit(GarantieCredit $garantieCredit): self
+    {
+        if ($this->garantieCredits->removeElement($garantieCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($garantieCredit->getProduitEpargne() === $this) {
+                $garantieCredit->setProduitEpargne(null);
             }
         }
 

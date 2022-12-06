@@ -55,29 +55,33 @@ class DemandeCreditType extends AbstractType
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
-                'by_reference'=>false,
-                'placeholder'=>'Choix Categorie'
+                'by_reference'=>true,
+                'placeholder'=>'Choix Categorie',
+                'required' => false,
             ])
             ->add('Categorie2Credit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
-                'by_reference'=>false,
-                'placeholder'=>'Choix Categorie'
+                'by_reference'=>true,
+                'placeholder'=>'Choix Categorie',
+                'required' => false
             ])
             ->add('Categorie3Credit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
                 'by_reference'=>true,
-                'placeholder'=>'Choix Categorie'
+                'placeholder'=>'Choix Categorie',
+                'required' => false
             ])
             ->add('Categorie4Credit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
                 'by_reference'=>true,
-                'placeholder'=>'Choix Categorie'
+                'placeholder'=>'Choix Categorie',
+                'required' => false
             ])
             ->add('CalculInteretDiffere')
             ->add('InteretDifferePaiementCapitalise')

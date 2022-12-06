@@ -29,6 +29,9 @@ class AmortissementFixe
     #[ORM\Column]
     private ?float $montanttTotal = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $codeclient = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class AmortissementFixe
     public function setMontanttTotal(float $montanttTotal): self
     {
         $this->montanttTotal = $montanttTotal;
+
+        return $this;
+    }
+
+    public function getCodeclient(): ?string
+    {
+        return $this->codeclient;
+    }
+
+    public function setCodeclient(string $codeclient): self
+    {
+        $this->codeclient = $codeclient;
 
         return $this;
     }

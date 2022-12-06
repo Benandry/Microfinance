@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route; 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class AmortissementController extends AbstractController
 {
@@ -18,8 +19,9 @@ class AmortissementController extends AbstractController
         $montant = $request->query->get('montant');
         $tranche = $request->query->get('tranche');
         $tauxInteret = $request->query->get('taux');
+        $codeclient = $request->query->get('codeclient');
 
-        $dateRemb = date('d/m/Y');
+        $dateRemb = date('Y/m/d');
         $capitalDu = $montant / $tranche;
         $interetTotal = $montant*($tauxInteret/100);
         $interet = $interetTotal / $tranche;
@@ -54,26 +56,33 @@ class AmortissementController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()){
-           // dd($tableau_amort[1]);
-            $amortissement = new AmortissementFixe();
+           //dd($tableau_amort[1]['dateRemb']);
 
+        //    $time_input = date_create($tableau_amort[1]['dateRemb']); 
+
+        //    dd($time_input);
+            
             for ($i=0; $i < $tranche; $i++) { 
-                $amortissement->setDateRemborsement($tableau_amort[i]['dateRemb']);
-                $amortissement->setPrincipale($tableau_amort[i]['CapitalDu']);
-                $amortissement->setInteret($tableau_amort[i]['interet']);
-                $amortissement->setMontanttTotal($tableau_amort[i]['montantPayer']);
-                $amortissement->setPeriode($tableau_amort[i]['periode']);
+                $amortissement = new AmortissementFixe();
+                $amortissement->setDateRemborsement(date_create($tableau_amort[$i]['dateRemb']));
+                $amortissement->setPrincipale($tableau_amort[$i]['CapitalDu']);
+                $amortissement->setInteret($tableau_amort[$i]['interet']);
+                $amortissement->setMontanttTotal($tableau_amort[$i]['montantPayer']);
+                $amortissement->setPeriode($tableau_amort[$i]['periode']);
+                $amortissement->setCodeclient($codeclient);
                 
                 $entityManager->persist($amortissement);
                 $entityManager->flush();
             }
-
+                
+           // dd("Fin d'ajout");
             $this->addFlash('success', "Terminée !!!!");
 
             return $this->redirectToRoute('app_tableau_amortissement', [
                 'montant' => $montant,
                 'tranche' => $tranche,
-                'taux' => $taux
+                'taux' => $tauxInteret,
+                'codeclient' => $codeclient
             ], Response::HTTP_SEE_OTHER);
 
         }
@@ -86,6 +95,7 @@ class AmortissementController extends AbstractController
             'totalInteret' => $sumInteret,
             'totalNet' => $sumNet,
             'form' => $form->createView(),
+            'codeclient' => $codeclient,
         ]);
     }
 }

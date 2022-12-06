@@ -68,16 +68,16 @@ class DemandeCredit
     // #[ORM\Column(length: 255)]
     // private ?string $ButCredit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable : true)]
     private ?string $Categorie1Credit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable : true)]
     private ?string $Categorie2Credit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable : true)]
     private ?string $Categorie3Credit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable : true)]
     private ?string $Categorie4Credit = null;
 
     #[ORM\Column]

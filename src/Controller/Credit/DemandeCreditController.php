@@ -30,19 +30,23 @@ class DemandeCreditController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-           //dd($demandeCredit);
+        //    dd($demandeCredit);
            $montant = $demandeCredit->getMontant();
            $tranche =  $demandeCredit->getNombreTranche();
            $taux =  $demandeCredit->getTauxInteretAnnuel();
+           $codeclient =  $demandeCredit->getCodeclient();
+
+           //dd($codeclient);
            $demandeCreditRepository->add($demandeCredit, true);
 
-            $this->addFlash('success', "Demende de credit de'".$demandeCredit->getCodeclient()."' reussite!!");
+            $this->addFlash('success', "Demande de credit du clisnt ".$codeclient. " '".$demandeCredit->getCodeclient()."' !!");
 
 
             return $this->redirectToRoute('app_tableau_amortissement', [
                 'montant' => $montant,
                 'tranche' => $tranche,
-                'taux' => $taux
+                'taux' => $taux,
+                'codeclient' => $codeclient,
             ], Response::HTTP_SEE_OTHER);
         }
 

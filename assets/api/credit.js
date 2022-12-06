@@ -51,10 +51,10 @@ $(document).ready(function(){
                         // Ici on verra si le client possede une epargne ou non
                         
                         if(codeepargneclient == null){
-                            console.log("vous n'avez pas de compte epargne")
-                        }else{
-                            console.log("vous avez de compte epargne")
+                            alert("vous n'avez pas de compte epargne")
                         }
+
+                        // Affichage du solde epargne
 
                         $('#demande_credit_SoldeEpargne').val(el.soldeepargne)
                         
@@ -83,7 +83,7 @@ $(document).ready(function(){
                         console.log(element);
 
                         // On recupere ici les configuration semblable au choix du client
-                        
+
                         var tranche=parseInt(element.Tranche);
                         var montantminimum=parseInt(element.MontantMinimumCredit)
                         var montantmaximum=parseInt(element.MontantMaximumCredit)
@@ -104,9 +104,54 @@ $(document).ready(function(){
                         // Test lie epargne
                         document.getElementById('lieep').innerHTML=element.ProduitLieEpargne
 
+                        // si la configuration indique que le produit epargne est false
+                        // on ne montre pas le champ solde epargne
+                        if(element.ProduitLieEpargne == false){
+                            $('#demande_credit_SoldeEpargne').hide()
+                        }
+                        else{
+                            $('#demande_credit_SoldeEpargne').show()
+                        }
                     }
                 }
             })
         })
+
+
+        // Configuration : garantie epargne
+        $('#garantie_credit_CreditBaseEpargne').on('click',function(){
+            var garantieepargne=($(this).val());
+
+            console.log(garantieepargne);
+
+            $('#garantie_credit_MontantCreditDmdIndividuel').attr('disabled',false)
+            $('#garantie_credit_MontantCreditDmdGroupe').attr('disabled',false)
+            $('#garantie_credit_MontantCrdAnciensCreditenCours').attr('disabled',false)
+            $('#garantie_credit_MontantCrdAnciensCreditenCoursGrp').attr('disabled',false)
+            $('#garantie_credit_GarantieBaseMontantCredit').attr('disabled',false)
+            $('#garantie_credit_DeduireGarantieAuDecaissement').attr('disabled',false)
+            $('#garantie_credit_DeduireGarantieAuDecaissementGrp').attr('disabled',false)
+
+        })
+
+        // Configuration : garant et credit
+
+        $('#garantie_credit_MontantExige').hide()
+        $('#garantie_credit_regle').hide()
+        $('#garantie_credit_MontantGarant').hide()
+        $('#garantie_credit_MontantGarantieGrp').hide()
+        $('#garantie_credit_reglegrp').hide()
+
+        // garantie credit individuel
+        $('#garantie_credit_GarantieObligatoireCreditInd').on('click',function(){
+          $('#garantie_credit_MontantExige').show()
+          $('#garantie_credit_regle').show()
+        })
+
+        // garant credit individuel
+        $('#garantie_credit_GarantObligatoireCreditGrp').on('click',function(){
+            $('#garantie_credit_MontantGarantieGrp').show()
+            $('#garantie_credit_reglegrp').show()
+            })
         
 })

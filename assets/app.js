@@ -32,7 +32,7 @@ import './api/compte_epargne/depot'
 //import les api pour les compte epargne
 //import './api/api_compte_epargne'//
 import 'jquery-modal'
-import 'jquery-modal/jquery.modal'
+// import 'jquery-modal/jquery.modal'
 
 
 import $ from 'jquery';
@@ -58,6 +58,7 @@ $(document).ready(function(){
 
 
         $('#myModal').modal('show');
+        
 
     $(".table1").DataTable({
         dom: 'Bltp',
