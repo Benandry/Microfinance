@@ -21,7 +21,7 @@ class AmortissementController extends AbstractController
         $tauxInteret = $request->query->get('taux');
         $codeclient = $request->query->get('codeclient');
 
-        $dateRemb = date('d/m/Y');
+        $dateRemb = date('Y/m/d');
         $capitalDu = $montant / $tranche;
         $interetTotal = $montant*($tauxInteret/100);
         $interet = $interetTotal / $tranche;
