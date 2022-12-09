@@ -57,7 +57,12 @@ $(document).ready(function(){
                         // Affichage du solde epargne
 
                         $('#demande_credit_SoldeEpargne').val(el.soldeepargne)
-                        
+
+                        // Recuperation solde
+                
+                        // var solde=$('#demande_credit_SoldeEpargne').text()
+
+                        $('#soldeepargne').text(el.soldeepargne)
                     }
                 }
             })            
@@ -112,8 +117,13 @@ $(document).ready(function(){
                         else{
                             $('#demande_credit_SoldeEpargne').show()
                         }
+                        // alert('heloo world')
+                        // // Recuperation pourcentage garantie
+                        $('#garantie').text(element.MontantCreditDmdIndividuel)
+                        // alert(element.MontantCreditDmdIndividuel)
                     }
                 }
+
             })
         })
 
@@ -153,5 +163,42 @@ $(document).ready(function(){
             $('#garantie_credit_MontantGarantieGrp').show()
             $('#garantie_credit_reglegrp').show()
             })
+        // Garant oblihatoire individuem
+        $('#garantie_credit_GarantObligatoireCreditInd').on('click',function(){
+            $('#garantie_credit_MontantGarant').show()
+        })
+
+        // Garantie
+        $('#demande_credit_Montant').on('blur',function(){
+            var montant=$(this).val()
+            console.log(' montant ' +montant)
+
+            // L'utilisateur tape ici le montant demande par le client
+
+            $('#montant').text(montant)
+            // ici , on fait la comparaison entre le montant demandé
+            // si le  produit credit est base sur l'epargne
+            // on fait la comparaison entre les soldes dans le compte epargne(depot de garantie)
+            // 
+            var solde=$('#soldeepargne').text()
+            console.log('solde : '+solde)
+            var garantie=$('#garantie').text()
+            console.log(garantie)
+
+            // calul
+            var calcul
+            calcul=(montant*garantie)/100
+
+            console.log('calcul :  '+calcul)
+
+            // comparaison
+            if(calcul <= solde){
+                console.log('approuver')
+            }
+            else{
+                console.log('Votre solde est insuffisant');
+            }
+
+        })
         
 })

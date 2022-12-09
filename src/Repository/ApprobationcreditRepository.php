@@ -91,7 +91,6 @@ class ApprobationCreditRepository extends ServiceEntityRepository
              With appro.codecredit = demande.NumeroCredit
             -- where appro.codecredit != demande.NumeroCredit OR appro.codecredit = 'null' 
 
-
             ";
 
             $statement = $this->getEntityManager()->createQuery($query)->execute();

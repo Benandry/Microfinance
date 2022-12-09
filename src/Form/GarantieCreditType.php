@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -58,37 +59,60 @@ class GarantieCreditType extends AbstractType
                 'disabled'=>false,
                 'required'=>false
             ])
-            ->add('MontantExige',IntegerType::class)
-            ->add('regle')
+            ->add('MontantExige',IntegerType::class,[
+                'label'=>false,
+                'attr'=>[
+                    'placeholder'=>'Montant exiger . . .'
+                    ]
+            ])
+            ->add('regle',ChoiceType::class,[
+                'label'=>false,
+                'choices'=>[
+                    'Demande'=>'Demande',
+                    'Approbation'=>'Approbation',
+                    'Remmboursement'=>'Remboursement'
+                ],
+                'attr'=>[
+                    'placeholder'=>'Regle'
+                ]
+            ])
             ->add('GarantObligatoireCreditInd',RadioType::class,[
                 'label'=>'Garant obligatoire  (Individuel)',
                 'disabled'=>false,
                 'required'=>false
             ])
-            ->add('MontantGarant')
+            ->add('MontantGarant',IntegerType::class,[
+                'label'=>false,
+                'attr'=>[
+                    'placeholder'=>'Montant Garant'
+                ]
+            ])
             ->add('GarantObligatoireCreditGrp',RadioType::class,[
                 'label'=>'Garant obligatoire  (Groupe)',
                 'disabled'=>false,
                 'required'=>false
             ])
             ->add('MontantGarantieGrp',IntegerType::class,[
-                'label'=>'Montant garantie  (Groupe)',
-                'disabled'=>true,
-                'required'=>false
+                'label'=>false,
+                'disabled'=>false,
+                'required'=>false,
+                'attr'=>[
+                    'placeholder'=>'Montant Garantie groupe'
+                ]
             ])
             ->add('reglegrp',ChoiceType::class,[
-                'placeholder'=>'Choix regles',
                 'choices'=>[
                     'Demandes'=>'Demandes',
                     'Approbation'=>'Approbation',
                     'Remboursement'=>'Remboursement'
                 ],
                 'attr'=>[
+                    'placeholder'=>'Choix regles',
                     'class'=>'form-control'
                 ],
-                'label'=>'Regle appliqué'
+                'label'=>false
             ])
-            ->add('ProduitEpargne',EntityType::class,[
+            ->add('ProduitCredit',EntityType::class,[
                 'class'=>ProduitCredit::class,
                 'choice_label'=>'NomProduitCredit',
                 'mapped'=>true,
