@@ -70,18 +70,6 @@ class DemandeCredit
     // #[ORM\Column(length: 255)]
     // private ?string $ButCredit = null;
 
-    #[ORM\Column(length: 255,nullable : true)]
-    private ?string $Categorie1Credit = null;
-
-    #[ORM\Column(length: 255,nullable : true)]
-    private ?string $Categorie2Credit = null;
-
-    #[ORM\Column(length: 255,nullable : true)]
-    private ?string $Categorie3Credit = null;
-
-    #[ORM\Column(length: 255,nullable : true)]
-    private ?string $Categorie4Credit = null;
-
     #[ORM\Column]
     private ?bool $CalculInteretDiffere = null;
 
@@ -129,6 +117,18 @@ class DemandeCredit
 
     #[ORM\Column(length: 255)]
     private ?string $statusApp = null;
+
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?CategorieCredit $Categorie1Credit = null;
+
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?CategorieCredit $Categorie2Credit = null;
+
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?CategorieCredit $Categorie3Credit = null;
+
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?CategorieCredit $Categorie4Credit = null;
 
 
     public function getId(): ?int
@@ -351,55 +351,6 @@ class DemandeCredit
 
         return $this;
     }
-
-    public function getCategorie1Credit(): ?string
-    {
-        return $this->Categorie1Credit;
-    }
-
-    public function setCategorie1Credit(string $Categorie1Credit): self
-    {
-        $this->Categorie1Credit = $Categorie1Credit;
-
-        return $this;
-    }
-
-    public function getCategorie2Credit(): ?string
-    {
-        return $this->Categorie2Credit;
-    }
-
-    public function setCategorie2Credit(string $Categorie2Credit): self
-    {
-        $this->Categorie2Credit = $Categorie2Credit;
-
-        return $this;
-    }
-
-    public function getCategorie3Credit(): ?string
-    {
-        return $this->Categorie3Credit;
-    }
-
-    public function setCategorie3Credit(string $Categorie3Credit): self
-    {
-        $this->Categorie3Credit = $Categorie3Credit;
-
-        return $this;
-    }
-
-    public function getCategorie4Credit(): ?string
-    {
-        return $this->Categorie4Credit;
-    }
-
-    public function setCategorie4Credit(string $Categorie4Credit): self
-    {
-        $this->Categorie4Credit = $Categorie4Credit;
-
-        return $this;
-    }
-
     public function isCalculInteretDiffere(): ?bool
     {
         return $this->CalculInteretDiffere;
@@ -593,6 +544,54 @@ class DemandeCredit
     public function setStatusApp(string $statusApp): self
     {
         $this->statusApp = $statusApp;
+
+        return $this;
+    }
+
+    public function getCategorie1Credit(): ?CategorieCredit
+    {
+        return $this->Categorie1Credit;
+    }
+
+    public function setCategorie1Credit(?CategorieCredit $Categorie1Credit): self
+    {
+        $this->Categorie1Credit = $Categorie1Credit;
+
+        return $this;
+    }
+
+    public function getCategorie2Credit(): ?CategorieCredit
+    {
+        return $this->Categorie2Credit;
+    }
+
+    public function setCategorie2Credit(?CategorieCredit $Categorie2Credit): self
+    {
+        $this->Categorie2Credit = $Categorie2Credit;
+
+        return $this;
+    }
+
+    public function getCategorie3Credit(): ?CategorieCredit
+    {
+        return $this->Categorie3Credit;
+    }
+
+    public function setCategorie3Credit(?CategorieCredit $Categorie3Credit): self
+    {
+        $this->Categorie3Credit = $Categorie3Credit;
+
+        return $this;
+    }
+
+    public function getCategorie4Credit(): ?CategorieCredit
+    {
+        return $this->Categorie4Credit;
+    }
+
+    public function setCategorie4Credit(?CategorieCredit $Categorie4Credit): self
+    {
+        $this->Categorie4Credit = $Categorie4Credit;
 
         return $this;
     }
