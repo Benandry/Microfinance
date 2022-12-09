@@ -15,8 +15,9 @@ class GarantieCredit
 
     #[ORM\Column(nullable:true)]
     private ?bool $CreditBaseEpargne = null;
-
+    
     #[ORM\ManyToOne(inversedBy: 'garantieCredits')]
+    #[ORM\Column(nullable:true)]
     private ?ProduitEpargne $ProduitEpargne = null;
 
     #[ORM\Column(nullable: true)]
@@ -63,6 +64,9 @@ class GarantieCredit
 
     #[ORM\Column(length: 255,nullable:true)]
     private ?string $reglegrp = null;
+
+    #[ORM\ManyToOne(inversedBy: 'garantieCredits')]
+    private ?ProduitCredit $ProduitCredit = null;
 
     public function getId(): ?int
     {
@@ -269,6 +273,18 @@ class GarantieCredit
     public function setReglegrp(string $reglegrp): self
     {
         $this->reglegrp = $reglegrp;
+
+        return $this;
+    }
+
+    public function getProduitCredit(): ?ProduitCredit
+    {
+        return $this->ProduitCredit;
+    }
+
+    public function setProduitCredit(?ProduitCredit $ProduitCredit): self
+    {
+        $this->ProduitCredit = $ProduitCredit;
 
         return $this;
     }

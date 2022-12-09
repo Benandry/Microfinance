@@ -33,12 +33,23 @@ class ProduitCredit
     #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: FraisConfigCredit::class)]
     private Collection $fraisConfigCredits;
 
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'produitCredits')]
+    private ?self $ProduitCredit = null;
+
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: self::class)]
+    private Collection $produitCredits;
+
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: GarantieCredit::class)]
+    private Collection $garantieCredits;
+
     public function __construct()
     {
         $this->configurationGeneralCredits = new ArrayCollection();
         $this->creditIndividuels = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
         $this->fraisConfigCredits = new ArrayCollection();
+        $this->produitCredits = new ArrayCollection();
+        $this->garantieCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,6 +200,78 @@ class ProduitCredit
             // set the owning side to null (unless already changed)
             if ($fraisConfigCredit->getProduitCredit() === $this) {
                 $fraisConfigCredit->setProduitCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProduitCredit(): ?self
+    {
+        return $this->ProduitCredit;
+    }
+
+    public function setProduitCredit(?self $ProduitCredit): self
+    {
+        $this->ProduitCredit = $ProduitCredit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getProduitCredits(): Collection
+    {
+        return $this->produitCredits;
+    }
+
+    public function addProduitCredit(self $produitCredit): self
+    {
+        if (!$this->produitCredits->contains($produitCredit)) {
+            $this->produitCredits[] = $produitCredit;
+            $produitCredit->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduitCredit(self $produitCredit): self
+    {
+        if ($this->produitCredits->removeElement($produitCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($produitCredit->getProduitCredit() === $this) {
+                $produitCredit->setProduitCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GarantieCredit>
+     */
+    public function getGarantieCredits(): Collection
+    {
+        return $this->garantieCredits;
+    }
+
+    public function addGarantieCredit(GarantieCredit $garantieCredit): self
+    {
+        if (!$this->garantieCredits->contains($garantieCredit)) {
+            $this->garantieCredits[] = $garantieCredit;
+            $garantieCredit->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGarantieCredit(GarantieCredit $garantieCredit): self
+    {
+        if ($this->garantieCredits->removeElement($garantieCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($garantieCredit->getProduitCredit() === $this) {
+                $garantieCredit->setProduitCredit(null);
             }
         }
 

@@ -86,11 +86,27 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             frais.FraisDeRefinancement,
             frais.CommissionCreditChaqueTrancheInd,
             frais.DroitTimbreSurCapital,
-            frais.SurInteretCours
+            frais.SurInteretCours,
+            -- configuration garantie credit
+            garantie.CreditBaseEpargne,
+            garantie.MontantCreditDmdIndividuel,
+            garantie.MontantCreditDmdGroupe,
+            garantie.MontantCrdAnciensCreditenCours,
+            garantie.MontantCrdAnciensCreditenCoursGrp,
+            garantie.GarantieBaseMontantCredit,
+            garantie.DeduireGarantieAuDecaissement,
+            garantie.DeduireGarantieAuDecaissementGrp,
+            garantie.GarantieObligatoireCreditInd,
+            garantie.MontantExige,
+            garantie.regle,
+            garantie.MontantGarant,
+            garantie.GarantObligatoireCreditGrp,
+            garantie.MontantGarantieGrp,
+            garantie.reglegrp
             -- produit credit
             -- produitcredit.NomProduitCredit,
             -- compte epargne
-            compteepargne
+            -- compteepargne
             FROM
             App\Entity\CreditIndividuel creditindividuel  
               INNER JOIN
@@ -99,12 +115,16 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             App\Entity\ProduitCredit produitcredit
                 INNER JOIN
             App\Entity\FraisConfigCredit frais
+                INNER JOIN
+            App\Entity\GarantieCredit garantie
                WITH
             produitcredit.id = configeneralcredit.ProduitCredit
                AND
             produitcredit.id = creditindividuel.ProduitCredit
                 AND
             produitcredit.id = frais.ProduitCredit
+                AND
+            garantie.ProduitCredit = produitcredit.id
                 WHERE
              creditindividuel.ProduitCredit= :produit
             '
