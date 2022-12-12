@@ -147,19 +147,50 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             compteepargne.codeepargne codeepargne,
             -- transaction
             max(transaction.id),
-            transaction.solde soldeepargne
+            transaction.solde soldeepargne,
+            -- produit epargne
+            produitepargne.nomproduit,
+            -- type produit
+            typeepargne.NomTypeEp
          FROM
          App\Entity\IndividuelClient individuel
          INNER JOIN
          App\Entity\CompteEpargne compteepargne
+         INNER JOIN 
+         App\Entity\ProduitEpargne produitepargne
+         INNER JOIN 
+         App\Entity\TypeEpargne typeepargne
          INNER JOIN
          App\Entity\Transaction transaction
             WITH
             compteepargne.codeep = individuel.codeclient
             AND
             transaction.codeepargneclient = compteepargne.codeepargne
-         WHERE individuel.codeclient =:codeclient')
+            AND
+            produitepargne.typeEpargne =  typeepargne.id
+            AND
+            produitepargne.id=compteepargne.produit
+         WHERE individuel.codeclient =:codeclient
+         AND typeepargne.NomTypeEp =\'Depot de garantie\' ')
          ->setParameter(':codeclient',$codeclient);
+
+        return $query->getResult();
+    }
+
+    // Cette fonction permet d'indentifier le client deja emprunté
+    public function api_demandecredit($codeclient){
+        
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                demande.codeclient
+            FROM
+                App\Entity\DemandeCredit demande
+            WHERE
+            demande.codeclient = :codeclient
+            ')
+            ->setParameter(':codeclient',$codeclient);
 
         return $query->getResult();
     }

@@ -126,6 +126,9 @@ class Individuelclient
     #[ORM\ManyToOne(inversedBy: 'individuelclients')]
     private ?Agence $Agence = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $garant = null;
+
     
     public function __construct()
     {
@@ -689,6 +692,18 @@ class Individuelclient
     public function setAgence(?Agence $Agence): self
     {
         $this->Agence = $Agence;
+
+        return $this;
+    }
+
+    public function isGarant(): ?bool
+    {
+        return $this->garant;
+    }
+
+    public function setGarant(?bool $garant): self
+    {
+        $this->garant = $garant;
 
         return $this;
     }
