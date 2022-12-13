@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\CategorieCredit;
 use App\Entity\DemandeCredit;
+use App\Entity\FondCredit;
 use App\Entity\ProduitCredit;
 use App\Entity\ProduitEpargne;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -40,7 +41,13 @@ class DemandeCreditType extends AbstractType
             ->add('MethodeCalculInteret')
             ->add('DiffereDePaiement')
             ->add('CapitalDerniereEcheance')
-            ->add('FondCredit')
+            ->add('FondCredit',EntityType::class,[
+                'class'=>FondCredit::class,
+                'choice_label'=>'NomBailleurs',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Choix fond credit'
+            ])
             // ->add('MontantEpargneTranche')
             // ->add('MontantFixe')
             ->add('SoldeEpargne')

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\NullableType;
 
 #[ORM\Entity(repositoryClass: DemandeCreditRepository::class)]
 class DemandeCredit
@@ -49,8 +50,8 @@ class DemandeCredit
     #[ORM\Column]
     private ?float $CapitalDerniereEcheance = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $FondCredit = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $FondCredit = null;
 
     // #[ORM\Column]
     // private ?float $MontantEpargneTranche = null;
@@ -70,7 +71,7 @@ class DemandeCredit
     // #[ORM\Column(length: 255)]
     // private ?string $ButCredit = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $CalculInteretDiffere = null;
 
     // #[ORM\Column]
@@ -88,7 +89,7 @@ class DemandeCredit
     // #[ORM\Column]
     // private ?bool $InteretDeduitDecaissement = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $CalculInteretJours = null;
 
     // #[ORM\Column]
@@ -115,11 +116,16 @@ class DemandeCredit
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $statusApp = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    #[ORM\Column(nullable:true)]
     private ?CategorieCredit $Categorie1Credit = null;
+
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    #[ORM\Column(nullable:true)]
+    private ?FondCredit $FondCredit = null;
 
     // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     // private ?CategorieCredit $Categorie2Credit = null;
@@ -268,17 +274,17 @@ class DemandeCredit
         return $this;
     }
 
-    public function getFondCredit(): ?string
-    {
-        return $this->FondCredit;
-    }
+    // public function getFondCredit(): ?string
+    // {
+    //     return $this->FondCredit;
+    // }
 
-    public function setFondCredit(string $FondCredit): self
-    {
-        $this->FondCredit = $FondCredit;
+    // public function setFondCredit(string $FondCredit): self
+    // {
+    //     $this->FondCredit = $FondCredit;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     // public function getMontantEpargneTranche(): ?float
     // {
@@ -595,4 +601,16 @@ class DemandeCredit
 
     //     return $this;
     // }
+
+    public function getFondCredit(): ?FondCredit
+    {
+        return $this->FondCredit;
+    }
+
+    public function setFondCredit(?FondCredit $FondCredit): self
+    {
+        $this->FondCredit = $FondCredit;
+
+        return $this;
+    }
 }
