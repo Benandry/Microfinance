@@ -78,7 +78,7 @@
                                     </li>
                                     <li class="w-100 nav-item dropdown">
                                             <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-long-arrow-up"></i>Depot Compte epargne
+                                                <i class="fa fa-long-arrow-up"></i>Depot 
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-primary dropmenu  dropdown-menu-start" aria-labelledby="navbarDarkDropdownMenuLink">
                                                 <li><a href="{{ path('app_compte_epargne_depot') }}" class="dropdown-item down"><i class="fa fa-user"></i> Depot client</span> </a></li>
@@ -87,7 +87,7 @@
                                     </li>
 
                                     <li class="w-100">
-                                        <a href="{{ path('app_transaction_retrait') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-long-arrow-up"></i> Retrait epargne </span> </a>
+                                        <a href="{{ path('app_transaction_retrait') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-long-arrow-up"></i> Retrait </span> </a>
                                     </li>
 
                                     
@@ -119,10 +119,10 @@
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span></a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
                                     <li class="w-100">
-                                        <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande de credit </span></a>
+                                        <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande </span></a>
                                     </li>
                                     <li class="w-100">
-                                        <a href="{{path('app_approbation_credit_index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Approbation du demande </span></a>
+                                        <a href="{{path('app_approbation_credit_index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Approbation</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -247,7 +247,17 @@
                         <div class="row">
                             <div class="col-12 col-md-12 col sm-12">
                                 <div class="row head">
-                                    <h5 class="text_head m-3">{% block head %} Fidev {% endblock %}</h5>
+                                    <div class="col-6 col-xl-6">
+                                        <div class="d-flex justify-content-start">
+                                            <h5 class="text_head m-3">{% block head %} Fidev {% endblock %}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-6">
+                                        <div class="d-flex justify-content-end">
+                                            <p class="m-3"> Agence : {{ app.user.nomagence }} </p>
+                                            <p class="m-3"> Code : {{ app.user.codeagence }} </p>
+                                        </div>
+                                    </div>
                                     <hr class="fw-bold">
                                 </div>
                                 <div class="row">

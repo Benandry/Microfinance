@@ -53,11 +53,11 @@ window.JSZip = jsZip;
 //*******************Variable sur le chemiin *****************/
 const path = window.location.pathname;
 
+ //alert("Alert zalaha aa");
+
 $(document).ready(function(){
 
     /*******Lancer modal  */
-
-
         $('#myModal').modal('show');
         
 

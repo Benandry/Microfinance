@@ -28,6 +28,10 @@ class DemandeCreditController extends AbstractController
         $form = $this->createForm(DemandeCreditType::class, $demandeCredit);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        //dd($roles);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
         //    dd($demandeCredit);
@@ -39,9 +43,6 @@ class DemandeCreditController extends AbstractController
 
            //dd($codeclient);
            $demandeCreditRepository->add($demandeCredit, true);
-
-            $this->addFlash('success', "Demande de credit du client ".$codeclient. " '".$demandeCredit->getCodeclient()."' !!");
-
 
             return $this->redirectToRoute('app_tableau_amortissement', [
                 'montant' => $montant,
