@@ -124,7 +124,17 @@ class Individuelclient
     private ?string $commune = null;
 
     #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    #[ORM\Column(nullable:true)]
     private ?Agence $Agence = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $garant = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $NomAgence = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CodeAgence = null;
 
     
     public function __construct()
@@ -689,6 +699,42 @@ class Individuelclient
     public function setAgence(?Agence $Agence): self
     {
         $this->Agence = $Agence;
+
+        return $this;
+    }
+
+    public function isGarant(): ?bool
+    {
+        return $this->garant;
+    }
+
+    public function setGarant(?bool $garant): self
+    {
+        $this->garant = $garant;
+
+        return $this;
+    }
+
+    public function getNomAgence(): ?string
+    {
+        return $this->NomAgence;
+    }
+
+    public function setNomAgence(?string $NomAgence): self
+    {
+        $this->NomAgence = $NomAgence;
+
+        return $this;
+    }
+
+    public function getCodeAgence(): ?string
+    {
+        return $this->CodeAgence;
+    }
+
+    public function setCodeAgence(?string $CodeAgence): self
+    {
+        $this->CodeAgence = $CodeAgence;
 
         return $this;
     }

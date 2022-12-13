@@ -196,7 +196,10 @@ class IndividuelclientType extends AbstractType
                     'length'=>'500px',
                     'class'=>'btn btn-primary btn-sm',
                 ]
-            ])        
+            ])       
+            ->add('garant') 
+            ->add('NomAgence')
+            ->add('CodeAgence')
         ;
     }
 

@@ -52,6 +52,7 @@ $(document).ready(function(){
                         
                         if(codeepargneclient == null){
                             alert("vous n'avez pas de compte epargne")
+                            $('.btn').hide()
                         }
 
                         // Affichage du solde epargne
@@ -196,7 +197,8 @@ $(document).ready(function(){
                 console.log('approuver')
             }
             else{
-                console.log('Votre solde est insuffisant');
+                alert('Votre solde est insuffisant');
+                $('.btn').hide()
             }
 
         })

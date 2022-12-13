@@ -59,44 +59,44 @@ class DemandeCreditType extends AbstractType
                 'placeholder'=>'Choix Categorie',
                 'required' => false,
             ])
-            ->add('Categorie2Credit',EntityType::class,[
-                'class'=>CategorieCredit::class,
-                'choice_label'=>'NomCategorieCredit',
-                'mapped'=>true,
-                'by_reference'=>true,
-                'placeholder'=>'Choix Categorie',
-                'required' => false
-            ])
-            ->add('Categorie3Credit',EntityType::class,[
-                'class'=>CategorieCredit::class,
-                'choice_label'=>'NomCategorieCredit',
-                'mapped'=>true,
-                'by_reference'=>true,
-                'placeholder'=>'Choix Categorie',
-                'required' => false
-            ])
-            ->add('Categorie4Credit',EntityType::class,[
-                'class'=>CategorieCredit::class,
-                'choice_label'=>'NomCategorieCredit',
-                'mapped'=>true,
-                'by_reference'=>true,
-                'placeholder'=>'Choix Categorie',
-                'required' => false
-            ])
+            // ->add('Categorie2Credit',EntityType::class,[
+            //     'class'=>CategorieCredit::class,
+            //     'choice_label'=>'NomCategorieCredit',
+            //     'mapped'=>true,
+            //     'by_reference'=>true,
+            //     'placeholder'=>'Choix Categorie',
+            //     'required' => false
+            // ])
+            // ->add('Categorie3Credit',EntityType::class,[
+            //     'class'=>CategorieCredit::class,
+            //     'choice_label'=>'NomCategorieCredit',
+            //     'mapped'=>true,
+            //     'by_reference'=>true,
+            //     'placeholder'=>'Choix Categorie',
+            //     'required' => false
+            // ])
+            // ->add('Categorie4Credit',EntityType::class,[
+            //     'class'=>CategorieCredit::class,
+            //     'choice_label'=>'NomCategorieCredit',
+            //     'mapped'=>true,
+            //     'by_reference'=>true,
+            //     'placeholder'=>'Choix Categorie',
+            //     'required' => false
+            // ])
             ->add('CalculInteretDiffere')
-            ->add('InteretDifferePaiementCapitalise')
-            ->add('InteretPayeMemePourDiffere')
-            ->add('TrancheDistinctInteretPeriodeDiffere')
-            ->add('PaiementPrealableInteret')
-            ->add('InteretDeduitDecaissement')
+            // ->add('InteretDifferePaiementCapitalise')
+            // ->add('InteretPayeMemePourDiffere')
+            // ->add('TrancheDistinctInteretPeriodeDiffere')
+            // ->add('PaiementPrealableInteret')
+            // ->add('InteretDeduitDecaissement')
             ->add('CalculInteretJours')
-            ->add('ForfaitPaiementPrealableInteret')
-            ->add('CreditLieUSD')
-            ->add('MettreJourCalendrierNonOuvrable')
-            ->add('ReporterPremierTranche')
-            ->add('CommissionPourcentageMontantCredit')
-            ->add('PourcentageCapitalEnCoursInteretCommission')
-            ->add('MontantFixeParTranche')
+            // ->add('ForfaitPaiementPrealableInteret')
+            // ->add('CreditLieUSD')
+            // ->add('MettreJourCalendrierNonOuvrable')
+            // ->add('ReporterPremierTranche')
+            // ->add('CommissionPourcentageMontantCredit')
+            // ->add('PourcentageCapitalEnCoursInteretCommission')
+            // ->add('MontantFixeParTranche')
             // ->add('ProduitEpargne',EntityType::class,[
             //     'class'=>ProduitEpargne::class,
             //     'choice_label'=>'nomproduit'

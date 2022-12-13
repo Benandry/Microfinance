@@ -26,4 +26,14 @@ class ApiCreditController extends AbstractController
 
         return new JsonResponse($creditIndividue);
     }
+    // Demande credit 
+    /*
+    *ici on verifie si le client est deja emprunté
+    */ 
+    #[Route('api/credit/{codeclient}',name:'app_demende_credit')]
+    public function DemandeCredit(CreditIndividuelRepository $creditIndividuelRepository,$codeclient):Response
+    {
+        $demandecredit=$creditIndividuelRepository->api_demandecredit($codeclient);
+        return new JsonResponse($demandecredit);
+    }
 }
