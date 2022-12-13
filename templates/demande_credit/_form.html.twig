@@ -3,7 +3,7 @@
       <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
       {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2" id="epargne">Etape 2</a></li> #}
       {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 2</a></li> #}
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape4">Etape 3</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
       {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape5">Etape 4</a></li>  #}
   </ul>
 
@@ -32,8 +32,6 @@
                       {{ form_row(form.DiffereDePaiement) }}
                       {{ form_row(form.CapitalDerniereEcheance) }}
                       {{ form_row(form.FondCredit) }}
-                      {{ form_row(form.Categorie1Credit) }}
-                      {{ form_row(form.SoldeEpargne) }}
                   </div>
 
               </div>
@@ -78,20 +76,22 @@
       </div> #}
 
       {# etape4 #}
-            <div class="tab-pane" id="etape4">
+            <div class="tab-pane" id="etape2">
         <div class="row shadow-sm p-3">
             <div class="col-12 col-sm-12 col-md-12">
-              <h6 class="text-center text-primary">Etape 4</h6>
+              <h6 class="text-center text-primary">Etape 2</h6>
               <div class="row">
                   <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.SoldeEpargne) }}
+                      {{ form_row(form.Categorie1Credit) }}
                       {# {{ form_row(form.InteretDifferePaiementCapitalise) }} #}
                       {# {{ form_row(form.InteretPayeMemePourDiffere) }} #}
                       {# {{ form_row(form.TrancheDistinctInteretPeriodeDiffere) }}#}
                       {# {{ form_row(form.PaiementPrealableInteret) }}
                       {{ form_row(form.InteretDeduitDecaissement) }} #}
-                          {{ form_row(form.CalculInteretJours) }}
-                  {# </div> #}
+                  </div>
                    <div class="col-6 col-sm-6 col-md-6">
+                          {{ form_row(form.CalculInteretJours) }}
                          {{ form_row(form.CalculInteretDiffere) }}
                       <div class="col-6 col-sm-6" style="display:none">
                           {{ form_row(form.Agent) }}

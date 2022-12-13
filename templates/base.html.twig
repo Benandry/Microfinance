@@ -23,9 +23,6 @@
                         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">Menu du Fidev</span>
                         </a>
-                        <div>
-                            <p> {{ app.user.nomagence }}</p>
-                        </div>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-white" id="menu">
 
                             <!-- Module client -->
@@ -118,15 +115,21 @@
                             {# Module credit #}
 
                             <li>
-                                <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span></a>
-                                <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
-                                    <li class="w-100">
-                                        <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande de credit </span></a>
-                                    </li>
-                                    <li class="w-100">
-                                        <a href="{{path('app_approbation_credit_index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Approbation du demande </span></a>
-                                    </li>
+                                <ul class="collapse nav flex-column ms-4" id="submenu3" data-bs-parent="#menu">
+                                    {# demande de credit #}
+                                        <li class="w-100">
+                                            <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande de credit </span></a>
+                                        </li>
+                                    {# approbation demande #}
+                                        <li class="w-100">
+                                            <a href="{{path('app_approbation_credit_index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Approbation du demande </span></a>
+                                        </li>
+                                    {# fonde de credit #}
+                                        <li class="w-100">
+                                            <a href="{{path('app_fond_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Fond de credit </span></a>
+                                        </li>
                                 </ul>
                             </li>
 
@@ -184,26 +187,45 @@
                                         </ul> 
                                     </li>
 
-                                    {# Configuration credit #}
-                                    {# <li>
-                                        <a href="{{path('app_credit_individuel_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Credit Individuel </span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{path('app_produit_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Credit </span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{path('app_configuration_general_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration general du credit</span></a>
-                                    </li>#}
                                 </ul>
                             </li> 
+
+                            {# Comptabilite #}
+
+                            <li>
+                                <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"><i class="fa fa-database"></i>  Comptabilite <span class="fa fa-chevron-down"></span> </span> </a>
+                                <ul class="collapse show nav flex-column ms-2" id="submenu5" data-bs-parent="#menu">
+
+                                    <li class="w-100">
+
+                                        <li class="w-100 nav-item dropdown">
+                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Epargne
+                                            </a>
+                                        </li>
+
+                                    </li>
+                                       <li class="w-100 nav-item dropdown">
+                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Credit
+                                            </a>
+                                        </li>
+
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            {# Fin Comptabilite #}
 
 
                             <!-- Reference    -->
 
                             <li>
-                                <a href="#submenu8" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-gear"></i> Reference <span class="fa fa-chevron-down"></span>  </span></a>
-                                <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-4" id="submenu6" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="{{path('app_langue_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-pencil"> </i> Langue </span></a>
                                     </li>

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FondCredit index{% endblock %}
+
+{% block body %}
+    <h1>FondCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomBailleurs</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fond_credit in fond_credits %}
+            <tr>
+                <td>{{ fond_credit.id }}</td>
+                <td>{{ fond_credit.NomBailleurs }}</td>
+                <td>{{ fond_credit.Montant }}</td>
+                <td>
+                    <a href="{{ path('app_fond_credit_show', {'id': fond_credit.id}) }}">show</a>
+                    <a href="{{ path('app_fond_credit_edit', {'id': fond_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fond_credit_new') }}">Create new</a>
+{% endblock %}

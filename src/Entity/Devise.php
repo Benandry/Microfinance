@@ -27,10 +27,14 @@ class Devise
     #[ORM\OneToMany(mappedBy: 'Devise', targetEntity: ConfigurationGeneralCredit::class)]
     private Collection $configurationGeneralCredits;
 
+    #[ORM\OneToMany(mappedBy: 'devise', targetEntity: FondCredit::class)]
+    private Collection $fondCredits;
+
     public function __construct()
     {
         $this->ConfigDevise = new ArrayCollection();
         $this->configurationGeneralCredits = new ArrayCollection();
+        $this->fondCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,6 +125,36 @@ class Devise
             // set the owning side to null (unless already changed)
             if ($configurationGeneralCredit->getDevise() === $this) {
                 $configurationGeneralCredit->setDevise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FondCredit>
+     */
+    public function getFondCredits(): Collection
+    {
+        return $this->fondCredits;
+    }
+
+    public function addFondCredit(FondCredit $fondCredit): self
+    {
+        if (!$this->fondCredits->contains($fondCredit)) {
+            $this->fondCredits[] = $fondCredit;
+            $fondCredit->setDevise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFondCredit(FondCredit $fondCredit): self
+    {
+        if ($this->fondCredits->removeElement($fondCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($fondCredit->getDevise() === $this) {
+                $fondCredit->setDevise(null);
             }
         }
 

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FondCredit{% endblock %}
+
+{% block body %}
+    <h1>FondCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fond_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>NomBailleurs</th>
+                <td>{{ fond_credit.NomBailleurs }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ fond_credit.Montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fond_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_fond_credit_edit', {'id': fond_credit.id}) }}">edit</a>
+
+    {{ include('fond_credit/_delete_form.html.twig') }}
+{% endblock %}
