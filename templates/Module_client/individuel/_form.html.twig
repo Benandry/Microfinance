@@ -28,7 +28,12 @@
                       {{ form_row(form.numero_mobile) }}
                       {{ form_row(form.profession) }}
                       {{ form_row(form.nom_conjoint) }}
-                      {{ form_row(form.Agence) }}
+                      {{ form_row(form.garant) }}
+                      <div style="display:none;">
+                        {{ form_row(form.Agence) }}
+                        {{ form_row(form.NomAgence) }}
+                        {{ form_row(form.CodeAgence) }}
+                      </div>
                   </div>
 
               </div>

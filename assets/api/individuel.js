@@ -113,5 +113,16 @@ $(document).ready(() =>{
         /************************************************************************************************* */
         /************************************************************************************************* */
 
+        // Recuperer l'agence et le code agence de l'utilisateur
+        var agences=$('#agence').text()
+        var code=$('#code').text()
+        console.log(agences)
+        console.log(code)
+
+        $('#individuelclient_NomAgence').val(agences)
+        $('#individuelclient_CodeAgence').val(code)
+
+
     }
+
 })

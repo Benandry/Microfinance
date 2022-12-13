@@ -35,7 +35,7 @@ class ApprobationCreditController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
+            // dd($form->getData());
             $approbationCreditRepository->add($approbationCredit, true);
 
             return $this->redirectToRoute('app_approbation_credit_index', [], Response::HTTP_SEE_OTHER);
