@@ -13,8 +13,11 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class AmortissementController extends AbstractController
 {
+
+
+    ///Amortissement Lineaire
     #[Route('/demande/tableau/amortissement', name: 'app_tableau_amortissement')]
-    public function index(Request $request,ManagerRegistry $doctrine): Response
+    public function lineaire(Request $request,ManagerRegistry $doctrine): Response
     {
         $montant = $request->query->get('montant');
         $tranche = $request->query->get('tranche');
@@ -35,7 +38,7 @@ class AmortissementController extends AbstractController
         }
        //dd($tableau_amort);
 
-    //    dd($tauxInteret);
+        //    dd($tauxInteret);
         $sumMontant = array_sum(array_column($tableau_amort,'CapitalDu'));
         $sumInteret = array_sum(array_column($tableau_amort,'interet'));
         $sumNet = array_sum(array_column($tableau_amort,'montantPayer'));
@@ -56,12 +59,6 @@ class AmortissementController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()){
-           //dd($tableau_amort[1]['dateRemb']);
-
-        //    $time_input = date_create($tableau_amort[1]['dateRemb']); 
-
-        //    dd($time_input);
-            
             for ($i=0; $i < $tranche; $i++) { 
                 $amortissement = new AmortissementFixe();
                 $amortissement->setDateRemborsement(date_create($tableau_amort[$i]['dateRemb']));
@@ -93,4 +90,69 @@ class AmortissementController extends AbstractController
             'codeclient' => $codeclient,
         ]);
     }
+
+    
+    ///Amortissement Lineaire
+    #[Route('/demande/tableau/amortissement/annuite_constante', name: 'app_tableau_amortissement_annuite_constante')]
+    public function annuite_constante(Request $request,ManagerRegistry $doctrine): Response
+    {
+        $montant = 25000;
+        $periode = 5;
+        $tauxInteret  = 0.06;
+
+        // dd($montant * (0.06/(1-pow(1.06,-5))));
+
+        // dd(25000*(0.06/1-pow(1.06,(-5))));
+
+        //calculer annuite 
+        $annuite_constante = $montant *( $tauxInteret /(1-pow((1 + $tauxInteret),(-$periode))));
+       // dd("Taux est ".$annuite_constante);
+
+       $tableau_amortissement = [];
+       
+       $dateRemb = date('Y/m/d');
+       $capitalRestantDu = $montant;
+       $interet = $capitalRestantDu * $tauxInteret;
+       $amortissement = $annuite_constante - $interet;
+
+
+       //Annuite constante
+       $tableau_amortissement = [ ['periode' => 1,'capitalRestantDu' => $capitalRestantDu, "interet" => $interet,'remboursement' => $amortissement,'annuite' => $annuite_constante], ];
+
+       for ( $i = 1; $i < $periode ; $i++ ) {
+            //capital restant du
+            $capitalRestantDu = $capitalRestantDu - $amortissement;
+            //interet pour les restant
+            $interet = $capitalRestantDu * $tauxInteret;
+            //amortissement restant
+            $amortissement = $annuite_constante - $interet;
+            array_push($tableau_amortissement,['periode'=> $i+1,'capitalRestantDu' => $capitalRestantDu,"interet" => $interet,'remboursement' => $amortissement,'annuite' => $annuite_constante]);
+       }
+
+      // dd($tableau_amortissement);
+
+       $sumMontant = array_sum(array_column($tableau_amortissement,'remboursement'));
+       $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
+
+       // return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
+
+       return $this->render('demande_credit/amortissement/degressive.html.twig', [
+        'montant' => $capitalRestantDu,
+        'periode' => $periode,
+        'tauxInteret' => $tauxInteret,
+        'annuite' => $annuite_constante,
+        'tableau_amortissement' => $tableau_amortissement,
+        'totalMontant' => $sumMontant,
+        'totalInteret' => $sumInteret
+
+       ]);
+    }
+
+     ///Amortissement Lineaire
+     #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
+     public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
+     {
+
+     }
+
 }
