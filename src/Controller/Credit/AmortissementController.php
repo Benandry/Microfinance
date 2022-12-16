@@ -75,7 +75,7 @@ class AmortissementController extends AbstractController
            // dd("Fin d'ajout");
             $this->addFlash('success', "Terminée !!!!");
 
-            // return $this->redirectToRoute('app_approbation_credit', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_approbation_credit', [], Response::HTTP_SEE_OTHER);
 
         }
         return $this->render('demande_credit/amortissement/index.html.twig', [
@@ -136,7 +136,7 @@ class AmortissementController extends AbstractController
 
        // return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
 
-       return $this->render('demande_credit/amortissement/degressive.html.twig', [
+       return $this->render('demande_credit/amortissement/annuite_constante.html.twig', [
         'montant' => $capitalRestantDu,
         'periode' => $periode,
         'tauxInteret' => $tauxInteret,
@@ -152,6 +152,15 @@ class AmortissementController extends AbstractController
      #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
      public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
      {
+
+        $montant = 25000;
+        $periode = 5;
+        $tauxInteret  = 0.06;
+
+        $tableau_amortissement = [];
+
+        dd($tableau_amortissement);
+       return $this->render('demande_credit/amortissement/remboursement_constant.html.twig', []);
 
      }
 
