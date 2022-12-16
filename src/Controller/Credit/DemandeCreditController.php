@@ -34,7 +34,7 @@ class DemandeCreditController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-        //    dd($demandeCredit);
+           $data = $form->getData();
            $montant = $demandeCredit->getMontant();
            $tranche =  $demandeCredit->getNombreTranche();
            $taux =  $demandeCredit->getTauxInteretAnnuel();
@@ -44,12 +44,37 @@ class DemandeCreditController extends AbstractController
            //dd($codeclient);
            $demandeCreditRepository->add($demandeCredit, true);
 
-            return $this->redirectToRoute('app_tableau_amortissement', [
-                'montant' => $montant,
-                'tranche' => $tranche,
-                'taux' => $taux,
-                'codeclient' => $codeclient,
-            ], Response::HTTP_SEE_OTHER);
+           //dd($data->getTypeAmortissement());
+
+           if($data->getTypeAmortissement() == "simple")
+           {
+                return $this->redirectToRoute('app_tableau_amortissement', [
+                    'montant' => $montant,
+                    'tranche' => $tranche,
+                    'taux' => $taux,
+                    'codeclient' => $codeclient,
+                ], Response::HTTP_SEE_OTHER);
+           }
+           elseif($data->getTypeAmortissement() == "anuuite constante")
+           {
+                return $this->redirectToRoute('app_tableau_amortissement_annuite_constante', [
+                    'montant' => $montant,
+                    'tranche' => $tranche,
+                    'taux' => $taux,
+                    'codeclient' => $codeclient,
+                ], Response::HTTP_SEE_OTHER);
+           }
+           else
+           {
+                return $this->redirectToRoute('app_tableau_amortissement_remboursement_constante', [
+                    'montant' => $montant,
+                    'tranche' => $tranche,
+                    'taux' => $taux,
+                    'codeclient' => $codeclient,
+                ], Response::HTTP_SEE_OTHER);
+           }
+           
+           
         }
 
         // Recupere la derniere ID pour creer la numero credit

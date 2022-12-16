@@ -45,6 +45,7 @@ class DemandeCreditType extends AbstractType
                 'class'=>FondCredit::class,
                 'choice_label'=>'NomBailleurs',
                 'mapped'=>true,
+                'required'=>false,
                 'by_reference'=>true,
                 'placeholder'=>'Choix fond credit'
             ])
@@ -114,6 +115,17 @@ class DemandeCreditType extends AbstractType
                 'mapped'=>true,
                 'by_reference'=>true,
                 'placeholder'=>'Choisir Produit Credit'
+            ])
+            
+            ->add('typeAmortissement',ChoiceType::class,[
+                'choices'=>[
+                    'Simple'=>'simple',
+                    'anuuite constante'=>'anuuite constante',
+                    'amortissement constante'=>'amortissement constante',
+                ],
+                'attr'=>[
+                    'class'=>'form-control'
+                ]
             ])
         ;
     }

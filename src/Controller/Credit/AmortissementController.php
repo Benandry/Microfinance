@@ -9,12 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route; 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class AmortissementController extends AbstractController
 {
-
-
     ///Amortissement Lineaire
     #[Route('/demande/tableau/amortissement', name: 'app_tableau_amortissement')]
     public function lineaire(Request $request,ManagerRegistry $doctrine): Response
@@ -96,9 +93,18 @@ class AmortissementController extends AbstractController
     #[Route('/demande/tableau/amortissement/annuite_constante', name: 'app_tableau_amortissement_annuite_constante')]
     public function annuite_constante(Request $request,ManagerRegistry $doctrine): Response
     {
-        $montant = 25000;
-        $periode = 5;
-        $tauxInteret  = 0.06;
+
+        $montant = $request->query->get('montant');
+        $periode = $request->query->get('tranche');
+        $taux = $request->query->get('taux');
+        $codeclient = $request->query->get('codeclient');
+
+        //dd($codeclient);
+
+        
+        $tauxInteret  = $taux / 100;
+
+       // dd($tauxInteret);
 
         // dd($montant * (0.06/(1-pow(1.06,-5))));
 
@@ -117,7 +123,7 @@ class AmortissementController extends AbstractController
 
 
        //Annuite constante
-       $tableau_amortissement = [ ['periode' => 1,'capitalRestantDu' => $capitalRestantDu, "interet" => $interet,'remboursement' => $amortissement,'annuite' => $annuite_constante], ];
+       $tableau_amortissement = [ ['periode' => 1,'dateRemb'=> $dateRemb ,'capitalRestantDu' => $capitalRestantDu, "interet" => $interet,'remboursement' => $amortissement,'annuite' => $annuite_constante], ];
 
        for ( $i = 1; $i < $periode ; $i++ ) {
             //capital restant du
@@ -126,7 +132,8 @@ class AmortissementController extends AbstractController
             $interet = $capitalRestantDu * $tauxInteret;
             //amortissement restant
             $amortissement = $annuite_constante - $interet;
-            array_push($tableau_amortissement,['periode'=> $i+1,'capitalRestantDu' => $capitalRestantDu,"interet" => $interet,'remboursement' => $amortissement,'annuite' => $annuite_constante]);
+            $dateRemb = date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
+            array_push($tableau_amortissement,['periode'=> $i+1,'dateRemb' => $dateRemb ,'capitalRestantDu' => $capitalRestantDu,"interet" => $interet,'remboursement' => $amortissement,'annuite' => $annuite_constante]);
        }
 
       // dd($tableau_amortissement);
@@ -134,17 +141,48 @@ class AmortissementController extends AbstractController
        $sumMontant = array_sum(array_column($tableau_amortissement,'remboursement'));
        $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
 
+       $form = $this->createFormBuilder()
+       ->add('submit', SubmitType::class,[
+           'label' => 'Suivant ',
+           'attr' => [
+               'class' => 'btn btn-primary btn-sm'
+           ]
+       ])
+       ->getForm();
+
+       $entityManager = $doctrine->getManager();
+
+
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid())
+       {
+            for ($i=0; $i < $periode; $i++) { 
+                $amortissement = new AmortissementFixe();
+                $amortissement->setDateRemborsement(date_create($tableau_amortissement[$i]['periode']));
+                $amortissement->setDateRemborsement(date_create($tableau_amortissement[$i]['dateRemb']));
+                $amortissement->setPrincipale($tableau_amortissement[$i]['CapitalDu']);
+                $amortissement->setInteret($tableau_amortissement[$i]['interet']);
+                $amortissement->setMontanttTotal($tableau_amortissement[$i]['montantPayer']);
+                $amortissement->setPeriode($tableau_amortissement[$i]['periode']);
+                $amortissement->setCodeclient($codeclient);
+                
+                $entityManager->persist($amortissement);
+                $entityManager->flush();
+            }
+       }
+
        // return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
 
        return $this->render('demande_credit/amortissement/annuite_constante.html.twig', [
-        'montant' => $capitalRestantDu,
+        'montant' => $montant,
         'periode' => $periode,
-        'tauxInteret' => $tauxInteret,
+        'tauxInteret' => $taux,
         'annuite' => $annuite_constante,
         'tableau_amortissement' => $tableau_amortissement,
         'totalMontant' => $sumMontant,
-        'totalInteret' => $sumInteret
-
+        'totalInteret' => $sumInteret,
+        'form' => $form->createView(),
        ]);
     }
 
@@ -159,7 +197,7 @@ class AmortissementController extends AbstractController
 
         $tableau_amortissement = [];
 
-        dd($tableau_amortissement);
+        //dd($tableau_amortissement);
        return $this->render('demande_credit/amortissement/remboursement_constant.html.twig', []);
 
      }
