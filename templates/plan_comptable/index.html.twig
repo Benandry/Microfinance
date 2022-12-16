@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanComptable index{% endblock %}
+
+{% block body %}
+    <h1>PlanComptable index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumeroCompte</th>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan_comptable in plan_comptables %}
+            <tr>
+                <td>{{ plan_comptable.id }}</td>
+                <td>{{ plan_comptable.NumeroCompte }}</td>
+                <td>{{ plan_comptable.Libelle }}</td>
+                <td>
+                    <a href="{{ path('app_plan_comptable_show', {'id': plan_comptable.id}) }}">show</a>
+                    <a href="{{ path('app_plan_comptable_edit', {'id': plan_comptable.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plan_comptable_new') }}">Create new</a>
+{% endblock %}

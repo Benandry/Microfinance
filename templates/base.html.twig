@@ -200,11 +200,17 @@
                                         </li>
 
                                     </li>
-                                       <li class="w-100 nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Credit
+                                       {# <li class="w-100 nav-item dropdown">
+                                            <a class="nav-link rapport dropdown-toggle" href="{{ path('app_plan_comptable_new') }}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Plan Comptable
                                             </a>
+                                        </li> #}
+
+                                        {#  #}
+                                        <li class="w-100">
+                                            <a href="{{path('app_plan_comptable_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book-open"></i> Plan Comptable </span></a>
                                         </li>
+                                        {#  #}
 
                                     </li>
                                 </ul>
