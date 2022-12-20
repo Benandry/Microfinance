@@ -1,19 +1,19 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Amortissemnent par annuité constante {% endblock %}
-{% block head %} Amortissemnent par annuité constante {% endblock %}
+{% block title %}Par annuité constante {% endblock %}
+{% block head %} Par annuité constante {% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-4 col-xl-4 col-sm-4">
             <p> Montant de credit : {{ montant }}</p>
-            <p> Annuité : {{ annuite }}</p>
+            <p> Annuité constante : {{ annuite }}</p>
         </div>
         <div class="col-4 col-xl-4 col-sm-4">
-            <p>Periode : {{ periode }} ans</p>
+            <p>Nombre tranche : {{ periode }}</p>
         </div>
         <div class="col-4 col-xl-4 col-sm-4">
-            <p>taux  : {{ tauxInteret }}</p>
+            <p>taux  : {{ tauxInteret }} % </p>
         </div>
     </div>
     <div class="row">
@@ -22,6 +22,7 @@
                 <thead>
                     <tr>
                         <th>Periode (N) </th>
+                        <th>Date de Remboursement  </th>
                         <th>Capital restant Du (K)</th>
                         <th>Interet (I)</th>
                         <th>Amortissemnent (r)</th>
@@ -32,7 +33,8 @@
                     {% for amortissement in tableau_amortissement %}
                         <tr>
                             <td> {{ amortissement.periode }} </td>
-                            <td> {{ amortissement.capitalRestantDu }} </td>
+                            <td> {{ amortissement.dateRemb|date("d/m/Y") }} </td>
+                            <td> {{ amortissement.capitalRestantDu }}
                             <td> {{ amortissement.interet }} </td>
                             <td> {{ amortissement.remboursement }} </td>
                             <td> {{ amortissement.annuite }} </td>
@@ -48,6 +50,21 @@
                     </tr>
                 </tfoot>
             </table>
+            <div>
+                {{ form_start(form) }}
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(form) }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(form.submit) }}
+                        </div>
+                        <div class="col" id="some-custom-id">
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}

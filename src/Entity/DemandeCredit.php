@@ -127,6 +127,9 @@ class DemandeCredit
     #[ORM\Column(nullable:true)]
     private ?FondCredit $FondCredit = null;
 
+    #[ORM\Column(length: 255,nullable:true)]
+    private ?string $typeAmortissement = null;
+
     // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     // private ?CategorieCredit $Categorie2Credit = null;
 
@@ -610,6 +613,18 @@ class DemandeCredit
     public function setFondCredit(?FondCredit $FondCredit): self
     {
         $this->FondCredit = $FondCredit;
+
+        return $this;
+    }
+
+    public function getTypeAmortissement(): ?string
+    {
+        return $this->typeAmortissement;
+    }
+
+    public function setTypeAmortissement(string $typeAmortissement): self
+    {
+        $this->typeAmortissement = $typeAmortissement;
 
         return $this;
     }

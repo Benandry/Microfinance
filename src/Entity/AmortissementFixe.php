@@ -32,6 +32,12 @@ class AmortissementFixe
     #[ORM\Column(length: 255)]
     private ?string $codeclient = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $remboursement = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $annuite = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +111,30 @@ class AmortissementFixe
     public function setCodeclient(string $codeclient): self
     {
         $this->codeclient = $codeclient;
+
+        return $this;
+    }
+
+    public function getRemboursement(): ?float
+    {
+        return $this->remboursement;
+    }
+
+    public function setRemboursement(?float $remboursement): self
+    {
+        $this->remboursement = $remboursement;
+
+        return $this;
+    }
+
+    public function getAnnuite(): ?float
+    {
+        return $this->annuite;
+    }
+
+    public function setAnnuite(?float $annuite): self
+    {
+        $this->annuite = $annuite;
 
         return $this;
     }

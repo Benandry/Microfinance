@@ -26,6 +26,11 @@ class CategorieCredit
         $this->demandeCredits = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (string) $this->getNomCategorieCredit();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
