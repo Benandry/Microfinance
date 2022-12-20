@@ -42,6 +42,9 @@ class ProduitCredit
     #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: GarantieCredit::class)]
     private Collection $garantieCredits;
 
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: CompteGL1::class)]
+    private Collection $compteGL1s;
+
     public function __construct()
     {
         $this->configurationGeneralCredits = new ArrayCollection();
@@ -50,6 +53,7 @@ class ProduitCredit
         $this->fraisConfigCredits = new ArrayCollection();
         $this->produitCredits = new ArrayCollection();
         $this->garantieCredits = new ArrayCollection();
+        $this->compteGL1s = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,6 +276,36 @@ class ProduitCredit
             // set the owning side to null (unless already changed)
             if ($garantieCredit->getProduitCredit() === $this) {
                 $garantieCredit->setProduitCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompteGL1>
+     */
+    public function getCompteGL1s(): Collection
+    {
+        return $this->compteGL1s;
+    }
+
+    public function addCompteGL1(CompteGL1 $compteGL1): self
+    {
+        if (!$this->compteGL1s->contains($compteGL1)) {
+            $this->compteGL1s[] = $compteGL1;
+            $compteGL1->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteGL1(CompteGL1 $compteGL1): self
+    {
+        if ($this->compteGL1s->removeElement($compteGL1)) {
+            // set the owning side to null (unless already changed)
+            if ($compteGL1->getProduitCredit() === $this) {
+                $compteGL1->setProduitCredit(null);
             }
         }
 

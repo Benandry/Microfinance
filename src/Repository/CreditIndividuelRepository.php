@@ -45,7 +45,7 @@ class CreditIndividuelRepository extends ServiceEntityRepository
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
-            'SELECT 
+            'SELECT
             -- credit individuel
             creditindividuel.TauxInteretAnnuel,
             creditindividuel.DifferementPayement,
@@ -102,13 +102,40 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             garantie.MontantGarant,
             garantie.GarantObligatoireCreditGrp,
             garantie.MontantGarantieGrp,
-            garantie.reglegrp
-            -- produit credit
-            -- produitcredit.NomProduitCredit,
-            -- compte epargne
-            -- compteepargne
+            garantie.reglegrp,
+            -- compe GL1
+            comptegl.CpteProvisionMauvaiseCreances,
+            comptegl.CptePrincipaleEnCours,
+            comptegl.CptePrvsionCoutMauvaiseCreance,
+            comptegl.CpteInteretRecuCredit,
+            comptegl.CpteCreditPassePerte,
+            comptegl.CpteInteretEchus,
+            comptegl.CpteInteretEchusRecevoir,
+            comptegl.CpteRefinancementCredit,
+            comptegl.CptePnlteComptabliliseAvance,
+            comptegl.CpteRevenuePnlteComptblsAvnc,
+            comptegl.CpteCommissionEchuesAccumulle,
+            comptegl.CpteCommissionAccumulleGagne,
+            comptegl.CpteRecvrmntCreanceDouteuse,
+            comptegl.CptePapeterie,
+            comptegl.CpteCheque,
+            comptegl.CpteSurpaiement,
+            comptegl.CpteChargeCheque,
+            comptegl.CpteCommissionCredit,
+            comptegl.CptePnlteCrdt,
+            comptegl.DifferenceMonnaie,
+            comptegl.Papeterie,
+            comptegl.Commission,
+            comptegl.FraisDeveloppement,
+            comptegl.FraisRefinancement,
+            comptegl.PapeterieDecaissement,
+            comptegl.CommisssionDecaissement,
+            comptegl.MajorationDecaissement,
+            comptegl.FraisDvlppmntDecaissement,
+            comptegl.FraisTraitementDecaissement
+            -- plan comptable
             FROM
-            App\Entity\CreditIndividuel creditindividuel  
+            App\Entity\CreditIndividuel creditindividuel
               INNER JOIN
             App\Entity\ConfigurationGeneralCredit configeneralcredit
               INNER JOIN
@@ -117,6 +144,8 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             App\Entity\FraisConfigCredit frais
                 INNER JOIN
             App\Entity\GarantieCredit garantie
+                INNER JOIN
+            App\Entity\CompteGL1 comptegl
                WITH
             produitcredit.id = configeneralcredit.ProduitCredit
                AND
@@ -125,6 +154,8 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             produitcredit.id = frais.ProduitCredit
                 AND
             garantie.ProduitCredit = produitcredit.id
+                AND
+            comptegl.ProduitCredit = produitcredit.id
                 WHERE
              creditindividuel.ProduitCredit= :produit
             '
@@ -139,7 +170,7 @@ class CreditIndividuelRepository extends ServiceEntityRepository
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
-        'SELECT 
+        'SELECT
             -- individuel
             individuel.nom_client nom,
             individuel.codeclient codeindividuel,
@@ -156,9 +187,9 @@ class CreditIndividuelRepository extends ServiceEntityRepository
          App\Entity\IndividuelClient individuel
          INNER JOIN
          App\Entity\CompteEpargne compteepargne
-         INNER JOIN 
+         INNER JOIN
          App\Entity\ProduitEpargne produitepargne
-         INNER JOIN 
+         INNER JOIN
          App\Entity\TypeEpargne typeepargne
          INNER JOIN
          App\Entity\Transaction transaction
@@ -179,7 +210,7 @@ class CreditIndividuelRepository extends ServiceEntityRepository
 
     // Cette fonction permet d'indentifier le client deja emprunté
     public function api_demandecredit($codeclient){
-        
+
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
