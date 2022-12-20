@@ -7,6 +7,12 @@
 {% endblock %} #}
 
 {% block body %}
+     {% for message in app.flashes('success') %}
+
+        <div class="alert alert-info text-center" role="alert">
+                {{ message }}
+        </div>
+    {% endfor %}
     <div style="display:none;">
         solde :<p id="soldeepargne" ></p>
         Montant :<p id="montant"></p>
@@ -27,10 +33,6 @@
     {# Ici on recupere le dernier id dans le numero credit #}
     
         <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none"> {{ numeros }}</p>
-    {% for message in app.flashes('success') %}
-        <strong class='text-alert alert-primary'>{{ message }}</strong>
-    {% endfor %}
-
     {{ include('demande_credit/_form.html.twig') }}
 
 {% endblock %}
