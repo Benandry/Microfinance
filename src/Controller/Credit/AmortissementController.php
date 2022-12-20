@@ -187,10 +187,11 @@ class AmortissementController extends AbstractController
     }
 
      ///Amortissement Lineaire
-     #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
-     public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
-     {
+    //  #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
+    //  public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
+    //  {
 
+<<<<<<< HEAD
         $montant = 25000;
         $periode = 5;
         $tauxInteret  = 0.06;
@@ -201,5 +202,8 @@ class AmortissementController extends AbstractController
        return $this->render('demande_credit/amortissement/remboursement_constant.html.twig', []);
 
      }
+=======
+    //  }
+>>>>>>> d47b9cbaf20bdb9c49ad52b747d9069425fce114
 
 }
