@@ -43,7 +43,7 @@ class AmortissementController extends AbstractController
         // dd($sumInteret);
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class,[
-                'label' => 'Suivant ',
+                'label' => 'Terminer',
                 'attr' => [
                     'class' => 'btn btn-primary btn-sm'
                 ]
@@ -70,9 +70,9 @@ class AmortissementController extends AbstractController
             }
                 
            // dd("Fin d'ajout");
-            $this->addFlash('success', "Terminée !!!!");
+            $this->addFlash('success', "Demande de credit terminée !!!!");
 
-            return $this->redirectToRoute('app_approbation_credit', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
 
         }
         return $this->render('demande_credit/amortissement/index.html.twig', [
@@ -143,7 +143,7 @@ class AmortissementController extends AbstractController
 
        $form = $this->createFormBuilder()
        ->add('submit', SubmitType::class,[
-           'label' => 'Suivant ',
+           'label' => 'Terminer',
            'attr' => [
                'class' => 'btn btn-primary btn-sm'
            ]
@@ -157,19 +157,25 @@ class AmortissementController extends AbstractController
 
        if ($form->isSubmitted() && $form->isValid())
        {
+
+            //dd(date_create($tableau_amortissement[1]['dateRemb']));
+
             for ($i=0; $i < $periode; $i++) { 
                 $amortissement = new AmortissementFixe();
-                $amortissement->setDateRemborsement(date_create($tableau_amortissement[$i]['periode']));
                 $amortissement->setDateRemborsement(date_create($tableau_amortissement[$i]['dateRemb']));
-                $amortissement->setPrincipale($tableau_amortissement[$i]['CapitalDu']);
+                $amortissement->setPrincipale($tableau_amortissement[$i]['capitalRestantDu']);
                 $amortissement->setInteret($tableau_amortissement[$i]['interet']);
-                $amortissement->setMontanttTotal($tableau_amortissement[$i]['montantPayer']);
+                $amortissement->setRemboursement($tableau_amortissement[$i]['remboursement']);
+                $amortissement->setAnnuite($tableau_amortissement[$i]['annuite']);
                 $amortissement->setPeriode($tableau_amortissement[$i]['periode']);
                 $amortissement->setCodeclient($codeclient);
                 
                 $entityManager->persist($amortissement);
                 $entityManager->flush();
             }
+
+            $this->addFlash('success', "Demande de credit terminée !!!!");
+            return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
        }
 
        // return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
@@ -186,6 +192,7 @@ class AmortissementController extends AbstractController
        ]);
     }
 
+<<<<<<< HEAD
      ///Amortissement Lineaire
     //  #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
     //  public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
@@ -193,4 +200,6 @@ class AmortissementController extends AbstractController
 
     //  }
 
+=======
+>>>>>>> 05da9e7a7e2d2c2f30f6c04d896b063e07e76cf2
 }

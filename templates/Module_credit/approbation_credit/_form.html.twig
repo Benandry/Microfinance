@@ -12,8 +12,7 @@
             {{ form_row(form.description) }}
         </div>
     </div>
-    <div>
+    <div class="d-flex justify-content-end">
         <button class="btn btn-sm btn-primary m-2">{{ button_label|default('Enregistrer') }} </button>
-        <a href="{{ path('app_approbation_credit_index') }}" class="btn btn-sm btn-info"><i class="fa fa-list"></i> liste demande</a>
     </div>
 {{ form_end(form) }}

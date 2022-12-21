@@ -26,7 +26,7 @@ class AmortissementFixe
     #[ORM\Column]
     private ?float $interet = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $montanttTotal = null;
 
     #[ORM\Column(length: 255)]
@@ -37,6 +37,12 @@ class AmortissementFixe
 
     #[ORM\Column(nullable: true)]
     private ?float $annuite = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $penalite = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $commission = null;
 
     public function getId(): ?int
     {
@@ -135,6 +141,30 @@ class AmortissementFixe
     public function setAnnuite(?float $annuite): self
     {
         $this->annuite = $annuite;
+
+        return $this;
+    }
+
+    public function getPenalite(): ?float
+    {
+        return $this->penalite;
+    }
+
+    public function setPenalite(?float $penalite): self
+    {
+        $this->penalite = $penalite;
+
+        return $this;
+    }
+
+    public function getCommission(): ?float
+    {
+        return $this->commission;
+    }
+
+    public function setCommission(?float $commission): self
+    {
+        $this->commission = $commission;
 
         return $this;
     }

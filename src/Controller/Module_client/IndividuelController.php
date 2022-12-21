@@ -105,7 +105,7 @@ class IndividuelController extends AbstractController
         }
         $individuelclientRepository->add($individuelclient,True);
             $this->addFlash('success', "Ajout de nouveau client:  ' ".$individuelclient-> getNomClient()."  " . $individuelclient->getPrenomClient()." ' avec code ".$individuelclient->getCodeclient()."  reussite!!");
-            // return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_client/individuel/new.html.twig', [

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Decaissement de credit{% endblock %}
+{% block head %} Decaissement de credit{% endblock %}
+
+
+{% block body %}
+
+    <div class="modal" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"  id="myModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" aria-hidden="true" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            
+                <form action="{{ path('app_decaissement_credit') }}" method="post" name="formulario_login">
+                    <div class="modal-body">
+                            <label for="codecredit">Code credit :</label>
+                            <input type="text" class="form-control" id="codecredit" name="codecredit" value=""  />
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" name="login" value="Valider" class="btn btn-sm btn-primary"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

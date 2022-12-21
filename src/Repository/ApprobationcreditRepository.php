@@ -76,10 +76,10 @@ class ApprobationCreditRepository extends ServiceEntityRepository
             demande.Montant,
             demande.DateDemande ,
             demande.NombreTranche ,
-            demande.TypeTranche
-            -- appro.id,
+            demande.TypeTranche,
+            --appro.id
             -- appro.statusApprobation,
-            -- appro.codecredit
+             appro.codecredit
 
             FROM App\Entity\DemandeCredit demande
             INNER JOIN 
@@ -89,7 +89,40 @@ class ApprobationCreditRepository extends ServiceEntityRepository
              LEFT JOIN 
              App\Entity\ApprobationCredit appro
              With appro.codecredit = demande.NumeroCredit
-            -- where appro.codecredit != demande.NumeroCredit OR appro.codecredit = 'null' 
+             where appro.codecredit IS NULL 
+
+            ";
+
+            $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+            return $statement;
+        }
+
+        public function getDemandeApprouver(string $status)
+        {
+            $query = "SELECT
+            client.nom_client,
+            client.prenom_client,
+            demande.NumeroCredit,
+            demande.codeclient,
+            demande.Montant,
+            demande.NombreTranche ,
+            demande.TypeTranche,
+            --appro.id
+             appro.statusApprobation,
+             appro.codecredit,
+             appro.dateApprobation,
+             appro.description
+
+            FROM App\Entity\DemandeCredit demande
+            INNER JOIN 
+            App\Entity\Individuelclient client
+            With demande.codeclient = client.codeclient 
+
+             LEFT JOIN 
+             App\Entity\ApprobationCredit appro
+             With appro.codecredit = demande.NumeroCredit
+             where appro.statusApprobation = '$status'
 
             ";
 
