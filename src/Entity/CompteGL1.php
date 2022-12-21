@@ -13,95 +13,93 @@ class CompteGL1
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
+    #[ORM\ManyToOne(inversedBy: 'ProduitCompteGL1')]
     private ?ProduitCredit $ProduitCredit = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteProvisionMauvaiseCreances = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CptePrncplEnCours = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CptePrincipaleEnCours = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteProvisionMvsCreances = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CptePrvsionCoutMauvaiseCreance = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteProvsionCoutMvsCreance = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteInteretRecuCredit = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CptIntrtRecuCrdt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteCreditPassePerte = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteCrdtPassePerte = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteInteretEchus = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteInteretEchus = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteInteretEchusRecevoir = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteIntrtEchusRecvoir = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteRefinancementCredit = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteRefinancmntCrdt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CptePnlteComptabliliseAvance = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CptePnltsComptblsAvnce = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteRevenuePnlteComptblsAvnc = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteRvnuePnltsComptblsAvnce = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteCommissionEchuesAccumulle = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteCommssionAccmlGagne = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteGL1s')]
-    private ?PlanComptable $CpteCommissionAccumulleGagne = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteRcvrmtCrncsDouteuse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CpteRecvrmntCreanceDouteuse')]
-    private ?PlanComptable $CpteRecvrmntCreanceDouteuse = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CptePapeterie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CptePapeterie')]
-    private ?PlanComptable $CptePapeterie = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteCheque = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CpteCheque')]
-    private ?PlanComptable $CpteCheque = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteSurpaiement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CpteSurpaiement')]
-    private ?PlanComptable $CpteSurpaiement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteChrgCheque = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CpteChargeCheque')]
-    private ?PlanComptable $CpteChargeCheque = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CpteCommssionCrdt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CpteCommissionCredit')]
-    private ?PlanComptable $CpteCommissionCredit = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CptePnltsCrdt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CptePnlteCrdt')]
-    private ?PlanComptable $CptePnlteCrdt = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $DiffrnceMonnaie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'DifferenceMonnaie')]
-    private ?PlanComptable $DifferenceMonnaie = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PapeterieDemande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Papeterie')]
-    private ?PlanComptable $Papeterie = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CommissionDemande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Commission')]
-    private ?PlanComptable $Commission = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $FraisDeveloppementDmd = null;
 
-    #[ORM\ManyToOne(inversedBy: 'FraisDeveloppement')]
-    private ?PlanComptable $FraisDeveloppement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $FraisRefinancementDemande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'FraisRefinancement')]
-    private ?PlanComptable $FraisRefinancement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PapeterieDecaissement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'PapeterieDecaissement')]
-    private ?PlanComptable $PapeterieDecaissement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CommissionDecaissement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CommisssionDecaissement')]
-    private ?PlanComptable $CommisssionDecaissement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $MajorationDecaissement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CommisssionDecaissement')]
-    private ?PlanComptable $MajorationDecaissement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $FraisDeveloppementDecssmnt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'FraisDvlppmntDecaissement')]
-    private ?PlanComptable $FraisDvlppmntDecaissement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $FraisTrtementDecaissement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'FraisDvlppmntDecaissement')]
-    private ?PlanComptable $FraisTraitementDecaissement = null;
 
     public function getId(): ?int
     {
@@ -120,351 +118,340 @@ class CompteGL1
         return $this;
     }
 
-    public function getCpteProvisionMauvaiseCreances(): ?PlanComptable
+    public function getCptePrncplEnCours(): ?string
     {
-        return $this->CpteProvisionMauvaiseCreances;
+        return $this->CptePrncplEnCours;
     }
 
-    public function setCpteProvisionMauvaiseCreances(?PlanComptable $CpteProvisionMauvaiseCreances): self
+    public function setCptePrncplEnCours(?string $CptePrncplEnCours): self
     {
-        $this->CpteProvisionMauvaiseCreances = $CpteProvisionMauvaiseCreances;
+        $this->CptePrncplEnCours = $CptePrncplEnCours;
 
         return $this;
     }
 
-    public function getCptePrincipaleEnCours(): ?PlanComptable
+    public function getCpteProvisionMvsCreances(): ?string
     {
-        return $this->CptePrincipaleEnCours;
+        return $this->CpteProvisionMvsCreances;
     }
 
-    public function setCptePrincipaleEnCours(?PlanComptable $CptePrincipaleEnCours): self
+    public function setCpteProvisionMvsCreances(?string $CpteProvisionMvsCreances): self
     {
-        $this->CptePrincipaleEnCours = $CptePrincipaleEnCours;
+        $this->CpteProvisionMvsCreances = $CpteProvisionMvsCreances;
 
         return $this;
     }
 
-    public function getCptePrvsionCoutMauvaiseCreance(): ?PlanComptable
+    public function getCpteProvsionCoutMvsCreance(): ?string
     {
-        return $this->CptePrvsionCoutMauvaiseCreance;
+        return $this->CpteProvsionCoutMvsCreance;
     }
 
-    public function setCptePrvsionCoutMauvaiseCreance(?PlanComptable $CptePrvsionCoutMauvaiseCreance): self
+    public function setCpteProvsionCoutMvsCreance(?string $CpteProvsionCoutMvsCreance): self
     {
-        $this->CptePrvsionCoutMauvaiseCreance = $CptePrvsionCoutMauvaiseCreance;
+        $this->CpteProvsionCoutMvsCreance = $CpteProvsionCoutMvsCreance;
 
         return $this;
     }
 
-    public function getCpteInteretRecuCredit(): ?PlanComptable
+    public function getCptIntrtRecuCrdt(): ?string
     {
-        return $this->CpteInteretRecuCredit;
+        return $this->CptIntrtRecuCrdt;
     }
 
-    public function setCpteInteretRecuCredit(?PlanComptable $CpteInteretRecuCredit): self
+    public function setCptIntrtRecuCrdt(?string $CptIntrtRecuCrdt): self
     {
-        $this->CpteInteretRecuCredit = $CpteInteretRecuCredit;
+        $this->CptIntrtRecuCrdt = $CptIntrtRecuCrdt;
 
         return $this;
     }
 
-    public function getCpteCreditPassePerte(): ?PlanComptable
+    public function getCpteCrdtPassePerte(): ?string
     {
-        return $this->CpteCreditPassePerte;
+        return $this->CpteCrdtPassePerte;
     }
 
-    public function setCpteCreditPassePerte(?PlanComptable $CpteCreditPassePerte): self
+    public function setCpteCrdtPassePerte(?string $CpteCrdtPassePerte): self
     {
-        $this->CpteCreditPassePerte = $CpteCreditPassePerte;
+        $this->CpteCrdtPassePerte = $CpteCrdtPassePerte;
 
         return $this;
     }
 
-    public function getCpteInteretEchus(): ?PlanComptable
+    public function getCpteInteretEchus(): ?string
     {
         return $this->CpteInteretEchus;
     }
 
-    public function setCpteInteretEchus(?PlanComptable $CpteInteretEchus): self
+    public function setCpteInteretEchus(?string $CpteInteretEchus): self
     {
         $this->CpteInteretEchus = $CpteInteretEchus;
 
         return $this;
     }
 
-    public function getCpteInteretEchusRecevoir(): ?PlanComptable
+    public function getCpteIntrtEchusRecvoir(): ?string
     {
-        return $this->CpteInteretEchusRecevoir;
+        return $this->CpteIntrtEchusRecvoir;
     }
 
-    public function setCpteInteretEchusRecevoir(?PlanComptable $CpteInteretEchusRecevoir): self
+    public function setCpteIntrtEchusRecvoir(?string $CpteIntrtEchusRecvoir): self
     {
-        $this->CpteInteretEchusRecevoir = $CpteInteretEchusRecevoir;
+        $this->CpteIntrtEchusRecvoir = $CpteIntrtEchusRecvoir;
 
         return $this;
     }
 
-    public function getCpteRefinancementCredit(): ?PlanComptable
+    public function getCpteRefinancmntCrdt(): ?string
     {
-        return $this->CpteRefinancementCredit;
+        return $this->CpteRefinancmntCrdt;
     }
 
-    public function setCpteRefinancementCredit(?PlanComptable $CpteRefinancementCredit): self
+    public function setCpteRefinancmntCrdt(?string $CpteRefinancmntCrdt): self
     {
-        $this->CpteRefinancementCredit = $CpteRefinancementCredit;
+        $this->CpteRefinancmntCrdt = $CpteRefinancmntCrdt;
 
         return $this;
     }
 
-    public function getCptePnlteComptabliliseAvance(): ?PlanComptable
+    public function getCptePnltsComptblsAvnce(): ?string
     {
-        return $this->CptePnlteComptabliliseAvance;
+        return $this->CptePnltsComptblsAvnce;
     }
 
-    public function setCptePnlteComptabliliseAvance(?PlanComptable $CptePnlteComptabliliseAvance): self
+    public function setCptePnltsComptblsAvnce(?string $CptePnltsComptblsAvnce): self
     {
-        $this->CptePnlteComptabliliseAvance = $CptePnlteComptabliliseAvance;
+        $this->CptePnltsComptblsAvnce = $CptePnltsComptblsAvnce;
 
         return $this;
     }
 
-    public function getCpteRevenuePnlteComptblsAvnc(): ?PlanComptable
+    public function getCpteRvnuePnltsComptblsAvnce(): ?string
     {
-        return $this->CpteRevenuePnlteComptblsAvnc;
+        return $this->CpteRvnuePnltsComptblsAvnce;
     }
 
-    public function setCpteRevenuePnlteComptblsAvnc(?PlanComptable $CpteRevenuePnlteComptblsAvnc): self
+    public function setCpteRvnuePnltsComptblsAvnce(?string $CpteRvnuePnltsComptblsAvnce): self
     {
-        $this->CpteRevenuePnlteComptblsAvnc = $CpteRevenuePnlteComptblsAvnc;
+        $this->CpteRvnuePnltsComptblsAvnce = $CpteRvnuePnltsComptblsAvnce;
 
         return $this;
     }
 
-    public function getCpteCommissionEchuesAccumulle(): ?PlanComptable
+    public function getCpteCommssionAccmlGagne(): ?string
     {
-        return $this->CpteCommissionEchuesAccumulle;
+        return $this->CpteCommssionAccmlGagne;
     }
 
-    public function setCpteCommissionEchuesAccumulle(?PlanComptable $CpteCommissionEchuesAccumulle): self
+    public function setCpteCommssionAccmlGagne(?string $CpteCommssionAccmlGagne): self
     {
-        $this->CpteCommissionEchuesAccumulle = $CpteCommissionEchuesAccumulle;
+        $this->CpteCommssionAccmlGagne = $CpteCommssionAccmlGagne;
 
         return $this;
     }
 
-    public function getCpteCommissionAccumulleGagne(): ?PlanComptable
+    public function getCpteRcvrmtCrncsDouteuse(): ?string
     {
-        return $this->CpteCommissionAccumulleGagne;
+        return $this->CpteRcvrmtCrncsDouteuse;
     }
 
-    public function setCpteCommissionAccumulleGagne(?PlanComptable $CpteCommissionAccumulleGagne): self
+    public function setCpteRcvrmtCrncsDouteuse(?string $CpteRcvrmtCrncsDouteuse): self
     {
-        $this->CpteCommissionAccumulleGagne = $CpteCommissionAccumulleGagne;
+        $this->CpteRcvrmtCrncsDouteuse = $CpteRcvrmtCrncsDouteuse;
 
         return $this;
     }
 
-    public function getCpteRecvrmntCreanceDouteuse(): ?PlanComptable
-    {
-        return $this->CpteRecvrmntCreanceDouteuse;
-    }
-
-    public function setCpteRecvrmntCreanceDouteuse(?PlanComptable $CpteRecvrmntCreanceDouteuse): self
-    {
-        $this->CpteRecvrmntCreanceDouteuse = $CpteRecvrmntCreanceDouteuse;
-
-        return $this;
-    }
-
-    public function getCptePapeterie(): ?PlanComptable
+    public function getCptePapeterie(): ?string
     {
         return $this->CptePapeterie;
     }
 
-    public function setCptePapeterie(?PlanComptable $CptePapeterie): self
+    public function setCptePapeterie(?string $CptePapeterie): self
     {
         $this->CptePapeterie = $CptePapeterie;
 
         return $this;
     }
 
-    public function getCpteCheque(): ?PlanComptable
+    public function getCpteCheque(): ?string
     {
         return $this->CpteCheque;
     }
 
-    public function setCpteCheque(?PlanComptable $CpteCheque): self
+    public function setCpteCheque(?string $CpteCheque): self
     {
         $this->CpteCheque = $CpteCheque;
 
         return $this;
     }
 
-    public function getCpteSurpaiement(): ?PlanComptable
+    public function getCpteSurpaiement(): ?string
     {
         return $this->CpteSurpaiement;
     }
 
-    public function setCpteSurpaiement(?PlanComptable $CpteSurpaiement): self
+    public function setCpteSurpaiement(?string $CpteSurpaiement): self
     {
         $this->CpteSurpaiement = $CpteSurpaiement;
 
         return $this;
     }
 
-    public function getCpteChargeCheque(): ?PlanComptable
+    public function getCpteChrgCheque(): ?string
     {
-        return $this->CpteChargeCheque;
+        return $this->CpteChrgCheque;
     }
 
-    public function setCpteChargeCheque(?PlanComptable $CpteChargeCheque): self
+    public function setCpteChrgCheque(?string $CpteChrgCheque): self
     {
-        $this->CpteChargeCheque = $CpteChargeCheque;
+        $this->CpteChrgCheque = $CpteChrgCheque;
 
         return $this;
     }
 
-    public function getCpteCommissionCredit(): ?PlanComptable
+    public function getCpteCommssionCrdt(): ?string
     {
-        return $this->CpteCommissionCredit;
+        return $this->CpteCommssionCrdt;
     }
 
-    public function setCpteCommissionCredit(?PlanComptable $CpteCommissionCredit): self
+    public function setCpteCommssionCrdt(?string $CpteCommssionCrdt): self
     {
-        $this->CpteCommissionCredit = $CpteCommissionCredit;
+        $this->CpteCommssionCrdt = $CpteCommssionCrdt;
 
         return $this;
     }
 
-    public function getCptePnlteCrdt(): ?PlanComptable
+    public function getCptePnltsCrdt(): ?string
     {
-        return $this->CptePnlteCrdt;
+        return $this->CptePnltsCrdt;
     }
 
-    public function setCptePnlteCrdt(?PlanComptable $CptePnlteCrdt): self
+    public function setCptePnltsCrdt(string $CptePnltsCrdt): self
     {
-        $this->CptePnlteCrdt = $CptePnlteCrdt;
+        $this->CptePnltsCrdt = $CptePnltsCrdt;
 
         return $this;
     }
 
-    public function getDifferenceMonnaie(): ?PlanComptable
+    public function getDiffrnceMonnaie(): ?string
     {
-        return $this->DifferenceMonnaie;
+        return $this->DiffrnceMonnaie;
     }
 
-    public function setDifferenceMonnaie(?PlanComptable $DifferenceMonnaie): self
+    public function setDiffrnceMonnaie(?string $DiffrnceMonnaie): self
     {
-        $this->DifferenceMonnaie = $DifferenceMonnaie;
+        $this->DiffrnceMonnaie = $DiffrnceMonnaie;
 
         return $this;
     }
 
-    public function getPapeterie(): ?PlanComptable
+    public function getPapeterieDemande(): ?string
     {
-        return $this->Papeterie;
+        return $this->PapeterieDemande;
     }
 
-    public function setPapeterie(?PlanComptable $Papeterie): self
+    public function setPapeterieDemande(?string $PapeterieDemande): self
     {
-        $this->Papeterie = $Papeterie;
+        $this->PapeterieDemande = $PapeterieDemande;
 
         return $this;
     }
 
-    public function getCommission(): ?PlanComptable
+    public function getCommissionDemande(): ?string
     {
-        return $this->Commission;
+        return $this->CommissionDemande;
     }
 
-    public function setCommission(?PlanComptable $Commission): self
+    public function setCommissionDemande(?string $CommissionDemande): self
     {
-        $this->Commission = $Commission;
+        $this->CommissionDemande = $CommissionDemande;
 
         return $this;
     }
 
-    public function getFraisDeveloppement(): ?PlanComptable
+    public function getFraisDeveloppementDmd(): ?string
     {
-        return $this->FraisDeveloppement;
+        return $this->FraisDeveloppementDmd;
     }
 
-    public function setFraisDeveloppement(?PlanComptable $FraisDeveloppement): self
+    public function setFraisDeveloppementDmd(?string $FraisDeveloppementDmd): self
     {
-        $this->FraisDeveloppement = $FraisDeveloppement;
+        $this->FraisDeveloppementDmd = $FraisDeveloppementDmd;
 
         return $this;
     }
 
-    public function getFraisRefinancement(): ?PlanComptable
+    public function getFraisRefinancementDemande(): ?string
     {
-        return $this->FraisRefinancement;
+        return $this->FraisRefinancementDemande;
     }
 
-    public function setFraisRefinancement(?PlanComptable $FraisRefinancement): self
+    public function setFraisRefinancementDemande(?string $FraisRefinancementDemande): self
     {
-        $this->FraisRefinancement = $FraisRefinancement;
+        $this->FraisRefinancementDemande = $FraisRefinancementDemande;
 
         return $this;
     }
 
-    public function getPapeterieDecaissement(): ?PlanComptable
+    public function getPapeterieDecaissement(): ?string
     {
         return $this->PapeterieDecaissement;
     }
 
-    public function setPapeterieDecaissement(?PlanComptable $PapeterieDecaissement): self
+    public function setPapeterieDecaissement(?string $PapeterieDecaissement): self
     {
         $this->PapeterieDecaissement = $PapeterieDecaissement;
 
         return $this;
     }
 
-    public function getCommisssionDecaissement(): ?PlanComptable
+    public function getCommissionDecaissement(): ?string
     {
-        return $this->CommisssionDecaissement;
+        return $this->CommissionDecaissement;
     }
 
-    public function setCommisssionDecaissement(?PlanComptable $CommisssionDecaissement): self
+    public function setCommissionDecaissement(?string $CommissionDecaissement): self
     {
-        $this->CommisssionDecaissement = $CommisssionDecaissement;
+        $this->CommissionDecaissement = $CommissionDecaissement;
 
         return $this;
     }
 
-    public function getMajorationDecaissement(): ?PlanComptable
+    public function getMajorationDecaissement(): ?string
     {
         return $this->MajorationDecaissement;
     }
 
-    public function setMajorationDecaissement(?PlanComptable $MajorationDecaissement): self
+    public function setMajorationDecaissement(?string $MajorationDecaissement): self
     {
         $this->MajorationDecaissement = $MajorationDecaissement;
 
         return $this;
     }
 
-    public function getFraisDvlppmntDecaissement(): ?PlanComptable
+    public function getFraisDeveloppementDecssmnt(): ?string
     {
-        return $this->FraisDvlppmntDecaissement;
+        return $this->FraisDeveloppementDecssmnt;
     }
 
-    public function setFraisDvlppmntDecaissement(?PlanComptable $FraisDvlppmntDecaissement): self
+    public function setFraisDeveloppementDecssmnt(?string $FraisDeveloppementDecssmnt): self
     {
-        $this->FraisDvlppmntDecaissement = $FraisDvlppmntDecaissement;
+        $this->FraisDeveloppementDecssmnt = $FraisDeveloppementDecssmnt;
 
         return $this;
     }
 
-    public function getFraisTraitementDecaissement(): ?PlanComptable
+    public function getFraisTrtementDecaissement(): ?string
     {
-        return $this->FraisTraitementDecaissement;
+        return $this->FraisTrtementDecaissement;
     }
 
-    public function setFraisTraitementDecaissement(?PlanComptable $FraisTraitementDecaissement): self
+    public function setFraisTrtementDecaissement(?string $FraisTrtementDecaissement): self
     {
-        $this->FraisTraitementDecaissement = $FraisTraitementDecaissement;
+        $this->FraisTrtementDecaissement = $FraisTrtementDecaissement;
 
         return $this;
     }
+
 }

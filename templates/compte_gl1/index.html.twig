@@ -9,6 +9,34 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>CptePrncplEnCours</th>
+                <th>CpteProvisionMvsCreances</th>
+                <th>CpteProvsionCoutMvsCreance</th>
+                <th>CptIntrtRecuCrdt</th>
+                <th>CpteCrdtPassePerte</th>
+                <th>CpteInteretEchus</th>
+                <th>CpteIntrtEchusRecvoir</th>
+                <th>CpteRefinancmntCrdt</th>
+                <th>CptePnltsComptblsAvnce</th>
+                <th>CpteRvnuePnltsComptblsAvnce</th>
+                <th>CpteCommssionAccmlGagne</th>
+                <th>CpteRcvrmtCrncsDouteuse</th>
+                <th>CptePapeterie</th>
+                <th>CpteCheque</th>
+                <th>CpteSurpaiement</th>
+                <th>CpteChrgCheque</th>
+                <th>CpteCommssionCrdt</th>
+                <th>CptePnltsCrdt</th>
+                <th>DiffrnceMonnaie</th>
+                <th>PapeterieDemande</th>
+                <th>CommissionDemande</th>
+                <th>FraisDeveloppementDmd</th>
+                <th>FraisRefinancementDemande</th>
+                <th>PapeterieDecaissement</th>
+                <th>CommissionDecaissement</th>
+                <th>MajorationDecaissement</th>
+                <th>FraisDeveloppementDecssmnt</th>
+                <th>FraisTrtementDecaissement</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +44,34 @@
         {% for compte_g_l1 in compte_g_l1s %}
             <tr>
                 <td>{{ compte_g_l1.id }}</td>
+                <td>{{ compte_g_l1.CptePrncplEnCours }}</td>
+                <td>{{ compte_g_l1.CpteProvisionMvsCreances }}</td>
+                <td>{{ compte_g_l1.CpteProvsionCoutMvsCreance }}</td>
+                <td>{{ compte_g_l1.CptIntrtRecuCrdt }}</td>
+                <td>{{ compte_g_l1.CpteCrdtPassePerte }}</td>
+                <td>{{ compte_g_l1.CpteInteretEchus }}</td>
+                <td>{{ compte_g_l1.CpteIntrtEchusRecvoir }}</td>
+                <td>{{ compte_g_l1.CpteRefinancmntCrdt }}</td>
+                <td>{{ compte_g_l1.CptePnltsComptblsAvnce }}</td>
+                <td>{{ compte_g_l1.CpteRvnuePnltsComptblsAvnce }}</td>
+                <td>{{ compte_g_l1.CpteCommssionAccmlGagne }}</td>
+                <td>{{ compte_g_l1.CpteRcvrmtCrncsDouteuse }}</td>
+                <td>{{ compte_g_l1.CptePapeterie }}</td>
+                <td>{{ compte_g_l1.CpteCheque }}</td>
+                <td>{{ compte_g_l1.CpteSurpaiement }}</td>
+                <td>{{ compte_g_l1.CpteChrgCheque }}</td>
+                <td>{{ compte_g_l1.CpteCommssionCrdt }}</td>
+                <td>{{ compte_g_l1.CptePnltsCrdt }}</td>
+                <td>{{ compte_g_l1.DiffrnceMonnaie }}</td>
+                <td>{{ compte_g_l1.PapeterieDemande }}</td>
+                <td>{{ compte_g_l1.CommissionDemande }}</td>
+                <td>{{ compte_g_l1.FraisDeveloppementDmd }}</td>
+                <td>{{ compte_g_l1.FraisRefinancementDemande }}</td>
+                <td>{{ compte_g_l1.PapeterieDecaissement }}</td>
+                <td>{{ compte_g_l1.CommissionDecaissement }}</td>
+                <td>{{ compte_g_l1.MajorationDecaissement }}</td>
+                <td>{{ compte_g_l1.FraisDeveloppementDecssmnt }}</td>
+                <td>{{ compte_g_l1.FraisTrtementDecaissement }}</td>
                 <td>
                     <a href="{{ path('app_compte_g_l1_show', {'id': compte_g_l1.id}) }}">show</a>
                     <a href="{{ path('app_compte_g_l1_edit', {'id': compte_g_l1.id}) }}">edit</a>
@@ -23,7 +79,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="2">no records found</td>
+                <td colspan="30">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
