@@ -63,4 +63,41 @@ class AmortissementFixeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findAmortissement(string $codeCredit)
+    {
+        $query = "SELECT
+        a.id,
+        a.periode ,
+        a.dateRemborsement,
+        a.principale,
+        a.interet,
+        a.montanttTotal 
+        FROM App\Entity\AmortissementFixe a
+        where a.codecredit = '$codeCredit'
+
+        ";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+    public function findMontantCredit(string $codeCredit)
+    {
+        $query = "SELECT DISTINCT
+        d.NumeroCredit,
+        d.Montant,
+        d.NombreTranche ,
+        d.TauxInteretAnnuel
+        FROM App\Entity\DemandeCredit d
+        where d.NumeroCredit = '$codeCredit'
+
+        ";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
 }

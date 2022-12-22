@@ -12,6 +12,7 @@ import './styles/app.scss';
 import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+import './credit/amortissement';
 import './credit/approbation'
 import './api/retrait'
 import './api/individuel'

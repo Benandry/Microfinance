@@ -5,22 +5,60 @@
 
 {% block body %}
 
-{% for message in app.flashes('success') %}
-    <strong class="alert alert-success text-center" >{{ message }}</strong>
-{% endfor %}
-<div class="card p-3">
-    <div class="row">
-        <div class="col-4 col-sm-4 col-sm-4">
-            <p>Montant credit :  {{ montant }}</p>
-            <p> Code client : {{ codeclient }}</p>
-        </div>
-        <div class="col-4 col-sm-4 col-sm-4">
-            Taux annuelle : {{ taux }}
-        </div>
-        <div class="col-4 col-sm-4 col-sm-4">
-            Nombre tranche : {{ tranche }}
+    {% for message in app.flashes('success') %}
+        <p class="alert alert-success text-center" >{{ message }}</p>
+    {% endfor %}
+    <div class="card p-3">
+        {% for data in info %}
+            <div class="row">
+                <div class="col-4 col-sm-4 col-sm-4">
+                    <p>Montant credit : {{ data.Montant }}  </p>
+                    <p> Code credit : {{ data.NumeroCredit }} </p>
+                </div>
+                <div class="col-4 col-sm-4 col-sm-4">
+                    Taux annuelle : {{ data.TauxInteretAnnuel }}
+                </div>
+                <div class="col-4 col-sm-4 col-sm-4">
+                    Nombre tranche : {{ data.NombreTranche }}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Periode(N)</th>
+                        <th>Date de remboursement</th>
+                        <th>Principale </th>
+                        <th>Interet </th>
+                        <th>Total </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tab in amortissement %}
+                        <tr>
+                            <td> {{ tab.periode}} </td>
+                            <td>{{ tab.dateRemborsement|date("d/m/Y")}}</td>
+                            <td>{{ tab.principale }}</td>
+                            <td>{{ tab.interet }}</td>
+                            <td>{{ tab.montanttTotal }}</td>
+                            <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> Modifier </a></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="2">Total </th>
+                        <th> {{ totalMontant }} </th>
+                        <th> {{ totalInteret }} </th>
+                        <th> {{ totalNet}} </th>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
+{# 
+
     <div class="card-body">
         <table class="table table-bordered">
             <thead>
@@ -43,31 +81,7 @@
                     </tr>
                 {% endfor %}
                {# <!-- {% endfor %} -->#}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="2"> Total</td>
-                    <td > {{ totalMontant }}</td>
-                    <td > {{ totalInteret }}</td>
-                    <td > {{ totalNet }}</td>
-                </tr>
-            </tfoot>
-        </table>
-
-        {{ form_start(form) }}
-            <div class="my-custom-class-for-errors">
-                {{ form_errors(form) }}
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    {{ form_row(form.submit) }}
-                </div>
-                <div class="col" id="some-custom-id">
-                </div>
-            </div>
-        {{ form_end(form) }}
-
+           
        {# <!-- <div class="row">
             <div class="col-6 col-xl-6 col-sm-6"> 
                <p> Montant Total :</p>
@@ -80,6 +94,4 @@
                  <p>{{  tranche }}</p>
             </div>
         </div> -->#}
-    </div>
-</div>
 {% endblock %}
