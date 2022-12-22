@@ -161,4 +161,18 @@ class AmortissementController extends AbstractController
         'form' => $form->createView(),
        ]);
     }
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+     ///Amortissement Lineaire
+    //  #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
+    //  public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
+    //  {
+
+    //  }
+
+=======
+>>>>>>> 05da9e7a7e2d2c2f30f6c04d896b063e07e76cf2
+>>>>>>> 46a5cebf814063bc288fb5e2152f45e703ce9e24
 }

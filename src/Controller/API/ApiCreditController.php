@@ -11,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiCreditController extends AbstractController
 {
     // configuration
+    /*
+    *Cette method configurationCredit permet de recuperer les configuration credit
+    */
     #[Route('/api/credit/{produit}', name: 'app_api_credit')]
     public function configurationCredit(CreditIndividuelRepository $creditIndividuelRepository,$produit): Response
     {
@@ -19,6 +22,10 @@ class ApiCreditController extends AbstractController
         return new JsonResponse($creditindividuel);
     }
     // client
+    /*
+    *Cette methode est pour le client credit
+    *
+    */
     #[Route('/api/credit/client/{codeclient}',name:'app_api_credit_client')]
     public function clientcredit(CreditIndividuelRepository $creditIndividuelRepository,$codeclient):Response
     {
@@ -26,10 +33,10 @@ class ApiCreditController extends AbstractController
 
         return new JsonResponse($creditIndividue);
     }
-    // Demande credit 
+    // Demande credit
     /*
     *ici on verifie si le client est deja emprunté
-    */ 
+    */
     #[Route('api/credit/{codeclient}',name:'app_demende_credit')]
     public function DemandeCredit(CreditIndividuelRepository $creditIndividuelRepository,$codeclient):Response
     {

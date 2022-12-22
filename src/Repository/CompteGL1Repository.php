@@ -39,21 +39,6 @@ class CompteGL1Repository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return CompteGL1[] Returns an array of CompteGL1 objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
 //    public function findOneBySomeField($value): ?CompteGL1
 //    {
 //        return $this->createQueryBuilder('c')

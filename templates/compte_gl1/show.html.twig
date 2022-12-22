@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompteGL1{% endblock %}
+
+{% block body %}
+    <h1>CompteGL1</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ compte_g_l1.id }}</td>
+            </tr>
+            <tr>
+                <th>CptePrncplEnCours</th>
+                <td>{{ compte_g_l1.CptePrncplEnCours }}</td>
+            </tr>
+            <tr>
+                <th>CpteProvisionMvsCreances</th>
+                <td>{{ compte_g_l1.CpteProvisionMvsCreances }}</td>
+            </tr>
+            <tr>
+                <th>CpteProvsionCoutMvsCreance</th>
+                <td>{{ compte_g_l1.CpteProvsionCoutMvsCreance }}</td>
+            </tr>
+            <tr>
+                <th>CptIntrtRecuCrdt</th>
+                <td>{{ compte_g_l1.CptIntrtRecuCrdt }}</td>
+            </tr>
+            <tr>
+                <th>CpteCrdtPassePerte</th>
+                <td>{{ compte_g_l1.CpteCrdtPassePerte }}</td>
+            </tr>
+            <tr>
+                <th>CpteInteretEchus</th>
+                <td>{{ compte_g_l1.CpteInteretEchus }}</td>
+            </tr>
+            <tr>
+                <th>CpteIntrtEchusRecvoir</th>
+                <td>{{ compte_g_l1.CpteIntrtEchusRecvoir }}</td>
+            </tr>
+            <tr>
+                <th>CpteRefinancmntCrdt</th>
+                <td>{{ compte_g_l1.CpteRefinancmntCrdt }}</td>
+            </tr>
+            <tr>
+                <th>CptePnltsComptblsAvnce</th>
+                <td>{{ compte_g_l1.CptePnltsComptblsAvnce }}</td>
+            </tr>
+            <tr>
+                <th>CpteRvnuePnltsComptblsAvnce</th>
+                <td>{{ compte_g_l1.CpteRvnuePnltsComptblsAvnce }}</td>
+            </tr>
+            <tr>
+                <th>CpteCommssionAccmlGagne</th>
+                <td>{{ compte_g_l1.CpteCommssionAccmlGagne }}</td>
+            </tr>
+            <tr>
+                <th>CpteRcvrmtCrncsDouteuse</th>
+                <td>{{ compte_g_l1.CpteRcvrmtCrncsDouteuse }}</td>
+            </tr>
+            <tr>
+                <th>CptePapeterie</th>
+                <td>{{ compte_g_l1.CptePapeterie }}</td>
+            </tr>
+            <tr>
+                <th>CpteCheque</th>
+                <td>{{ compte_g_l1.CpteCheque }}</td>
+            </tr>
+            <tr>
+                <th>CpteSurpaiement</th>
+                <td>{{ compte_g_l1.CpteSurpaiement }}</td>
+            </tr>
+            <tr>
+                <th>CpteChrgCheque</th>
+                <td>{{ compte_g_l1.CpteChrgCheque }}</td>
+            </tr>
+            <tr>
+                <th>CpteCommssionCrdt</th>
+                <td>{{ compte_g_l1.CpteCommssionCrdt }}</td>
+            </tr>
+            <tr>
+                <th>CptePnltsCrdt</th>
+                <td>{{ compte_g_l1.CptePnltsCrdt }}</td>
+            </tr>
+            <tr>
+                <th>DiffrnceMonnaie</th>
+                <td>{{ compte_g_l1.DiffrnceMonnaie }}</td>
+            </tr>
+            <tr>
+                <th>PapeterieDemande</th>
+                <td>{{ compte_g_l1.PapeterieDemande }}</td>
+            </tr>
+            <tr>
+                <th>CommissionDemande</th>
+                <td>{{ compte_g_l1.CommissionDemande }}</td>
+            </tr>
+            <tr>
+                <th>FraisDeveloppementDmd</th>
+                <td>{{ compte_g_l1.FraisDeveloppementDmd }}</td>
+            </tr>
+            <tr>
+                <th>FraisRefinancementDemande</th>
+                <td>{{ compte_g_l1.FraisRefinancementDemande }}</td>
+            </tr>
+            <tr>
+                <th>PapeterieDecaissement</th>
+                <td>{{ compte_g_l1.PapeterieDecaissement }}</td>
+            </tr>
+            <tr>
+                <th>CommissionDecaissement</th>
+                <td>{{ compte_g_l1.CommissionDecaissement }}</td>
+            </tr>
+            <tr>
+                <th>MajorationDecaissement</th>
+                <td>{{ compte_g_l1.MajorationDecaissement }}</td>
+            </tr>
+            <tr>
+                <th>FraisDeveloppementDecssmnt</th>
+                <td>{{ compte_g_l1.FraisDeveloppementDecssmnt }}</td>
+            </tr>
+            <tr>
+                <th>FraisTrtementDecaissement</th>
+                <td>{{ compte_g_l1.FraisTrtementDecaissement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_compte_g_l1_index') }}">back to list</a>
+
+    <a href="{{ path('app_compte_g_l1_edit', {'id': compte_g_l1.id}) }}">edit</a>
+
+    {{ include('compte_gl1/_delete_form.html.twig') }}
+{% endblock %}
