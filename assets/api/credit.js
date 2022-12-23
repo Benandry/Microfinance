@@ -138,7 +138,23 @@ $(document).ready(function(){
                         }
                         else if(element.GarantieObligatoireCreditInd == 1){
                                 $('#demande_credit_garant').attr('disabled',true)
-                        }
+                            }
+                            
+                            // Ici on compare la valeur total et le montant exiger pour la garantie
+
+                            $('#demande_credit_ValeurTotal').on('blur',function(){
+                                    var montantgarantie=element.MontantExige
+                                    var valeurtotal = $(this).val()
+                                    console.log(valeurtotal)
+                                    console.log(montantgarantie)
+
+                                    if(valeurtotal < montantgarantie){
+                                        alert("Votre garantie est insuffisant !")
+                                        $('.btn').attr('disabled',true)
+
+                                    }
+
+                        })
                     }
                 }
 
@@ -220,5 +236,9 @@ $(document).ready(function(){
             }
 
         })
+
+        // Recuperation des utilisateur qui approuve le credit
+        var utilisateur=$('#utilisateur').text()
+        $('#approbation_credit_utilisateur').val(utilisateur)
         
 })
