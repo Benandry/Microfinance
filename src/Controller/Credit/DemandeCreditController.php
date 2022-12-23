@@ -44,7 +44,7 @@ class DemandeCreditController extends AbstractController
            $demandeCredit->setStatusApp("en attente ");
            $codecredit = $demandeCredit->getNumeroCredit();
 
-           //dd($codeclient);
+           //dd($data->getTypeAmortissement() );
 
            //dd($data->getTypeAmortissement());
            $demandeCreditRepository->add($demandeCredit, true);
@@ -95,6 +95,7 @@ class DemandeCreditController extends AbstractController
                     $amortissement->setPeriode($tableau_amort[$i]['periode']);
                     $amortissement->setCodeclient($codeclient);
                     $amortissement->setCodecredit($codecredit);
+                    $amortissement->setTypeamortissement('simple');
                     
                     $entityManager->persist($amortissement);
                     $entityManager->flush();
@@ -114,15 +115,124 @@ class DemandeCreditController extends AbstractController
 
            elseif($data->getTypeAmortissement() == "anuuite constante")
            {
+            
+                    
+                $tauxInteret  = $taux / 100;
+                $annuite_constante = $montant *( $tauxInteret /(1-pow((1 + $tauxInteret),(-$tranche))));
+                // dd("Taux est ".$annuite_constante);
+            
+                $tableau_amortissement = [];
+                
+                $dateRemb = date('Y/m/d');
+                $capitalRestantDu = $montant;
+                $interet = $capitalRestantDu * $tauxInteret;
+                $amortissement = $annuite_constante - $interet;
+            
+            
+                //Annuite constante
+                $tableau_amortissement = [ 
+                    [
+                        'periode' => 1,
+                        'dateRemb'=> $dateRemb ,
+                        'capitalRestantDu' => $capitalRestantDu, 
+                        "interet" => $interet,
+                        'remboursement' => $amortissement,
+                        'annuite' => $annuite_constante,
+                    ], 
+                ];
+            
+                for ( $i = 1; $i < $tranche ; $i++ ) {
+                        //capital restant du
+                        $capitalRestantDu = $capitalRestantDu - $amortissement;
+                        //interet pour les restant
+                        $interet = $capitalRestantDu * $tauxInteret;
+                        //amortissement restant
+                        $amortissement = $annuite_constante - $interet;
+                        $dateRemb = date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
+                        array_push($tableau_amortissement,[
+                            'periode'=> $i+1,
+                            'dateRemb' => $dateRemb ,
+                            'capitalRestantDu' => $capitalRestantDu,
+                            "interet" => $interet,
+                            'remboursement' => $amortissement,
+                            'annuite' => $annuite_constante,
+                        ]);
+                }
+            
+               //dd($tableau_amortissement);
+
+                $entityManager = $doctine->getManager();
+                for ($i=0; $i < $tranche; $i++) { 
+                    $amortissement = new AmortissementFixe();
+                    $amortissement->setDateRemborsement(date_create($tableau_amortissement[$i]['dateRemb']));
+                    $amortissement->setPrincipale($tableau_amortissement[$i]['capitalRestantDu']);
+                    $amortissement->setInteret($tableau_amortissement[$i]['interet']);
+                    $amortissement->setRemboursement($tableau_amortissement[$i]['remboursement']);
+                    $amortissement->setAnnuite($tableau_amortissement[$i]['annuite']);
+                    $amortissement->setPeriode($tableau_amortissement[$i]['periode']);
+                    $amortissement->setCodeclient($codeclient);
+                    $amortissement->setCodecredit($codecredit);
+                    $amortissement->setTypeamortissement('anuuite constante');
+                    
+                    $entityManager->persist($amortissement);
+                    $entityManager->flush();
+                }
                 return $this->redirectToRoute('app_tableau_amortissement_annuite_constante', [
-                    'montant' => $montant,
-                    'tranche' => $tranche,
-                    'taux' => $taux,
-                    'codeclient' => $codeclient,
+                    'codecredit' => $codecredit,
                 ], Response::HTTP_SEE_OTHER);
            }
-           else
+
+           elseif($data->getTypeAmortissement() == "amortissement constante") 
            {
+
+                /**
+                 * Formule amortissement constante est A = capital/periode
+                 */
+                $k = 25000;
+                $t = 5;
+                $taux = 0.06;
+                $amortissement_constante = $k / $t;
+                $interet = $k *$taux;
+                $annuite = $amortissement_constante + $interet;
+
+                /***
+                * Etablissement du tableau d’amortissement
+                */
+                $dateRemb = date('Y/m/d');
+                // $capitalRestantDu = $montant;
+                // $interet = $capitalRestantDu * $tauxInteret;
+                // $amortissement = $annuite_constante - $interet;
+
+                $tableau_amortissement = [
+                    [
+                        'periode' => 1,
+                        'dateRemboursement' => $dateRemb,
+                        'capitalRestantDu' => $k,
+                        'interet' => $interet,
+                        'remboursement' => $amortissement_constante,
+                        'annuite' => $annuite,
+                    ]
+                ];
+
+                for ($i=0; $i < $t; $i++) { 
+                    $k = $k - $amortissement_constante;
+                    $interet = $k * $taux;
+                    $annuite = $amortissement_constante + $interet;
+
+                    array_push($tableau_amortissement,[
+                        'periode' => $i+1,
+                        'dateRemboursement' => $dateRemb,
+                        'capitalRestantDu' => $k,
+                        'interet' => $interet,
+                        'remboursement' => $amortissement_constante,
+                        'annuite' => $annuite,
+                    ]);
+                }
+
+
+                
+                dd($tableau_amortissement);
+
                 return $this->redirectToRoute('app_tableau_amortissement_remboursement_constante', [
                     'montant' => $montant,
                     'tranche' => $tranche,
