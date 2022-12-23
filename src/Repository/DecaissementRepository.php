@@ -39,28 +39,21 @@ class DecaissementRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Decaissement[] Returns an array of Decaissement objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function decaissementApprouver(string $codeCredit)
+    {
+        $query = "SELECT
+        a.id,
+        a.dateApprobation,
+        a.description,
+        a.statusApprobation,
+        a.montant,
+        a.codecredit
+        FROM App\Entity\ApprobationCredit a
+        where a.codecredit = '$codeCredit'
+        ";
 
-//    public function findOneBySomeField($value): ?Decaissement
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
 }

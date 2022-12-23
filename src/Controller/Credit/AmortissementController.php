@@ -99,4 +99,44 @@ class AmortissementController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+<<<<<<< HEAD
+
+
+     #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
+     public function remboursement_constant(Request $request,AmortissementFixeRepository $repoAmortisssement): Response
+     {
+        $codecredit = $request->query->get('codecredit');
+
+        $tableau_amortissement = $repoAmortisssement->findAmortissement($codecredit);
+
+        $info = $repoAmortisssement->findInfoCredit($codecredit);
+      // dd($info);
+        //dd($tableau_amortissement);
+
+        $form = $this->createFormBuilder()
+        ->add('submit', SubmitType::class,[
+            'label' => 'Terminer',
+            'attr' => [
+                'class' => 'btn btn-primary btn-sm'
+            ]
+        ])
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+                $this->addFlash('success', "Demande de credit terminée !!!!");
+                return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('demande_credit/amortissement/remboursement_constant.html.twig', [
+            'tableau_amortissement' => $tableau_amortissement,
+            'info' => $info,
+            'form' => $form->createView(),
+        ]);
+     }
+
+=======
+>>>>>>> 3604f020b1c5d715b274ddd1d91860449d388ef3
 }

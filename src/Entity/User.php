@@ -49,9 +49,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nomagence = null;
 
+    #[ORM\OneToMany(mappedBy: 'agentCredit', targetEntity: ApprobationCredit::class)]
+    private Collection $approbationCredits;
+
     public function __construct()
     {
         $this->individuelclients = new ArrayCollection();
+        $this->approbationCredits = new ArrayCollection();
     }
 
     public function __toString()
@@ -234,6 +238,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNomagence(string $nomagence): self
     {
         $this->nomagence = $nomagence;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ApprobationCredit>
+     */
+    public function getApprobationCredits(): Collection
+    {
+        return $this->approbationCredits;
+    }
+
+    public function addApprobationCredit(ApprobationCredit $approbationCredit): self
+    {
+        if (!$this->approbationCredits->contains($approbationCredit)) {
+            $this->approbationCredits[] = $approbationCredit;
+            $approbationCredit->setAgentCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprobationCredit(ApprobationCredit $approbationCredit): self
+    {
+        if ($this->approbationCredits->removeElement($approbationCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($approbationCredit->getAgentCredit() === $this) {
+                $approbationCredit->setAgentCredit(null);
+            }
+        }
 
         return $this;
     }

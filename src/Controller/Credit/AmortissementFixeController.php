@@ -72,6 +72,14 @@ class AmortissementFixeController extends AbstractController
                     'codecredit' => $codecredit
                 ], Response::HTTP_SEE_OTHER);
             }
+
+            elseif($form->getData()->getTypeamortissement() == 'amortissement constante')
+            {
+                return $this->redirectToRoute('app_tableau_amortissement_remboursement_constante', [
+                    'codecredit' => $codecredit
+                ], Response::HTTP_SEE_OTHER);
+            }
+
         }
 
         return $this->renderForm('amortissement_fixe/edit.html.twig', [
