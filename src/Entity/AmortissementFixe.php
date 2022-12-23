@@ -47,6 +47,9 @@ class AmortissementFixe
     #[ORM\Column(length: 255)]
     private ?string $codecredit = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $typeamortissement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -180,6 +183,18 @@ class AmortissementFixe
     public function setCodecredit(string $codecredit): self
     {
         $this->codecredit = $codecredit;
+
+        return $this;
+    }
+
+    public function getTypeamortissement(): ?string
+    {
+        return $this->typeamortissement;
+    }
+
+    public function setTypeamortissement(string $typeamortissement): self
+    {
+        $this->typeamortissement = $typeamortissement;
 
         return $this;
     }

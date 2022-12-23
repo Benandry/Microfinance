@@ -27,6 +27,7 @@ class AmortissementFixeType extends AbstractType
             ->add('annuite')
             ->add('penalite')
             ->add('commission')
+            ->add('typeamortissement')
             ->add('codecredit',HiddenType::class,[])
         ;
     }

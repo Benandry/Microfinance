@@ -53,28 +53,16 @@ class DemandeCreditRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-//    /**
-//     * @return DemandeCredit[] Returns an array of DemandeCredit objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findDemnadeCredit($date1, $date2)
+    {
+        $query = "SELECT DISTINCT
+        d
+        FROM App\Entity\DemandeCredit d
+        ";
 
-//    public function findOneBySomeField($value): ?DemandeCredit
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
 }

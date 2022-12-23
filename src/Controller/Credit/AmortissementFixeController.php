@@ -58,11 +58,20 @@ class AmortissementFixeController extends AbstractController
             $amortissementFixeRepository->add($amortissementFixe, true);
             $codecredit = $form->getData()->getCodecredit();
 
+           // dd($form->getData()->getTypeamortissement());
             $this->addFlash('success', "Modification sur le periode ".$form->getData()->getPeriode());
 
-            return $this->redirectToRoute('app_tableau_amortissement', [
-                'codecredit' => $codecredit
-            ], Response::HTTP_SEE_OTHER);
+            if($form->getData()->getTypeamortissement() == 'simple'){    
+                return $this->redirectToRoute('app_tableau_amortissement', [
+                    'codecredit' => $codecredit
+                ], Response::HTTP_SEE_OTHER);
+            }
+            elseif($form->getData()->getTypeamortissement() == 'anuuite constante')
+            {
+                return $this->redirectToRoute('app_tableau_amortissement_annuite_constante', [
+                    'codecredit' => $codecredit
+                ], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('amortissement_fixe/edit.html.twig', [

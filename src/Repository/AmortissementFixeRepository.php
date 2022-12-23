@@ -72,7 +72,9 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         a.dateRemborsement,
         a.principale,
         a.interet,
-        a.montanttTotal 
+        a.montanttTotal ,
+        a.remboursement,
+        a.annuite
         FROM App\Entity\AmortissementFixe a
         where a.codecredit = '$codeCredit'
 
@@ -83,16 +85,19 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         return $statement;
     }
 
-    public function findMontantCredit(string $codeCredit)
+    public function findInfoCredit(string $codeCredit)
     {
         $query = "SELECT DISTINCT
         d.NumeroCredit,
         d.Montant,
         d.NombreTranche ,
-        d.TauxInteretAnnuel
+        d.TauxInteretAnnuel,
+        a.annuite
         FROM App\Entity\DemandeCredit d
+        LEFT JOIN
+        App\Entity\AmortissementFixe a
+        WITH a.codecredit= d.NumeroCredit
         where d.NumeroCredit = '$codeCredit'
-
         ";
 
         $statement = $this->getEntityManager()->createQuery($query)->execute();

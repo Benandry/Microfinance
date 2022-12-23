@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Tableau d'amortissement simple {% endblock %}
-{% block head %}Tableau d'Amortissement simple {% endblock %}
+{% block head %}par amortissement simple {% endblock %}
 
 {% block body %}
 
@@ -43,7 +43,7 @@
                             <td>{{ tab.principale }}</td>
                             <td>{{ tab.interet }}</td>
                             <td>{{ tab.montanttTotal }}</td>
-                            <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> Modifier </a></td>
+                            <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td>
                         </tr>
                     {% endfor %}
                     <tr>
@@ -54,6 +54,11 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="card-foot">
+            {{ form_start(form)}}
+                {{ form_widget(form) }}
+            {{ form_end(form)}}
         </div>
     </div>
 
