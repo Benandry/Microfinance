@@ -113,11 +113,11 @@ $(document).ready(function(){
 
                         // si la configuration indique que le produit epargne est false
                         // on ne montre pas le champ solde epargne
-                        if(element.ProduitLieEpargne == false){
-                            $('#demande_credit_SoldeEpargne').hide()
+                        if(element.ProduitLieEpargne == null){
+                            $('#soldeepargneform').hide()
                         }
                         else{
-                            $('#demande_credit_SoldeEpargne').show()
+                            $('#soldeepargneform').show()
                         }
                         // alert('heloo world')
                         // // Recuperation pourcentage garantie
@@ -139,6 +139,14 @@ $(document).ready(function(){
                         else if(element.GarantieObligatoireCreditInd == 1){
                                 $('#demande_credit_garant').attr('disabled',true)
                             }
+                        else if(element.GarantObligatoireCreditGrp == 1){
+                            $('#demande_credit_garantie').attr('disabled',true)
+                            $('#demande_credit_Valeur').attr('disabled',true)
+                            $('#demande_credit_Type').attr('disabled',true)
+                            $('#demande_credit_ValeurUnitaure').attr('disabled',true)
+                            $('#demande_credit_Unite').attr('disabled',true)
+                            $('#demande_credit_ValeurTotal').attr('disabled',true)
+                        }
                             
                             // Ici on compare la valeur total et le montant exiger pour la garantie
 
