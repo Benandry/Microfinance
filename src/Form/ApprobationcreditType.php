@@ -36,6 +36,7 @@ class ApprobationCreditType extends AbstractType
             ->add('codecredit',TextType::class,[
                 'label' => 'Code credit',
             ])
+            ->add('utilisateur')
         ;
     }
 

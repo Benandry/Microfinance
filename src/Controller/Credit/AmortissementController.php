@@ -99,34 +99,4 @@ class AmortissementController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-     ///Amortissement Lineaire
-    //  #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
-    //  public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
-    //  {
->>>>>>> 23b6ccbf5116b42cb25caab3058a71208828b697
-
-     #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
-     public function remboursement_constant(Request $request,ManagerRegistry $doctrine): Response
-     {
-
-        return $this->render('demande_credit/amortissement/annuite_constante.html.twig', [
-        ]);
-     }
-
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 05da9e7a7e2d2c2f30f6c04d896b063e07e76cf2
->>>>>>> 46a5cebf814063bc288fb5e2152f45e703ce9e24
->>>>>>> 20f6dcb20fd7d89248951e510cffb43f09d274d7
->>>>>>> 23b6ccbf5116b42cb25caab3058a71208828b697
->>>>>>> 2463c85d92fe149294f52629496541240334b03d
 }

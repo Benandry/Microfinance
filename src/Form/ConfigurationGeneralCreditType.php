@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ConfigurationGeneralCredit;
 use App\Entity\ProduitCredit;
+use App\Entity\Devise;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +32,13 @@ class ConfigurationGeneralCreditType extends AbstractType
                 'by_reference'=>true,
                 'placeholder'=>'Produit Credit'
             ])
-            ->add('Devise')
+            ->add('Devise',EntityType::class,[
+                'class'=>Devise::class,
+                'choice_label'=>'devise',
+                'mapped'=>true,
+                'by_reference'=>true,
+                'placeholder'=>'Liste Devise'
+            ])
         ;
     }
 

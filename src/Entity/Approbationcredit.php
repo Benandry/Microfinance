@@ -29,6 +29,9 @@ class ApprobationCredit
     #[ORM\Column(length: 255)]
     private ?string $codecredit = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $utilisateur = null;
+
 
     public function getId(): ?int
     {
@@ -91,6 +94,18 @@ class ApprobationCredit
     public function setCodecredit(string $codecredit): self
     {
         $this->codecredit = $codecredit;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?string
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(string $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
