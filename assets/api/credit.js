@@ -246,7 +246,7 @@ $(document).ready(function(){
         })
 
         // Recuperation des utilisateur qui approuve le credit
-        var utilisateur=$('#utilisateur').text()
-        $('#approbation_credit_utilisateur').val(utilisateur)
+        // var utilisateur=$('#utilisateur').text()
+        // $('#approbation_credit_utilisateur').val(utilisateur)
         
 })

@@ -99,7 +99,6 @@ class AmortissementController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-<<<<<<< HEAD
 
 
      #[Route('/demande/tableau/amortissement/remboursement_constante', name: 'app_tableau_amortissement_remboursement_constante')]
@@ -137,6 +136,4 @@ class AmortissementController extends AbstractController
         ]);
      }
 
-=======
->>>>>>> 3604f020b1c5d715b274ddd1d91860449d388ef3
 }
