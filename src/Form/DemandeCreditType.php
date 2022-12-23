@@ -127,6 +127,13 @@ class DemandeCreditType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
+            ->add('garant')
+            ->add('garantie')
+            ->add('Valeur')
+            ->add('Type')
+            ->add('ValeurUnitaure')
+            ->add('Unite')
+            ->add('ValeurTotal')
         ;
     }
 

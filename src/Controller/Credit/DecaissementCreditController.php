@@ -14,7 +14,7 @@ class DecaissementCreditController extends AbstractController
     public function index(Request $request): Response
     {
         $codecredit  = $request->request->get('codecredit');
-        if($codecredit == null){
+        if($codecredit != null){
             return $this->render('Module_credit/decaissement/index.html.twig');
         }else{
            dd($codecredit);
