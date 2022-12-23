@@ -108,6 +108,7 @@ $(document).ready(function(){
                         $('#demande_credit_MethodeCalculInteret').val(caclulInteret)
 
                         // Test lie epargne
+                        
                         document.getElementById('lieep').innerHTML=element.ProduitLieEpargne
 
                         // si la configuration indique que le produit epargne est false
@@ -122,6 +123,22 @@ $(document).ready(function(){
                         // // Recuperation pourcentage garantie
                         $('#garantie').text(element.MontantCreditDmdIndividuel)
                         // alert(element.MontantCreditDmdIndividuel)
+
+                        // Garantie base sur garant et garantie de valeur
+                        if(element.GarantieObligatoireCreditInd == null && element.GarantObligatoireCreditInd == null && element.GarantObligatoireCreditGrp){
+                            $('#garantiecredit').hide()
+                        }
+                        else if(element.GarantObligatoireCreditInd == 1){
+                            $('#demande_credit_garantie').attr('disabled',true)
+                            $('#demande_credit_Valeur').attr('disabled',true)
+                            $('#demande_credit_Type').attr('disabled',true)
+                            $('#demande_credit_ValeurUnitaure').attr('disabled',true)
+                            $('#demande_credit_Unite').attr('disabled',true)
+                            $('#demande_credit_ValeurTotal').attr('disabled',true)
+                        }
+                        else if(element.GarantieObligatoireCreditInd == 1){
+                                $('#demande_credit_garant').attr('disabled',true)
+                        }
                     }
                 }
 
@@ -169,7 +186,8 @@ $(document).ready(function(){
             $('#garantie_credit_MontantGarant').show()
         })
 
-        // Garantie
+        // Garantie base sur l'epargne
+
         $('#demande_credit_Montant').on('blur',function(){
             var montant=$(this).val()
             console.log(' montant ' +montant)

@@ -130,6 +130,27 @@ class DemandeCredit
     #[ORM\Column(length: 255,nullable:true)]
     private ?string $typeAmortissement = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $garant = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $garantie = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $Valeur = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Type = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ValeurUnitaure = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $Unite = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $ValeurTotal = null;
+
     // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     // private ?CategorieCredit $Categorie2Credit = null;
 
@@ -625,6 +646,90 @@ class DemandeCredit
     public function setTypeAmortissement(string $typeAmortissement): self
     {
         $this->typeAmortissement = $typeAmortissement;
+
+        return $this;
+    }
+
+    public function getGarant(): ?string
+    {
+        return $this->garant;
+    }
+
+    public function setGarant(?string $garant): self
+    {
+        $this->garant = $garant;
+
+        return $this;
+    }
+
+    public function getGarantie(): ?string
+    {
+        return $this->garantie;
+    }
+
+    public function setGarantie(?string $garantie): self
+    {
+        $this->garantie = $garantie;
+
+        return $this;
+    }
+
+    public function getValeur(): ?int
+    {
+        return $this->Valeur;
+    }
+
+    public function setValeur(?int $Valeur): self
+    {
+        $this->Valeur = $Valeur;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->Type;
+    }
+
+    public function setType(?string $Type): self
+    {
+        $this->Type = $Type;
+
+        return $this;
+    }
+
+    public function getValeurUnitaure(): ?string
+    {
+        return $this->ValeurUnitaure;
+    }
+
+    public function setValeurUnitaure(?string $ValeurUnitaure): self
+    {
+        $this->ValeurUnitaure = $ValeurUnitaure;
+
+        return $this;
+    }
+
+    public function getUnite(): ?int
+    {
+        return $this->Unite;
+    }
+
+    public function setUnite(?int $Unite): self
+    {
+        $this->Unite = $Unite;
+
+        return $this;
+    }
+
+    public function getValeurTotal(): ?int
+    {
+        return $this->ValeurTotal;
+    }
+
+    public function setValeurTotal(?int $ValeurTotal): self
+    {
+        $this->ValeurTotal = $ValeurTotal;
 
         return $this;
     }

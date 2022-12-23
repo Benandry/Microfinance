@@ -23,7 +23,6 @@ class GarantieCreditType extends AbstractType
                     'label'=>'% Montant credit demande (Individuel)',
                     'disabled'=>true,
                     'required'=>false
-
             ])
             ->add('MontantCreditDmdGroupe',IntegerType::class,[
                 'label'=>'% Montant credit demande (Groupe)',
@@ -63,7 +62,9 @@ class GarantieCreditType extends AbstractType
                 'label'=>false,
                 'attr'=>[
                     'placeholder'=>'Montant exiger . . .'
-                    ]
+                ],
+                'required'=>false
+
             ])
             ->add('regle',ChoiceType::class,[
                 'label'=>false,
@@ -74,7 +75,8 @@ class GarantieCreditType extends AbstractType
                 ],
                 'attr'=>[
                     'placeholder'=>'Regle'
-                ]
+                ],
+                'required'=>false
             ])
             ->add('GarantObligatoireCreditInd',RadioType::class,[
                 'label'=>'Garant obligatoire  (Individuel)',
@@ -85,7 +87,8 @@ class GarantieCreditType extends AbstractType
                 'label'=>false,
                 'attr'=>[
                     'placeholder'=>'Montant Garant'
-                ]
+                ],
+                'required'=>false
             ])
             ->add('GarantObligatoireCreditGrp',RadioType::class,[
                 'label'=>'Garant obligatoire  (Groupe)',
@@ -110,14 +113,16 @@ class GarantieCreditType extends AbstractType
                     'placeholder'=>'Choix regles',
                     'class'=>'form-control'
                 ],
-                'label'=>false
+                'label'=>false,
+                'required'=>false
             ])
             ->add('ProduitCredit',EntityType::class,[
                 'class'=>ProduitCredit::class,
                 'choice_label'=>'NomProduitCredit',
                 'mapped'=>true,
                 'by_reference'=>true,
-                'placeholder'=>'Type credit'
+                'placeholder'=>'Type credit',
+                'required'=>false
             ])
         ;
     }

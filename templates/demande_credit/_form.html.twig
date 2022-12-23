@@ -4,6 +4,7 @@
       {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2" id="epargne">Etape 2</a></li> #}
       {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 2</a></li> #}
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
+      <li class="nav-item"id="garantiecredit"> <a class="nav-link" data-bs-toggle="tab" href="#etape3" >Etape 3</a></li>
       {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape5">Etape 4</a></li>  #}
   </ul>
 
@@ -111,6 +112,30 @@
             </div>
         </div>
       </div>
+
+              {# Etape 3 #}
+
+            <div class="tab-pane" id="etape3">
+        <div class="row shadow-sm p-3">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Etape 3</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.garant) }}
+                    </div>
+                    <div class="col-6 col-sm-6">
+                      {{ form_row(form.garantie) }}
+                      {{ form_row(form.Valeur) }}
+                      {{ form_row(form.Type) }}
+                      {{ form_row(form.ValeurUnitaure) }}
+                      {{ form_row(form.Unite) }}
+                      {{ form_row(form.ValeurTotal) }}
+                    </div>
+                 </div>
+                             </div>
+        </div>
+      </div>
+
 
     {# Etape 5 #}
           {# <div class="tab-pane" id="etape5">
