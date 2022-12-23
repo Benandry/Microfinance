@@ -44,6 +44,9 @@ class AmortissementFixe
     #[ORM\Column(nullable: true)]
     private ?float $commission = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $codecredit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +168,18 @@ class AmortissementFixe
     public function setCommission(?float $commission): self
     {
         $this->commission = $commission;
+
+        return $this;
+    }
+
+    public function getCodecredit(): ?string
+    {
+        return $this->codecredit;
+    }
+
+    public function setCodecredit(string $codecredit): self
+    {
+        $this->codecredit = $codecredit;
 
         return $this;
     }

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AmortissementFixe index{% endblock %}
+
+{% block body %}
+    <h1>AmortissementFixe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Periode</th>
+                <th>DateRemborsement</th>
+                <th>Principale</th>
+                <th>Interet</th>
+                <th>MontanttTotal</th>
+                <th>Codeclient</th>
+                <th>Remboursement</th>
+                <th>Annuite</th>
+                <th>Penalite</th>
+                <th>Commission</th>
+                <th>Codecredit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for amortissement_fixe in amortissement_fixes %}
+            <tr>
+                <td>{{ amortissement_fixe.id }}</td>
+                <td>{{ amortissement_fixe.periode }}</td>
+                <td>{{ amortissement_fixe.dateRemborsement ? amortissement_fixe.dateRemborsement|date('Y-m-d') : '' }}</td>
+                <td>{{ amortissement_fixe.principale }}</td>
+                <td>{{ amortissement_fixe.interet }}</td>
+                <td>{{ amortissement_fixe.montanttTotal }}</td>
+                <td>{{ amortissement_fixe.codeclient }}</td>
+                <td>{{ amortissement_fixe.remboursement }}</td>
+                <td>{{ amortissement_fixe.annuite }}</td>
+                <td>{{ amortissement_fixe.penalite }}</td>
+                <td>{{ amortissement_fixe.commission }}</td>
+                <td>{{ amortissement_fixe.codecredit }}</td>
+                <td>
+                    <a href="{{ path('app_amortissement_fixe_show', {'id': amortissement_fixe.id}) }}">show</a>
+                    <a href="{{ path('app_amortissement_fixe_edit', {'id': amortissement_fixe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_amortissement_fixe_new') }}">Create new</a>
+{% endblock %}

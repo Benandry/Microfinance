@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Amortissement{% endblock %}
+{% block head %}Modification d'amortissement{% endblock %}
+
+{% block body %}
+
+    {{ include('amortissement_fixe/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}
