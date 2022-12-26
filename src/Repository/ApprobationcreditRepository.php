@@ -113,6 +113,7 @@ class ApprobationCreditRepository extends ServiceEntityRepository
              appro.codecredit,
              appro.dateApprobation,
              appro.description
+            --  appro.utilisateur
 
             FROM App\Entity\DemandeCredit demande
             INNER JOIN 

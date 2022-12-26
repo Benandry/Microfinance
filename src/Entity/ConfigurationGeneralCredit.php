@@ -17,37 +17,37 @@ class ConfigurationGeneralCredit
     #[ORM\ManyToOne(inversedBy: 'configurationGeneralCredits')]
     private ?ProduitCredit $ProduitCredit = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $ProduitLieEpargne = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?int $NombreJourInteretAnnee = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?int $NombreSemaineAnnee = null;
 
     #[ORM\ManyToOne(inversedBy: 'configurationGeneralCredits')]
     private ?Devise $Devise = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT,nullable:true)]
     private ?string $RecalculDateEcheanceDecaissement = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?int $TauxInteretVariableSoldeDegressif = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $RecalculInteretRemboursementAmortissementDegressif = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $MethodeSoldeDegressifComposeCalculInteret = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $AutorisationDecaissementPartiellement = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $AcrivePrioriteRemboursementCredit = null;
 
     public function getId(): ?int
