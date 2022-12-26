@@ -1,16 +1,14 @@
 {% extends "base.html.twig" %}
+
 {% block title %} Ajout de nouvelle client {% endblock %}
 {% block head %} Ajout de nouvelle client {% endblock %}
+
 {% block body %}
 
-      {# /***************Messages succes ******************/#}
-       {% for message in app.flashes('success') %}
-                <div class="text-success">
-                        <strong>{{ message }}</strong>
-                </div>
-       {% endfor %}
-                Agence : <p id="agence"> {{ app.user.nomagence }}</p>
-                Code : <p id="code"> {{ app.user.codeagence }}</p>
+    {# /***************Messages succes ******************/#}
+    {% for message in app.flashes('success') %}
+        <p class="alert alert-info text-center" role="alert">{{ message }} </p>
+    {% endfor %}
 
         <div style="display:none;"> client <span id="last_client">{{ lastClient }}</span>  <span id="agence_id"> {{ agence_client }} </span></div>
         {{ include('Module_client/individuel/_form.html.twig') }}

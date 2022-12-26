@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decaissement index{% endblock %}
+
+{% block body %}
+    <h1>Decaissement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumeroCredit</th>
+                <th>MontantCredit</th>
+                <th>DateDecaissement</th>
+                <th>PieceComptable</th>
+                <th>FraisPapeterie</th>
+                <th>CommissionCredit</th>
+                <th>FraisDeDeveloppement</th>
+                <th>CaisseCredit</th>
+                <th>Cash</th>
+                <th>CycleDeCredit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for decaissement in decaissements %}
+            <tr>
+                <td>{{ decaissement.id }}</td>
+                <td>{{ decaissement.numeroCredit }}</td>
+                <td>{{ decaissement.montantCredit }}</td>
+                <td>{{ decaissement.dateDecaissement ? decaissement.dateDecaissement|date('Y-m-d') : '' }}</td>
+                <td>{{ decaissement.pieceComptable }}</td>
+                <td>{{ decaissement.fraisPapeterie }}</td>
+                <td>{{ decaissement.commissionCredit }}</td>
+                <td>{{ decaissement.fraisDeDeveloppement }}</td>
+                <td>{{ decaissement.caisseCredit }}</td>
+                <td>{{ decaissement.cash ? 'Yes' : 'No' }}</td>
+                <td>{{ decaissement.cycleDeCredit }}</td>
+                <td>
+                    <a href="{{ path('app_crud_decaissement_show', {'id': decaissement.id}) }}">show</a>
+                    <a href="{{ path('app_crud_decaissement_edit', {'id': decaissement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crud_decaissement_new') }}">Create new</a>
+{% endblock %}

@@ -38,6 +38,8 @@ class ApprobationCreditController extends AbstractController
             // dd($form->getData());
             $approbationCreditRepository->add($approbationCredit, true);
 
+            
+            $this->addFlash('success', "Le demande de credit ".$approbationCredit->getCodecredit()." est ".$approbationCredit->getStatusApprobation());
             return $this->redirectToRoute('app_approbation_credit_index', [], Response::HTTP_SEE_OTHER);
         }
 

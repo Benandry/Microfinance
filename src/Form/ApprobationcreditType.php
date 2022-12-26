@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\DemandeCredit;
+use App\Entity\User;
 use App\Entity\ApprobationCredit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ApprobationCreditType extends AbstractType
 {
@@ -36,7 +38,15 @@ class ApprobationCreditType extends AbstractType
             ->add('codecredit',TextType::class,[
                 'label' => 'Code credit',
             ])
-            ->add('utilisateur')
+            ->add('agentCredit',EntityType::class,[
+                'class'=>User::class,
+                'choice_label'=>'prenom',
+                'by_reference'=>true,
+                'placeholder'=>'Agent de credit . . .',
+                'attr'=>[
+                    'class'=>'form-control'
+                 ]
+                ])
         ;
     }
 

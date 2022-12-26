@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Decaissement{% endblock %}
+{% block head %}Decaissement{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        {% for demande in demandes %}
+            <div class="col-sm-6 col-xl-6">
+                <p> Nom du client : <span > {{ demande.nom_client }} </span> </p>
+                <p> Prenom du client : <span> {{ demande.prenom_client }}</span> </p>
+            </div>
+            <div class="col-sm-6 col-xl-6">
+                <p> Numero de credit : <span id="numero_credit" > {{ demande.NumeroCredit }} </span> </p>
+                <p> Montant de credit : <span id="montant_credit" > {{ demande.Montant }} </span> </p>
+            </div>
+        {% endfor %}
+    </div>
+    {{ include('Module_credit/crud_decaissement/_form.html.twig') }}
+
+{% endblock %}

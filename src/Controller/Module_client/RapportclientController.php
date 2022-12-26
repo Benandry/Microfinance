@@ -20,6 +20,7 @@ class RapportclientController extends AbstractController
     public function index(Request $request,IndividuelclientRepository $individuelclients,AgenceRepository $agence): Response
     {
        $clientRapport=$individuelclients->findAll();
+       dd($clientRapport);
 
        $trier=$this->createForm(TrierRapportClientType::class);
        $filtrerapportdate=$trier->handleRequest($request);

@@ -4,7 +4,11 @@
 {% block head %}Liste demande credit en attente d'approbation{% endblock %}
 
 {% block body %}
-    <table class="table table-bordered">
+    {% for message in app.flashes('success') %}
+        <p class="alert alert-info text-center" role="alert">{{ message }} </p>
+    {% endfor %}
+
+    <table class="table table-bordered table2">
         <thead>
             <tr>
                 <th>Numero credit </th>

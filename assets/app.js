@@ -12,6 +12,7 @@ import './styles/app.scss';
 import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+import './credit/decaissement'
 import './credit/amortissement';
 import './credit/approbation'
 import './api/retrait'
@@ -80,6 +81,23 @@ $(document).ready(function(){
         }
       
     });
+
+    $(".table2").DataTable({
+        dom: 'tp',
+        language: {
+            search: "Rechercher&nbsp;",
+            lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+            info: "Affichage de  _START_ a _END_ sur _TOTAL_ elements",
+            paginate: {
+                first:      "Premier",
+                previous:   "Pr&eacute;c&eacute;dent",
+                next:       "Suivant",
+                last:       "Dernier"
+            }
+        }
+      
+    });
+
 
     $('#filtre_rapport_transaction_date1').on('change',()=>{
         $('#two_date').hide()

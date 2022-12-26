@@ -107,9 +107,6 @@ class Individuelclient
     #[ORM\OneToMany(mappedBy: 'codeclient', targetEntity: ListeRouge::class)]
     private Collection $listeRouges;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateadhesion=null;
-
     #[ORM\ManyToMany(targetEntity: CompteEpargne::class, inversedBy: 'codeindcl')]
     private Collection $codeclientind;
 
@@ -117,8 +114,6 @@ class Individuelclient
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $codeclient = null;
 
-    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
-    private ?User $user = null;
 
     #[ORM\Column(length: 255)]
     private ?string $commune = null;
@@ -135,6 +130,13 @@ class Individuelclient
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $CodeAgence = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateadhesion = null;
+
+    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     
     public function __construct()
@@ -610,18 +612,6 @@ class Individuelclient
         return $this;
     }
 
-    public function getDateadhesion(): ?\DateTimeInterface
-    {
-        return $this->dateadhesion;
-    }
-
-    public function setDateadhesion(\DateTimeInterface $dateadhesion): self
-    {
-        $this->dateadhesion = $dateadhesion;
-
-        return $this;
-    }
-
     public function setCodeindividuel(string $codeindividuel): self
     {
         $this->codeindividuel = $codeindividuel;
@@ -663,18 +653,6 @@ class Individuelclient
     public function setCodeclient(?string $codeclient): self
     {
         $this->codeclient = $codeclient;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -735,6 +713,30 @@ class Individuelclient
     public function setCodeAgence(?string $CodeAgence): self
     {
         $this->CodeAgence = $CodeAgence;
+
+        return $this;
+    }
+
+    public function getDateadhesion(): ?\DateTimeInterface
+    {
+        return $this->dateadhesion;
+    }
+
+    public function setDateadhesion(?\DateTimeInterface $dateadhesion): self
+    {
+        $this->dateadhesion = $dateadhesion;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

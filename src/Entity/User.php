@@ -40,8 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $responsabilite = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Individuelclient::class)]
-    private Collection $individuelclients;
 
     #[ORM\Column(length: 10)]
     private ?string $codeagence = null;
@@ -52,10 +50,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'agentCredit', targetEntity: ApprobationCredit::class)]
     private Collection $approbationCredits;
 
+    #[ORM\OneToMany(mappedBy: 'AgentDeCredit', targetEntity: Decaissement::class)]
+    private Collection $decaissements;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Individuelclient::class)]
+    private Collection $individuelclients;
+
     public function __construct()
     {
-        $this->individuelclients = new ArrayCollection();
         $this->approbationCredits = new ArrayCollection();
+        $this->decaissements = new ArrayCollection();
+        $this->individuelclients = new ArrayCollection();
     }
 
     public function __toString()
@@ -187,37 +192,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Individuelclient>
-     */
-    public function getIndividuelclients(): Collection
-    {
-        return $this->individuelclients;
-    }
-
-    public function addIndividuelclient(Individuelclient $individuelclient): self
-    {
-        if (!$this->individuelclients->contains($individuelclient)) {
-            $this->individuelclients[] = $individuelclient;
-            $individuelclient->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIndividuelclient(Individuelclient $individuelclient): self
-    {
-        if ($this->individuelclients->removeElement($individuelclient)) {
-            // set the owning side to null (unless already changed)
-            if ($individuelclient->getUser() === $this) {
-                $individuelclient->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getCodeagence(): ?string
     {
         return $this->codeagence;
@@ -266,6 +241,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($approbationCredit->getAgentCredit() === $this) {
                 $approbationCredit->setAgentCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Decaissement>
+     */
+    public function getDecaissements(): Collection
+    {
+        return $this->decaissements;
+    }
+
+    public function addDecaissement(Decaissement $decaissement): self
+    {
+        if (!$this->decaissements->contains($decaissement)) {
+            $this->decaissements[] = $decaissement;
+            $decaissement->setAgentDeCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDecaissement(Decaissement $decaissement): self
+    {
+        if ($this->decaissements->removeElement($decaissement)) {
+            // set the owning side to null (unless already changed)
+            if ($decaissement->getAgentDeCredit() === $this) {
+                $decaissement->setAgentDeCredit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Individuelclient>
+     */
+    public function getIndividuelclients(): Collection
+    {
+        return $this->individuelclients;
+    }
+
+    public function addIndividuelclient(Individuelclient $individuelclient): self
+    {
+        if (!$this->individuelclients->contains($individuelclient)) {
+            $this->individuelclients[] = $individuelclient;
+            $individuelclient->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIndividuelclient(Individuelclient $individuelclient): self
+    {
+        if ($this->individuelclients->removeElement($individuelclient)) {
+            // set the owning side to null (unless already changed)
+            if ($individuelclient->getUser() === $this) {
+                $individuelclient->setUser(null);
             }
         }
 

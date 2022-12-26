@@ -140,7 +140,6 @@ class IndividuelclientType extends AbstractType
             ->add('dateadhesion',DateType::class,[
                 'widget'=>'single_text',
                 'label'=>'Date d\'adhesion ',
-                'mapped'=>true,
                 'required'=>false,
             ])
             ->add('lieudelivrance',TextType::class,[
@@ -181,14 +180,14 @@ class IndividuelclientType extends AbstractType
 
             ->add('user',EntityType::class,[
                 'class'=>User::class,
-                'choice_label'=>'nom ',
+                'choice_label'=>'prenom',
                 'multiple' => false,
                 
                 'mapped'=>true,
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'label' => "Utilisateur"
+                'label' => "Agent "
             ])  
             
             ->add('Sauvegarder',SubmitType::class,[
