@@ -192,4 +192,16 @@ class IndividuelclientRepository extends ServiceEntityRepository
 
         return $stmt;
    }
+
+   public function findAllClient()
+   {
+        $query = " SELECT  client
+        FROM App\Entity\Individuelclient client
+        ";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+        return $stmt;
+   }
+
 }
