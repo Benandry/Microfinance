@@ -125,7 +125,6 @@ class CompteEpargneController extends AbstractController
     public function new(Request $request, CompteEpargneRepository $compteEpargneRepository): Response
     {
 
-
         $code = $request->query->get('code');
         $nom = $request->query->get('nom');
         $prenom = $request->query->get('prenom');

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Remboursement index{% endblock %}
+
+{% block body %}
+    <h1>Remboursement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Periode</th>
+                <th>DateRemborsement</th>
+                <th>Principale</th>
+                <th>Interet</th>
+                <th>MontanttTotal</th>
+                <th>Codeclient</th>
+                <th>Remboursement</th>
+                <th>Annuite</th>
+                <th>Penalite</th>
+                <th>Commission</th>
+                <th>Codecredit</th>
+                <th>Typeamortissement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for remboursement in remboursements %}
+            <tr>
+                <td>{{ remboursement.id }}</td>
+                <td>{{ remboursement.periode }}</td>
+                <td>{{ remboursement.dateRemborsement ? remboursement.dateRemborsement|date('Y-m-d') : '' }}</td>
+                <td>{{ remboursement.principale }}</td>
+                <td>{{ remboursement.interet }}</td>
+                <td>{{ remboursement.montanttTotal }}</td>
+                <td>{{ remboursement.codeclient }}</td>
+                <td>{{ remboursement.remboursement }}</td>
+                <td>{{ remboursement.annuite }}</td>
+                <td>{{ remboursement.penalite }}</td>
+                <td>{{ remboursement.commission }}</td>
+                <td>{{ remboursement.codecredit }}</td>
+                <td>{{ remboursement.typeamortissement }}</td>
+                <td>
+                    <a href="{{ path('app_remboursement_edit', {'id': remboursement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

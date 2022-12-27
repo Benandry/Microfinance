@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Ouvrir une compte epargne Client
+{% endblock %}
+
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                <div class="modal-header titre_modal">
+                    <h4 class="modal-title text-center">Remboursement </h4>
+                </div>
+                {{ form_start(form) }} 
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-4 col-sm-4">
+                                <div id="code_suggest"></div>
+
+                                <div id="info_client">
+                                    {{ form_row(form.codecredit)}}
+                                </div>
+                            </div>
+                            {# <div class="col-auto col-sm-auto mt-3 ms-5" >
+                                <p class="fw-bold"> Code Client : <span id="code_cli"></span> </p>
+                                <p class="fw-bold"> Nom Client : <span id="nom_cli"></span> </p>
+                                <p class="fw-bold"> Prenom Client : <span id="prenom_cli"></span> </p>
+                            </div> #}
+                            
+                        </div>
+
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                             {{ form_row(form.Suivant)}}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div> 
+{% endblock %}

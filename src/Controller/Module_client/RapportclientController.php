@@ -106,9 +106,9 @@ class RapportclientController extends AbstractController
              }
 
              if ($rapportMembre == ' ') {
-                $code = " ";
-                $nom = " ";
-                $email = " ";
+                // $code = " ";
+                // $nom = " ";
+                // $email = " ";
              }else{
                 //dd($rapportMembre);
                 $nom = $rapportMembre[0]['nomGroupe'];
@@ -128,9 +128,9 @@ class RapportclientController extends AbstractController
          'one_date' => $one_date,
          'du'=>$du,
          'au' =>$au,
-         'code' => $code,
-         'nom' => $nom,
-         'email' => $email,
+        //  'code' => $code,
+        //  'nom' => $nom,
+        //  'email' => $email,
          ]
      );
      }
