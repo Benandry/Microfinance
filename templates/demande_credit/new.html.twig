@@ -8,10 +8,7 @@
 
 {% block body %}
      {% for message in app.flashes('success') %}
-
-        <div class="alert alert-info text-center" role="alert">
-                {{ message }}
-        </div>
+        <p class="alert alert-info text-center" role="alert"> {{ message }}</p>
     {% endfor %}
     <div style="display:none;">
         solde :<p id="soldeepargne" ></p>

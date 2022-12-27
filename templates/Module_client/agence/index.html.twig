@@ -9,9 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_agence_new') }}" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Nouveau</a>
-
-    <table class="table1 table">
+    <table class="table table2">
         <thead>
             <tr>
                 <th>Code Agence</th>
@@ -51,5 +49,7 @@
         {% endfor %}
         </tbody>
     </table>
+    
+    <a href="{{ path('app_agence_new') }}" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Nouveau</a>
 
 {% endblock %}

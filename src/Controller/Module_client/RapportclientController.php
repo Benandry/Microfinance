@@ -19,7 +19,9 @@ class RapportclientController extends AbstractController
     #[Route('/rapportclient', name: 'app_rapportclient')]
     public function index(Request $request,IndividuelclientRepository $individuelclients,AgenceRepository $agence): Response
     {
-       $clientRapport=$individuelclients->findAll();
+       // dd(" Mbola eto aloha");
+       $clientRapport=$individuelclients->findAllClient();
+       //dd($clientRapport);
 
        $trier=$this->createForm(TrierRapportClientType::class);
        $filtrerapportdate=$trier->handleRequest($request);

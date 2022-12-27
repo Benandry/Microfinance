@@ -1,12 +1,32 @@
 {% extends "base.html.twig" %}
 
 {% block title %} Decaissement de credit{% endblock %}
-{% block head %} Decaissement de credit{% endblock %}
+{% block head %} Liste de demande approuver {% endblock %}
 
 
 {% block body %}
-
-    <div class="modal" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    {% for message in app.flashes('success') %}
+        <p class="alert alert-info text-center" role="alert">{{ message }} </p>
+    {% endfor %}
+        <table class="table table-bordered table2">
+            <thead>
+                <th>Numero  de credit </th>
+                <th>Nom et Prenom</th>
+                <th>Montant credit</th>
+                <th>Action </th>
+            </thead>
+            <tbody> 
+                {% for liste in demandeApprouver %}
+                    <tr>
+                        <td> {{ liste.NumeroCredit }} </td>
+                        <td> {{ liste.nom_client }}  {{ liste.prenom_client }}  </td>
+                        <td> {{ liste.Montant }} </td>
+                        <td> <a href="{{ path('app_crud_decaissement_new',{'liste' : liste }) }}" class="btn btn-sm btn-info"> Decaisser</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {# <div class="modal" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,6 +45,6 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> #}
 
 {% endblock %}

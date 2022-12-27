@@ -98,14 +98,14 @@ class IndividuelController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-        $brochureFile = $form->get('photo')->getData();
-        if ($brochureFile) {
-            $brochureFileName = $fileUploader->upload($brochureFile);
-            $individuelclient->setPhoto($brochureFileName);
-        }
-        $individuelclientRepository->add($individuelclient,True);
-            $this->addFlash('success', "Ajout de nouveau client:  ' ".$individuelclient-> getNomClient()."  " . $individuelclient->getPrenomClient()." ' avec code ".$individuelclient->getCodeclient()."  reussite!!");
-            return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
+            $brochureFile = $form->get('photo')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile);
+                $individuelclient->setPhoto($brochureFileName);
+            }
+            $individuelclientRepository->add($individuelclient,True);
+                $this->addFlash('success', "Ajout de nouveau client:  ' ".$individuelclient-> getNomClient()."  " . $individuelclient->getPrenomClient()." ' avec code ".$individuelclient->getCodeclient()."  reussite!!");
+                return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_client/individuel/new.html.twig', [

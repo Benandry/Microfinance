@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-sm-4 col-xl-4">
+            <div style="display:none">
+                {{ form_row(form.numeroCredit) }}
+                {{ form_row(form.montantCredit) }}
+            </div>
+            {{ form_row(form.dateDecaissement) }}
+            {{ form_row(form.pieceComptable) }}
+            {{ form_row(form.fraisPapeterie) }}
+        </div>
+        <div class="col-sm-4 col-xl-4">
+            {{ form_row(form.commissionCredit) }}
+            {{ form_row(form.fraisDeDeveloppement) }}
+            {{ form_row(form.caisseCredit) }}
+        </div>
+        <div class="col-sm-4 col-xl-4">
+            {{ form_row(form.cycleDeCredit) }}
+            {{ form_row(form.AgentDeCredit) }}
+            {{ form_row(form.cash) }}
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="{{ path('app_decaissement_credit') }}" class="btn btn-sm btn-info m-2"> Annuler</a> 
+            </div>
+            <div class="col-sm-6 mt-2">
+                <button class="btn btn-sm btn-primary">{{ button_label|default('Valider') }}</button>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

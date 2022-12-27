@@ -42,7 +42,7 @@ class AmortissementController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()){
-            $this->addFlash('success', "Demande de credit terminée !!!!");
+            $this->addFlash('success', "Demande de credit ".$codecredit." terminée " );
             return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
 
         }
@@ -83,7 +83,7 @@ class AmortissementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-                $this->addFlash('success', "Demande de credit terminée !!!!");
+                $this->addFlash('success', "Demande de credit ".$codecredit." terminée " );
                 return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -125,7 +125,7 @@ class AmortissementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-                $this->addFlash('success', "Demande de credit terminée !!!!");
+                $this->addFlash('success', "Demande de credit ".$codecredit." terminée " );
                 return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
         }
 

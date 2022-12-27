@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ApprobationCreditRepository;
 use App\Repository\DemandeCreditRepository;
 use App\Form\RapportCreditType;
+use App\Repository\DecaissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 class RapportCreditController extends AbstractController
@@ -82,6 +83,16 @@ class RapportCreditController extends AbstractController
         return $this->render('Module_credit/rapportCredit/demande_credit.html.twig',[
             'listeDifferer' => $rapportDemande,
             'trierDocs'=>$trierDoc,
+        ]);
+    }
+
+    #[Route('/rapport/credit/decaissement', name: 'app_rapport_credit_decaissement')]
+    public function decaissement(DecaissementRepository $decaissementRepository): Response
+    {
+        $listeDecaissement = $decaissementRepository->rapportDecaissement();
+        //dd($listeDecaissement);
+        return $this->render('Module_credit/rapportCredit/decaissement.html.twig',[
+            'listeDecaisser' => $listeDecaissement,
         ]);
     }
 }

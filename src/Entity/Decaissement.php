@@ -44,6 +44,10 @@ class Decaissement
     #[ORM\Column]
     private ?int $cycleDeCredit = null;
 
+    #[ORM\ManyToOne(inversedBy: 'decaissements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $AgentDeCredit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +169,18 @@ class Decaissement
     public function setCycleDeCredit(int $cycleDeCredit): self
     {
         $this->cycleDeCredit = $cycleDeCredit;
+
+        return $this;
+    }
+
+    public function getAgentDeCredit(): ?user
+    {
+        return $this->AgentDeCredit;
+    }
+
+    public function setAgentDeCredit(?user $AgentDeCredit): self
+    {
+        $this->AgentDeCredit = $AgentDeCredit;
 
         return $this;
     }
