@@ -32,10 +32,6 @@ class ApprobationCredit
     #[ORM\ManyToOne(inversedBy: 'approbationCredits')]
     private ?User $agentCredit = null;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0d17d6343241c92027d42036e70a8feea011a335
     public function getId(): ?int
     {
         return $this->id;
