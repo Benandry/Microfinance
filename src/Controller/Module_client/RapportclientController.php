@@ -84,9 +84,6 @@ class RapportclientController extends AbstractController
              $du = 0;
              $au = 0;
              $one_date = 0;
-             $code = " ";
-             $nom = " ";
-             $email = " ";
 
          if($form->isSubmitted() && $form->isValid()){
              $data = $rapportmembregroupe->getData();
@@ -109,17 +106,6 @@ class RapportclientController extends AbstractController
                 $rapportMembre=$groupeRepository->FiltreMembre($groupe,$du,$au);
                // dd($rapportMembre);
              }
-
-             if ($rapportMembre == '') {
-                $code = "";
-                $nom = "";
-                $email = "";
-             }else{
-                //dd($rapportMembre);
-                $nom = $rapportMembre[0]['nomGroupe'];
-                $code = $rapportMembre[0]['codegroupe'];
-                $email = $rapportMembre[0]['email'];
-             }
              
          }
  
@@ -133,9 +119,6 @@ class RapportclientController extends AbstractController
          'one_date' => $one_date,
          'du'=>$du,
          'au' =>$au,
-         'code' => $code,
-         'nom' => $nom,
-         'email' => $email,
          ]
      );
      }
