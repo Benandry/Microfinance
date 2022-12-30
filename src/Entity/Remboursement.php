@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AmortissementFixeRepository;
+use App\Repository\RemboursementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AmortissementFixeRepository::class)]
-class AmortissementFixe
+#[ORM\Entity(repositoryClass: RemboursementRepository::class)]
+class Remboursement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -198,4 +198,6 @@ class AmortissementFixe
 
         return $this;
     }
+
+
 }

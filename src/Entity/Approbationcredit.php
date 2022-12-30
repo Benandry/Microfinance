@@ -30,9 +30,7 @@ class ApprobationCredit
     private ?string $codecredit = null;
 
     #[ORM\ManyToOne(inversedBy: 'approbationCredits')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?User $agentCredit = null;
-
 
     public function getId(): ?int
     {
@@ -111,15 +109,4 @@ class ApprobationCredit
         return $this;
     }
 
-    // public function getUtilisateur(): ?string
-    // {
-    //     return $this->utilisateur;
-    // }
-
-    // public function setUtilisateur(string $utilisateur): self
-    // {
-    //     $this->utilisateur = $utilisateur;
-
-    //     return $this;
-    // }
 }

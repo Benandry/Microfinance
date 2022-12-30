@@ -4,7 +4,9 @@ namespace App\Controller\Credit;
 
 use App\Entity\DemandeCredit;
 use App\Entity\AmortissementFixe;
+use App\Entity\Remboursement;
 use App\Form\DemandeCreditType;
+use App\Form\RemboursementType;
 use App\Repository\DemandeCreditRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +29,7 @@ class DemandeCreditController extends AbstractController
     public function new(Request $request, DemandeCreditRepository $demandeCreditRepository,ManagerRegistry $doctine ): Response
     {
         $demandeCredit = new DemandeCredit();
+        
         $form = $this->createForm(DemandeCreditType::class, $demandeCredit);
         $form->handleRequest($request);
 
@@ -99,7 +102,9 @@ class DemandeCreditController extends AbstractController
                     
                     $entityManager->persist($amortissement);
                     $entityManager->flush();
-                }
+
+                }                
+
                 //dd($tableau_amort);
                 return $this->redirectToRoute('app_tableau_amortissement', [
                     'codecredit' => $codecredit,
