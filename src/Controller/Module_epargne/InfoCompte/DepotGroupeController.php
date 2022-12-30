@@ -19,11 +19,9 @@ class DepotGroupeController extends AbstractController
     
             $form = $this->createFormBuilder()
             ->add('code', TextType::class,[
-                'label' => "Code groupe : ",
+                'label' => "Compte epargne groupe : ",
                 'attr' =>[
                     'class' => 'form-control',
-                    'maxlength' => 10,
-                    'minLength' => 10
                 ]
             ])
             ->add('nom', TextType::class,[
@@ -32,6 +30,14 @@ class DepotGroupeController extends AbstractController
                     'class' => 'form-control',
                 ]
             ])
+
+            ->add('code_groupe', TextType::class,[
+                'label' => "code du groupe : ",
+                'attr' =>[
+                    'class' => 'form-control',
+                ]
+            ])
+
             ->add('email', TextType::class,[
                 'label' => "Email du groupe : ",
                 'attr' =>[
@@ -55,10 +61,12 @@ class DepotGroupeController extends AbstractController
                 $code = $data['code'];
                 $nom = $data['nom'];
                 $email = $data['email'];
-                return $this->redirectToRoute('app_compte_epargne_new', [
+                $code_groupe = $data['code_groupe'];
+                return $this->redirectToRoute('app_transaction_new', [
                         'code' => $code,
                         'nom' => $nom,
                         'email' => $email,
+                        'code_groupe' => $code_groupe
     
                     ], 
                 Response::HTTP_SEE_OTHER);

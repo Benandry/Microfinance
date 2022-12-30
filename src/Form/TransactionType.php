@@ -46,7 +46,7 @@ class TransactionType extends AbstractType
                 'label'=>'Montant'
                 ])
             ->add('montant_bruite',IntegerType::class,[
-            'label' => "Montant bruite",
+            'label' => "Montant du depot",
             'mapped' => false,
             'attr'=>[
                 'class'=>'form-control'

@@ -10,7 +10,7 @@ $(document).ready(() =>{
         const code_rechercher = document.getElementById('form_code');
 
         code_rechercher.addEventListener('keyup',()=>{
-            const value_input = code_rechercher.value
+        const value_input = code_rechercher.value
             
             $.ajax({
                 url: url_api,

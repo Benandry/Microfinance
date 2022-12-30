@@ -29,16 +29,7 @@ $(document).ready(() =>{
             montant_bruit_= $('#transaction_montant_bruite').val();
            // alert(": I010000015")
             console.log(montant_bruit_);
-        })
 
-        $('#transaction_commission').val(0)
-        $('#transaction_commission').on('change',()=>{
-            commission=$('#transaction_commission').val();
-            // alert(commission);
-        })
-
-        $('#transaction_papeterie').val(0)
-        $('#transaction_papeterie').on('keyup',() =>{
             papeterie = $('#transaction_papeterie').val()
             var montant_total = parseInt(montant_bruit_) -(parseInt(commission) + parseInt(papeterie))
 
@@ -50,6 +41,15 @@ $(document).ready(() =>{
 
             $('#transaction_solde').val(solde)
         })
+
+        $('#transaction_commission').val(0)
+        $('#transaction_commission').on('change',()=>{
+            commission=$('#transaction_commission').val();
+            // alert(commission);
+        })
+
+        $('#transaction_papeterie').val(0)
+        
 
 
     }

@@ -216,4 +216,36 @@ class GroupeRepository extends ServiceEntityRepository
   
 
   /**********************Pr */
+  public function api_compte_epargne_groupe()
+  {
+    $query = " SELECT
+      ce.codegroupeepargne code
+    FROM  App\Entity\CompteEpargne ce
+    WHERE ce.codegroupeepargne IS NOT NULL ";
+    
+    $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+    return $stmt;
+  }
+
+  public function api_compte_epargne_groupe_code($code)
+  {
+
+    $query = " SELECT
+      ce.codegroupeepargne code ,
+      groupe.nomGroupe nom,
+      groupe.email,
+      groupe.codegroupe
+
+    FROM  App\Entity\CompteEpargne ce
+    INNER JOIN  App\Entity\Groupe groupe
+    WITH ce.codegroupe = groupe.codegroupe
+    WHERE ce.codegroupeepargne = '$code'
+     ";
+    
+    $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+    return $stmt;
+  }
+  
 }

@@ -160,4 +160,25 @@ class AllApiController extends AbstractController
        // dd($api);
         return new JsonResponse($api);
     }
+
+
+    #[Route('/api/allcodegroupe', name: 'app_all_code_groupe')]
+
+    public function api_code_groupe_epargne(GroupeRepository $repo): Response
+    {
+
+        $api = $repo->api_compte_epargne_groupe(); 
+
+        return new JsonResponse($api);
+    }
+
+    #[Route('/api/epargne/groupe/{code}', name: 'app_code_groupe_epargne')]
+
+    public function api_code_groupe_epargne_by_id(GroupeRepository $repo,$code): Response
+    {
+        $api = $repo->api_compte_epargne_groupe_code($code); 
+
+        return new JsonResponse($api);
+    }
+
 }

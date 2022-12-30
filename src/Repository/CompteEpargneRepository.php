@@ -703,6 +703,9 @@ class CompteEpargneRepository extends ServiceEntityRepository
         return $stmt;
     }
 
-      
+    
+    public function compteGroupeExiste(){
+        
+    }
     
 }
