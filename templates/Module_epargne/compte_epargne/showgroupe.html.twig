@@ -1,47 +1,48 @@
-{{ include('header.html.twig') }}
+{% extends "base.html.twig" %}
+
+{% block title %} Groupe {% endblock %}
+{% block head %} Groupe {% endblock %}
 
 {% block body %}
-    {% for Agence in agences  %}
-      <div class="card jumbotron jumbotron-fluid" style="width: 550px;margin-left:200px;">
-        <div class="card-body" style-"width:200px;">
-          <h5 class="card-title"></h5><br>
-          <p class="card-text">Code Epargne :{{ Groupes.codegroupeepargne }}</p>
-          <p class="card-text">Nom : {{ Groupes.nomGroupe }}</p>
-          <p class="card-text">Date de creation : {{ Groupes.dateInscription | date('d-m-y') }}</p>
-          <p class="card-text">Numero mobile : {{ Groupes.numeroMobile }}</p>
-          <p class="card-text">Eamil : {{ Groupes.email }}</p>
+    {% for Groupes in Groupes  %}
+      <div class="row">
+        <div class="col-xl-4 col-md-4 col-sm-4">
+            <p> <b>Code Epargne : </b> {{ Groupes.codegroupeepargne }}</p>
+            <p> <b> Nom :</b> {{ Groupes.nomGroupe }}</p>
         </div>
-        </ul>
+        <div class="col-xl-4 col-md-4 col-sm-4">
+          <p> <b> Date de creation :</b> {{ Groupes.dateInscription | date('d-m-y') }}</p>
+          <p><b>Numero mobile : </b>{{ Groupes.numeroMobile }}</p>
+        </div>
+        <div class="col-xl-4 col-md-4 col-sm-4">
+           <p><b> Eamil :</b> {{ Groupes.email }}</p>
+        </div>
       </div>
-    {% endfor %}
-
-    <ul class="list-group list-group-flush alert alert-success" style="padding:50px;">
-    {# Type et profuit epargne #}
-       <div class="container">
-            <h2 class="card-title">Type et Produit Epargne</h2>
-            <div class="row">
+      
+      <ul class="list-group list-group-flush alert alert-success" style="padding:50px;">
+      {# Type et profuit epargne #}
+        <div class="container">
+              <h5 class="card-title">Type et Produit Epargne</h5>
+              <div class="row">
+                  <div class="col-md-5">
+                    <p> Nom Produit<p>
+                    <li class="list-group-item" style="color:black;">{{Groupes.nomproduit }}</li></a><br>
+                  </div>
+                  {% if Groupes.solde == '' %}
                 <div class="col-md-5">
-                  <p>Nom Produit<p>
-                  <li class="list-group-item" style="color:black;">{{produits.nomproduit}}</li></a><br>
+                    <p>Solde</p>
+                      <li class="list-group-item" style="color:black;"> 0 </li></a><br>
                 </div>
-                {% for compte_epargne in solde %}
-                {% if compte_epargne.Description == 'DEPOT' %}
-              <div class="col-md-5">
-                  <p>Solde</p>
-                    <li class="list-group-item" style="color:black;">{{ compte_epargne.soldes }}</li></a><br>
+                {% else %}
+                <div class="col-md-5">
+                    <p>Solde</p>
+                      <li class="list-group-item" style="color:black;"> {{ Groupes.solde }} </li></a><br>
+                </div>
+                  {% endif %}
               </div>
-              {% else %}
-               <div class="col-md-5">
-                  <p>Solde</p>
-                    <li class="list-group-item" style="color:black;">0</li></a><br>
-              </div>
-                {% endif %}
-                {% endfor %}
-
-            </div>
-      </div>
-    </ul>
+        </div>
+      </ul>
+    {% endfor %}
 
 {% endblock %}
 
-{{ include('footer.html.twig') }}

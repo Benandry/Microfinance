@@ -10,23 +10,16 @@
 
 {% block body %}
 
-    {% for message in app.flashes('success') %}
-            <strong class="text-alert alert-success">{{ message }}</strong>
-        {% endfor %}
+    {{ include('modal.html.twig') }}
     <div class="row">
-        <div class="col-4 col-sm-4 col-md-4">
-            <div class="card m-3">
-                <div class="card-title text-center p-2" > Information du client </div>
-                <hr>
-                <div class="card-body">
-                    <p class="fw-bold">Code client : <span id="code_client"> {{ code }}</span></p>
-                    <p class="fw-bold"> Nom Client : <span id="nom"> {{ nom }}</span></p>
-                    <p class="fw-bold"> Prenom client :  <span id="prenom"> {{ prenom }}</span></p>
-                </div>
-            </div>
+        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+            <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>        
         </div>
-        <div class="col-auto col-sm-auto">
-
+        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+            <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p>
+        </div>
+        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+            <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p>
         </div>
     </div>
               {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
@@ -38,14 +31,17 @@
             <p> Text ecrit : <span id="text"> </span> </p>
             <p> Text ecrit : <span id="code_text"> </span> </p>
         </div>
-        
+        <div class="fw-bold">
+            <hr/>
+        </div>
         <h6 class="text-primary">Compte existant du client {{ nom }} {{ prenom }}</h6>
         <table class="table mt-3">
             <thead>
                 <tr>
                     <th>Code Epargne</th>
-                    <th>Produits</th>
+                    <th>Code client</th>
                     <th>Date d'ouverture </th>
+                    <th>Produits</th>
                     <th>Solde</th>
                     <th>Actions </th>
                 </tr>
@@ -54,8 +50,9 @@
                 <tbody class="jumbotron jumbotron-fluid" style="color:black;">
                     <tr>
                         <td class="fw-bold">{{ compte_epargne.codeepargne }}</td>
+                        <td>{{ compte_epargne.codeclient }}</td>
+                        <td>{{ compte_epargne.datedebut | date('d-m-Y') }}</td>
                         <td>{{ compte_epargne.nomproduit }}</td>
-                        <td>{{ compte_epargne.datedebut | date }}</td>
                         <td>
                             {% if compte_epargne.solde != '' %}
                                 {{ compte_epargne.solde }}
@@ -64,15 +61,12 @@
                             {% endif %}</td>
                         <td>
                         <div class="row">
-                                <div class="col-sm-4">
-                                    <a href="{{ path('app_compte_epargne_show', {'id': compte_epargne.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
-                                </div>
-                                <div class="col-sm-4">
-                                    <a href="{{ path('app_compte_epargne_edit', {'id': compte_epargne.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                                </div>
-                                <div class="col-sm-4">
-                                    {{ include('Module_epargne/compte_epargne/_delete_form.html.twig') }}
-                                </div>
+                            <div class="col-sm-6">
+                                <a href="{{ path('app_compte_epargne_show', {'id': compte_epargne.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="{{ path('app_compte_epargne_edit', {'id': compte_epargne.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                            </div>
                         </div>
                         </td>
                     </tr>

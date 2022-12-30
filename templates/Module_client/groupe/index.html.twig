@@ -16,7 +16,7 @@
     </div>
 {{ include('modal.html.twig') }}
 
-    <table class="table1 table">
+    <table class="table2 table">
         <thead>
             <tr>
                 <th>Code groupe</th>
@@ -37,14 +37,11 @@
                 <td>{{ Groupe.email }}</td>
                 <td>
                     <div class="row">
-                        <div class="col-3 col-sm-3">
+                        <div class="col-4 col-sm-4">
                             <a href="{{ path('app_groupe_show', {'id': Groupe.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                         </div>
-                        <div class="col-3 col-sm-3">
+                        <div class="col-4 col-sm-4">
                             <a href="{{ path('app_groupe_edit', {'id': Groupe.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                        </div>
-                        <div class="col-auto col-sm-auto">
-                            {{ include('Module_client/groupe/_delete_form.html.twig') }}
                         </div>
                     </div>
                 </td>

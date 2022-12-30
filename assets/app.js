@@ -12,6 +12,7 @@ import './styles/app.scss';
 import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+import './epargne/groupe/depot';
 import './credit/decaissement'
 import './credit/amortissement';
 import './credit/approbation'
@@ -27,7 +28,7 @@ import './api/compte_epargne/compt_epargne_groupe'
 import './api/compte_epargne/ouvrir_compte_epargne_client'
 import './api/compte_epargne/compte_epargne_individuel'
 import './api/compte_epargne/api_rapport_releve'
-import './api/compte_epargne/api_transfert'
+import './api/compte_epargne/api_transfert';
 
 //Import les api retrait ////
 import './api/compte_epargne/depot'

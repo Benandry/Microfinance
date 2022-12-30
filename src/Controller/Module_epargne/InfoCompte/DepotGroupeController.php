@@ -19,7 +19,7 @@ class DepotGroupeController extends AbstractController
     
             $form = $this->createFormBuilder()
             ->add('code', TextType::class,[
-                'label' => "Code client a ouvrir un compte : ",
+                'label' => "Code groupe : ",
                 'attr' =>[
                     'class' => 'form-control',
                     'maxlength' => 10,
@@ -27,13 +27,13 @@ class DepotGroupeController extends AbstractController
                 ]
             ])
             ->add('nom', TextType::class,[
-                'label' => "Nom du client : ",
+                'label' => "Nom du groupe : ",
                 'attr' =>[
                     'class' => 'form-control',
                 ]
             ])
-            ->add('prenom', TextType::class,[
-                'label' => "Prenom du client : ",
+            ->add('email', TextType::class,[
+                'label' => "Email du groupe : ",
                 'attr' =>[
                     'class' => 'form-control',
                 ]
@@ -52,15 +52,13 @@ class DepotGroupeController extends AbstractController
             /* ===== Si les produits sont selectionnnés. On va executer les requests ci-dessous ====== */
             if ($form->isSubmitted() && $form->isValid()){
                 $data = $form->getData();
-    
-                /*****Inforamtion via lees formulaire************************ */
                 $code = $data['code'];
                 $nom = $data['nom'];
-                $prenom = $data['prenom'];
+                $email = $data['email'];
                 return $this->redirectToRoute('app_compte_epargne_new', [
                         'code' => $code,
                         'nom' => $nom,
-                        'prenom' => $prenom,
+                        'email' => $email,
     
                     ], 
                 Response::HTTP_SEE_OTHER);
