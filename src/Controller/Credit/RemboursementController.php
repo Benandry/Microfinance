@@ -32,11 +32,17 @@ class RemboursementController extends AbstractController
     #[Route('/new', name: 'app_remboursement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RemboursementRepository $remboursementRepository): Response
     {
+
+        // remboursement
+        $codecredit=$request->query->get('codecredit');
+
         $remboursement = new Remboursement();
         $form = $this->createForm(RemboursementType::class, $remboursement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $remboursements=$remboursement->setCodecredit($codecredit);
+
             $remboursementRepository->add($remboursement, true);
 
             return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
@@ -44,6 +50,7 @@ class RemboursementController extends AbstractController
 
         return $this->renderForm('remboursement/new.html.twig', [
             'remboursement' => $remboursement,
+            'codecredit'=>$codecredit,
             'form' => $form,
         ]);
     }

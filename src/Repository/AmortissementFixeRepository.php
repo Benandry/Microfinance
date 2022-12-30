@@ -39,6 +39,32 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         }
     }
 
+    public function RemboursementCredit($codecredit){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT 
+                remboursement.periode,
+                remboursement.dateRemborsement,
+                remboursement.principale,
+                remboursement.interet,
+                remboursement.montanttTotal,
+                remboursement.codeclient,
+                remboursement.remboursement,
+                remboursement.annuite,
+                remboursement.penalite,
+                remboursement.commission,
+                remboursement.codecredit,
+                remboursement.typeamortissement
+            FROM 
+            App\Entity\AmortissementFixe remboursement
+            WHERE
+            remboursement.codecredit = :codecredit
+            '
+        )
+        ->setParameter(':codecredit',$codecredit);
+
+        return $query->getResult();
+    }
 //    /**
 //     * @return AmortissementFixe[] Returns an array of AmortissementFixe objects
 //     */
