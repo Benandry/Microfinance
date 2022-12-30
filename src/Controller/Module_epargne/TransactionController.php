@@ -81,10 +81,11 @@ class TransactionController extends AbstractController
         $code_client = $request->query->get('cod_client');
         $nom = $request->query->get('nom');
         $prenom = $request->query->get('prenom');
+        $email = $request->query->get('email');
+        $code_groupe = $request->query->get('code_groupe');
 
-        #dd($code);
+        //dd($code_groupe);
         $soldeCurrent = $transactionRepository->soldeCurrent($code);
-        #dd($soldeCurrent);
 
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
@@ -104,6 +105,8 @@ class TransactionController extends AbstractController
 
             $codeclient=$transaction->getCodeepargneclient();
             $transaction->setCodeepargneclient($codeclient);
+
+            //setCodeepargneclient(string $codeepargneclient)
 
             $Description=$transaction->getDescription();
             $transaction->setDescription($Description);

@@ -130,12 +130,7 @@ class CompteEpargneController extends AbstractController
         $prenom = $request->query->get('prenom');
         $email = $request->query->get('email');
 
-        dd($email);
-        // affichage du client du jour
         $compte_existe=$compteEpargneRepository->compteClientCourant($code);
-        
-       // dd($compte_existe);
-        
         $compteEpargne = new CompteEpargne();
         $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
         $form->handleRequest($request);
@@ -151,8 +146,6 @@ class CompteEpargneController extends AbstractController
                 'prenom' => $prenom,
             ], Response::HTTP_SEE_OTHER);
         }
-
-        
         return $this->renderForm('Module_epargne/compte_epargne/new.html.twig', [
             'compte_epargne' => $compteEpargne,
             'form' => $form,
@@ -300,6 +293,8 @@ class CompteEpargneController extends AbstractController
 
     }
 
+
+   
         // // Cette fonction est pour le rapport
         
         // #[Route('/rapportsolde',name:'app_rapport_solde')]

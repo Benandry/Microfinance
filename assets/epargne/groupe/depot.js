@@ -10,7 +10,7 @@ $(document).ready(() =>{
 
             const code_groupe_ = $('#form_code').val();
             /////Api groupe
-            var url = "/api/code-groupe/code/"+code_groupe_;
+            var url = "/api/epargne/groupe/"+code_groupe_;
     
             $.ajax({
                 url: url,
@@ -30,26 +30,8 @@ $(document).ready(() =>{
 
                         $('#form_nom').val(element.nom);
                         $('#form_email').val(element.email);
+                        $('#form_code_groupe').val(element.codegroupe);
                     }
-
-                      //console.log(code_groupe_);
-
-
-                     const getValue = result.filter(i => i.code.toLocaleLowerCase().includes(code_groupe_.toLocaleLowerCase()))
-                        // console.log(getValue)
-
-                        var suggestion = ''
-
-                        if( code_groupe_ != ''){
-                            getValue.forEach(resultItem =>{
-                            
-                                suggestion += `<div class="suggestion">${resultItem.Commune}</div>`
-                            })
-                        }else{
-                            suggestion = '<div class="suggestion"> Pas de groupe </div>'
-                        }
-
-                        document.getElementById('groupe_suggest').innerHTML = suggestion
             
                 },
                 error: function (request, status, error) {
@@ -61,5 +43,61 @@ $(document).ready(() =>{
 
         })
 
+
+        /*************************Suggestion */
+
+
+        var url_api = '/api/allcodegroupe';
+
+        const code_rechercher = document.getElementById('form_code');
+
+        code_rechercher.addEventListener('keyup',()=>{
+        const value_input = code_rechercher.value;
+
+            $.ajax({
+                url: url_api,
+                method: "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify(),
+                success: function(result){
+                    const getValue = result.filter(i => i.code.toLocaleLowerCase().includes(value_input.toLocaleLowerCase()))
+                        var suggestion = ''
+
+                        if( value_input != ''){
+                            getValue.forEach(resultItem =>{
+                            
+                                suggestion += `<div class="suggestion">${resultItem.code}</div>`
+                            })
+                        }else{
+                            suggestion = '<div class="suggestion"> Pas de groupe </div>'
+                        }
+
+                        document.getElementById('groupe_suggest').innerHTML = suggestion
+            
+
+                    // const getValue = result.filter(i => i.code.toLocaleLowerCase().includes(value_input.toLocaleLowerCase()))
+
+                    // var suggestion = ''
+
+                    // if( value_input != '' ){
+                    //     getValue.forEach(resultItem =>{
+                        
+                    //     suggestion += `<div class="suggestion">${resultItem.code}</div>`
+                    //     })
+                    // }else{
+                    //     suggestion = '<div class="suggestion"> Pas de commune</div>'
+                    // }
+                    
+                    // document.getElementById('code_suggest').innerHTML = suggestion
+                
+            
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+
+            }); 
+        }); 
     }
 })
