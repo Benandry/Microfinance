@@ -24,7 +24,7 @@ class RemboursementModalController extends AbstractController
             $codecredit=$data['codecredit'];
             // dd($codecredit);
 
-            return $this->redirectToRoute('app_remboursement_index',
+            return $this->redirectToRoute('app_remboursement_new',
             [
                 'codecredit'=>$codecredit
 

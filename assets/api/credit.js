@@ -13,7 +13,7 @@ $(document).ready(function(){
 
             // recuperation du code agence
             var codeagence=$('#codeagence').text();
-            console.log(codeagence)
+            // console.log(codeagence)
 
             // on va boucler le maxId dans la derniere 
             
@@ -23,10 +23,11 @@ $(document).ready(function(){
             
             var pad_last_id = recuplastnumerocredit.toString().padStart(7,0)
             // console.log(pad_last_id);
-
+            var codecreditnouveau='I'+codeagence+pad_last_id
+            console.log(codecreditnouveau)
             // Ici on aura une resultat : I0000001
             if($('#demande_credit_TypeClient').val() == 'INDIVIDUEL'){
-                $('#demande_credit_NumeroCredit').val('I'+codeagence+pad_last_id);
+                $('#demande_credit_NumeroCredit').val(codecreditnouveau);
             }
             else{
                 $('#demande_credit_NumeroCredit').val('G'+codeagence+pad_last_id);
@@ -36,7 +37,7 @@ $(document).ready(function(){
 
             $.ajax({
                 url:url_api,
-                method:"GET",
+                method:'GET',
                 dataType:"json",
                 contentType:"application/json; charset=utf-8",
                 success : function(content){
@@ -46,7 +47,7 @@ $(document).ready(function(){
                         
                         var codeepargneclient=el.codeepargne
 
-                        console.log(codeepargneclient)
+                        // console.log(codeepargneclient)
                         
                         // Ici on verra si le client possede une epargne ou non
                         
@@ -86,7 +87,7 @@ $(document).ready(function(){
 
                         var element= result[i];
 
-                        console.log(element);
+                        // console.log(element);
 
                         // On recupere ici les configuration semblable au choix du client
 
