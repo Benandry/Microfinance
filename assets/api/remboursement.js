@@ -7,7 +7,7 @@ $(document).ready(function(){
     
     var url_api='/remboursement_credit/'+recupe_codecredit;
 
-    $('#remboursement_dateRemborsement').on('blur',function(){
+    $('#remboursement_periode').on('blur',function(){
         $.ajax({
             url:url_api,
             method:'GET',
