@@ -128,10 +128,13 @@ class CompteEpargneController extends AbstractController
         $code = $request->query->get('code');
         $nom = $request->query->get('nom');
         $prenom = $request->query->get('prenom');
+        $email = $request->query->get('email');
+
+        dd($email);
         // affichage du client du jour
         $compte_existe=$compteEpargneRepository->compteClientCourant($code);
         
-       # dd($compte_existe);
+       // dd($compte_existe);
         
         $compteEpargne = new CompteEpargne();
         $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
@@ -139,7 +142,6 @@ class CompteEpargneController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-           # dd($data);
             $compteEpargneRepository->add($compteEpargne, true);
 
             $this->addFlash('success', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
@@ -150,6 +152,7 @@ class CompteEpargneController extends AbstractController
             ], Response::HTTP_SEE_OTHER);
         }
 
+        
         return $this->renderForm('Module_epargne/compte_epargne/new.html.twig', [
             'compte_epargne' => $compteEpargne,
             'form' => $form,
@@ -182,6 +185,11 @@ class CompteEpargneController extends AbstractController
             $compteEpargneRepository->add($compteEpargne, true);
 
             $this->addFlash('success', "Creation du compte epargne  ".$compteEpargne->getCodegroupe()." réussite!!!");
+            return $this->redirectToRoute('app_compte_epargne_new', [
+                'code' => $code,
+                'nom' => $nom,
+                'prenom' => $email,
+            ], Response::HTTP_SEE_OTHER);
         }
        
         return $this->renderForm('Module_epargne/compte_epargne/newcomptegroupe.html.twig', [
@@ -225,24 +233,13 @@ class CompteEpargneController extends AbstractController
     #[Route('/DetailesGroupe/{id}', name: 'app_compte_epargne_details_groupe', methods: ['GET'])]
     public function DetailsGroupe(CompteEpargneRepository $compteEpargneRepository,ManagerRegistry $doctrine,$id,AgenceRepository $agence): Response
     {
-        $epargne=$doctrine->getRepository(CompteEpargne::class)->find($id);
-        $Groupe=$epargne->getCodeGroupe();
-        $produit=$epargne->getProduit();
+       // $epargne=$doctrine->getRepository(CompteEpargne::class)->find($id);
+        $Groupe=$compteEpargneRepository->findyGroupeById($id);
+        $agenceRepos=$agence->findAll();
 
-        // Agence
-            $agenceRepos=$agence->findAll();
-        // type produit
-        $produits=$doctrine->getRepository(ProduitEpargne::class)->find($id);
-        $type=$produit->getTypeEpargne();
-        // Solde
-        $soldes=$compteEpargneRepository->Solde($id);
         return $this->render('Module_epargne/compte_epargne/showgroupe.html.twig', [
             'Groupes' => $Groupe,
-            'epargnes' => $epargne,
             'agences'=>$agenceRepos,
-            'produits'=>$produit,
-            'types'=>$type,
-            'solde'=>$soldes
         ]);
     }
 

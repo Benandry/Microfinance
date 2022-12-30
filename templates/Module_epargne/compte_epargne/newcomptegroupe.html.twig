@@ -8,28 +8,20 @@
     Compte epargne du groupe {{ nom }}
 {% endblock %}
 {% block body %}
-
-       {% for message in app.flashes('success') %}>
-             <strong>{{ message }}</strong>
-       {% endfor %}
-
+    {{ include('modal.html.twig') }}
     <div class="row">
-        <div class="col-4 col-sm-4 col-md-4">
-            <div class="card m-3">
-                <div class="card-title text-center p-2" > Information du Groupe </div>
-                <hr>
-                <div class="card-body">
-                        <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
-                        <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>
-                        <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
-                </div>
-            </div>
+        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+            <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>      
         </div>
-        <div class="col-auto col-sm-auto">
-
+        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+            <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
+        </div>
+        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
+            <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
         </div>
     </div>
-    <div id="information">
+
+    <div id="information" style="display: none;">
         <p> Text ecrit : <span id="text"> </span> </p>
         <p> Text ecrit : <span id="code"> </span> </p>
     </div>
@@ -82,7 +74,13 @@
                         {{ compte.solde }}
                     {% endif %}
                 </td>
-                <td> </td>
+                <td> 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

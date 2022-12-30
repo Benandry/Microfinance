@@ -21,6 +21,7 @@ class AllApiController extends AbstractController
 
         $api = $produitRepo->findByApiProduit($id); 
 
+        dd($api);
         return new JsonResponse($api);
     }
 

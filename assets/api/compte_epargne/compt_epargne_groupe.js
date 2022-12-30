@@ -97,8 +97,7 @@ $(document).ready(() =>{
 
     if (path === '/compte/epargne/new/groupe') {
 
-        var code_groupe_ = $('#code_groupe').text()
-        
+        var code_groupe_ = $('#code_groupe').text();
         $('#information').css('display','none')
         $('#code_ep_Gr').css('display','none')
         $('#compte_groupe_ep_codegroupe').val(code_groupe_)

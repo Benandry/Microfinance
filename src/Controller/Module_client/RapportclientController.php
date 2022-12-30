@@ -91,20 +91,19 @@ class RapportclientController extends AbstractController
              $one_date = $data['search_on_date'];
 
              $groupe = $data['groupe'];
-
              #------------------Afficher ---------------------------------#
 
              if ($one_date != null) {
                 $date_1 = true;
-                $rapportMembre = $groupeRepository->filtreByOneDate($groupe, $one_date);
-                //dd($rapportMembre);
+                $rapportMembre = $groupeRepository->filtreByOneDate('Groupe A', $one_date);
+                dd($rapportMembre);
              } else {
                 $date_2 = true;
                 $du = $rapportmembregroupe->get('Du')->getData();
                 $au = $rapportmembregroupe->get('Au')->getData();
 
                 $rapportMembre=$groupeRepository->FiltreMembre($groupe,$du,$au);
-               // dd($rapportMembre);
+                dd($rapportMembre);
              }
 
              if ($rapportMembre == ' ') {
