@@ -131,7 +131,7 @@ class CompteEpargneController extends AbstractController
         $prenom = $request->query->get('prenom');
         $email = $request->query->get('email');
 
-        dd($email);
+        //dd($email);
         // affichage du client du jour
         $compte_existe=$compteEpargneRepository->compteClientCourant($code);
         
