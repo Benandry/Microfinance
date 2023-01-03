@@ -139,7 +139,7 @@ class IndividuelController extends AbstractController
     public function edit(Request $request, Individuelclient $individuelclient, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface,$id ,$active): Response
     {
        // $client = new Individuelclient();
-       // dd($client);
+       // dd($active);
         $form = $this->createForm(IndividuelclientType::class, $individuelclient);
         $form->handleRequest($request);
         
@@ -168,6 +168,7 @@ class IndividuelController extends AbstractController
             'form' => $form,
             'clientToModify' => $clientToModify[0]['id'],
             'nom_client' => $nom,
+            'active' => $active,
         ]);
     }
 
