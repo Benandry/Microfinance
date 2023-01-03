@@ -67,6 +67,7 @@ class TransactionType extends AbstractType
             ])
             ->add('nom',TextType::class,[
                 'mapped'=>false,
+                'required'=>false,
                 'attr'=>[
                     'class'=>'form-control',
                     'disabled'=>true,
@@ -74,6 +75,7 @@ class TransactionType extends AbstractType
                 ])
             ->add('prenom',TextType::class,[
                 'mapped'=>false,
+                'required'=>false,
                 'attr'=>[
                     'class'=>'form-control',
                     'disabled'=>true,
@@ -81,6 +83,7 @@ class TransactionType extends AbstractType
             ])
             ->add('nomgroupe',TextType::class,[
                 'mapped'=>false,
+                'required'=>false,
                 'attr'=>[
                     'class'=>'form-control',
                     'disabled'=>true,
@@ -89,6 +92,7 @@ class TransactionType extends AbstractType
             ])
             ->add('donneessolde',TextType::class,[
                 'mapped'=>false,
+                'required'=>false,
                 'attr'=>[
                     'class'=>'form-control',
                     'disabled'=>true,

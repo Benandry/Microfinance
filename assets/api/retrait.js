@@ -4,7 +4,6 @@ const path = window.location.pathname
 $(document).ready(() =>{
 
     if (path === '/transaction/retrait') {
-            alert("Bonjour a tous")
             var montant_bruit_ = 0
             var commission = 0
             var papeterie = 0

@@ -50,24 +50,37 @@ class RemboursementRepository extends ServiceEntityRepository
         
         $query=$entityManager->createQuery(
             "SELECT 
-                remboursement.id,
-                remboursement.periode,
-                remboursement.dateRemborsement,
-                remboursement.principale,
-                remboursement.interet,
-                remboursement.montanttTotal,
-                remboursement.codeclient,
-                remboursement.remboursement,
-                remboursement.annuite,
-                remboursement.penalite,
-                remboursement.commission,
-                remboursement.codecredit,
-                remboursement.typeamortissement
+                -- ammortissemnt
+                -- ammortissement.periode,
+                -- ammortissement.dateRemborsement,
+                -- ammortissement.principale,
+                -- ammortissement.interet,
+                -- ammortissement.montanttTotal,
+                -- ammortissement.codeclient,
+                -- ammortissement.remboursement,
+                -- ammortissement.annuite,
+                -- ammortissement.penalite,
+                -- ammortissement.commission,
+                -- ammortissement.typeamortissement,
+                -- ammortissement.codecredit as codecreditammortissement ,
+                -- remboursement
+                DISTINCT remboursement.id,
+                remboursement.dateRemborsement as remboursementdate,
+                -- Test si le montant est complet ou non
+                CASE
+                   WHEN ammortissement.montanttTotal = remboursement.remboursement THEN ammortissement.montanttTotal
+                   ELSE (remboursement.remboursement)
+                END as remboursementpaye,
+                remboursement.penalite as remboursementpenalite,
+                remboursement.commission as remboursementcommission,
+                remboursement.codecredit as remboursementcodecredit
             FROM
             App\Entity\Remboursement remboursement
+            INNER JOIN
+            App\Entity\AmortissementFixe ammortissement
             WHERE
-            Month(remboursement.dateRemborsement) = '$mois'
-            AND 
+            ammortissement.codecredit = remboursement.codecredit
+            AND
             remboursement.codecredit = :codecredit
             "
         )

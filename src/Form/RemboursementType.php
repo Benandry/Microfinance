@@ -14,20 +14,20 @@ class RemboursementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('periode',TextType::class)
+            // ->add('periode',TextType::class)
             ->add('dateRemborsement',DateType::class,[
                 'widget'=>'single_text'
                 ])
-            ->add('principale')
-            ->add('interet')
-            ->add('montanttTotal')
-            ->add('codeclient')
+            // ->add('principale')
+            // ->add('interet')
+            // ->add('montanttTotal')
+            // ->add('codeclient')
             ->add('remboursement')
-            ->add('annuite')
+            // ->add('annuite')
             ->add('penalite')
             ->add('commission')
             ->add('codecredit')
-            ->add('typeamortissement')
+            // ->add('typeamortissement')
         ;
     }
 
