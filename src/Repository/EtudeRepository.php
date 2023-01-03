@@ -39,28 +39,40 @@ class EtudeRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Etude[] Returns an array of Etude objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function nombreClient()
+    {
+        $query = "SELECT client FROM App\Entity\Individuelclient client";
 
-//    public function findOneBySomeField($value): ?Etude
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+    public function nombreGroupe()
+    {
+        $query = "SELECT groupe FROM App\Entity\Groupe groupe";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+    public function nombreEpargne()
+    {
+        $query = "SELECT ce FROM App\Entity\CompteEpargne ce";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+    public function nombreAgence()
+    {
+        $query = "SELECT a FROM App\Entity\Agence a";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
 }

@@ -29,8 +29,7 @@ class IndividuelController extends AbstractController
     public function index(Request $request,IndividuelclientRepository $individuelclientRepository,AgenceRepository $agenceRepository): Response
     {
 
-        $individuel=$individuelclientRepository->Client();
-
+        $individuel=$individuelclientRepository->findBy([],['id' => 'ASC' ]);
         // Recherche
 
         $formulaire=$this->createForm(RechercheIndividuelType::class);
@@ -67,10 +66,6 @@ class IndividuelController extends AbstractController
 
     public function new(AgenceRepository $agence,ManagerRegistry $doctrine,Request $request, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface): Response
     {
-
-
-        // Maka an ilay client farany
-
         $get_last_client = $individuelclientRepository->findByLastClient();
 
         #dd($get_last_client[0][1]);
@@ -140,8 +135,8 @@ class IndividuelController extends AbstractController
         ]);
     }
 
-#[Route('/{id}/edit', name: 'app_individuel_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Individuelclient $individuelclient, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface,$id): Response
+#[Route('/{id}/edit/{active}', name: 'app_individuel_edit', methods: ['GET','POST'])]
+    public function edit(Request $request, Individuelclient $individuelclient, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface,$id ,$active): Response
     {
        // $client = new Individuelclient();
        // dd($client);

@@ -87,21 +87,6 @@ class IndividuelclientRepository extends ServiceEntityRepository
         ->getResult();
    }
 
-   public function Client()
-   {
-       $entityManager=$this->getEntityManager();
-
-       $query=$entityManager->createQuery(
-           'SELECT
-            i 
-            FROM
-            App\Entity\Individuelclient i
-            ORDER BY i.id DESC'
-       )
-       ->setMaxResults(5);
-       return $query->getResult();
-   }
-
     
    //    Cette fonction permet de trier les rapoort client entre deux date
     public function trierRapportClient ($date1=null,$date2=null)

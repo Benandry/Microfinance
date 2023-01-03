@@ -115,17 +115,10 @@ class Individuelclient
     private ?string $codeclient = null;
 
 
-    #[ORM\Column(length: 255)]
-    private ?string $commune = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $garant = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $NomAgence = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $CodeAgence = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateadhesion = null;
@@ -137,6 +130,10 @@ class Individuelclient
     #[ORM\ManyToOne(inversedBy: 'individuelclients')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Agence $Agence = null;
+
+    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Commune $commune = null;
 
     
     public function __construct()
@@ -656,18 +653,6 @@ class Individuelclient
 
         return $this;
     }
-
-    public function getCommune(): ?string
-    {
-        return $this->commune;
-    }
-
-    public function setCommune(string $commune): self
-    {
-        $this->commune = $commune;
-
-        return $this;
-    }
     public function isGarant(): ?bool
     {
         return $this->garant;
@@ -676,30 +661,6 @@ class Individuelclient
     public function setGarant(?bool $garant): self
     {
         $this->garant = $garant;
-
-        return $this;
-    }
-
-    public function getNomAgence(): ?string
-    {
-        return $this->NomAgence;
-    }
-
-    public function setNomAgence(?string $NomAgence): self
-    {
-        $this->NomAgence = $NomAgence;
-
-        return $this;
-    }
-
-    public function getCodeAgence(): ?string
-    {
-        return $this->CodeAgence;
-    }
-
-    public function setCodeAgence(?string $CodeAgence): self
-    {
-        $this->CodeAgence = $CodeAgence;
 
         return $this;
     }
@@ -736,6 +697,18 @@ class Individuelclient
     public function setAgence(?Agence $Agence): self
     {
         $this->Agence = $Agence;
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->commune;
+    }
+
+    public function setCommune(?Commune $commune): self
+    {
+        $this->commune = $commune;
 
         return $this;
     }
