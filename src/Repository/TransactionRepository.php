@@ -45,6 +45,48 @@ class TransactionRepository extends ServiceEntityRepository
             'SELECT SUM(t.Montant) FROM App\Entity\Transaction t GROUP BY t.codeepargneclient');
              return $query->getResult();
     }
+
+        // Cette fonction permet d'avoir les releve a chaque client
+
+        public function ReleveTransaction()
+        {
+             $entityManager=$this->getEntityManager();
+             $query=$entityManager->createQuery(
+                 'SELECT 
+                 -- transaction 
+                 tr.id,
+                 tr.Description,
+                 tr.PieceComptable,
+                 tr.DateTransaction,
+                 tr.Montant,
+                 tr.codetransaction,
+                 tr.codeepargneclient,
+                 tr.solde,
+                 -- compte epargne
+                 ce.codeep,
+                 ce.codeepargne,
+                 -- individuel
+                 i.codeclient,
+                 i.nom_client,
+                 i.prenom_client
+                 FROM
+                 App\Entity\Transaction tr
+                 INNER JOIN
+                 App\Entity\CompteEpargne ce
+                 INNER JOIN 
+                 App\Entity\Individuelclient i
+                 WITH
+                 tr.codeepargneclient = ce.codeepargne
+                 AND
+                 ce.codeep = i.codeclient
+                 '
+             );
+     
+     
+                  return $query->getResult();
+        }
+    
+    //  rapport transaction
     
    public function RapportTransaction()
    {
@@ -90,52 +132,13 @@ class TransactionRepository extends ServiceEntityRepository
              c.codeepargne = tr.codeepargneclient AND
              c.produit = p.id AND
              p.typeEpargne = te.id
+             AND
+             c.codeep = i.codeclient
             ')
             ->setMaxResults(0);
 
              return $query->getResult();
    }
-
-
-    // Cette fonction permet d'avoir les releve a chaque client
-
-    public function ReleveTransaction()
-    {
-         $entityManager=$this->getEntityManager();
-         $query=$entityManager->createQuery(
-             'SELECT 
-             -- transaction 
-             tr.id,
-             tr.Description,
-             tr.PieceComptable,
-             tr.DateTransaction,
-             tr.Montant,
-             tr.codetransaction,
-             tr.codeepargneclient,
-             tr.solde,
-             -- compte epargne
-             ce.codeep,
-             ce.codeepargne,
-             -- individuel
-             i.codeclient,
-             i.nom_client,
-             i.prenom_client
-             FROM
-             App\Entity\Transaction tr
-             INNER JOIN
-             App\Entity\CompteEpargne ce
-             INNER JOIN 
-             App\Entity\Individuelclient i
-             WITH
-             tr.codeepargneclient = ce.codeepargne
-             AND
-             ce.codeep = i.codeclient
-             '
-         );
- 
- 
-              return $query->getResult();
-    }
 
     // Cette fonction permet de filtrer les rapports soldes
 
@@ -182,7 +185,10 @@ class TransactionRepository extends ServiceEntityRepository
              c.codeepargne = tr.codeepargneclient AND
              c.produit = p.id AND
              p.typeEpargne = te.id AND
-             tr.DateTransaction BETWEEN :Du AND :Au
+             tr.DateTransaction
+             AND
+             c.codeep = i.codeclient
+             BETWEEN :Du AND :Au
             ')
             ->setParameter(':Du',$Du)
             ->setParameter(':Au',$Au)
@@ -226,15 +232,22 @@ class TransactionRepository extends ServiceEntityRepository
              INNER JOIN
              App\Entity\Transaction tr
              INNER JOIN
-             App\Entity\Individuelclient i
-             INNER JOIN
              App\Entity\ProduitEpargne p
              INNER JOIN
              App\Entity\TypeEpargne te
+             INNER JOIN
+             App\Entity\Individuelclient i
+             INNER JOIN
+             App\Entity\Groupe g
              WHERE
              c.codeepargne = tr.codeepargneclient AND
              c.produit = p.id AND
-             p.typeEpargne = te.id AND
+             p.typeEpargne = te.id
+             AND
+             c.codeep = i.codeclient
+             AND
+             g.codegroupe = c.codeep
+             AND
              tr.DateTransaction <= :Du
             ')
             ->setParameter(':Du',$Du)

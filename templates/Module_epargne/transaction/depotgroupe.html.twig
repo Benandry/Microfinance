@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Depot de compte epargne {{ nom }}
+    Depot de compte epargne {{ nomgroupe }}
 {% endblock %}
 
 {% block head %}
-    Depot client individuel {{ nom }}
+    Depot client groupe {{ nomgroupe }}
 {% endblock %}
 
 {% block body %}
@@ -21,11 +21,13 @@
                     {{ message }}
                 </p>
             {% endfor %} 
+
+
     {# *************************************#}
 
-     <div class="row">
+         <div class="row">
     <div class="col-xl-3 col-md-3 col-sm-3">
-        <p> <b>Compte epargne : </b><span id="code_client"> {{ code }}</span></p>
+        <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
         <p> <b>Solde client : </b>
             {% if solde != '' %}
                 <span id="solde_cli">{{ solde }}</span>     
@@ -35,15 +37,14 @@
         </p>
     </div>
     <div class="col-xl-3 col-md-3 col-sm-3">
-        <p><b>Code client :</b> <span id="code_client"> {{ code_client }}</span></p>
+        <p><b>Code client :</b> <span id="code_client"> {{ codegroupe }}</span></p>
     </div>
     <div class="col-xl-3 col-md-3 col-sm-3">
-        <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>
-    </div>
-    <div class="col-xl-3 col-md-3 col-sm-3">
-        <p> <b>Prenom client :</b>  <span id="prenom"> {{ prenom }}</span></p>
+        <p><b> Nom Client :</b> <span id="nom"> {{ nomgroupe }}</span></p>
     </div>
 </div>
+
+
     {{ include('Module_epargne/transaction/_form.html.twig') }}
 
             <P style="display:none"><span id="code"> </span> </P>

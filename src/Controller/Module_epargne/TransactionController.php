@@ -57,7 +57,6 @@ class TransactionController extends AbstractController
             }
         }
 
-
         return $this->renderForm('Module_epargne/transaction/DernierTransaction.html.twig', [
             'agences' => $agenceRepository->findAll(),
             'transactions'=>$transaction,
@@ -161,6 +160,7 @@ class TransactionController extends AbstractController
             'solde' => $soldeCurrent[0]['solde'],
         ]);
     }
+    
     // Retrait
     #[Route('/retrait', name: 'app_transaction_retrait', methods: ['GET', 'POST'])]
     public function Retrait(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response

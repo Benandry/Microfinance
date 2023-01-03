@@ -2,6 +2,10 @@
 
 namespace App\Controller\Module_epargne\InfoCompte;
 
+use App\Entity\Transaction;
+use App\Form\TransactionType;
+use App\Repository\TransactionRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,7 +66,7 @@ class DepotGroupeController extends AbstractController
                 $nom = $data['nom'];
                 $email = $data['email'];
                 $code_groupe = $data['code_groupe'];
-                return $this->redirectToRoute('app_transaction_new', [
+                return $this->redirectToRoute('app_transaction_groupe_depot', [
                         'code' => $code,
                         'nom' => $nom,
                         'email' => $email,
@@ -77,4 +81,92 @@ class DepotGroupeController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
+
+            // Nouveau depot
+    #[Route('/depotgroupe', name: 'app_transaction_groupe_depot', methods: ['GET', 'POST'])]
+
+    public function DepotGroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository)
+    {
+        $transaction = new Transaction();
+
+        $codegroupe = $request->query->get('code');
+        $nomgroupe = $request->query->get('nom');
+        $email = $request->query->get('email');
+
+        // dd($nomgroupe,$codegroupe,$email);
+
+        $soldeCurrent = $transactionRepository->soldeCurrent($codegroupe);
+
+        if($soldeCurrent == null ){
+            $soldeCurrent[0]['solde'] = 0;
+        }
+
+    //    dd($soldeCurrent);
+        $form = $this->createForm(TransactionType::class, $transaction);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // $transactionRepository->add($transaction,true);
+
+            $entityManager=$doctrine->getManager();
+
+            $transaction->setCodetransaction(random_int(2,1000000000));
+
+            $codeclient=$transaction->getCodeepargneclient();
+            $transaction->setCodeepargneclient($codeclient);
+
+            // setCodeepargneclient(string $codeepargneclient)
+
+            $Description=$transaction->getDescription();
+            $transaction->setDescription($Description);
+
+            $PieceComptable=$transaction->getPieceComptable();
+            $transaction->setPieceComptable($PieceComptable);
+
+            $DateTransaction=$transaction->getDateTransaction();
+            $transaction->setDateTransaction($DateTransaction);
+
+            $Montant=$transaction->getMontant();
+            $transaction->setMontant($Montant);
+
+            $Papeterie=$transaction->getPapeterie();
+            $transaction->setPapeterie($Papeterie);
+
+            $Commission=$transaction->getCommission();
+            $transaction->setCommission($Commission);
+
+            $TypeClient=$transaction->getTypeClient();
+            $transaction->setTypeClient($TypeClient);
+
+            $solde=$transaction->getSolde();
+
+            if ($solde == "NaN") {
+                $transaction->setSolde($Montant);
+            }else{
+                $transaction->setSolde($solde);
+            }
+            
+
+            $entityManager->persist($transaction);
+            $entityManager->flush();
+
+            $this->addFlash('success', " Transaction depot compte epargne '" .$transaction->getCodeepargneclient()."'réussite!!!");
+            return $this->redirectToRoute('app_transaction_new', [
+                'codegroupe' => $codegroupe,
+                'nomgroupe' => $nomgroupe,
+                'email' => $email,
+            ], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Module_epargne/transaction/depotgroupe.html.twig', [
+            'transaction' => $transaction,
+            'form' => $form,
+            'codegroupe' => $codegroupe,
+            'nomgroupe' => $nomgroupe,
+            'email' => $email,
+        'solde' => $soldeCurrent[0]['solde'],
+        ]);
+    }
+
 }

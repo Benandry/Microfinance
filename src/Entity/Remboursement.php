@@ -14,29 +14,29 @@ class Remboursement
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $periode = null;
+    // #[ORM\Column]
+    // private ?int $periode = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateRemborsement = null;
 
-    #[ORM\Column]
-    private ?float $principale = null;
+    // #[ORM\Column]
+    // private ?float $principale = null;
 
-    #[ORM\Column]
-    private ?float $interet = null;
+    // #[ORM\Column]
+    // private ?float $interet = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $montanttTotal = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?float $montanttTotal = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $codeclient = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $codeclient = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $remboursement = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $annuite = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?float $annuite = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $penalite = null;
@@ -47,25 +47,25 @@ class Remboursement
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $codecredit = null;
 
-    #[ORM\Column(length: 255,nullable: true)]
-    private ?string $typeamortissement = null;
+    // #[ORM\Column(length: 255,nullable: true)]
+    // private ?string $typeamortissement = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPeriode(): ?int
-    {
-        return $this->periode;
-    }
+    // public function getPeriode(): ?int
+    // {
+    //     return $this->periode;
+    // }
 
-    public function setPeriode(int $periode): self
-    {
-        $this->periode = $periode;
+    // public function setPeriode(int $periode): self
+    // {
+    //     $this->periode = $periode;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getDateRemborsement(): ?\DateTimeInterface
     {
@@ -79,53 +79,53 @@ class Remboursement
         return $this;
     }
 
-    public function getPrincipale(): ?float
-    {
-        return $this->principale;
-    }
+    // public function getPrincipale(): ?float
+    // {
+    //     return $this->principale;
+    // }
 
-    public function setPrincipale(float $principale): self
-    {
-        $this->principale = $principale;
+    // public function setPrincipale(float $principale): self
+    // {
+    //     $this->principale = $principale;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getInteret(): ?float
-    {
-        return $this->interet;
-    }
+    // public function getInteret(): ?float
+    // {
+    //     return $this->interet;
+    // }
 
-    public function setInteret(float $interet): self
-    {
-        $this->interet = $interet;
+    // public function setInteret(float $interet): self
+    // {
+    //     $this->interet = $interet;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getMontanttTotal(): ?float
-    {
-        return $this->montanttTotal;
-    }
+    // public function getMontanttTotal(): ?float
+    // {
+    //     return $this->montanttTotal;
+    // }
 
-    public function setMontanttTotal(float $montanttTotal): self
-    {
-        $this->montanttTotal = $montanttTotal;
+    // public function setMontanttTotal(float $montanttTotal): self
+    // {
+    //     $this->montanttTotal = $montanttTotal;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getCodeclient(): ?string
-    {
-        return $this->codeclient;
-    }
+    // public function getCodeclient(): ?string
+    // {
+    //     return $this->codeclient;
+    // }
 
-    public function setCodeclient(string $codeclient): self
-    {
-        $this->codeclient = $codeclient;
+    // public function setCodeclient(string $codeclient): self
+    // {
+    //     $this->codeclient = $codeclient;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getRemboursement(): ?float
     {
@@ -139,17 +139,17 @@ class Remboursement
         return $this;
     }
 
-    public function getAnnuite(): ?float
-    {
-        return $this->annuite;
-    }
+    // public function getAnnuite(): ?float
+    // {
+    //     return $this->annuite;
+    // }
 
-    public function setAnnuite(?float $annuite): self
-    {
-        $this->annuite = $annuite;
+    // public function setAnnuite(?float $annuite): self
+    // {
+    //     $this->annuite = $annuite;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getPenalite(): ?float
     {
@@ -187,17 +187,17 @@ class Remboursement
         return $this;
     }
 
-    public function getTypeamortissement(): ?string
-    {
-        return $this->typeamortissement;
-    }
+    // public function getTypeamortissement(): ?string
+    // {
+    //     return $this->typeamortissement;
+    // }
 
-    public function setTypeamortissement(string $typeamortissement): self
-    {
-        $this->typeamortissement = $typeamortissement;
+    // public function setTypeamortissement(string $typeamortissement): self
+    // {
+    //     $this->typeamortissement = $typeamortissement;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
 }

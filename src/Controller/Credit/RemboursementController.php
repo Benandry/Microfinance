@@ -13,12 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/remboursement')]
 class RemboursementController extends AbstractController
 {
-    #[Route('/', name: 'app_remboursement_index', methods: ['GET'])]
-    public function index(Request $request,RemboursementRepository $remboursement): Response
+    #[Route('/{codecredit}', name: 'app_remboursement_index', methods: ['GET'])]
+    public function index(Request $request,RemboursementRepository $remboursement,$codecredit): Response
     {
         // recuperation du code credit venant du RemboursementModalController.php
 
-        $codecredit=$request->query->get('codecredit');
+        // $codecredit=$request->query->get('codecredit');
     
         $remboursementRepository = $remboursement->Remboursement($codecredit);
 
@@ -45,7 +45,7 @@ class RemboursementController extends AbstractController
 
             $remboursementRepository->add($remboursement, true);
 
-            return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
+            // return $this->redirectToRoute('app_remboursement_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('remboursement/new.html.twig', [

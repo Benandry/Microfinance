@@ -7,19 +7,19 @@
 
     <table class="table">
         <tbody>
-            <tr>
+            {# <tr>
                 <th>Id</th>
                 <td>{{ remboursement.id }}</td>
-            </tr>
-            <tr>
+            </tr> #}
+            {# <tr>
                 <th>Periode</th>
                 <td>{{ remboursement.periode }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>DateRemborsement</th>
                 <td>{{ remboursement.dateRemborsement ? remboursement.dateRemborsement|date('Y-m-d') : '' }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>Principale</th>
                 <td>{{ remboursement.principale }}</td>
             </tr>
@@ -30,19 +30,19 @@
             <tr>
                 <th>MontanttTotal</th>
                 <td>{{ remboursement.montanttTotal }}</td>
-            </tr>
-            <tr>
+            </tr> #}
+            {# <tr>
                 <th>Codeclient</th>
                 <td>{{ remboursement.codeclient }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Remboursement</th>
                 <td>{{ remboursement.remboursement }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>Annuite</th>
                 <td>{{ remboursement.annuite }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Penalite</th>
                 <td>{{ remboursement.penalite }}</td>
@@ -55,14 +55,14 @@
                 <th>Codecredit</th>
                 <td>{{ remboursement.codecredit }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>Typeamortissement</th>
                 <td>{{ remboursement.typeamortissement }}</td>
-            </tr>
+            </tr> #}
         </tbody>
     </table>
 
-    <a href="{{ path('app_remboursement_index') }}">back to list</a>
+    {# <a href="{{ path('app_remboursement_index') }}">back to list</a> #}
 
     <a href="{{ path('app_remboursement_edit', {'id': remboursement.id}) }}">edit</a>
 

@@ -2,7 +2,6 @@ import $ from 'jquery'
 //import 'jquery-modal'
 
 var path = window.location.pathname
-
 $(document).ready(() =>{
 
     if (path === '/transaction/new') {
@@ -146,5 +145,53 @@ $(document).ready(() =>{
         
         })
 
+        // $('#form_code').on('keyup',function(){
+        //     console.log('hello')
+        // })
     }
+
+    if( path === '/depot/epargne/groupe' ){
+        $('#form_code').on('keyup',()=>{
+            var codegroupe =$('#form_code').val();
+
+            console.log(codegroupe)
+
+
+            if( codegroupe.length === 15) {
+                var url = '/info/'+codegroupe
+                $.ajax({
+                    url: url,
+                    method: "GET",
+                    dataType : "json",
+                    contentType: "application/json; charset=utf-8",
+                    data : JSON.stringify(codegroupe),
+                    success: function(result){
+                        for(let i = 0; i < result.length; i++){
+                            var element = result[i]
+                            
+                            // console.log(element);
+                            if(element !== '' ){
+                                $('#form_code_groupe').val(element.codegroupe)
+                                $('#form_nom').val(element.nomGroupe)
+                                $('#form_email').val(element.email)
+
+                                document.getElementById('code_groupe').innerHTML=element.codegroupe;
+                                document.getElementById('nom_groupe').innerHTML=element.nomGroupe;
+                            }else{
+                                // console.lo  g(element)
+                                document.getElementById('code_groupe').innerHTML='Pas de code groupe';
+                                document.getElementById('nom_groupe').innerHTML='Pas de nom de groupe';
+                            }
+                               
+                        }
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+            
+                })    
+            }
+        })
+    }
+
 })
