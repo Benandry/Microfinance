@@ -21,10 +21,14 @@ class Commune
     #[ORM\Column(length: 255)]
     private ?string $CodeCommune = null;
 
+    #[ORM\OneToMany(mappedBy: 'commune', targetEntity: Individuelclient::class)]
+    private Collection $individuelclients;
+
 
     public function __construct()
     {
         $this->Codecomm = new ArrayCollection();
+        $this->individuelclients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,4 +64,34 @@ class Commune
     {
         return (string) $this->getId();
     }
+
+        /**
+         * @return Collection<int, Individuelclient>
+         */
+        public function getIndividuelclients(): Collection
+        {
+            return $this->individuelclients;
+        }
+
+        public function addIndividuelclient(Individuelclient $individuelclient): self
+        {
+            if (!$this->individuelclients->contains($individuelclient)) {
+                $this->individuelclients[] = $individuelclient;
+                $individuelclient->setCommune($this);
+            }
+
+            return $this;
+        }
+
+        public function removeIndividuelclient(Individuelclient $individuelclient): self
+        {
+            if ($this->individuelclients->removeElement($individuelclient)) {
+                // set the owning side to null (unless already changed)
+                if ($individuelclient->getCommune() === $this) {
+                    $individuelclient->setCommune(null);
+                }
+            }
+
+            return $this;
+        }
 }

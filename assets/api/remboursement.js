@@ -4,6 +4,7 @@ $(document).ready(function(){
 
     var recupe_codecredit=$('#codecreditremboursement').text()
     // var codecredit=$('#remboursement_codecredit').val(recupe_codecredit)
+<<<<<<< HEAD
     console.log(recupe_codecredit)
 
     // cache tous les elements inutile
@@ -14,10 +15,13 @@ $(document).ready(function(){
     // $('#remboursement_annuite').hide()
     // $('#remboursement_codecredit').hide()
     // $('#remboursement_typeamortissement').hide()
+=======
+>>>>>>> a978b4129b2ff17d4d292312bae905af7ab006e5
 
     
     var url_api='/remboursement_credit/'+recupe_codecredit;
 
+<<<<<<< HEAD
     // $('#remboursement_periode').on('blur',function(){
         $.ajax({
             url:url_api,
@@ -50,9 +54,27 @@ $(document).ready(function(){
                     // console.log(clientcredit.codecreditammortissement)
                     
                 }
+=======
+    console.log(url_api);
+        $.ajax({
+            url: url_api,
+            method: "GET",
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(),
+            success: function(result){
+>>>>>>> a978b4129b2ff17d4d292312bae905af7ab006e5
 
+                console.log(result);
+                for (let i = 0; i < result.length; i++) {
+                    var element = result[i];
+                
+                }
             }
         });
+<<<<<<< HEAD
     // })
 
+=======
+>>>>>>> a978b4129b2ff17d4d292312bae905af7ab006e5
     })

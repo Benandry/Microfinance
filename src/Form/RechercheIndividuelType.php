@@ -17,12 +17,15 @@ class RechercheIndividuelType extends AbstractType
                 'label'=>false,
                 'attr'=>[
                     'class'=>'form-control',
-                    'placeholder'=>'Recherche . . .',
-                    'placeholder'=>'Tapez votre recherche . . .'
+                    'placeholder'=>'Recherche . . .'
                 ],
                 'mapped'=>true,
             ])
-            ->add('Recherche',SubmitType::class)
+            ->add('Recherche',SubmitType::class,[
+                'attr' => [
+                    'class' => 'btn btn-primary btn-sm'
+                ]
+            ])
         ;
     }
 

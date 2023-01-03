@@ -1,41 +1,20 @@
 {% extends "base.html.twig" %}
 
-{% block head %}  Dasboard Fidev  {% endblock %}
+{% block head "Page d'acceuil Fidev " %}
+{% block title "Page d'acceuil Fidev " %}
 
 {% block body %}
-      <ul class="nav nav-tabs">
-         <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a></li>
-         <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#profile">Profile</a></li>
-         <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#contact">Contact </a></li>
-      </ul>
-      <div class="tab-content">
-
-         <div class="tab-pane active" id="home">
-            <div class="row border g-0 rounded shadow-sm p-3">
-               <div class="col-12">
-                  <h1>Home page</h1>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore animi, quo, excepturi nulla distinctio aperiam cupiditate eius possimus cumque reiciendis fugit. Exercitationem laboriosam dolore, tempore doloribus soluta ad consequatur asperiores.
-               </div>
-            </div>
-         </div>
-
-         <div class="tab-pane" id="profile">
-            <div class="row border g-0 rounded shadow-sm p-3">
-               <div class="col-12">
-                  <h1>Profile page</h1>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore animi, quo, excepturi nulla distinctio aperiam cupiditate eius possimus cumque reiciendis fugit. Exercitationem laboriosam dolore, tempore doloribus soluta ad consequatur asperiores.
-               </div>
-            </div>
-         </div>
-
-         <div class="tab-pane" id="contact">
-            <div class="row border g-0 rounded shadow-sm p-3">
-               <div class="col-12">
-                  <h1>Contact page</h1>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore animi, quo, excepturi nulla distinctio aperiam cupiditate eius possimus cumque reiciendis fugit. Exercitationem laboriosam dolore, tempore doloribus soluta ad consequatur asperiores.
-               </div>
-            </div>
-         </div>
-
+      <div style="display:none"> 
+         <p> Nombre total de Client :<span id="client">{{ clientTotal|length }}</span> </p>
+         <p> Nombre total du groupe : <span id="groupe">{{ groupeTotal|length }}</span> </p>
+         <p> Nombre compte epargne : <span id="epargne">{{ compteEparne|length }}</span> </p>
+         <p> Nombre compte agence : <span id="agence">{{ agence|length }}</span> </p>
       </div>
+      
+
+      <div  class="chart-container d-flex justify-content-center" style="position: relative; height:40vh; width:80vw;">
+         <canvas id="myChart"></canvas>
+      </div>
+
+
 {% endblock %}

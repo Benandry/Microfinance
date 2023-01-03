@@ -45,7 +45,6 @@ class IndividuelclientType extends AbstractType
             ->add('prenom_client',TextType::class,[
                 'label'=>'Prenom',
             ])
-            ->add('cin')
             ->add('nom_conjoint')
             ->add('date_inscription',DateType::class,[
                 'widget'=>'single_text',
@@ -65,19 +64,17 @@ class IndividuelclientType extends AbstractType
             ->add('lieu_naissance')
             ->add('numero_mobile',TextType::class,[
                 'label'=>'Numero telephone',
+                'attr' => [
+                    'class'=>'form-control',
+                    'maxLength' =>10,
+                    'minLength' =>10,
+                ]
             ])
             ->add('profession')
             ->add('adressephysique',TextType::class,[
                 'label'=>'Adresse physique',
             ])
-            ->add('commune',TextType::class,[
-                'label'=>'Commune',
-                'by_reference'=>true,
-                'attr'=>[
-                    'class'=>'form-control',
-                    'id'=>'commune'
-                    ]
-            ])
+            ->add('commune',CommuneAutocompleteField::class)
             ->add('etatcivile',EntityType::class,[
                 'class'=>Etatcivile::class,
                 'choice_label'=>'etatcivile',
@@ -142,17 +139,8 @@ class IndividuelclientType extends AbstractType
                 'label'=>'Date d\'adhesion ',
                 'required'=>false,
             ])
-            ->add('lieudelivrance',TextType::class,[
-                'label'=>'Lieu'
-            ])
-            ->add('datecin',DateType::class,[
-                'widget'=>'single_text',
-                'label'=>'Date de delivrance'
-            ])
-            ->add('dateexpiration',DateType::class,[
-                'widget'=>'single_text',
-                'label'=>'Date expiration'
-            ])
+
+            // Information sur identite //
             ->add('TypeIdentite',ChoiceType::class,[
                 'choices'=>[
                     'CIN'=>'CIN',
@@ -162,6 +150,27 @@ class IndividuelclientType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
+            ->add('cin',TextType::class,[
+                'label'=>"Numéro d'identités : ",
+                'attr'=>[
+                    'class'=>'form-control',
+                    'maxLength' =>12,
+                    'minLength' =>12,
+                ]
+            ])
+            ->add('datecin',DateType::class,[
+                'widget'=>'single_text',
+                'label'=>'Date de delivrance : '
+            ])
+            ->add('lieudelivrance',TextType::class,[
+                'label'=>'Lieu de delivrance :'
+            ])
+            ->add('dateexpiration',DateType::class,[
+                'widget'=>'single_text',
+                'label'=>'Date expiration : '
+            ])
+            /// ******************************//
+
             ->add('codeclient',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control'
@@ -197,8 +206,6 @@ class IndividuelclientType extends AbstractType
                 ]
             ])       
             ->add('garant') 
-            ->add('NomAgence')
-            ->add('CodeAgence')
         ;
     }
 

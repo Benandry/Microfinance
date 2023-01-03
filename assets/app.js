@@ -30,6 +30,7 @@ import './api/compte_epargne/ouvrir_compte_epargne_client'
 import './api/compte_epargne/compte_epargne_individuel'
 import './api/compte_epargne/api_rapport_releve'
 import './api/compte_epargne/api_transfert';
+import './api/dashboard';
 
 //Import les api retrait ////
 import './api/compte_epargne/depot'
@@ -68,7 +69,7 @@ $(document).ready(function(){
     $(".table1").DataTable({
         dom: 'Bltp',
         buttons: [
-            'excel','pdf','csv','print'
+            'excel','pdf','print'
         ],
         language: {
             search: "Rechercher&nbsp;",
