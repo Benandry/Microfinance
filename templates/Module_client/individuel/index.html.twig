@@ -6,9 +6,10 @@
     Listes individuel client
 {% endblock %}
 {% block body %}
-
-    <a href="{{ path('app_individuel_new') }}" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Ajouter nouvel individuel</a><br><br>
     {{ include('modal.html.twig')}}
+    <div class="d-flex justify-content-end me-4">
+        <a href="{{ path('app_individuel_new') }}" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Ajouter nouvel individuel</a><br><br>
+    </div>
     {# Champ pour la recherche #}
         {{ form_start(formulaire) }}    
             <div class="row" >

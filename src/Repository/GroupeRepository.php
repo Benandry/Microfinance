@@ -128,12 +128,28 @@ class GroupeRepository extends ServiceEntityRepository
 
       // Filtre entre deux date transaction
        // Filtre entre deux date transaction
-       public function filtreMembre($groupe,$date1,$date2){
+       public function filtreMembre($date1,$date2){
 
-        $query = "SELECT  g.codegroupe, client.codeclient,client.dateadhesion , client.nom_client ,client.prenom_client,g.email ,g.nomGroupe ,g.dateInscription FROM App\Entity\Groupe g
-                  LEFT JOIN App\Entity\Individuelclient client WITH g.id = client.MembreGroupe
-                  WHERE client.dateadhesion  BETWEEN :au AND :du AND g.nomGroupe = '$groupe' ";
-                $statement = $this->getEntityManager()->createQuery($query)->setParameter(':du',$date1)->setParameter(':au',$date2)->execute();
+        $query = "SELECT  
+                  g.codegroupe,
+                 client.codeclient,
+                  client.dateadhesion , 
+                  client.nom_client ,
+                  client.prenom_client,
+                  g.email ,
+                  g.nomGroupe ,
+                  g.email
+
+                FROM App\Entity\Groupe g
+                INNER JOIN App\Entity\Individuelclient client 
+                WITH g.id = client.MembreGroupe
+
+                WHERE client.dateadhesion >= :du AND client.dateadhesion <= :au ";
+                $statement = $this->getEntityManager()
+                ->createQuery($query)
+                ->setParameter(':du',$date1)
+                ->setParameter(':au',$date2)
+                ->execute();
 
             return $statement;
       }
@@ -155,22 +171,23 @@ class GroupeRepository extends ServiceEntityRepository
         
         return $statement;
      }
-     public function filtreByOneDate($groupe,$date){
+     public function filtreByOneDate($date){
 
         $query = "SELECT  
                   g.codegroupe,
-                  client.codeclient,
+                 client.codeclient,
                   client.dateadhesion , 
                   client.nom_client ,
                   client.prenom_client,
-                  g.email ,g.nomGroupe ,
-                  g.dateInscription 
+                  g.email ,
+                  g.nomGroupe ,
+                  g.email
                   FROM App\Entity\Groupe g
-                  LEFT JOIN App\Entity\Individuelclient client WITH g.id = client.MembreGroupe
+                  LEFT JOIN App\Entity\Individuelclient client 
+                  WITH g.id = client.MembreGroupe
                   WHERE 
-                  client.dateadhesion >=  :one_date
-                   OR 
-                  g.nomGroupe = '$groupe'
+                   client.dateadhesion <=  :one_date
+                   ORDER BY client.dateadhesion ASC
                   ";
                 $statement = $this->getEntityManager()->createQuery($query)
                 ->setParameter(':one_date',$date)

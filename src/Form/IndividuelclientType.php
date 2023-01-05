@@ -44,7 +44,7 @@ class IndividuelclientType extends AbstractType
             ->add('prenom_client',TextType::class,[
                 'label'=>'Prenom',
             ])
-            ->add('nom_conjoint')
+            ->add('nomConjoint')
             ->add('date_inscription',DateType::class,[
                 'widget'=>'single_text',
                 'label'=>'Date Inscription',
@@ -61,7 +61,7 @@ class IndividuelclientType extends AbstractType
                 'label'=>'Date de naissance',
             ])
             ->add('lieu_naissance')
-            ->add('numero_mobile',TextType::class,[
+            ->add('numeroMobile',TextType::class,[
                 'label'=>'Numero telephone',
                 'attr' => [
                     'class'=>'form-control',
@@ -87,7 +87,8 @@ class IndividuelclientType extends AbstractType
                 'choice_label'=>'niveau',
                 'by_reference'=>true,
                 'mapped' => true,
-                'attr'=>['class'=>'form-control']
+                'autocomplete' => true,
+                'placeholder' => "Choisissez le niveau d'etude " ,
             ])
             ->add('titre',EntityType::class,[
                 'class'=>Titre::class,
@@ -180,10 +181,11 @@ class IndividuelclientType extends AbstractType
                 'choice_label'=>'NomAgence',
                 'by_reference'=>true,
                 'mapped'=>true,
-                'attr'=>[
-                    'class'=>'form-control'
+                'attr' => [
+                    'placeholder' => 'Choisissez le nom de commune du client',
                 ],
-                'label' => "Nom Agence"
+                'label' => "Nom Agence",
+                'autocomplete' =>true
             ])
 
             ->add('user',EntityType::class,[

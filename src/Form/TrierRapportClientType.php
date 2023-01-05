@@ -16,7 +16,7 @@ class TrierRapportClientType extends AbstractType
             ->add('search_one_date',DateType::class,[
                 'widget'=>'single_text',
                 'format' => 'yyyy-MM-dd',
-                'label'=>'Par un date',
+                'label'=>' ',
                 'mapped'=>true,
                 'html5'=>true,
                 'required' => false
@@ -40,7 +40,7 @@ class TrierRapportClientType extends AbstractType
             ])
             ->add('Chercher',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-success'
+                    'class'=>'btn btn-primary btn-sm'
                 ]
             ])
         ;

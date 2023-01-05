@@ -9,10 +9,11 @@
     {% for message in app.flashes('success') %}
         <p class="alert alert-info text-center" role="alert">{{ message }} </p>
     {% endfor %}
-        
-        <a href="{{ path('app_individuel_index') }}" class="btn btn-info btn-sm mb-3"><i class="fa fa-list"></i> Recherche client</a>
+        <div class="d-flex justify-content-end me-3">
+            <a href="{{ path('app_individuel_index') }}" class="btn btn-info btn-sm mb-3"><i class="fa fa-list"></i> Recherche client</a>
+        </div>
         <div style="display:none;"> client <span id="last_client">{{ lastClient }}</span>  <span id="agence_id"> {{ agence_client }} </span></div>
-        {{ include('Module_client/individuel/_form.html.twig') }}
+        {{ include('Module_client/individuel/_form.html.twig',{activer : 'active'}) }}
 
 {% endblock %}
 

@@ -33,12 +33,12 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="text-center" id="one_date">
-                                <h4 class="text-center"> Dans une date arrêtée </h4>
+                                <h5 class="text-center"> Date </h5>
                                 {{ form_row(trier.search_one_date) }}
                             </div>
 
                             <div class="row text-center" id="two_date">
-                                    <h4 class="text-center">Entre deux dates </h4>
+                                    <h5 class="text-center">Entre deux période  </h5>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             {{ form_row(trier.date1) }}
@@ -62,24 +62,32 @@
 
  <p id="test">  <p>
     {% else %}
-            <table class="table1 table alert alert-primary" style="margin-top:20px;">
+            <table class="table1 table" style="margin-top:20px;">
             <thead>
                 <tr>
                     <th>Code client</th>
-                    <th>Nom client</th>
-                    <th>Prenom client</th>
+                    <th>Nom et prenom client </th>
+                    <th>Téléphone </th>
                     <th>Cin</th>
+                    <th>Proféssion </th>
                     <th>Date inscription</th>
+                    <th>Agence </th>etatcivile
+                    <th>Etat civil </th>
+                    <th>Adresse </th>
                 </tr>
             </thead>
             <tbody class="jumbotron jumbotron-fluid" style="color:black;">
             {% for individuelclient in individuel %}
                     <tr>
                         <td> {{ individuelclient.codeclient }}</td>
-                        <td>{{ individuelclient.nomClient }}</td>
-                        <td>{{ individuelclient.prenomClient }}</td>
-                        <td>{{ individuelclient.cin }}</td>
-                        <td>{{ individuelclient.dateInscription ? individuelclient.dateInscription|date('Y-m-d') : '' }}</td>           
+                        <td>{{ individuelclient.nomClient }} </td>
+                        <td> {{ individuelclient.numeroMobile }}</td>
+                        <td>{{ individuelclient.cin|number_format(0,',', ' ') }}</td>
+                        <td> {{ individuelclient.profession }}</td>
+                        <td>{{ individuelclient.dateInscription ? individuelclient.dateInscription|date('Y-m-d') : '' }}</td>     
+                        <td>{{ individuelclient.Agence.NomAgence }}</td>      
+                        <td>{{ individuelclient.etatcivile.etatcivile }}</td>      
+                        <td>{{ individuelclient.adressephysique }}</td>     
                     </tr>
             {% else %}
                 <tr>

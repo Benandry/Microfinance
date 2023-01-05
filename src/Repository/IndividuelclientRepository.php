@@ -156,9 +156,9 @@ class IndividuelclientRepository extends ServiceEntityRepository
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
-            'SELECT i
+            "SELECT i
              FROM App\Entity\Individuelclient i
-              WHERE i.date_inscription <= :date1')
+              WHERE i.date_inscription <= :date1 AND i.garant = 0 ")
             ->setParameter('date1',$date);
 
             return $query->getResult();   

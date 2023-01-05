@@ -102,14 +102,14 @@ $(document).ready(function(){
     });
 
 
-    $('#filtre_rapport_transaction_date1').on('change',()=>{
+    $('#filtre_rapport_transaction_date1').on('keyup',()=>{
         $('#two_date').hide()
     })
 
-    $('#filtre_rapport_transaction_Au').on('change',()=>{
+    $('#filtre_rapport_transaction_Au').on('keyup',()=>{
         $('#one_date').hide()
     }) 
-    $('#filtre_rapport_transaction_Du').on('change',()=>{
+    $('#filtre_rapport_transaction_Du').on('keyup',()=>{
         $('#one_date').hide()
     })
 
@@ -138,29 +138,29 @@ $(document).ready(function(){
         // {# Cacher le champ code client#}
         $('#code').attr("style", "display: none");
 
-        $("#filtre_rapport_solde_date1").on('change',function(){
+        $("#filtre_rapport_solde_date1").on('keyup',function(){
             $('#two_date').hide();
         });
 
-        $("#filtre_rapport_solde_Du").on('change',function(){
+        $("#filtre_rapport_solde_Du").on('keyup',function(){
             $('#one_date').hide(); 
         });
         
-        $("#filtre_rapport_solde_Au").on('change',function(){
+        $("#filtre_rapport_solde_Au").on('keyup',function(){
             $('#one_date').hide(); 
         });
 
 
-        $("#rapportcompteepargnetrie_datearrete").on('change',function(){
+        $("#rapportcompteepargnetrie_datearrete").on('keyup',function(){
                         
             $('#two_date').hide();
         });
 
-        $("#rapportcompteepargnetrie_datedebut").on('change',function(){
+        $("#rapportcompteepargnetrie_datedebut").on('keyup',function(){
             $('#one_date').hide(); 
         });
         
-        $("#rapportcompteepargnetrie_datefin").on('change',function(){
+        $("#rapportcompteepargnetrie_datefin").on('keyup',function(){
             $('#one_date').hide(); 
         });
 });

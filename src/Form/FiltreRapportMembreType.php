@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Groupe;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +18,7 @@ class FiltreRapportMembreType extends AbstractType
                 ->add('search_on_date',DateType::class,[
                     'widget'=>'single_text',
                     'format' => 'yyyy-MM-dd',
-                    'label'=>'Par un date',
+                    'label'=>' ',
                     'mapped'=>true,
                     'required' => false,
                     'html5'=>true,
@@ -39,15 +40,9 @@ class FiltreRapportMembreType extends AbstractType
                     'required' => false,
                 ])
 
-                ->add('groupe',TextType::class,[
-                    'label'=>'Nom du groupe : ',
-                    'mapped'=>true,
-                    'required' => true,
-                ])
-
-            ->add('Filtre',SubmitType::class,[
+            ->add('chercher',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-success'
+                    'class'=>'btn btn-primary btn-sm'
                 ]
             ])
         ;

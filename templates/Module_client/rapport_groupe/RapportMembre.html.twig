@@ -2,9 +2,9 @@
 
     {% block title %}
         {% if affiche_tab  == false %}
-            Rapport membre
+            Rapport clients membre
         {% else %}
-            Liste des membre {{ nom }} {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des clients membre {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
@@ -12,7 +12,7 @@
         {% if affiche_tab  == false %}
           
         {% else %}
-            Liste des membres {{ nom }} {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des clients membres{% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
@@ -33,18 +33,13 @@
                     {{ form_start(form) }} 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <div class="text-center" id="nom_groupe">
-                                <h4 class="text-center"> Date arrêtée </h4>
-                                {{ form_row(form.groupe) }}
-                            </div>
-
                             <div class="text-center" id="one_date">
-                                <h4 class="text-center"> Date arrêtée </h4>
+                                <h5 class="text-center"> Date</h5>
                                 {{ form_row(form.search_on_date) }}
                             </div>
 
                         <div class=" row text-center" id="two_date">
-                            <h4 class="text-center">Entre deux dates </h4>
+                            <h5 class="text-center">Entre deux période </h5>
                             <div class="col-sm-6">
                                 {{ form_row(form.Du) }}
                             </div>
@@ -57,7 +52,7 @@
                 
                         <!-- Modal footer -->
                         <div class="modal-footer mb-0">
-                            {{ form_row(form.Filtre) }}
+                            {{ form_row(form.chercher) }}
                         </div>
                     {{ form_end(form) }}
                 </div>
@@ -65,27 +60,26 @@
         </div>
 
     {% else %}
-            <div class="row m-2">
-                <p class="col-4 col-sm-4"> <span class="fw-bold"> Code groupe : </span>  <span> {{ code }} </span></p>
-                <p class="col-4 col-sm-4"> <span class="fw-bold"> Nom du groupe : </span> <span> {{ nom }}  </span></p>
-                <p class="col-4 col-sm-4"> <span class="fw-bold">Email groupe :  </span> <span> {{ email }} </span> </p>
-            </div>
-            <table class="table1 table alert alert-primary">
+            <table class="table1 table table-bordered">
             <thead>
                 <tr>
+                    <th>Code groupe</th>
                     <th>Code Client</th>
                     <th>Date d'adhesion</th>
-                    <th>Nom Client</th>
-                    <th>Date de creation </th>
+                    <th>Nom du groupe</th>
+                    <th>Email du groupe</th>
+                    <th>Nom Prenom du client</th>
                 </tr>
             </thead>
             <tbody class="jumbotron jumbotron-fluid" style="color:black;">
             {% for Groupe in rapportMembre %}
                     <tr>
+                        <td> {{ Groupe.codegroupe}}</td>
                         <td> {{ Groupe.codeclient}}</td>
                         <td>{{ Groupe.dateadhesion | date('d-m-Y') }}</td>
+                        <td> {{ Groupe.nomGroupe}}</td>
+                        <td> {{ Groupe.email}}</td>
                         <td>{{ Groupe.nom_client }} {{ Groupe.prenom_client }}</td>
-                        <td>{{ Groupe.dateInscription | date('d-m-Y') }}</td>
                     </tr>
                 {% else %}
                     <tr>

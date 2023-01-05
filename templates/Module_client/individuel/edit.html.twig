@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ active }}
-    {{ include('Module_client/individuel/_form.html.twig', {'button_label': 'Valider la modification'}) }}
+    
+    {{ include('Module_client/individuel/_form.html.twig', {'button_label': 'Valider la modification',activer : 'active'} ) }}
 
 {% endblock %}

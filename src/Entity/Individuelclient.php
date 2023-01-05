@@ -27,7 +27,7 @@ class Individuelclient
     private ?string $cin = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_conjoint = null;
+    private ?string $nomConjoint = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_inscription = null;
@@ -42,7 +42,7 @@ class Individuelclient
     private ?string $lieu_naissance = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $numero_mobile = null;
+    private ?string $numeroMobile = null;
 
     #[ORM\Column(length: 255)]
     private ?string $profession = null;
@@ -140,9 +140,9 @@ class Individuelclient
     {
         $this->CodeIndividuel = new ArrayCollection();
         $this->codecompteepargne = new ArrayCollection();
-        $this->CompteMembreIndividuel = new ArrayCollection();
+       // $this->CompteMembreIndividuel = new ArrayCollection();
         $this->mobiles = new ArrayCollection();
-        $this->docIdentites = new ArrayCollection();
+       // $this->docIdentites = new ArrayCollection();
         $this->listeRouges = new ArrayCollection();
         $this->codeclientind = new ArrayCollection();
     }
@@ -190,12 +190,12 @@ class Individuelclient
 
     public function getNomConjoint(): ?string
     {
-        return $this->nom_conjoint;
+        return $this->nomConjoint;
     }
 
-    public function setNomConjoint(string $nom_conjoint): self
+    public function setNomConjoint(string $nomConjoint): self
     {
-        $this->nom_conjoint = $nom_conjoint;
+        $this->nomConjoint = $nomConjoint;
 
         return $this;
     }
@@ -251,12 +251,12 @@ class Individuelclient
 
     public function getNumeroMobile(): ?string
     {
-        return $this->numero_mobile;
+        return $this->numeroMobile;
     }
 
-    public function setNumeroMobile(string $numero_mobile): self
+    public function setNumeroMobile(string $numeroMobile): self
     {
-        $this->numero_mobile = $numero_mobile;
+        $this->numeroMobile = $numeroMobile;
 
         return $this;
     }

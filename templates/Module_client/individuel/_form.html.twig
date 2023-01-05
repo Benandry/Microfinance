@@ -1,10 +1,10 @@
 {{ form_start(form) }}
   <ul class="nav nav-tabs">
-      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etat">Etat Civile</a></li>
+      <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">Etat Civile</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#famille">Famille</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Adresse et Niveau d'etude</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe">Groupe</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Identite</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Identité</a></li>
   </ul>
   <div class="tab-content">
 

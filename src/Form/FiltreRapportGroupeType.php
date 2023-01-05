@@ -17,7 +17,7 @@ class FiltreRapportGroupeType extends AbstractType
             ->add('one_date_search',DateType::class,[
                 'widget'=>'single_text',
                 'format' => 'yyyy-MM-dd',
-                'label'=>'Une date :',
+                'label'=>' ',
                 'mapped'=>true,
                 'html5'=>true,
                 'required' =>false,
@@ -38,9 +38,9 @@ class FiltreRapportGroupeType extends AbstractType
                     'html5'=>true,
                     'required' =>false,
                 ])
-            ->add('Filtre',SubmitType::class,[
+            ->add('Chercher',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-success',
+                    'class'=>'btn btn-primary btn-sm',
                     ],
             ])
         ;
