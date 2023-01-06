@@ -16,7 +16,7 @@ class FiltreRapportDocumentIdentiteType extends AbstractType
             ->add('one_date_search',DateType::class,[
                 'widget'=>'single_text',
                 'mapped'=>true,
-                'label'=>'Une date ',
+                'label'=>' ',
                 'required' => false,
                 ])
             ->add('Date1',DateType::class,[
@@ -32,9 +32,9 @@ class FiltreRapportDocumentIdentiteType extends AbstractType
                     'label'=>'Au',
                     'required' => false
             ])
-            ->add('Filtre',SubmitType::class,[
+            ->add('chercher',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-success'
+                    'class'=>'btn btn-primary btn-sm'
                 ]
             ])
         ;

@@ -132,7 +132,7 @@ class RapportclientController extends AbstractController
        $groupeRapport = $groupeRepository->findByNumberClienByGroupe();
 
        $affiche_tab = false ;
-    //    $trierGroupe=$groupeRepository->FiltreGroupe($date1,$date2);
+        //    $trierGroupe=$groupeRepository->FiltreGroupe($date1,$date2);
        $trierGroupe=$this->createForm(FiltreRapportGroupeType::class);
        $filtrerapportdate=$trierGroupe->handleRequest($request); 
 
@@ -176,6 +176,24 @@ class RapportclientController extends AbstractController
             'one_date' => $one_date,
             'du'=>$date_debut,
             'au' =>$date_fin,
+        ]);
+    }
+
+    #[Route('/rapportclient/agence',name: 'app_rapport_par_agence',methods: ['GET'])]
+    public function rapportParAgence():Response
+    {
+
+        return $this->render('Module_client/rapportclient/agence.html.twig',[
+             
+        ]);
+    }
+
+    #[Route('/rapportclient/commune',name: 'app_rapport_par_commune',methods: ['GET'])]
+    public function rapportParCommune():Response
+    {
+
+        return $this->render('Module_client/rapportclient/commune.html.twig',[
+             
         ]);
     }
 }

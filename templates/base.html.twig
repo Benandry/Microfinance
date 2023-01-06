@@ -53,6 +53,8 @@
                                             <li><a class="dropdown-item down" href="{{ path('app_rapportgroupe') }}"> <i class="fa-solid fa-users"></i> Groupe </a></li>
                                             <li><a class="dropdown-item down" href="{{ path('app_rapport_membre_groupe_index') }}"> <i class="fa-solid fa-users"></i>  Membre groupe</a></li>
                                             <li><a class="dropdown-item down" href="{{path('app_rapportdocumentidentite')}}"> <i class="fa-solid fa-newspaper"></i> Document d'identite</a></li>
+                                            <li><a class="dropdown-item down" href="{{ path('app_rapport_par_agence') }}"> <i class="fa-solid fa-home"></i> Agence</a></li>
+                                            <li><a class="dropdown-item down" href="{{ path('app_rapport_par_commune') }}"> <i class="fa-solid fa-newspaper"></i> Commune</a></li>
                                         </ul>
                                     </li>    
                                 </ul>
@@ -324,7 +326,7 @@
                                     </div>
                                     <div class="col-6 col-xl-6">
                                         <div class="d-flex justify-content-end">
-                                            <p class="m-3"> Agence : {{ app.user.nomagence }} </p>
+                                            <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.nomagence }} </p>
                                             <p class="m-3"> Code : {{ app.user.codeagence }} </p>
                                         </div>
                                     </div>

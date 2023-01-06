@@ -2,17 +2,17 @@
 
     {% block title %}
         {% if affiche_table  == false %}
-            Rapport client par Identite
+            Rapport client par Identité
         {% else %}
-            Liste des client par Identite {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des client par Identité {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
     {% block head %}
         {% if affiche_table  == false %}
-            Rapport client par Identite
+            Rapport client par Identité
         {% else %}
-            Liste client par Identite {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste client par Identité {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
@@ -26,18 +26,18 @@
             
                         <!-- Modal Header -->
                     <div class="modal-header titre_modal">
-                        <h4 class="modal-title text-center">Document Identite </h4>
+                        <h4 class="modal-title text-center">Document Identité </h4>
                     </div>
                     {{ form_start(trierDocs) }} 
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="text-center" id="one_date">
-                                <h4 class="text-center"> Date arrêtée </h4>
+                                <h4 class="text-center"> Date </h4>
                                 {{ form_row(trierDocs.one_date_search) }}
                             </div>
 
                             <div class="row text-center" id="two_date">
-                                    <h4 class="text-center">Entre deux dates </h4>
+                                    <h4 class="text-center">Entre deux période </h4>
                                     <div class="col-sm-6">
                                         {{ form_row(trierDocs.Date1) }}
                                     </div>
@@ -50,7 +50,7 @@
                 
                         <!-- Modal footer -->
                         <div class="modal-footer mb-0">
-                             {{ form_row(trierDocs.Filtre) }}
+                             {{ form_row(trierDocs.chercher ) }}
                         </div>
                     {{ form_end(trierDocs) }}
                 </div>
@@ -72,7 +72,7 @@
                 {% for Individuelclient in documents %}
             <tbody class="jumbotron jumbotron-fluid" style="color:black;">
                     <tr>
-                        <td class="fw-bold">{{ Individuelclient.getCin() }}</td>
+                        <td class="fw-bold">{{ Individuelclient.getCin()|number_format(0,',', ' ') }}</td>
                         <td>{{ Individuelclient.getNomclient() }} {{ Individuelclient.getPrenomclient() }} </td>
                         <td>{{ Individuelclient.getDatenaissance()| date('d/m/Y') }}</td>
                         <td>{{ Individuelclient.getLieunaissance() }}</td>
