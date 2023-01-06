@@ -1,1 +1,2 @@
 'Invalid credentials.': 'Invalide. Veuillez réessayez ulterieurement.'
+'Invalid CSRF token.' : "Une erreur s'est produit"
