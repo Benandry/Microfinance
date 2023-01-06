@@ -58,8 +58,6 @@ window.JSZip = jsZip;
 //*******************Variable sur le chemiin *****************/
 const path = window.location.pathname;
 
- alert(path);
-
 $(document).ready(function(){
 
     /*******Lancer modal  */
