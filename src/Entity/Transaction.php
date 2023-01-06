@@ -23,10 +23,10 @@ class Transaction
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateTransaction = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?float $Montant = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?float $papeterie = null;
 
     #[ORM\Column]
