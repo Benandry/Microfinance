@@ -2,6 +2,8 @@
 
 namespace App\Controller\Module_client;
 
+use App\Entity\Agence;
+use App\Entity\Commune;
 use App\Form\FiltreRapportGroupeType;
 use App\Form\TrierRapportClientType;
 use App\Repository\AgenceRepository;
@@ -10,6 +12,8 @@ use App\Repository\IndividuelclientRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Form\FiltreRapportMembreType;
+use App\Repository\CommuneRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,13 +48,13 @@ class RapportclientController extends AbstractController
             if ($one_date != null) {
                 $date_1 = true;
                 $clientRapport = $individuelclients->trierRapportClientPar_une_date($one_date);
-            // dd($clientRapport);
+             //dd($clientRapport);
             }else {
                 $date_2 = true;
                 $date_debut = $data['date1'];
                 $date_fin = $data['date2'];
                 $clientRapport=$individuelclients->trierRapportClient($date_debut,$date_fin);
-                
+                //dd($clientRapport);
             }
 
         }
@@ -84,9 +88,6 @@ class RapportclientController extends AbstractController
              $du = 0;
              $au = 0;
              $one_date = 0;
-             $code = " ";
-             $nom = " ";
-             $email = " ";
 
          if($form->isSubmitted() && $form->isValid()){
              $data = $rapportmembregroupe->getData();
@@ -179,21 +180,76 @@ class RapportclientController extends AbstractController
         ]);
     }
 
-    #[Route('/rapportclient/agence',name: 'app_rapport_par_agence',methods: ['GET'])]
-    public function rapportParAgence():Response
+    #[Route('/rapportclient/agence',name: 'app_rapport_par_agence',methods: ['GET','POST'])]
+    public function rapportParAgence(Request $request, AgenceRepository $agenceRepository):Response
     {
+        $affiche_tab = false;
+        $rapportClient = [];
+        $agence = '';
+
+        $form = $this->createFormBuilder()
+        ->add('nomAgence',EntityType::class,[
+            'class' => Agence::class,
+            'autocomplete' => true,
+            'placeholder' => "Agences ...",
+            'label' => "Agence :",
+            'choice_label' => 'NomAgence'
+        ])
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiche_tab = true;
+            $data = $form->getData();
+            $agence = $data['nomAgence'];
+            $rapportClient = $agenceRepository->findClientParAgence($agence);
+          // dd($rapportClient);
+        }
+
 
         return $this->render('Module_client/rapportclient/agence.html.twig',[
-             
+             'form' => $form->createView(),
+             'affiche_tab' => $affiche_tab,
+             'clients' => $rapportClient,
+             'agence' => $agence
         ]);
     }
 
-    #[Route('/rapportclient/commune',name: 'app_rapport_par_commune',methods: ['GET'])]
-    public function rapportParCommune():Response
+    #[Route('/rapportclient/commune',name: 'app_rapport_par_commune',methods: ['GET','POST'])]
+    public function rapportParCommune(Request $request,CommuneRepository $communeRepository):Response
     {
+        $affiche_tab = false;
+        $rapportClient = [];
+        $commune = '';
+
+        $form = $this->createFormBuilder()
+        ->add('commune',EntityType::class,[
+            'class' => Commune::class,
+            'autocomplete' => true,
+            'placeholder' => "Commune ...",
+            'label' => "Commune :",
+            'choice_label' => 'NomCommune'
+        ])
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiche_tab = true;
+            $data = $form->getData();
+            $commune = $data['commune'];
+           $rapportClient = $communeRepository->findClientParCommune($commune);
+          // dd($rapportClient);
+        }
+
+
 
         return $this->render('Module_client/rapportclient/commune.html.twig',[
-             
+            'form' => $form->createView(),
+            'affiche_tab' => $affiche_tab,
+            'clients' => $rapportClient,
+            'commune' => $commune,  
         ]);
     }
 }

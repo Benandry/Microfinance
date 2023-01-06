@@ -4,7 +4,7 @@
         {% if affiche_tab  == false %}
             Rapport groupe 
         {% else %}
-            Liste des groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des groupe {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 
@@ -12,7 +12,7 @@
         {% if affiche_tab  == false %}
             Rapport groupe 
         {% else %}
-            Liste des groupe {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des groupe {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
         {% endif %}
     {% endblock %}
 

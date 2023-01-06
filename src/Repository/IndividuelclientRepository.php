@@ -95,9 +95,10 @@ class IndividuelclientRepository extends ServiceEntityRepository
 
         $query=$entityManager->createQuery(
             'SELECT i
-             FROM App\Entity\Individuelclient i
-              WHERE i.date_inscription
-               BETWEEN :date1 AND :date2')
+            FROM App\Entity\Individuelclient i
+            WHERE i.date_inscription
+            BETWEEN :date1 AND :date2
+            AND i.garant = 0 ')
             ->setParameter('date1',$date1)
             ->setParameter('date2',$date2);
 
@@ -112,7 +113,9 @@ class IndividuelclientRepository extends ServiceEntityRepository
          $query=$entityManager->createQuery(
              'SELECT i
               FROM App\Entity\Individuelclient i
-              WHERE i.date_inscription <=  :date2 ORDER BY i.date_inscription ASC')
+              WHERE i.date_inscription <=  :date2 
+              AND i.garant = 0 
+              ORDER BY i.date_inscription ASC')
              ->setParameter('date2',$date);
  
              return $query->getResult();

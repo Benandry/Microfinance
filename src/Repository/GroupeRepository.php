@@ -115,12 +115,12 @@ class GroupeRepository extends ServiceEntityRepository
             i.dateadhesion,
             i.codeclient,
             g.codegroupe
-             FROM 
-             App\Entity\Groupe g
-             INNER JOIN
-             App\Entity\Individuelclient i
-              WHERE 
-              g.id = i.MembreGroupe
+            FROM 
+            App\Entity\Groupe g
+            INNER JOIN
+            App\Entity\Individuelclient i
+            with g.id = i.MembreGroupe
+            WHERE i.garant = 0 
               ');
 
         return $query->getResult();
@@ -144,7 +144,8 @@ class GroupeRepository extends ServiceEntityRepository
                 INNER JOIN App\Entity\Individuelclient client 
                 WITH g.id = client.MembreGroupe
 
-                WHERE client.dateadhesion >= :du AND client.dateadhesion <= :au ";
+                WHERE client.dateadhesion >= :du AND client.dateadhesion <= :au 
+                AND client.garant = 0";
                 $statement = $this->getEntityManager()
                 ->createQuery($query)
                 ->setParameter(':du',$date1)
@@ -179,6 +180,7 @@ class GroupeRepository extends ServiceEntityRepository
                   client.dateadhesion , 
                   client.nom_client ,
                   client.prenom_client,
+                  client.garant,
                   g.email ,
                   g.nomGroupe ,
                   g.email
@@ -186,7 +188,8 @@ class GroupeRepository extends ServiceEntityRepository
                   LEFT JOIN App\Entity\Individuelclient client 
                   WITH g.id = client.MembreGroupe
                   WHERE 
-                   client.dateadhesion <=  :one_date
+                  client.dateadhesion <=  :one_date
+                  AND client.garant = 0
                    ORDER BY client.dateadhesion ASC
                   ";
                 $statement = $this->getEntityManager()->createQuery($query)

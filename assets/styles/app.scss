@@ -10,7 +10,7 @@
     display: none;
 }
 
-#inputEmail,#inputPassword,#login,#registration_form_prenom,#registration_form_nom,#registration_form_email,#registration_form_responsabilite,#registration_form_password_first,#registration_form_password_second{
+#inputEmail,#inputPassword,#registration_form_prenom,#registration_form_nom,#registration_form_email,#registration_form_responsabilite,#registration_form_password_first,#registration_form_password_second{
     font-size: small;
     height: 30px;
 }
@@ -26,6 +26,9 @@
 
 #login{
     background-color: #4786a5;
+    font-weight: bold;
+    font-size: 15px;
+    height: 40px;
 }
 
 #login:hover{

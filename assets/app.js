@@ -67,7 +67,7 @@ $(document).ready(function(){
         
 
     $(".table1").DataTable({
-        dom: 'Bltp',
+        dom: 'Bfrtip',
         buttons: [
             'excel','pdf','print'
         ],

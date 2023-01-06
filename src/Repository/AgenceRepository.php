@@ -62,28 +62,16 @@ class AgenceRepository extends ServiceEntityRepository
             return $query->getResult();
         }
 
-//    /**
-//     * @return Agence[] Returns an array of Agence objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+        public function findClientParAgence($agence)
+        {
+            $query = "SELECT 
+             client
+             FROM App\Entity\Individuelclient client
+             WHERE client.Agence = $agence
+             AND client.garant = 0
+             ";
 
-//    public function findOneBySomeField($value): ?Agence
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+             $statement = $this->getEntityManager()->createQuery($query)->execute();        
+             return $statement;
+        }
 }
