@@ -15,7 +15,7 @@
 <body>
     <section class="container">
             <div class="row align-items-center h-100">
-                <div class="col-12">
+                <div class="col-md-6 mx-auto">
 
                     <div class="d-flex justify-content-center mt-5">
                         <div class="card " style="width: 29rem;padding: 20px;box-shadow: 5px 10px 8px #888888;">
@@ -29,12 +29,11 @@
                                         {{ form_row(requestForm.email) }}
                                         <div>
                                             <small>
-                                                Enter your email address and we will send you a
-                                                link to reset your password.
+                                                Entrer votre addresse email et nous allons envoyer un lien pour reinitialiser votre mot de passe.
                                             </small>
                                         </div>
 
-                                        <button class="btn btn-primary">Send password reset email</button>
+                                        <button class="btn btn-primary m-2" id="login">Confirmer </button>
                                     {{ form_end(requestForm) }}
                             </div>
                         </div>
