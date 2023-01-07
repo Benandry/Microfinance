@@ -53,16 +53,62 @@ class DemandeCreditRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-    public function findDemnadeCredit($date1, $date2)
+    public function findDemnadeCreditOne(\DATETIME $date_arreter)
     {
+
         $query = "SELECT DISTINCT
-        d
-        FROM App\Entity\DemandeCredit d
+        d.NumeroCredit,
+        d.DateDemande,
+        d.Montant,
+        d.NombreTranche,
+        d.Agent,
+        client.nom_client,
+        client.prenom_client,
+        appro.statusApprobation
+        FROM App\Entity\DemandeCredit d 
+        INNER JOIN App\Entity\Individuelclient client
+        WITH d.codeclient = client.codeclient
+
+        LEFT JOIN App\Entity\ApprobationCredit appro
+        WITH appro.codecredit = d.NumeroCredit
+        WHERE d.DateDemande <= :arreter
         ";
 
-        $statement = $this->getEntityManager()->createQuery($query)->execute();
+        $statement = $this->getEntityManager()->createQuery($query)
+        ->setParameter('arreter',$date_arreter)
+        ->execute();
 
         return $statement;
     }
 
+    public function findDemnadeCredit(\DATETIME $date_debut,\DATETIME $date_fin)
+    {
+
+        $query = "SELECT DISTINCT
+        d.NumeroCredit,
+        d.DateDemande,
+        d.Montant,
+        d.NombreTranche,
+        d.Agent,
+        client.nom_client,
+        client.prenom_client,
+        appro.statusApprobation
+        FROM App\Entity\DemandeCredit d 
+        INNER JOIN App\Entity\Individuelclient client
+        WITH d.codeclient = client.codeclient
+
+        
+        LEFT JOIN App\Entity\ApprobationCredit appro
+        WITH appro.codecredit = d.NumeroCredit
+        
+        WHERE d.DateDemande >= :debut AND d.DateDemande <= :fin 
+        ";
+
+        $statement = $this->getEntityManager()->createQuery($query)
+        ->setParameter('debut',$date_debut)
+        ->setParameter('fin',$date_fin)
+        ->execute();
+
+        return $statement;
+    }
 }

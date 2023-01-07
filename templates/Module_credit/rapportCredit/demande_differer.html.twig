@@ -1,31 +1,20 @@
 {% extends "base.html.twig" %}
+{% block title %}
+    {{ include('Module_credit/rapportCredit/_titre.html.twig',{ status: 'differée' }) }}
+{% endblock %}
 
-{% block title %} Liste de demande differée {% endblock %}
-{% block head %} Liste de demande differée {% endblock %}
+{% block head %}
+    {{ include('Module_credit/rapportCredit/_head.html.twig',{ status: 'differée' }) }}
+{% endblock %}
 
 {% block body %}
-    <table class="table table1">
-        <thead>
-           <tr>
-                <th>Code credit</th>
-                <th>Date d'approbation</th>
-                <th>Nom et prenom</th>
-                <th>Status </th>
-                <th>Montant de credit </th>
-                <th> Description </th>
-           </tr>
-        </thead>
-        <tbody>
-            {% for liste in listeDifferer %} 
-                <tr>
-                    <td>{{ liste.NumeroCredit }}</td>
-                    <td> {{ liste.dateApprobation|date('Y-m-d') }} </td>
-                    <td> {{ liste.nom_client }} {{ liste.prenom_client }} </td>
-                    <td> {{ liste.statusApprobation }}</td>
-                    <td> {{ liste.Montant }}</td>
-                    <td> {{ liste.description }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+
+    {% if affiche_table == false %}
+     <!-- The Modal -->
+       {{ include('Module_credit/rapportCredit/_filtre.html.twig',{ status: 'differée' }) }}
+
+    {% else %}
+       {{ include('Module_credit/rapportCredit/_table.html.twig') }}
+    {% endif %}
 {% endblock %}

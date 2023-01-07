@@ -10,79 +10,191 @@ use App\Repository\DemandeCreditRepository;
 use App\Form\RapportCreditType;
 use App\Repository\DecaissementRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Controller\Credit\Filtrer\Traitement;
 
 class RapportCreditController extends AbstractController
 {
 
     #[Route('/rapport/credit/approuver', name: 'app_rapport_credit_approuver')]
-    public function index(ApprobationCreditRepository $approRepo): Response
+    public function approuver(ApprobationCreditRepository $approRepo,Request $request,Traitement $tr): Response
     {
-         $listeApprouver = $approRepo->getDemandeApprouver('approuvé');
+
+        $affiche_table = false;
+        $listeApprouver = [];
+        $date1 = false;
+        $date2 = false;
+        
+        $date_arreter = null;
+        $date_debut = null;
+        $date_fin = null;
+        $form = $this->createForm(RapportCreditType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiche_table = true;
+            
+            $data = $form->getData();
+            
+            $date_arreter = $data['datearrete'];
+            $date_debut = $data['datedebut'];
+            $date_fin = $data['datefin'];
+
+            $liste = $tr->filtreApprobation($date_arreter,$date_debut,$date_fin,$approRepo,'approuvé');
+            $listeApprouver = $liste['liste'];
+            $date1 = $liste['date1'];
+            $date2 = $liste['date2'];
+        }
+
+
        // $listeApprouver = $approRepo->findDemandeNonApprouver();
        // dd($listeApprouver);
-        return $this->render('Module_credit/rapportCredit/demande_approuver.html.twig',[
-            'listeApprouver' => $listeApprouver,
+        return $this->renderForm('Module_credit/rapportCredit/demande_approuver.html.twig',[
+            'listes' => $listeApprouver,
+            'affiche_table' => $affiche_table,
+            'form' => $form,
+            'date1' => $date1,
+            'date2' => $date2,
+            'arreter'=> $date_arreter,
+            'debut'=> $date_debut,
+            'fin'=> $date_fin,
+            
         ]);
     }
 
     #[Route('/rapport/credit/rejeter', name: 'app_rapport_credit_rejeter')]
-    public function rejeter(ApprobationCreditRepository $approRepo): Response
+    public function rejeter(ApprobationCreditRepository $approRepo,Traitement $tr,Request $request): Response
     {
-        $listeRejeter = $approRepo->getDemandeApprouver('Rejeté');
-        //dd($listeApprouver);
-        return $this->render('Module_credit/rapportCredit/demande_rejeter.html.twig',[
-            'listeRejeter' => $listeRejeter,
+
+        $affiche_table = false;
+        $listeRejeter = [];
+        $date1 = false;
+        $date2 = false;
+        
+        $date_arreter = null;
+        $date_debut = null;
+        $date_fin = null;
+        $form = $this->createForm(RapportCreditType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiche_table = true;
+            
+            $data = $form->getData();
+            
+            $date_arreter = $data['datearrete'];
+            $date_debut = $data['datedebut'];
+            $date_fin = $data['datefin'];
+
+            $liste = $tr->filtreApprobation($date_arreter,$date_debut,$date_fin,$approRepo,'Rejeté');
+            $listeRejeter = $liste['liste'];
+            $date1 = $liste['date1'];
+            $date2 = $liste['date2'];
+        }
+
+        return $this->renderForm('Module_credit/rapportCredit/demande_rejeter.html.twig',[
+            'listes' => $listeRejeter,
+            'affiche_table' => $affiche_table,
+            'form' => $form,
+            'date1' => $date1,
+            'date2' => $date2,
+            'arreter'=> $date_arreter,
+            'debut'=> $date_debut,
+            'fin'=> $date_fin,
         ]);
     }
 
     #[Route('/rapport/credit/differer', name: 'app_rapport_credit_differer')]
-    public function differer(ApprobationCreditRepository $approRepo): Response
+    public function differer(ApprobationCreditRepository $approRepo,Request $request,Traitement $tr): Response
     {
-        $listeDifferer = $approRepo->getDemandeApprouver('Différée');
-        //dd($listeApprouver);
-        return $this->render('Module_credit/rapportCredit/demande_differer.html.twig',[
-            'listeDifferer' => $listeDifferer,
+        $affiche_table = false;
+        $listeDifferer = [];
+        $date1 = false;
+        $date2 = false;
+        
+        $date_arreter = null;
+        $date_debut = null;
+        $date_fin = null;
+        $form = $this->createForm(RapportCreditType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiche_table = true;
+            
+            $data = $form->getData();
+            
+            $date_arreter = $data['datearrete'];
+            $date_debut = $data['datedebut'];
+            $date_fin = $data['datefin'];
+
+            $liste = $tr->filtreApprobation($date_arreter,$date_debut,$date_fin,$approRepo,'Différée');
+            $listeDifferer = $liste['liste'];
+            $date1 = $liste['date1'];
+            $date2 = $liste['date2'];
+        }
+        return $this->renderForm('Module_credit/rapportCredit/demande_differer.html.twig',[
+            'listes' => $listeDifferer,
+            'affiche_table' => $affiche_table,
+            'form' => $form,
+            'date1' => $date1,
+            'date2' => $date2,
+            'arreter'=> $date_arreter,
+            'debut'=> $date_debut,
+            'fin'=> $date_fin,
         ]);
     }
 
     #[Route('/rapport/demande/credit', name: 'app_rapport_demande_credit')]
     public function demandeCredit(DemandeCreditRepository $repoDemande,Request $request): Response
     {
-        $trierDoc=$this->createForm(RapportCreditType::class);
-        $filtrerapportdate=$trierDoc->handleRequest($request);
+        $affiche_table = false;
+        $date1 = false;
+        $date2 = false;
+        
+        $date_arreter = null;
+        $date_debut = null;
+        $date_fin = null;
+
+        $form=$this->createForm(RapportCreditType::class);
+        $form->handleRequest($request);
         $afficher_table = false;
 
-        $affiche_tab = false ;
+        $rapportDemande = [];
 
-        #--------------Date afficher ---------------------------#
-        $date_1 = false;
-        $date_2 = false;
-        $date_debut = 0;
-        $date_fin = 0;
-        $one_date = 0;
 
-        if($trierDoc->isSubmitted() && $trierDoc->isValid()){
-            $data = $filtrerapportdate->getData();
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            $affiche_table = true;
+            
+            $data = $form->getData();
+            
+            $date_arreter = $data['datearrete'];
+            $date_debut = $data['datedebut'];
+            $date_fin = $data['datefin'];
+
     
-            $one_date = $data['one_date_search'];
-    
-            if ($one_date != null) {
-                $date_1 = true;
-                $rapportDemande = $repoDemande->findDemnadeCredit('5555','5555'); 
-                //dd($rapportdoc); 
-            }else {
-                $date_2 = true;
-                $date_debut = $data['Date1'];
-                $date_fin = $data['Date2'];
-                $rapportDemande = $repoDemande->findDemnadeCredit('5555','5555');   
-                //dd($rapportdoc);
+            if ($date_arreter != null) {
+                $date1 = true;
+                $rapportDemande = $repoDemande->findDemnadeCreditOne($date_arreter); 
+            }elseif ($date_debut !=  null && $date_fin != null) {
+                $date2= true;
+                $rapportDemande = $repoDemande->findDemnadeCredit($date_debut,$date_fin); 
+               // dd($rapportDemande); 
             }
-            $afficher_table = true;
+            else {
+                $affiche_table = false;
+            };
         }
-
-        return $this->render('Module_credit/rapportCredit/demande_credit.html.twig',[
-            'listeDifferer' => $rapportDemande,
-            'trierDocs'=>$trierDoc,
+        //dd($rapportDemande);
+        return $this->renderForm('Module_credit/rapportCredit/demande_credit.html.twig',[
+            'listes' => $rapportDemande,
+            'form'=>$form,
+            'affiche_table' => $affiche_table,
+            'form' => $form,
+            'date1' => $date1,
+            'date2' => $date2,
+            'arreter'=> $date_arreter,
+            'debut'=> $date_debut,
+            'fin'=> $date_fin,
         ]);
     }
 

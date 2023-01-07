@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RapportcompteepargnetrieType extends AbstractType
+class RapportCreditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -26,9 +26,9 @@ class RapportcompteepargnetrieType extends AbstractType
             ->add('datearrete',DateType::class,[
                 'widget'=>'single_text',
                 'required'=>false,
-                'label' => 'date arretée : '
+                'label' => ' '
             ])
-            ->add('Filtre',SubmitType::class)
+            ->add('chercher',SubmitType::class)
         ;
     }
 

@@ -65,7 +65,7 @@ $(document).ready(function(){
         
 
     $(".table1").DataTable({
-        dom: 'Bfrtip',
+        dom: 'Bfrtp',
         buttons: [
             'excel','pdf','print'
         ],
@@ -84,7 +84,7 @@ $(document).ready(function(){
     });
 
     $(".table2").DataTable({
-        dom: 'tp',
+        dom: 'ftp',
         language: {
             search: "Rechercher&nbsp;",
             lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
@@ -136,29 +136,44 @@ $(document).ready(function(){
         // {# Cacher le champ code client#}
         $('#code').attr("style", "display: none");
 
-        $("#filtre_rapport_solde_date1").on('keyup',function(){
+        $("#filtre_rapport_solde_date1").on('change',function(){
             $('#two_date').hide();
         });
 
-        $("#filtre_rapport_solde_Du").on('keyup',function(){
+        $("#filtre_rapport_solde_Du").on('change',function(){
             $('#one_date').hide(); 
         });
         
-        $("#filtre_rapport_solde_Au").on('keyup',function(){
+        $("#filtre_rapport_solde_Au").on('change',function(){
             $('#one_date').hide(); 
         });
 
 
-        $("#rapportcompteepargnetrie_datearrete").on('keyup',function(){
+        $("#rapportcompteepargnetrie_datearrete").on('change',function(){
                         
             $('#two_date').hide();
         });
 
-        $("#rapportcompteepargnetrie_datedebut").on('keyup',function(){
+        $("#rapportcompteepargnetrie_datedebut").on('change',function(){
             $('#one_date').hide(); 
         });
         
-        $("#rapportcompteepargnetrie_datefin").on('keyup',function(){
+        $("#rapportcompteepargnetrie_datefin").on('change',function(){
+            $('#one_date').hide(); 
+        });
+
+        
+
+        ///Rapport credit iray mantolo
+        $("#rapport_credit_datearrete").on('change',function(){
+            $('#two_date').hide();
+        });
+
+        $("#rapport_credit_datedebut").on('change',function(){
+            $('#one_date').hide(); 
+        });
+        
+        $("#rapport_credit_datefin").on('change',function(){
             $('#one_date').hide(); 
         });
 });
