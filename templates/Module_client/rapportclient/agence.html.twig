@@ -1,7 +1,21 @@
 {% extends "base.html.twig" %}
 
-{% block title "Rapport client par agence" %}
-{% block head "Rapport client par agence" %}
+{% block title %}
+    {% if affiche_tab == false %}
+        Rapport client par agence 
+    {% else %}
+        Rapport client  {{ debut|date('Y-m-d') }} au {{ fin|date('Y-m-d') }}
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    {% if affiche_tab == false %}
+        Rapport client par agence 
+    {% else %}
+        Rapport client  {{ debut|date('Y-m-d') }} au {{ fin|date('Y-m-d') }}
+    {% endif %}
+{% endblock %}
+
 
 {% block body %}
     {% if affiche_tab == false %}
@@ -19,6 +33,14 @@
                         <div class="modal-body">
                             <div class="text-center p-3">
                                {{ form_row(form.nomAgence) }}
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-md-6 col-sm-6 col-xl-6">
+                                    {{ form_row(form.debut) }}
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xl-6">
+                                    {{ form_row(form.fin) }}
+                                </div>
                             </div>
                         </div>
                         <!-- Modal footer -->

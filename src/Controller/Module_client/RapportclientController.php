@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Form\FiltreRapportMembreType;
 use App\Repository\CommuneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -186,6 +187,8 @@ class RapportclientController extends AbstractController
         $affiche_tab = false;
         $rapportClient = [];
         $agence = '';
+        $debut = null;
+        $fin = null;
 
         $form = $this->createFormBuilder()
         ->add('nomAgence',EntityType::class,[
@@ -195,6 +198,14 @@ class RapportclientController extends AbstractController
             'label' => "Agence :",
             'choice_label' => 'NomAgence'
         ])
+        ->add('debut',DateType::class,[
+            'label' => 'du',
+            'widget' => 'single_text'
+            
+        ])->add('fin',DateType::class,[
+            'label' => 'au',
+            'widget' => 'single_text'
+        ])
         ->getForm();
 
         $form->handleRequest($request);
@@ -203,8 +214,10 @@ class RapportclientController extends AbstractController
             $affiche_tab = true;
             $data = $form->getData();
             $agence = $data['nomAgence'];
-            $rapportClient = $agenceRepository->findClientParAgence($agence);
-          // dd($rapportClient);
+            $debut = $data['debut'];
+            $fin = $data['fin'];
+            $rapportClient = $agenceRepository->findClientParAgence($agence,$debut,$fin);
+           //dd($rapportClient);
         }
 
 
@@ -212,7 +225,9 @@ class RapportclientController extends AbstractController
              'form' => $form->createView(),
              'affiche_tab' => $affiche_tab,
              'clients' => $rapportClient,
-             'agence' => $agence
+             'agence' => $agence,
+             'debut' => $debut, 
+             'fin' => $fin, 
         ]);
     }
 
@@ -222,6 +237,8 @@ class RapportclientController extends AbstractController
         $affiche_tab = false;
         $rapportClient = [];
         $commune = '';
+        $debut = null;
+        $fin = null;
 
         $form = $this->createFormBuilder()
         ->add('commune',EntityType::class,[
@@ -231,6 +248,14 @@ class RapportclientController extends AbstractController
             'label' => "Commune :",
             'choice_label' => 'NomCommune'
         ])
+        ->add('debut',DateType::class,[
+            'label' => 'du',
+            'widget' => 'single_text'
+            
+        ])->add('fin',DateType::class,[
+            'label' => 'au',
+            'widget' => 'single_text'
+        ])
         ->getForm();
 
         $form->handleRequest($request);
@@ -239,8 +264,9 @@ class RapportclientController extends AbstractController
             $affiche_tab = true;
             $data = $form->getData();
             $commune = $data['commune'];
-           $rapportClient = $communeRepository->findClientParCommune($commune);
-          // dd($rapportClient);
+            $debut = $data['debut'];
+            $fin = $data['fin'];
+            $rapportClient = $communeRepository->findClientParCommune($commune,$debut,$fin);
         }
 
 
@@ -249,7 +275,9 @@ class RapportclientController extends AbstractController
             'form' => $form->createView(),
             'affiche_tab' => $affiche_tab,
             'clients' => $rapportClient,
-            'commune' => $commune,  
+            'commune' => $commune, 
+            'debut' => $debut, 
+            'fin' => $fin, 
         ]);
     }
 }
