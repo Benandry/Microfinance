@@ -45,15 +45,19 @@ class ListeRougeRepository extends ServiceEntityRepository
         $query=$entityManager->createQuery(
             'SELECT
                 -- liste rouge
+                lr.id,
                 lr.dateliste,
                 lr.raison,
-                --  individuel
-                (i.id) AS code,
                 (i.nom_client) AS nom,
-                (i.prenom_client) AS prenom
+                (i.prenom_client) AS prenom,
+                i.codeclient
              FROM 
-                App\Entity\ListeRouge lr,
-                App\Entity\Individuelclient i WHERE  lr.codeclient = i.id GROUP BY lr.id'
+                App\Entity\ListeRouge lr
+            INNER JOIN
+                App\Entity\Individuelclient i 
+            WITH
+              lr.codeclient = i.id
+              '
         );
 
         return $query->getResult();
@@ -65,14 +69,19 @@ class ListeRougeRepository extends ServiceEntityRepository
         $query=$entityManager->createQuery(
             'SELECT
                 -- liste rouge
+                lr.id,
                 lr.dateliste,
                 lr.raison,
                 --  groupe
                 g.id AS codegroupe,
-                g.nomGroupe AS nomgroupe 
+                g.nomGroupe AS nomgroupe ,
+                g.codegroupe
              FROM 
-                App\Entity\ListeRouge lr,
-                App\Entity\Groupe g WHERE  lr.codegroupe = g.id GROUP BY lr.id'
+                App\Entity\ListeRouge lr
+             INNER JOIN
+                App\Entity\Groupe g 
+            WITH
+               lr.codegroupe = g.id'
         );
 
         return $query->getResult();

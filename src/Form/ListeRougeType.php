@@ -28,13 +28,11 @@ class ListeRougeType extends AbstractType
             ])
             ->add('codegroupe',EntityType::class,[
                 'class'=>Groupe::class,
+                'required' => false,
                 'choice_label'=>'nomGroupe',
-                'by_reference'=>true,
-                'attr'=>[
-                    'class'=>'hidden'
-                ],
-                'label'=>false,
-                'mapped'=>false
+                'autocomplete'=>true,
+                'label'=> 'Groupe :',
+                'placeholder'=> "Groupe ... "
                 ])
             ->add('codeclient',EntityType::class,[
             'class'=>Individuelclient::class,
@@ -42,20 +40,19 @@ class ListeRougeType extends AbstractType
                 return $er->createQueryBuilder('i');
             },
             'choice_label'=>'nom_client',
-            'label'=>'Code Client',
+            'label'=>'Individuel Client : ',
+            'placeholder' => 'Client ...',
             'by_reference'=>true,
+            'required' => false,
             'attr'=>[
                 'class'=>'form-control'
-            ]
+            ],
+            'autocomplete' => true,
             ])
             ->add('TypeClient',ChoiceType::class,[
                 'choices'=>[
-                    'INDIVIDUEL'=>'INDIVIDUEL'
+                    ' '=>' '
                 ],
-                'attr'=>[
-                    'class'=>'hidden'
-                ],
-                'label'=>false
             ])
         ;
     }

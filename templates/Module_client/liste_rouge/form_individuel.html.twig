@@ -1,25 +1,25 @@
 {% extends "base.html.twig" %}
 
-{% block title 'Ajouter au liste rouge le groupe ' %}
-{% block head 'Ajouter au liste rouge le groupe ' %}
+{% block title 'Ajouter au liste rouge individuel' %}
+{% block head 'Ajouter au liste rouge individuel' %}
 
 {% block body %}
     
-    <div class="row">
+    <div class="row m-4">
         <div class="col-12 col-sm-12 d-flex justify-content-end">
-            <a href="{{ path('app_liste_rouge_groupe_index') }}"  class="btn btn-info btn-sm"><i class="fa fa-list"></i> groupe liste rouge</a>
+            <a href="{{ path('app_liste_rouge_index') }}"  class="btn btn-info btn-sm"><i class="fa fa-list"></i> Individuel liste rouge</a>
         </div>
     </div>
 
         {{ form_start(form) }}
             <div class="row m-4">
                 <div class="col-6 col-sm-6 col-md-6">
+                    {{ form_row(form.codeclient) }}
+                    {{ form_row(form.dateliste) }}
                     <div style="display: none;">
-                        {{ form_row(form.codeclient) }}
+                        {{ form_row(form.codegroupe) }}
                         {{ form_row(form.TypeClient) }}
                     </div>
-                    {{ form_row(form.codegroupe) }}
-                    {{ form_row(form.dateliste) }}
                 </div>
                 <div class="col-6 col-sm-6 col-md-6">
                     {{ form_row(form.raison) }}

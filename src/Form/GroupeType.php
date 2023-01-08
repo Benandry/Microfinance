@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -28,9 +29,13 @@ class GroupeType extends AbstractType
             ->add('numeroMobile',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control',
+                    'maxLength' => 10,
+                    'minLength' => 10,
                 ]
             ])
-            ->add('email')
+            ->add('email',EmailType::class,[
+                'label' => 'adresse email du groupe : '
+            ])
             ->add('codegroupe',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control',

@@ -37,8 +37,18 @@
                                     <li class="w-100">
                                         <a href="{{path('app_groupe_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
                                     </li>
-                                    <li class="w-100">
-                                        <a href="{{path('app_liste_rouge_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-list"></i> Liste rouge </span></a>
+                                    <li class="w-100"> 
+                                             <a href="#submenu01" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Liste rouge  <span class="fa fa-chevron-down"></span> </span>
+                                            </a>
+                                            <ul class="collapse nav flex-column ms-4" id="submenu01">
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_liste_rouge_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                                </li>
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_liste_rouge_groupe_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                                </li>
+                                            </ul>
                                     </li>
 
                                     <li class="w-100">
@@ -186,7 +196,7 @@
                                             <i class="fa fa-bars"></i> Epargnes 
                                             <span class="fa fa-chevron-down"></span> </span> 
                                         </a>   
-                                        <ul class="collapse show nav flex-column ms-4" id="submenu10" data-bs-parent="#menu">
+                                        <ul class="collapse show nav flex-column ms-4" id="submenu10">
                                                 <li class="w-100">
                                                     <a href="{{path('app_type_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Type epargne</span></a>
                                                 </li>
@@ -205,7 +215,7 @@
                                             <i class="fa fa-coins"></i> Credits 
                                             <span class="fa fa-chevron-down"></span> </span> 
                                         </a>   
-                                        <ul class="collapse show nav flex-column ms-4" id="submenu11" data-bs-parent="#menu">
+                                        <ul class="collapse show nav flex-column ms-4" id="submenu11">
                                             <li>
                                                 <a href="{{path('app_credit_individuel_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Credit Individuel </span></a>
                                             </li>
@@ -213,7 +223,7 @@
                                                 <a href="{{path('app_produit_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Credit </span></a>
                                             </li>
                                             <li>
-                                                <a href="{{path('app_configuration_general_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration general du credit</span></a>
+                                                <a href="{{path('app_configuration_general_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration general</span></a>
                                             </li>
                                             <li>
                                                 <a href="{{path('app_frais_config_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Frais</span></a>
@@ -317,11 +327,11 @@
                 </div>
                     <div class="col">
                         <div class="row">
-                            <div class="col-12 col-md-12 col sm-12">
+                            <div class="col-12 col-md-12 col-sm-12">
                                 <div class="row head">
                                     <div class="col-6 col-xl-6">
                                         <div class="d-flex justify-content-start">
-                                            <h5 class="text_head m-3">{% block head %} Fidev {% endblock %}</h5>
+                                            <h5 class="text_head mt-3">Fidev /{% block head %} Fidev {% endblock %}</h5>
                                         </div>
                                     </div>
                                     <div class="col-6 col-xl-6">

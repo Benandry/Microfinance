@@ -18,50 +18,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListeRougeController extends AbstractController
 {
     #[Route('/', name: 'app_liste_rouge_index')]
-    public function index(Request $request,ListeRougeRepository $listeRougeRepository,AgenceRepository $agenceRepository): Response
+    public function index(ListeRougeRepository $listeRougeRepository,AgenceRepository $agenceRepository): Response
     {
         $listerouge=$listeRougeRepository->ListeRouge();
 
-        $form=$this->createForm(FiltreListeRougeIndividuelType::class);
-        $filtredate=$form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $listeRouge=$listeRougeRepository->ListeRougeIndividuel(
-                $filtredate->get('Du')->getData(),
-                $filtredate->get('Au')->getData()
-            );
-        }
-        return $this->renderForm('Module_client/liste_rouge/index.html.twig', [
+        return $this->render('Module_client/liste_rouge/liste_individuel.html.twig', [
             'listerouge' => $listerouge,
-            'agences'=>$agenceRepository->findAll(),
-            'form'=>$form
         ]);
     }
 
     // groupe
-    #[Route('/groupe', name: 'app_liste_rougegroupe_index')]
+    #[Route('/groupe', name: 'app_liste_rouge_groupe_index')]
     public function groupe(Request $request,ListeRougeRepository $listeRougeRepository,AgenceRepository $agenceRepository): Response
     {
         $listerouge=$listeRougeRepository->ListeRougeGroupe();
 
-        $form=$this->createForm(FiltreListeRougeGroupeType::class);
-        $filtregroupe= $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $listeRouge=$listeRougeRepository->ListeRougeClientGroupe(
-                $filtregroupe->get('Du')->getData(),
-                $filtregroupe->get('Au')->getData()
-            );
-        }
-
         return $this->renderForm('Module_client/liste_rouge/listegroupe.html.twig', [
             'listerouge' => $listerouge,
-            'agences'=>$agenceRepository->findAll(),
-            'form'=>$form
         ]);
     }
 
-    #[Route('/new', name: 'app_liste_rouge_new', methods: ['GET', 'POST'])]
+    #[Route('/individuel/new', name: 'app_liste_rouge_individuel_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ListeRougeRepository $listeRougeRepository): Response
     {
         $listeRouge = new ListeRouge();
@@ -69,29 +46,31 @@ class ListeRougeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $listeRouge->setTypeClient('INDIVIDUEL');
             $listeRougeRepository->add($listeRouge, true);
-
+            $this->addFlash('success', "Ajout au liste rouge  reussite!!");
             return $this->redirectToRoute('app_liste_rouge_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Module_client/liste_rouge/new.html.twig', [
+        return $this->renderForm('Module_client/liste_rouge/form_individuel.html.twig', [
             'liste_rouge' => $listeRouge,
             'form' => $form,
         ]);
     }
     // groupe
 
-    #[Route('/new/groupe', name: 'app_liste_rougegroupe_new', methods: ['GET', 'POST'])]
+    #[Route('groupe/new', name: 'app_liste_rouge_groupe_new', methods: ['GET', 'POST'])]
     public function Listerougegroupe(Request $request, ListeRougeRepository $listeRougeRepository): Response
     {
         $listeRouge = new ListeRouge();
-        $form = $this->createForm(ListeRougeGroupeType::class, $listeRouge);
+        $form = $this->createForm(ListeRougeType::class, $listeRouge);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $listeRouge->setTypeClient('GROUPE');
             $listeRougeRepository->add($listeRouge, true);
-
-            return $this->redirectToRoute('app_liste_rouge_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', "Ajout au liste rouge  reussite!!");
+            return $this->redirectToRoute('app_liste_rouge_groupe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_client/liste_rouge/formgroupe.html.twig', [

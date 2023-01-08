@@ -10,13 +10,13 @@
 
 {% block body %}
     <div class="row mb-3">
-        <div class="col-2 col-sm-3 col-md-3">
-            <a href="{{ path('app_groupe_new') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter nouveau groupe</a>  
+        <div class="d-flex justify-content-end me-3">
+            <a href="{{ path('app_groupe_new') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter nouveau groupe</a>
         </div>
     </div>
 {{ include('modal.html.twig') }}
 
-    <table class="table2 table">
+    <table class="table2 table mt-3">
         <thead>
             <tr>
                 <th>Code groupe</th>
