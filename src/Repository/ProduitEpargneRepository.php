@@ -94,7 +94,7 @@ class ProduitEpargneRepository extends ServiceEntityRepository
     {
         $query = " SELECT client.codeclient ,client.nom_client nom, client.prenom_client prenom 
         FROM App\Entity\Individuelclient client
-        WHERE client.codeclient = '$code'";
+        WHERE client.id = '$code'";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
 

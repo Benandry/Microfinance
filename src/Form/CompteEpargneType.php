@@ -49,14 +49,7 @@ class CompteEpargneType extends AbstractType
                 ]
                 ])
 
-            ->add('codeep',TextType::class,[
-                'mapped'=>true,
-                'label'=>'Code client',
-                'attr'=>[
-                    'class'=>'form-control'
-                ],
-                
-            ])
+            ->add('codeep',CompteEpargneAutocompleteField::class)
 
             ->add('nom',TextType::class,[
                 'mapped'=>false,

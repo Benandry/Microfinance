@@ -30,7 +30,7 @@
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user"></i> Client  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
-                                <ul class="collapse nav flex-column ms-2" id="submenu1" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="{{path('app_individuel_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
                                     </li>
@@ -54,17 +54,29 @@
                                     <li class="w-100">
                                         <a href="{{path('app_agence_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-home"></i> Agences </span></a>
                                     </li>
-                                    <li class="nav-item dropdown w-100">
-                                        <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Rapports 
+                                    <li class="w-100">
+                                        <a href="#submenu02" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Rapport client  <span class="fa fa-chevron-down"></span> </span>
                                         </a>
-                                        <ul class="dropdown-menu dropdown-menu-primary dropmenu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                            <li><a class="dropdown-item down" href="{{path('app_rapportclient')}}"> <i class="fa-solid fa-user"></i>  Individuel</a></li>
-                                            <li><a class="dropdown-item down" href="{{ path('app_rapportgroupe') }}"> <i class="fa-solid fa-users"></i> Groupe </a></li>
-                                            <li><a class="dropdown-item down" href="{{ path('app_rapport_membre_groupe_index') }}"> <i class="fa-solid fa-users"></i>  Membre groupe</a></li>
-                                            <li><a class="dropdown-item down" href="{{path('app_rapportdocumentidentite')}}"> <i class="fa-solid fa-newspaper"></i> Document d'identite</a></li>
-                                            <li><a class="dropdown-item down" href="{{ path('app_rapport_par_agence') }}"> <i class="fa-solid fa-home"></i> Agence</a></li>
-                                            <li><a class="dropdown-item down" href="{{ path('app_rapport_par_commune') }}"> <i class="fa-solid fa-newspaper"></i> Commune</a></li>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu02">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapportclient') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapportgroupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_membre_groupe_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Membre groupe </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapportdocumentidentite') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Document  </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_par_agence') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-university"></i> Agence  </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_par_commune') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-building fa-fw"></i> Commune  </span></a>
+                                            </li>
                                         </ul>
                                     </li>    
                                 </ul>
@@ -76,38 +88,46 @@
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-database"></i> Epargne  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
                                 <ul class="collapse nav flex-column ms-2" id="submenu2" data-bs-parent="#menu">
-
+                                    <li class="w-100">
+                                        <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Ouvrir compte <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu06">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <li class="w-100">
 
-                                        <li class="w-100 nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Compte epargne
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-primary dropmenu  dropdown-menu-start" aria-labelledby="navbarDarkDropdownMenuLink">
-                                                <li><a href="{{ path('app_ouvrir_compte_epargne') }}" class="dropdown-item down"> <span class="d-none d-sm-inline lien">  <i class="fa fa-user"></i> Individuel </span></a></li>
-                                                <li><a class="dropdown-item down" href="{{ path('app_ouvrir_compte_groupe') }}"> <i class="fa-solid fa-users"></i> Groupe </a></li>
-                                            </ul>
-                                        </li>
-
-                                    </li>
-                                    <li class="w-100 nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-long-arrow-up"></i>Depot 
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-primary dropmenu  dropdown-menu-start" aria-labelledby="navbarDarkDropdownMenuLink">
-                                                <li><a href="{{ path('app_compte_epargne_depot') }}" class="dropdown-item down"><i class="fa fa-user"></i> Individuel</span> </a></li>
-                                                <li><a class="dropdown-item down" href="{{ path('app_depot_epargne_groupe') }}"><i class="fa-solid fa-users"></i> Groupe </a></li>
-                                            </ul>
+                                        <a href="#submenu04" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-long-arrow-up"></i> Depot <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu04">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_compte_epargne_depot') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_epargne_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                        </ul>
                                     </li>
 
-                                         <li class="w-100 nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-long-arrow-down"></i>Retrait 
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-primary dropmenu  dropdown-menu-start" aria-labelledby="navbarDarkDropdownMenuLink">
-                                                <li><a href="{{ path('app_retrait_individuel') }}" class="dropdown-item down"><i class="fa fa-user"></i> Individuel</span> </a></li>
-                                                <li><a class="dropdown-item down" href="{{ path('app_transaction_retrait_groupe') }}"><i class="fa-solid fa-users"></i> Groupe </a></li>
-                                            </ul>
+                                    <li class="w-100">
+                                        <a href="#submenu05" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-long-arrow-down"></i> Retrait <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu05">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_retrait_individuel') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transaction_retrait_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                        </ul>
                                     </li>
 
                                     {# <li class="w-100">
@@ -120,17 +140,24 @@
                                     </li>
 
                                     <li class="w-100">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Rapports
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-primary dropmenu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                              <li><a class="dropdown-item down" href="{{ path('app_rapport_compte') }}" > <i class="fa-solid fa-user"></i> Rapport compte epargne </a></li>
-                                              <li><a class="dropdown-item down" href="{{ path('app_transac_liste') }}"> <i class="fa fa-dollar"> </i> Rapport Solde</a></li>
-                                              <li><a class="dropdown-item down" href="{{ path('app_transaction_index') }}" > <i class="fa-solid fa-users"></i> Rapport Transaction </a></li>
-                                              <li><a class="dropdown-item down" href="{{ path('app_transaction_releve') }}"> <i class="fa-solid fa-newspaper"></i> Relevé </a></li>
-                                            </ul>
-                                        </li>
+
+                                        <a href="#submenu07" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Rapports <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu07">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_compte') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> compte epargne </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transac_liste') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Solde </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transaction_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transaction </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transaction_releve') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Relevé </span></a>
+                                            </li>
+                                        </ul>
                                     </li>
 
                                 </ul>
@@ -154,7 +181,6 @@
                                     <li class="w-100">
                                         <a href="{{ path('app_remboursement_modal') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Remboursement </span></a>
                                     </li>
-
                                     <li class="w-100">
                                         <a href="#submenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
@@ -164,24 +190,20 @@
                                         <ul class="collapse show nav flex-column ms-4" id="submenu">
 
                                             <li class="w-100">
-                                                <div class="dropdown pb-4">
-                                                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <span class="d-none d-sm-inline mx-1 lien">Approbation</span>
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
-                                                        <li><a class="dropdown-item down" href="{{path('app_rapport_credit_approuver')}}" > <i class="fa fa-check"></i> approuvé </a></li>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><a class="dropdown-item down" href="{{path('app_rapport_credit_rejeter')}}" > <i class="fa fa-ban"></i> rejeté </a></li>
-                                                        
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><a class="dropdown-item down" href="{{path('app_rapport_credit_differer')}}" > <i class="fa fa-times"></i> differée </a></li>
-                                                        
-                                                    </ul>
-                                                </div>
+                                                <a href="#submenu03" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Approbation   <span class="fa fa-chevron-down"></span> </span>
+                                                </a>
+                                                <ul class="collapse nav flex-column ms-4" id="submenu03">
+                                                    <li class="w-100">
+                                                        <a href="{{ path('app_rapport_credit_approuver') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-check"></i> approuvé </span></a>
+                                                    </li>
+                                                    <li class="w-100">
+                                                        <a href="{{ path('app_rapport_credit_rejeter') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ban"></i> rejeté </span></a>
+                                                    </li>
+                                                    <li class="w-100">
+                                                        <a href="{{ path('app_rapport_credit_differer') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-times"></i> differée </span></a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                             <li class="w-100">
                                                 <a href="{{path('app_rapport_demande_credit')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-list"></i> rapport demande </span></a>

@@ -127,17 +127,11 @@ class Individuelclient
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $commune = null;
+    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    private ?Agence $Agence = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $agence = null;
-
-    // #[ORM\ManyToOne(inversedBy: 'individuelclients')]
-    // private ?Agence $Agence = null;
-
-    // #[ORM\ManyToOne(inversedBy: 'individuelclients')]
-    // private ?Commune $commune = null;
+    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    private ?Commune $commune = null;
 
     
     public function __construct()
@@ -693,51 +687,28 @@ class Individuelclient
         return $this;
     }
 
-    // public function getAgence(): ?Agence
-    // {
-    //     return $this->Agence;
-    // }
+    public function getAgence(): ?Agence
+    {
+        return $this->Agence;
+    }
 
-    // public function setAgence(?Agence $Agence): self
-    // {
-    //     $this->Agence = $Agence;
+    public function setAgence(?Agence $Agence): self
+    {
+        $this->Agence = $Agence;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getCommune(): ?Commune
-    // {
-    //     return $this->commune;
-    // }
-
-    // public function setCommune(?Commune $commune): self
-    // {
-    //     $this->commune = $commune;
-
-    //     return $this;
-    // }
-
-    public function getCommune(): ?string
+    public function getCommune(): ?Commune
     {
         return $this->commune;
     }
 
-    public function setCommune(string $commune): self
+    public function setCommune(?Commune $commune): self
     {
         $this->commune = $commune;
 
         return $this;
     }
 
-    public function getAgence(): ?string
-    {
-        return $this->agence;
-    }
-
-    public function setAgence(string $agence): self
-    {
-        $this->agence = $agence;
-
-        return $this;
-    }
 }

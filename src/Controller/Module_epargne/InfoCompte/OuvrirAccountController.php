@@ -2,6 +2,9 @@
 
 namespace App\Controller\Module_epargne\InfoCompte;
 
+use App\Entity\CompteEpargne;
+use App\Entity\Individuelclient;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,13 +20,11 @@ class OuvrirAccountController extends AbstractController
     {
 
         $form = $this->createFormBuilder()
-        ->add('code', TextType::class,[
-            'label' => "Code client a ouvrir un compte : ",
-            'attr' =>[
-                'class' => 'form-control',
-                'maxlength' => 10,
-                'minLength' => 10
-            ]
+        ->add('code', EntityType::class,[
+                'class' => Individuelclient::class,
+                'choice_label' => 'codeclient',
+                'autocomplete' => true,
+                'placeholder' => 'Code client .....'
         ])
         ->add('nom', TextType::class,[
             'label' => "Nom du client : ",

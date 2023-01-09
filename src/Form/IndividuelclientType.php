@@ -88,7 +88,6 @@ class IndividuelclientType extends AbstractType
                 'by_reference'=>true,
                 'mapped' => true,
                 'autocomplete' => true,
-                'placeholder' => "Choisissez le niveau d'etude " ,
             ])
             ->add('titre',EntityType::class,[
                 'class'=>Titre::class,
@@ -115,7 +114,6 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
                 'by_reference'=>true,
                 'mapped'=>true,
-                'placeholder' => 'Groupe ...',
                 'autocomplete' => true,
                 'label'=>'Membre du groupe'
             ])
@@ -178,7 +176,6 @@ class IndividuelclientType extends AbstractType
             ->add('Agence',EntityType::class,[
                 'class'=>Agence::class,
                 'choice_label'=>'NomAgence',
-                'placeholder' => 'Agence ...',
                 'autocomplete' => true,
             ])
 

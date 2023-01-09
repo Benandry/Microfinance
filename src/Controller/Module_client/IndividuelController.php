@@ -87,14 +87,13 @@ class IndividuelController extends AbstractController
 
 
         $individuelclient = new Individuelclient();
-        $agences=new Agence();
         #dd($individuelclient);
         $form = $this->createForm(IndividuelclientType::class, $individuelclient);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //dd($form->getData());
+            dd($form->getData());
             $brochureFile = $form->get('photo')->getData();
             if ($brochureFile) {
                 $brochureFileName = $fileUploader->upload($brochureFile);
@@ -140,9 +139,12 @@ class IndividuelController extends AbstractController
 #[Route('/{id}/edit/{active}', name: 'app_individuel_edit', methods: ['GET','POST'])]
     public function edit(Request $request, Individuelclient $individuelclient, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface,$id ,$active): Response
     {
+
         $form = $this->createForm(IndividuelclientType::class, $individuelclient);
         $form->handleRequest($request);
         
+        //dd($active);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile = $form->get('photo')->getData();
             if ($brochureFile) {
