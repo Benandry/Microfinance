@@ -144,13 +144,9 @@ class Individuelclient
     {
         $this->CodeIndividuel = new ArrayCollection();
         $this->codecompteepargne = new ArrayCollection();
-<<<<<<< HEAD
        // $this->CompteMembreIndividuel = new ArrayCollection();
         $this->mobiles = new ArrayCollection();
        // $this->docIdentites = new ArrayCollection();
-=======
-        $this->mobiles = new ArrayCollection();
->>>>>>> d27273309d77040eeafadbdaf7227e87f1d03235
         $this->listeRouges = new ArrayCollection();
         $this->codeclientind = new ArrayCollection();
     }
