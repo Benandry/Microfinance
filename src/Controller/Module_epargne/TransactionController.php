@@ -23,6 +23,7 @@ class TransactionController extends AbstractController
     public function index(Request $request,AgenceRepository $agenceRepository,TransactionRepository $transactionRepository): Response
     {
         $transaction=$transactionRepository->RapportTransaction();
+        // dd($transaction);
         #--------------Date afficher ---------------------------#
         $date_1 = false;
         $date_2 = false;
