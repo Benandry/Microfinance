@@ -76,6 +76,7 @@ class TransactionController extends AbstractController
     public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
     {
         $transaction = new Transaction();
+        
         $code = $request->query->get('code');
         $code_client = $request->query->get('cod_client');
         $nom = $request->query->get('nom');
@@ -163,9 +164,22 @@ class TransactionController extends AbstractController
     
     // Retrait
     #[Route('/retrait', name: 'app_transaction_retrait', methods: ['GET', 'POST'])]
-    public function Retrait(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
+    public function Retraitgroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
     {
         $transaction = new Transaction();
+
+        $code = $request->query->get('code');
+        $nom = $request->query->get('nom');
+
+        // dd($code,$nom);
+
+        $soldeCurrent = $transactionRepository->soldeCurrent($code);
+
+        if($soldeCurrent == null ){
+            $soldeCurrent[0]['solde'] = 0;
+        }        
+
+
         $form = $this->createForm(TransactionretraitType::class, $transaction);
         $form->handleRequest($request);
 
@@ -212,8 +226,85 @@ class TransactionController extends AbstractController
         return $this->renderForm('Module_epargne/transaction/retrait.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
+            'code'=>$code,
+            'nom'=>$nom,
+            'solde' => $soldeCurrent[0]['solde']
         ]);
     }
+
+    // Retrait individuel
+        // Retrait
+        #[Route('/individuel', name: 'app_retrait', methods: ['GET', 'POST'])]
+        public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
+        {
+            $transaction = new Transaction();
+    
+            $code = $request->query->get('code');
+            $codeclient=$request->query->get('cod_client');
+            $nom = $request->query->get('nom');
+            $prenom=$request->query->get('prenom');
+    
+            // dd($code,$nom,$prenom,$codeclient);
+    
+            $soldeCurrent = $transactionRepository->soldeCurrent($code);
+    
+            if($soldeCurrent == null ){
+                $soldeCurrent[0]['solde'] = 0;
+            }        
+    
+    
+            $form = $this->createForm(TransactionretraitType::class, $transaction);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                // $transactionRepository->add($transaction, true);
+    
+                $entityManager=$doctrine->getManager();
+    
+                $transaction->setCodetransaction(random_int(1,2000000));
+    
+                $codeclient=$transaction->getCodeepargneclient();
+                $transaction->setCodeepargneclient($codeclient);
+    
+                $Description=$transaction->getDescription();
+                $transaction->setDescription($Description);
+    
+                $PieceComptable=$transaction->getPieceComptable();
+                $transaction->setPieceComptable($PieceComptable);
+    
+                $DateTransaction=$transaction->getDateTransaction();
+                $transaction->setDateTransaction($DateTransaction);
+    
+                $Montant=$transaction->getMontant();
+                $transaction->setMontant(-$Montant);
+    
+                $Papeterie=$transaction->getPapeterie();
+                $transaction->setPapeterie($Papeterie);
+    
+                $Commission=$transaction->getCommission();
+                $transaction->setCommission($Commission);
+    
+                $TypeClient=$transaction->getTypeClient();
+                $transaction->setTypeClient($TypeClient);
+    
+                $solde=$transaction->getSolde();
+                $transaction->setSolde($solde);
+    
+                $entityManager->persist($transaction);
+                $entityManager->flush();
+                $this->addFlash('success', "Transaction retrait compte epargne '" .$transaction->getCodeepargneclient()."' réussite!!!");
+               // return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+            }
+    
+            return $this->renderForm('Module_epargne/transaction/retrait_individuel_form.html.twig', [
+                'transaction' => $transaction,
+                'form' => $form,
+                'code'=>$code,
+                'nom'=>$nom,
+                'prenom'=>$prenom,
+                'solde' => $soldeCurrent[0]['solde']
+            ]);
+        }
 
     #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
     public function show(Transaction $transaction): Response

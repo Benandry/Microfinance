@@ -18,7 +18,9 @@ $(document).ready(() =>{
         var solde = $('#solde_cli').text()
         $('#transaction_donneessolde').val(solde)
 
-        $('#transaction_typeClient').val('GROUPE')
+        $('#transaction_typeClient').val('INDIVIDUEL')
+
+        $('#transaction_Description').val('DEPOT')
 
 
 
@@ -152,7 +154,8 @@ $(document).ready(() =>{
         // })
     }
 
-    // epargne groupe
+    // epargne groupe : ici on recupere toute les informations 
+    // concernant le groupe
 
     if( path === '/depotgroupe' ){
         var codegroupe = $('#code_client').text()
@@ -214,19 +217,19 @@ $(document).ready(() =>{
 
     if( path === '/depot/epargne/groupe' ){
         $('#form_code').on('keyup',()=>{
-            var codegroupe =$('#form_code').val();
+            var code =$('#form_code').val();
 
-            console.log(codegroupe)
+            console.log(code)
 
 
-            if( codegroupe.length === 15) {
-                var url = '/info/'+codegroupe
+            if( code.length === 15) {
+                var url = '/info/'+code
                 $.ajax({
                     url: url,
                     method: "GET",
                     dataType : "json",
                     contentType: "application/json; charset=utf-8",
-                    data : JSON.stringify(codegroupe),
+                    data : JSON.stringify(code),
                     success: function(result){
                         for(let i = 0; i < result.length; i++){
                             var element = result[i]

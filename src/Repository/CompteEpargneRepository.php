@@ -456,22 +456,31 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 -- COMPTE EPARGNE
                 ce.datedebut,
                 ce.codeepargne,
-                -- -- INDIVIDUEL CLIENT
+                ce.typeClient,
+                -- INDIVIDUEL CLIENT
                 i.nom_client,
                 i.prenom_client,
-                -- -- PRODUIT EPARGNE
+                -- GROUPE
+                g.nomGroupe,
+                -- PRODUIT EPARGNE
                 p.nomproduit
-                -- -- TYPE EPARGNE
+                -- TYPE EPARGNE
                 
                 FROM
                 App\Entity\CompteEpargne ce
-                INNER JOIN
+                LEFT JOIN
                 App\Entity\Individuelclient i
+                WITH
+                ce.codeep = i.codeclient
+
+                LEFT JOIN
+                App\Entity\Groupe g
+                WITH
+                ce.codeep = g.codegroupe
+
                 INNER JOIN
                 App\Entity\ProduitEpargne p
-                WHERE
-                ce.codeep = i.codeclient
-                AND
+                WITH
                 ce.produit = p.id
                 '
             );
@@ -490,22 +499,33 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 -- COMPTE EPARGNE
                 ce.datedebut,
                 ce.codeepargne,
-                -- -- INDIVIDUEL CLIENT
+                ce.typeClient,
+                -- INDIVIDUEL CLIENT
                 i.nom_client,
                 i.prenom_client,
-                -- -- PRODUIT EPARGNE
+                -- GROUPE
+                g.nomGroupe,
+                -- PRODUIT EPARGNE
                 p.nomproduit
+                -- TYPE EPARGNE
+                
                 FROM
                 App\Entity\CompteEpargne ce
-                INNER JOIN
+                LEFT JOIN
                 App\Entity\Individuelclient i
+                WITH
+                ce.codeep = i.codeclient
+
+                LEFT JOIN
+                App\Entity\Groupe g
+                WITH
+                ce.codeep = g.codegroupe
+
                 INNER JOIN
                 App\Entity\ProduitEpargne p
-                WHERE
-                ce.codeep = i.codeclient
-                AND
+                WITH
                 ce.produit = p.id
-                AND
+                WHERE
                 ce.datedebut BETWEEN :datedebut AND :datefin
                     '
                 )
@@ -525,27 +545,36 @@ class CompteEpargneRepository extends ServiceEntityRepository
          
                  $query=$entityManager->createQuery(
                      'SELECT 
-                 -- COMPTE EPARGNE
-                 ce.datedebut,
-                 ce.codeepargne,
-                 -- -- INDIVIDUEL CLIENT
-                 i.nom_client,
-                 i.prenom_client,
-                 -- -- PRODUIT EPARGNE
-                 p.nomproduit
-                 -- -- TYPE EPARGNE
-                 -- te
-                 FROM
-                 App\Entity\CompteEpargne ce
-                 INNER JOIN
-                 App\Entity\Individuelclient i
-                 INNER JOIN
-                 App\Entity\ProduitEpargne p
-                 WHERE
-                 ce.codeep = i.codeclient
-                 AND
-                 ce.produit = p.id
-                 AND
+                -- COMPTE EPARGNE
+                ce.datedebut,
+                ce.codeepargne,
+                ce.typeClient,
+                -- INDIVIDUEL CLIENT
+                i.nom_client,
+                i.prenom_client,
+                -- GROUPE
+                g.nomGroupe,
+                -- PRODUIT EPARGNE
+                p.nomproduit
+                -- TYPE EPARGNE
+                
+                FROM
+                App\Entity\CompteEpargne ce
+                LEFT JOIN
+                App\Entity\Individuelclient i
+                WITH
+                ce.codeep = i.codeclient
+
+                LEFT JOIN
+                App\Entity\Groupe g
+                WITH
+                ce.codeep = g.codegroupe
+
+                INNER JOIN
+                App\Entity\ProduitEpargne p
+                WITH
+                ce.produit = p.id
+                WHERE
                  ce.datedebut <= :datearrete 
                  -- AND
                  -- ce.datedebut <=:datearrete

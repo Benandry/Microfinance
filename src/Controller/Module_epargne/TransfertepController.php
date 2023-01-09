@@ -78,7 +78,7 @@ class TransfertepController extends AbstractController
             
             $entityManager->flush();
             //dd($form->getData());
-            $this->addFlash('success', " Transfert "+$montantdest+" Ar du  réussite!!!");
+            $this->addFlash('success', " Transfert ".$transfertep->getMontantdestinataire()." Ar du  réussite!!!");
 
              return $this->redirectToRoute('app_transfertep_new', [], Response::HTTP_SEE_OTHER);
         }

@@ -131,6 +131,7 @@ class RapportController extends AbstractController
     {
 
         $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne();
+        // dd($rapport_compteepargne);
 
         
         $compteepargne = new CompteEpargne();
@@ -166,6 +167,7 @@ class RapportController extends AbstractController
             }
 
         }
+        // dd($rapport_compteepargne);
 
         return  $this->renderForm('rapport/rapport_compte_epargne.html.twig',[
             'rapportcompteep'=>$rapport_compteepargne,

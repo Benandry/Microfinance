@@ -41,18 +41,33 @@ class CompteGroupeEpType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('codegroupe',TextType::class,[
+            ->add('codeep',TextType::class,[
+                'mapped'=>true,
+                'label'=>'Code client',
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'label' => 'Code du groupe : '
+                
             ])
-            ->add('codegroupeepargne',TextType::class,[
-                'label'=> 'Code epargne groupe ',
+            ->add('codeepargne',TextType::class,[
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'hidden',
                 ],
+                'label'=>false
             ])
+
+            // ->add('codegroupe',TextType::class,[
+            //     'attr'=>[
+            //         'class'=>'form-control'
+            //     ],
+            //     'label' => 'Code du groupe : '
+            // ])
+            // ->add('codegroupeepargne',TextType::class,[
+            //     'label'=> 'Code epargne groupe ',
+            //     'attr'=>[
+            //         'class'=>'form-control'
+            //     ],
+            // ])
             
             ->add('Valider',SubmitType::class,[
                 'attr' => [

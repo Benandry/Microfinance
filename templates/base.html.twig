@@ -88,9 +88,19 @@
                                             </ul>
                                     </li>
 
-                                    <li class="w-100">
-                                        <a href="{{ path('app_transaction_retrait') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-long-arrow-up"></i> Retrait </span> </a>
+                                         <li class="w-100 nav-item dropdown">
+                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-long-arrow-down"></i>Retrait 
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-primary dropmenu  dropdown-menu-start" aria-labelledby="navbarDarkDropdownMenuLink">
+                                                <li><a href="{{ path('app_retrait_individuel') }}" class="dropdown-item down"><i class="fa fa-user"></i> Individuel</span> </a></li>
+                                                <li><a class="dropdown-item down" href="{{ path('app_transaction_retrait_groupe') }}"><i class="fa-solid fa-users"></i> Groupe </a></li>
+                                            </ul>
                                     </li>
+
+                                    {# <li class="w-100">
+                                        <a href="{{ path('app_transaction_retrait_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-long-arrow-up"></i> Retrait </span> </a>
+                                    </li> #}
 
                                     
                                     <li class="w-100">

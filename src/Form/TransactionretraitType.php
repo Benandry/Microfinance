@@ -18,21 +18,17 @@ class TransactionretraitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Description',ChoiceType::class,[
-                'choices'=>[
-                    'RETRAIT'=>'RETRAIT'
-                ],
+            ->add('Description',TextType::class,[
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'hidden',
+                    'value'=>'RETRAIT'
                 ]
             ])
-            ->add('typeClient',ChoiceType::class,[
-                'choices'=>[
-                    'INDIVIDUEL'=>'INDIVIDUEL',
-                    'GROUPE'=>'GROUPE'
-                ],
+            ->add('typeClient',TextType::class,[
+                
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'form-control',
+                    'value'=>'GROUPE'
                 ]
             ])
             ->add('PieceComptable')
