@@ -52,6 +52,7 @@ $(document).ready(function(){
                 }
 
                 console.log(result);
+                
                 for (let i = 0; i < result.length; i++) {
                     var element = result[i];
                 

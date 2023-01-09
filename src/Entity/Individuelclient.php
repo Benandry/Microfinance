@@ -127,22 +127,30 @@ class Individuelclient
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Agence $Agence = null;
+    #[ORM\Column(length: 255)]
+    private ?string $commune = null;
 
-    #[ORM\ManyToOne(inversedBy: 'individuelclients')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Commune $commune = null;
+    #[ORM\Column(length: 255)]
+    private ?string $agence = null;
+
+    // #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    // private ?Agence $Agence = null;
+
+    // #[ORM\ManyToOne(inversedBy: 'individuelclients')]
+    // private ?Commune $commune = null;
 
     
     public function __construct()
     {
         $this->CodeIndividuel = new ArrayCollection();
         $this->codecompteepargne = new ArrayCollection();
+<<<<<<< HEAD
        // $this->CompteMembreIndividuel = new ArrayCollection();
         $this->mobiles = new ArrayCollection();
        // $this->docIdentites = new ArrayCollection();
+=======
+        $this->mobiles = new ArrayCollection();
+>>>>>>> d27273309d77040eeafadbdaf7227e87f1d03235
         $this->listeRouges = new ArrayCollection();
         $this->codeclientind = new ArrayCollection();
     }
@@ -611,7 +619,7 @@ class Individuelclient
 
     public function setCodeindividuel(string $codeindividuel): self
     {
-        $this->codeindividuel = $codeindividuel;
+        $this->CodeIndividuel = $codeindividuel;
 
         return $this;
     }
@@ -689,26 +697,50 @@ class Individuelclient
         return $this;
     }
 
-    public function getAgence(): ?Agence
-    {
-        return $this->Agence;
-    }
+    // public function getAgence(): ?Agence
+    // {
+    //     return $this->Agence;
+    // }
 
-    public function setAgence(?Agence $Agence): self
-    {
-        $this->Agence = $Agence;
+    // public function setAgence(?Agence $Agence): self
+    // {
+    //     $this->Agence = $Agence;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getCommune(): ?Commune
+    // public function getCommune(): ?Commune
+    // {
+    //     return $this->commune;
+    // }
+
+    // public function setCommune(?Commune $commune): self
+    // {
+    //     $this->commune = $commune;
+
+    //     return $this;
+    // }
+
+    public function getCommune(): ?string
     {
         return $this->commune;
     }
 
-    public function setCommune(?Commune $commune): self
+    public function setCommune(string $commune): self
     {
         $this->commune = $commune;
+
+        return $this;
+    }
+
+    public function getAgence(): ?string
+    {
+        return $this->agence;
+    }
+
+    public function setAgence(string $agence): self
+    {
+        $this->agence = $agence;
 
         return $this;
     }

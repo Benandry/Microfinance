@@ -18,20 +18,14 @@ class TransactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Description',ChoiceType::class,[
-                'choices'=>[
-                    'DEPOT' =>'DEPOT'
-                ],
+            ->add('Description',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control',
-                ]
+                ],
+                'required'=>false
             ])
             ->add('PieceComptable')
-            ->add('typeClient',ChoiceType::class,[
-                'choices'=>[
-                    'INDIVIDUEL'=>'INDIVIDUEL',
-                    'GROUPE'=>'GROUPE'
-                ],
+            ->add('typeClient',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control'
                 ]
@@ -43,7 +37,8 @@ class TransactionType extends AbstractType
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'label'=>'Montant'
+                'label'=>'Montant',
+                'required'=>false,
                 ])
             ->add('montant_bruite',IntegerType::class,[
             'label' => "Montant du depot",
