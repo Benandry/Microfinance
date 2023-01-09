@@ -72,7 +72,11 @@
                 <tr>
                     <td>{{ CompteEpargne.datedebut | date('Y-m-d') }}</td>
                     <td>{{ CompteEpargne.codeepargne }}</td>
-                    <td>{{ CompteEpargne.nom_client }} {{ CompteEpargne.prenom_client }}</td>
+                    {% if CompteEpargne.typeClient == 'INDIVIDUEL' %}
+                        <td>{{ CompteEpargne.nom_client }} {{ CompteEpargne.prenom_client }}</td>
+                    {% else %}
+                        <td>{{ CompteEpargne.nomGroupe }}</td>
+                    {%  endif %}
                     <td> {{ CompteEpargne.nomproduit }}</td>
                 </tr>
             {%  endfor %}

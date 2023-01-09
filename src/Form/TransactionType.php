@@ -92,10 +92,12 @@ class TransactionType extends AbstractType
                     'class'=>'form-control',
                     'disabled'=>true,
                 ],
-                'label'=>'solde'
+                'label'=>false
             ])
 
-            ->add('solde',TextType::class)
+            ->add('solde',TextType::class,[
+                'label'=>'dolsqdfq'
+            ])
         ;
     }
 

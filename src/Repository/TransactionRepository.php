@@ -477,13 +477,17 @@ class TransactionRepository extends ServiceEntityRepository
 
             $query=$entityManager->createQuery(
             "SELECT DISTINCT
-            tr.solde,ce.codeepargne
+            MAX(tr.id),
+            SUM(tr.Montant) AS solde,
+            ce.codeepargne
             FROM
             App\Entity\CompteEpargne ce
             LEFT JOIN
             App\Entity\Transaction tr
-            WITH tr.codeepargneclient = ce.codeepargne
-            WHERE ce.codeepargne = '$code' AND tr.id = (SELECT MAX(t.id) FROM App\Entity\Transaction t )
+
+            WITH 
+            tr.codeepargneclient = ce.codeepargne
+            WHERE tr.codeepargneclient = '$code'
             ");
 
             return  $query->getResult();

@@ -100,7 +100,7 @@ $(document).ready(() =>{
         var code_groupe_ = $('#code_groupe').text();
         $('#information').css('display','none')
         $('#code_ep_Gr').css('display','none')
-        $('#compte_groupe_ep_codegroupe').val(code_groupe_)
+        $('#compte_groupe_ep_codeep').val(code_groupe_)
 
         $("#compte_groupe_ep_produit").on('change',function(){
             var produit = $("#compte_groupe_ep_produit").val()
@@ -124,7 +124,7 @@ $(document).ready(() =>{
                         var type_produit = $('#type_prod').text();
                         var id_produits = $('#id_prod').text();
                         
-                        $('#compte_groupe_ep_codegroupeepargne').val(code_groupe_+type_produit+id_produits.padStart(5,0));
+                        $('#compte_groupe_ep_codeepargne').val(code_groupe_+type_produit+id_produits.padStart(5,0));
                     }
             
                 },

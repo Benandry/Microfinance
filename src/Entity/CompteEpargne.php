@@ -67,7 +67,6 @@ class CompteEpargne
     
     public function __construct()
     {
-        $this->compteep = new ArrayCollection();
         $this->transfertProduits = new ArrayCollection();
         $this->produittransmis = new ArrayCollection();
         $this->compteTransfert = new ArrayCollection();
@@ -76,7 +75,6 @@ class CompteEpargne
         $this->individuelclients = new ArrayCollection();
         $this->CodeIndividuelClient = new ArrayCollection();
         $this->codeindcl = new ArrayCollection();
-        $this->transferts = new ArrayCollection();
     }
 
     public function getId(): ?int

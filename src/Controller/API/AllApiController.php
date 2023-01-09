@@ -15,13 +15,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AllApiController extends AbstractController
 {
     #[Route('/api/individuel/{id}', name: 'app_api_individuel')]
-
     public function index(ProduitEpargneRepository $produitRepo,$id): Response
     {
 
         $api = $produitRepo->findByApiProduit($id); 
 
-        dd($api);
+        // dd($api);
         return new JsonResponse($api);
     }
 

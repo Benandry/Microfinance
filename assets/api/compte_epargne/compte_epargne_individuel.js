@@ -31,12 +31,14 @@ $(document).ready(() =>{
                     for (let i = 0; i < result.length; i++) {
                     
                         var element = result[i];
+                        console.log(element)
                        
                         document.getElementById('text').innerHTML = "<span id=\'type_prod\'>"+element.TypeProd.toString().padStart(1,0)+"</span><span id=\'id_prod\'>"+element.Produit_id.toString().padStart(4,0)+" </span>";
                         
                         
                         var type_produit = $('#type_prod').text();
                         var id_produits = $('#id_prod').text();
+                        // alert(code_client_+type_produit)
                         $('#compte_epargne_codeepargne').val(code_client_+type_produit+id_produits.padStart(5,0));
                     }
             
