@@ -1,14 +1,138 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Modification sur l'information du client ' {{ nom_client }} '
+    Modification du client ' {{ nom_client }} '
 {% endblock %}
 {% block head %}
-    Modification sur l'information du client ' {{ nom_client }} '
+    Modification du client ' {{ nom_client }} '
 {% endblock %}
 
 {% block body %}
-    
-    {{ include('Module_client/individuel/_form.html.twig', {'button_label': 'Valider la modification',activer : 'active'} ) }}
+
+    {% set activer = 'active' %}
+    {{ form_start(form) }}
+        <ul class="nav nav-tabs">
+            <li class="nav-item"> <a class="nav-link {% if active is defined and active == 'etat' %} {{ activer|default(' ') }} {% endif %}" data-bs-toggle="tab" href="#etat">Etat Civile</a></li>
+            <li class="nav-item"> <a class="nav-link {% if active is defined and active == 'famille' %} {{ activer|default(' ') }}{% endif %}" data-bs-toggle="tab" href="#famille">Famille</a></li>
+            <li class="nav-item"> <a class="nav-link {% if active is defined and active == 'adresse' %} {{ activer|default(' ') }} {% endif %}" data-bs-toggle="tab" href="#adresse">Adresse et Niveau d'etude</a></li>
+            <li class="nav-item"> <a class="nav-link {% if active is defined and active == 'groupe' %} {{ activer|default(' ') }}{% endif %} " data-bs-toggle="tab" href="#groupe">Groupe</a></li>
+            <li class="nav-item"> <a class="nav-link {% if active is defined and active == 'identite' %} {{ activer|default(' ') }}{% endif %}" data-bs-toggle="tab" href="#identite">Identité</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane {% if active is defined and active == 'etat' %} {{ activer|default(' ') }}{% endif %}" id="etat">
+                <div class="row shadow-sm p-1">
+                    <div class="col-12 col-sm-12 col-md-12">
+                    <h6 class="text-center text-primary">Etat civile</h6>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.photo) }}
+                            {{ form_row(form.nom_client) }}
+                            {{ form_row(form.prenom_client) }}
+                            {{ form_row(form.sexe) }}
+                            {{ form_row(form.titre) }}
+                            {{ form_row(form.date_inscription) }}
+                            {{ form_row(form.etatcivile) }}
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.date_naissance) }}
+                            <span id="age"></span>
+                            {{ form_row(form.lieu_naissance) }}
+                            {{ form_row(form.numeroMobile) }}
+                            {{ form_row(form.profession) }}
+                            {{ form_row(form.nomConjoint) }}
+                            {{ form_row(form.garant) }}
+                            {{ form_row(form.Agence) }}
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane {% if active is defined and active == 'famille' %} {{ activer|default(' ') }}  {% endif %}" id="famille">
+                <div class="row shadow-sm p-1">
+                    <div class="col-12 col-sm-12 col-md-12">
+                        <h6 class="text-center text-primary">Information familiale</h6>
+                        <div class="row">
+                            <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.parent_nom) }}
+                            {{ form_row(form.nb_enfant) }}
+                            {{ form_row(form.nb_personne_charge) }}
+                            </div>
+                            <div class="col-6 col-sm-6">
+                            {{ form_row(form.parent_adresse) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane {% if active is defined and active == 'adresse' %} {{ activer|default(' ') }}  {% endif %}" id="adresse">
+                <div class="row shadow-sm p-1">
+                    <div class="col-12">
+                    <h6 class="text-center text-primary" >Adressse page</h6>
+                    <div class="row">
+                            <div class="col-6 col-sm-6">
+                            {{ form_row(form.adressephysique) }}
+                            {{ form_row(form.commune) }}
+                            <div id="commune_suggest"></div>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                            {{ form_row(form.etude) }}
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane {% if active is defined and active == 'groupe' %} {{ activer|default(' ') }}  {% endif %} " id="groupe">
+                <div class="row shadow-sm p-1">
+                    <div class="col-12">
+                    <h6 class="text-center text-primary">Groupe Client</h6>
+                        <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.MembreGroupe) }}
+                            {{ form_row(form.TitreGroupe) }}
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.dateadhesion) }}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane {% if active is defined and active == 'identite' %} {{ activer|default(' ') }}  {% endif %} " id="identite">
+                <div class="row shadow-sm p-3">
+                    <div class="col-12">
+                    <h6 class="text-center text-primary">Identite national </h6>
+                        <div class="row">                
+                            <div class="col-6 col-sm-6">
+                                {{ form_row(form.TypeIdentite) }}
+                                {{ form_row(form.cin) }}
+                                {{ form_row(form.datecin) }}
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                {{ form_row(form.dateexpiration) }}
+                                {{ form_row(form.lieudelivrance) }}
+                                <div id="individuel" style="display:none">
+                                {{ form_row(form.codeclient) }}
+                                </div>
+                                <div class="user-log">
+                                {{ form_row(form.user) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-12 col-md-12 d-flex justify-content-center">
+                    <button class="btn btn-sm btn-primary">{{ button_label|default('Valider la modification') }}</button>
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
 
 {% endblock %}

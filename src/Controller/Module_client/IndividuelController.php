@@ -11,12 +11,9 @@ use App\Form\RechercheIndividuelType;
 use App\Repository\AgenceRepository;
 use App\Repository\IndividuelclientRepository;
 use App\Service\FileUploader;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,7 +61,7 @@ class IndividuelController extends AbstractController
     
     #[Route('/new', name: 'app_individuel_new', methods: ['GET', 'POST'])]
 
-    public function new(AgenceRepository $agence,ManagerRegistry $doctrine,Request $request, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface): Response
+    public function new(Request $request, IndividuelclientRepository $individuelclientRepository,FileUploader $fileUploader,EntityManagerInterface $entityManagerInterface): Response
     {
         $get_last_client = $individuelclientRepository->findByLastClient();
 

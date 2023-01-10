@@ -73,13 +73,20 @@ class IndividuelclientType extends AbstractType
             ->add('adressephysique',TextType::class,[
                 'label'=>'Adresse physique',
             ])
-            ->add('commune',CommuneAutocompleteField::class)
+            ->add('commune',EntityType::class,[
+                'class'=>Commune::class,
+                'choice_label'=>'NomCommune',
+                'by_reference'=>true,
+                'label'=>'Commune : ',
+                'autocomplete' => true,
+                'attr'=>['class'=>'form-control']
+                ])
             ->add('etatcivile',EntityType::class,[
                 'class'=>Etatcivile::class,
                 'choice_label'=>'etatcivile',
                 'by_reference'=>true,
                 'label'=>'Etat civile',
-                'mapped' => true,
+                'autocomplete' => true,
                 'attr'=>['class'=>'form-control']
             ])
             ->add('etude',EntityType::class,[

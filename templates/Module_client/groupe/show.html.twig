@@ -1,12 +1,7 @@
 {% extends "base.html.twig" %}
 
-{% block title %}
-  Inforrmation sur {{ groupe.nomGroupe }}
-{% endblock %}
-
-{% block head %}
-  Inforrmation sur {{ groupe.nomGroupe }}
-{% endblock %}
+{% block title groupe.nomGroupe %}
+{% block head groupe.nomGroupe %}
 
 {% block body %}
 
