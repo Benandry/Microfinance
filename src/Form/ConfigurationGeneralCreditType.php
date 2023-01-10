@@ -15,7 +15,7 @@ class ConfigurationGeneralCreditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('ProduitLieEpargne')
+            // ->add('ProduitLieEpargne')
             ->add('NombreJourInteretAnnee')
             ->add('NombreSemaineAnnee')
             ->add('RecalculDateEcheanceDecaissement')

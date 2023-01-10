@@ -47,6 +47,9 @@ $(document).ready(function(){
                         
                         var codeepargneclient=el.codeepargne
 
+                        var creditlieepargne= document.getElementById('lieepargne').innerHTML;
+                        alert(creditlieepargne);
+
                         // console.log(codeepargneclient)
                         
                         // Ici on verra si le client possede une epargne ou non
@@ -110,11 +113,12 @@ $(document).ready(function(){
 
                         // Test lie epargne
                         
-                        document.getElementById('lieep').innerHTML=element.ProduitLieEpargne
+                        document.getElementById('lieepargne').innerHTML=element.CreditBaseEpargne
+                        // $('#lieep').text(element.CreditBaseEpargne)
 
                         // si la configuration indique que le produit epargne est false
                         // on ne montre pas le champ solde epargne
-                        if(element.ProduitLieEpargne == null){
+                        if(element.CreditBaseEpargne == false){
                             $('#soldeepargneform').hide()
                         }
                         else{

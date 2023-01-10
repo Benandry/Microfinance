@@ -66,10 +66,10 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             creditindividuel.PeriodeMinimumCredit,
             creditindividuel.PeriodeMaximumCredit,
             -- configuration general
-            configeneralcredit.ProduitLieEpargne,
+            -- configeneralcredit.ProduitLieEpargne,
             configeneralcredit.NombreJourInteretAnnee,
             configeneralcredit.NombreSemaineAnnee,
-            configeneralcredit.ProduitLieEpargne,
+            -- configeneralcredit.ProduitLieEpargne,
             configeneralcredit.NombreJourInteretAnnee,
             configeneralcredit.NombreSemaineAnnee,
             configeneralcredit.RecalculDateEcheanceDecaissement,
@@ -183,9 +183,9 @@ class CreditIndividuelRepository extends ServiceEntityRepository
             -- type produit
             typeepargne.NomTypeEp
          FROM
-         App\Entity\IndividuelClient individuel
-         INNER JOIN
          App\Entity\CompteEpargne compteepargne
+         INNER JOIN
+         App\Entity\IndividuelClient individuel
          INNER JOIN
          App\Entity\ProduitEpargne produitepargne
          INNER JOIN
