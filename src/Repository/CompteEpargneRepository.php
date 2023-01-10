@@ -156,29 +156,45 @@ class CompteEpargneRepository extends ServiceEntityRepository
         (i.id) as codeclient,
         (i.nom_client) AS nomclient,
         (i.prenom_client) AS prenomclient,
-        -- produit
+         -- groupe
+         g.nomGroupe,
+        -- -- produit
         (p.id) as codeproduit,
         (p.nomproduit) as nomproduit,
-        -- type
+        -- -- type
         (te.id) as codetypeepargne,
-        -- solde
-        (tr.solde) as soldes,
-        tr.DateTransaction
+        -- -- solde
+        SUM(tr.Montant) as soldes,
+        tr.DateTransaction,
+        tr.Description,
+        tr.typeClient
         FROM 
         App\Entity\CompteEpargne c
+        LEFT JOIN
+        App\Entity\Individuelclient i
+        WITH
+        c.codeep = i.codeclient
+
+        LEFT JOIN
+        App\Entity\Groupe g
+        WITH
+        c.codeep = g.codegroupe
+
         INNER JOIN
-        App\Entity\Individuelclient i,
-        App\Entity\ProduitEpargne p,
-        App\Entity\TypeEpargne te,
+        App\Entity\ProduitEpargne p
+        INNER JOIN
+        App\Entity\TypeEpargne te
+        INNER JOIN
         App\Entity\Transaction tr
-        WHERE c.codeep = i.codeclient AND
-        c.produit = p.id AND
-        p.typeEpargne = te.id AND
+        WITH
+        c.produit = p.id
+        AND
+        p.typeEpargne = te.id
+        AND
         tr.codeepargneclient = c.codeepargne
-        GROUP BY tr.id
+        GROUP BY tr.codeepargneclient
         '
-        )
-        ->setMaxResults(0);
+        );
 
          return $query->getResult();
   }
@@ -267,36 +283,52 @@ class CompteEpargneRepository extends ServiceEntityRepository
         $entityManager=$this->getEntityManager();
         $query=$entityManager->createQuery(
             'SELECT DISTINCT
-            -- compte epargne
-            c.id,
-            tr.Description,
-            c.codeepargne,
-            c.codeep,
-            -- individuel client
-            (i.id) as codeclient,
-            (i.nom_client) AS nomclient,
-            (i.prenom_client) AS prenomclient,
-            -- produit
-            (p.id) as codeproduit,
-            (p.nomproduit) as nomproduit,
-            -- type
-            (te.id) as codetypeepargne,
-            -- solde
-            (tr.solde) as soldes,
-            tr.DateTransaction
-            FROM 
-            App\Entity\CompteEpargne c
-            INNER JOIN
-            App\Entity\Individuelclient i,
-            App\Entity\ProduitEpargne p,
-            App\Entity\TypeEpargne te,
-            App\Entity\Transaction tr
-            WHERE c.codeep = i.codeclient AND
-            c.produit = p.id AND
-            p.typeEpargne = te.id AND
-            tr.codeepargneclient = c.codeepargne
-            AND tr.DateTransaction BETWEEN :Du AND :Au
-            GROUP BY tr.id
+                    -- compte epargne
+                    c.id,
+                    c.codeepargne,
+                    c.codeep,
+                    -- individuel client
+                    (i.id) as codeclient,
+                    (i.nom_client) AS nomclient,
+                    (i.prenom_client) AS prenomclient,
+                    -- groupe
+                    g.nomGroupe,
+                    -- -- produit
+                    (p.id) as codeproduit,
+                    (p.nomproduit) as nomproduit,
+                    -- -- type
+                    (te.id) as codetypeepargne,
+                    -- -- solde
+                    SUM(tr.Montant) as soldes,
+                    tr.DateTransaction,
+                    tr.Description,
+                    tr.typeClient
+                    FROM 
+                    App\Entity\CompteEpargne c
+                    LEFT JOIN
+                    App\Entity\Individuelclient i
+                    WITH
+                    c.codeep = i.codeclient
+
+                    LEFT JOIN
+                    App\Entity\Groupe g
+                    WITH
+                    c.codeep = g.codegroupe
+
+                    INNER JOIN
+                    App\Entity\ProduitEpargne p
+                    INNER JOIN
+                    App\Entity\TypeEpargne te
+                    INNER JOIN
+                    App\Entity\Transaction tr
+                    WITH
+                    c.produit = p.id
+                    AND
+                    p.typeEpargne = te.id
+                    AND
+                    tr.codeepargneclient = c.codeepargne
+                    AND tr.DateTransaction BETWEEN :Du AND :Au
+                    GROUP BY tr.codeepargneclient
             ')
             ->setParameter(':Du',$Du)
             ->setParameter(':Au',$Au)
@@ -311,38 +343,52 @@ class CompteEpargneRepository extends ServiceEntityRepository
             $entityManager=$this->getEntityManager();
             $query=$entityManager->createQuery(
                 'SELECT DISTINCT
-                -- compte epargne
-                c.id,
-                --Description --
-                tr.Description,
+                    -- compte epargne
+                    c.id,
+                    c.codeepargne,
+                    c.codeep,
+                    -- individuel client
+                    (i.id) as codeclient,
+                    (i.nom_client) AS nomclient,
+                    (i.prenom_client) AS prenomclient,
+                     -- groupe
+                     g.nomGroupe,
+                    -- -- produit
+                    (p.id) as codeproduit,
+                    (p.nomproduit) as nomproduit,
+                    -- -- type
+                    (te.id) as codetypeepargne,
+                    -- -- solde
+                    SUM(tr.Montant) as soldes,
+                    tr.DateTransaction,
+                    tr.Description,
+                    tr.typeClient
+                    FROM 
+                    App\Entity\CompteEpargne c
+                    LEFT JOIN
+                    App\Entity\Individuelclient i
+                    WITH
+                    c.codeep = i.codeclient
 
-                c.codeepargne,
-                c.codeep,
-                -- individuel client
-                (i.id) as codeclient,
-                (i.nom_client) AS nomclient,
-                (i.prenom_client) AS prenomclient,
-                -- produit
-                (p.id) as codeproduit,
-                (p.nomproduit) as nomproduit,
-                -- type
-                (te.id) as codetypeepargne,
-                -- solde
-                (tr.solde) as soldes,
-                tr.DateTransaction
-                FROM 
-                App\Entity\CompteEpargne c
-                INNER JOIN
-                App\Entity\Individuelclient i,
-                App\Entity\ProduitEpargne p,
-                App\Entity\TypeEpargne te,
-                App\Entity\Transaction tr
-                WHERE c.codeep = i.codeclient AND
-                c.produit = p.id AND
-                p.typeEpargne = te.id AND
-                tr.codeepargneclient = c.codeepargne
+                    LEFT JOIN
+                    App\Entity\Groupe g
+                    WITH
+                    c.codeep = g.codegroupe
+
+                    INNER JOIN
+                    App\Entity\ProduitEpargne p
+                    INNER JOIN
+                    App\Entity\TypeEpargne te
+                    INNER JOIN
+                    App\Entity\Transaction tr
+                    WITH
+                    c.produit = p.id
+                    AND
+                    p.typeEpargne = te.id
+                    AND
+                    tr.codeepargneclient = c.codeepargne
                 AND tr.DateTransaction <= :Du
-                GROUP BY tr.id
+                GROUP BY tr.codeepargneclient
                 ')
                 ->setParameter(':Du',$Du)
                 ;

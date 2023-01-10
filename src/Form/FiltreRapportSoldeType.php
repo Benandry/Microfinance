@@ -13,21 +13,21 @@ class FiltreRapportSoldeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Du',DateType::class,[
-                    'widget'=>'single_text',
-                    'label'=>'Du',
-                    'mapped'=>true,
-                    'by_reference'=>true,
-                    'required' => false
-                ])
-                ->add('Au',DateType::class,[
-                    'widget'=>'single_text',
-                    'label'=>'Au',
-                    'mapped'=>true,
-                    'by_reference'=>true,
-                    'required' => false
+            // ->add('Du',DateType::class,[
+            //         'widget'=>'single_text',
+            //         'label'=>'Du',
+            //         'mapped'=>true,
+            //         'by_reference'=>true,
+            //         'required' => false
+            //     ])
+            //     ->add('Au',DateType::class,[
+            //         'widget'=>'single_text',
+            //         'label'=>'Au',
+            //         'mapped'=>true,
+            //         'by_reference'=>true,
+            //         'required' => false
     
-                ])
+            //     ])
                 ->add('date1',DateType::class,[
                     'widget'=>'single_text',
                     'label'=>'Date un jour',

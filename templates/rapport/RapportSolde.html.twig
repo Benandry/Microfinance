@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    {% if showTable == false %}
+    {# {% if showTable == false %}
         Rapport solde
     {% else %}
         Rapport solde  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
@@ -13,7 +13,7 @@
 
     {% else %}
         Rapport solde  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
-    {% endif %}
+    {% endif %}#}
 {% endblock %}
 
 {% block body %}
@@ -33,11 +33,11 @@
                     <!-- Modal body -->
                      <div class="modal-body">    
                         <div class="text-center ps-5 pe-5" id="one_date">
-                            <h4 class="text-center"> Date arrêtée </h4>
+                            <h4 class="text-center"> Date </h4>
                             {{ form_row(form1.date1) }}
                         </div>
 
-                        <div class="row text-center" id="two_date">
+                        {# <div class="row text-center" id="two_date">
                             <h4 class="text-center">Entre deux dates </h4>
                             <div class="col-6 col-sm-6">
                                 {{ form_row(form1.Du) }}
@@ -45,7 +45,7 @@
                             <div class="col-6 col-sm-6">
                                 {{ form_row(form1.Au) }}
                             </div>
-                        </div>
+                        </div> #}
                     </div>
                 
                     <!-- Modal footer -->
@@ -63,8 +63,8 @@
                     <tr>
                         <th>Date transaction</th>
                         <th>Compte Epargne</th>
-                        <th>Description</th> 
-                        <th>Nom et prenom</th>
+                        {# <th>Description</th>  #}
+                        <th>Nom</th>
                         <th>Nom Produit</th>
                         <th>Solde</th>
                     </tr>
@@ -74,16 +74,14 @@
                     <tr>
                         <td>{{ CompteEpargne.DateTransaction | date('Y-m-d') }}</td>
                         <td>{{ CompteEpargne.codeepargne }}</td>
-                        <td>{{ CompteEpargne.Description }}</td> 
-                        <td>{{ CompteEpargne.nomclient }} {{ CompteEpargne.prenomclient }}</td>
+                        {# <td>{{ CompteEpargne.Description }}</td>  #}
+                        {% if CompteEpargne.typeClient == 'INDIVIDUEL' %}
+                            <td>{{ CompteEpargne.nomclient }} {{ CompteEpargne.prenomclient }}</td>
+                        {% else %}
+                            <td>{{ CompteEpargne.nomGroupe }}</td>
+                        {% endif %}
                         <td> {{ CompteEpargne.nomproduit }}</td>
-                        <td>
-                            {% if CompteEpargne.Description == 'RETRAIT' %}
-                                <span style="color: red;"> <i class="fa fa-long-arrow-up"></i> {{ CompteEpargne.soldes }}</span>
-                            {% else %}
-                                <span style="color: green;"> <i class="fa fa-long-arrow-down"></i> {{ CompteEpargne.soldes }}</span>
-                            {% endif %}
-                        </td>
+                        <td>{{ CompteEpargne.soldes }} </td>
                     </tr>
                 {%  endfor %}
                 </tbody>

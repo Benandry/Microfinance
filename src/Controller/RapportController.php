@@ -42,8 +42,8 @@ class RapportController extends AbstractController
             $showTable_ = true;
 
             $data = $form1->getData();
-            $date_du_ = $data['Du'];
-            $date_au_ = $data['Au'];
+            // $date_du_ = $data['Du'];
+            // $date_au_ = $data['Au'];
             $date1 = $data['date1'];
 
             
@@ -67,8 +67,8 @@ class RapportController extends AbstractController
             'agences'=>$agenceRepos->findAll(),
             'form1'=>$form1,
             'showTable' => $showTable_,
-            'du' => $date_du_,
-            'au' => $date_au_,
+            // 'du' => $date_du_,
+            // 'au' => $date_au_,
             'one_date' => $date1,
             'date_1' => $date_1,
             'date_2' => $date_2,
