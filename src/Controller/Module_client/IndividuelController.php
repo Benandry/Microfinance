@@ -27,35 +27,11 @@ class IndividuelController extends AbstractController
     {
 
         $individuel=$individuelclientRepository->findBy([],['id' => 'ASC' ]);
-        // Recherche
 
-        $formulaire=$this->createForm(RechercheIndividuelType::class);
-        $Chercher=$formulaire->handleRequest($request);
-
-        if($formulaire->isSubmitted() && $formulaire->isValid()){
-           // dd($Chercher);
-            $individuel=$individuelclientRepository->Recherche($Chercher->getData()) ;
-        }
-
-           // Filtre entre deux date
-
-        $filtre=$this->createForm(FiltreIndividuelType::class);
-        $filtreDate=$filtre->handleRequest($request);
-
-        if($filtre->isSubmitted() && $filtre->isValid()){
-            $date_debut = $filtreDate->getData()['Date1'];
-            $date_fin = $filtreDate->getData()['Date2'];
-            
-            $individuel=$individuelclientRepository->trierRapportClient($date_debut,$date_fin);
-        }
-
-        // $filtre=$individuelclientRepository->trierRapportClient($date1,$date2);
 
         return $this->renderForm('Module_client/individuel/index.html.twig', [
             'individuelclients' => $individuel,
             'agences' => $agenceRepository->findAll(),
-            'formulaire'=>$formulaire,
-            'filtre'=>$filtre,
         ]);
     }
     

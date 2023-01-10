@@ -28,22 +28,32 @@
                             <!-- Module client -->
                             <li>
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user"></i> Client  <span class="fa fa-chevron-down"></span> </span>
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user-circle"></i> Client  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
-                                        <a href="{{path('app_individuel_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                            <a href="#submenu012" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-address-card"></i> Individuel  <span class="fa fa-chevron-down"></span> </span>
+                                            </a>
+                                            <ul class="collapse nav flex-column ms-4" id="submenu012">
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-plus-square"></i> nouvel </span></a>
+                                                </li>
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_individuel_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-list"></i> Liste client </span></a>
+                                                </li>
+                                            </ul>
                                     </li>
                                     <li class="w-100">
                                         <a href="{{path('app_groupe_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
                                     </li>
                                     <li class="w-100"> 
-                                             <a href="#submenu01" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <a href="#submenu01" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                                 <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Liste rouge  <span class="fa fa-chevron-down"></span> </span>
                                             </a>
                                             <ul class="collapse nav flex-column ms-4" id="submenu01">
                                                 <li class="w-100">
-                                                    <a href="{{ path('app_liste_rouge_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                                    <a href="{{ path('app_liste_rouge_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
                                                 </li>
                                                 <li class="w-100">
                                                     <a href="{{ path('app_liste_rouge_groupe_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
@@ -60,7 +70,7 @@
                                         </a>
                                         <ul class="collapse nav flex-column ms-4" id="submenu02">
                                             <li class="w-100">
-                                                <a href="{{ path('app_rapportclient') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                                <a href="{{ path('app_rapportclient') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
                                             </li>
                                             <li class="w-100">
                                                 <a href="{{ path('app_rapportgroupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
@@ -94,7 +104,7 @@
                                         </a>
                                         <ul class="collapse nav flex-column ms-4" id="submenu06">
                                             <li class="w-100">
-                                                <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                                <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
                                             </li>
                                             <li class="w-100">
                                                 <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
@@ -108,7 +118,7 @@
                                         </a>
                                         <ul class="collapse nav flex-column ms-4" id="submenu04">
                                             <li class="w-100">
-                                                <a href="{{ path('app_compte_epargne_depot') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                                <a href="{{ path('app_compte_epargne_depot') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
                                             </li>
                                             <li class="w-100">
                                                 <a href="{{ path('app_depot_epargne_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
@@ -122,7 +132,7 @@
                                         </a>
                                         <ul class="collapse nav flex-column ms-4" id="submenu05">
                                             <li class="w-100">
-                                                <a href="{{ path('app_retrait_individuel') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel </span></a>
+                                                <a href="{{ path('app_retrait_individuel') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
                                             </li>
                                             <li class="w-100">
                                                 <a href="{{ path('app_transaction_retrait_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
