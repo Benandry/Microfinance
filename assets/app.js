@@ -37,11 +37,13 @@ import './api/compte_epargne/depot'
 
 //import les api pour les compte epargne
 //import './api/api_compte_epargne'//
-import 'jquery-modal'
+
 // import 'jquery-modal/jquery.modal'
 
 
 import $ from 'jquery';
+import 'jquery-modal';
+
 
 import jsZip from 'jszip'; 
 import 'pdfmake';
