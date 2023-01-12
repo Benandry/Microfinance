@@ -7,9 +7,7 @@
 {% endblock %} #}
 
 {% block body %}
-     {% for message in app.flashes('success') %}
-        <p class="alert alert-info text-center" role="alert"> {{ message }}</p>
-    {% endfor %}
+    {{ include('modal.html.twig') }}
     <div style="display:none;">
         solde :<p id="soldeepargne" ></p>
         Montant :<p id="montant"></p>

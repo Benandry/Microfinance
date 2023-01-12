@@ -1,3 +1,24 @@
-    {% for message in app.flashes('success') %}
-        <p class="alert alert-info text-center m-3" role="alert">{{ message }} </p>
+    {% for type, messages in app.flashes %}
+        {% for type, message in messages %}
+            
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="alert text-center alert-success">
+                                        {{ message }}
+                                    </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn-primary btn-sm" data-bs-dismiss="modal"> OK</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
     {% endfor %}

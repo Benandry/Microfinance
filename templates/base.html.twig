@@ -21,12 +21,12 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar_body" >
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Menu du Fidev</span>
+                            <span class="fs-5 d-none d-sm-inline">Menu du Fidev ({{ app.user.getRoles[0] }})</span>
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-white" id="menu">
 
                             <!-- Module client -->
-                            <li>
+                            <li class="w-100 active">
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user-circle"></i> Client  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
@@ -397,6 +397,11 @@
                 </div>
             </div>
         </div>
-
+        <script src="{{ asset('datatable/jquery-3.5.1.js') }}"></script>
+        <script>
+            $(document).ready(() => {
+                $('#myModal').modal('show');
+            })
+        </script>
 </body>
 </html>

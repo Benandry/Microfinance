@@ -17,7 +17,7 @@
         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
             <a href="{{ path('app_individuel_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i> Voir liste client</a>
-  <li class="breadcrumb-item active" aria-current="page"> </li>
+            <li class="breadcrumb-item active" aria-current="page"> </li>
           </ol>
         </nav>
       </div>
@@ -47,7 +47,7 @@
                 <p class="mb-0" style="color:black;">Carte d'identite National</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ individuelclients.cin }}</p>
+                <p class="text-muted mb-0">{{ individuelclients.cin|number_format(0,',', ' ') }}</p>
               </div>
             </div>
             <hr>

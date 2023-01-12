@@ -5,10 +5,8 @@
 
 {% block body %}
 
-    {# /***************Messages succes ******************/#}
-    {% for message in app.flashes('success') %}
-        <p class="alert alert-info text-center" role="alert">{{ message }} </p>
-    {% endfor %}
+    {{ include('modal.html.twig') }}
+
         <div class="d-flex justify-content-end me-3">
             <a href="{{ path('app_individuel_index') }}" class="btn btn-info btn-sm mb-3"><i class="fa fa-list"></i> Recherche client</a>
         </div>

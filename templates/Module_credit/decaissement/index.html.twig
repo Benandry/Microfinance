@@ -5,9 +5,7 @@
 
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <p class="alert alert-info text-center" role="alert">{{ message }} </p>
-    {% endfor %}
+        {{ include('modal.html.twig') }}
         <table class="table table-bordered table2 mt-3">
             <thead>
                 <th>Numero  de credit </th>

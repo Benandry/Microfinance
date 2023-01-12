@@ -20,11 +20,8 @@ class OuvrirAccountController extends AbstractController
     {
 
         $form = $this->createFormBuilder()
-        ->add('code', EntityType::class,[
-                'class' => Individuelclient::class,
-                'choice_label' => 'codeclient',
-                'autocomplete' => true,
-                'placeholder' => 'Code client .....'
+        ->add('code', TextType::class,[
+                'label' => 'Code client '
         ])
         ->add('nom', TextType::class,[
             'label' => "Nom du client : ",

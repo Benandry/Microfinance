@@ -17,8 +17,6 @@ class ListeRouge
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateliste = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $raison = null;
 
     #[ORM\ManyToOne(inversedBy: 'listeRouges')]
     private ?Groupe $codegroupe = null;
@@ -28,6 +26,9 @@ class ListeRouge
 
     #[ORM\Column(length: 120)]
     private ?string $TypeClient = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $raison = null;
 
     public function getId(): ?int
     {
@@ -42,18 +43,6 @@ class ListeRouge
     public function setDateliste(\DateTimeInterface $dateliste): self
     {
         $this->dateliste = $dateliste;
-
-        return $this;
-    }
-
-    public function getRaison(): ?string
-    {
-        return $this->raison;
-    }
-
-    public function setRaison(string $raison): self
-    {
-        $this->raison = $raison;
 
         return $this;
     }
@@ -90,6 +79,18 @@ class ListeRouge
     public function setTypeClient(string $TypeClient): self
     {
         $this->TypeClient = $TypeClient;
+
+        return $this;
+    }
+
+    public function getRaison(): ?string
+    {
+        return $this->raison;
+    }
+
+    public function setRaison(string $raison): self
+    {
+        $this->raison = $raison;
 
         return $this;
     }

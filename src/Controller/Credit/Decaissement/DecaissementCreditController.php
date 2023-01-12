@@ -14,26 +14,6 @@ class DecaissementCreditController extends AbstractController
     public function index(Request $request,DecaissementRepository $decaissementRepository): Response
     {
         $listeDemandeApprouver = $decaissementRepository->decaissementApprouver();
-
-        //dd($listeDemandeApprouver);
-        
-        // $codecredit  = $request->request->get('codecredit');
-        // if($codecredit == null){
-        //     return $this->redirectToRoute('app_decaissement_credit', [], Response::HTTP_SEE_OTHER);
-        // }else{
-        //    $demandeApprouver = $decaissementRepository->decaissementApprouver($codecredit);
-        //    if($demandeApprouver == null){
-        //         dd("Demande en attende d'approbation");
-        //    }else {
-        //         if($demandeApprouver[0]['statusApprobation'] == 'approuvé'){
-        //             dd($demandeApprouver);
-        //         }
-        //         elseif ($demandeApprouver[0]['statusApprobation'] == 'Rejeté') {
-        //             # code...
-        //         }
-        //    }
-        // }
-
         return $this->render('Module_credit/decaissement/index.html.twig', [
             'demandeApprouver' => $listeDemandeApprouver ,
         ]);

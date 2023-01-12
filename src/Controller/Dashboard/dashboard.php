@@ -13,6 +13,7 @@ class dashboard extends AbstractController
     #[Route('/',name: 'app_dashboard')]
     public function index(EtudeRepository $repoEtude):Response
     {
+        // dd($this->getUser()->getRoles()[0]);
         $nombreClientTotal = $repoEtude->nombreClient();
         $nombreGroupe = $repoEtude->nombreGroupe();
         $nombreCompteEpargne = $repoEtude->nombreEpargne();
