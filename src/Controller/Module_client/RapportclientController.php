@@ -59,7 +59,7 @@ class RapportclientController extends AbstractController
             }
 
         }
-        #dd($affiche_tab);
+        //dd($clientRapport);
         return $this->renderForm('Module_client/rapportclient/index.html.twig', [
             'individuel' => $clientRapport,
             'agences'=>$agence->findAll(),

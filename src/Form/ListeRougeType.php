@@ -23,9 +23,7 @@ class ListeRougeType extends AbstractType
                 'widget'=>'single_text',
                 'label'=>'Date'
             ])
-            ->add('raison',TextType::class,[
-                'label'=>'Raison',
-            ])
+            ->add('raison')
             ->add('codegroupe',EntityType::class,[
                 'class'=>Groupe::class,
                 'required' => false,

@@ -141,7 +141,9 @@ class ResetPasswordController extends AbstractController
         }
 
         try {
+           // dd($user);
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
+           // dd($resetToken);
         } catch (ResetPasswordExceptionInterface $e) {
             // If you want to tell the user why a reset email was not sent, uncomment
             // the lines below and change the redirect to 'app_forgot_password_request'.
@@ -152,10 +154,9 @@ class ResetPasswordController extends AbstractController
             //     $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE, [], 'ResetPasswordBundle'),
             //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             // ));
-
+                dd("Tsy lasa a");
             return $this->redirectToRoute('app_check_email');
         }
-
         $email = (new TemplatedEmail())
             ->from(new Address('fidev@gmail.com', 'fidev'))
             ->to($user->getEmail())
@@ -167,7 +168,7 @@ class ResetPasswordController extends AbstractController
         ;
 
         $mailer->send($email);
-
+       // dd($mailer);
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 

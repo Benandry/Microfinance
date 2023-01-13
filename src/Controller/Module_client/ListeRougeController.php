@@ -48,7 +48,8 @@ class ListeRougeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $listeRouge->setTypeClient('INDIVIDUEL');
             $listeRougeRepository->add($listeRouge, true);
-            $this->addFlash('success', "Ajout au liste rouge  reussite!!");
+
+            $this->addFlash('success', "Ajout du ".$listeRouge->getCodeclient()->getNomClient()." ".$listeRouge->getCodeclient()->getPrenomClient()." au liste rouge");
             return $this->redirectToRoute('app_liste_rouge_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -69,7 +70,7 @@ class ListeRougeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $listeRouge->setTypeClient('GROUPE');
             $listeRougeRepository->add($listeRouge, true);
-            $this->addFlash('success', "Ajout au liste rouge  reussite!!");
+            $this->addFlash('success', "Ajout du ".$listeRouge->getCodegroupe()->getNomGroupe()." au liste rouge");
             return $this->redirectToRoute('app_liste_rouge_groupe_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -4,10 +4,7 @@
 {% block head %} Par annuité constante {% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <p class="alert alert-success text-center" >{{ message }}</p>
-    {% endfor %}
-
+    {{ include('modal.html.twig') }}
     {% for info in info %}
         <div class="row">
             <div class="col-4 col-xl-4 col-sm-4">

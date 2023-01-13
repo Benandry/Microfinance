@@ -21,12 +21,12 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar_body" >
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Menu du Fidev</span>
+                            <span class="fs-5 d-none d-sm-inline">Menu du Fidev ({{ app.user.getRoles[0] }})</span>
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-white" id="menu">
 
                             <!-- Module client -->
-                            <li>
+                            <li class="w-100 active">
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user-circle"></i> Client  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
@@ -37,7 +37,7 @@
                                             </a>
                                             <ul class="collapse nav flex-column ms-4" id="submenu012">
                                                 <li class="w-100">
-                                                    <a href="{{ path('app_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-plus-square"></i> nouvel </span></a>
+                                                    <a href="{{ path('app_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-plus-square"></i> nouveau </span></a>
                                                 </li>
                                                 <li class="w-100">
                                                     <a href="{{ path('app_individuel_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-list"></i> Liste client </span></a>
@@ -97,7 +97,7 @@
                                 <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-database"></i> Epargne  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
-                                <ul class="collapse nav flex-column ms-2" id="submenu2" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-4" id="submenu2" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                             <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Ouvrir compte <span class="fa fa-chevron-down"></span> </span>
@@ -231,7 +231,7 @@
                                 <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-toolbox"></i> Configuration  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
-                                <ul class="collapse nav flex-column ms-2" id="submenu4" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-4" id="submenu4" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="#submenu10" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
@@ -288,7 +288,7 @@
                                 <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-file"></i> Comptabilite  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
-                                <ul class="collapse nav flex-column ms-2" id="submenu5" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
 
                                     <li class="w-100">
 
@@ -397,6 +397,11 @@
                 </div>
             </div>
         </div>
-
+        <script src="{{ asset('datatable/jquery-3.5.1.js') }}"></script>
+        <script>
+            $(document).ready(() => {
+                $('#myModal').modal('show');
+            })
+        </script>
 </body>
 </html>

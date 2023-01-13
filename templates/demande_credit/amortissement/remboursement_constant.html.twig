@@ -4,6 +4,7 @@
 {% block head %} Par remboursement constante {% endblock %}
 
 {% block body %}
+    {{ include('modal.html.twig') }}
     <div class="row">
         {% for info in info %}
             <div class="col-4 col-sm-4 col-xl-4">

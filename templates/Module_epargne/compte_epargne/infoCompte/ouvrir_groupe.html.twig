@@ -9,13 +9,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
         
                     <!-- Modal Header -->
                 <div class="modal-header titre_modal">
                     <h4 class="modal-title text-center">Info Groupe </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 {{ form_start(form) }} 
                     <!-- Modal body -->

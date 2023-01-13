@@ -34,6 +34,4 @@ $(document).ready(() =>{
         })
     }
 
-    alert(path);
-
 })

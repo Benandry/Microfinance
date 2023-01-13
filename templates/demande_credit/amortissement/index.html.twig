@@ -4,10 +4,7 @@
 {% block head %}par amortissement simple {% endblock %}
 
 {% block body %}
-
-    {% for message in app.flashes('success') %}
-        <p class="alert alert-success text-center" >{{ message }}</p>
-    {% endfor %}
+    {{ include('modal.html.twig') }}
     <div class="card p-3">
         {% for data in info %}
             <div class="row">
