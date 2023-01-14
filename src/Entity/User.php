@@ -40,13 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $responsabilite = null;
 
-
-    #[ORM\Column(length: 10)]
-    private ?string $codeagence = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nomagence = null;
-
     #[ORM\OneToMany(mappedBy: 'agentCredit', targetEntity: ApprobationCredit::class)]
     private Collection $approbationCredits;
 
@@ -55,6 +48,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Individuelclient::class)]
     private Collection $individuelclients;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Agence $agence = null;
 
     public function __construct()
     {
@@ -192,30 +188,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    
-    public function getCodeagence(): ?string
-    {
-        return $this->codeagence;
-    }
-
-    public function setCodeagence(string $codeagence): self
-    {
-        $this->codeagence = $codeagence;
-
-        return $this;
-    }
-
-    public function getNomagence(): ?string
-    {
-        return $this->nomagence;
-    }
-
-    public function setNomagence(string $nomagence): self
-    {
-        $this->nomagence = $nomagence;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, ApprobationCredit>
@@ -303,6 +275,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $individuelclient->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAgence(): ?Agence
+    {
+        return $this->agence;
+    }
+
+    public function setAgence(?Agence $agence): self
+    {
+        $this->agence = $agence;
 
         return $this;
     }

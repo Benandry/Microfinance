@@ -14,11 +14,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-
                 <div class="d-flex justify-content-center mt-5">
                     <div class="card " style="width: 29rem; padding: 20px;box-shadow: 5px 10px 8px #888888;">
 
-                            <h5 class="fw-bold text-center">Page d'inscription</h5>
+                        <h5 class="fw-bold text-center">Page d'inscription</h5>
                         {{ form_start(registrationForm) }}
                             <div class="row">
                                 <div class="col-6">
@@ -32,27 +31,25 @@
                                         label: 'Password'
                                     }) }}
                                 </div>
-                                  <div class="col-6">
-                                    {{ form_row(registrationForm.codeagence, {
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {{ form_row(registrationForm.agence, {
                                         label: 'Code agence'
                                     }) }}
                                 </div>
-                                  <div class="col-6">
-                                    {{ form_row(registrationForm.nomagence, {
-                                        label: 'Agence'
-                                    }) }}
-                                </div>
                             </div>
-                            <div class="row">
+                            <div class="row m-2">
                                 <div class="col-6">
                                     {{ form_row(registrationForm.agreeTerms) }}
                                 </div>
-                                <div class="col-6">
-                                    <a href="{{path('app_connexion_')}}"><i class="fa fa-pencil"></i>Connexion</a>
+                                <div class="col-sm-6 col-md-6 d-flex justify-content-end">
+                                    <a href="{{path('app_connexion_')}}" class=" me-2"><i class="fa fa-pencil"></i>Connexion</a>
+                                    <a href="{{path('app_liste_user')}}" class=""><i class="fa fa-list"></i> Listes </a>
                                 </div>
                             </div>
                             <div class="row">
-                                <button type="submit" class="btn btn-primary btn-sm">Register</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Enregistrer</button>
                             </div>
                         {{ form_end(registrationForm) }}
                     </div>

@@ -17,9 +17,6 @@ class AgenceController extends AbstractController
     public function index(AgenceRepository $agenceRepository): Response
     {
         $agence=$agenceRepository->ListeAgence();
-
-       // dd($agence);
-
         return $this->render('Module_client/agence/index.html.twig', [
             'agences' => $agence,
         ]);
@@ -29,18 +26,22 @@ class AgenceController extends AbstractController
     public function new(Request $request, AgenceRepository $agenceRepository): Response
     {
         $agence = new Agence();
+        $maxId = $agenceRepository->getIdMax();
+        $id = $maxId[0][1] + 1;
         $form = $this->createForm(AgenceType::class, $agence);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $agenceRepository->add($agence, true);
 
+            $this->addFlash('success',"Ajout de nouveau agence ".$agence->getNomAgence());
             return $this->redirectToRoute('app_agence_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_client/agence/new.html.twig', [
             'agence' => $agence,
             'form' => $form,
+            'id' => $id,
         ]);
     }
 
@@ -60,12 +61,9 @@ class AgenceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $agenceRepository->add($agence, true);
-
+            $this->addFlash('info',"Modification de l'agence ".$agence->getNomAgence());
             return $this->redirectToRoute('app_agence_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        //dd($agence);
-
         return $this->renderForm('Module_client/agence/edit.html.twig', [
             'agence' => $agence,
             'form' => $form,
@@ -78,7 +76,7 @@ class AgenceController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$agence->getId(), $request->request->get('_token'))) {
             $agenceRepository->remove($agence, true);
         }
-
+        $this->addFlash('info',"Suppression de l'agence ".$agence->getNomAgence());
         return $this->redirectToRoute('app_agence_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -2,6 +2,11 @@
 @import '~bootstrap/scss/bootstrap';
 //@import '~jquery/jquerymodal.css';
 
+
+body{
+    background: #f9f9fb;
+    min-height: 100vh;
+}
 .sidebar_body{
     background-color: #275d71;
 }
@@ -153,6 +158,13 @@ form div a{
 
 /*******Chart Css **********************/
 
+.body-chart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .container-chart{
     display: flex;
     align-items: flex-start;
@@ -165,4 +177,5 @@ form div a{
     border: 1px solid #f49131;
     border-radius: 1rem;
     box-shadow: 0 0 16px rgba(0,0, 0,0.8);
+    background: #ccdbe3;
 }

@@ -26,32 +26,6 @@
                                         <strong>{{ error.messageKey|trans(error.messageData, 'security') }}</strong>
                                     </div>
                                 {% endif %}
-
-                                   {# /***************Messages succes ******************/#}
-                                {% for message in app.flashes('success') %}
-                                    <div class="alert text-center alert-success">
-                                        <!-- The Modal -->
-                                        <div class="modal fade" id="myModal">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                        <!-- Modal body -->
-                                                        <div class="modal-body">
-                                                            <p class="alert alert-success text-center">
-                                                                {{ message }}
-                                                            </p>
-                                                        </div>
-                                                        
-                                                        <!-- Modal footer -->
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn-primary" data-bs-dismiss="modal"> OK</button>
-                                                        </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            
                                 <h5 class="fw-bold text-center">  <img class="img-fluid avatar" src="{{ asset('images/img_avatar.png') }}" width="150" alt="AVATAR" style="border-radius: 50%;" ></h6>
                                 <div class="form-group m-3">
                                     <label for="inputEmail" class="fw-bolder label-login mb-1"><i class="fa fa-user" style="font-size: 15px; margin-right: 5px;"></i>  Nom d'utilisateur :</label>

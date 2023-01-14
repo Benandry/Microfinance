@@ -9,7 +9,11 @@
 {% endblock %}
 
 {% block body %}
-    <table class="table table2">
+    {% include('modal.html.twig') %}
+    <div class="d-flex justify-content-end me-3">
+        <a href="{{ path('app_agence_new') }}" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Nouveau</a>
+    </div>
+    <table class="table table2 table-bordered mt-3">
         <thead>
             <tr>
                 <th>Code Agence</th>
@@ -20,14 +24,14 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        <tbody>
         {% for agence in agences %}
             <tr>
-                <td>{{ "%02d" | format(agence.id) }}</td>
+                <td>{{ agence.codeAgence }}</td>
                 <td>{{ agence.NomAgence }}</td>
                 <td>{{ agence.AdressAgence }}</td>
-                <td>{{ agence.commune }}</td>
-                <td>{{ agence.codec }}</td>
+                <td>{{ agence.commune.NomCommune }}</td>
+                <td>{{ agence.commune.CodeCommune }}</td>
                 <td>
                    <div class="row">
                         <div class="col-3 col-sm-3 col-md-3">
@@ -39,7 +43,7 @@
                         <div class="col-auto col-sm-auto col-md-auto">
                                  {{ include('Module_client/agence/_delete_form.html.twig') }}
                         </div>
-                   </div>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -49,7 +53,4 @@
         {% endfor %}
         </tbody>
     </table>
-    
-    <a href="{{ path('app_agence_new') }}" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Nouveau</a>
-
 {% endblock %}

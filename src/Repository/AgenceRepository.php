@@ -45,17 +45,9 @@ class AgenceRepository extends ServiceEntityRepository
 
             $query = $entityManager->createQuery(
                 'SELECT
-                p.id,
-                p.NomAgence,
-                p.AdressAgence,
-                p.commune,
-                c.CodeCommune AS codec
+               a
                 FROM 
-                App\Entity\Agence p
-                INNER JOIN
-                App\Entity\Commune c
-                WITH
-                p.commune = c.NomCommune
+                App\Entity\Agence a
                 '
             );
 
@@ -79,5 +71,12 @@ class AgenceRepository extends ServiceEntityRepository
                 ->setParameter('fin',$fin)
                 ->execute();        
              return $statement;
+        }
+
+        public function getIdMax()
+        {
+            $query = "SELECT MAX(agence.id) FROM App\Entity\Agence agence";
+            $statement = $this->getEntityManager()->createQuery($query)->execute();
+            return $statement;
         }
 }

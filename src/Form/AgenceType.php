@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Agence;
+use App\Entity\Commune;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,20 +22,17 @@ class AgenceType extends AbstractType
                 ]
             ])
             ->add('AdressAgence',TextType::class,[
+                'label' => 'Adresse agence :',
                 'attr'=>[
                     'placeholder'=>'Adresse de l\'agence . . .',
                 ]
             ])
-            ->add('commune',TextType::class,[
-                'attr'=>[
-                    'class'=>'form-control',
-                ]
-            ])
-            ->add('Save',SubmitType::class,[
-                'label'=>'Sauvegarder',
-                'attr'=>[
-                    'class'=>'btn btn-primary btn-sm',
-                ]
+            ->add('codeAgence')
+            ->add('commune',EntityType::class,[
+                'class' => Commune::class,
+                'placeholder' => 'Commune ... ',
+                'autocomplete' => true,
+                'choice_label' => 'NomCommune'
             ])
         ;
     }

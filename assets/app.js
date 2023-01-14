@@ -177,5 +177,10 @@ $(document).ready(function(){
         $("#rapport_credit_datefin").on('change',function(){
             $('#one_date').hide(); 
         });
+
+        if(path === '/agence/new'){
+            let max_id_ = $('#id-max').text().padStart(4,0);
+            $('#agence_codeAgence').val(max_id_);
+        }
 });
 

@@ -1,5 +1,5 @@
     {% for type, messages in app.flashes %}
-        {% for type, message in messages %}
+        {% for message in messages %}
             
                 <!-- The Modal -->
                 <div class="modal fade" id="myModal">
@@ -7,7 +7,7 @@
                         <div class="modal-content">
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <div class="alert text-center alert-success">
+                                    <div class="alert text-center alert-{{ type }}">
                                         {{ message }}
                                     </div>
                                 </div>
@@ -16,7 +16,6 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn-primary btn-sm" data-bs-dismiss="modal"> OK</button>
                                 </div>
-                            
                         </div>
                     </div>
                 </div>
