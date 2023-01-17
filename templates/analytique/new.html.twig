@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan Analytique{% endblock %}
+{% block head %}Plan Analytique{% endblock %}
+
+{% block body %}
+    
+    {{ include('plan_partial/_form.html.twig', {'button_label': 'Enregistrer','titre': 'Nouveau plan analytique'}) }}
+{% endblock %}

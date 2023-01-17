@@ -1,5 +1,6 @@
 @import './custom/custom';
 @import '~bootstrap/scss/bootstrap';
+@import "~datatables.net-bs5/css/dataTables.bootstrap5.min";
 //@import '~jquery/jquerymodal.css';
 
 
@@ -54,13 +55,13 @@ body{
     color: #fff;
 }
 
-.lien:hover,.rapport:hover{
-    font-size: 13px;
-    color: #000;
-}
-.rapport:active{
-    color: #000;
-}
+// .lien:hover,.rapport:hover{
+//     font-size: 13px;
+//     color: #000;
+// }
+// .rapport:active{
+//     color: #000;
+// }
 .down{
     font-size: 13px;
     color: #fff;
@@ -71,7 +72,7 @@ body{
     color: #000;
 }
 .dropmenu{
-    background-color: #275d60;
+    background-color: white;
 }
 
 // *******************Tabs ******************/

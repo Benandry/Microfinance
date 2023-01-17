@@ -26,12 +26,12 @@
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-white" id="menu">
 
                             <!-- Module client -->
-                            <li class="w-100 active">
+                            <li class="w-100 nav-item ">
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user-circle"></i> Client  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
-                                    <li class="w-100">
+                                    <li class="nav-item w-100">
                                             <a href="#submenu012" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                                 <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-address-card"></i> Individuel  <span class="fa fa-chevron-down"></span> </span>
                                             </a>
@@ -282,31 +282,35 @@
                             {# Comptabilite #}
                             <li>
                                 <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-file"></i> Comptabilite  <span class="fa fa-chevron-down"></span> </span>
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-calculator"></i> Comptabilite  <span class="fa fa-chevron-down"></span> </span>
                                 </a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
 
                                     <li class="w-100">
-
-                                        <li class="w-100 nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Epargne
-                                            </a>
-                                        </li>
-
-                                    </li>
-                                       {# <li class="w-100 nav-item dropdown">
-                                            <a class="nav-link rapport dropdown-toggle" href="{{ path('app_plan_comptable_new') }}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-down-left-and-up-right-to-center"></i>Plan Comptable
-                                            </a>
-                                        </li> #}
-
-                                        {#  #}
-                                        <li class="w-100">
-                                            <a href="{{path('app_plan_comptable_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book-open"></i> Plan Comptable </span></a>
-                                        </li>
-                                        {#  #}
-
+                                        <a href="#submenu0167" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-sitemap"></i> Structures  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-3" id="submenu0167">
+                                            <li class=" nav-item w-100">
+                                                <a href="#submenu019" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-book"></i> Plan Comptable <span class="fa fa-chevron-down"></span> </span>
+                                                </a>
+                                                <ul class="collapse nav flex-column ms-4" id="submenu019">
+                                                    <li class="w-100 nav-item">
+                                                        <a href="{{ path('app_plan_comptable_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-cogs"></i> Generale </span></a>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                        <a href="{{ path('app_analytique_index')}} " class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-map"></i> Analytique </span></a>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                        <a href="{{ path('app_plan_budget_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-money-bill-alt"></i> Budgetaire </span></a>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                        <a href="{{ path('app_plan_comptable_tier_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-layer-group"></i> Tier </span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>

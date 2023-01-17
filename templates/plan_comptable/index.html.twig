@@ -1,37 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PlanComptable index{% endblock %}
+{% block title %}Plan Comptable{% endblock %}
+{% block head %}Plan Comptable{% endblock %}
 
 {% block body %}
-    <h1>PlanComptable index</h1>
-
-    <table class="table">
+ <div class="d-flex justify-content-end me-3"><a href="{{ path('app_plan_comptable_new') }}" class="btn btn-sm btn-primary">Inserer nouveau compte</a></div>
+    <table class="table table2 table-bordered mt-3">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>NumeroCompte</th>
+                <th>Numero de Compte</th>
                 <th>Libelle</th>
+                {# <th>classes</th> #}
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for plan_comptable in plan_comptables %}
-            <tr>
-                <td>{{ plan_comptable.id }}</td>
-                <td>{{ plan_comptable.NumeroCompte }}</td>
-                <td>{{ plan_comptable.Libelle }}</td>
-                <td>
-                    <a href="{{ path('app_plan_comptable_show', {'id': plan_comptable.id}) }}">show</a>
-                    <a href="{{ path('app_plan_comptable_edit', {'id': plan_comptable.id}) }}">edit</a>
-                </td>
+             <tr>
+                <td colspan="4" class="fw-bolder text-center">1 - COMPTES DE CAPITAUX</td>
             </tr>
-        {% else %}
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '1'}) }}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4" class="fw-bolder text-center"> 2 - COMPTES D'IMMOBILISATIONS..  </td>
             </tr>
-        {% endfor %}
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '2'}) }}
+
+            <tr>
+                <td colspan="4" class="fw-bolder text-center"> 3 - COMPTES DE STOCKS ET EN-COURS.  </td>
+            </tr>
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '3'}) }}
+
+            <tr>
+                <td colspan="4" class="fw-bolder text-center"> 4 - COMPTES DE TIERS.  </td>
+            </tr>
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '4'}) }}
+            
+            <tr>
+                <td colspan="4" class="fw-bolder text-center"> 5 - COMPTES FINANCIERS  </td>
+            </tr>
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '5'}) }}
+
+                
+            <tr>
+                <td colspan="4" class="fw-bolder text-center"> 6 - COMPTES DE CHARGES.  </td>
+            </tr>
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '6'}) }}
+            
+            <tr>
+                <td colspan="4" class="fw-bolder text-center"> 7 - COMPTES DE PRODUITS  </td>
+            </tr>
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '7'}) }}
+
+            <tr>
+                <td colspan="4" class="fw-bolder text-center"> 8 - COMPTES DE   </td>
+            </tr>
+            {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '8'}) }}
+
+        <tr>
+            <td colspan="4" class="fw-bolder text-center"> 9 - COMPTES DE   </td>
+        </tr>
+        {{ include('plan_comptable/_tableau.html.twig', {'compteClase': '9'}) }}
+
         </tbody>
     </table>
-
-    <a href="{{ path('app_plan_comptable_new') }}">Create new</a>
 {% endblock %}

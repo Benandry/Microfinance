@@ -18,6 +18,7 @@ class ExcelController extends AbstractController
     {
         $client=$doctrine->getRepository(Individuelclient::class)->findAll();
 
+        // dd($client);
         $response=new StreamedResponse();
         $response->setCallback(
             function() use($client) {
@@ -51,7 +52,7 @@ class ExcelController extends AbstractController
             }
         );
         $response->headers->set('Content-Type', 'application/force-download');
-        $response->headers->set('Content-Disposition', 'attachment; filename="IndividuelClient.csv"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="IndividuelClient.xlsx"');
 
         return $response;
     }

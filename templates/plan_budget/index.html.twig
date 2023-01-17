@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan Budgetaire {% endblock %}
+{% block head %}Plan Budgetaire {% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-end me-3"><a href="{{ path('app_plan_budget_new') }}" class="btn btn-sm btn-primary">Inserer nouveau compte</a></div>
+    <table class="table table2 table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Titre</th>
+                <th>Montant</th>
+                <th>TypeBudget</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan_budget in plan_budgets %}
+            <tr>
+                <td>{{ plan_budget.id }}</td>
+                <td>{{ plan_budget.code }}</td>
+                <td>{{ plan_budget.titre }}</td>
+                <td>{{ plan_budget.montant }}</td>
+                <td>{{ plan_budget.TypeBudget }}</td>
+                <td>
+                    <a href="{{ path('app_plan_budget_show', {'id': plan_budget.id}) }}">show</a>
+                    <a href="{{ path('app_plan_budget_edit', {'id': plan_budget.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

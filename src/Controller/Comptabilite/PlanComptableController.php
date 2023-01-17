@@ -4,6 +4,7 @@ namespace App\Controller\Comptabilite;
 
 use App\Entity\PlanComptable;
 use App\Form\PlanComptableType;
+use App\Repository\ClassesRepository;
 use App\Repository\PlanComptableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,27 +17,43 @@ class PlanComptableController extends AbstractController
     #[Route('/', name: 'app_plan_comptable_index', methods: ['GET'])]
     public function index(PlanComptableRepository $planComptableRepository): Response
     {
+        // dd($planComptableRepository->findAll());
+
         return $this->render('plan_comptable/index.html.twig', [
             'plan_comptables' => $planComptableRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_plan_comptable_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PlanComptableRepository $planComptableRepository): Response
+    public function new(Request $request, PlanComptableRepository $planComptableRepository,ClassesRepository $classeRepo): Response
     {
         $planComptable = new PlanComptable();
         $form = $this->createForm(PlanComptableType::class, $planComptable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $planComptableRepository->add($planComptable, true);
 
-            return $this->redirectToRoute('app_plan_comptable_index', [], Response::HTTP_SEE_OTHER);
+            /*
+            *Compta
+            */
+
+            $code = $planComptable->getNumeroCompte();
+            $id = mb_substr($code, 0, 1);
+            if ($id <= 9 ) {
+               $classe = $classeRepo->findClassById($id)[0];
+               $planComptable->setClasses($classe);
+               $planComptableRepository->add($planComptable, true);
+               return $this->redirectToRoute('app_plan_comptable_index', [], Response::HTTP_SEE_OTHER);
+            }else{
+                return $this->redirectToRoute('app_plan_comptable_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('plan_comptable/new.html.twig', [
-            'plan_comptable' => $planComptable,
+            'comptes' => $planComptableRepository->findAll(),
             'form' => $form,
+
+
         ]);
     }
 

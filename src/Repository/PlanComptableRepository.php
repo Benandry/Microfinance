@@ -39,28 +39,15 @@ class PlanComptableRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return PlanComptable[] Returns an array of PlanComptable objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findPlanByAll()
+    {
+        $query = "SELECT
+        plan
+        FROM App\Entity\PlanComptable  plan
+        ";
 
-//    public function findOneBySomeField($value): ?PlanComptable
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
 }

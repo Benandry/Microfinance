@@ -54,7 +54,6 @@ import 'datatables.net-buttons/js/buttons.print';
 import 'datatables.net-bs5';
 import '@fortawesome/fontawesome-free/js/all';
 
-
 window.JSZip = jsZip;
 
 //*******************Variable sur le chemiin *****************/

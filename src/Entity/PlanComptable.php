@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PlanComptableRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,6 +19,10 @@ class PlanComptable
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Libelle = null;
+
+    #[ORM\ManyToOne(inversedBy: 'planComptables')]
+    private ?Classes $classes = null;
+
 
 
     public function getId(): ?int
@@ -52,4 +54,15 @@ class PlanComptable
         return $this;
     }
 
+    public function getClasses(): ?Classes
+    {
+        return $this->classes;
+    }
+
+    public function setClasses(?Classes $classes): self
+    {
+        $this->classes = $classes;
+
+        return $this;
+    }
 }

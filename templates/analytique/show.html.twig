@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analytique{% endblock %}
+
+{% block body %}
+    <h1>Analytique</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ analytique.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ analytique.code }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ analytique.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Percent</th>
+                <td>{{ analytique.percent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_analytique_index') }}">back to list</a>
+
+    <a href="{{ path('app_analytique_edit', {'id': analytique.id}) }}">edit</a>
+
+    {{ include('analytique/_delete_form.html.twig') }}
+{% endblock %}

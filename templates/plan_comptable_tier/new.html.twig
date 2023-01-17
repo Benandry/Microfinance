@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan tier{% endblock %}
+{% block head %}Plan tier{% endblock %}
+
+{% block body %}
+{{ include('plan_partial/_form.html.twig', {'button_label': 'Modifier','titre': 'Nouveau plan tier'}) }}
+{% endblock %}
