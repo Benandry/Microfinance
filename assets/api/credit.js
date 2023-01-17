@@ -45,17 +45,17 @@ $(document).ready(function(){
                         var el=content[j];
                         console.log(el);
                         
-                        var codeepargneclient=el.codeepargne
+                        var typeepargne=el.NomTypeEp
 
                         var creditlieepargne= document.getElementById('lieepargne').innerHTML;
-                        alert(creditlieepargne);
+                        // alert(creditlieepargne);
 
                         // console.log(codeepargneclient)
                         
                         // Ici on verra si le client possede une epargne ou non
                         
-                        if(codeepargneclient == null){
-                            alert("vous n'avez pas de compte epargne")
+                        if(typeepargne == null && creditlieepargne == true){
+                            alert("vous n'avez pas de depot de garantie")
                             $('.btn').hide()
                         }
 

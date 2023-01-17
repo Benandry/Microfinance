@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RemboursementCredit{% endblock %}
+
+{% block body %}
+    <h1>RemboursementCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ remboursement_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>NumeroCredit</th>
+                <td>{{ remboursement_credit.NumeroCredit }}</td>
+            </tr>
+            <tr>
+                <th>DateRemboursement</th>
+                <td>{{ remboursement_credit.DateRemboursement ? remboursement_credit.DateRemboursement|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>PieceCompteble</th>
+                <td>{{ remboursement_credit.PieceCompteble }}</td>
+            </tr>
+            <tr>
+                <th>MontantTotalPaye</th>
+                <td>{{ remboursement_credit.MontantTotalPaye }}</td>
+            </tr>
+            <tr>
+                <th>Papeterie</th>
+                <td>{{ remboursement_credit.Papeterie }}</td>
+            </tr>
+            <tr>
+                <th>TransactionEnLiquide</th>
+                <td>{{ remboursement_credit.TransactionEnLiquide ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TransfertEpargne</th>
+                <td>{{ remboursement_credit.TransfertEpargne ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_remboursement_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_remboursement_credit_edit', {'id': remboursement_credit.id}) }}">edit</a>
+
+    {{ include('remboursement_credit/_delete_form.html.twig') }}
+{% endblock %}

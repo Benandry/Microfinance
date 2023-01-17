@@ -169,39 +169,44 @@ class CreditIndividuelRepository extends ServiceEntityRepository
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
-        'SELECT
+        'SELECT DISTINCT
             -- individuel
             individuel.nom_client nom,
             individuel.codeclient codeindividuel,
             -- compte epargne
             compteepargne.codeepargne codeepargne,
-            -- transaction
-            max(transaction.id),
-            transaction.solde soldeepargne,
-            -- produit epargne
+            -- -- transaction
+            -- max(transaction.id),
+            SUM(transaction.Montant) soldeepargne,
+            -- -- produit epargne
             produitepargne.nomproduit,
-            -- type produit
+            -- -- type produit
             typeepargne.NomTypeEp
          FROM
-         App\Entity\CompteEpargne compteepargne
-         INNER JOIN
+            -- individuel et compte epargne
          App\Entity\IndividuelClient individuel
-         INNER JOIN
-         App\Entity\ProduitEpargne produitepargne
-         INNER JOIN
+        LEFT JOIN
+             App\Entity\CompteEpargne compteepargne
+        WITH
+             compteepargne.codeep = individuel.codeclient
+
+            --produit epargne
+        LEFT JOIN
+             App\Entity\ProduitEpargne produitepargne
+        WITH
+         produitepargne.id=compteepargne.produit
+            -- type epargne
+         LEFT JOIN
          App\Entity\TypeEpargne typeepargne
-         INNER JOIN
+            WITH
+            produitepargne.typeEpargne =  typeepargne.id
+            AND typeepargne.NomTypeEp =\'Depot de garantie\'
+        LEFT JOIN
          App\Entity\Transaction transaction
             WITH
-            compteepargne.codeep = individuel.codeclient
-            AND
             transaction.codeepargneclient = compteepargne.codeepargne
-            AND
-            produitepargne.typeEpargne =  typeepargne.id
-            AND
-            produitepargne.id=compteepargne.produit
          WHERE individuel.codeclient =:codeclient
-         AND typeepargne.NomTypeEp =\'Depot de garantie\' ')
+          ')
          ->setParameter(':codeclient',$codeclient);
 
         return $query->getResult();

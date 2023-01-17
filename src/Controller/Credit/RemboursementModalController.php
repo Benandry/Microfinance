@@ -13,7 +13,6 @@ class RemboursementModalController extends AbstractController
     #[Route('/modal/remboursement', name: 'app_remboursement_modal')]
     public function index(Request $request):Response
     {
-        
         $form=$this->createForm(RemboursementModalType::class);
         $form->handleRequest($request);
 
@@ -24,7 +23,7 @@ class RemboursementModalController extends AbstractController
             $codecredit=$data['codecredit'];
             // dd($codecredit);
 
-            return $this->redirectToRoute('app_remboursement_new',
+            return $this->redirectToRoute('app_remboursement_credit_new',
             [
                 'codecredit'=>$codecredit
 
