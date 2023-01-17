@@ -4,6 +4,7 @@ namespace App\Controller\API;
 
 use App\Repository\AmortissementFixeRepository;
 use App\Repository\CreditIndividuelRepository;
+use App\Repository\RemboursementCreditRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,4 +54,16 @@ class ApiCreditController extends AbstractController
 
         return new JsonResponse($remboursement);
     }
+
+    /**
+     * Fonction qui recupere les api remboursement selon les periodes
+     */
+    #[Route('/remboursement/periode/{numerocredit}',name:'app_remboursement_periode')]
+    public function ApiRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
+    {
+        $remboursement=$remboursementCreditRepository->ApiRemboursement($numerocredit);
+
+        return new JsonResponse($remboursement);
+    }
+
 }

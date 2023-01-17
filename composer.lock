@@ -411,6 +411,18 @@
         },
         {
             "name": "doctrine/dbal",
+<<<<<<< HEAD
+            "version": "3.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/dbal.git",
+                "reference": "63e513cebbbaf96a6795e5c5ee34d205831bfc85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/63e513cebbbaf96a6795e5c5ee34d205831bfc85",
+                "reference": "63e513cebbbaf96a6795e5c5ee34d205831bfc85",
+=======
             "version": "3.5.3",
             "source": {
                 "type": "git",
@@ -421,6 +433,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/88fa7e5189fd5ec6682477044264dc0ed4e3aa1e",
                 "reference": "88fa7e5189fd5ec6682477044264dc0ed4e3aa1e",
+>>>>>>> refs/remotes/origin/main
                 "shasum": ""
             },
             "require": {
@@ -435,7 +448,11 @@
             "require-dev": {
                 "doctrine/coding-standard": "11.0.0",
                 "jetbrains/phpstorm-stubs": "2022.3",
+<<<<<<< HEAD
+                "phpstan/phpstan": "1.9.2",
+=======
                 "phpstan/phpstan": "1.9.4",
+>>>>>>> refs/remotes/origin/main
                 "phpstan/phpstan-strict-rules": "^1.4",
                 "phpunit/phpunit": "9.5.27",
                 "psalm/plugin-phpunit": "0.18.4",
@@ -502,7 +519,11 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/doctrine/dbal/tree/3.5.2"
+=======
                 "source": "https://github.com/doctrine/dbal/tree/3.5.3"
+>>>>>>> refs/remotes/origin/main
             },
             "funding": [
                 {
@@ -518,7 +539,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2022-12-19T08:17:34+00:00"
+=======
             "time": "2023-01-12T10:21:44+00:00"
+>>>>>>> refs/remotes/origin/main
         },
         {
             "name": "doctrine/deprecations",
@@ -1096,6 +1121,18 @@
         },
         {
             "name": "doctrine/migrations",
+<<<<<<< HEAD
+            "version": "3.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/migrations.git",
+                "reference": "61c6ef3a10b7df43c3b6388a184754f26e58700a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/61c6ef3a10b7df43c3b6388a184754f26e58700a",
+                "reference": "61c6ef3a10b7df43c3b6388a184754f26e58700a",
+=======
             "version": "3.5.3",
             "source": {
                 "type": "git",
@@ -1106,6 +1143,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/migrations/zipball/01f89a1082b6971ba53ba76f95741fc8ad4a5fd2",
                 "reference": "01f89a1082b6971ba53ba76f95741fc8ad4a5fd2",
+>>>>>>> refs/remotes/origin/main
                 "shasum": ""
             },
             "require": {
@@ -1178,7 +1216,11 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/migrations/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/doctrine/migrations/tree/3.5.2"
+=======
                 "source": "https://github.com/doctrine/migrations/tree/3.5.3"
+>>>>>>> refs/remotes/origin/main
             },
             "funding": [
                 {
@@ -1194,7 +1236,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2022-08-04T14:29:49+00:00"
+=======
             "time": "2023-01-11T07:13:35+00:00"
+>>>>>>> refs/remotes/origin/main
         },
         {
             "name": "doctrine/orm",
@@ -2428,6 +2474,8 @@
                 "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.0"
             },
             "time": "2022-09-06T12:16:56+00:00"
+<<<<<<< HEAD
+=======
         },
         {
             "name": "phpoffice/phpexcel",
@@ -2490,6 +2538,7 @@
             },
             "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01T07:00:55+00:00"
+>>>>>>> refs/remotes/origin/main
         },
         {
             "name": "phpoffice/phpspreadsheet",

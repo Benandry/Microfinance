@@ -45,14 +45,17 @@ $(document).ready(function(){
                         var el=content[j];
                         console.log(el);
                         
-                        var codeepargneclient=el.codeepargne
+                        var typeepargne=el.NomTypeEp
+
+                        var creditlieepargne= document.getElementById('lieepargne').innerHTML;
+                        // alert(creditlieepargne);
 
                         // console.log(codeepargneclient)
                         
                         // Ici on verra si le client possede une epargne ou non
                         
-                        if(codeepargneclient == null){
-                            alert("vous n'avez pas de compte epargne")
+                        if(typeepargne == null && creditlieepargne == true){
+                            alert("vous n'avez pas de depot de garantie")
                             $('.btn').hide()
                         }
 
@@ -110,11 +113,12 @@ $(document).ready(function(){
 
                         // Test lie epargne
                         
-                        document.getElementById('lieep').innerHTML=element.ProduitLieEpargne
+                        document.getElementById('lieepargne').innerHTML=element.CreditBaseEpargne
+                        // $('#lieep').text(element.CreditBaseEpargne)
 
                         // si la configuration indique que le produit epargne est false
                         // on ne montre pas le champ solde epargne
-                        if(element.ProduitLieEpargne == null){
+                        if(element.CreditBaseEpargne == false){
                             $('#soldeepargneform').hide()
                         }
                         else{

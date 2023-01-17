@@ -17,8 +17,8 @@ class ConfigurationGeneralCredit
     #[ORM\ManyToOne(inversedBy: 'configurationGeneralCredits')]
     private ?ProduitCredit $ProduitCredit = null;
 
-    #[ORM\Column(nullable:true)]
-    private ?bool $ProduitLieEpargne = null;
+    // #[ORM\Column(nullable:true)]
+    // private ?bool $ProduitLieEpargne = null;
 
     #[ORM\Column(nullable:true)]
     private ?int $NombreJourInteretAnnee = null;
@@ -67,17 +67,17 @@ class ConfigurationGeneralCredit
         return $this;
     }
 
-    public function isProduitLieEpargne(): ?bool
-    {
-        return $this->ProduitLieEpargne;
-    }
+    // public function isProduitLieEpargne(): ?bool
+    // {
+    //     return $this->ProduitLieEpargne;
+    // }
 
-    public function setProduitLieEpargne(bool $ProduitLieEpargne): self
-    {
-        $this->ProduitLieEpargne = $ProduitLieEpargne;
+    // public function setProduitLieEpargne(bool $ProduitLieEpargne): self
+    // {
+    //     $this->ProduitLieEpargne = $ProduitLieEpargne;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getNombreJourInteretAnnee(): ?int
     {

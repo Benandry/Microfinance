@@ -1,0 +1,38 @@
+{{ form_start(form) }}
+              
+                <div class="row" >
+                        <div class="col-sm-3">
+                            {{ form_row(form.NumeroCredit) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_row(form.DateRemboursement) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_row(form.MontantTotalPaye) }}
+                        </div>
+                          <div class="col-sm-3">
+                            {{ form_row(form.periode) }}
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row" >
+                    <div class="col-sm-5">
+                        {{ form_row(form.PieceCompteble) }}
+                        {{ form_row(form.Papeterie) }}
+                        {{ form_row(form.penalite) }}
+                    </div>
+
+                    <div class="col-sm-3" style="margin-top:25px;margin-left:100px">
+                        {{ form_row(form.TransactionEnLiquide) }}
+                        <div style="display:none;" id="caisse">{{ form_row(form.Caisse) }}</div>
+                        {{ form_row(form.TransfertEpargne) }}
+                    </div>
+                    </div>
+                </div>
+
+    {# {{ form_widget(form) }} #}
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

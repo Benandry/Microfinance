@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Remboursement 
+{% endblock %}
+
+{% block head %}
+    Remboursement 
+{% endblock %}
+
+{% block body %}
+
+    {# /***************Messages succes ******************/#}
+    
+         {% for message in app.flashes('success') %}
+                {{ message }}
+        {% endfor %}
+    {# *************************************#}
+
+    <div class="row">
+    <div class="col-xl-3 col-md-3 col-sm-3">
+        <p> <b>Code Credit : </b><span id="codecreditremboursement">{{ codecredit }}</span></p>
+        <p> <b>Periode : </b><span id="periode"></span></p>
+        {# <p> <b>Solde client : </b>
+            {% if solde != '' %}
+                <span id="solde_cli">{{ solde }}</span>     
+            {% else %}
+                <span id="solde_cli">0</span>  
+            {% endif %} 
+        </p> #}
+    </div>
+    {# <div class="col-xl-3 col-md-3 col-sm-3">
+        <p><b>Code client :</b> <span id="code_client"> {{ codegroupe }}</span></p>
+    </div> #}
+    <div class="col-xl-3 col-md-3 col-sm-3">
+        {# <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p> #}
+    </div>
+</div>
+
+    {{ include('remboursement_credit/_form.html.twig') }}
+
+{% endblock %}

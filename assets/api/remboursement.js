@@ -1,64 +1,133 @@
 import $ from 'jquery'
 
+var path = window.location.pathname
+
 $(document).ready(function(){
 
-    var recupe_codecredit=$('#codecreditremboursement').text()
-    // var codecredit=$('#remboursement_codecredit').val(recupe_codecredit)
-    console.log(recupe_codecredit)
+    if( path === '/remboursement/credit/new' ){
+        
+        // Ici on va cacher en premier le formulaire caisse
+        
+        
+        // On va afficher le numero credit du client individuel
+        $('#remboursement_credit_TransactionEnLiquide').on('click',function(){
+            $('#caisse').show();
+        })
 
-    // cache tous les elements inutile
-    // $('#remboursement_periode').hide()
-    // $('#remboursement_principale').hide()
-    // $('#remboursement_interet').hide()
-    // $('#remboursement_codeclient').hide()
-    // $('#remboursement_annuite').hide()
-    // $('#remboursement_codecredit').hide()
-    // $('#remboursement_typeamortissement').hide()
+        
+        $('#remboursement_credit_MontantTotalPaye').on('blur',function(){
+            
+            // On recupere le montant a payer par le client
+            var montant = $('#remboursement_credit_MontantTotalPaye').val();
 
-    
-    var url_api='/remboursement_credit/'+recupe_codecredit;
+            // console.log(montant);
 
-    // $('#remboursement_periode').on('blur',function(){
-        $.ajax({
-            url:url_api,
-            method:'GET',
-            dataType:"json",
-            contentType:"application/json; charset=utf-8",
-            data : JSON.stringify(),
-            success :function(data){
-                for(let j=0;j<data.length;j++){
-                    var clientcredit=data[j];
-                    // on recupere la date ici
-                    // var date =new Date()
-                    // var mois=date.getMonth()+1
+            var codecredit=document.getElementById('codecreditremboursement').innerHTML;
 
-                    if(clientcredit.codecreditammortissement == null){
-                        // $('#remboursement_periode').val(clientcredit.periode)
-                        // $('#remboursement_dateRemborsement').val(clientcredit.dateRemborsement)
-                        // $('#remboursement_principale').val(clientcredit.principale)
-                        // $('#remboursement_interet').val(clientcredit.interet)
-                        // $('#remboursement_montanttTotal').val(clientcredit.montanttTotal)
-                        // $('#remboursement_codeclient').val(clientcredit.codeclient)
-                        // $('#remboursement_remboursement').val('Montant A payer')
-                        // $('#remboursement_annuite').val(clientcredit.remboursementannuite)
-                        $('#remboursement_codecredit').val(clientcredit.codecredit)
-                        // $('#remboursement_typeamortissement').val(clientcredit.typeamortissement)
+            // console.log('code credit'+codecredit);
+            
+            $('#remboursement_credit_NumeroCredit').val(codecredit);
+
+                // url
+                var url_api='/remboursement/periode/'+codecredit;
+                console.log(url_api);
+
+                $.ajax({
+                    url:url_api,
+                    method:'GET',
+                    dataType:"json",
+                    contentType:"application/json; charset=utf-8",
+                    data : JSON.stringify(codecredit),
+                    success : function(content){
+                        console.log('hello world')
+                        for(let j=0;j<content.length;j++){
+                            var remboursement=content[j];
+                            // console.log(remboursement);
+
+                            // $('#montant').val(remboursement.montanttTotal)
+                            // document.getElementById('montant').innerHTML=remboursement.montanttTotal;
+                            document.getElementById('periode').innerHTML=remboursement.maxperiode;
+                            // console.log('maxperiode'+remboursement.maxperiode);
+
+                            // Si remboursement égal a null
+                            // On recupere la periode dans ammortissement
+
+                            if(remboursement.perioderemboursement == null)
+                            {
+                                $('#remboursement_credit_periode').val(remboursement.periode);
+                            }
+                            // sinon on incremente le periode
+                            else{
+                                // Si le montant preciinferieur oi egal ou maontant payes
+                                if(remboursement.montanttTotal <= montant ){
+
+                                    var perioderemb=remboursement.perioderemboursement;
+                                    perioderemb++;
+                                    // console.log(perioderemb);
+                                    $('#remboursement_credit_periode').val(perioderemb);
+                                }
+                                else{
+                                    // Ici on test si le montant paye precedent est normale
+                                    var montantprecedentpaye=remboursement.montantrembourse;
+                                    var montantprecedentnormale =remboursement.montanttTotal;
+
+                                        if(montantprecedentpaye == montantprecedentnormale ){
+
+                                            var periodepenalite=remboursement.perioderemboursement;
+                                            periodepenalite++;
+                                            
+                                            var penalite=((remboursement.montanttTotal*2/100));
+                                            
+                                            $('#remboursement_credit_penalite').val(penalite);
+                                            $('#remboursement_credit_periode').val(periodepenalite);
+                                        }
+                                            // Sinon on complete le remboursement ,
+                                        else{
+                                                // Si le montant precedent n'est pas complet
+
+                                                
+                                                
+                                                // Si le somme des montant sont encore minimum par
+                                                // rapport au montant du ,encore penalisé
+                                                    var montantprecedent=remboursement.montantrembourse;
+                                                    var montantnormale=remboursement.montanttTotal;
+                                                    var periodepenaliteretard=remboursement.perioderemboursement;
+                                                    var montantTotal=parseFloat(montant)+parseFloat(montantprecedent);
+                                                    var penaliteretarddeuxieme=((remboursement.montanttTotal*2/100));
+
+                                                    console.log('montant total'+montantTotal);
+                                                    console.log('montant precedent'+montantnormale);
+
+
+                                                        if(montantTotal < montantnormale)
+                                                        {
+                                                            $('#remboursement_credit_penalite').val(penalite);
+                                                            $('#remboursement_credit_MontantTotalPaye').val(montantTotal);
+                                                            $('#remboursement_credit_periode').val(periodepenaliteretard);
+                                                            $('#remboursement_credit_penalite').val(penaliteretarddeuxieme);
+
+                                                        }
+                                                        else
+                                                        {
+                                                            var periodesanspenalite=remboursement.perioderemboursement;
+                                                            periodesanspenalite++;
+                
+                                                            $('#remboursement_credit_MontantTotalPaye').val(montantTotal);
+                                                            $('#remboursement_credit_periode').val(periodesanspenalite);
+
+                                                        }
+                                            
+                                        }
+
+                                }
+                            }
+
+                           
+                        }
                     }
-
-                    // console.log(mois)
-                    // console.log(clientcredit.codecredit)
-                    // console.log(clientcredit.codecreditammortissement)
-                    
-                }
-
-                console.log(result);
-                
-                for (let i = 0; i < result.length; i++) {
-                    var element = result[i];
-                
-                }
-            }
+                }) 
         });
-    // })
 
-    })
+      
+    }
+    });
