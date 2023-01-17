@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Modification utilisateur' %}
+{% block head 'Modification utilisateur' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="card " style="width: 29rem; padding: 20px;box-shadow: 5px 10px 8px #888888;">
+
+                    <h5 class="fw-bold text-center">Page d'inscription</h5>
+                    {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form_row(form.nom) }}
+                                {{ form_row(form.prenom) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(form.responsabilite) }}
+                                {{ form_row(form.email) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form_row(form.agence, {
+                                    label: 'Code agence'
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-6">
+                                {{ form_row(form.agreeTerms) }}
+                            </div>
+                            <div class="col-sm-6 col-md-6 d-flex justify-content-end">
+                                <a href="{{path('app_connexion_')}}" class=" me-2"><i class="fa fa-pencil"></i>Connexion</a>
+                                <a href="{{path('app_liste_user')}}" class=""><i class="fa fa-list"></i> Listes </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

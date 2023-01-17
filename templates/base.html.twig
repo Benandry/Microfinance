@@ -21,7 +21,7 @@
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar_body" >
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Menu du Fidev ({{ app.user.getRoles[0] }})</span>
+                            <span class="fs-5 d-none d-sm-inline"> Menu du Fidev ({{ app.user.responsabilite}}) </span>
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-white" id="menu">
 
@@ -59,10 +59,6 @@
                                                     <a href="{{ path('app_liste_rouge_groupe_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
                                                 </li>
                                             </ul>
-                                    </li>
-
-                                    <li class="w-100">
-                                        <a href="{{path('app_agence_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-home"></i> Agences </span></a>
                                     </li>
                                     <li class="w-100">
                                         <a href="#submenu02" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -328,43 +324,38 @@
                                     <li class="w-100">
                                         <a href="{{path('app_langue_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-pencil"> </i> Langue </span></a>
                                     </li>
-                                    <li>
+                                    <li class="w-100">
                                         <a href="{{path('app_titre_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa-solid fa-user"></i>  Titres </span></a>
                                     </li>
-                                    <li>
+                                    <li class="w-100">
                                         <a href="{{path('app_etatcivile_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa-solid fa-flag"></i> Etat civile </span> </a>
                                     </li>
-                                    <li>
+                                    <li class="w-100">
+
+                                        <a href="#submenu045" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="d-none d-sm-inline menu"> <i class="fa fa-home"></i> Agences  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu045">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_agence_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-plus-square"></i> nouveau </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_agence_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-list"></i> Listes </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="w-100">
                                         <a href="{{path('app_etude_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"></i> Niveau d'etude </span></a>
                                     </li>
-                                    <li>
+                                    <li class="w-100">
                                         <a href="{{path('app_devise_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Devise </span> </a>
                                     </li>
-                                    <li>
+                                    <li class="w-100">
                                         <a href="{{path('app_categorie_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Categorie Credit</span> </a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-
-                        <hr>
-                        <!-- Deconnection  et inscription  -->
-                        <div class="dropdown pb-4">
-                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img class="img-fluid avatar" src="{{ asset('images/img_avatar.png') }}" width="30" alt="AVATAR" style="border-radius: 50%;" >
-                                <span class="d-none d-sm-inline mx-1 lien">{{ app.user.prenom }}</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
-                                <li><a class="dropdown-item down" href="{{path('app_inscription_')}}" > Créer un compte </a></li>
-                                
-                                <li><a class="dropdown-item down" href="#" >Connecté en tant que <p id="utilisateur">{{ app.user.prenom }}</p></a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item down" href="{{path('app_logout')}}" > <i class="fa fa-fw fa-sign-out"></i>  Déconnecté </a></li>
-                                
-                            </ul>
-                        </div>
                     </div>
                 </div>
                     <div class="col">
@@ -378,8 +369,30 @@
                                     </div>
                                     <div class="col-6 col-xl-6">
                                         <div class="d-flex justify-content-end">
-                                            <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.nomagence }} </p>
-                                            <p class="m-3"> Code : {{ app.user.codeagence }} </p>
+                                            <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.agence.NomAgence }} </p>
+                                            <p class="m-3"> Code : {{ app.user.agence.codeAgence }} </p>
+                                             <!-- Deconnection  et inscription  -->
+                                            <div class="dropdown m-3">
+                                                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <span class="d-none d-sm-inline mx-1 lien">{{ app.user.prenom }} ({{ app.user.responsabilite }})</span>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
+                                                {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
+                                                    <li>
+                                                        <a class="dropdown-item down" href="{{path('app_liste_user')}}" >Gestion d'utilisateur <p style="display: none;" id="utilisateur">{{ app.user.prenom }} </p> 
+                                                            <div class="fw-bold">
+                                                                ({{ app.user.responsabilite }})
+                                                            </div> 
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><a class="dropdown-item down" href="{{path('app_logout')}}" > <i class="fa fa-fw fa-sign-out"></i>  Déconnecté </a></li>
+                                                    
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <hr class="fw-bold">

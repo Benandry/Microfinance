@@ -24,11 +24,15 @@ class Commune
     #[ORM\OneToMany(mappedBy: 'commune', targetEntity: Individuelclient::class)]
     private Collection $individuelclients;
 
+    #[ORM\OneToMany(mappedBy: 'commune', targetEntity: Agence::class)]
+    private Collection $agences;
+
 
     public function __construct()
     {
         $this->Codecomm = new ArrayCollection();
         $this->individuelclients = new ArrayCollection();
+        $this->agences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,6 +93,36 @@ class Commune
                 // set the owning side to null (unless already changed)
                 if ($individuelclient->getCommune() === $this) {
                     $individuelclient->setCommune(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Agence>
+         */
+        public function getAgences(): Collection
+        {
+            return $this->agences;
+        }
+
+        public function addAgence(Agence $agence): self
+        {
+            if (!$this->agences->contains($agence)) {
+                $this->agences->add($agence);
+                $agence->setCommune($this);
+            }
+
+            return $this;
+        }
+
+        public function removeAgence(Agence $agence): self
+        {
+            if ($this->agences->removeElement($agence)) {
+                // set the owning side to null (unless already changed)
+                if ($agence->getCommune() === $this) {
+                    $agence->setCommune(null);
                 }
             }
 

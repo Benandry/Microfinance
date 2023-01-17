@@ -21,15 +21,22 @@ class Agence
     #[ORM\Column(length: 255)]
     private ?string $AdressAgence = null;
 
-    #[ORM\Column(length: 200, nullable: true)]
-    private ?string $commune = null;
-
     #[ORM\OneToMany(mappedBy: 'Agence', targetEntity: Individuelclient::class)]
     private Collection $individuelclients;
+
+    #[ORM\ManyToOne(inversedBy: 'agences')]
+    private ?Commune $commune = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $codeAgence = null;
+
+    #[ORM\OneToMany(mappedBy: 'agence', targetEntity: User::class)]
+    private Collection $users;
 
     public function __construct()
     {
         $this->individuelclients = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -67,18 +74,6 @@ class Agence
         return (string) $this->getId();
     }
 
-    public function getCommune(): ?string
-    {
-        return $this->commune;
-    }
-
-    public function setCommune(?string $commune): self
-    {
-        $this->commune = $commune;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Individuelclient>
      */
@@ -103,6 +98,60 @@ class Agence
             // set the owning side to null (unless already changed)
             if ($individuelclient->getAgence() === $this) {
                 $individuelclient->setAgence(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->commune;
+    }
+
+    public function setCommune(?Commune $commune): self
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    public function getCodeAgence(): ?string
+    {
+        return $this->codeAgence;
+    }
+
+    public function setCodeAgence(string $codeAgence): self
+    {
+        $this->codeAgence = $codeAgence;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setAgence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getAgence() === $this) {
+                $user->setAgence(null);
             }
         }
 
