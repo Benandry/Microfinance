@@ -67,7 +67,7 @@ class GroupeController extends AbstractController
             $groupeRepository->add($groupe, true);
             
             $this->addFlash('success', "Ajout du nouveau ' ".$groupe-> getNomGroupe()." ' avec code ".$groupe->getCodegroupe()."  reussite!!");
-            return $this->redirectToRoute('app_groupe_new', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_groupe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_client/groupe/new.html.twig', [

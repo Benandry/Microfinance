@@ -36,13 +36,16 @@ class RapportclientController extends AbstractController
           #--------------Date afficher ---------------------------#
           $date_1 = false;
           $date_2 = false;
+          $date_3 = false;
           $date_debut = 0;
           $date_fin = 0;
           $one_date = 0;
+          $agent = null;
 
        if($trier->isSubmitted() && $trier->isValid()){
             $affiche_tab = true;
             $data = $filtrerapportdate->getData();
+            $agent = $data['agent'];
 
             $one_date = $data['search_one_date'];
 
@@ -50,7 +53,12 @@ class RapportclientController extends AbstractController
                 $date_1 = true;
                 $clientRapport = $individuelclients->trierRapportClientPar_une_date($one_date);
              //dd($clientRapport);
-            }else {
+            } elseif ($agent != null) {
+                $date_3 = true;
+                $clientRapport = $individuelclients->findClientByAgent($agent);
+                 
+            }
+            else {
                 $date_2 = true;
                 $date_debut = $data['date1'];
                 $date_fin = $data['date2'];
@@ -59,7 +67,7 @@ class RapportclientController extends AbstractController
             }
 
         }
-        //  dd($clientRapport);
+    //    dd($clientRapport);
         return $this->renderForm('Module_client/rapportclient/index.html.twig', [
             'individuel' => $clientRapport,
             'agences'=>$agence->findAll(),
@@ -67,9 +75,11 @@ class RapportclientController extends AbstractController
             'affiche_tab' => $affiche_tab,
             'date_1' => $date_1,
             'date_2' => $date_2,
+            'date_3' => $date_3,
             'one_date' => $one_date,
             'du'=>$date_debut,
             'au' =>$date_fin,
+            'agent' => $agent,
         ]);
     }
 

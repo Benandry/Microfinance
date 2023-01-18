@@ -65,7 +65,7 @@ $(document).ready(function(){
         
 
     $(".table1").DataTable({
-        dom: 'Bfrtp',
+        dom: 'Bfrtip',
         buttons: [
             'excel','pdf','print'
         ],
@@ -84,7 +84,7 @@ $(document).ready(function(){
     });
 
     $(".table2").DataTable({
-        dom: 'ftp',
+        dom: 'ftip',
         language: {
             search: "Rechercher&nbsp;",
             lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",

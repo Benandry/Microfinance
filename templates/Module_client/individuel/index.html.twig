@@ -7,70 +7,74 @@
 {% endblock %}
 {% block body %}
     {{ include('modal.html.twig')}}
-    <div class="d-flex justify-content-end me-4">
+    <div class="d-flex justify-content-end me-1">
         <a href="{{ path('app_individuel_new') }}" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Ajouter nouvel individuel</a><br><br>
     </div>
-    <table class="table table2 table-borderd mt-3">
-        <thead>
-            <tr>
-                <th>Code Client</th>
-                <th>Nom client</th>
-                <th>Prenom client</th>
-                <th>Cin</th>
-                <th>Date inscription</th>
-                <th>Sexe</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
-        {% for Individuelclient in individuelclients %}
-         
-            <tr>
-                <td class="fw-bold"> {{ Individuelclient.codeclient }} </td>
-                {# <td>{{ Individuelclient.codeindividuel }}</td> #}
-                <td>{{ Individuelclient.nomClient }}</td>
-                <td>{{ Individuelclient.prenomClient }}</td>
-                <td>{{ Individuelclient.cin }}</td>
-                <td>{{ Individuelclient.dateInscription ? Individuelclient.dateInscription|date('Y-m-d') : '' }}</td>
-                <td>{{ Individuelclient.sexe }}</td>
-                <td>
-                    <div class="row">
-                        <div class="col-3 col-sm-3">
-                            <a href="{{ path('app_individuel_show', {'id': Individuelclient.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                        </div>
-                        <div class="col-3 col-sm-3">
-
-                            <div class="dropdown pb-4">
-                                <a href="#" 
-                                        class="text-decoration-none dropdown-toggle btn btn-sm btn-info" 
-                                        id="modifierClient" data-bs-toggle="dropdown" 
-                                        aria-expanded="false">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="modifierClient">
-                                    <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "etat"}) }} " > Etat civile</a></li>
-                                    <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "famille"}) }}" >Famille </a></li>
-                                    <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "adresse"}) }}" >Adresse et Etude</a></li>
-                                    <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "groupe"}) }}" > Groupe </a></li>
-                                    <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "identite"}) }}" > Identité </a></li>
-                                </ul>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 mt-3">
+            <table class="table table2 table-borderd mt-3">
+                <thead>
+                    <tr>
+                        <th>Code Client</th>
+                        <th>Nom client</th>
+                        <th>Prenom client</th>
+                        <th>Cin</th>
+                        <th>Date inscription</th>
+                        <th>Sexe</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                {% for Individuelclient in individuelclients %}
+                 
+                    <tr>
+                        <td class="fw-bold"> {{ Individuelclient.codeclient }} </td>
+                        {# <td>{{ Individuelclient.codeindividuel }}</td> #}
+                        <td>{{ Individuelclient.nomClient }}</td>
+                        <td>{{ Individuelclient.prenomClient }}</td>
+                        <td>{{ Individuelclient.cin }}</td>
+                        <td>{{ Individuelclient.dateInscription ? Individuelclient.dateInscription|date('Y-m-d') : '' }}</td>
+                        <td>{{ Individuelclient.sexe }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-3 col-sm-3">
+                                    <a href="{{ path('app_individuel_show', {'id': Individuelclient.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                </div>
+                                <div class="col-3 col-sm-3">
+        
+                                    <div class="dropdown pb-4">
+                                        <a href="#" 
+                                                class="text-decoration-none dropdown-toggle btn btn-sm btn-info" 
+                                                id="modifierClient" data-bs-toggle="dropdown" 
+                                                aria-expanded="false">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="modifierClient">
+                                            <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "etat"}) }} " > Etat civile</a></li>
+                                            <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "famille"}) }}" >Famille </a></li>
+                                            <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "adresse"}) }}" >Adresse et Etude</a></li>
+                                            <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "groupe"}) }}" > Groupe </a></li>
+                                            <li><a class="dropdown-item down" href="{{ path('app_individuel_edit', {'id': Individuelclient.id,'active' : "identite"}) }}" > Identité </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+        
+                                    {# <a href="{{ path('app_individuel_edit', {'id': Individuelclient.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> #}
+        
+                                <div class="col-auto col-sm-auto">
+                                    {{ include('Module_client/individuel/_delete_form.html.twig') }}
+                                </div> 
                             </div>
-                        </div>
-
-                            {# <a href="{{ path('app_individuel_edit', {'id': Individuelclient.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> #}
-
-                        <div class="col-auto col-sm-auto">
-                            {{ include('Module_client/individuel/_delete_form.html.twig') }}
-                        </div> 
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="28">no records found</td>
-            </tr>
-      
-         {% endfor %}
-        </tbody>
-    </table>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="28">no records found</td>
+                    </tr>
+              
+                 {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

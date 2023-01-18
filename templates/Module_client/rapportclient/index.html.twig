@@ -12,7 +12,14 @@
         {% if affiche_tab  == false %}
             Rapport client 
         {% else %}
-            Liste des clients {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            Liste des clients 
+            {% if date_1 == true %}
+                     jusq'a {{ one_date| date('d-m-Y') }} 
+            {% elseif date_3 == true %} 
+                par agent {{ agent.prenom }}
+            {% else %}
+                     du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }} 
+            {% endif %}
         {% endif %}
     {% endblock %}
 
@@ -32,6 +39,9 @@
                     {{ form_start(trier) }} 
                         <!-- Modal body -->
                         <div class="modal-body">
+                            <h5 class="text-center"> Par nom de l'agent : </h5>
+                                {{ form_row(trier.agent) }}
+
                             <div class="text-center" id="one_date">
                                 <h5 class="text-center"> Date </h5>
                                 {{ form_row(trier.search_one_date) }}

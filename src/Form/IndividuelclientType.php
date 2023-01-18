@@ -75,10 +75,12 @@ class IndividuelclientType extends AbstractType
             ])
             ->add('commune',EntityType::class,[
                 'class'=>Commune::class,
-                'choice_label'=>'NomCommune',
-                'by_reference'=>true,
+                'placeholder'=>"Commune ...",
                 'label'=>'Commune : ',
                 'autocomplete' => true,
+                'choice_label' => function ($c) {
+                    return $c->getCodeCommune() . ' - ' . $c->getNomCommune();
+                },
                 'attr'=>['class'=>'form-control']
                 ])
             ->add('etatcivile',EntityType::class,[
@@ -184,18 +186,23 @@ class IndividuelclientType extends AbstractType
                 'class'=>Agence::class,
                 'choice_label'=>'NomAgence',
                 'autocomplete' => true,
+                'placeholder' => 'Agence ...',
+                'choice_label' => function ($c) {
+                    return $c->getCodeAgence() . ' - ' . $c->getNomAgence();
+                },
             ])
 
             ->add('user',EntityType::class,[
                 'class'=>User::class,
-                'choice_label'=>'prenom',
-                'multiple' => false,
-                
-                'mapped'=>true,
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'label' => "Agent "
+                'label' => "Agent ",
+                'autocomplete' => true,
+                'placeholder' => "Agent ...",
+                'choice_label' => function ($c) {
+                    return $c->getNom(). ' '.$c->getPrenom(); 
+                }
             ])       
             ->add('garant') 
         ;

@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Individuelclient;
-use App\Entity\Agence;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Constraints\Date;
@@ -168,6 +167,25 @@ class IndividuelclientRepository extends ServiceEntityRepository
 
             return $query->getResult();   
     }
+
+
+     ///Rechercher client  carte d'identite par date
+     public function findClientByAgent($user){
+
+        //dd($agent);
+        $query = "SELECT 
+        client
+        FROM App\Entity\Individuelclient client
+        WHERE client.user = $user
+        AND client.garant = 0
+        ";
+
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $stmt;
+    }
+
 
     /*****Information adresse du client ********* */
    public function InfoCommuneClient($id)

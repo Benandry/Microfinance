@@ -41,12 +41,6 @@ class GroupeType extends AbstractType
                     'class'=>'form-control',
                 ]
             ])
-            ->add('Ajouter',SubmitType::class,[
-                'attr'=>[
-                    'class'=>'btn btn-primary btn-sm',
-                ],
-                'label' => 'Enregistrer'
-            ])
         ;
     }
 
