@@ -1,21 +1,16 @@
 {% extends "base.html.twig" %}
 
-{% block title %}
-    Ouvrir un compte epargne du client {{ nom }}
-{% endblock %}
+{% block title 'Ouvrir un compte du '~ nom %}
+{% block head 'Ouvrir un compte du '~ nom %}
 
 {% block body %}
 
     {{ include('modal.html.twig') }}
     <div class="row">
-        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-            <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>        
-        </div>
-        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-            <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p>
-        </div>
-        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-            <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p>
+        <div class="col-12 col-sm-12 col-md-12 text-secondary">
+            <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>   
+            <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p> 
+            <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p>    
         </div>
     </div>
               {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
@@ -23,7 +18,7 @@
 
       {# /***************Messages succes ******************/#}
             
-        <div id="information">
+        <div style="display: none;">
             <p> Text ecrit : <span id="text"> </span> </p>
             <p> Text ecrit : <span id="code_text"> </span> </p>
         </div>

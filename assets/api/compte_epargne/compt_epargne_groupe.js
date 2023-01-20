@@ -98,8 +98,6 @@ $(document).ready(() =>{
     if (path === '/compte/epargne/new/groupe') {
 
         var code_groupe_ = $('#code_groupe').text();
-        $('#information').css('display','none')
-        $('#code_ep_Gr').css('display','none')
         $('#compte_groupe_ep_codeep').val(code_groupe_)
 
         $("#compte_groupe_ep_produit").on('change',function(){

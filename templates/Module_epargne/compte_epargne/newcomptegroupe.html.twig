@@ -9,48 +9,45 @@
 {% endblock %}
 {% block body %}
     {{ include('modal.html.twig') }}
-    <div class="row">
-        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-            <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>      
-        </div>
-        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-            <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
-        </div>
-        <div class="col-4 col-sm-4 col-xl-4 col-md-4">
-            <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
+    <div class="card">
+        <div class="row m-4">
+            <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-secondary">
+                <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>     
+                <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
+                <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
+            </div>
         </div>
     </div>
 
-    <div id="information" style="display: none;">
+    <div style="display: none;">
         <p> Text ecrit : <span id="text"> </span> </p>
         <p> Text ecrit : <span id="code"> </span> </p>
     </div>
-    {# <a href="{{ path('app_liste_groupe') }}" class="btn btn-success"> <i class="fa fa-eye"></i> Voir Liste</a> #}
+    {{ form_start(form) }}
+        <div class="row mt-3">
+            <div class="col-4 col-sm-4">
+                {{ form_row(form.produit) }}
+            </div>
+            <div class="col-4 col-sm-4"> 
+                {{ form_row(form.datedebut) }}
+            </div>
+            <div class="col-4 col-sm-4">
+                {{ form_row(form.typeClient) }} 
+            </div>
+        </div> 
 
-{{ form_start(form) }}
-    <div class="row jumbotron jumbotron-fluid">
-       <div class="col-4 col-sm-4">
-             {{ form_row(form.produit) }}
+        <div style="display: none;">
+                {{ form_row(form.codeep) }}
+                {{ form_row(form.codeepargne) }}
+        </div> 
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                {{ form_row(form.Valider) }}
+            </div>
         </div>
-       <div class="col-4 col-sm-4"> 
-             {{ form_row(form.datedebut) }}
-        </div>
-        <div class="col-4 col-sm-4">
-            {{ form_row(form.typeClient) }} 
-        </div>
-    </div> 
-    <div id="code_ep_Gr">
-            {# {{ form_row(form.codegroupe) }}
-            {{ form_row(form.codegroupeepargne) }} #}
-            {{ form_row(form.codeep) }}
-            {{ form_row(form.codeepargne) }}
-    </div> 
-    <div class="row">
-            {{ form_row(form.Valider) }}
-        </div>
-{{ form_end(form) }}
-
-    <h6 class="text-primary"> Compte existant du {{ nom }} </h6>
+    {{ form_end(form) }}
+    <div class="m-4"></div>
+    <h6 class="text-primary"> Compte existant du groupe {{ nom }} </h6>
     <table class="table">
         <thead>
             <tr>
@@ -65,7 +62,7 @@
         <tbody class="jumbotron jumbotron-fluid" style="color:black;">
             {% for compte in compte_exist %}
             <tr>
-                <td> {{ compte.codegroupeepargne }}</td>
+                <td> {{ compte.codeepargne }}</td>
                 <td> {{ compte.codegroupe }}</td>
                 <td> {{ compte.datedebut|date('Y-m-d') }}</td>
                 <td> {{ compte.nomproduit }}</td>

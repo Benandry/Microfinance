@@ -688,7 +688,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         pe.nomproduit,
         ce.datedebut ,
         ce.id,
-        ce.codegroupeepargne,
+        ce.codeepargne ,
         t.solde
         FROM App\Entity\CompteEpargne ce 
         LEFT JOIN
@@ -699,8 +699,8 @@ class CompteEpargneRepository extends ServiceEntityRepository
         with ce.produit = pe.id
         INNER JOIN 
         App\Entity\Groupe g
-        WITH ce.codegroupe = g.codegroupe
-        WHERE ce.codegroupe = '$code' 
+        WITH ce.codeep = g.codegroupe
+        WHERE ce.codeep = '$code' 
         --AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c RIGHT JOIN App\Entity\Transaction tr  WITH tr.codeepargnegroupe = c.codegroupeepargne  WHERE ce.codeep = '$code' )
        ";
         

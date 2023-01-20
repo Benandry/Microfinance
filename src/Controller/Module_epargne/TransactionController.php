@@ -2,6 +2,8 @@
 
 namespace App\Controller\Module_epargne;
 
+use App\Controller\Comptabilite\TraitementCompta\MouvementEpargne;
+use App\Controller\Comptabilite\TraitementCompta\MouvementRetrait;
 use App\Entity\Transaction;
 use App\Form\FiltreRapportTransactionType;
 use App\Form\RapportTransactionDuJourType;
@@ -74,7 +76,7 @@ class TransactionController extends AbstractController
 
     // Nouveau depot
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
-    public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
+    public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
     {
         $transaction = new Transaction();
         
@@ -98,16 +100,12 @@ class TransactionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $transactionRepository->add($transaction,true);
-
+            $refTransac = random_int(2,1000000000);
+            $transaction->setCodetransaction($refTransac);
             $entityManager=$doctrine->getManager();
 
-            $transaction->setCodetransaction(random_int(2,1000000000));
-
-            $codeclient=$transaction->getCodeepargneclient();
-            $transaction->setCodeepargneclient($codeclient);
-
-            //setCodeepargneclient(string $codeepargneclient)
+            /**Inserer dans la table Mouvement comptable */
+            $mouvement->operationJournal($entityManager,$transaction);
 
             $Description=$transaction->getDescription();
             $transaction->setDescription($Description);
@@ -165,7 +163,7 @@ class TransactionController extends AbstractController
     
     // Retrait
     #[Route('/retrait', name: 'app_transaction_retrait', methods: ['GET', 'POST'])]
-    public function Retraitgroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
+    public function Retraitgroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementRetrait $mouvement): Response
     {
         $transaction = new Transaction();
 
@@ -185,9 +183,10 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $transactionRepository->add($transaction, true);
-
+            
             $entityManager=$doctrine->getManager();
+
+            $mouvement->operationJournal($entityManager,$transaction);
 
             $transaction->setCodetransaction(random_int(1,2000000));
 
@@ -221,7 +220,10 @@ class TransactionController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
             $this->addFlash('success', "Transaction retrait compte epargne '" .$transaction->getCodeepargneclient()."' réussite!!!");
-           // return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+           return $this->redirectToRoute('app_transaction_retrait', [
+            'nom' => $nom,
+            'code' => $code
+           ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transaction/retrait.html.twig', [
@@ -236,7 +238,7 @@ class TransactionController extends AbstractController
     // Retrait individuel
         // Retrait
         #[Route('/individuel', name: 'app_retrait', methods: ['GET', 'POST'])]
-        public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository): Response
+        public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementRetrait $mouvement): Response
         {
             $transaction = new Transaction();
     
@@ -252,15 +254,14 @@ class TransactionController extends AbstractController
             if($soldeCurrent == null ){
                 $soldeCurrent[0]['solde'] = 0;
             }        
-    
-    
+
             $form = $this->createForm(TransactionretraitType::class, $transaction);
             $form->handleRequest($request);
     
             if ($form->isSubmitted() && $form->isValid()) {
-                // $transactionRepository->add($transaction, true);
-    
                 $entityManager=$doctrine->getManager();
+
+                $mouvement->operationJournal($entityManager,$transaction);
     
                 $transaction->setCodetransaction(random_int(1,2000000));
     
@@ -294,7 +295,13 @@ class TransactionController extends AbstractController
                 $entityManager->persist($transaction);
                 $entityManager->flush();
                 $this->addFlash('success', "Transaction retrait compte epargne '" .$transaction->getCodeepargneclient()."' réussite!!!");
-               // return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_retrait', [
+                    'code' => $code,
+                    'cod_client' => $codeclient,
+                    'code' => $code,
+                    'nom' => $nom,
+                    'prenom' => $prenom,
+                ], Response::HTTP_SEE_OTHER);
             }
     
             return $this->renderForm('Module_epargne/transaction/retrait_individuel_form.html.twig', [

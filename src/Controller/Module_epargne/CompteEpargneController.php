@@ -165,8 +165,9 @@ class CompteEpargneController extends AbstractController
         $nom = $request->query->get('nom');
         $email = $request->query->get('email');
 
+        //dd($code);
         $compteEpargneExiste = $compteEpargneRepository->compteEpargneExist($code);
-       #dd($compteEpargneExiste);
+    //    dd($compteEpargneExiste);
 
 
         $compteEpargne = new CompteEpargne();
@@ -178,7 +179,7 @@ class CompteEpargneController extends AbstractController
             $compteEpargneRepository->add($compteEpargne, true);
 
             $this->addFlash('success', "Creation du compte epargne  ".$compteEpargne->getCodegroupe()." réussite!!!");
-            return $this->redirectToRoute('app_compte_epargne_new', [
+            return $this->redirectToRoute('app_compte_epargne_new_groupe', [
                 'code' => $code,
                 'nom' => $nom,
                 'prenom' => $email,

@@ -94,7 +94,7 @@ class ProduitEpargneRepository extends ServiceEntityRepository
     {
         $query = " SELECT client.codeclient ,client.nom_client nom, client.prenom_client prenom 
         FROM App\Entity\Individuelclient client
-        WHERE client.id = '$code'";
+        WHERE client.codeclient = '$code'";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
 
@@ -123,4 +123,17 @@ class ProduitEpargneRepository extends ServiceEntityRepository
         return $stmt;
     }
 
+    public function findByProduitDepot($code)
+    {
+        $query = " SELECT p
+        FROM App\Entity\ProduitEpargne p 
+        INNER JOIN App\Entity\CompteEpargne ce
+        WITH p.id = ce.produit 
+         WHERE ce.codeepargne = '$code'
+        ";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+        return $stmt;
+    }
 }

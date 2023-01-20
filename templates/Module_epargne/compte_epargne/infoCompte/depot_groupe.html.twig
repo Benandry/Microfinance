@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Ouvrir une compte epargne Client
+    Depot compte epargne
 {% endblock %}
 
 {% block head %}
@@ -12,7 +12,6 @@
     <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-        
                     <!-- Modal Header -->
                 <div class="modal-header titre_modal">
                     <h4 class="modal-title text-center">Info client </h4>
@@ -21,23 +20,23 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-4 col-sm-4">
+                            <div class="col-md-6 col-sm-6 m-auto">
                                 {{ form_row(form.code)}}
                                 <div id="groupe_suggest"></div>
 
-                                <div style="display: hide;">
+                                <div style="display: none;">
                                     {{ form_row(form.code_groupe)}}
                                     {{ form_row(form.nom)}}
                                     {{ form_row(form.email)}}
                                 </div>
                             </div>
-                            <div class="col-auto col-sm-auto mt-3 ms-5" >
+                        </div>
+                        <div class="row">    
+                            <div class="col-8 col-sm-8 mt-1 m-auto" >
                                 <p class="fw-bold"> Code groupe : <span id="code_groupe"></span> </p>
                                 <p class="fw-bold"> Nom groupe : <span id="nom_groupe"></span> </p>
                             </div>
-                            
                         </div>
-
                     </div>
             
                     <!-- Modal footer -->

@@ -15,7 +15,7 @@ class MouvementComptable
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_mouvement = null;
+    private ?\DateTimeInterface $dateMouvement = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
@@ -29,6 +29,21 @@ class MouvementComptable
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $solde = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $refTransaction = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pieceComptable = null;
+
+    #[ORM\ManyToOne(inversedBy: 'mouvementComptables')]
+    private ?PlanComptable $planCompta = null;
+
+
+    public function __toString()
+    {
+        return $this->getId();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,12 +51,12 @@ class MouvementComptable
 
     public function getDateMouvement(): ?\DateTimeInterface
     {
-        return $this->date_mouvement;
+        return $this->dateMouvement;
     }
 
-    public function setDateMouvement(\DateTimeInterface $date_mouvement): self
+    public function setDateMouvement(\DateTimeInterface $dateMouvement): self
     {
-        $this->date_mouvement = $date_mouvement;
+        $this->dateMouvement = $dateMouvement;
 
         return $this;
     }
@@ -90,6 +105,42 @@ class MouvementComptable
     public function setSolde(string $solde): self
     {
         $this->solde = $solde;
+
+        return $this;
+    }
+
+    public function getRefTransaction(): ?string
+    {
+        return $this->refTransaction;
+    }
+
+    public function setRefTransaction(?string $refTransaction): self
+    {
+        $this->refTransaction = $refTransaction;
+
+        return $this;
+    }
+
+    public function getPieceComptable(): ?string
+    {
+        return $this->pieceComptable;
+    }
+
+    public function setPieceComptable(?string $pieceComptable): self
+    {
+        $this->pieceComptable = $pieceComptable;
+
+        return $this;
+    }
+
+    public function getPlanCompta(): ?PlanComptable
+    {
+        return $this->planCompta;
+    }
+
+    public function setPlanCompta(?PlanComptable $planCompta): self
+    {
+        $this->planCompta = $planCompta;
 
         return $this;
     }

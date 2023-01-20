@@ -35,7 +35,7 @@ class CompteGroupeEpType extends AbstractType
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
                 'choice_label'=>'nomproduit',
-                'by_reference'=>true,
+                'autocomplete'=>true,
                 'placeholder'=>'Choisir produit . . .',
                 'attr'=>[
                     'class'=>'form-control'
@@ -55,24 +55,12 @@ class CompteGroupeEpType extends AbstractType
                 ],
                 'label'=>false
             ])
-
-            // ->add('codegroupe',TextType::class,[
-            //     'attr'=>[
-            //         'class'=>'form-control'
-            //     ],
-            //     'label' => 'Code du groupe : '
-            // ])
-            // ->add('codegroupeepargne',TextType::class,[
-            //     'label'=> 'Code epargne groupe ',
-            //     'attr'=>[
-            //         'class'=>'form-control'
-            //     ],
-            // ])
             
             ->add('Valider',SubmitType::class,[
                 'attr' => [
                     'class' => 'btn btn-primary btn-sm'
-                ]
+                ],
+                'label' => "Créer compte"
             ])
         ;
     }

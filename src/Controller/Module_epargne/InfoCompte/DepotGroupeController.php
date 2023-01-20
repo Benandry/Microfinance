@@ -2,6 +2,7 @@
 
 namespace App\Controller\Module_epargne\InfoCompte;
 
+use App\Controller\Comptabilite\TraitementCompta\MouvementEpargne;
 use App\Entity\Transaction;
 use App\Form\TransactionType;
 use App\Repository\TransactionRepository;
@@ -77,7 +78,7 @@ class DepotGroupeController extends AbstractController
             }
     
             return $this->render('Module_epargne/compte_epargne/infoCompte/depot_groupe.html.twig',[
-                'nom' => 'Nandrianina ',
+                'nom' => ' ',
                 'form' => $form->createView(),
             ]);
         }
@@ -85,7 +86,7 @@ class DepotGroupeController extends AbstractController
             // Nouveau depot
     #[Route('/depotgroupe', name: 'app_transaction_groupe_depot', methods: ['GET', 'POST'])]
 
-    public function DepotGroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository)
+    public function DepotGroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement)
     {
         $transaction = new Transaction();
 
@@ -108,13 +109,16 @@ class DepotGroupeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $transactionRepository->add($transaction,true);
-
+            $refTransac = random_int(2,1000000000);
+            $transaction->setCodetransaction($refTransac);
             $entityManager=$doctrine->getManager();
 
-            $transaction->setCodetransaction(random_int(2,1000000000));
+            $mouvement->operationJournal($entityManager,$transaction);
+            
+            // $transactionRepository->add($transaction,true);
 
             $codeclient=$transaction->getCodeepargneclient();
+            // dd($codeclient);
             $transaction->setCodeepargneclient($codeclient);
 
             // setCodeepargneclient(string $codeepargneclient)
@@ -153,9 +157,9 @@ class DepotGroupeController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', " Transaction depot compte epargne '" .$transaction->getCodeepargneclient()."'réussite!!!");
-            return $this->redirectToRoute('app_transaction_new', [
-                'codegroupe' => $code,
-                'nomgroupe' => $nomgroupe,
+            return $this->redirectToRoute('app_transaction_groupe_depot', [
+                'code' => $code,
+                'nom' => $nomgroupe,
                 'email' => $email,
             ], Response::HTTP_SEE_OTHER);
         }
@@ -199,23 +203,23 @@ class DepotGroupeController extends AbstractController
     
         $form->handleRequest($request);
         
-            /* ===== Si le code groupe sont ecrites ,on va passer a la requete suivante ====== */
-            if ($form->isSubmitted() && $form->isValid()){
-                $data = $form->getData();
-                $code = $data['code'];
-                $nom = $data['nom'];
-                return $this->redirectToRoute('app_transaction_retrait', [
-                        'code' => $code,
-                        'nom' => $nom,
-    
-                    ], 
-                Response::HTTP_SEE_OTHER);
-            }
-    
-            return $this->render('Module_epargne/compte_epargne/infoCompte/retrait_groupe.html.twig',[
-                'nom' => 'Nandrianina ',
-                'form' => $form->createView(),
-            ]);
+        /* ===== Si le code groupe sont ecrites ,on va passer a la requete suivante ====== */
+        if ($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            $code = $data['code'];
+            $nom = $data['nom'];
+            return $this->redirectToRoute('app_transaction_retrait', [
+                    'code' => $code,
+                    'nom' => $nom,
+
+                ], 
+            Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('Module_epargne/compte_epargne/infoCompte/retrait_groupe.html.twig',[
+            'nom' => 'Nandrianina ',
+            'form' => $form->createView(),
+        ]);
     }
 
     // Retrait individuel

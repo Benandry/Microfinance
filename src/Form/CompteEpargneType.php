@@ -31,7 +31,6 @@ class CompteEpargneType extends AbstractType
             ->add('typeClient',ChoiceType::class,[
                 'choices'=>[
                     'INDIVIDUEL'=>'INDIVIDUEL',
-                    'GROUPE'=>'GROUPE',
                 ],
                 'attr'=>[
                     'class'=>'form-control'
@@ -42,14 +41,14 @@ class CompteEpargneType extends AbstractType
                 'mapped'=>true,
                 'choice_label'=>'nomproduit',
                 'placeholder' =>'Choisir un produit ',
-                'by_reference'=>true,
+                'autocomplete'=>true,
                 'label'=>'Nom Produit',
                 'attr'=>[
                     'class'=>'form-control'
                 ]
                 ])
 
-            ->add('codeep',CompteEpargneAutocompleteField::class)
+            ->add('codeep')
 
             ->add('nom',TextType::class,[
                 'mapped'=>false,

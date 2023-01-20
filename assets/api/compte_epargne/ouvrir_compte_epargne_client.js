@@ -54,7 +54,6 @@ $(document).ready(() =>{
         $('#form_code').on('keyup',()=>{
 
             var code_client = $('#form_code').val()
-            
             if (code_client.length === 10) {
                 var url = '/api/code-client/'+code_client
                 $.ajax({
@@ -91,8 +90,6 @@ $(document).ready(() =>{
             }
         
         })
-        /*************************************Cacher les formulaire nom et prenom ********* */
-        $('#info_client').css('display','none')
            
    
     }

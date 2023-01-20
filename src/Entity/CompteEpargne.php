@@ -34,11 +34,6 @@ class CompteEpargne
     #[ORM\OneToMany(mappedBy: 'compte', targetEntity: TransfertProduit::class)]
     private Collection $compteTransfert;
 
-    #[ORM\OneToMany(mappedBy: 'compte1', targetEntity: Produittransfert::class)]
-    private Collection $comptetransfert1;
-
-    #[ORM\OneToMany(mappedBy: 'compte2', targetEntity: Produittransfert::class)]
-    private Collection $comptetransfert2;
 
     #[ORM\Column(length: 50)]
     private ?string $typeClient = null;
@@ -70,8 +65,6 @@ class CompteEpargne
         $this->transfertProduits = new ArrayCollection();
         $this->produittransmis = new ArrayCollection();
         $this->compteTransfert = new ArrayCollection();
-        $this->comptetransfert1 = new ArrayCollection();
-        $this->comptetransfert2 = new ArrayCollection();
         $this->individuelclients = new ArrayCollection();
         $this->CodeIndividuelClient = new ArrayCollection();
         $this->codeindcl = new ArrayCollection();
@@ -209,66 +202,6 @@ class CompteEpargne
             // set the owning side to null (unless already changed)
             if ($compteTransfert->getCompte() === $this) {
                 $compteTransfert->setCompte(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Produittransfert>
-     */
-    public function getComptetransfert1(): Collection
-    {
-        return $this->comptetransfert1;
-    }
-
-    public function addComptetransfert1(Produittransfert $comptetransfert1): self
-    {
-        if (!$this->comptetransfert1->contains($comptetransfert1)) {
-            $this->comptetransfert1[] = $comptetransfert1;
-            $comptetransfert1->setCompte1($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComptetransfert1(Produittransfert $comptetransfert1): self
-    {
-        if ($this->comptetransfert1->removeElement($comptetransfert1)) {
-            // set the owning side to null (unless already changed)
-            if ($comptetransfert1->getCompte1() === $this) {
-                $comptetransfert1->setCompte1(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Produittransfert>
-     */
-    public function getComptetransfert2(): Collection
-    {
-        return $this->comptetransfert2;
-    }
-
-    public function addComptetransfert2(Produittransfert $comptetransfert2): self
-    {
-        if (!$this->comptetransfert2->contains($comptetransfert2)) {
-            $this->comptetransfert2[] = $comptetransfert2;
-            $comptetransfert2->setCompte2($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComptetransfert2(Produittransfert $comptetransfert2): self
-    {
-        if ($this->comptetransfert2->removeElement($comptetransfert2)) {
-            // set the owning side to null (unless already changed)
-            if ($comptetransfert2->getCompte2() === $this) {
-                $comptetransfert2->setCompte2(null);
             }
         }
 

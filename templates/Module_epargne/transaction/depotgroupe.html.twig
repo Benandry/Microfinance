@@ -12,37 +12,21 @@
 
         <div style="display:none;">
             <p> Text ecrit : <span id="text"> </span> </p>
-            {# <p> Text ecrit : <span id="code"> </span> </p> #}
         </div>
-             {# /***************Messages succes ******************/#}
-   
-            {% for message in app.flashes('success') %}
-                <p class="alert alert-success text-center">
-                    {{ message }}
-                </p>
-            {% endfor %} 
-
-
-    {# *************************************#}
-
-         <div class="row">
-    <div class="col-xl-3 col-md-3 col-sm-3">
-        <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
-        <p> <b>Solde client : </b>
-            {% if solde != '' %}
-                <span id="solde_cli">{{ solde }}</span>     
-            {% else %}
-                <span id="solde_cli">0</span>  
-            {% endif %} 
-        </p>
+        {{ include('modal.html.twig') }}
+    <div class="row">
+        <div class="col-xl-12 col-md-12 col-sm-12 text-secondary">
+            <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
+            <p> <b>Solde client : </b>
+                {% if solde != '' %}
+                    <span id="solde_cli">{{ solde }}</span>     
+                {% else %}
+                    <span id="solde_cli">0</span>  
+                {% endif %} 
+            </p>
+            <p><b>Code client :</b> <span id="code_client"> {{ nomgroupe }}</span></p>
+        </div>
     </div>
-    <div class="col-xl-3 col-md-3 col-sm-3">
-        <p><b>Code client :</b> <span id="code_client"> {{ nomgroupe }}</span></p>
-    </div>
-    {# <div class="col-xl-3 col-md-3 col-sm-3">
-        <p><b> Nom Client :</b> <span id="nom"> {{ nomgroupe }}</span></p>
-    </div> #}
-</div>
 
 
     {{ include('Module_epargne/transaction/_form.html.twig') }}
@@ -52,85 +36,3 @@
             <P style="display:hide"><span id="solde"> </span></p>
 
 {% endblock %}
-{% block javascript %}
-    {# <script src="{{ asset('/api/depot.js')}}"></script> #}
-{% endblock %}
-{# 
-
-
-{{ include('header.html.twig') }}
-{% block stylesheet %}
-  <style>
-    .suggestion{
-      font-size: 14px;
-    }
-    .suggestion:hover{
-      background-color: cornflowerblue;
-      color: #fff;
-    }
-  </style>
-{% endblock %}
-
-{% block body %}
-
-        <div>
-            <p> Text ecrit : <span id="text"> </span> </p>
-            {# <p> Text ecrit : <span id="code"> </span> </p>
-        </div>
-
-
-            {# /***************Messages succes ******************/#}
-            {# {% for message in app.flashes('success') %}
-                <div class="alert text-center alert-success">
-                    <!-- The Modal -->
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <p class="alert alert-success text-center">
-                                            {{ message }}
-                                        </p>
-                                    </div>
-                                    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %} #}
-
-
-          
-
-            {# *************************************#}
-
-
-    {# {{ include('Module_epargne/transaction/_form.html.twig') }}
-
-    <table class="table table-bordered">
-    <thead class="alert alert-success"> 
-        <tr>
-            <th>Code Epargne</th>
-            <th>Nom et prenom client</th>
-            <th>Solde</th>
-        </tr>
-    </thead> 
-    <tbody class="jumbotron jumbotron-fluid">
-        <tr>
-            <td><span id="code"> </span> </td>
-            <td><span id="nom"> </span> </td>
-            <td><span id="solde"> </span> </td>
-        </tr>
-    </tbody>
-</table>
-
-    {% block javascript %}
-        <script src="{{ asset('/api/depot.js')}}"></script>
-    {% endblock %}
-{% endblock %}
-{{ include('footer.html.twig') }} #} 

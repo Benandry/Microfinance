@@ -4,9 +4,6 @@ var path = window.location.pathname
 
 $(document).ready(() =>{
      /********Cache les info */
-    $('#information').css('display','none')
-    $('#client_current').css('display','none')
-
     if (path === '/compte/epargne/new') {
         var code_client_ = $('#code_client').text()
         var nom_client_ = $('#nom').text()

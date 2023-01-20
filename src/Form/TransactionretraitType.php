@@ -20,7 +20,6 @@ class TransactionretraitType extends AbstractType
         $builder
             ->add('Description',TextType::class,[
                 'attr'=>[
-                    'class'=>'hidden',
                     'value'=>'RETRAIT'
                 ]
             ])
@@ -63,7 +62,11 @@ class TransactionretraitType extends AbstractType
                     'placeholder'=>'Code client . . .'
                 ],
             ])
-            ->add('solde',TextType::class)
+            ->add('solde',TextType::class,[
+                'attr'=>[
+                    'class'=>'hidden'
+                ]
+            ])
             ;
     }
 

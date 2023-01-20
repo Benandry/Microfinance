@@ -39,28 +39,16 @@ class MouvementComptableRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return MouvementComptable[] Returns an array of MouvementComptable objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findJournal(): array
+    {
+        $query = "
+            SELECT journal 
+            FROM 
+            App\Entity\MouvementComptable journal
+        ";
 
-//    public function findOneBySomeField($value): ?MouvementComptable
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $stmt = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $stmt;
+    }
 }

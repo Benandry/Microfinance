@@ -22,23 +22,23 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-4 col-sm-4">
+                            <div class="col-md-6 col-sm-6 m-auto">
                                 {{ form_row(form.code)}}
                                 <div id="code_suggest"></div>
 
-                                <div id="info_client">
+                                <div style="display:none;">
                                     {{ form_row(form.nom)}}
                                     {{ form_row(form.prenom)}}
                                 </div>
-                            </div>
-                            <div class="col-auto col-sm-auto mt-3 ms-5" >
+                            </div>  
+                        </div>
+                        <div class="row">    
+                            <div class="col-md-10 col-sm-10 mt-3 m-auto" >
                                 <p class="fw-bold"> Code Client : <span id="code_cli"></span> </p>
                                 <p class="fw-bold"> Nom Client : <span id="nom_cli"></span> </p>
                                 <p class="fw-bold"> Prenom Client : <span id="prenom_cli"></span> </p>
                             </div>
-                            
                         </div>
-
                     </div>
             
                     <!-- Modal footer -->
