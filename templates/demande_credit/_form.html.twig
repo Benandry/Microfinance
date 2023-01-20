@@ -1,17 +1,12 @@
 {{ form_start(form) }}
   <ul class="nav nav-tabs">
       <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
-      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2" id="epargne">Etape 2</a></li> #}
-      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 2</a></li> #}
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
       <li class="nav-item"id="garantiecredit"> <a class="nav-link" data-bs-toggle="tab" href="#etape3" >Etape 3</a></li>
-      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape5">Etape 4</a></li>  #}
   </ul>
 
     <div class="tab-content">
-
         {# Etape 1 #}
-
         <div class="tab-pane active" id="etape1">
         <div class="row shadow-sm p-3">
             <div class="col-12 col-sm-12 col-md-12">
@@ -21,7 +16,10 @@
                       {{ form_row(form.ProduitCredit) }}
                       {{ form_row(form.codeclient) }}
                       {{ form_row(form.TypeClient) }}
-                      {{ form_row(form.NumeroCredit) }}
+                      <div style="display:none;">
+                        {{ form_row(form.NumeroCredit) }}
+                        {{ form_row(form.cycles) }}
+                      </div>
                       {{ form_row(form.DateDemande) }}
                       {{ form_row(form.Montant) }}
                       {{ form_row(form.TauxInteretAnnuel) }}
@@ -40,42 +38,6 @@
         </div>
       </div>
 
-        {# Etape 2 #}
-          {# <div class="tab-pane" id="etape2">
-        <div class="row shadow-sm p-3">
-            <div class="col-12 col-sm-12 col-md-12">
-                <h6 class="text-center text-primary">Etape 3</h6>
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6"> #}
-                      {# {{ form_row(form.MontantEpargneTranche) }}
-                      {{ form_row(form.MontantFixe) }} #}
-                    {# </div> #}
-                    {# <div class="col-6 col-sm-6">
-                      {{ form_row(form.ButCredit) }}
-                    </div> #}
-                {# </div>
-            </div>
-        </div>
-      </div> #}
-        {# Etape 3 #}
-
-            {# <div class="tab-pane" id="etape3">
-        <div class="row shadow-sm p-3">
-            <div class="col-12 col-sm-12 col-md-12">
-                <h6 class="text-center text-primary">Etape 3</h6>
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6"> #}
-                      {# {{ form_row(form.Categorie2Credit) }}
-                      {{ form_row(form.Categorie3Credit) }} #}
-                    {# </div> #}
-                    {# <div class="col-6 col-sm-6">
-                      {{ form_row(form.Categorie4Credit) }}
-                    </div> #}
-                {# </div>
-            </div>
-        </div>
-      </div> #}
-
       {# etape4 #}
             <div class="tab-pane" id="etape2">
         <div class="row shadow-sm p-3">
@@ -87,27 +49,12 @@
                       {{ form_row(form.SoldeEpargne) }}
                     </div>  
                       {{ form_row(form.Categorie1Credit) }}
-                      {# {{ form_row(form.InteretDifferePaiementCapitalise) }} #}
-                      {# {{ form_row(form.InteretPayeMemePourDiffere) }} #}
-                      {# {{ form_row(form.TrancheDistinctInteretPeriodeDiffere) }}#}
-                      {# {{ form_row(form.PaiementPrealableInteret) }}
-                      {{ form_row(form.InteretDeduitDecaissement) }} #}
+                      {{ form_row(form.typeAmortissement) }}
                   </div>
                    <div class="col-6 col-sm-6 col-md-6">
-                          {{ form_row(form.CalculInteretJours) }}
-                         {{ form_row(form.CalculInteretDiffere) }}
-                      <div class="col-6 col-sm-6" style="display:none">
-                          {{ form_row(form.Agent) }}
-                      </div>
-                      <div>
-                         {{ form_row(form.typeAmortissement) }}
-                      </div>
-
-                      {# {{ form_row(form.ForfaitPaiementPrealableInteret) }}
-                      {{ form_row(form.CreditLieUSD) }}
-                      {{ form_row(form.MettreJourCalendrierNonOuvrable) }}
-                      {{ form_row(form.ReporterPremierTranche) }}
-                      {{ form_row(form.CommissionPourcentageMontantCredit) }} #}
+                      {{ form_row(form.CalculInteretJours) }}
+                      {{ form_row(form.CalculInteretDiffere) }}
+                      {{ form_row(form.agent) }}
                   </div>
 
               </div>
@@ -137,19 +84,6 @@
                              </div>
         </div>
       </div>
-
-
-    {# Etape 5 #}
-          {# <div class="tab-pane" id="etape5">
-        <div class="row shadow-sm p-3">
-            <div class="col-12">
-              <h6 class="text-center text-primary" >Etape 5</h6>
-              <div class="row">
-              </div>
-            </div>
-        </div>
-      </div> #}
-
     </div>
     <button class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> {{ button_label|default('Suivant') }}</button> 
 {{ form_end(form) }}

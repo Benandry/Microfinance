@@ -40,23 +40,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $responsabilite = null;
 
-    #[ORM\OneToMany(mappedBy: 'agentCredit', targetEntity: ApprobationCredit::class)]
-    private Collection $approbationCredits;
-
-    #[ORM\OneToMany(mappedBy: 'AgentDeCredit', targetEntity: Decaissement::class)]
-    private Collection $decaissements;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Individuelclient::class)]
     private Collection $individuelclients;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Agence $agence = null;
 
+    #[ORM\OneToMany(mappedBy: 'agent', targetEntity: DemandeCredit::class)]
+    private Collection $demandeCredits;
+
     public function __construct()
     {
-        $this->approbationCredits = new ArrayCollection();
-        $this->decaissements = new ArrayCollection();
         $this->individuelclients = new ArrayCollection();
+        $this->demandeCredits = new ArrayCollection();
     }
 
     public function __toString()
@@ -188,67 +184,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, ApprobationCredit>
-     */
-    public function getApprobationCredits(): Collection
-    {
-        return $this->approbationCredits;
-    }
-
-    public function addApprobationCredit(ApprobationCredit $approbationCredit): self
-    {
-        if (!$this->approbationCredits->contains($approbationCredit)) {
-            $this->approbationCredits[] = $approbationCredit;
-            $approbationCredit->setAgentCredit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeApprobationCredit(ApprobationCredit $approbationCredit): self
-    {
-        if ($this->approbationCredits->removeElement($approbationCredit)) {
-            // set the owning side to null (unless already changed)
-            if ($approbationCredit->getAgentCredit() === $this) {
-                $approbationCredit->setAgentCredit(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Decaissement>
-     */
-    public function getDecaissements(): Collection
-    {
-        return $this->decaissements;
-    }
-
-    public function addDecaissement(Decaissement $decaissement): self
-    {
-        if (!$this->decaissements->contains($decaissement)) {
-            $this->decaissements[] = $decaissement;
-            $decaissement->setAgentDeCredit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDecaissement(Decaissement $decaissement): self
-    {
-        if ($this->decaissements->removeElement($decaissement)) {
-            // set the owning side to null (unless already changed)
-            if ($decaissement->getAgentDeCredit() === $this) {
-                $decaissement->setAgentDeCredit(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Individuelclient>
      */
@@ -287,6 +222,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAgence(?Agence $agence): self
     {
         $this->agence = $agence;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeCredit>
+     */
+    public function getDemandeCredits(): Collection
+    {
+        return $this->demandeCredits;
+    }
+
+    public function addDemandeCredit(DemandeCredit $demandeCredit): self
+    {
+        if (!$this->demandeCredits->contains($demandeCredit)) {
+            $this->demandeCredits->add($demandeCredit);
+            $demandeCredit->setAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeCredit(DemandeCredit $demandeCredit): self
+    {
+        if ($this->demandeCredits->removeElement($demandeCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeCredit->getAgent() === $this) {
+                $demandeCredit->setAgent(null);
+            }
+        }
 
         return $this;
     }

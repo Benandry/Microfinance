@@ -4,23 +4,25 @@
 {% block head %}Nouveau Approbation Credit{% endblock %}
 
 {% block body %}
-    <div class="card m-2 p-3">
-        <div >
+    <div class="card mb-3">
+        <div class="row m-3 text-secondary">
             {% for demande in demandes %}
-                <div class="row">
-                    <div class="col-4 col-sm-4 col-md-4">
-                        <p> <span class="fw-bold">Nom du client : </span> <span id="nom"> {{ demande.nom_client }}</span> </p>
-                        <p> <span class="fw-bold">Prenom du client : </span> <span id="prenom">{{ demande.prenom_client }}</span> </p>
-                        <p> <span class="fw-bold">Code credit :  </span> <span id="codecredit">{{ demande.NumeroCredit }}</span> </p>
-                    </div>
-                    <div class="col-8 col-sm-8 col-md-8"> 
-                        <p> <span class="fw-bold">Montant du credit :  </span> <span id="montant">{{ demande.Montant }}</span> </p> 
-                        <p> <span class="fw-bold">Nombre tranche :  </span> <span id="nombreTranche">{{ demande.NombreTranche }}</span> </p> 
-                        <p> <span class="fw-bold">Type Tranche :  </span> <span id="typeTranche">{{ demande.TypeTranche }}</span> </p> 
-                    </div>
+                <div class="col-4 col-sm-4 col-md-4">
+                    <p> <span class="fw-bold">Nom du client : </span> <span id="nom"> {{ demande.nom_client }}</span> </p>
+                    <p> <span class="fw-bold">Prenom du client : </span> <span id="prenom">{{ demande.prenom_client }}</span> </p>
+                    <p> <span class="fw-bold">Code credit :  </span> <span id="codecredit">{{ demande.NumeroCredit }}</span> </p>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 m-auto">
+            <p class="fw-bold">Cycle de credit : {{ cycle }} </p>
+                </div> 
+                <div class="col-4 col-sm-4 col-md-4"> 
+                    <p> <span class="fw-bold">Montant du credit :  </span> <span id="montant">{{ demande.Montant }}</span> </p> 
+                    <p> <span class="fw-bold">Nombre tranche :  </span> <span id="nombreTranche">{{ demande.NombreTranche }}</span> </p> 
+                    <p> <span class="fw-bold">Type Tranche :  </span> <span id="typeTranche">{{ demande.TypeTranche }}</span> </p> 
                 </div>
             {% endfor %}
         </div>
-        {{ include('Module_credit/approbation_credit/_form.html.twig') }}
     </div>
+        {{ include('Module_credit/approbation_credit/_form.html.twig') }}
+
 {% endblock %}

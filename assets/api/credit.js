@@ -1,5 +1,6 @@
 import $ from 'jquery'
 
+const path = window.location.pathname;
 $(document).ready(function(){
 
         // Ici on recuper le nom de l'agent de credit
@@ -13,8 +14,6 @@ $(document).ready(function(){
 
             // recuperation du code agence
             var codeagence=$('#codeagence').text();
-            // console.log(codeagence)
-
             // on va boucler le maxId dans la derniere 
             
             recuplastnumerocredit++;
@@ -22,9 +21,7 @@ $(document).ready(function(){
             // On va metter 1  en 0000001
             
             var pad_last_id = recuplastnumerocredit.toString().padStart(7,0)
-            // console.log(pad_last_id);
-            var codecreditnouveau='I'+codeagence+pad_last_id
-            console.log(codecreditnouveau)
+            var codecreditnouveau='I'+codeagence+pad_last_id;
             // Ici on aura une resultat : I0000001
             if($('#demande_credit_TypeClient').val() == 'INDIVIDUEL'){
                 $('#demande_credit_NumeroCredit').val(codecreditnouveau);
@@ -43,15 +40,12 @@ $(document).ready(function(){
                 success : function(content){
                     for(let j=0;j<content.length;j++){
                         var el=content[j];
-                        console.log(el);
                         
                         var typeepargne=el.NomTypeEp
 
                         var creditlieepargne= document.getElementById('lieepargne').innerHTML;
                         // alert(creditlieepargne);
 
-                        // console.log(codeepargneclient)
-                        
                         // Ici on verra si le client possede une epargne ou non
                         
                         if(typeepargne == null && creditlieepargne == true){
@@ -90,8 +84,6 @@ $(document).ready(function(){
 
                         var element= result[i];
 
-                        // console.log(element);
-
                         // On recupere ici les configuration semblable au choix du client
 
                         var tranche=parseInt(element.Tranche);
@@ -102,7 +94,6 @@ $(document).ready(function(){
                         var typetranche=(element.TypeTranche)
                         var caclulInteret=(element.CalculInteret)
                         var Differepaiemement=(element.CalculIntertPourDiffere)
-                        console.log(Differepaiemement);
                         
                         $('#demande_credit_NombreTranche').val(tranche);
                         $('#demande_credit_Montant').val('Min: '+montantminimum+' || Max:'+montantmaximum);
@@ -158,8 +149,6 @@ $(document).ready(function(){
                             $('#demande_credit_ValeurTotal').on('blur',function(){
                                     var montantgarantie=element.MontantExige
                                     var valeurtotal = $(this).val()
-                                    console.log(valeurtotal)
-                                    console.log(montantgarantie)
 
                                     if(valeurtotal < montantgarantie){
                                         alert("Votre garantie est insuffisant !")
@@ -178,8 +167,6 @@ $(document).ready(function(){
         // Configuration : garantie epargne
         $('#garantie_credit_CreditBaseEpargne').on('click',function(){
             var garantieepargne=($(this).val());
-
-            console.log(garantieepargne);
 
             $('#garantie_credit_MontantCreditDmdIndividuel').attr('disabled',false)
             $('#garantie_credit_MontantCreditDmdGroupe').attr('disabled',false)
@@ -219,7 +206,6 @@ $(document).ready(function(){
 
         $('#demande_credit_Montant').on('blur',function(){
             var montant=$(this).val()
-            console.log(' montant ' +montant)
 
             // L'utilisateur tape ici le montant demande par le client
 
@@ -229,19 +215,16 @@ $(document).ready(function(){
             // on fait la comparaison entre les soldes dans le compte epargne(depot de garantie)
             // 
             var solde=$('#soldeepargne').text()
-            console.log('solde : '+solde)
             var garantie=$('#garantie').text()
-            console.log(garantie)
 
             // calul
             var calcul
             calcul=(montant*garantie)/100
 
-            console.log('calcul :  '+calcul)
 
             // comparaison
             if(calcul <= solde){
-                console.log('approuver')
+
             }
             else{
                 alert('Votre solde est insuffisant');
@@ -254,4 +237,24 @@ $(document).ready(function(){
         // var utilisateur=$('#utilisateur').text()
         // $('#approbation_credit_utilisateur').val(utilisateur)
         
+
+        if (path === '/demande/credit/new') {
+            $('#demande_credit_codeclient').on('keyup',() =>{
+                
+                let codeclient = $('#demande_credit_codeclient').val();
+                var url ='/credit/cycle/'+codeclient;
+                // alert(url);
+
+                $.ajax({
+                    url:url,
+                    method:'GET',
+                    dataType:"json",
+                    contentType:"application/json; charset=utf-8",
+                    data : JSON.stringify(codeclient),
+                    success : function(result){
+                        $('#demande_credit_cycles').val(result[0].nombre + 1);
+                    }
+                }) 
+            })
+        }
 })

@@ -16,17 +16,9 @@
 
     <div style="display:none">
         TestLieEpargne : <p id="lieepargne"></p>
-    </div>
-    {# Ici on recupere l'agent de credit #}
-    
         Agent de credit : <p id="prenom"> {{ app.user.prenom }}</p>
-    
-    {# Ici on recupere le code agence #}
-    
-        <p style="display:block">Code agence</p><p id="codeagence"  style="display:none">{{ app.user.agence.codeAgence }}</p>
-
-    {# Ici on recupere le dernier id dans le numero credit #}
-    
+    </div>
+        <p style="display:none">Code agence</p><p id="codeagence"  style="display:none">{{ app.user.agence.codeAgence }}</p>
         <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none"> {{ numeros }}</p>
     {{ include('demande_credit/_form.html.twig') }}
 

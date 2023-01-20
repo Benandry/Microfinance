@@ -4,6 +4,7 @@ namespace App\Controller\API;
 
 use App\Repository\AmortissementFixeRepository;
 use App\Repository\CreditIndividuelRepository;
+use App\Repository\DemandeCreditRepository;
 use App\Repository\RemboursementCreditRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -66,4 +67,12 @@ class ApiCreditController extends AbstractController
         return new JsonResponse($remboursement);
     }
 
+
+    #[Route('/credit/cycle/{codeclient}',name:'app_cycle_credit')]
+    public function getCyle(DemandeCreditRepository $demandeCreditRepository,string $codeclient):Response
+    {
+        $cycle = $demandeCreditRepository->getCycleCredit($codeclient);
+        // dd($cycle);
+        return new JsonResponse($cycle);
+    }
 }

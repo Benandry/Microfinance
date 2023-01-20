@@ -6,23 +6,25 @@
 {% block body %}
     {{ include('modal.html.twig') }}
     {% for info in info %}
-        <div class="row">
-            <div class="col-4 col-xl-4 col-sm-4">
-                <p> Montant de credit : {{ info.Montant }}</p>
-                <p> Annuité constante : {{ info.annuite }}</p>
+    <div class="card">
+        <div class="row text-secondary m-3">
+            <div class="col-md-4 col-sm-4 col-sm-4">
+                <p class="fw-bold"> Montant de credit : {{ info.Montant }}</p>
+                <p class="fw-bold"> taux  : {{ info.TauxInteretAnnuel }} % </p>
             </div>
-            <div class="col-4 col-xl-4 col-sm-4">
-                <p>Numero de credit : {{ info.NumeroCredit }}</p>
-                <p>Nombre tranche : {{ info.NombreTranche }}</p>
+            <div class="col-md-4 col-xl-4 col-sm-4 m-auto">
+                <p class="fw-bold"> Annuité constante : {{ info.annuite }}</p>
             </div>
-            <div class="col-4 col-xl-4 col-sm-4">
-                <p>taux  : {{ info.TauxInteretAnnuel }} % </p>
+            <div class="col-md-4 col-xl-4 col-sm-4">
+                <p class="fw-bold">Numero de credit : {{ info.NumeroCredit }}</p>
+                <p class="fw-bold"> Nombre tranche : {{ info.NombreTranche }}</p>
             </div>
         </div>
+    </div>
     {% endfor %}
     <div class="row">
         <div class="col-12 col-sm-12 col-xl-12">
-            <table class="table">
+            <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
                         <th>Periode (N) </th>
@@ -60,7 +62,7 @@
                     </tr>
                 </tfoot> #}
             </table>
-            <div>
+            <div class="d-flex justify-content-center">
                 {{ form_start(form) }}
                     <div class="my-custom-class-for-errors">
                         {{ form_errors(form) }}

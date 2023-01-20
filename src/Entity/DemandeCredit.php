@@ -50,68 +50,14 @@ class DemandeCredit
     #[ORM\Column]
     private ?float $CapitalDerniereEcheance = null;
 
-    // #[ORM\Column(length: 255)]
-    // private ?string $FondCredit = null;
-
-    // #[ORM\Column]
-    // private ?float $MontantEpargneTranche = null;
-
-    // #[ORM\Column]
-    // private ?float $MontantFixe = null;
-
-    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    // private ?ProduitEpargne $ProduitEpargne = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $SoldeEpargne = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $Agent = null;
-
-    // #[ORM\Column(length: 255)]
-    // private ?string $ButCredit = null;
 
     #[ORM\Column(nullable:true)]
     private ?bool $CalculInteretDiffere = null;
 
-    // #[ORM\Column]
-    // private ?bool $InteretDifferePaiementCapitalise = null;
-
-    // #[ORM\Column]
-    // private ?bool $InteretPayeMemePourDiffere = null;
-
-    // #[ORM\Column]
-    // private ?bool $TrancheDistinctInteretPeriodeDiffere = null;
-
-    // #[ORM\Column]
-    // private ?bool $PaiementPrealableInteret = null;
-
-    // #[ORM\Column]
-    // private ?bool $InteretDeduitDecaissement = null;
-
     #[ORM\Column(nullable:true)]
     private ?bool $CalculInteretJours = null;
-
-    // #[ORM\Column]
-    // private ?bool $ForfaitPaiementPrealableInteret = null;
-
-    // #[ORM\Column]
-    // private ?bool $CreditLieUSD = null;
-
-    // #[ORM\Column]
-    // private ?bool $MettreJourCalendrierNonOuvrable = null;
-
-    // #[ORM\Column]
-    // private ?bool $ReporterPremierTranche = null;
-
-    // #[ORM\Column]
-    // private ?bool $CommissionPourcentageMontantCredit = null;
-
-    // #[ORM\Column]
-    // private ?float $PourcentageCapitalEnCoursInteretCommission = null;
-
-    // #[ORM\Column]
-    // private ?float $MontantFixeParTranche = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
@@ -151,15 +97,11 @@ class DemandeCredit
     #[ORM\Column(nullable: true)]
     private ?int $ValeurTotal = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    // private ?CategorieCredit $Categorie2Credit = null;
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?User $agent = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    // private ?CategorieCredit $Categorie3Credit = null;
-
-    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    // private ?CategorieCredit $Categorie4Credit = null;
-
+    #[ORM\Column(nullable: true)]
+    private ?int $cycles = null;
 
     public function getId(): ?int
     {
@@ -354,18 +296,6 @@ class DemandeCredit
     public function setSoldeEpargne(string $SoldeEpargne): self
     {
         $this->SoldeEpargne = $SoldeEpargne;
-
-        return $this;
-    }
-
-    public function getAgent(): ?string
-    {
-        return $this->Agent;
-    }
-
-    public function setAgent(string $Agent): self
-    {
-        $this->Agent = $Agent;
 
         return $this;
     }
@@ -730,6 +660,30 @@ class DemandeCredit
     public function setValeurTotal(?int $ValeurTotal): self
     {
         $this->ValeurTotal = $ValeurTotal;
+
+        return $this;
+    }
+
+    public function getAgent(): ?User
+    {
+        return $this->agent;
+    }
+
+    public function setAgent(?User $agent): self
+    {
+        $this->agent = $agent;
+
+        return $this;
+    }
+
+    public function getCycles(): ?int
+    {
+        return $this->cycles;
+    }
+
+    public function setCycles(?int $cycles): self
+    {
+        $this->cycles = $cycles;
 
         return $this;
     }

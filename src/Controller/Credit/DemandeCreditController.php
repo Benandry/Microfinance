@@ -32,11 +32,6 @@ class DemandeCreditController extends AbstractController
         
         $form = $this->createForm(DemandeCreditType::class, $demandeCredit);
         $form->handleRequest($request);
-
-        $user = $this->getUser();
-       // $roles = $user->getRoles();
-        //dd($roles);
-        
         if ($form->isSubmitted() && $form->isValid()) {
 
            $data = $form->getData();

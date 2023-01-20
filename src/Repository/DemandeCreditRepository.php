@@ -111,4 +111,15 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
         return $statement;
     }
+
+    public function getCycleCredit($codeclient)
+    {
+        $query = " SELECT COUNT(d.codeclient) nombre
+            FROM App\Entity\DemandeCredit d
+            WHERE d.codeclient = '$codeclient'
+            ";
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
 }

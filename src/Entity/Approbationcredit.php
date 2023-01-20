@@ -29,8 +29,6 @@ class ApprobationCredit
     #[ORM\Column(length: 255)]
     private ?string $codecredit = null;
 
-    #[ORM\ManyToOne(inversedBy: 'approbationCredits')]
-    private ?User $agentCredit = null;
 
     public function getId(): ?int
     {
@@ -96,17 +94,4 @@ class ApprobationCredit
 
         return $this;
     }
-
-    public function getAgentCredit(): ?User
-    {
-        return $this->agentCredit;
-    }
-
-    public function setAgentCredit(?User $agentCredit): self
-    {
-        $this->agentCredit = $agentCredit;
-
-        return $this;
-    }
-
 }

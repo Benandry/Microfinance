@@ -432,7 +432,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         i.prenom_client,
         
         
-         t.solde
+         SUM(t.Montant) solde
         FROM
         App\Entity\CompteEpargne ce
         LEFT JOIN
@@ -689,7 +689,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         ce.datedebut ,
         ce.id,
         ce.codeepargne ,
-        t.solde
+        SUM(t.Montant) solde
         FROM App\Entity\CompteEpargne ce 
         LEFT JOIN
         App\Entity\Transaction t

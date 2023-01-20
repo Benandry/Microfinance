@@ -30,15 +30,6 @@ class DecaissementType extends AbstractType
             ->add('caisseCredit')
             ->add('cash')
             ->add('cycleDeCredit')
-            ->add('AgentDeCredit',EntityType::class,[
-                'class'=>User::class,
-                'choice_label'=>'prenom',
-                'by_reference'=>true,
-                'placeholder'=>'Agent de credit . . .',
-                'attr'=>[
-                    'class'=>'form-control'
-                 ]
-                ])
         ;
     }
 

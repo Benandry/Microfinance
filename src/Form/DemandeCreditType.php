@@ -7,6 +7,7 @@ use App\Entity\DemandeCredit;
 use App\Entity\FondCredit;
 use App\Entity\ProduitCredit;
 use App\Entity\ProduitEpargne;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -51,19 +52,22 @@ class DemandeCreditType extends AbstractType
             ])
             // ->add('MontantEpargneTranche')
             // ->add('MontantFixe')
-            ->add('SoldeEpargne')
-            ->add('Agent',TextType::class,[
-                    'attr'=>[
-                        'class'=>'hidden',
-                        'label'=>false
-                    ],
+            ->add('SoldeEpargne',TextType::class,[
+                'label' => " Solde Epargne :",
+                'required'=>false,
             ])
-            // ->add('ButCredit')
+            ->add('agent',EntityType::class,[
+                    'class' => User::class,
+                    'choice_label' => "prenom",
+                    'label' => "Agent de credit :",
+                    'placeholder' => "agent de credit",
+                    'autocomplete' => true,
+            ])
             ->add('Categorie1Credit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
                 'mapped'=>true,
-                'by_reference'=>true,
+                'label'=>" Categorie de categorie :",
                 'placeholder'=>'Choix Categorie',
                 'required' => false,
             ])
@@ -134,6 +138,7 @@ class DemandeCreditType extends AbstractType
             ->add('ValeurUnitaure')
             ->add('Unite')
             ->add('ValeurTotal')
+            ->add('cycles')
         ;
     }
 

@@ -29,7 +29,8 @@ class ApprobationCreditController extends AbstractController
     public function new(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
     {
         $demande = $request->query->all();
-
+        $codeclient = $demande['demande']['codeclient'];
+        $cycles = $approbationCreditRepository->findCycle($codeclient)[0]['cycles'];
         $approbationCredit = new ApprobationCredit();
         $form = $this->createForm(ApprobationCreditType::class, $approbationCredit);
         $form->handleRequest($request);
@@ -37,8 +38,6 @@ class ApprobationCreditController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($form->getData());
             $approbationCreditRepository->add($approbationCredit, true);
-
-            
             $this->addFlash('success', "Le demande de credit ".$approbationCredit->getCodecredit()." est ".$approbationCredit->getStatusApprobation());
             return $this->redirectToRoute('app_approbation_credit_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -47,6 +46,7 @@ class ApprobationCreditController extends AbstractController
             'approbation_credit' => $approbationCredit,
             'demandes' => $demande,
             'form' => $form,
+            'cycle' =>$cycles,
         ]);
     }
 

@@ -7,52 +7,50 @@
     {{ include('modal.html.twig') }}
     <div class="card p-3">
         {% for data in info %}
-            <div class="row">
-                <div class="col-4 col-sm-4 col-sm-4">
-                    <p>Montant credit : {{ data.Montant }}  </p>
-                    <p> Code credit : {{ data.NumeroCredit }} </p>
-                </div>
-                <div class="col-4 col-sm-4 col-sm-4">
-                    Taux annuelle : {{ data.TauxInteretAnnuel }}
-                </div>
-                <div class="col-4 col-sm-4 col-sm-4">
-                    Nombre tranche : {{ data.NombreTranche }}
+            <div class="card">
+                <div class="row text-secondary m-3">
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold">Montant credit : {{ data.Montant }}  </p>
+                        <p class="fw-bold">Code credit : {{ data.NumeroCredit }} </p>
+                    </div>
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold"> Taux annuelle : {{ data.TauxInteretAnnuel }} </p>
+                        <p class="fw-bold"> Nombre tranche : {{ data.NombreTranche }} </p>
+                    </div>
                 </div>
             </div>
         {% endfor %}
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Periode(N)</th>
+                    <th>Date de remboursement</th>
+                    <th>Principale </th>
+                    <th>Interet </th>
+                    <th>Total </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tab in amortissement %}
                     <tr>
-                        <th>Periode(N)</th>
-                        <th>Date de remboursement</th>
-                        <th>Principale </th>
-                        <th>Interet </th>
-                        <th>Total </th>
-                        <th></th>
+                        <td> {{ tab.periode}} </td>
+                        <td>{{ tab.dateRemborsement|date("d/m/Y")}}</td>
+                        <td>{{ tab.principale }}</td>
+                        <td>{{ tab.interet }}</td>
+                        <td>{{ tab.montanttTotal }}</td>
+                        <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for tab in amortissement %}
-                        <tr>
-                            <td> {{ tab.periode}} </td>
-                            <td>{{ tab.dateRemborsement|date("d/m/Y")}}</td>
-                            <td>{{ tab.principale }}</td>
-                            <td>{{ tab.interet }}</td>
-                            <td>{{ tab.montanttTotal }}</td>
-                            <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td>
-                        </tr>
-                    {% endfor %}
-                    <tr>
-                        <th colspan="2">Total </th>
-                        <th> {{ totalMontant }} </th>
-                        <th> {{ totalInteret }} </th>
-                        <th> {{ totalNet}} </th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card-foot">
+                {% endfor %}
+                <tr>
+                    <th colspan="2">Total </th>
+                    <th> {{ totalMontant }} </th>
+                    <th> {{ totalInteret }} </th>
+                    <th> {{ totalNet}} </th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
             {{ form_start(form)}}
                 {{ form_widget(form) }}
             {{ form_end(form)}}
