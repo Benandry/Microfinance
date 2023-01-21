@@ -75,4 +75,13 @@ class EtudeRepository extends ServiceEntityRepository
         return $statement;
     }
 
+    public function nombreCompteCredit()
+    {
+        $query = "SELECT d FROM App\Entity\DemandeCredit d ";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
 }

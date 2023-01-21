@@ -63,13 +63,12 @@ class DemandeCreditType extends AbstractType
                     'placeholder' => "agent de credit",
                     'autocomplete' => true,
             ])
-            ->add('Categorie1Credit',EntityType::class,[
+            ->add('categorieCredit',EntityType::class,[
                 'class'=>CategorieCredit::class,
                 'choice_label'=>'NomCategorieCredit',
-                'mapped'=>true,
+                'autocomplete'=>true,
                 'label'=>" Categorie de categorie :",
                 'placeholder'=>'Choix Categorie',
-                'required' => false,
             ])
             // ->add('Categorie2Credit',EntityType::class,[
             //     'class'=>CategorieCredit::class,
@@ -124,7 +123,7 @@ class DemandeCreditType extends AbstractType
             ->add('typeAmortissement',ChoiceType::class,[
                 'choices'=>[
                     'Simple'=>'simple',
-                    'anuuite constante'=>'anuuite constante',
+                    'annuite constante'=>'annuite constante',
                     'amortissement constante'=>'amortissement constante',
                 ],
                 'attr'=>[

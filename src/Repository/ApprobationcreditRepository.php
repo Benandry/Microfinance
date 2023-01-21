@@ -66,114 +66,124 @@ class ApprobationCreditRepository extends ServiceEntityRepository
 
 
 // Liste des demande client 
-        public function findDemandeNonApprouver(){
+    public function findDemandeNonApprouver(){
 
-            $query = "SELECT
-            client.nom_client,
-            client.prenom_client,
-            demande.NumeroCredit,
-            demande.codeclient,
-            demande.Montant,
-            demande.DateDemande ,
-            demande.NombreTranche ,
-            demande.TypeTranche,
-            --appro.id
-            -- appro.statusApprobation,
-             appro.codecredit
+        $query = "SELECT
+        client.nom_client,
+        client.prenom_client,
+        demande.NumeroCredit,
+        demande.codeclient,
+        demande.Montant,
+        demande.DateDemande ,
+        demande.NombreTranche ,
+        demande.TypeTranche,
+        --appro.id
+        -- appro.statusApprobation,
+            appro.codecredit
 
-            FROM App\Entity\DemandeCredit demande
-            INNER JOIN 
-            App\Entity\Individuelclient client
-            With demande.codeclient = client.codeclient 
+        FROM App\Entity\DemandeCredit demande
+        INNER JOIN 
+        App\Entity\Individuelclient client
+        With demande.codeclient = client.codeclient 
 
-             LEFT JOIN 
-             App\Entity\ApprobationCredit appro
-             With appro.codecredit = demande.NumeroCredit
-             where appro.codecredit IS NULL 
+            LEFT JOIN 
+            App\Entity\ApprobationCredit appro
+            With appro.codecredit = demande.NumeroCredit
+            where appro.codecredit IS NULL 
 
+        ";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+    public function getDemandeApprouver($date, string $status)
+    {
+        $query = "SELECT
+        client.nom_client,
+        client.prenom_client,
+        demande.NumeroCredit,
+        demande.codeclient,
+        demande.Montant,
+        demande.NombreTranche ,
+        demande.TypeTranche,
+        --appro.id
+            appro.statusApprobation,
+            appro.codecredit,
+            appro.dateApprobation,
+            appro.description
+        --  appro.utilisateur
+
+        FROM App\Entity\DemandeCredit demande
+        INNER JOIN 
+        App\Entity\Individuelclient client
+        With demande.codeclient = client.codeclient 
+
+            LEFT JOIN 
+            App\Entity\ApprobationCredit appro
+            With appro.codecredit = demande.NumeroCredit
+            where appro.statusApprobation = '$status'
+            AND appro.dateApprobation <= :date1 
+
+        ";
+
+        $statement = $this->getEntityManager()
+        ->createQuery($query)
+            ->setParameter('date1',$date)
+        ->execute();
+
+        return $statement;
+    }
+
+    public function getDemandeApprouverDeuxDate($debut,$fin,string $status)
+    {
+        $query = "SELECT
+        client.nom_client,
+        client.prenom_client,
+        demande.NumeroCredit,
+        demande.codeclient,
+        demande.Montant,
+        demande.NombreTranche ,
+        demande.TypeTranche,
+        --appro.id
+            appro.statusApprobation,
+            appro.codecredit,
+            appro.dateApprobation,
+            appro.description
+        --  appro.utilisateur
+
+        FROM App\Entity\DemandeCredit demande
+        INNER JOIN 
+        App\Entity\Individuelclient client
+        With demande.codeclient = client.codeclient 
+
+            LEFT JOIN 
+            App\Entity\ApprobationCredit appro
+            With appro.codecredit = demande.NumeroCredit
+            where appro.statusApprobation = '$status'
+            AND appro.dateApprobation >= :debut 
+            AND appro.dateApprobation <= :fin  
+
+        ";
+
+        $statement = $this->getEntityManager()
+        ->createQuery($query)
+            ->setParameter('debut',$debut)
+            ->setParameter('fin',$fin)
+        ->execute();
+
+        return $statement;
+    }
+
+    public function findCycle($codeclient)
+    {
+        $query = " SELECT MAX(d.cycles)
+            FROM App\Entity\DemandeCredit d
+            WHERE d.codeclient = '$codeclient'
             ";
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
 
-            $statement = $this->getEntityManager()->createQuery($query)->execute();
-
-            return $statement;
-        }
-
-        public function getDemandeApprouver($date, string $status)
-        {
-            $query = "SELECT
-            client.nom_client,
-            client.prenom_client,
-            demande.NumeroCredit,
-            demande.codeclient,
-            demande.Montant,
-            demande.NombreTranche ,
-            demande.TypeTranche,
-            --appro.id
-             appro.statusApprobation,
-             appro.codecredit,
-             appro.dateApprobation,
-             appro.description
-            --  appro.utilisateur
-
-            FROM App\Entity\DemandeCredit demande
-            INNER JOIN 
-            App\Entity\Individuelclient client
-            With demande.codeclient = client.codeclient 
-
-             LEFT JOIN 
-             App\Entity\ApprobationCredit appro
-             With appro.codecredit = demande.NumeroCredit
-             where appro.statusApprobation = '$status'
-              AND appro.dateApprobation <= :date1 
-
-            ";
-
-            $statement = $this->getEntityManager()
-            ->createQuery($query)
-             ->setParameter('date1',$date)
-            ->execute();
-
-            return $statement;
-        }
-
-        public function getDemandeApprouverDeuxDate($debut,$fin,string $status)
-        {
-            $query = "SELECT
-            client.nom_client,
-            client.prenom_client,
-            demande.NumeroCredit,
-            demande.codeclient,
-            demande.Montant,
-            demande.NombreTranche ,
-            demande.TypeTranche,
-            --appro.id
-             appro.statusApprobation,
-             appro.codecredit,
-             appro.dateApprobation,
-             appro.description
-            --  appro.utilisateur
-
-            FROM App\Entity\DemandeCredit demande
-            INNER JOIN 
-            App\Entity\Individuelclient client
-            With demande.codeclient = client.codeclient 
-
-             LEFT JOIN 
-             App\Entity\ApprobationCredit appro
-             With appro.codecredit = demande.NumeroCredit
-             where appro.statusApprobation = '$status'
-             AND appro.dateApprobation >= :debut 
-             AND appro.dateApprobation <= :fin  
-
-            ";
-
-            $statement = $this->getEntityManager()
-            ->createQuery($query)
-             ->setParameter('debut',$debut)
-             ->setParameter('fin',$fin)
-            ->execute();
-
-            return $statement;
-        }
-
+        return $statement;
+    }
 }

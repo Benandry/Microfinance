@@ -65,9 +65,6 @@ class DemandeCredit
     #[ORM\Column(length: 255,nullable:true)]
     private ?string $statusApp = null;
 
-    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    #[ORM\Column(nullable:true)]
-    private ?CategorieCredit $Categorie1Credit = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     #[ORM\Column(nullable:true)]
@@ -102,6 +99,9 @@ class DemandeCredit
 
     #[ORM\Column(nullable: true)]
     private ?int $cycles = null;
+
+    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    private ?CategorieCredit $categorieCredit = null;
 
     public function getId(): ?int
     {
@@ -508,54 +508,6 @@ class DemandeCredit
         return $this;
     }
 
-    public function getCategorie1Credit(): ?CategorieCredit
-    {
-        return $this->Categorie1Credit;
-    }
-
-    public function setCategorie1Credit(?CategorieCredit $Categorie1Credit): self
-    {
-        $this->Categorie1Credit = $Categorie1Credit;
-
-        return $this;
-    }
-
-    // public function getCategorie2Credit(): ?CategorieCredit
-    // {
-    //     return $this->Categorie2Credit;
-    // }
-
-    // public function setCategorie2Credit(?CategorieCredit $Categorie2Credit): self
-    // {
-    //     $this->Categorie2Credit = $Categorie2Credit;
-
-    //     return $this;
-    // }
-
-    // public function getCategorie3Credit(): ?CategorieCredit
-    // {
-    //     return $this->Categorie3Credit;
-    // }
-
-    // public function setCategorie3Credit(?CategorieCredit $Categorie3Credit): self
-    // {
-    //     $this->Categorie3Credit = $Categorie3Credit;
-
-    //     return $this;
-    // }
-
-    // public function getCategorie4Credit(): ?CategorieCredit
-    // {
-    //     return $this->Categorie4Credit;
-    // }
-
-    // public function setCategorie4Credit(?CategorieCredit $Categorie4Credit): self
-    // {
-    //     $this->Categorie4Credit = $Categorie4Credit;
-
-    //     return $this;
-    // }
-
     public function getFondCredit(): ?FondCredit
     {
         return $this->FondCredit;
@@ -684,6 +636,18 @@ class DemandeCredit
     public function setCycles(?int $cycles): self
     {
         $this->cycles = $cycles;
+
+        return $this;
+    }
+
+    public function getCategorieCredit(): ?CategorieCredit
+    {
+        return $this->categorieCredit;
+    }
+
+    public function setCategorieCredit(?CategorieCredit $categorieCredit): self
+    {
+        $this->categorieCredit = $categorieCredit;
 
         return $this;
     }

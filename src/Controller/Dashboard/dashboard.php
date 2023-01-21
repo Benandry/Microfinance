@@ -18,12 +18,16 @@ class dashboard extends AbstractController
         $nombreGroupe = $repoEtude->nombreGroupe();
         $nombreCompteEpargne = $repoEtude->nombreEpargne();
         $nombreAgence = $repoEtude->nombreAgence();
+        $compteCredit = $repoEtude->nombreCompteCredit();
+
+        // dd($compteCredit);
         
         return $this->render('Dashboard/dashboard.html.twig',[
             'clientTotal' => $nombreClientTotal,
             'groupeTotal' => $nombreGroupe,
             'compteEparne' => $nombreCompteEpargne,
-            'agence' => $nombreAgence
+            'agence' => $nombreAgence,
+            'credit' => $compteCredit,
         ]);
     }
 }

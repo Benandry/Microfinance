@@ -30,7 +30,7 @@ class ApprobationCreditController extends AbstractController
     {
         $demande = $request->query->all();
         $codeclient = $demande['demande']['codeclient'];
-        $cycles = $approbationCreditRepository->findCycle($codeclient)[0]['cycles'];
+        $cycles = $approbationCreditRepository->findCycle($codeclient)[0][1];
         $approbationCredit = new ApprobationCredit();
         $form = $this->createForm(ApprobationCreditType::class, $approbationCredit);
         $form->handleRequest($request);

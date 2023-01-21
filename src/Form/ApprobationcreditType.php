@@ -38,16 +38,6 @@ class ApprobationCreditType extends AbstractType
             ->add('codecredit',TextType::class,[
                 'label' => 'Code credit',
             ])
-            ->add('agentCredit',EntityType::class,[
-                'class'=>User::class,
-                'choice_label'=>'prenom',
-                'by_reference'=>true,
-                'placeholder'=>'Agent de credit . . .',
-                'attr'=>[
-                    'class'=>'form-control'
-                 ]
-                ])
-            ->add('agentCredit')
         ;
     }
 
