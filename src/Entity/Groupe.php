@@ -46,9 +46,6 @@ class Groupe
 
     public function __construct()
     {
-        $this->client = new ArrayCollection();
-        $this->membreGroupes = new ArrayCollection();
-        $this->GroupeNom = new ArrayCollection();
         $this->IndividuelMembre = new ArrayCollection();
         $this->listeRouges = new ArrayCollection();
         $this->codegroupeEpargne = new ArrayCollection();

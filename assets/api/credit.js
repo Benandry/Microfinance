@@ -3,11 +3,19 @@ import $ from 'jquery'
 const path = window.location.pathname;
 $(document).ready(function(){
 
-        // Ici on recuper le nom de l'agent de credit
+        $('#demande_credit_TypeClient').on('keyup',() =>{
+            
+            if($('#demande_credit_TypeClient').val() === 'INDIVIDUEL' ){
+                ('#demande_credit_codeclient').val('I');
+            }
+            else if($('#demande_credit_TypeClient').val() === 'GROUPE' ){
+                ('#demande_credit_codeclient').val('G');
+            }
+        });
 
         $('#demande_credit_codeclient').on('blur',function(){
             $('#demande_credit_Agent').val($('#prenom').text())
-    
+            // console.log("met  vee");
             // Creation du numero credit
             
             var recuplastnumerocredit=$('#lastnumero').text();
@@ -22,6 +30,9 @@ $(document).ready(function(){
             
             var pad_last_id = recuplastnumerocredit.toString().padStart(7,0)
             var codecreditnouveau='I'+codeagence+pad_last_id;
+
+            // alert($('#demande_credit_codeclient').val());
+
             // Ici on aura une resultat : I0000001
             if($('#demande_credit_TypeClient').val() == 'INDIVIDUEL'){
                 $('#demande_credit_NumeroCredit').val(codecreditnouveau);

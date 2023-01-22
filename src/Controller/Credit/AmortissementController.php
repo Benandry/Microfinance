@@ -22,7 +22,7 @@ class AmortissementController extends AbstractController
         $codecredit = $request->query->get('codecredit');
         $info = $repoAmortisssement->findInfoCredit($codecredit);
 
-       // dd($info);
+    //    dd($info);
         $tableau_amortissement = $repoAmortisssement->findAmortissement($codecredit);
         $sumMontant = array_sum(array_column($tableau_amortissement,'principale'));
         $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
@@ -109,7 +109,7 @@ class AmortissementController extends AbstractController
         $tableau_amortissement = $repoAmortisssement->findAmortissement($codecredit);
 
         $info = $repoAmortisssement->findInfoCredit($codecredit);
-      // dd($info);
+    //    dd($info);
         //dd($tableau_amortissement);
 
         $form = $this->createFormBuilder()

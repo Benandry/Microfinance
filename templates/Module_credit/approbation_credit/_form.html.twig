@@ -1,19 +1,20 @@
+
 {{ form_start(form) }}
-    <div class="row">
-        <div class="col-4 col-sm-4">
-            <span style="display: none;">{{ form_row(form.montant) }}</span>
-            <span style="display: none;"> {{ form_row(form.codecredit) }} </span>
-            {# <span style="display: none;"> {{ form_row(form.utilisateur) }} </span> #}
-            {{ form_row(form.statusApprobation) }}
-        </div>
-        <div class="col-4 col-sm-4">
-            {{ form_row(form.dateApprobation) }}
-        </div>
-        <div class="col-4 col-sm-4">
-            {{ form_row(form.description) }}
-        </div>
+<div class="row">
+    <div class="col-4 col-sm-4">
+        <span style="display: none;">{{ form_row(form.montant) }}</span>
+        <span style="display: none;"> {{ form_row(form.codecredit) }} </span>
+        {# <span style="display: none;"> {{ form_row(form.utilisateur) }} </span> #}
+        {{ form_row(form.statusApprobation) }}
     </div>
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-sm btn-primary m-2">{{ button_label|default('Enregistrer') }} </button>
+    <div class="col-4 col-sm-4">
+        {{ form_row(form.dateApprobation) }}
     </div>
+    <div class="col-4 col-sm-4">
+        {{ form_row(form.description) }}
+    </div>
+</div>
+<div class="d-flex justify-content-end">
+    <button class="btn btn-sm btn-primary m-2">{{ button_label|default('Enregistrer') }} </button>
+</div>
 {{ form_end(form) }}

@@ -173,13 +173,24 @@
 
                             <li>
                                 <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span></a>
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span>
+                                </a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu3" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande </span></a>
                                     </li>
                                     <li class="w-100">
-                                        <a href="{{path('app_approbation_credit_index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Approbation</span></a>
+                                        <a href="#submenu98" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Approbation <span class="fa fa-chevron-down"></span>  </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu98">
+                                            <li class="w-100">
+                                                <a href="{{path('app_approbation_credit_individuel')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Individuel</span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_approbation_credit_groupe')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Groupe </span></a>
+                                            </li>
+                                        </ul>
                                     </li>
                                      <li class="w-100">
                                         <a href="{{path('app_decaissement_credit')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Decaissement </span></a>
@@ -387,7 +398,7 @@
                                 <div class="row head">
                                     <div class="col-6 col-xl-6">
                                         <div class="d-flex justify-content-start">
-                                            <h5 class="text_head mt-3">Fidev /{% block head %} Fidev {% endblock %}</h5>
+                                            <h6 class="text_head mt-3">Fidev/{% block head %} Fidev {% endblock %}</h6>
                                         </div>
                                     </div>
                                     <div class="col-6 col-xl-6">

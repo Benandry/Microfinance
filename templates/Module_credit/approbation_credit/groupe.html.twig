@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Approbation demende credit{% endblock %}
-{% block head %}Liste demande credit en attente d'approbation{% endblock %}
+{% block title %}Approbation demande credit groupe{% endblock %}
+{% block head %}Approbation/Groupe/Demande credit en attente d'approbation{% endblock %}
 
 {% block body %}
     {{ include('modal.html.twig') }}
@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Numero credit </th>
-                <th>Nom et prenom </th>
+                <th>Nom du groupe </th>
                 <th>Montant du credit </th>
                 <th>Date du demande </th>
                 <th>Nombre tranche </th>
@@ -21,18 +21,14 @@
         {% for demande in demandes %}
             <tr>
                 <td class="fw-bold">{{ demande.NumeroCredit }}</td>
-                <td>{{ demande.nom_client }} {{ demande.prenom_client }}</td>
+                <td>{{ demande.nomGroupe }}</td>
                 <td>{{ demande.Montant }}</td>
                 <td>{{ demande.DateDemande  ? demande.DateDemande |date('Y-m-d') : '' }}</td>
                 <td>{{ demande.NombreTranche }}</td>
                 <td>{{ demande.TypeTranche }}</td>
                 <td>
-                    <a href="{{ path('app_approbation_credit_new',{'demande': demande }) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Approbation</a>
+                    <a href="{{ path('app_approbation_credit_new_groupe',{'demande': demande }) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Approbation</a>
                 </td>
-                {# <td>
-                    <a href="{{ path('app_approbation_credit_show', {'id': approbation_credit.id}) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_approbation_credit_edit', {'id': approbation_credit.id}) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
-                </td> #}
             </tr>
         {% else %}
             <tr>

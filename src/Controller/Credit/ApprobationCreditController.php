@@ -13,22 +13,35 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/approbation/credit')]
 class ApprobationCreditController extends AbstractController
 {
-    #[Route('/', name: 'app_approbation_credit_index', methods: ['GET'])]
-    public function index(ApprobationCreditRepository $approbationCreditRepository): Response
+    #[Route('/individuel', name: 'app_approbation_credit_individuel', methods: ['GET'])]
+    public function individuel(ApprobationCreditRepository $approbationCreditRepository): Response
     {
         $demandes = $approbationCreditRepository->findDemandeNonApprouver();
         //dd($demandes);
         
-        return $this->render('Module_credit/approbation_credit/index.html.twig', [
+        return $this->render('Module_credit/approbation_credit/individuel.html.twig', [
             'demandes' => $demandes,
             'approbation_credits' => $approbationCreditRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_approbation_credit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
+    #[Route('/groupe', name: 'app_approbation_credit_groupe', methods: ['GET'])]
+    public function groupe(ApprobationCreditRepository $approbationCreditRepository): Response
+    {
+        $demandes = $approbationCreditRepository->findDemandeNonApprouverGroupe();
+        // dd($demandes);
+        
+        return $this->render('Module_credit/approbation_credit/groupe.html.twig', [
+            'demandes' => $demandes,
+            'approbation_credits' => $approbationCreditRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/new/individuel', name: 'app_approbation_credit_new_individuel', methods: ['GET', 'POST'])]
+    public function newIndividuel(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
     {
         $demande = $request->query->all();
+
         $codeclient = $demande['demande']['codeclient'];
         $cycles = $approbationCreditRepository->findCycle($codeclient)[0][1];
         $approbationCredit = new ApprobationCredit();
@@ -36,19 +49,44 @@ class ApprobationCreditController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($form->getData());
             $approbationCreditRepository->add($approbationCredit, true);
             $this->addFlash('success', "Le demande de credit ".$approbationCredit->getCodecredit()." est ".$approbationCredit->getStatusApprobation());
-            return $this->redirectToRoute('app_approbation_credit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_approbation_credit_individuel', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Module_credit/approbation_credit/new.html.twig', [
+        return $this->renderForm('Module_credit/approbation_credit/approIndividuel.html.twig', [
             'approbation_credit' => $approbationCredit,
             'demandes' => $demande,
             'form' => $form,
             'cycle' =>$cycles,
         ]);
     }
+
+    #[Route('/new/groupe', name: 'app_approbation_credit_new_groupe', methods: ['GET', 'POST'])]
+    public function newGroupe(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
+    {
+        $demande = $request->query->all();
+        // dd($demande);
+        $codeclient = $demande['demande']['codeclient'];
+        $cycles = $approbationCreditRepository->findCycle($codeclient)[0][1];
+        $approbationCredit = new ApprobationCredit();
+        $form = $this->createForm(ApprobationCreditType::class, $approbationCredit);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $approbationCreditRepository->add($approbationCredit, true);
+            $this->addFlash('success', "Le demande de credit ".$approbationCredit->getCodecredit()." est ".$approbationCredit->getStatusApprobation());
+            return $this->redirectToRoute('app_approbation_credit_groupe', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Module_credit/approbation_credit/approGroupe.html.twig', [
+            'approbation_credit' => $approbationCredit,
+            'demandes' => $demande,
+            'form' => $form,
+            'cycle' =>$cycles,
+        ]);
+    }
+
 
     #[Route('/{id}', name: 'app_approbation_credit_show', methods: ['GET'])]
     public function show(ApprobationCredit $approbationCredit): Response
@@ -67,7 +105,7 @@ class ApprobationCreditController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $approbationCreditRepository->add($approbationCredit, true);
 
-            return $this->redirectToRoute('app_approbation_credit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_approbation_credit_individuel', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_credit/approbation_credit/edit.html.twig', [
@@ -83,6 +121,6 @@ class ApprobationCreditController extends AbstractController
             $approbationCreditRepository->remove($approbationCredit, true);
         }
 
-        return $this->redirectToRoute('app_approbation_credit_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_approbation_credit_individuel', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -34,11 +34,6 @@ class DemandeCreditController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
            $data = $form->getData();
-           
-            //    dd($data->getNombreTranche());
-           $montant = $demandeCredit->getMontant();
-           $tranche =  $demandeCredit->getNombreTranche();
-           $taux =  $demandeCredit->getTauxInteretAnnuel();
            $demandeCredit->setStatusApp("en attente ");
            $codecredit = $demandeCredit->getNumeroCredit();
 
@@ -47,20 +42,14 @@ class DemandeCreditController extends AbstractController
             /***Amortissement simple */
            if($data->getTypeAmortissement() == "simple")
            {
-                /***Amortissement simple */
                 $traitement->amortissementSimple($data);
-
                 return $this->redirectToRoute('app_tableau_amortissement', [
                     'codecredit' => $codecredit,
-                    'montant' => $montant,
-                    'tranche' => $tranche,
-                    'taux' => $taux,
                 ], Response::HTTP_SEE_OTHER);
            }
            /***Amortissement simple annuite constante */
            elseif($data->getTypeAmortissement() == "annuite constante")
            {
-                //Appel le function pour le traitement de annuite constante
                 $traitement->annuiteConstante($data);
                 return $this->redirectToRoute('app_tableau_amortissement_annuite_constante', [
                     'codecredit' => $codecredit,

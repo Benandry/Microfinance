@@ -65,9 +65,9 @@ class ApprobationCreditRepository extends ServiceEntityRepository
 //    }
 
 
-// Liste des demande client 
-    public function findDemandeNonApprouver(){
-
+// Liste des demande client Individuel
+    public function findDemandeNonApprouver()
+    {
         $query = "SELECT
         client.nom_client,
         client.prenom_client,
@@ -182,6 +182,39 @@ class ApprobationCreditRepository extends ServiceEntityRepository
             FROM App\Entity\DemandeCredit d
             WHERE d.codeclient = '$codeclient'
             ";
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+    // Liste des demande client 
+    public function findDemandeNonApprouverGroupe()
+    {
+        $query = "SELECT
+        groupe.nomGroupe,
+        groupe.numeroMobile,
+        demande.NumeroCredit,
+        demande.codeclient,
+        demande.Montant,
+        demande.DateDemande ,
+        demande.NombreTranche ,
+        demande.TypeTranche,
+        --appro.id
+        -- appro.statusApprobation,
+        appro.codecredit
+
+        FROM App\Entity\DemandeCredit demande
+        INNER JOIN 
+        App\Entity\Groupe groupe
+        With demande.codeclient = groupe.codegroupe 
+
+        LEFT JOIN 
+        App\Entity\ApprobationCredit appro
+        With appro.codecredit = demande.NumeroCredit
+        where appro.codecredit IS NULL 
+
+        ";
+
         $statement = $this->getEntityManager()->createQuery($query)->execute();
 
         return $statement;
