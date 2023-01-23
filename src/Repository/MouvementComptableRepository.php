@@ -51,4 +51,17 @@ class MouvementComptableRepository extends ServiceEntityRepository
 
         return $stmt;
     }
+
+    public function findByGrandLivre(): array
+    {
+        $query = "
+            SELECT journal 
+            FROM 
+            App\Entity\MouvementComptable journal
+        ";
+
+        $stmt = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $stmt;
+    }
 }

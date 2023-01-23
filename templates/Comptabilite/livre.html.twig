@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Comptabilité Grand Livre Général {% endblock %}
+{% block head %}Comptabilité /Etat /Grand Livre Général {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card p-3">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 m-auto">
+                    <h5 class="fw-bold text-primary text-center"> Grand-Livre Général </h5>
+                </div>
+            </div>
+            <div class="row m-3 table-bordered">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Date </td>
+                            <td>Pièce comptable </td>
+                            <td>Libellé de l'opération </td>
+                            <td>Numéro de compte </td> 
+                            <td>Intitulé du compte </td>
+                            <td>Le journal utilisé </td>
+                            <td> Débits </td>
+                            <td> Crédit </td>
+                            <td> Solde </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for liste in livres %}
+                        <tr>
+                            <td>{{ liste.dateMouvement|date('Y/m/d') }} </td> 
+                            <td>{{ liste.pieceComptable }} </td> 
+                            <td>{{ liste.description }} </td>
+                            <td>{{ liste.planCompta.NumeroCompte }} </td>
+                            <td>{{ liste.planCompta.Libelle}} </td>
+                            <td>Journall </td>
+                            <td>{{ liste.debit }} </td>
+                            <td>{{ liste.credit }} </td>
+                            <td>{{ liste.solde }} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
