@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decaissement{% endblock %}
+{% block head %}Decaissement/groupe {% endblock %}
+
+{% block body %}
+    <div class="card p-3">
+        {% for demande in demandes %}
+            <div class="card mb-3">
+                <div class="row text-secondary m-3">
+                    <div class="col-sm-4 col-xl-4">
+                        <p class="fw-bold"> Nom du groupe : <span > {{ demande.nomGroupe }} </span> </p>
+                        <p class="fw-bold"> Prenom du client : <span> {{ demande.numeroMobile }}</span> </p>
+                    </div>
+                    <div class="col-sm-4 col-xl-4 m-auto">
+                        <p class="fw-bold"> Cycle de credit : {{ cycle }} </p>
+                    </div>
+                    <div class="col-sm-4 col-xl-4">
+                        <p class="fw-bold"> Numero de credit : <span id="numero_credit" > {{ demande.NumeroCredit }} </span> </p>
+                        <p class="fw-bold"> Montant de credit : <span id="montant_credit" > {{ demande.Montant }} </span> </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {{ include('Module_credit/crud_decaissement/_form.html.twig') }}
+    </div>
+
+{% endblock %}

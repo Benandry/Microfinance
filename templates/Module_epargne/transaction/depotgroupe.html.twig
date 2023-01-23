@@ -14,25 +14,26 @@
             <p> Text ecrit : <span id="text"> </span> </p>
         </div>
         {{ include('modal.html.twig') }}
-    <div class="row">
-        <div class="col-xl-12 col-md-12 col-sm-12 text-secondary">
-            <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
-            <p> <b>Solde client : </b>
-                {% if solde != '' %}
-                    <span id="solde_cli">{{ solde }}</span>     
-                {% else %}
-                    <span id="solde_cli">0</span>  
-                {% endif %} 
-            </p>
-            <p><b>Code client :</b> <span id="code_client"> {{ nomgroupe }}</span></p>
-        </div>
-    </div>
-
-
-    {{ include('Module_epargne/transaction/_form.html.twig') }}
+        <div class="card p-3">
+            <div class="card mb-3">
+                <div class="row text-secondary m-3">
+                    <div class="col-xl-12 col-md-12 col-sm-12 text-secondary">
+                        <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
+                        <p> <b>Solde client : </b>
+                            {% if solde != '' %}
+                                <span id="solde_cli">{{ solde }}</span>     
+                            {% else %}
+                                <span id="solde_cli">0</span>  
+                            {% endif %} 
+                        </p>
+                        <p><b>Code client :</b> <span id="code_client"> {{ nomgroupe }}</span></p>
+                    </div>
+                </div>
+                {{ include('Module_epargne/transaction/_form.html.twig') }}
+            </div>
 
             <P style="display:hide"><span id="code"> </span> </P>
             <P style="display:hide"><span id="nom"> </span> </P>
             <P style="display:hide"><span id="solde"> </span></p>
-
+        </div>
 {% endblock %}

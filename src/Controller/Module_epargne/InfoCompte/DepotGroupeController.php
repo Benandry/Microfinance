@@ -112,8 +112,9 @@ class DepotGroupeController extends AbstractController
             $refTransac = random_int(2,1000000000);
             $transaction->setCodetransaction($refTransac);
             $entityManager=$doctrine->getManager();
-
-            $mouvement->operationJournal($entityManager,$transaction);
+            $debit = $form->get('debit')->getData();
+            $credit = $form->get('credit')->getData();
+            $mouvement->operationJournal($entityManager,$transaction,$debit,$credit);
             
             // $transactionRepository->add($transaction,true);
 
@@ -156,7 +157,8 @@ class DepotGroupeController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', " Transaction depot compte epargne '" .$transaction->getCodeepargneclient()."'réussite!!!");
+            $this->addFlash('success', " Dépot réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction());
+
             return $this->redirectToRoute('app_transaction_groupe_depot', [
                 'code' => $code,
                 'nom' => $nomgroupe,

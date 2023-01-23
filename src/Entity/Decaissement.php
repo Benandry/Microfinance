@@ -41,8 +41,8 @@ class Decaissement
     #[ORM\Column]
     private ?bool $cash = null;
 
-    #[ORM\Column]
-    private ?int $cycleDeCredit = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $refDecaissement = null;
 
     public function getId(): ?int
     {
@@ -157,14 +157,14 @@ class Decaissement
         return $this;
     }
 
-    public function getCycleDeCredit(): ?int
+    public function getRefDecaissement(): ?string
     {
-        return $this->cycleDeCredit;
+        return $this->refDecaissement;
     }
 
-    public function setCycleDeCredit(int $cycleDeCredit): self
+    public function setRefDecaissement(?string $refDecaissement): self
     {
-        $this->cycleDeCredit = $cycleDeCredit;
+        $this->refDecaissement = $refDecaissement;
 
         return $this;
     }

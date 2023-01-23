@@ -178,7 +178,7 @@ $(document).ready(function(){
         });
 
         if(path === '/agence/new'){
-            let max_id_ = $('#id-max').text().padStart(4,0);
+            let max_id_ = $('#id-max').text().padStart(2,0);
             $('#agence_codeAgence').val(max_id_);
         }
 });

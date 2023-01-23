@@ -2,9 +2,11 @@
 
 namespace App\Controller\Credit\Decaissement;
 
+use App\Controller\Comptabilite\TraitementCompta\ComptaDecaissement;
 use App\Entity\Decaissement;
 use App\Form\DecaissementType;
 use App\Repository\DecaissementRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,27 +23,76 @@ class CrudDecaissementController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_crud_decaissement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, DecaissementRepository $decaissementRepository): Response
+    #[Route('/new/individuel', name: 'app_crud_decaissement_new_individuel', methods: ['GET', 'POST'])]
+    public function individuel(ManagerRegistry $doctrine, Request $request, DecaissementRepository $decaissementRepository,ComptaDecaissement $compta): Response
     {
         $demandeApprouver = $request->query->all();
-
-       // dd($demandeApprouver['liste']);
-
         $decaissement = new Decaissement();
+        // dd($demandeApprouver);
+
+        $codecredit = $demandeApprouver['liste']['codeclient'];
+
+        $cycle = $decaissementRepository->findByCycle($codecredit)[0][1];
+
         $form = $this->createForm(DecaissementType::class, $decaissement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Reference de decaissement
+            $decaissement->setRefDecaissement(random_int(2,1000000000));
+
+            $em=$doctrine->getManager();
+            
+            $debit = $form->get('debit')->getData();
+            $credit = $form->get('credit')->getData();
+            // dd($debit);
+            $compta->decaissement($em,$decaissement,$debit,$credit);
+
             $decaissementRepository->add($decaissement, true);
-            $this->addFlash('success', "Decaissement de credit  ".$decaissement->getNumeroCredit()." reuissite ");
-            return $this->redirectToRoute('app_decaissement_credit', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', "Décaissement de credit  ".$decaissement->getNumeroCredit()." reuissite .Réferences : ".$decaissement->getRefDecaissement());
+            return $this->redirectToRoute('app_decaissement_credit_individuel', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Module_credit/crud_decaissement/new.html.twig', [
+        return $this->renderForm('Module_credit/crud_decaissement/individuel.html.twig', [
             'decaissement' => $decaissement,
             'form' => $form,
-            'demandes' => $demandeApprouver
+            'demandes' => $demandeApprouver,
+            'cycle' => $cycle
+        ]);
+    }
+
+    #[Route('/new/groupe', name: 'app_crud_decaissement_new_groupe', methods: ['GET', 'POST'])]
+    public function groupe(ManagerRegistry $doctrine, ComptaDecaissement $compta, Request $request, DecaissementRepository $decaissementRepository): Response
+    {
+        $demandeApprouver = $request->query->all();
+        $decaissement = new Decaissement();
+        $codecredit = $demandeApprouver['liste']['codeclient'];
+        
+        $cycle = $decaissementRepository->findByCycle($codecredit)[0][1];
+
+        $form = $this->createForm(DecaissementType::class, $decaissement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Reference de decaissement
+            $decaissement->setRefDecaissement(random_int(2,1000000000));
+
+            $em=$doctrine->getManager();
+            
+            $debit = $form->get('debit')->getData();
+            $credit = $form->get('credit')->getData();
+            $compta->decaissement($em,$decaissement,$debit,$credit);
+
+            $decaissementRepository->add($decaissement, true);
+            $this->addFlash('success', " Decaissement de credit ".$decaissement->getNumeroCredit()." reuissite ");
+            return $this->redirectToRoute('app_decaissement_credit_groupe', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Module_credit/crud_decaissement/groupe.html.twig', [
+            'decaissement' => $decaissement,
+            'form' => $form,
+            'demandes' => $demandeApprouver,
+            'cycle' => $cycle
         ]);
     }
 

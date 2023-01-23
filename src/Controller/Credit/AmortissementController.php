@@ -62,7 +62,6 @@ class AmortissementController extends AbstractController
     #[Route('/demande/tableau/amortissement/annuite_constante', name: 'app_tableau_amortissement_annuite_constante')]
     public function annuite_constante(Request $request,AmortissementFixeRepository $repoAmortisssement): Response
     {
-
         $codecredit = $request->query->get('codecredit');
         $tableau_amortissement = $repoAmortisssement->findAmortissement($codecredit);
 

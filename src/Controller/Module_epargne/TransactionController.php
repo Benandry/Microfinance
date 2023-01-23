@@ -94,18 +94,24 @@ class TransactionController extends AbstractController
             $soldeCurrent[0]['solde'] = 0;
         }
 
-       //dd($soldeCurrent);
+    //    dd("Depot client tsika izao");
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            
             $refTransac = random_int(2,1000000000);
             $transaction->setCodetransaction($refTransac);
             $entityManager=$doctrine->getManager();
 
+            //Plan comptable
+            $debit = $form->get('debit')->getData();
+            $credit = $form->get('credit')->getData();
+            // dd($debit);
+
             /**Inserer dans la table Mouvement comptable */
-            $mouvement->operationJournal($entityManager,$transaction);
+            $mouvement->operationJournal($entityManager,$transaction,$debit,$credit);
 
             $Description=$transaction->getDescription();
             $transaction->setDescription($Description);
@@ -140,7 +146,7 @@ class TransactionController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', " Transaction depot compte epargne '" .$transaction->getCodeepargneclient()."'réussite!!!");
+            $this->addFlash('success', " Depot réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction());
             return $this->redirectToRoute('app_transaction_new', [
                 'code' => $code,
                 'cod_client' => $code_client,
@@ -185,8 +191,10 @@ class TransactionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $entityManager=$doctrine->getManager();
-
-            $mouvement->operationJournal($entityManager,$transaction);
+            //Plan comptable
+            $debit = $form->get('debit')->getData();
+            $credit = $form->get('credit')->getData();
+            $mouvement->operationJournal($entityManager,$transaction,$debit,$credit);
 
             $transaction->setCodetransaction(random_int(1,2000000));
 
@@ -219,8 +227,8 @@ class TransactionController extends AbstractController
 
             $entityManager->persist($transaction);
             $entityManager->flush();
-            $this->addFlash('success', "Transaction retrait compte epargne '" .$transaction->getCodeepargneclient()."' réussite!!!");
-           return $this->redirectToRoute('app_transaction_retrait', [
+            $this->addFlash('success', " Rétrait réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction());
+            return $this->redirectToRoute('app_transaction_retrait', [
             'nom' => $nom,
             'code' => $code
            ], Response::HTTP_SEE_OTHER);
@@ -261,7 +269,10 @@ class TransactionController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager=$doctrine->getManager();
 
-                $mouvement->operationJournal($entityManager,$transaction);
+                            //Plan comptable
+                $debit = $form->get('debit')->getData();
+                $credit = $form->get('credit')->getData();
+                $mouvement->operationJournal($entityManager,$transaction,$debit,$credit);
     
                 $transaction->setCodetransaction(random_int(1,2000000));
     
@@ -294,7 +305,8 @@ class TransactionController extends AbstractController
     
                 $entityManager->persist($transaction);
                 $entityManager->flush();
-                $this->addFlash('success', "Transaction retrait compte epargne '" .$transaction->getCodeepargneclient()."' réussite!!!");
+
+                $this->addFlash('success', " Rétrait réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction());
                 return $this->redirectToRoute('app_retrait', [
                     'code' => $code,
                     'cod_client' => $codeclient,

@@ -61,7 +61,7 @@ class CompteEpargneController extends AbstractController
        if($trierEp->isSubmitted() && $trierEp->isValid()){
 
             $data = $trierEp->getData();
-
+            // dd($data);
             $afiche_tab = true;
 
             if ($data['date1'] != null ) {
@@ -75,7 +75,7 @@ class CompteEpargneController extends AbstractController
             }
         
 
-        // dd($groupeRapport);
+        dd($groupeRapport);
        }
         // Appel des fonction CompteEpargne qui recupere tous les info sur le compte epargnes
         
@@ -133,6 +133,7 @@ class CompteEpargneController extends AbstractController
         $compte_existe=$compteEpargneRepository->compteClientCourant($code);
         $compteEpargne = new CompteEpargne();
         $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

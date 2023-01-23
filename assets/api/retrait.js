@@ -73,14 +73,17 @@ $(document).ready(() =>{
         $('#transactionretrait_Montant').on('keyup',()=>{
             var montant=$('#transactionretrait_Montant').val();
 
-            var soldeactuel=solde-montant
+            var soldeactuel=solde - montant
 
+                console.log(montant);
+                console.log(solde);
             $('#transactionretrait_montant_bruite').val(montant);
-            if(solde >= montant){
-                $('#transactionretrait_solde').val(soldeactuel)
-            }else{
+            if(soldeactuel < 0){
                 alert('Solde epuisé')
                 $('.btn').hide()
+            }else{
+                $('#transactionretrait_solde').val(soldeactuel)
+                $('.btn').show()
             }
         })
 

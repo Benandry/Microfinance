@@ -192,20 +192,29 @@
                                             </li>
                                         </ul>
                                     </li>
-                                     <li class="w-100">
-                                        <a href="{{path('app_decaissement_credit')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Decaissement </span></a>
+                                    <li class="w-100">
+                                        <a href="#submenu001" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="d-none d-sm-inline menu"> <i class="fa-solid fa-share"></i> Decaissement <span class="fa fa-chevron-down"></span>  </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu001">
+                                            <li class="w-100">
+                                                <a href="{{path('app_decaissement_credit_individuel')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_decaissement_credit_groupe')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Groupe </span></a>
+                                            </li>
+                                        </ul>                                     
                                     </li>
                                     <li class="w-100">
                                         <a href="{{ path('app_remboursement_modal') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Remboursement </span></a>
                                     </li>
                                     <li class="w-100">
-                                        <a href="#submenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <a href="#submenu66" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
                                             <i class="fas fa-tasks"></i> Rapports 
                                             <span class="fa fa-chevron-down"></span> </span> 
                                         </a>   
-                                        <ul class="collapse show nav flex-column ms-4" id="submenu">
-
+                                        <ul class="collapse nav flex-column ms-4" id="submenu66">
                                             <li class="w-100">
                                                 <a href="#submenu03" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Approbation   <span class="fa fa-chevron-down"></span> </span>
@@ -392,55 +401,64 @@
                         </ul>
                     </div>
                 </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-12 col-md-12 col-sm-12">
-                                <div class="row head">
-                                    <div class="col-6 col-xl-6">
-                                        <div class="d-flex justify-content-start">
-                                            <h6 class="text_head mt-3">Fidev/{% block head %} Fidev {% endblock %}</h6>
-                                        </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-sm-12">
+                            <div class="row head">
+                                <div class="col-6 col-xl-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h6 class="text_head mt-3">Fidev/{% block head %} Fidev {% endblock %}</h6>
                                     </div>
-                                    <div class="col-6 col-xl-6">
-                                        <div class="d-flex justify-content-end">
-                                            <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.agence.NomAgence }} </p>
-                                            <p class="m-3"> Code : {{ app.user.agence.codeAgence }} </p>
-                                             <!-- Deconnection  et inscription  -->
-                                            <div class="dropdown m-3">
-                                                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <span class="d-none d-sm-inline mx-1 lien">{{ app.user.prenom }} ({{ app.user.responsabilite }})</span>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
-                                                {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
-                                                    <li>
-                                                        <a class="dropdown-item down" href="{{path('app_liste_user')}}" >Gestion d'utilisateur <p style="display: none;" id="utilisateur">{{ app.user.prenom }} </p> 
-                                                            <div class="fw-bold">
-                                                                ({{ app.user.responsabilite }})
-                                                            </div> 
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                                    <li>
-                                                        <hr class="dropdown-divider">
-                                                    </li>
-                                                    <li><a class="dropdown-item down" href="{{path('app_logout')}}" > <i class="fa fa-fw fa-sign-out"></i>  Déconnecté </a></li>
-                                                    
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="fw-bold">
                                 </div>
-                                <div class="row">
-                                    <div class="rounded g-0 shadow-sm p-3 m-2">
-                                        {% block body %}
-                                            
-                                        {% endblock %}
+                                <div class="col-6 col-xl-6">
+                                    <div class="d-flex justify-content-end">
+                                        <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.agence.NomAgence }} </p>
+                                        <p class="m-3"> Code : {{ app.user.agence.codeAgence }} </p>
+                                            <!-- Deconnection  et inscription  -->
+                                        <div class="dropdown m-3">
+                                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="d-none d-sm-inline mx-1 lien">{{ app.user.prenom }} ({{ app.user.responsabilite }})</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
+                                            {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
+                                                <li>
+                                                    <a class="dropdown-item down" href="{{path('app_liste_user')}}" >Gestion d'utilisateur <p style="display: none;" id="utilisateur">{{ app.user.prenom }} </p> 
+                                                        <div class="fw-bold">
+                                                            ({{ app.user.responsabilite }})
+                                                        </div> 
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item down" href="{{path('app_logout')}}" > <i class="fa fa-fw fa-sign-out"></i>  Déconnecté </a></li>
+                                                
+                                            </ul>
+                                        </div>
                                     </div>
+                                </div>
+                                <hr class="fw-bold">
+                            </div>
+                            <div class="row">
+                                <div class="rounded g-0 shadow-sm p-3 m-2">
+                                    {% block body %}
+                                        
+                                    {% endblock %}
+
+                                    <footer class="container text-center mt-5">
+                                        <div class="text-muted">
+                                            <p>
+                                                &copy; {{ 'now'|date('Y') }} &middot;
+                                                Build with <span class="text-danger">&hearts; </span> by <a href=""> Fidev </a>
+                                            </p>
+                                        </div>
+                                    </footer>
+
                                 </div>
                             </div>
                         </div>
-                       
+                    </div>
                 </div>
             </div>
         </div>

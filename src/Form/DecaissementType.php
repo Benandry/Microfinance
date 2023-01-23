@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Analytique;
 use App\Entity\Decaissement;
+use App\Entity\PlanComptable;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +31,52 @@ class DecaissementType extends AbstractType
             ->add('fraisDeDeveloppement')
             ->add('caisseCredit')
             ->add('cash')
-            ->add('cycleDeCredit')
+            ->add('debit',EntityType::class,[
+                'class' => PlanComptable::class,
+                'choice_label' => function($c){
+                    return $c->getNumeroCompte().' - '.$c->getLibelle();
+                },
+                'label'=>'Compte debit :',
+                'mapped'=>false,
+                'placeholder'=>"Compte debit ... ",
+                'required' => false,
+                'autocomplete' => true,
+            ])
+
+            ->add('credit',EntityType::class,[
+                    'class' => PlanComptable::class,
+                    'choice_label' => function($c){
+                        return $c->getNumeroCompte().' - '.$c->getLibelle();
+                    },
+                'label'=>'Compte credit :',
+                'mapped'=>false,
+                'required' => false,
+                'autocomplete' => true,
+                'placeholder'=>"Compte credit ... ",
+            ])
+
+            ->add('debitAnalytique',EntityType::class,[
+                'class' => Analytique ::class,
+                'choice_label' => function($c){
+                    return $c->getCode().' - '.$c->getLibelle();
+                },
+                'label'=>'Compte debit :',
+                'mapped'=>false,
+                'placeholder'=>"Compte debit ... ",
+                'required' => false,
+                'autocomplete' => true,
+            ])
+            ->add('creditAnalytique',EntityType::class,[
+                'class' => Analytique ::class,
+                'choice_label' => function($c){
+                    return $c->getCode().' - '.$c->getLibelle();
+                },
+                'label'=>'Compte debit :',
+                'mapped'=>false,
+                'placeholder'=>"Compte debit ... ",
+                'required' => false,
+                'autocomplete' => true,
+            ])
         ;
     }
 

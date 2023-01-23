@@ -2,7 +2,7 @@
  const path = window.location.pathname;
 
  $(document).ready(() =>{
-    if(path === '/decaissement/credit/crud/new'){
+    if(path === '/decaissement/credit/crud/new/individuel' || path === '/decaissement/credit/crud/new/groupe'){
         const numero_credit = $('#numero_credit').text();
         const montant_credit = $('#montant_credit').text();
 
