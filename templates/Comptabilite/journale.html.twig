@@ -4,46 +4,152 @@
 {% block head %}Comptabilité / Etat/ Journal  {% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="row m-3">
-            <div class="col-md-4 col-sm-4">
-                <div class="d-flex justify-content-start text-secondary fw-bolder"> ONG Fidev </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Journal </h5></div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="d-flex justify-content-end text-secondary fw-bolder">Période </div>
+
+    {% if afficher == false %}
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header titre_modal">
+                        <h6 class="modal-title">Journal du compte </h6>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    {{ form_start(form) }}
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 col-md-6 ">
+                                    {{ form_row(form.debut) }}
+                                </div>
+                                <div class="col-6 col-md-6 ">
+                                    {{ form_row(form.fin) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+                            <input type="submit" value="Filtrer" class="btn btn-primary btn-sm"/>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="m-4"></div>
-    <table class="table table1 taable-bordered mt-3">
+    {% else %}
+
+    <div class="card p-1">
+        <table class="table table1 table-bordered mt-4">
             <thead>
                 <tr>
-                    <th> Date </th>
-                    <th> Code Transaction</th>
-                    <th> Réference </th>
-                    <th> N de compte</th>
-                    <th> Libéllé</th>
-                    <th> Débit </th>
+                    <th colspan="8" style="background-color: white" class="text-secondary">
+                        <div class="row m-3">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="d-flex justify-content-start fw-bolder">
+                                    <div>
+                                        <p> ONG Fidev <br/>
+                                            Agence :  {{ app.user.agence.codeAgence }} - </br> 
+                                            {{ app.user.agence.NomAgence }}  
+                                        </p> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Journal du compte </h5></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="d-flex justify-content-end fw-bolder">
+                                    <div>
+                                        <p> Période <br/>
+                                            Du {{ debut|date('d/m/Y') }} </br> 
+                                            Au {{ fin|date('d/m/Y') }} <br/>
+                                            Tenue du compte : Ar 
+                                        </p> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th rowspan="2"> Date </th>
+                    <th rowspan="2"> Piéce comptable </th>
+                    <th colspan="2" class="text-center"> N de compte</th>
+                    <th colspan="2" class="text-center"> Libéllé</th>
+                    <th colspan="2" class="text-center"> Montants </th>
+                </tr>
+                <tr>
+                    <th> Débits </th>
                     <th> Crédit </th>
-                    <th> Solde </th>
+                    <th> Débits </th>
+                    <th> Crédit </th>
+                    <th> Débits </th>
+                    <th> Crédit </th>
                 </tr>
             </thead>
             <tbody>
                 {% for journal in journals %}
                     <tr>
                         <td> {{ journal.dateMouvement|date('Y/m/d') }} </td>
-                        <td> {{ journal.refTransaction}} </td>
                         <td> {{ journal.pieceComptable}} </td>
-                        <td>  {{ journal.planCompta.NumeroCompte}}   </td>
-                        <td> {{ journal.planCompta.Libelle}} </td>
-                        <td> {{ journal.debit}} </td>
-                        <td> {{ journal.credit}} </td>
-                        <td> {{ journal.solde}} </td>
+                        <td>   
+                            {% if journal.debit is null %}
+
+                            {% else %}
+                                {{ journal.NumeroCompte}}  
+                            {% endif %}
+                            
+                        </td>
+                        <td>   
+                            {% if journal.credit is null %}
+
+                            {% else %}
+                                {{ journal.NumeroCompte}}  
+                            {% endif %}
+                            
+                        </td>
+
+                        <td>   
+                            {% if journal.debit is null %}
+
+                            {% else %}
+                                {{ journal.Libelle}}
+                            {% endif %}
+                            
+                        </td>
+                        <td>   
+                            {% if journal.credit is null %}
+
+                            {% else %}
+                                {{ journal.Libelle}}
+                            {% endif %}
+                            
+                        </td>
+                        <td>   
+                            {% if journal.debit is null %}
+
+                            {% else %}
+                                {{ journal.debit|number_format(0,',', ' ')}}
+                            {% endif %}
+                            
+                        </td>
+                        <td>   
+                            {% if journal.credit is null %}
+
+                            {% else %}
+                                {{ journal.credit|number_format(0,',', ' ')}}
+                            {% endif %}
+                            
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
-    </table>
+            <foot>
+            <tr>
+                <th colspan="6">Totaux : </th>
+                <th> {{ totalDebit|number_format(0,',', ' ') }} </th>
+                <th> {{ totalCredit|number_format(0,',', ' ') }} </th>
+            </tr>
+            </foot>
+        </table>
+    </div>
+    {% endif %}
 {% endblock %}

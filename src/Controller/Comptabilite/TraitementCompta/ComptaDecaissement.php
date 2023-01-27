@@ -19,8 +19,9 @@ class ComptaDecaissement
     {
         // Debit de decaissement
         $compta = new MouvementComptable;
+        $compta->setCodeclient($decaissement->getNumeroCredit());
         $compta->setDateMouvement($decaissement->getDateDecaissement());
-        $compta->setDescription('Decaissement de credit');
+        $compta->setDescription('DECAISSEMENT de credit');
         $compta->setDebit($decaissement->getMontantCredit());
         $compta->setSolde($decaissement->getMontantCredit());
         $compta->setRefTransaction($decaissement->getRefDecaissement());
@@ -39,7 +40,7 @@ class ComptaDecaissement
         $compta = new MouvementComptable;
         $compta->setCredit($decaissement->getMontantCredit());
         $compta->setDateMouvement($decaissement->getDateDecaissement());
-        $compta->setDescription('Decaissement de credit');
+        $compta->setDescription('DECAISSEMENT de credit');
         $compta->setSolde($decaissement->getMontantCredit());
         $compta->setRefTransaction($decaissement->getRefDecaissement());
         $compta->setPieceComptable($decaissement->getPieceComptable());

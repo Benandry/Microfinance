@@ -240,54 +240,6 @@ class DemandeCredit
         return $this;
     }
 
-    // public function getFondCredit(): ?string
-    // {
-    //     return $this->FondCredit;
-    // }
-
-    // public function setFondCredit(string $FondCredit): self
-    // {
-    //     $this->FondCredit = $FondCredit;
-
-    //     return $this;
-    // }
-
-    // public function getMontantEpargneTranche(): ?float
-    // {
-    //     return $this->MontantEpargneTranche;
-    // }
-
-    // public function setMontantEpargneTranche(float $MontantEpargneTranche): self
-    // {
-    //     $this->MontantEpargneTranche = $MontantEpargneTranche;
-
-    //     return $this;
-    // }
-
-    // public function getMontantFixe(): ?float
-    // {
-    //     return $this->MontantFixe;
-    // }
-
-    // public function setMontantFixe(float $MontantFixe): self
-    // {
-    //     $this->MontantFixe = $MontantFixe;
-
-    //     return $this;
-    // }
-
-    // public function getProduitEpargne(): ?ProduitEpargne
-    // {
-    //     return $this->ProduitEpargne;
-    // }
-
-    // public function setProduitEpargne(?ProduitEpargne $ProduitEpargne): self
-    // {
-    //     $this->ProduitEpargne = $ProduitEpargne;
-
-    //     return $this;
-    // }
-
     public function getSoldeEpargne(): ?string
     {
         return $this->SoldeEpargne;
@@ -300,17 +252,6 @@ class DemandeCredit
         return $this;
     }
 
-    // public function getButCredit(): ?string
-    // {
-    //     return $this->ButCredit;
-    // }
-
-    // public function setButCredit(string $ButCredit): self
-    // {
-    //     $this->ButCredit = $ButCredit;
-
-    //     return $this;
-    // }
     public function isCalculInteretDiffere(): ?bool
     {
         return $this->CalculInteretDiffere;
@@ -323,66 +264,6 @@ class DemandeCredit
         return $this;
     }
 
-    // public function isInteretDifferePaiementCapitalise(): ?bool
-    // {
-    //     return $this->InteretDifferePaiementCapitalise;
-    // }
-
-    // public function setInteretDifferePaiementCapitalise(bool $InteretDifferePaiementCapitalise): self
-    // {
-    //     $this->InteretDifferePaiementCapitalise = $InteretDifferePaiementCapitalise;
-
-    //     return $this;
-    // }
-
-    // public function isInteretPayeMemePourDiffere(): ?bool
-    // {
-    //     return $this->InteretPayeMemePourDiffere;
-    // }
-
-    // public function setInteretPayeMemePourDiffere(bool $InteretPayeMemePourDiffere): self
-    // {
-    //     $this->InteretPayeMemePourDiffere = $InteretPayeMemePourDiffere;
-
-    //     return $this;
-    // }
-
-    // public function isTrancheDistinctInteretPeriodeDiffere(): ?bool
-    // {
-    //     return $this->TrancheDistinctInteretPeriodeDiffere;
-    // }
-
-    // public function setTrancheDistinctInteretPeriodeDiffere(bool $TrancheDistinctInteretPeriodeDiffere): self
-    // {
-    //     $this->TrancheDistinctInteretPeriodeDiffere = $TrancheDistinctInteretPeriodeDiffere;
-
-    //     return $this;
-    // }
-
-    // public function isPaiementPrealableInteret(): ?bool
-    // {
-    //     return $this->PaiementPrealableInteret;
-    // }
-
-    // public function setPaiementPrealableInteret(bool $PaiementPrealableInteret): self
-    // {
-    //     $this->PaiementPrealableInteret = $PaiementPrealableInteret;
-
-    //     return $this;
-    // }
-
-    // public function isInteretDeduitDecaissement(): ?bool
-    // {
-    //     return $this->InteretDeduitDecaissement;
-    // }
-
-    // public function setInteretDeduitDecaissement(bool $InteretDeduitDecaissement): self
-    // {
-    //     $this->InteretDeduitDecaissement = $InteretDeduitDecaissement;
-
-    //     return $this;
-    // }
-
     public function isCalculInteretJours(): ?bool
     {
         return $this->CalculInteretJours;
@@ -394,91 +275,6 @@ class DemandeCredit
 
         return $this;
     }
-
-    // public function isForfaitPaiementPrealableInteret(): ?bool
-    // {
-    //     return $this->ForfaitPaiementPrealableInteret;
-    // }
-
-    // public function setForfaitPaiementPrealableInteret(bool $ForfaitPaiementPrealableInteret): self
-    // {
-    //     $this->ForfaitPaiementPrealableInteret = $ForfaitPaiementPrealableInteret;
-
-    //     return $this;
-    // }
-
-    // public function isCreditLieUSD(): ?bool
-    // {
-    //     return $this->CreditLieUSD;
-    // }
-
-    // public function setCreditLieUSD(bool $CreditLieUSD): self
-    // {
-    //     $this->CreditLieUSD = $CreditLieUSD;
-
-    //     return $this;
-    // }
-
-    // public function isMettreJourCalendrierNonOuvrable(): ?bool
-    // {
-    //     return $this->MettreJourCalendrierNonOuvrable;
-    // }
-
-    // public function setMettreJourCalendrierNonOuvrable(bool $MettreJourCalendrierNonOuvrable): self
-    // {
-    //     $this->MettreJourCalendrierNonOuvrable = $MettreJourCalendrierNonOuvrable;
-
-    //     return $this;
-    // }
-
-    // public function isReporterPremierTranche(): ?bool
-    // {
-    //     return $this->ReporterPremierTranche;
-    // }
-
-    // public function setReporterPremierTranche(bool $ReporterPremierTranche): self
-    // {
-    //     $this->ReporterPremierTranche = $ReporterPremierTranche;
-
-    //     return $this;
-    // }
-
-    // public function isCommissionPourcentageMontantCredit(): ?bool
-    // {
-    //     return $this->CommissionPourcentageMontantCredit;
-    // }
-
-    // public function setCommissionPourcentageMontantCredit(bool $CommissionPourcentageMontantCredit): self
-    // {
-    //     $this->CommissionPourcentageMontantCredit = $CommissionPourcentageMontantCredit;
-
-    //     return $this;
-    // }
-
-    // public function getPourcentageCapitalEnCoursInteretCommission(): ?float
-    // {
-    //     return $this->PourcentageCapitalEnCoursInteretCommission;
-    // }
-
-    // public function setPourcentageCapitalEnCoursInteretCommission(float $PourcentageCapitalEnCoursInteretCommission): self
-    // {
-    //     $this->PourcentageCapitalEnCoursInteretCommission = $PourcentageCapitalEnCoursInteretCommission;
-
-    //     return $this;
-    // }
-
-    // public function getMontantFixeParTranche(): ?float
-    // {
-    //     return $this->MontantFixeParTranche;
-    // }
-
-    // public function setMontantFixeParTranche(float $MontantFixeParTranche): self
-    // {
-    //     $this->MontantFixeParTranche = $MontantFixeParTranche;
-
-    //     return $this;
-    // }
-
     public function __toString()
     {
         return $this->getId();

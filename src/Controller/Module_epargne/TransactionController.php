@@ -99,7 +99,7 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            // dd($transaction->getCodeepargneclient());
             
             $refTransac = random_int(2,1000000000);
             $transaction->setCodetransaction($refTransac);
@@ -146,7 +146,7 @@ class TransactionController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', " Depot réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction());
+            $this->addFlash('success', " Depot de ".$transaction->getMontant()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction());
             return $this->redirectToRoute('app_transaction_new', [
                 'code' => $code,
                 'cod_client' => $code_client,
@@ -194,6 +194,7 @@ class TransactionController extends AbstractController
             //Plan comptable
             $debit = $form->get('debit')->getData();
             $credit = $form->get('credit')->getData();
+
             $mouvement->operationJournal($entityManager,$transaction,$debit,$credit);
 
             $transaction->setCodetransaction(random_int(1,2000000));
@@ -227,7 +228,7 @@ class TransactionController extends AbstractController
 
             $entityManager->persist($transaction);
             $entityManager->flush();
-            $this->addFlash('success', " Rétrait réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction());
+            $this->addFlash('success', " Rétrait ".abs($transaction->getMontant())." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction());
             return $this->redirectToRoute('app_transaction_retrait', [
             'nom' => $nom,
             'code' => $code
@@ -306,7 +307,7 @@ class TransactionController extends AbstractController
                 $entityManager->persist($transaction);
                 $entityManager->flush();
 
-                $this->addFlash('success', " Rétrait réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction());
+                $this->addFlash('success', " Rétrait de ".abs($transaction->getMontant())." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction());
                 return $this->redirectToRoute('app_retrait', [
                     'code' => $code,
                     'cod_client' => $codeclient,

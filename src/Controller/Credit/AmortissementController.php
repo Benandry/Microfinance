@@ -24,6 +24,7 @@ class AmortissementController extends AbstractController
 
     //    dd($info);
         $tableau_amortissement = $repoAmortisssement->findAmortissement($codecredit);
+        
         $sumMontant = array_sum(array_column($tableau_amortissement,'principale'));
         $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
         $sumNet = array_sum(array_column($tableau_amortissement,'montanttTotal'));

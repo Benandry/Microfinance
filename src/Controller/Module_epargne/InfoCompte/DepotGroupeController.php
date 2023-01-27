@@ -157,7 +157,7 @@ class DepotGroupeController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', " Dépot réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction());
+            $this->addFlash('success', " Dépot ".$transaction->getMontant()." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction());
 
             return $this->redirectToRoute('app_transaction_groupe_depot', [
                 'code' => $code,

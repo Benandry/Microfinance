@@ -1,0 +1,28 @@
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header titre_modal">
+                <h6 class="modal-title text-center">Grand livre </h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            {{ form_start(form) }}
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 col-md-6 ">
+                            {{ form_row(form.debut) }}
+                        </div>
+                        <div class="col-6 col-md-6 ">
+                            {{ form_row(form.fin) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+                    <input type="submit" value="Filtrer" class="btn btn-primary btn-sm"/>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

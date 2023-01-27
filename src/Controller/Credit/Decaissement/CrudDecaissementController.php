@@ -39,6 +39,8 @@ class CrudDecaissementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Reference de decaissement
+
+            // dd($decaissement->getNumeroCredit());
             $decaissement->setRefDecaissement(random_int(2,1000000000));
 
             $em=$doctrine->getManager();
@@ -75,6 +77,8 @@ class CrudDecaissementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Reference de decaissement
+
+            dd($decaissement);
             $decaissement->setRefDecaissement(random_int(2,1000000000));
 
             $em=$doctrine->getManager();

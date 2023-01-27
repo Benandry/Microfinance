@@ -4,45 +4,111 @@
 {% block head %}Comptabilité /Etat /Grand Livre Général {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="card p-3">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12 m-auto">
-                    <h5 class="fw-bold text-primary text-center"> Grand-Livre Général </h5>
+    {% if affiche_tab == false %}
+            <!-- The Modal -->
+        {{ include('Comptabilite/_modal.html.twig') }}
+    {% else %}
+        <div class="container">
+            <div class="card p-1">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 m-auto">
+                        <h5 class="fw-bold text-primary text-center"> Grand-Livre Général </h5>
+                    </div>
+                </div>
+                <div class="row m-3 table-bordered">
+                    <h6 class="fw-small text-center text-secondary"> Période du  {{ debut|date('d/m/Y') }} au {{ fin|date('d/m/Y') }} </h6>
+                    <table class="table table1 table-bordered">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Date </th>
+                                <th rowspan="2">Pièce comptable </th>
+                                <th rowspan="2">Libellé de l'opération </th>
+                                <th colspan="2" class="text-center">Numéro de compte </th>
+                                <th colspan="2" class="text-center">Intitulé du compte </th>
+                                <th>Le journal utilisé </th>
+                                <th colspan="2" class="text-center"> Montants </th>
+                                <th> Solde </th>
+                            </tr>
+                            <tr>
+                                <th> Débits </th>
+                                <th> Crédit </th>
+                                <th> Débits </th>
+                                <th> Crédit </th>
+                                <th > </th>
+                                <th> Débits </td>
+                                <th> Crédit </td>
+                                <th > </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {# {{ liste.NumeroCompte }} #}
+                            {% for liste in livres %}
+                            <tr> 
+                                <td>{{ liste.dateMouvement|date('Y/m/d') }} </td> 
+                                <td>{{ liste.pieceComptable }} </td> 
+                                <td>{{ liste.description }} </td>
+                                <td>  
+                                    {% if liste.debit is null %}
+                                        
+                                    {% else %}
+                                        {{ liste.NumeroCompte }} 
+                                    {% endif %}
+                                    
+                                </td>
+                                <td>  
+                                    {% if liste.credit is null %}
+
+                                    {% else %}
+                                        {{ liste.NumeroCompte }} 
+                                    {% endif %}
+                                </td>
+                                
+                                <td>  
+                                    {% if liste.debit is null %}
+                                        
+                                    {% else %}
+                                        {{ liste.Libelle }} 
+                                    {% endif %}
+                                    
+                                </td>
+                                <td>  
+                                    {% if liste.credit is null %}
+
+                                    {% else %}
+                                        {{ liste.Libelle }} 
+                                    {% endif %}
+                                </td>
+                                <td>Journall </td>
+
+                                    <td>  
+                                        {% if liste.debit is null %}
+                                            
+                                        {% else %}
+                                        {{ liste.debit|number_format(0,',', ' ') }} 
+                                        {% endif %}
+                                        
+                                    </td>
+                                    <td>  
+                                        {% if liste.credit is null %}
+    
+                                        {% else %}
+                                            {{ liste.credit|number_format(0,',', ' ') }} 
+                                        {% endif %}
+                                    </td>
+                                <td>{{ liste.solde }} </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <t>
+                                <th colspan="8" > Totaux </th>
+                                <th> Total débits {{ totalCredit|number_format(0,',', ' ') }} </th>
+                                <th> Total crédit {{ totalCredit|number_format(0,',', ' ') }} </th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
-            <div class="row m-3 table-bordered">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Date </td>
-                            <td>Pièce comptable </td>
-                            <td>Libellé de l'opération </td>
-                            <td>Numéro de compte </td> 
-                            <td>Intitulé du compte </td>
-                            <td>Le journal utilisé </td>
-                            <td> Débits </td>
-                            <td> Crédit </td>
-                            <td> Solde </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for liste in livres %}
-                        <tr>
-                            <td>{{ liste.dateMouvement|date('Y/m/d') }} </td> 
-                            <td>{{ liste.pieceComptable }} </td> 
-                            <td>{{ liste.description }} </td>
-                            <td>{{ liste.planCompta.NumeroCompte }} </td>
-                            <td>{{ liste.planCompta.Libelle}} </td>
-                            <td>Journall </td>
-                            <td>{{ liste.debit }} </td>
-                            <td>{{ liste.credit }} </td>
-                            <td>{{ liste.solde }} </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}

@@ -20,7 +20,6 @@ $(document).ready(() =>{
         $('#individuelclient_codeclient').val(code_client_);
         
         // {# Cacher le champ code client individuel#}
-        $('#individuel').attr("style", "display: none");
 
         /*****Manova an ilay age user */
         $('#individuelclient_date_naissance').on('change',(e)=>{

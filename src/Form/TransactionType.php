@@ -106,9 +106,9 @@ class TransactionType extends AbstractType
                 'choice_label' => function($c){
                     return $c->getNumeroCompte().' - '.$c->getLibelle();
                 },
-                'label'=>'Compte debit :',
+                'label'=>'Compte débité  :',
                 'mapped'=>false,
-                'placeholder'=>"Compte debit ... ",
+                'placeholder'=>"Compte débité  ... ",
                 'required' => false,
                 'autocomplete' => true,
             ])
@@ -118,11 +118,11 @@ class TransactionType extends AbstractType
                     'choice_label' => function($c){
                         return $c->getNumeroCompte().' - '.$c->getLibelle();
                     },
-                'label'=>'Compte credit :',
+                'label'=>'Compte crédité  :',
                 'mapped'=>false,
                 'required' => false,
                 'autocomplete' => true,
-                'placeholder'=>"Compte credit ... ",
+                'placeholder'=>"Compte crédité  ... ",
             ])
 
             ->add('debitAnalytique',EntityType::class,[
@@ -130,9 +130,9 @@ class TransactionType extends AbstractType
                 'choice_label' => function($c){
                     return $c->getCode().' - '.$c->getLibelle();
                 },
-                'label'=>'Compte debit :',
+                'label'=>'Compte débité  :',
                 'mapped'=>false,
-                'placeholder'=>"Compte debit ... ",
+                'placeholder'=>"Compte débité  ... ",
                 'required' => false,
                 'autocomplete' => true,
             ])
@@ -141,9 +141,9 @@ class TransactionType extends AbstractType
                 'choice_label' => function($c){
                     return $c->getCode().' - '.$c->getLibelle();
                 },
-                'label'=>'Compte debit :',
+                'label'=>'Compte crédité   :',
                 'mapped'=>false,
-                'placeholder'=>"Compte debit ... ",
+                'placeholder'=>"Compte crédité   ... ",
                 'required' => false,
                 'autocomplete' => true,
             ])

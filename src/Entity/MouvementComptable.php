@@ -38,6 +38,9 @@ class MouvementComptable
     #[ORM\ManyToOne(inversedBy: 'mouvementComptables')]
     private ?PlanComptable $planCompta = null;
 
+    #[ORM\Column(length: 255,nullable: true)]
+    private ?string $codeclient = null;
+
 
     public function __toString()
     {
@@ -141,6 +144,18 @@ class MouvementComptable
     public function setPlanCompta(?PlanComptable $planCompta): self
     {
         $this->planCompta = $planCompta;
+
+        return $this;
+    }
+
+    public function getCodeclient(): ?string
+    {
+        return $this->codeclient;
+    }
+
+    public function setCodeclient(string $codeclient): self
+    {
+        $this->codeclient = $codeclient;
 
         return $this;
     }

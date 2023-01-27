@@ -25,6 +25,7 @@ class MouvementRetrait
         $compta = new MouvementComptable();
         $compta->setDateMouvement($transaction->getDateTransaction());
         $compta->setDescription($transaction->getDescription().' compte epargne ');
+        $compta->setCodeclient($transaction->getCodeepargneclient());
         $compta->setDebit($transaction->getMontant());
         $compta->setSolde($transaction->getMontant());
         $compta->setRefTransaction($transaction->getCodetransaction());
@@ -58,6 +59,7 @@ class MouvementRetrait
 
         /***Credit retrait */
         $compta = new MouvementComptable();
+        $compta->setCodeclient($transaction->getCodeepargneclient());
         $compta->setDateMouvement($transaction->getDateTransaction());
         $compta->setDescription($transaction->getDescription().' compte epargne ');
         $compta->setCredit($transaction->getMontant());

@@ -446,6 +446,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         App\Entity\Individuelclient i
         WITH ce.codeep = i.codeclient
         WHERE ce.codeep = '$code'
+        GROUP BY ce.codeepargne
         ORDER BY ce.datedebut DESC
       --  AND t.id = (SELECT MAX(tr.id) FROM App\Entity\Transaction tr INNER JOIN App\Entity\CompteEpargne c  WITH tr.codeepargneclient = c.codeepargne  WHERE ce.codeep = '$code' )
         "
@@ -689,6 +690,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         ce.datedebut ,
         ce.id,
         ce.codeepargne ,
+        ce.codeep,
         SUM(t.Montant) solde
         FROM App\Entity\CompteEpargne ce 
         LEFT JOIN
@@ -700,8 +702,8 @@ class CompteEpargneRepository extends ServiceEntityRepository
         INNER JOIN 
         App\Entity\Groupe g
         WITH ce.codeep = g.codegroupe
-        WHERE ce.codeep = '$code' 
-        --AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c RIGHT JOIN App\Entity\Transaction tr  WITH tr.codeepargnegroupe = c.codegroupeepargne  WHERE ce.codeep = '$code' )
+        WHERE ce.codeep = '$code'
+        GROUP BY ce.codeepargne
        ";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();

@@ -117,12 +117,10 @@ class DecaissementRepository extends ServiceEntityRepository
         demande.NumeroCredit,
         demande.Montant,
         demande.DateDemande,
-        demande.Agent AgentdeCreditDemande,
         appro.dateApprobation,
-        user.prenom AgentDeCreditApprouver,
-        decaissement.dateDecaissement,
-        user.prenom AgentDeCreditDecaissement 
-
+        user.prenom agent ,
+        decaissement.dateDecaissement
+        
         FROM App\Entity\DemandeCredit demande
         INNER JOIN 
         App\Entity\Individuelclient client
@@ -135,9 +133,10 @@ class DecaissementRepository extends ServiceEntityRepository
         LEFT JOIN 
         App\Entity\Decaissement decaissement
         With decaissement.numeroCredit = appro.codecredit
+
         INNER JOIN 
         App\Entity\User user
-        With user.id = appro.agentCredit 
+        With user.id = demande.agent 
 
         where appro.statusApprobation = 'approuvé'
         AND decaissement.numeroCredit IS NOT NULL

@@ -178,6 +178,7 @@ class IndividuelclientType extends AbstractType
             /// ******************************//
 
             ->add('codeclient',TextType::class,[
+                'label' => 'Code clent',
                 'attr'=>[
                     'class'=>'form-control'
                 ]

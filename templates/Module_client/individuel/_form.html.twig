@@ -13,26 +13,29 @@
             <div class="col-12 col-sm-12 col-md-12">
               <h6 class="text-center text-primary">Etat civile</h6>
               <div class="row">
-                  <div class="col-6 col-sm-6 col-md-6">
+                  <div class="col-4 col-sm-4 col-md-4">
                       {{ form_row(form.photo) }}
                       {{ form_row(form.nom_client) }}
                       {{ form_row(form.prenom_client) }}
                       {{ form_row(form.sexe) }}
                       {{ form_row(form.titre) }}
-                      {{ form_row(form.date_inscription) }}
-                      {{ form_row(form.etatcivile) }}
                   </div>
-                  <div class="col-6 col-sm-6 col-md-6">
+
+                  <div class="col-4 col-sm-4 col-md-4">  
                       {{ form_row(form.date_naissance) }}
                       <span id="age"></span>
                       {{ form_row(form.lieu_naissance) }}
                       {{ form_row(form.numeroMobile) }}
-                      {{ form_row(form.profession) }}
-                      {{ form_row(form.nomConjoint) }}
-                      {{ form_row(form.garant) }}
-                      {{ form_row(form.Agence) }}
+                      {{ form_row(form.etatcivile) }}
                   </div>
 
+                  <div class="col-4 col-sm-4 col-md-4">
+                      {{ form_row(form.profession) }}
+                      {{ form_row(form.nomConjoint) }}
+                      {{ form_row(form.date_inscription) }}
+                      {{ form_row(form.Agence) }}
+                      {{ form_row(form.garant) }}
+                  </div>
               </div>
             </div>
         </div>
@@ -44,11 +47,11 @@
                 <h6 class="text-center text-primary">Information familiale</h6>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6">
-                      {{ form_row(form.parent_nom) }}
                       {{ form_row(form.nb_enfant) }}
                       {{ form_row(form.nb_personne_charge) }}
                     </div>
                     <div class="col-6 col-sm-6">
+                      {{ form_row(form.parent_nom) }}
                       {{ form_row(form.parent_adresse) }}
                     </div>
                 </div>
@@ -95,25 +98,27 @@
         <div class="row shadow-sm p-1">
             <div class="col-12">
               <h6 class="text-center text-primary">Identite national </h6>
-                  <div class="row">                
+                   <div class="row">                
                       <div class="col-4 col-sm-4">
                         {{ form_row(form.TypeIdentite) }}
                         {{ form_row(form.cin) }}
-                        {{ form_row(form.datecin) }}
                       </div>
                       <div class="col-4 col-sm-4">
+                        {{ form_row(form.datecin) }}
                         {{ form_row(form.dateexpiration) }}
+                        <div style="display:none;">
+                        {{ form_row(form.codeclient) }}
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-md-4 ">
                         {{ form_row(form.lieudelivrance) }}
-                        <div id="individuel" style="display:none">
-                          {{ form_row(form.codeclient) }}
-                        </div>
-                        <div class="user-log">
                         {{ form_row(form.user) }}
-                        </div>
                       </div>
-                      <div class="col-sm-4 mt-5">
-                          <button class="btn btn-sm btn-primary">{{ button_label|default('Sauvegarder') }}</button>
-                      </div>
+                   </div>
+                  <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-sm btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+                    </div>
                   </div>
             </div>
         </div>

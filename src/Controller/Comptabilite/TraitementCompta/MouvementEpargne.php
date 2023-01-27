@@ -24,6 +24,7 @@ class MouvementEpargne
             // dd($planCompta);
 
             $compta = new MouvementComptable();
+            $compta->setCodeclient($transaction->getCodeepargneclient());
             $compta->setDateMouvement($transaction->getDateTransaction());
             $compta->setDescription($transaction->getDescription().' compte epargne ');
             $compta->setDebit($transaction->getMontant());
@@ -39,7 +40,7 @@ class MouvementEpargne
             }
 
             $em->persist($compta);
-            $em->flush();
+            // $em->flush();
 
             
            /**Credit */ 
@@ -47,7 +48,9 @@ class MouvementEpargne
            $compta = new MouvementComptable();
            $compta->setDateMouvement($transaction->getDateTransaction());
            $compta->setDescription($transaction->getDescription().' compte epargne ');
+           $compta->setCodeclient($transaction->getCodeepargneclient());
            $compta->setCredit($transaction->getMontant());
+           $compta->setSolde($transaction->getMontant());
            $compta->setRefTransaction($transaction->getCodetransaction());
            $compta->setPieceComptable($transaction->getPieceComptable());
 

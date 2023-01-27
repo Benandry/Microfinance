@@ -39,28 +39,60 @@ class MouvementComptableRepository extends ServiceEntityRepository
         }
     }
 
-    public function findJournal(): array
+    public function findJournal($debut,$fin): array
     {
-        $query = "
-            SELECT journal 
+        $query = "SELECT 
+                journal.dateMouvement,
+                journal.pieceComptable,
+                journal.debit,
+                journal.credit,
+                compta.NumeroCompte,
+                compta.Libelle
             FROM 
             App\Entity\MouvementComptable journal
+
+            INNER JOIN
+            App\Entity\PlanComptable compta
+            with compta.id = journal.planCompta
+            WHERE journal.dateMouvement BETWEEN :debut AND :fin
         ";
 
-        $stmt = $this->getEntityManager()->createQuery($query)->execute();
+        $stmt = $this->getEntityManager()
+                ->createQuery($query)
+                ->setParameter(':debut',$debut)
+                ->setParameter(':fin',$fin)
+                ->execute();
 
         return $stmt;
     }
 
-    public function findByGrandLivre(): array
+    public function findByGrandLivre($debut,$fin): array
     {
-        $query = "
-            SELECT journal 
-            FROM 
-            App\Entity\MouvementComptable journal
+        $query = "SELECT 
+                livre.dateMouvement,
+                livre.pieceComptable,
+                livre.description,
+                livre.description,
+                compta.NumeroCompte,
+                compta.Libelle,
+                livre.debit,
+                livre.credit,
+                livre.solde,
+                livre.refTransaction
+                FROM 
+                App\Entity\MouvementComptable livre
+                INNER JOIN
+                App\Entity\PlanComptable compta
+                with compta.id = livre.planCompta
+                WHERE livre.dateMouvement BETWEEN :debut AND :fin
+                -- GROUP BY livre.refTransaction
         ";
 
-        $stmt = $this->getEntityManager()->createQuery($query)->execute();
+        $stmt = $this->getEntityManager()
+                ->createQuery($query)
+                ->setParameter(':debut',$debut)
+                ->setParameter(':fin',$fin)
+                ->execute();
 
         return $stmt;
     }
