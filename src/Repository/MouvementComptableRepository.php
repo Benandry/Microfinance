@@ -96,4 +96,33 @@ class MouvementComptableRepository extends ServiceEntityRepository
 
         return $stmt;
     }
+
+    public function getBalance()
+    {
+        $query = "SELECT
+         compta.NumeroCompte,
+         compta.Libelle,
+        --  SUM (balance.solde) solde
+        balance.debit,
+        balance.credit,
+        balance.solde
+         FROM  
+        App\Entity\MouvementComptable balance
+        INNER JOIN
+        App\Entity\PlanComptable compta
+        with compta.id = balance.planCompta
+        INNER JOIN
+        App\Entity\Classes classe
+        with compta.classes = classe.id
+
+        WHERE classe.numero_classe = 1
+        -- GROUP BY compta.NumeroCompte
+        ";
+
+        $stmt = $this->getEntityManager()
+        ->createQuery($query)
+        ->execute();
+
+        return $stmt;
+    }
 }

@@ -1,0 +1,95 @@
+{% extends "base.html.twig" %}
+
+{% block title "Balance de compte " %}
+{% block head "Comptabilité>Balance de compte " %} 
+
+{% block body %}
+
+<div class="card p-2">
+    <div class="container">
+        <div class="card p-1 mb-3">
+            <div class="row m-3">
+                <div class="col-md-4 col-sm-4">
+                    <div class="d-flex justify-content-start fw-bolder">
+                        <div>
+                            <p> ONG Fidev <br/>
+                                Agence :  {{ app.user.agence.codeAgence }} - </br> 
+                                {{ app.user.agence.NomAgence }}  
+                            </p> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> <i class="fa fa-balance-scale"></i> Balance de compte </h5></div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="d-flex justify-content-end fw-bolder">
+                        <div>
+                            <p> Période <br/>
+                                Du  </br> 
+                                Au  <br/>
+                                Tenue du compte : Ar 
+                            </p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="defaultContainer defaultPanelOther collapsable" id="376557284">
+            <div class="defaultPanel defaultCard">
+                <table class="table display table1 table-bordered mt-5">
+                    <thead>
+                        <tr>
+                            <th rowspan="2"> N° de compte</th>
+                            <th rowspan="2"> Intitulee de compte </th>
+                            <th colspan="2" class="text-center"> Solde de compte </th>
+                        </tr>
+                        <tr>
+                            <th> Debit </th>
+                            <th> Credit </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for balance in classe1 %}
+                            <tr>
+                                <td> {{ balance.NumeroCompte }} </td>
+                                <td> {{ balance.Libelle }} </td>
+                                <td> 
+                                    {% if  balance.debit is null  %}
+                                
+                                    {% else %}
+                                        {{ balance.solde }} 
+                                    {% endif %}
+                                    
+                                </td>
+                                <td> 
+                                    {% if  balance.credit is null  %}
+                                
+                                    {% else %}
+                                        {{ balance.solde }} 
+                                    {% endif %}
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>classe 2</td>
+                            <td>classe 2</td>
+                            <td>classe 2</td>
+                            <td>classe 2</td>
+                        </tr>
+                        {# {% for balance in classe2 %}
+                            <tr>
+                                <td> {{ balance.NumeroCompte }} </td>
+                                <td> {{ balance.Libelle }} </td>
+                                <td> {{ balance.solde }} </td>
+                                <td> {{ balance.solde }} </td>
+                            </tr>
+                        {% endfor %} #}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+</div>
+{% endblock %}

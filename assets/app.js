@@ -65,9 +65,17 @@ $(document).ready(function(){
         
 
     $(".table1").DataTable({
-        dom: 'Bfrtip',
+        dom:  "Bfrtip",
         buttons: [
-            'excel','pdf','print'
+            {
+                "orientation":  "landscape",
+                "extend":  "pdfHtml5",
+                "pageSize":  "A3"
+            },
+            {
+                "extend":  "excelHtml5"
+            },
+            ,'print'
         ],
         language: {
             search: "Rechercher&nbsp;",
@@ -79,8 +87,28 @@ $(document).ready(function(){
                 next:       "Suivant",
                 last:       "Dernier"
             }
-        }
-      
+        },
+        lengthMenu:  [
+            [
+                15,
+                25,
+                50,
+                100,
+                -1
+            ],
+            [
+                15,
+                25,
+                50,
+                100,
+                "All"
+            ]
+        ],
+        order : true,
+        info : true,
+        responsive : {
+            "details":  true
+        },
     });
 
     $(".table2").DataTable({
