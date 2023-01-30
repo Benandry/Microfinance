@@ -123,6 +123,27 @@ class EtatController extends AbstractController
     public function balance(Request $request,MouvementComptableRepository $mouvementComptableRepository ):Response
     {
         $classe1 = $mouvementComptableRepository->getBalance();
+
+        $sumDebit = array_sum(array_column($classe1,'debit'));
+        $sumCredit = array_sum(array_column($classe1,'credit'));
+
+
+        // dd($sumDebit,$sumCredit);
+        // $table_debit = [];
+        // $table_credit = [];
+
+        // foreach ($classe1  as $key => $value) {
+        //     if ($value['debit'] == null) {
+        //         $table_debit[] = $value;
+        //     }else
+        //     {
+        //         $table_credit[] = $value;
+        //     }
+        // }
+
+        // dd($table_debit,$table_credit);
+
+
         // $classe2 = $mouvementComptableRepository->getBalance(2);
         // $classe3 = $mouvementComptableRepository->getBalance(3);
         // $classe4 = $mouvementComptableRepository->getBalance(4);
@@ -133,8 +154,8 @@ class EtatController extends AbstractController
         // dd($classe1);
         return $this->renderForm("Comptabilite/balance.html.twig",[
             'classe1' => $classe1,
-        //     'classe2' => $classe2,
-        //     'classe3' => $classe3,
+            'debit' => $sumDebit,
+            'credit' => $sumCredit,
         //     'classe4' => $classe4,
         //     'classe5' => $classe5,
         //     'classe6' => $classe6,
