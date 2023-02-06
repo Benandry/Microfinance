@@ -26,7 +26,6 @@
                                         {{ form_row(form.fraisTenuCpt) }}       
                                         {{ form_row(form.commissionRetCash) }}
                                         {{ form_row(form.commissionTransf) }}
-                                
                                         {{ form_row(form.fraisFermCpt) }}
                                         {{ form_row(form.soldeouvert) }}
                                     </div>
@@ -36,8 +35,8 @@
                             </div>
 
                             <div class="modal-footer">
+                        <a href="{{ path('app_config_ep_index') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Voir Liste</a>
                                 <button class="btn btn-primary btn-sm" >{{ button_label|default('Enregistrer') }}</button>
-                                <a href="{{ path('app_config_ep_index') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Voir Liste</a>
                             </div>
                         {{ form_end(form)}}
                     </div>

@@ -1,7 +1,8 @@
 import $ from 'jquery'
 //import 'jquery-modal'
 
-var path = window.location.pathname
+var path = window.location.pathname;
+
 $(document).ready(() =>{
 
     if (path === '/transaction/new') {
@@ -149,15 +150,12 @@ $(document).ready(() =>{
         
         })
 
-        // $('#form_code').on('keyup',function(){
-        //     console.log('hello')
-        // })
     }
 
     // epargne groupe : ici on recupere toute les informations 
     // concernant le groupe
 
-    if( path === '/depotgroupe' ){
+    if( path === '/transaction/depotgroupe' ){
         var codegroupe = $('#code_client').text()
         var nomgroupe = $('#nom').text()
         var solde = $('#solde_cli').text()

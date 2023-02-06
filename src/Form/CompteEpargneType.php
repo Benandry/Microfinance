@@ -32,9 +32,7 @@ class CompteEpargneType extends AbstractType
                 'choices'=>[
                     'INDIVIDUEL'=>'INDIVIDUEL',
                 ],
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
+                'disabled' => true,
             ])
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,

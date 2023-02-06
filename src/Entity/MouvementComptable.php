@@ -41,6 +41,12 @@ class MouvementComptable
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $codeclient = null;
 
+    #[ORM\ManyToOne(inversedBy: 'mouvementComptables')]
+    private ?Analytique $analytique = null;
+
+    #[ORM\ManyToOne(inversedBy: 'mouvementComptables')]
+    private ?PlanBudget $budgetaire = null;
+
 
     public function __toString()
     {
@@ -156,6 +162,30 @@ class MouvementComptable
     public function setCodeclient(string $codeclient): self
     {
         $this->codeclient = $codeclient;
+
+        return $this;
+    }
+
+    public function getAnalytique(): ?Analytique
+    {
+        return $this->analytique;
+    }
+
+    public function setAnalytique(?Analytique $analytique): self
+    {
+        $this->analytique = $analytique;
+
+        return $this;
+    }
+
+    public function getBudgetaire(): ?PlanBudget
+    {
+        return $this->budgetaire;
+    }
+
+    public function setBudgetaire(?PlanBudget $budgetaire): self
+    {
+        $this->budgetaire = $budgetaire;
 
         return $this;
     }

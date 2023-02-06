@@ -6,18 +6,27 @@
 {% block body %}
 
     {{ include('modal.html.twig') }}
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 text-secondary">
-            <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>   
-            <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p> 
-            <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p>    
+
+    <div class="card p-3">
+        <div class="card mb-3">
+            <div class="row text-secondary m-3">
+                <div class="col-xl-4 col-md-4 col-sm-4">
+                    <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>   
+                    <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p> 
+                </div>
+                
+                <div class="col-md-4 col-sm-4 m-auto">
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Ouvrir compte epargne </h5></div>
+                </div>
+                <div class="col-xl-4 col-md-4 col-sm-4">
+                    <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p> 
+                </div>
+            </div>              
         </div>
-    </div>
-              {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
-
-
-      {# /***************Messages succes ******************/#}
-            
+        <div class="fw-bold">
+            <hr/>
+        </div>
+        {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
         <div style="display: none;">
             <p> Text ecrit : <span id="text"> </span> </p>
             <p> Text ecrit : <span id="code_text"> </span> </p>
@@ -67,6 +76,13 @@
                     </tr>
                 </tbody>
             {% endfor %}
-    </table>
+        </table>
+    </div>
+
+
+
+      {# /***************Messages succes ******************/#}
+            
+
 {% endblock %}
 

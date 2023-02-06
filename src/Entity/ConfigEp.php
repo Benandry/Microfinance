@@ -49,6 +49,7 @@ class ConfigEp
     #[ORM\ManyToOne(inversedBy: 'ConfigDevise')]
     private ?Devise $deviseutiliser = null;
 
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MouvementComptable{% endblock %}
+
+{% block body %}
+    <h1>MouvementComptable</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mouvement_comptable.id }}</td>
+            </tr>
+            <tr>
+                <th>DateMouvement</th>
+                <td>{{ mouvement_comptable.dateMouvement ? mouvement_comptable.dateMouvement|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ mouvement_comptable.description }}</td>
+            </tr>
+            <tr>
+                <th>Debit</th>
+                <td>{{ mouvement_comptable.debit }}</td>
+            </tr>
+            <tr>
+                <th>Credit</th>
+                <td>{{ mouvement_comptable.credit }}</td>
+            </tr>
+            <tr>
+                <th>Solde</th>
+                <td>{{ mouvement_comptable.solde }}</td>
+            </tr>
+            <tr>
+                <th>RefTransaction</th>
+                <td>{{ mouvement_comptable.refTransaction }}</td>
+            </tr>
+            <tr>
+                <th>PieceComptable</th>
+                <td>{{ mouvement_comptable.pieceComptable }}</td>
+            </tr>
+            <tr>
+                <th>Codeclient</th>
+                <td>{{ mouvement_comptable.codeclient }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mouvement_comptable_index') }}">back to list</a>
+
+    <a href="{{ path('app_mouvement_comptable_edit', {'id': mouvement_comptable.id}) }}">edit</a>
+
+    {{ include('mouvement_comptable/_delete_form.html.twig') }}
+{% endblock %}

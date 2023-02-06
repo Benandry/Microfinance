@@ -15,7 +15,7 @@ class ComptaDecaissement
         $this->plan = $plan;    
     }
 
-    public function decaissement($em,$decaissement,$debit,$credit)
+    public function decaissement($em,$decaissement)
     {
         // Debit de decaissement
         $compta = new MouvementComptable;
@@ -26,16 +26,10 @@ class ComptaDecaissement
         $compta->setSolde($decaissement->getMontantCredit());
         $compta->setRefTransaction($decaissement->getRefDecaissement());
         $compta->setPieceComptable($decaissement->getPieceComptable());
-        if ($debit != null ) {
-            // dd($debit);
-            $compta->setPlanCompta($debit);
-        }
-        else{
-            $compta->setPlanCompta($this->plan->findPlanById(203)[0]);
-        }
+     
+        $compta->setPlanCompta($this->plan->findPlanById(203)[0]);
 
         $em->persist($compta);
-        $em->flush();
 
         $compta = new MouvementComptable;
         $compta->setCredit($decaissement->getMontantCredit());
@@ -45,15 +39,10 @@ class ComptaDecaissement
         $compta->setRefTransaction($decaissement->getRefDecaissement());
         $compta->setPieceComptable($decaissement->getPieceComptable());
 
-        if ($credit != null ) {
-            $compta->setPlanCompta($credit);
-        }else{
-            $compta->setPlanCompta($this->plan->findPlanById(10)[0]);
-        }
+       
+        $compta->setPlanCompta($this->plan->findPlanById(10)[0]);
 
         $em->persist($compta);
         $em->flush();
-
-        // dd($compta);
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MouvementComptable{% endblock %}
+
+{% block body %}
+    <h1>Edit MouvementComptable</h1>
+
+    {{ include('mouvement_comptable/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_mouvement_comptable_index') }}">back to list</a>
+
+    {{ include('mouvement_comptable/_delete_form.html.twig') }}
+{% endblock %}

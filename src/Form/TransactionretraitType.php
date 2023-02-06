@@ -64,30 +64,6 @@ class TransactionretraitType extends AbstractType
                 ],
             ])
 
-            ->add('debit',EntityType::class,[
-                'class' => PlanComptable::class,
-                'choice_label' => function($c){
-                    return $c->getNumeroCompte().' - '.$c->getLibelle();
-                },
-                'label'=>'Compte débité :',
-                'mapped'=>false,
-                'placeholder'=>"Compte débité ... ",
-                'required' => false,
-                'autocomplete' => true,
-            ])
-
-            ->add('credit',EntityType::class,[
-                    'class' => PlanComptable::class,
-                    'choice_label' => function($c){
-                        return $c->getNumeroCompte().' - '.$c->getLibelle();
-                    },
-                'label'=>'Compte crédité  :',
-                'mapped'=>false,
-                'required' => false,
-                'autocomplete' => true,
-                'placeholder'=>"Compte crédité  ... ",
-            ])
-
             ->add('solde',TextType::class,[
                 'attr'=>[
                     'class'=>'hidden'

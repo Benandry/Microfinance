@@ -507,9 +507,12 @@ class TransactionRepository extends ServiceEntityRepository
             WITH 
             tr.codeepargneclient = ce.codeepargne
             WHERE tr.codeepargneclient = '$code'
+            GROUP BY ce.codeepargne
             ");
 
             return  $query->getResult();
         }
+
+
 }
 

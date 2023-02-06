@@ -34,6 +34,10 @@ class PlanComptable
     }
 
 
+    public function __toString()
+    {
+        return $this->getId();
+    }
 
     public function getId(): ?int
     {

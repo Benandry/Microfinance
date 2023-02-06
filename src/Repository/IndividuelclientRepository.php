@@ -212,4 +212,43 @@ class IndividuelclientRepository extends ServiceEntityRepository
         return $stmt;
    }
 
+   /**
+    * Fonction pour afficher l'informatio du client
+    *
+    * @param  Int $id du client
+    * @return void
+    */
+    public function findClient($id){
+
+        $query = "SELECT
+            i.photo,
+            i.nom_client nomClient,
+            i.prenom_client prenomClient,
+            i.codeclient,
+            i.cin,
+            i.adressephysique adressePhysique,
+            i.numeroMobile,
+            i.profession,
+            i.nb_enfant nbEnfant,
+            i.nb_personne_charge nbPersonneCharge,
+            c.NomCommune,
+            c.CodeCommune,
+            etat.etatcivile
+         FROM 
+         App\Entity\Individuelclient i
+         INNER JOIN 
+         App\Entity\Commune c
+         with i.commune = c.id
+
+         INNER JOIN 
+         App\Entity\Etatcivile etat
+         with i.etatcivile = etat.id
+         WHERE i.id = $id";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
+
+
 }

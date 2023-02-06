@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block head %}
-    Retrait compte epargne 
+    Retrait compte epargne {{ nom }}
 {% endblock %}
 
 {% block body %}
@@ -15,16 +15,20 @@
             <div class="row text-secondary m-3">
                 <div class="col-xl-4 col-md-4 col-sm-4">
                     <p> <b>Compte epargne : </b><span id="code_epargne_groupe"> {{ code }}</span></p>
-                    <p> <b>Solde client : </b>
+                    <p> <b>Solde  : </b>
                         {% if solde != '' %}
-                            <span id="solde_cli">{{ solde }}</span>     
+                            <span id="solde_cli" style="display:none">{{ solde }}</span>    
+                            <span>{{ solde|number_format(0,',', ' ') }}</span>  
                         {% else %}
                             <span id="solde_cli">0</span>  
                         {% endif %} 
                     </p>
                 </div>
+                <div class="col-md-4 col-sm-4 m-auto">
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Retrait epargne </h5></div>
+                </div>
                 <div class="col-xl-4 col-md-4 col-sm-4">
-                    <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>
+                    <p><b> Nom groupe :</b> <span id="nom"> {{ nom }}</span></p>
                 </div>
             </div>
         </div>
@@ -55,25 +59,6 @@
             </div>
             
             <hr/>
-            <div class="row">
-                <h5 class="fw-bold text-center"> Comptabilité </h5>
-                <div class="col-sm-4 col-md-4">
-                    <h6 class="text-primary text-center"> Plan comptable (PCEC)</h6>
-                    {{ form_row(form.debit) }}
-                    {{ form_row(form.credit) }}
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <h6 class="text-primary text-center"> Plan analytique </h6>
-                    {# {{ form_row(form.debitAnalytique) }}
-                    {{ form_row(form.creditAnalytique) }} #}
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <h6 class="text-primary text-center"> Plan Budgetaire </h6>
-                    {# {{ form_row(form.papeterie) }}
-                    {{ form_row(form.montant_bruite) }} #}
-                </div>
-            </div>
-
             <div class="row">
                 <div class="d-flex justify-content-center">
                     <button class="btn btn-primary">{{ button_label|default('Valider le retrait') }}</button>

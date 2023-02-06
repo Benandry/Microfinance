@@ -11,13 +11,13 @@
 {% block body %}
 
     {# /***************Messages succes ******************/#}
-    <div class="text-center">
-        {% for message in app.flashes('success') %}
-            <strong class="alert alert-success">{{ message }}</strong>
-        {% endfor %}
+
+        {{ include('modal.html.twig') }}
+    <div class="d-flex justify-content-start">
+        <a href="{{ path('app_type_epargne_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajouter nouveau</a>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table2 table-bordered mt-3">
         <thead>
             <tr>
                 <th>Code type</th>
@@ -27,7 +27,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody class="jumbotron jumbotron-fluid text-ligth">
+        <tbody>
         {% for type_epargne in type_epargnes %}
             <tr>
                 <td>{{ type_epargne.id }}</td>
@@ -55,7 +55,4 @@
         {% endfor %}
         </tbody>
     </table>
-    <div>
-    <a href="{{ path('app_type_epargne_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajputer nouveau</a>
-    </div>
 {% endblock %}

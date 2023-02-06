@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-  Information sur les client {{ individuelclients.nomClient }}
+  Information sur les client {{ individuelclient.nomClient }}
 {% endblock %}
 
 {% block head %}
-  Information sur les client {{ individuelclients.nomClient }}
+  Information sur les client {{ individuelclient.nomClient }}
 {% endblock %}
 
 {% block body %}
@@ -27,11 +27,11 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{ asset('uploads/photo/' ~ individuelclients.getPhoto()  ) }}" alt="avatar"
+            <img src="{{ asset('uploads/photo/' ~ client.getPhoto()) }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;height:150px;border-radius:100%;">
-            <h5 class="my-3" style="color:black;"><b>{{ individuelclients.nomClient }}</b></h5>
-            <h5 class="my-3" style="color:black;"><b>{{ individuelclients.prenomClient }}</b></h5>
-            <h5 class="my-3" style="color:black;"><b> {{ individuelclients.codeclient }}</b></h5>
+            <h5 class="my-3" style="color:black;"><b>{{ individuelclient.nomClient }}</b></h5>
+            <h5 class="my-3" style="color:black;"><b>{{ individuelclient.prenomClient }}</b></h5>
+            <h5 class="my-3" style="color:black;"><b> {{ individuelclient.codeclient }}</b></h5>
             <p class="text-muted mb-1"></p>
             <p class="text-muted mb-4"></p>
             <div class="d-flex justify-content-center mb-2">
@@ -47,7 +47,7 @@
                 <p class="mb-0" style="color:black;">Carte d'identite National</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ individuelclients.cin|number_format(0,',', ' ') }}</p>
+                <p class="text-muted mb-0">{{ individuelclient.cin|number_format(0,',', ' ') }}</p>
               </div>
             </div>
             <hr>
@@ -57,19 +57,16 @@
                 <p class="mb-0" style="color:black;">Adresse</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ individuelclients.adressePhysique }}</p>
+                <p class="text-muted mb-0">{{ individuelclient.adressePhysique }}</p>
               </div>
             </div>
             <hr>
-
-            {% for commune in communes %}
-
              <div class="row">
               <div class="col-sm-6">
                 <p class="mb-0" style="color:black;">Code Commune </p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{commune.CodeCommune}}</p>
+                <p class="text-muted mb-0">{{individuelclient.CodeCommune}}</p>
               </div>
             </div>
             <hr>
@@ -79,18 +76,17 @@
                 <p class="mb-0" style="color:black;">Commune </p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{commune.NomCommune }}</p>
+                <p class="text-muted mb-0">{{individuelclient.NomCommune }}</p>
               </div>
             </div>
             <hr>
-              
-            {% endfor %}  
+                
             <div class="row">
               <div class="col-sm-6">
                 <p class="mb-0" style="color:black;">Numero Telephone</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ individuelclients.numeroMobile }}</p>
+                <p class="text-muted mb-0">{{ individuelclient.numeroMobile }}</p>
               </div>
             </div>
             <hr>
@@ -99,7 +95,7 @@
                 <p class="mb-0" style="color:black;">Profession</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{ individuelclients.profession }}</p>
+                <p class="text-muted mb-0">{{ individuelclient.profession }}</p>
               </div>
             </div>
               <hr/>
@@ -108,7 +104,7 @@
                 <p class="mb-0" style="color:black;">Etat Civile</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{etatciviles.etatcivile}}</p>
+                <p class="text-muted mb-0">{{individuelclient.etatcivile}}</p>
               </div>
             </div>
               <hr/>
@@ -118,7 +114,7 @@
                 <p class="mb-0" style="color:black;">Nombre d'enfant</p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{individuelclients.nbEnfant}}</p>
+                <p class="text-muted mb-0">{{individuelclient.nbEnfant}}</p>
               </div>
             </div>
             <hr/>
@@ -128,7 +124,7 @@
                 <p class="mb-0" style="color:black;">Nombre personne en charge </p>
               </div>
               <div class="col-sm-6">
-                <p class="text-muted mb-0">{{individuelclients.nbPersonneCharge}}</p>
+                <p class="text-muted mb-0">{{individuelclient.nbPersonneCharge}}</p>
               </div>
             </div>
             <hr/>

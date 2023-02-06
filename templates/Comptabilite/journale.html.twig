@@ -127,7 +127,7 @@
                             {% if journal.debit is null %}
 
                             {% else %}
-                                {{ journal.debit|number_format(0,',', ' ')}}
+                                {{ journal.debit|abs|number_format(0,',', ' ')}}
                             {% endif %}
                             
                         </td>
@@ -135,7 +135,7 @@
                             {% if journal.credit is null %}
 
                             {% else %}
-                                {{ journal.credit|number_format(0,',', ' ')}}
+                                {{ journal.credit|abs|number_format(0,',', ' ')}}
                             {% endif %}
                             
                         </td>
@@ -145,8 +145,8 @@
             <foot>
             <tr>
                 <th colspan="6">Totaux : </th>
-                <th> {{ totalDebit|number_format(0,',', ' ') }} </th>
-                <th> {{ totalCredit|number_format(0,',', ' ') }} </th>
+                <th> {{ totalDebit|abs|number_format(0,',', ' ') }} </th>
+                <th> {{ totalCredit|abs|number_format(0,',', ' ') }} </th>
             </tr>
             </foot>
         </table>

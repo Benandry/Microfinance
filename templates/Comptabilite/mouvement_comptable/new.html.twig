@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comptable >Nouveau Traitement {% endblock %}
+{% block head %}Comptable >Nouveau Traitement {% endblock %}
+
+{% block body %}
+{{ include('modal.html.twig') }}
+<div class="card p-2">
+    <div class="container">
+        <div class="card p-1 mb-3">
+            <div class="row m-3">
+                <div class="col-md-4 col-sm-4">
+                    <div class="d-flex justify-content-start fw-bolder">
+                        <div>
+                            <p> ONG Fidev <br/>
+                                Agence :  {{ app.user.agence.codeAgence }} - </br> 
+                                {{ app.user.agence.NomAgence }}  
+                            </p> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Nouveau Traitement </h5></div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="d-flex justify-content-end fw-bolder">
+                        <div>
+                        <a href="{{ path('app_mouvement_comptable_index') }}">Liste </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ include('Comptabilite/mouvement_comptable/_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

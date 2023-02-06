@@ -649,32 +649,43 @@ class CompteEpargneRepository extends ServiceEntityRepository
         i.nom_client,
         i.prenom_client,
         i.cin,
-        i.numero_mobile telephone,
+        i.numeroMobile telephone,
         i.profession ,
         i.adressephysique adresse,
         i.nb_personne_charge charge,
         ce.codeepargne code_epargne,
+        ce.id,
+        ce.datedebut,
+        i.codeclient,
+        i.id idcli,
         -- -- PRODUIT EPARGNE
         p.nomproduit,
+        p.nomproduit,
+        t.abreviation,
         -- -- TYPE EPARGNE
-        ------Commune --------------
-        c.NomCommune commune,
-        c.CodeCommune code_commune
+        ----Solde --------------
+        SUM(tr.Montant) solde
         -- te
         FROM
         App\Entity\CompteEpargne ce
         INNER JOIN
         App\Entity\Individuelclient i
         WITH ce.codeep = i.codeclient
-        INNER JOIN
-        App\Entity\Commune c
-        WITH c.NomCommune = i.commune
+        LEFT JOIN
+        App\Entity\Transaction tr
+        with tr.codeepargneclient = ce.codeepargne
         INNER JOIN
         App\Entity\ProduitEpargne p
         WITH
         ce.produit = p.id
+
+        INNER JOIN
+        App\Entity\TypeEpargne t
+        WITH
+        t.id = p.typeEpargne
         WHERE
-        ce.id = $id "
+        ce.id = $id 
+        GROUP BY ce.codeepargne"
         );
 
         return $query->getResult();

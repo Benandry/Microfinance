@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MouvementComptable index{% endblock %}
+
+{% block body %}
+    <h1>MouvementComptable index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateMouvement</th>
+                <th>Description</th>
+                <th>Debit</th>
+                <th>Credit</th>
+                <th>Solde</th>
+                <th>RefTransaction</th>
+                <th>PieceComptable</th>
+                <th>Codeclient</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mouvement_comptable in mouvement_comptables %}
+            <tr>
+                <td>{{ mouvement_comptable.id }}</td>
+                <td>{{ mouvement_comptable.dateMouvement ? mouvement_comptable.dateMouvement|date('Y-m-d') : '' }}</td>
+                <td>{{ mouvement_comptable.description }}</td>
+                <td>{{ mouvement_comptable.debit }}</td>
+                <td>{{ mouvement_comptable.credit }}</td>
+                <td>{{ mouvement_comptable.solde }}</td>
+                <td>{{ mouvement_comptable.refTransaction }}</td>
+                <td>{{ mouvement_comptable.pieceComptable }}</td>
+                <td>{{ mouvement_comptable.codeclient }}</td>
+                <td>
+                    <a href="{{ path('app_mouvement_comptable_show', {'id': mouvement_comptable.id}) }}">show</a>
+                    <a href="{{ path('app_mouvement_comptable_edit', {'id': mouvement_comptable.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mouvement_comptable_new') }}">Create new</a>
+{% endblock %}

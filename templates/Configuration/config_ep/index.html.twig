@@ -9,27 +9,10 @@
 {% endblock %}
 {% block body %}
   {# /***************Messages succes ******************/#}
-  {% for message in app.flashes('success') %}
-  <!-- The Modal -->
-  <div class="modal fade" id="myModal">
-      <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-              <!-- Modal body -->
-              <div class="modal-body">
-                  <strong>{{ message }}</strong>
-              </div>
-              
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
-              </div>
-          </div>
-      </div>
-  </div>
-{% endfor %}
+  {{ include('modal.html.twig') }}
 
     <table class="table table-bordered">
-        <thead class="alert alert-success">
+        <thead>
             <tr>
                 <th>Code Nom Produit</th>
                 <th>Negatif</th>
@@ -41,9 +24,10 @@
                 <th>Commission retrait cash</th>
                 <th>Commission transaction</th>
                 <th>Frais Fermeture compte</th>
+                <th>Actions</th>
             </tr>
         </thead>
-        <tbody class="jumbotron jumbotron-fluid">
+        <tbody>
         {% for config_ep in config_eps %}
             <tr>
                 <td>{{ config_ep.produitEpargne }}</td>
@@ -56,6 +40,16 @@
                 <td>{{ config_ep.commissionRetCash }}</td>
                 <td>{{ config_ep.commissionTransf }}</td>
                 <td>{{ config_ep.fraisFermCpt }}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-4 col-sm-4">
+                            <a href="{{ path('app_config_ep_show', {'id': config_ep.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-4 col-sm-4">
+                            <a href="{{ path('app_config_ep_edit', {'id': config_ep.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
