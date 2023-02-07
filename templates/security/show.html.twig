@@ -7,24 +7,38 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <table class="table">
-                <tr>
-                    <th> Nom: </th>
-                    <td> {{ users.nom }} </td>
-                </tr>
-                <tr>
-                    <th> Prenom :</th>
-                    <td> {{ users.prenom }} </td>
-                </tr>
-                <tr>
-                    <th> Responsable : </th>
-                    <td> {{ users.responsabilite }} </td>
-                </tr>
-                <tr>
-                    <th> Agence : </th>
-                    <td> {{ users.agence.NomAgence }} </td>
-                </tr>
-            </table>
+            <div class="col-lg-4 col-sm-4 col-md-8">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold text-center">  
+                            <img class="img-fluid avatar" src="{{ asset('images/img_avatar.png') }}" width="150" alt="AVATAR" style="border-radius: 50%;" >
+                        </h5>
+                        <h5 class="my-3" style="color:black;"><b>{{ users.prenom }}</b></h5>
+                        <div class="d-flex justify-content-center mb-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-md-8">
+                <table class="table">
+                    <tr>
+                        <th> Nom et Prenom : </th>
+                        <td> {{ users.nom }} {{ users.prenom }}  </td>
+                    </tr>
+                    <tr>
+                        <th> Responsable : </th>
+                        <td> {{ users.responsabilite }} </td>
+                    </tr>
+                    <tr>
+                        <th> Agence : </th>
+                        <td> {{ users.agence.NomAgence }} </td>
+                    </tr>
+                    <tr>
+                        <th> Agence : </th>
+                        <td> {{ users.agence.codeAgence }} </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}

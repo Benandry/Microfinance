@@ -19,14 +19,14 @@ class TypeEpargneType extends AbstractType
             ])
             ->add('abreviation',ChoiceType::class,[
                 'placeholder' => "Type de client ...",
-                'choices'=>[
-                    'DAV'=>'DAV',
-                    'DAT'=>'DAT',
-                    'DA'=>'DA',
-                    'PEP' => 'PEP',
-                    'BDC' => 'BDC',
-                    'DDG' => 'DDG',
-                    'Autre' => 'autre produit epargne '
+                'choices'=>[ 
+                    'DAV -- Depot a vue'=>'DAV',
+                    'DAT -- Dépôts à terme'=>'DAT',
+                    'DA -- Depot Salaire'=>'DA',
+                    'PEP -- Compte d\'épargne à régime spécial' => 'PEP',
+                    'BDC -- Bon de Caisse' => 'BDC',
+                    'DDG -- Dépôts de garantie' => 'DDG',
+                    'autre produit epargne' => 'Autre'
                 ],
             ])
             ->add('description')

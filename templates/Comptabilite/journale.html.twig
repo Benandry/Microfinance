@@ -72,13 +72,10 @@
                 <tr>
                     <th rowspan="2"> Date </th>
                     <th rowspan="2"> Piéce comptable </th>
-                    <th colspan="2" class="text-center"> N de compte</th>
-                    <th colspan="2" class="text-center"> Libéllé</th>
+                    <th colspan="2" class="text-center"> N de compte et Libéllé</th>
                     <th colspan="2" class="text-center"> Montants </th>
                 </tr>
                 <tr>
-                    <th> Débits </th>
-                    <th> Crédit </th>
                     <th> Débits </th>
                     <th> Crédit </th>
                     <th> Débits </th>
@@ -94,7 +91,7 @@
                             {% if journal.debit is null %}
 
                             {% else %}
-                                {{ journal.NumeroCompte}}  
+                                {{ journal.NumeroCompte}} -- {{ journal.Libelle}}
                             {% endif %}
                             
                         </td>
@@ -102,24 +99,7 @@
                             {% if journal.credit is null %}
 
                             {% else %}
-                                {{ journal.NumeroCompte}}  
-                            {% endif %}
-                            
-                        </td>
-
-                        <td>   
-                            {% if journal.debit is null %}
-
-                            {% else %}
-                                {{ journal.Libelle}}
-                            {% endif %}
-                            
-                        </td>
-                        <td>   
-                            {% if journal.credit is null %}
-
-                            {% else %}
-                                {{ journal.Libelle}}
+                                {{ journal.NumeroCompte}} -- {{ journal.Libelle}}
                             {% endif %}
                             
                         </td>
@@ -144,7 +124,7 @@
             </tbody>
             <foot>
             <tr>
-                <th colspan="6">Totaux : </th>
+                <th colspan="4">Totaux : </th>
                 <th> {{ totalDebit|abs|number_format(0,',', ' ') }} </th>
                 <th> {{ totalCredit|abs|number_format(0,',', ' ') }} </th>
             </tr>
