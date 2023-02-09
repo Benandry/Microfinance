@@ -39,7 +39,6 @@ class MouvementComptableRepository extends ServiceEntityRepository
         }
     }
 
-<<<<<<< HEAD
     public function findJournal($debut,$fin): array
     {
         $query = "SELECT 
@@ -123,17 +122,6 @@ class MouvementComptableRepository extends ServiceEntityRepository
         $stmt = $this->getEntityManager()
         ->createQuery($query)
         ->execute();
-=======
-    public function findJournal(): array
-    {
-        $query = "
-            SELECT journal 
-            FROM 
-            App\Entity\MouvementComptable journal
-        ";
-
-        $stmt = $this->getEntityManager()->createQuery($query)->execute();
->>>>>>> refs/remotes/origin/main
 
         return $stmt;
     }

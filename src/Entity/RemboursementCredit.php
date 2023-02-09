@@ -44,8 +44,6 @@ class RemboursementCredit
     #[ORM\Column(nullable: true)]
     private ?float $penalite = null;
 
-<<<<<<< HEAD
-=======
     #[ORM\Column(length: 255)]
     private ?string $Commentaire = null;
 
@@ -58,7 +56,6 @@ class RemboursementCredit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $TypeClient = null;
 
->>>>>>> refs/remotes/origin/main
     public function getId(): ?int
     {
         return $this->id;
@@ -183,8 +180,6 @@ class RemboursementCredit
 
         return $this;
     }
-<<<<<<< HEAD
-=======
 
     public function getCommentaire(): ?string
     {
@@ -238,5 +233,4 @@ class RemboursementCredit
 
         return $this;
     }
->>>>>>> refs/remotes/origin/main
 }

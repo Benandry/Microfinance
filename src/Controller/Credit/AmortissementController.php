@@ -24,19 +24,12 @@ class AmortissementController extends AbstractController
 
     //    dd($info);
         $tableau_amortissement = $repoAmortisssement->findAmortissement($codecredit);
-<<<<<<< HEAD
-        
-        $sumMontant = array_sum(array_column($tableau_amortissement,'principale'));
-        $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
-        $sumNet = array_sum(array_column($tableau_amortissement,'montanttTotal'));
-=======
         $sumMontant = array_sum(array_column($tableau_amortissement,'principale'));
         $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
         $sumNet = array_sum(array_column($tableau_amortissement,'montanttTotal'));
         $soldedu=array_sum(array_column($tableau_amortissement,'soldedu'));
 
         // dd($soldedu);
->>>>>>> refs/remotes/origin/main
 
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class,[
@@ -62,10 +55,7 @@ class AmortissementController extends AbstractController
             'totalMontant' => $sumMontant,
             'totalInteret' => $sumInteret,
             'totalNet' => $sumNet,
-<<<<<<< HEAD
-=======
             'soldedu'=>$soldedu,
->>>>>>> refs/remotes/origin/main
             'form' => $form->createView(),
              'codecredit' => $codecredit,
         ]);

@@ -1,10 +1,7 @@
 @import './custom/custom';
 @import '~bootstrap/scss/bootstrap';
 @import "~datatables.net-bs5/css/dataTables.bootstrap5.min";
-<<<<<<< HEAD
 @import "~datatables.net-dt/css/jquery.dataTables.min";
-=======
->>>>>>> refs/remotes/origin/main
 //@import '~jquery/jquerymodal.css';
 
 
@@ -184,8 +181,6 @@ form div a{
 
 .chart{
     padding: 2rem;
-    border: 1px solid #f49131;
     border-radius: 1rem;
-    box-shadow: 0 0 16px rgba(0,0, 0,0.8);
     background: #ccdbe3;
 }

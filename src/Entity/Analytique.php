@@ -3,11 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnalytiqueRepository;
-<<<<<<< HEAD
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-=======
->>>>>>> refs/remotes/origin/main
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnalytiqueRepository::class)]
@@ -27,7 +24,6 @@ class Analytique
     #[ORM\Column(length: 255)]
     private ?string $percent = null;
 
-<<<<<<< HEAD
     #[ORM\OneToMany(mappedBy: 'analytique', targetEntity: MouvementComptable::class)]
     private Collection $mouvementComptables;
 
@@ -36,8 +32,6 @@ class Analytique
         $this->mouvementComptables = new ArrayCollection();
     }
 
-=======
->>>>>>> refs/remotes/origin/main
     public function getId(): ?int
     {
         return $this->id;
@@ -78,7 +72,6 @@ class Analytique
 
         return $this;
     }
-<<<<<<< HEAD
 
     /**
      * @return Collection<int, MouvementComptable>
@@ -109,6 +102,4 @@ class Analytique
 
         return $this;
     }
-=======
->>>>>>> refs/remotes/origin/main
 }

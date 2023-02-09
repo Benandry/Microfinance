@@ -3,11 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlanBudgetRepository;
-<<<<<<< HEAD
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-=======
->>>>>>> refs/remotes/origin/main
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlanBudgetRepository::class)]
@@ -30,7 +27,6 @@ class PlanBudget
     #[ORM\Column(length: 255)]
     private ?string $TypeBudget = null;
 
-<<<<<<< HEAD
     #[ORM\OneToMany(mappedBy: 'budgetaire', targetEntity: MouvementComptable::class)]
     private Collection $mouvementComptables;
 
@@ -39,8 +35,6 @@ class PlanBudget
         $this->mouvementComptables = new ArrayCollection();
     }
 
-=======
->>>>>>> refs/remotes/origin/main
     public function getId(): ?int
     {
         return $this->id;
@@ -93,7 +87,6 @@ class PlanBudget
 
         return $this;
     }
-<<<<<<< HEAD
 
     /**
      * @return Collection<int, MouvementComptable>
@@ -124,6 +117,4 @@ class PlanBudget
 
         return $this;
     }
-=======
->>>>>>> refs/remotes/origin/main
 }

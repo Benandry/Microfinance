@@ -30,29 +30,15 @@ class Types
         $interetTotal = $data->getMontant() * ($data->getTauxInteretAnnuel()/100);
         $interet = $interetTotal / $tranche;
         $netPayer = $capitalDu + $interet;
-<<<<<<< HEAD
-
-        $tableau_amort = [ 
-=======
         $soldedu=$netPayer;
 
         $tableau_amort = [
->>>>>>> refs/remotes/origin/main
             [
                 'periode' => 1, 
                 'dateRemb' => $dateRemb,
                 'CapitalDu' =>$capitalDu,
                 "interet" => $interet,
                 "montantPayer" =>$netPayer,
-<<<<<<< HEAD
-            ],  
-        ];
-
-        /******************************Amortissement simple ******************* */
-        for ( $i = 1 ; $i < $tranche; $i++ ) {
-            $dateRemb =  date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
-            array_push($tableau_amort,[
-=======
                 "soldedu"=>$soldedu,
             ],  
         ];
@@ -68,17 +54,11 @@ class Types
             $soldedu+=$netPayer;
 
            array_push($tableau_amort,[
->>>>>>> refs/remotes/origin/main
                 'periode'=> $i+1,
                 'dateRemb'=>$dateRemb,
                 'CapitalDu'=>$capitalDu,
                 'interet'=>$interet,
                 'montantPayer'=>$netPayer,
-<<<<<<< HEAD
-            ]);
-        }
-
-=======
                 "soldedu"=>$soldedu,
             ]);
 
@@ -86,7 +66,6 @@ class Types
 
         // dd($tableau_amort);
 
->>>>>>> refs/remotes/origin/main
         /***Insertion dans la base de donner */
                         
         $entityManager = $this->doctine->getManager();
@@ -100,10 +79,7 @@ class Types
             $amortissement->setCodeclient($codeclient);
             $amortissement->setCodecredit($codecredit);
             $amortissement->setTypeamortissement('simple');
-<<<<<<< HEAD
-=======
             $amortissement->setSoldedu($tableau_amort[$i]['soldedu']);
->>>>>>> refs/remotes/origin/main
             
             $entityManager->persist($amortissement);
             $entityManager->flush();
@@ -126,10 +102,7 @@ class Types
         $dateRemb = date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
         $interet = $capitalRestantDu * $tauxInteret;
         $amortissement = $annuite_constante - $interet;
-<<<<<<< HEAD
-=======
         $soldedu=$annuite_constante;
->>>>>>> refs/remotes/origin/main
 
         $tableau_amortissement = [ 
             [
@@ -139,10 +112,7 @@ class Types
                 "interet" => $interet,
                 'remboursement' => $amortissement,
                 'annuite' => $annuite_constante,
-<<<<<<< HEAD
-=======
                 'soldedu'=>$soldedu
->>>>>>> refs/remotes/origin/main
             ], 
         ];
 
@@ -155,11 +125,8 @@ class Types
             //amortissement restant
             $amortissement = $annuite_constante - $interet;
             $dateRemb = date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
-<<<<<<< HEAD
-=======
             // Solde du
             $soldedu+=$annuite_constante;
->>>>>>> refs/remotes/origin/main
             array_push($tableau_amortissement,[
                 'periode'=> $i+1,
                 'dateRemb' => $dateRemb ,
@@ -167,10 +134,7 @@ class Types
                 "interet" => $interet,
                 'remboursement' => $amortissement,
                 'annuite' => $annuite_constante,
-<<<<<<< HEAD
-=======
                 'soldedu'=>$soldedu
->>>>>>> refs/remotes/origin/main
             ]);
         }
 
@@ -186,10 +150,7 @@ class Types
             $amortissement->setCodeclient($codeclient);
             $amortissement->setCodecredit($codecredit);
             $amortissement->setTypeamortissement('anuuite constante');
-<<<<<<< HEAD
-=======
             $amortissement->setSoldedu($tableau_amortissement[$i]['soldedu']);
->>>>>>> refs/remotes/origin/main
             
             $entityManager->persist($amortissement);
             $entityManager->flush();
@@ -210,10 +171,7 @@ class Types
         $amortissement_constante = $montant/ $tranche ;
         $interet = $montant *$taux;
         $annuite = $amortissement_constante + $interet;
-<<<<<<< HEAD
-=======
         $soldedu=$annuite;
->>>>>>> refs/remotes/origin/main
 
         
         $dateRemb = date('Y/m/d');
@@ -226,10 +184,7 @@ class Types
                 'interet' => $interet,
                 'remboursement' => $amortissement_constante,
                 'annuite' => $annuite,
-<<<<<<< HEAD
-=======
                 'soldedu' => $soldedu,
->>>>>>> refs/remotes/origin/main
             ]
         ];
 
@@ -240,12 +195,9 @@ class Types
             $interet = $montant * $taux;
             $annuite = $amortissement_constante + $interet;
             $dateRemb = date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
-<<<<<<< HEAD
-=======
 
             // Solde du
             $soldedu+=$annuite;
->>>>>>> refs/remotes/origin/main
             array_push($tableau_amortissement,[
                 'periode' => $i+1,
                 'dateRemboursement' => $dateRemb,
@@ -253,10 +205,7 @@ class Types
                 'interet' => $interet,
                 'remboursement' => $amortissement_constante,
                 'annuite' => $annuite,
-<<<<<<< HEAD
-=======
                 'soldedu' => $soldedu
->>>>>>> refs/remotes/origin/main
             ]);
         }
 
@@ -272,10 +221,7 @@ class Types
             $amortissement->setCodeclient($codeclient);
             $amortissement->setCodecredit($codecredit);
             $amortissement->setTypeamortissement("amortissement constante");
-<<<<<<< HEAD
-=======
             $amortissement->setSoldedu($tableau_amortissement[$i]['soldedu']);
->>>>>>> refs/remotes/origin/main
             
             $entityManager->persist($amortissement);
             $entityManager->flush();

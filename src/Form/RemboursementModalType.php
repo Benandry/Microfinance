@@ -3,10 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-<<<<<<< HEAD
-=======
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
->>>>>>> refs/remotes/origin/main
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,11 +14,6 @@ class RemboursementModalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-<<<<<<< HEAD
-            ->add('codecredit',TextType::class)
-            ->add('Suivant',SubmitType::class)
-        ;
-=======
             ->add('typeclient',ChoiceType::class,[
                 'placeholder'=>'Type Client',
                 'choices'=>[
@@ -46,7 +38,6 @@ class RemboursementModalType extends AbstractType
                 'required'=>false
             ])
             ;
->>>>>>> refs/remotes/origin/main
     }
 
     public function configureOptions(OptionsResolver $resolver): void

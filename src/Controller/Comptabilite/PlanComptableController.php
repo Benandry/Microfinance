@@ -21,10 +21,6 @@ class PlanComptableController extends AbstractController
 
         return $this->render('plan_comptable/index.html.twig', [
             'plan_comptables' => $planComptableRepository->findAll(),
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/main
         ]);
     }
 

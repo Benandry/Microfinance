@@ -4,10 +4,7 @@ namespace App\Form;
 
 use App\Entity\ConfigEp;
 use App\Entity\Devise;
-<<<<<<< HEAD
 use App\Entity\PlanComptable;
-=======
->>>>>>> refs/remotes/origin/main
 use App\Entity\ProduitEpargne;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -25,10 +22,6 @@ class ConfigEpType extends AbstractType
             ->add('produitEpargne',EntityType::class,[
                 'class'=>ProduitEpargne::class,
                 'choice_label'=>'nomproduit',
-<<<<<<< HEAD
-=======
-                'by_reference'=>false,
->>>>>>> refs/remotes/origin/main
                 'mapped'=>true,
                 'label'=>'Produit',
                 'attr'=>[

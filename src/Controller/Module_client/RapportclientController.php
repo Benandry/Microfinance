@@ -229,11 +229,7 @@ class RapportclientController extends AbstractController
             $rapportClient = $agenceRepository->findClientParAgence($agence,$debut,$fin);
            //dd($rapportClient);
         }
-<<<<<<< HEAD
         // dd($rapportClient);
-=======
-        dd($rapportClient);
->>>>>>> refs/remotes/origin/main
 
         return $this->render('Module_client/rapportclient/agence.html.twig',[
              'form' => $form->createView(),

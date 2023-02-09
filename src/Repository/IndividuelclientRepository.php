@@ -212,7 +212,6 @@ class IndividuelclientRepository extends ServiceEntityRepository
         return $stmt;
    }
 
-<<<<<<< HEAD
    /**
     * Fonction pour afficher l'informatio du client
     *
@@ -251,7 +250,20 @@ class IndividuelclientRepository extends ServiceEntityRepository
         return $statement;
     }
 
+    /**
+     * Fonction qui recupere le client s'il la numero cin qui correspond
+     * 
+     */
+    public function findByNumeroCin($numero_cin){
 
-=======
->>>>>>> refs/remotes/origin/main
+        $query = "SELECT
+         i
+         FROM 
+         App\Entity\Individuelclient i
+         WHERE i.cin = $numero_cin";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
 }

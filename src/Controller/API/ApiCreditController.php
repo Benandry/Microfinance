@@ -59,17 +59,10 @@ class ApiCreditController extends AbstractController
     /**
      * Fonction qui recupere les api remboursement selon les periodes
      */
-<<<<<<< HEAD
-    #[Route('/remboursement/periode/{numerocredit}',name:'app_remboursement_periode')]
-    public function ApiRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
-    {
-        $remboursement=$remboursementCreditRepository->ApiRemboursement($numerocredit);
-=======
     #[Route('/remboursement/periode/{numerocredit}/{periode}',name:'app_remboursement_periode')]
     public function ApiRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit,int $periode):Response
     {
         $remboursement=$remboursementCreditRepository->ApiRemboursement($numerocredit,$periode);
->>>>>>> refs/remotes/origin/main
 
         return new JsonResponse($remboursement);
     }
@@ -82,8 +75,6 @@ class ApiCreditController extends AbstractController
         // dd($cycle);
         return new JsonResponse($cycle);
     }
-<<<<<<< HEAD
-=======
      /**
      * Fonction qui recupere les api remboursement sur le modal
      */
@@ -119,5 +110,4 @@ class ApiCreditController extends AbstractController
     }
 
 
->>>>>>> refs/remotes/origin/main
 }

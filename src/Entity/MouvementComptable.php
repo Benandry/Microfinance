@@ -38,7 +38,6 @@ class MouvementComptable
     #[ORM\ManyToOne(inversedBy: 'mouvementComptables')]
     private ?PlanComptable $planCompta = null;
 
-<<<<<<< HEAD
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $codeclient = null;
 
@@ -48,8 +47,6 @@ class MouvementComptable
     #[ORM\ManyToOne(inversedBy: 'mouvementComptables')]
     private ?PlanBudget $budgetaire = null;
 
-=======
->>>>>>> refs/remotes/origin/main
 
     public function __toString()
     {
@@ -156,7 +153,6 @@ class MouvementComptable
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getCodeclient(): ?string
     {
@@ -193,6 +189,4 @@ class MouvementComptable
 
         return $this;
     }
-=======
->>>>>>> refs/remotes/origin/main
 }

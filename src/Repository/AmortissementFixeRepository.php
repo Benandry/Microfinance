@@ -101,10 +101,7 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         a.montanttTotal ,
         a.remboursement,
         a.annuite,
-<<<<<<< HEAD
-=======
         a.soldedu,
->>>>>>> refs/remotes/origin/main
         a.codecredit
         FROM App\Entity\AmortissementFixe a
         where a.codecredit = '$codeCredit'
@@ -136,8 +133,4 @@ class AmortissementFixeRepository extends ServiceEntityRepository
 
         return $statement;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
 }

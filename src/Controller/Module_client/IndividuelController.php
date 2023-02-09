@@ -70,17 +70,21 @@ class IndividuelController extends AbstractController
                 $brochureFileName = $fileUploader->upload($brochureFile);
                 $individuelclient->setPhoto($brochureFileName);
             }
-<<<<<<< HEAD
 
+            //Get le numero de cin de nouveau client et verifier s'il existe ou pas
             $numero_cin = $individuelclient->getCin();
+            $cin_client = $individuelclientRepository->findByNumeroCin($numero_cin);
 
-            dd($numero_cin);
-
-=======
->>>>>>> refs/remotes/origin/main
-            $individuelclientRepository->add($individuelclient,True);
+            if($cin_client){
+                //Client deja existe
+                $this->addFlash("error","Ajout de nouveau client:  ' ".$individuelclient-> getNomClient()."  " . $individuelclient->getPrenomClient()."  est impossible car son numero de cin ' ".$numero_cin." ' est deja existe dans la base de donnee !!");
+                return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
+            }else{
+                // Le nouveau client n'existe pas dans la base et on peut ajouter
+                $individuelclientRepository->add($individuelclient,True);
                 $this->addFlash('success', "Ajout de nouveau client:  ' ".$individuelclient-> getNomClient()."  " . $individuelclient->getPrenomClient()." ' avec code ".$individuelclient->getCodeclient()."  reussite!!");
                 return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('Module_client/individuel/new.html.twig', [
@@ -93,34 +97,12 @@ class IndividuelController extends AbstractController
 
     #[Route('/{id}', name: 'app_individuel_show', methods: ['GET'])]
     // #[ParamConverter('get',class:'SensioBlogBundle:Get')]
-<<<<<<< HEAD
     public function show(IndividuelclientRepository $individuelclientRepository,Individuelclient $client,int $id ): Response
     {
         $individuelclient = $individuelclientRepository->findClient($id);
         return $this->render('Module_client/individuel/show.html.twig', [
             'individuelclient' => $individuelclient[0],
             'client'=> $client
-=======
-    public function show(ManagerRegistry $docrtine,Individuelclient $individuelclient,AgenceRepository $agenceRepository,int $id,IndividuelclientRepository $individuelRepo ): Response
-    {
-        $individuelclient=$docrtine->getRepository(Individuelclient::class)->find($id);
-        $Commune= $individuelRepo->InfoCommuneClient($id) ;
-
-        #dd($Commune[0]);
-        $etude=$individuelclient->getEtude();
-        $titre=$individuelclient->getTitre();
-        $etatcivile=$individuelclient->getEtatcivile();
-        //Agence
-        $agence=$agenceRepository->findAll(); 
-
-        return $this->render('Module_client/individuel/show.html.twig', [
-            'individuelclients' => $individuelclient,
-            'communes'=>$Commune,
-            'agences' => $agence,
-            'etudes' => $etude,
-            'titres' => $titre,
-            'etatciviles' => $etatcivile,
->>>>>>> refs/remotes/origin/main
         ]);
     }
 

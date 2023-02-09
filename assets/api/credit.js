@@ -3,23 +3,6 @@ import $ from 'jquery'
 const path = window.location.pathname;
 $(document).ready(function(){
 
-<<<<<<< HEAD
-=======
-        //Quand l'utilisateur selection le type client
-        // GROUPE OU INDIVIDUEL 
-        
-        $('#demande_credit_TypeClient').on('change',function(){
-            // alert('qsdmfkjqsmfkqsjmdfklqsjdmflk');
-            var typeclient=$('#demande_credit_TypeClient').val();
-            if(typeclient == 'INDIVIDUEL'){
-                $('#demande_credit_codeclient').val('I');
-            }
-            else{
-                $('#demande_credit_codeclient').val('G');
-            }
-        });
-
->>>>>>> refs/remotes/origin/main
         $('#demande_credit_TypeClient').on('keyup',() =>{
             
             if($('#demande_credit_TypeClient').val() === 'INDIVIDUEL' ){

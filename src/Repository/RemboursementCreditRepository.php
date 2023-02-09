@@ -42,12 +42,6 @@ class RemboursementCreditRepository extends ServiceEntityRepository
     /**
      * Api remboursement 
      *
-<<<<<<< HEAD
-     * @param integer $periode periode de remboursement credit
-     * @return $query
-     */
-    public function ApiRemboursement($numerocredit)
-=======
      * @return $query
      */
     
@@ -258,7 +252,6 @@ class RemboursementCreditRepository extends ServiceEntityRepository
      * @return $query
      */
     public function ApiRemboursementModal($numerocredit)
->>>>>>> refs/remotes/origin/main
     {
         $entityManager=$this->getEntityManager();
 
@@ -277,10 +270,6 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 amortissement.codecredit,
                 amortissement.typeamortissement,
             -- remboursement
-<<<<<<< HEAD
-                remboursement.periode perioderemboursement,
-                remboursement.MontantTotalPaye montantrembourse
-=======
                 remboursement.periode perioderemboursementModal,
                 remboursement.MontantTotalPaye montantrembourseModal,
                 remboursement.penalite penaliteremboursementModal,
@@ -291,7 +280,6 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 remboursement.TransactionEnLiquide,
                 remboursement.TransfertEpargne,
                 remboursement.Commentaire
->>>>>>> refs/remotes/origin/main
 
             FROM
                 App\Entity\AmortissementFixe amortissement
@@ -299,17 +287,11 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 App\Entity\RemboursementCredit remboursement
             WITH
                 amortissement.periode = remboursement.periode
-<<<<<<< HEAD
-            WHERE
-                amortissement.codecredit = :numerocredit
-            ORDER BY remboursement.id DESC
-=======
                 AND 
                 amortissement.codecredit = remboursement.NumeroCredit
             WHERE
             amortissement.codecredit = :numerocredit
             ORDER BY remboursement.periode DESC
->>>>>>> refs/remotes/origin/main
                 '
         )
         ->setParameter(':numerocredit',$numerocredit)
@@ -318,8 +300,6 @@ class RemboursementCreditRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
-<<<<<<< HEAD
-=======
     /**
      * @method   HistoriqueRemboursement() : Methode permet de suivre
      * l'historique du remboursement
@@ -403,7 +383,6 @@ class RemboursementCreditRepository extends ServiceEntityRepository
 
             return $query->getResult();
     }
->>>>>>> refs/remotes/origin/main
 
 
 //    /**

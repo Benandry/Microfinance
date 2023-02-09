@@ -5,11 +5,8 @@ namespace App\Controller\Credit;
 use App\Entity\RemboursementCredit;
 use App\Form\RemboursementCreditType;
 use App\Repository\RemboursementCreditRepository;
-<<<<<<< HEAD
-=======
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
->>>>>>> refs/remotes/origin/main
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,49 +24,15 @@ class RemboursementCreditController extends AbstractController
     }
 
     #[Route('/new', name: 'app_remboursement_credit_new', methods: ['GET', 'POST'])]
-<<<<<<< HEAD
     public function new(Request $request, RemboursementCreditRepository $remboursementCreditRepository): Response
     {   
         // Recuperation du code credit
         $codecredit=$request->query->get('codecredit');
 
-=======
-    public function new(EntityManagerInterface $em, ManagerRegistry $doctrine, Request $request, RemboursementCreditRepository $remboursementCreditRepository): Response
-    {
-        // Recuperation du code credit
-        // dd($request);
-        $typeclient=$request->query->get('typeclient');
-        $codecredit = $request->query->get('codecredit');
-        $penalitenonrmebourser = $request->query->get('penalite');
-        $montantprecedent = $request->query->get('montant');
-        $montantdu = $request->query->get('montantdu');
-        $periode = $request->query->get('periode');
-        $restemontant = $request->query->get('restemontant');
-        $resteprecedent=$restemontant+$penalitenonrmebourser;
-        
-        // dd($typeclient);
-
-        $historique = $remboursementCreditRepository->HistoriqueRemboursement($codecredit);
-        $tableauAmmortissemnt = $remboursementCreditRepository->TableauAmmortissement($codecredit);
-
-        
->>>>>>> refs/remotes/origin/main
         $remboursementCredit = new RemboursementCredit();
 
         $form = $this->createForm(RemboursementCreditType::class, $remboursementCredit);
         $form->handleRequest($request);
-<<<<<<< HEAD
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $remboursementCreditRepository->save($remboursementCredit, true);
-
-            $this->addFlash('success','Remboursement de credit reussi !');
-            // return $this->redirectToRoute('app_remboursement_credit_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('remboursement_credit/new.html.twig', [
-            'codecredit'=>$codecredit,
-=======
         
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -382,7 +345,6 @@ class RemboursementCreditController extends AbstractController
             'periode'=>$periode,
             'restemontant'=>$restemontant,
             'tableauAmmortissemnt' => $tableauAmmortissemnt,
->>>>>>> refs/remotes/origin/main
             'remboursement_credit' => $remboursementCredit,
             'form' => $form,
         ]);
@@ -417,34 +379,10 @@ class RemboursementCreditController extends AbstractController
     #[Route('/{id}', name: 'app_remboursement_credit_delete', methods: ['POST'])]
     public function delete(Request $request, RemboursementCredit $remboursementCredit, RemboursementCreditRepository $remboursementCreditRepository): Response
     {
-<<<<<<< HEAD
         if ($this->isCsrfTokenValid('delete'.$remboursementCredit->getId(), $request->request->get('_token'))) {
-=======
-        if ($this->isCsrfTokenValid('delete' . $remboursementCredit->getId(), $request->request->get('_token'))) {
->>>>>>> refs/remotes/origin/main
             $remboursementCreditRepository->remove($remboursementCredit, true);
         }
 
         return $this->redirectToRoute('app_remboursement_credit_index', [], Response::HTTP_SEE_OTHER);
     }
-<<<<<<< HEAD
-=======
-
-    /**
-     * @method mixed HistoriqueRemboursement()
-     *
-     * @return void
-     */
-    
-    // #[Route('/historique/remboursement/{codecredit}',name:'app_historique_remboursement')]
-    // public function HistoriqueRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $codecredit)
-    // {
-    //     $historique=$remboursementCreditRepository->HistoriqueRemboursement($codecredit);
-
-    //     return $this->renderForm('remboursement_credit/new.html.twig', [
-    //         'historique'=>$historique,
-    //     ]);
-
-    // }
->>>>>>> refs/remotes/origin/main
 }

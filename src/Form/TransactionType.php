@@ -100,8 +100,6 @@ class TransactionType extends AbstractType
             ->add('solde',TextType::class,[
                 'label'=>'Solde de compte'
             ])
-<<<<<<< HEAD
-=======
 
             ->add('debit',EntityType::class,[
                 'class' => PlanComptable::class,
@@ -149,7 +147,6 @@ class TransactionType extends AbstractType
                 'required' => false,
                 'autocomplete' => true,
             ])
->>>>>>> refs/remotes/origin/main
         ;
     }
 

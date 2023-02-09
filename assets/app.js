@@ -21,10 +21,7 @@ import './api/individuel'
 import './api/groupe'
 import './api/credit'
 import './api/remboursement'
-<<<<<<< HEAD
-=======
 import './api/penalitecredit'
->>>>>>> refs/remotes/origin/main
 import './api/agence'
 import './api/jquery-3.6.0'
 import './api/jquery-ui'
@@ -69,7 +66,6 @@ $(document).ready(function(){
         
 
     $(".table1").DataTable({
-<<<<<<< HEAD
         dom:  "Bfrtip",
         buttons: [
             {
@@ -81,11 +77,6 @@ $(document).ready(function(){
                 "extend":  "excelHtml5"
             },
             ,'print'
-=======
-        dom: 'Bfrtip',
-        buttons: [
-            'excel','pdf','print'
->>>>>>> refs/remotes/origin/main
         ],
         language: {
             search: "Rechercher&nbsp;",
@@ -97,7 +88,6 @@ $(document).ready(function(){
                 next:       "Suivant",
                 last:       "Dernier"
             }
-<<<<<<< HEAD
         },
         lengthMenu:  [
             [
@@ -120,10 +110,6 @@ $(document).ready(function(){
         responsive : {
             "details":  true
         },
-=======
-        }
-      
->>>>>>> refs/remotes/origin/main
     });
 
     $(".table2").DataTable({

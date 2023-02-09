@@ -16,13 +16,6 @@ class RemboursementModalController extends AbstractController
         $form=$this->createForm(RemboursementModalType::class);
         $form->handleRequest($request);
 
-<<<<<<< HEAD
-
-        if($form->isSubmitted() && $form->isValid()){
-            $data= $form->getData();
-
-            $codecredit=$data['codecredit'];
-=======
         if($form->isSubmitted() && $form->isValid()){
             $data= $form->getData();
 
@@ -33,14 +26,10 @@ class RemboursementModalController extends AbstractController
             $montantdu=$data['montantdu'];
             $periode=$data['periode'];
             $restemontant=$data['restemontant'];
->>>>>>> refs/remotes/origin/main
             // dd($codecredit);
 
             return $this->redirectToRoute('app_remboursement_credit_new',
             [
-<<<<<<< HEAD
-                'codecredit'=>$codecredit
-=======
                 'typeclient'=>$typeclient,
                 'codecredit'=>$codecredit,
                 'penalite'=>$penalite,
@@ -48,15 +37,11 @@ class RemboursementModalController extends AbstractController
                 'montantdu'=>$montantdu,
                 'periode'=>$periode,
                 'restemontant'=>$restemontant,
->>>>>>> refs/remotes/origin/main
 
             ],Response::HTTP_SEE_OTHER);
 
         }
         return $this->renderForm('remboursement/remboursement_modal/index.html.twig', [
-<<<<<<< HEAD
-            'codecredits' => 'codecredit',
-=======
             'typeclient'=>'typeclient',
             'codecredits' => 'codecredit',
             'penalite'=> 'penalite',
@@ -64,7 +49,6 @@ class RemboursementModalController extends AbstractController
             'periode'=>'periode',
             'montantdu'=>'montantdu',
             'restemontant'=>'restemontant',
->>>>>>> refs/remotes/origin/main
             'form'=>$form
         ]);
     }

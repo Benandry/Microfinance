@@ -64,8 +64,6 @@ class TransactionretraitType extends AbstractType
                 ],
             ])
 
-<<<<<<< HEAD
-=======
             ->add('debit',EntityType::class,[
                 'class' => PlanComptable::class,
                 'choice_label' => function($c){
@@ -90,7 +88,6 @@ class TransactionretraitType extends AbstractType
                 'placeholder'=>"Compte credit ... ",
             ])
 
->>>>>>> refs/remotes/origin/main
             ->add('solde',TextType::class,[
                 'attr'=>[
                     'class'=>'hidden'

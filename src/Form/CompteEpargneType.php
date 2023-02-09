@@ -32,13 +32,7 @@ class CompteEpargneType extends AbstractType
                 'choices'=>[
                     'INDIVIDUEL'=>'INDIVIDUEL',
                 ],
-<<<<<<< HEAD
                 'disabled' => true,
-=======
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
->>>>>>> refs/remotes/origin/main
             ])
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
@@ -53,10 +47,6 @@ class CompteEpargneType extends AbstractType
                 ])
 
             ->add('codeep')
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
             ->add('nom',TextType::class,[
                 'mapped'=>false,
                 'disabled' => true,
@@ -79,11 +69,7 @@ class CompteEpargneType extends AbstractType
 
             ->add('codeepargne',TextType::class,[
                 'attr'=>[
-<<<<<<< HEAD
                     'class'=>'hidden',
-=======
-                    'class'=>'form-control',
->>>>>>> refs/remotes/origin/main
                 ],
                 'label'=>false
             ])
