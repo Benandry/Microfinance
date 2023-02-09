@@ -37,7 +37,7 @@ class RemboursementCreditController extends AbstractController
         $restemontant = $request->query->get('restemontant');
         $resteprecedent=$restemontant+$penalitenonrmebourser;
         
-        dd($typeclient);
+        // dd($typeclient);
 
         $historique = $remboursementCreditRepository->HistoriqueRemboursement($codecredit);
         $tableauAmmortissemnt = $remboursementCreditRepository->TableauAmmortissement($codecredit);
