@@ -1,8 +1,12 @@
 import $ from 'jquery'
 //import 'jquery-modal'
 
+<<<<<<< HEAD
 var path = window.location.pathname;
 
+=======
+var path = window.location.pathname
+>>>>>>> refs/remotes/origin/main
 $(document).ready(() =>{
 
     if (path === '/transaction/new') {
@@ -150,12 +154,22 @@ $(document).ready(() =>{
         
         })
 
+<<<<<<< HEAD
+=======
+        // $('#form_code').on('keyup',function(){
+        //     console.log('hello')
+        // })
+>>>>>>> refs/remotes/origin/main
     }
 
     // epargne groupe : ici on recupere toute les informations 
     // concernant le groupe
 
+<<<<<<< HEAD
     if( path === '/transaction/depotgroupe' ){
+=======
+    if( path === '/depotgroupe' ){
+>>>>>>> refs/remotes/origin/main
         var codegroupe = $('#code_client').text()
         var nomgroupe = $('#nom').text()
         var solde = $('#solde_cli').text()

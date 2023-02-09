@@ -17,21 +17,32 @@
         <div class="card p-3">
             <div class="card mb-3">
                 <div class="row text-secondary m-3">
+<<<<<<< HEAD
                     <div class="col-md-4 col-sm-4 m-auto">
                         <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
                         <p> <b>Solde client : </b>
                             {% if solde != '' %}
                                 <span id="solde_cli" style="display:none">{{ solde }}</span>  
                                 <span>{{ solde|number_format(0,',', ' ') }}</span>     
+=======
+                    <div class="col-xl-12 col-md-12 col-sm-12 text-secondary">
+                        <p> <b>Compte epargne : </b><span id="code_client"> {{ codegroupe }}</span></p>
+                        <p> <b>Solde client : </b>
+                            {% if solde != '' %}
+                                <span id="solde_cli">{{ solde }}</span>     
+>>>>>>> refs/remotes/origin/main
                             {% else %}
                                 <span id="solde_cli">0</span>  
                             {% endif %} 
                         </p>
+<<<<<<< HEAD
                     </div>
                     <div class="col-md-4 col-sm-4 m-auto">
                         <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Dépôt epargne </h5></div>
                     </div>
                     <div class="col-md-4 col-sm-4">
+=======
+>>>>>>> refs/remotes/origin/main
                         <p><b>Code client :</b> <span id="code_client"> {{ nomgroupe }}</span></p>
                     </div>
                 </div>

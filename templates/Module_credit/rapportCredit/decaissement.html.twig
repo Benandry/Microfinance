@@ -10,9 +10,17 @@
             <th>Nom et Prenom du client</th>
             <th>Montant</th>
             <th>Date demande </th>
+<<<<<<< HEAD
             <th>Date d'approbation </th>
             <th>Date decaissement</th>
             <th>Agent de credit </th>
+=======
+            <th>Agent de credit demande </th>
+            <th>Date d'approbation </th>
+            <th>Agent de credit approuver </th>
+            <th>Date decaissement</th>
+            <th>Agent de credit decaissement</th>
+>>>>>>> refs/remotes/origin/main
         </thead>
 
         <tbody>
@@ -22,9 +30,17 @@
                     <td> {{ liste.nom_client }}  {{ liste.prenom_client }} </td>
                     <td> {{ liste.Montant}} </td>
                     <td> {{ liste.DateDemande|date('Y-m-d') }} </td>
+<<<<<<< HEAD
                     <td> {{ liste.dateApprobation|date('Y-m-d') }} </td>
                     <td> {{ liste.dateDecaissement|date('Y-m-d') }} </td>
                     <td> {{ liste.agent }} </td>
+=======
+                    <td> {{ liste.AgentdeCreditDemande }} </td>
+                    <td> {{ liste.dateApprobation|date('Y-m-d') }} </td>
+                    <td> {{ liste.AgentDeCreditApprouver}} </td>
+                    <td> {{ liste.dateDecaissement|date('Y-m-d') }} </td>
+                    <td> {{ liste.AgentDeCreditDecaissement }} </td>
+>>>>>>> refs/remotes/origin/main
                 </tr>
             {% endfor %}
         </tbody>

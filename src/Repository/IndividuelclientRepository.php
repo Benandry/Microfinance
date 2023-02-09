@@ -212,6 +212,7 @@ class IndividuelclientRepository extends ServiceEntityRepository
         return $stmt;
    }
 
+<<<<<<< HEAD
    /**
     * Fonction pour afficher l'informatio du client
     *
@@ -251,4 +252,6 @@ class IndividuelclientRepository extends ServiceEntityRepository
     }
 
 
+=======
+>>>>>>> refs/remotes/origin/main
 }

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PenaliteCredit index{% endblock %}
+
+{% block body %}
+    <h1>PenaliteCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CalculMontantFixe</th>
+                <th>CalculMntntFixParOccasion</th>
+                <th>PnlitePourcntgDurntunPeriod</th>
+                <th>ClculCommPourctngSimple</th>
+                <th>CalculSlnNbrSemne</th>
+                <th>CalculSmplPrctgSoldImpaye</th>
+                <th>CalculSurArrierePrcpl</th>
+                <th>SurArrierPrcplIntrt</th>
+                <th>SurPrcplIntrtPnltArriere</th>
+                <th>PenalitMinimum</th>
+                <th>PenalitMaximum</th>
+                <th>PenaliteCalclPourMax</th>
+                <th>CalculAutoPenalite</th>
+                <th>CalculPenaliteAlaConnection</th>
+                <th>ClclPnltSrIntrtCptlsEtPnltArr</th>
+                <th>ClclPnltSiJrArrierDpassDlGrass</th>
+                <th>TrnsferAutoFondCptEprgnAuxCptCrdt</th>
+                <th>UtilseSoldeMin</th>
+                <th>JourMinimumArriere</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for penalite_credit in penalite_credits %}
+            <tr>
+                <td>{{ penalite_credit.id }}</td>
+                <td>{{ penalite_credit.CalculMontantFixe ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.CalculMntntFixParOccasion ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.PnlitePourcntgDurntunPeriod ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.ClculCommPourctngSimple ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.CalculSlnNbrSemne ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.CalculSmplPrctgSoldImpaye ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.CalculSurArrierePrcpl ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.SurArrierPrcplIntrt ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.SurPrcplIntrtPnltArriere ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.PenalitMinimum }}</td>
+                <td>{{ penalite_credit.PenalitMaximum }}</td>
+                <td>{{ penalite_credit.PenaliteCalclPourMax }}</td>
+                <td>{{ penalite_credit.CalculAutoPenalite ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.CalculPenaliteAlaConnection ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.ClclPnltSrIntrtCptlsEtPnltArr ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.ClclPnltSiJrArrierDpassDlGrass ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.TrnsferAutoFondCptEprgnAuxCptCrdt ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.UtilseSoldeMin ? 'Yes' : 'No' }}</td>
+                <td>{{ penalite_credit.JourMinimumArriere }}</td>
+                <td>
+                    <a href="{{ path('app_penalite_credit_show', {'id': penalite_credit.id}) }}">show</a>
+                    <a href="{{ path('app_penalite_credit_edit', {'id': penalite_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="21">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_penalite_credit_new') }}">Create new</a>
+{% endblock %}

@@ -6,7 +6,13 @@ use App\Entity\PlanComptable;
 use App\Entity\RemboursementCredit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+=======
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+>>>>>>> refs/remotes/origin/main
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,6 +37,16 @@ class RemboursementCreditType extends AbstractType
                 'placeholder'=>'Choix caisse'
             ])
             ->add('penalite')
+<<<<<<< HEAD
+=======
+            ->add('Commentaire')
+            ->add('MontantEcheance')
+            ->add('Anticipe',TextType::class,[
+                'required'=>false
+            ])
+            ->add('TypeClient')
+          
+>>>>>>> refs/remotes/origin/main
         ;
     }
 

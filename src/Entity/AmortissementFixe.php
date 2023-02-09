@@ -50,6 +50,12 @@ class AmortissementFixe
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $typeamortissement = null;
 
+<<<<<<< HEAD
+=======
+    #[ORM\Column(nullable: true)]
+    private ?float $soldedu = null;
+
+>>>>>>> refs/remotes/origin/main
     public function getId(): ?int
     {
         return $this->id;
@@ -198,4 +204,19 @@ class AmortissementFixe
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    public function getSoldedu(): ?float
+    {
+        return $this->soldedu;
+    }
+
+    public function setSoldedu(?float $soldedu): self
+    {
+        $this->soldedu = $soldedu;
+
+        return $this;
+    }
+>>>>>>> refs/remotes/origin/main
 }

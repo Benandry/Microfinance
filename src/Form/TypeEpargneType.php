@@ -4,7 +4,10 @@ namespace App\Form;
 
 use App\Entity\TypeEpargne;
 use Symfony\Component\Form\AbstractType;
+<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+=======
+>>>>>>> refs/remotes/origin/main
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,6 +20,7 @@ class TypeEpargneType extends AbstractType
             ->add('NomTypeEp',TextType::class,[
                 'label'=>'Type epargne',
             ])
+<<<<<<< HEAD
             ->add('abreviation',ChoiceType::class,[
                 'placeholder' => "Type de client ...",
                 'choices'=>[ 
@@ -29,6 +33,9 @@ class TypeEpargneType extends AbstractType
                     'autre produit epargne' => 'Autre'
                 ],
             ])
+=======
+            ->add('abreviation')
+>>>>>>> refs/remotes/origin/main
             ->add('description')
         ;
     }

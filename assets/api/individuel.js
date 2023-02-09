@@ -20,6 +20,10 @@ $(document).ready(() =>{
         $('#individuelclient_codeclient').val(code_client_);
         
         // {# Cacher le champ code client individuel#}
+<<<<<<< HEAD
+=======
+        $('#individuel').attr("style", "display: none");
+>>>>>>> refs/remotes/origin/main
 
         /*****Manova an ilay age user */
         $('#individuelclient_date_naissance').on('change',(e)=>{

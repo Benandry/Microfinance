@@ -88,7 +88,11 @@ class CompteEpargneRepository extends ServiceEntityRepository
     public function CompteEpargne($date1,$date2)
     {
 
+<<<<<<< HEAD
         $query = "SELECT 
+=======
+        $query = 'SELECT 
+>>>>>>> refs/remotes/origin/main
                 c.datedebut,
                 c.id as idepc,
                 c.typeClient,
@@ -105,7 +109,11 @@ class CompteEpargneRepository extends ServiceEntityRepository
             INNER JOIN App\Entity\ProduitEpargne pe
             WITH c.produit = pe.id
             WHERE c.datedebut BETWEEN :date1 AND :date2
+<<<<<<< HEAD
            ";
+=======
+           ';
+>>>>>>> refs/remotes/origin/main
 
 
            $statement = $this->getEntityManager()->createQuery($query)->setParameter('date1',$date1)->setParameter('date2',$date2)->execute();
@@ -446,7 +454,10 @@ class CompteEpargneRepository extends ServiceEntityRepository
         App\Entity\Individuelclient i
         WITH ce.codeep = i.codeclient
         WHERE ce.codeep = '$code'
+<<<<<<< HEAD
         GROUP BY ce.codeepargne
+=======
+>>>>>>> refs/remotes/origin/main
         ORDER BY ce.datedebut DESC
       --  AND t.id = (SELECT MAX(tr.id) FROM App\Entity\Transaction tr INNER JOIN App\Entity\CompteEpargne c  WITH tr.codeepargneclient = c.codeepargne  WHERE ce.codeep = '$code' )
         "
@@ -454,6 +465,47 @@ class CompteEpargneRepository extends ServiceEntityRepository
         return $query->getResult();
 
     }
+<<<<<<< HEAD
+=======
+
+        /**********************************Compte epargne existant */
+
+        public function compteEpargneExist($code){
+            $query = " SELECT DISTINCT
+            g.codegroupe,
+            g.nomGroupe nom,
+            pe.nomproduit,
+            ce.datedebut ,
+            ce.id,
+            ce.codeep,
+            ce.codeepargne,
+            SUM(t.Montant) solde
+
+            FROM App\Entity\CompteEpargne ce 
+            LEFT JOIN
+            App\Entity\Transaction t
+            WITH t.codeepargneclient = ce.codeepargne
+
+            INNER JOIN
+            App\Entity\ProduitEpargne pe
+            with ce.produit = pe.id
+
+            INNER JOIN 
+            App\Entity\Groupe g
+            WITH ce.codeep = g.codegroupe
+            WHERE ce.codeep = '$code'
+            ORDER BY ce.datedebut DESC
+            -- AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c LEFT JOIN App\Entity\Transaction tr  WITH tr.codeepargneclient = c.codegroupe  WHERE ce.codeep = '$code' )
+           ";
+            
+            $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+      
+            return $stmt;
+        }
+    
+    
+
+>>>>>>> refs/remotes/origin/main
     // **********************************************
     // **********************************************
     // **********************************************
@@ -649,11 +701,16 @@ class CompteEpargneRepository extends ServiceEntityRepository
         i.nom_client,
         i.prenom_client,
         i.cin,
+<<<<<<< HEAD
         i.numeroMobile telephone,
+=======
+        i.numero_mobile telephone,
+>>>>>>> refs/remotes/origin/main
         i.profession ,
         i.adressephysique adresse,
         i.nb_personne_charge charge,
         ce.codeepargne code_epargne,
+<<<<<<< HEAD
         ce.id,
         ce.datedebut,
         i.codeclient,
@@ -665,19 +722,34 @@ class CompteEpargneRepository extends ServiceEntityRepository
         -- -- TYPE EPARGNE
         ----Solde --------------
         SUM(tr.Montant) solde
+=======
+        -- -- PRODUIT EPARGNE
+        p.nomproduit,
+        -- -- TYPE EPARGNE
+        ------Commune --------------
+        c.NomCommune commune,
+        c.CodeCommune code_commune
+>>>>>>> refs/remotes/origin/main
         -- te
         FROM
         App\Entity\CompteEpargne ce
         INNER JOIN
         App\Entity\Individuelclient i
         WITH ce.codeep = i.codeclient
+<<<<<<< HEAD
         LEFT JOIN
         App\Entity\Transaction tr
         with tr.codeepargneclient = ce.codeepargne
+=======
+        INNER JOIN
+        App\Entity\Commune c
+        WITH c.NomCommune = i.commune
+>>>>>>> refs/remotes/origin/main
         INNER JOIN
         App\Entity\ProduitEpargne p
         WITH
         ce.produit = p.id
+<<<<<<< HEAD
 
         INNER JOIN
         App\Entity\TypeEpargne t
@@ -686,11 +758,16 @@ class CompteEpargneRepository extends ServiceEntityRepository
         WHERE
         ce.id = $id 
         GROUP BY ce.codeepargne"
+=======
+        WHERE
+        ce.id = $id "
+>>>>>>> refs/remotes/origin/main
         );
 
         return $query->getResult();
     }
 
+<<<<<<< HEAD
     /**********************************Compte epargne existant */
 
     public function compteEpargneExist($code){
@@ -721,6 +798,37 @@ class CompteEpargneRepository extends ServiceEntityRepository
   
         return $stmt;
     }
+=======
+
+    // public function compteEpargneExist($code){
+
+    //     $query = " SELECT 
+    //     g.codegroupe,
+    //     g.nomGroupe nom,
+    //     pe.nomproduit,
+    //     ce.datedebut ,
+    //     ce.id,
+    //     ce.codeepargne ,
+    //     SUM(t.Montant) solde
+    //     FROM App\Entity\CompteEpargne ce 
+    //     LEFT JOIN
+    //     App\Entity\Transaction t
+    //     WITH t.codeepargneclient = ce.codeepargne
+    //     INNER JOIN
+    //     App\Entity\ProduitEpargne pe
+    //     with ce.produit = pe.id
+    //     INNER JOIN 
+    //     App\Entity\Groupe g
+    //     WITH ce.codeep = g.codegroupe
+    //     WHERE ce.codeep = '$code' 
+    //     --AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c RIGHT JOIN App\Entity\Transaction tr  WITH tr.codeepargnegroupe = c.codegroupeepargne  WHERE ce.codeep = '$code' )
+    //    ";
+        
+    //     $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+  
+    //     return $stmt;
+    // }
+>>>>>>> refs/remotes/origin/main
 
 
     //   api code epargne

@@ -16,7 +16,10 @@ class TypeEpargneController extends AbstractController
     #[Route('/', name: 'app_type_epargne_index', methods: ['GET'])]
     public function index(TypeEpargneRepository $typeEpargneRepository): Response
     {
+<<<<<<< HEAD
         // dd("Type");
+=======
+>>>>>>> refs/remotes/origin/main
         return $this->render('Configuration/type_epargne/index.html.twig', [
             'type_epargnes' => $typeEpargneRepository->findAll(),
         ]);

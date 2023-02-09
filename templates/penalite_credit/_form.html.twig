@@ -1,0 +1,144 @@
+{{ form_start(form) }}
+    <ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape3">Etape 3</a></li>
+  </ul>
+    <div class="tab-content">
+            {# Etape 1 #}
+            <div class="tab-pane active" id="etape1">
+                <div class="row shadow-sm p-3">
+                    <div class="col-12 col-sm-12 col-md-12">
+                    <h6 class="text-center text-primary">Etape 1</h6>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.ProduitCredit) }}
+                            {{ form_row(form.PnltClclCmmMntnFixPrJr) }}
+                             {{ form_row(form.CalculMntntFixParOccasion) }}
+                            {{ form_row(form.PnlitePourcntgDurntunPeriod) }}
+                            {{ form_row(form.ClculCommPourctngSimple) }}
+                            {{ form_row(form.CalculSlnNbrSemne) }}
+                            {{ form_row(form.CalculSmplPrctgSoldImpaye) }}
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                            <div id="durantperiode">
+                               <div id="CalculSurArrierePrcpl"> {{ form_row(form.CalculSurArrierePrcpl) }}</div>
+                                <div id="SurArrierPrcplIntrt">{{ form_row(form.SurArrierPrcplIntrt) }}</div>
+                                <div id="SurPrcplIntrtPnltArriere">{{ form_row(form.SurPrcplIntrtPnltArriere) }}</div>
+                                {# {{ form_row(form.ClculCommPourctngSimple) }} #}
+                                <div id="PnltBsSrMntntDuPrTrnches">{{ form_row(form.PnltBsSrMntntDuPrTrnches) }}</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+             </div>
+
+             {# Etape 2 #}
+
+        <div class="tab-pane" id="etape2">
+            <div class="row shadow-sm p-3">
+                <div class="col-12 col-sm-12 col-md-12">
+                    <h6 class="text-center text-primary">Etape 2</h6>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                                {{ form_row(form.PnltPrChqTrnchRtrd) }}
+                                <div style="width:200px;">{{ form_row(form.PenaliteComme) }}</div>
+                            <div style="width:200px;"> {{ form_row(form.PenalitMaximum) }} <p>jour apres date echeance</p></div>
+                            <div style="width:200px;"> {{ form_row(form.DiffePaimntEnNbrJrAvntPnltImps) }}</div>
+                            {{ form_row(form.CalculAutoPenalite) }}
+                        </div>
+                        <div class="col-6 col-sm-6">
+                                {{ form_row(form.PnltJourFerierEtWE) }}
+                            <div style="width:200px;">{{ form_row(form.PenalitMinimum) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Etape 3 #}
+        <div class="tab-pane" id="etape3">
+            <div class="row shadow-sm p-3">
+                <div class="col-12 col-sm-12 col-md-12">
+                    <h6 class="text-center text-primary">Etape 3</h6>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.CalculPenaliteAlaConnection) }}
+                            <h5>Calcul Automatique des penalites</h5>
+                            {{ form_row(form.ClclPnltSrIntrtCptlsEtPnltArr) }}
+                            {{ form_row(form.ClclPnltSiJrArrierDpassDlGrass) }}
+                            {{ form_row(form.InclrCrdtAvcMntntDusAuJrRapprt) }}
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            {{ form_row(form.TrnsferAutoFondCptEprgnAuxCptCrdt) }}
+                            {{ form_row(form.UtilseSoldeMin) }}
+                            {{ form_row(form.JourMinimumArriere) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <button class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
+    </div>   
+{{ form_end(form) }}
+
+
+
+    {# <div class="tab-content">
+            <div class="tab-pane active" id="etape1">
+                <div class="row shadow-sm p-3">
+                    <div class="col-12 col-sm-12 col-md-12">
+                    <h6 class="text-center text-primary">Etape 1</h6>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.ProduitCredit) }}
+                            {{ form_row(form.PenalitMinimum) }}
+                            {{ form_row(form.PenalitMaximum) }}
+                            {{ form_row(form.PenaliteCalclPourMax) }}
+                            {{ form_row(form.JourMinimumArriere) }}
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.PnlitePourcntgDurntunPeriod) }}
+                             {{ form_row(form.CalculSmplPrctgSoldImpaye) }}
+                             {{ form_row(form.CalculSurArrierePrcpl) }}
+                             {{ form_row(form.SurArrierPrcplIntrt) }}
+                             {{ form_row(form.SurPrcplIntrtPnltArriere) }}
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+             </div>
+
+
+                                 <div class="tab-pane" id="etape2">
+        <div class="row shadow-sm p-3">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Etape 2</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.CalculSlnNbrSemne) }}
+                            {{ form_row(form.CalculMontantFixe) }}
+                            {{ form_row(form.CalculAutoPenalite) }}
+                            {{ form_row(form.CalculPenaliteAlaConnection) }}
+                            {{ form_row(form.ClclPnltSrIntrtCptlsEtPnltArr) }}
+                    </div>
+                    <div class="col-6 col-sm-6">
+                            {{ form_row(form.CalculMntntFixParOccasion) }}
+                            {{ form_row(form.ClclPnltSiJrArrierDpassDlGrass) }}
+                            {{ form_row(form.ClculCommPourctngSimple) }}
+                            {{ form_row(form.TrnsferAutoFondCptEprgnAuxCptCrdt) }}
+                            {{ form_row(form.UtilseSoldeMin) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+        <button class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
+    </div>    #}

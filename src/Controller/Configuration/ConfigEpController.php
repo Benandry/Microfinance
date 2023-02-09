@@ -58,10 +58,16 @@ class ConfigEpController extends AbstractController
     #[Route('/{id}/edit', name: 'app_config_ep_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ConfigEp $configEp, ConfigEpRepository $configEpRepository): Response
     {
+<<<<<<< HEAD
        
         $form = $this->createForm(ConfigEpType::class, $configEp);
         $form->handleRequest($request);
         
+=======
+        $form = $this->createForm(ConfigEpType::class, $configEp);
+        $form->handleRequest($request);
+
+>>>>>>> refs/remotes/origin/main
         if ($form->isSubmitted() && $form->isValid()) {
             $configEpRepository->add($configEp, true);
 

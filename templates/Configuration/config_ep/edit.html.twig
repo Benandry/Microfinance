@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Modification de Configuration epargne{% endblock %}
 {% block head %}Configuration > Epargne{% endblock %}
 
@@ -7,4 +8,16 @@
 
     {{ include('Configuration/config_ep/_form.html.twig', {'button_label': 'Update'}) }}
 
+=======
+{% block title %}Edit ConfigEp{% endblock %}
+
+{% block body %}
+    <h1>Edit ConfigEp</h1>
+
+    {{ include('Configuration/config_ep/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_config_ep_index') }}">back to list</a>
+
+    {{ include('Configuration/config_ep/_delete_form.html.twig') }}
+>>>>>>> refs/remotes/origin/main
 {% endblock %}

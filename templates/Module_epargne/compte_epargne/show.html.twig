@@ -28,6 +28,7 @@
           <div class="col-lg-4">
             <div class="card mb-4">
               <div class="card-body text-center">
+<<<<<<< HEAD
                  <a href="{{ path('app_individuel_show',{'id': client.idcli}) }}" style="color:#4786a5;text-decoration: none">
                     <img src="{{ asset('uploads/photo/' ~ client.photo  ) }}" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 120px;height:120px;border-radius:100%;"> 
@@ -36,29 +37,77 @@
                     <div class="fw-bold"> {{ client.prenom_client }} </div>
                     <div class="fw-bold">{{ client.codeclient }}</div>
                   </a>
+=======
+                  <img src="{{ asset('uploads/photo/' ~ client.photo  ) }}" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 120px;height:120px;border-radius:100%;"> 
+                  
+                  <div class="fw-bold" style="color:black;"> {{ client.nom_client }} </div>
+                  <div class="fw-bold" style="color:black;"> {{ client.prenom_client }} </div>
+                  <div class="fw-bold" style="color:black;">{{ client.code_epargne }}</div>
+
+                {# {% for Agence in agences  %}
+                <h5 class="my-3" style="color:black;"><b>I{{ "%02d" | format(Agence.id)}}{{ "%07d" | format(clients.id) }}{{ types.id }}{{ "%02d" | format(produits.id) }}</b></h5>
+                {% endfor %} #}
+>>>>>>> refs/remotes/origin/main
                 <p class="text-muted mb-1"></p>
                 <p class="text-muted mb-4"></p>
                 <div class="d-flex justify-content-center mb-2">
                 </div>
               </div>
+<<<<<<< HEAD
             </div>
             <br><br><br>
+=======
+            </div><br><br><br>
+            <div class="card mb-4 mb-lg-0">
+              <div class="card-body p-0">
+                <ul class="list-group list-group-flush rounded-3">
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class=""></i>
+                    <p class="mb-0"></p>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fw-bold">Nom Produit</i>
+                    <p style="color:black;">{{client.nomproduit}}</p>
+                  </li>
+
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fw-bold">Nombre personne en charge </i>
+                    <p class="mt-2"> {{ client.charge}} </p>
+                  </li>
+            
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="" style="color: #3b5998;"></i>
+                    <p class=""></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+>>>>>>> refs/remotes/origin/main
           </div>
           <div class="col-lg-8">
             <div class="card mb-4 alert alert-Primary">
               <div class="card-body">
                 <div class="row mb-2">
 
+<<<<<<< HEAD
                   <div class="col-sm-4">
                     <p class="mb-0 fw-bold">Code compte epargne </p>
                   </div>
                   <div class="col-sm-8">
+=======
+                  <div class="col-sm-3">
+                    <p class="mb-0 fw-bold">Code compte epargne </p>
+                  </div>
+                  <div class="col-sm-9">
+>>>>>>> refs/remotes/origin/main
                         <p class="text-muted mb-0">{{ client.code_epargne }}</p> 
                   </div>
                 </div>
                 <div class="row">
                   <hr/>
                   <hr/>
+<<<<<<< HEAD
 
                   <div class="col-sm-4">
                     <p class="mb-0 fw-bold">Produit epargne </p>
@@ -99,10 +148,75 @@
                   </div>
                   <div class="col-sm-8">
                         <p class="text-muted mb-0">{{ client.profession }}</p>
+=======
+                  <div class="col-sm-3">
+                    <p class="mb-0 fw-bold">Carte d'identite National : </p>
+                  </div>
+                  <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ client.cin }}</p> 
+                  </div>
+                </div>
+                <hr>
+                {# <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0" style="color:black;">Adresse</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0"></p>
+                  </div>
+                </div> #}
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0 fw-bold">Numero Telephone</p>
+                  </div>
+                  <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ client.telephone }}</p> 
+                  </div>
+                </div>
+                <hr>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0 fw-bold">Profession</p>
+                  </div>
+                  <div class="col-sm-9">
+                          <p class="text-muted mb-0">{{ client.profession }}</p>
+>>>>>>> refs/remotes/origin/main
                   </div>
                 </div>
               </div>
             </div><br><br>
+<<<<<<< HEAD
+=======
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-4 mb-md-0">
+                  <div class="card-body">
+                    <p class="mb-4"><span class="text-primary font-italic me-1" style="color:black;">Information Adresse :</span> 
+                    </p>
+                    <hr/>
+                    <p class="mb-1 fw-bold">Commune :</p>
+                    <div class="rounded p-2">
+                        <p class="mb-1">  {{ client.commune }} </p>
+                    </div>
+                    <p class="mt-3 fw-bold">Code commune :</p>
+                    <div class="rounded p-2">
+                        <p class="mb-1">  {{ client.code_commune }} </p>
+                    </div>
+                    <p class="mt-3 fw-bold">Adresse physique :</p>
+                    <div class="rounded p-2">
+                        <p class="mb-1">  {{ client.adresse }} </p>
+                    </div>
+                    
+
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+            </div>
+>>>>>>> refs/remotes/origin/main
           </div>
         </div>
       </div>

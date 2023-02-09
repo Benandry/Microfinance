@@ -90,6 +90,11 @@ $(document).ready(() =>{
             }
         
         })
+<<<<<<< HEAD
+=======
+        /*************************************Cacher les formulaire nom et prenom ********* */
+        $('#info_client').css('display','hide')
+>>>>>>> refs/remotes/origin/main
            
    
     }

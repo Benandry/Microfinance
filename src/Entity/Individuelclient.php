@@ -2,15 +2,24 @@
 
 namespace App\Entity;
 
+<<<<<<< HEAD
 use ApiPlatform\Core\Annotation\ApiResource;
+=======
+use ApiPlatform\Metadata\ApiResource;
+>>>>>>> refs/remotes/origin/main
 use App\Repository\IndividuelclientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 
 #[ORM\Entity(repositoryClass: IndividuelclientRepository::class)]
+=======
+#[ORM\Entity(repositoryClass: IndividuelclientRepository::class)]
+
+>>>>>>> refs/remotes/origin/main
 #[ApiResource()]
 class Individuelclient
 {
@@ -19,6 +28,10 @@ class Individuelclient
     #[ORM\Column()]
     private ?int $id = null;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
     #[ORM\Column(length: 100)]
     private ?string $nom_client = null;
 

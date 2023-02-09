@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Plan Comptable{% endblock %}
 {% block head " Comptabilité>afficher"%}
 {% block body %}
@@ -25,4 +26,33 @@
     <a href="{{ path('app_plan_comptable_index') }}" style="text-decoration: none">Plan Comptable(PCEC)</a>
 <div>
 
+=======
+{% block title %}PlanComptable{% endblock %}
+
+{% block body %}
+    <h1>PlanComptable</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plan_comptable.id }}</td>
+            </tr>
+            <tr>
+                <th>NumeroCompte</th>
+                <td>{{ plan_comptable.NumeroCompte }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ plan_comptable.Libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plan_comptable_index') }}">back to list</a>
+
+    <a href="{{ path('app_plan_comptable_edit', {'id': plan_comptable.id}) }}">edit</a>
+
+    {{ include('plan_comptable/_delete_form.html.twig') }}
+>>>>>>> refs/remotes/origin/main
 {% endblock %}

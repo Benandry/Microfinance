@@ -4,6 +4,12 @@ var path = window.location.pathname
 
 $(document).ready(() =>{
      /********Cache les info */
+<<<<<<< HEAD
+=======
+    $('#information').css('display','hide')
+    $('#client_current').css('display','hide')
+
+>>>>>>> refs/remotes/origin/main
     if (path === '/compte/epargne/new') {
         var code_client_ = $('#code_client').text()
         var nom_client_ = $('#nom').text()

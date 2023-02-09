@@ -11,6 +11,7 @@
 {% block body %}
 
     {# /***************Messages succes ******************/#}
+<<<<<<< HEAD
 
         {{ include('modal.html.twig') }}
     <div class="d-flex justify-content-start">
@@ -18,6 +19,15 @@
     </div>
 
     <table class="table table2 table-bordered mt-3">
+=======
+    <div class="text-center">
+        {% for message in app.flashes('success') %}
+            <strong class="alert alert-success">{{ message }}</strong>
+        {% endfor %}
+    </div>
+
+    <table class="table table-bordered">
+>>>>>>> refs/remotes/origin/main
         <thead>
             <tr>
                 <th>Code type</th>
@@ -27,7 +37,11 @@
                 <th>Actions</th>
             </tr>
         </thead>
+<<<<<<< HEAD
         <tbody>
+=======
+        <tbody class="jumbotron jumbotron-fluid text-ligth">
+>>>>>>> refs/remotes/origin/main
         {% for type_epargne in type_epargnes %}
             <tr>
                 <td>{{ type_epargne.id }}</td>
@@ -55,4 +69,10 @@
         {% endfor %}
         </tbody>
     </table>
+<<<<<<< HEAD
+=======
+    <div>
+    <a href="{{ path('app_type_epargne_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajputer nouveau</a>
+    </div>
+>>>>>>> refs/remotes/origin/main
 {% endblock %}

@@ -34,10 +34,13 @@ class PlanComptable
     }
 
 
+<<<<<<< HEAD
     public function __toString()
     {
         return $this->getId();
     }
+=======
+>>>>>>> refs/remotes/origin/main
 
     public function getId(): ?int
     {

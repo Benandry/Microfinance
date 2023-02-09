@@ -59,10 +59,17 @@ class ApiCreditController extends AbstractController
     /**
      * Fonction qui recupere les api remboursement selon les periodes
      */
+<<<<<<< HEAD
     #[Route('/remboursement/periode/{numerocredit}',name:'app_remboursement_periode')]
     public function ApiRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
     {
         $remboursement=$remboursementCreditRepository->ApiRemboursement($numerocredit);
+=======
+    #[Route('/remboursement/periode/{numerocredit}/{periode}',name:'app_remboursement_periode')]
+    public function ApiRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit,int $periode):Response
+    {
+        $remboursement=$remboursementCreditRepository->ApiRemboursement($numerocredit,$periode);
+>>>>>>> refs/remotes/origin/main
 
         return new JsonResponse($remboursement);
     }
@@ -75,4 +82,42 @@ class ApiCreditController extends AbstractController
         // dd($cycle);
         return new JsonResponse($cycle);
     }
+<<<<<<< HEAD
+=======
+     /**
+     * Fonction qui recupere les api remboursement sur le modal
+     */
+    #[Route('/remboursement/modal/{numerocredit}',name:'app_remboursement_periode_modal')]
+    public function ApiRemboursementModal(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
+    {
+        $remboursement=$remboursementCreditRepository->ApiRemboursementModal($numerocredit);
+
+        return new JsonResponse($remboursement);
+    }
+
+       /**
+     * Methode permet de comparer le montant rembourser et l'echeance
+     */
+    #[Route('/remboursement/comparaison/{numerocredit}/{periode}',name:'app_remboursement_comparaison_modal')]
+    public function ComparaisonRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit,int $periode):Response
+    {
+        $comparaison=$remboursementCreditRepository->ComparaisonRemboursement($numerocredit,$periode);
+
+        return new JsonResponse($comparaison);
+    }
+
+        /**
+     * Fonction qui recupere les 1 ere remboursement en ammortissemnt
+     */
+    #[Route('/remboursement/ammortissement/{numerocredit}/{periode}',name:'app_remboursement_periode_ammortissement')]
+    public function ApiRemboursementAmmortissemnt(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit,int $periode):Response
+    {
+        $remboursement=$remboursementCreditRepository->ApiRemboursementAmmortissement($numerocredit,$periode);
+
+     
+       return new JsonResponse($remboursement);
+    }
+
+
+>>>>>>> refs/remotes/origin/main
 }

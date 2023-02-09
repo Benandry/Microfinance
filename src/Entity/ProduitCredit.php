@@ -48,6 +48,12 @@ class ProduitCredit
     #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: CompteGL1::class)]
     private Collection $ProduitCompteGL1;
 
+<<<<<<< HEAD
+=======
+    #[ORM\OneToMany(mappedBy: 'ProduitCredit', targetEntity: PenaliteCredit::class)]
+    private Collection $penaliteCredits;
+
+>>>>>>> refs/remotes/origin/main
     public function __construct()
     {
         $this->configurationGeneralCredits = new ArrayCollection();
@@ -58,6 +64,10 @@ class ProduitCredit
         $this->garantieCredits = new ArrayCollection();
         $this->compteGL1s = new ArrayCollection();
         $this->ProduitCompteGL1 = new ArrayCollection();
+<<<<<<< HEAD
+=======
+        $this->penaliteCredits = new ArrayCollection();
+>>>>>>> refs/remotes/origin/main
     }
 
     public function getId(): ?int
@@ -345,4 +355,37 @@ class ProduitCredit
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * @return Collection<int, PenaliteCredit>
+     */
+    public function getPenaliteCredits(): Collection
+    {
+        return $this->penaliteCredits;
+    }
+
+    public function addPenaliteCredit(PenaliteCredit $penaliteCredit): self
+    {
+        if (!$this->penaliteCredits->contains($penaliteCredit)) {
+            $this->penaliteCredits->add($penaliteCredit);
+            $penaliteCredit->setProduitCredit($this);
+        }
+
+        return $this;
+    }
+
+    public function removePenaliteCredit(PenaliteCredit $penaliteCredit): self
+    {
+        if ($this->penaliteCredits->removeElement($penaliteCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($penaliteCredit->getProduitCredit() === $this) {
+                $penaliteCredit->setProduitCredit(null);
+            }
+        }
+
+        return $this;
+    }
+>>>>>>> refs/remotes/origin/main
 }

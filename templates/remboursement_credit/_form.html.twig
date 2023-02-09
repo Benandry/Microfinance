@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{ form_start(form) }}
               
                 <div class="row" >
@@ -16,13 +17,51 @@
                     </div>
                 </div>
 
+=======
+
+{{ form_start(form) }}
+  <ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#Remboursement">Remboursement</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Historique">Historique</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#tableauAmmortissemnt">tableau Ammortissemnt </a></li>
+  </ul>
+  <div class="tab-content">
+
+        {# Remboursement #}
+
+      <div class="tab-pane active" id="Remboursement">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+              <h6 class="text-center text-primary">Etat civile</h6>
+                    <div class="row" >
+                            <div class="col-sm-3">
+                                {{ form_row(form.NumeroCredit) }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ form_row(form.DateRemboursement) }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ form_row(form.MontantTotalPaye) }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ form_row(form.periode) }}
+                            </div>
+                    </div>
+>>>>>>> refs/remotes/origin/main
                 <hr>
 
                 <div class="row" >
                     <div class="col-sm-5">
                         {{ form_row(form.PieceCompteble) }}
                         {{ form_row(form.Papeterie) }}
+<<<<<<< HEAD
                         {{ form_row(form.penalite) }}
+=======
+                        {{ form_row(form.Commentaire) }}
+                        {{ form_row(form.penalite) }}
+                        {{ form_row(form.Anticipe) }}
+                        {{ form_row(form.MontantEcheance) }}
+>>>>>>> refs/remotes/origin/main
                     </div>
 
                     <div class="col-sm-3" style="margin-top:25px;margin-left:100px">
@@ -30,9 +69,110 @@
                         <div style="display:none;" id="caisse">{{ form_row(form.Caisse) }}</div>
                         {{ form_row(form.TransfertEpargne) }}
                     </div>
+<<<<<<< HEAD
                     </div>
                 </div>
 
     {# {{ form_widget(form) }} #}
     <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+=======
+                </div>
+                <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+            </div>
+        </div>
+      </div>
+
+      {# Historique #}
+
+      <div class="tab-pane" id="Historique">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Historique</h6>
+                              <table class="table">
+                            <thead>
+                                <tr>    
+                                    <th scope="col">Date defini</th>
+                                    <th scope="col">Date de remboursement</th>
+                                    <th scope="col">Periode</th>
+                                    <th scope="col">Montant du</th>
+                                    <th scope="col">Montant paye</th>
+                                    <th scope="col">Penalite</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for AmortissementFixe in historique %}
+                                {% if AmortissementFixe.penaliteremboursement == null %}
+                                    <tr>
+                                        <td>{{ AmortissementFixe.dateRemborsement|date('Y-m-d') }}</td>
+                                        <td>{{ AmortissementFixe.dateremb|date('Y-m-d') }}</td>
+                                        <td>{{ AmortissementFixe.perioderemboursement }}</td>
+                                        <td>{{ AmortissementFixe.montanttTotal }}</td>
+                                        <td>{{ AmortissementFixe.montantrembourse }}</td>
+                                        <td>{{ AmortissementFixe.penaliteremboursement }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr style="color:red">
+                                        <td>{{ AmortissementFixe.dateRemborsement|date('Y-m-d') }}</td>
+                                        <td>{{ AmortissementFixe.dateremb|date('Y-m-d') }}</td>
+                                        <td>{{ AmortissementFixe.perioderemboursement }}</td>
+                                        <td>{{ AmortissementFixe.montanttTotal }}</td>
+                                        <td>{{ AmortissementFixe.montantrembourse }}</td>
+                                        <td>{{ AmortissementFixe.penaliteremboursement }}</td>
+                                    </tr>
+                                {% endif %}
+                            {%  endfor %}
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+      </div>
+
+      {# Tableau d'ammortissemnt #}
+
+
+            <div class="tab-pane" id="tableauAmmortissemnt">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">tableau Ammortissemnt</h6>
+                              <table class="table">
+                            <thead>
+                                <tr>    
+                                    <th scope="col">Periode</th>
+                                    <th scope="col">Date de remboursement</th>
+                                    <th scope="col">Principale</th>
+                                    <th scope="col">interet</th>
+                                    <th scope="col">montant Total</th>
+                                    <th scope="col">annuite</th>
+                                    <th scope="col">commission</th>
+                                    <th scope="col">type amortissement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for AmortissementFixe in tableauAmmortissemnt %}
+                                    <tr>
+                                        <td>{{ AmortissementFixe.periode }}</td>
+                                        <td>{{ AmortissementFixe.dateRemborsement|date('Y-m-d') }}</td>
+                                        <td>{{ AmortissementFixe.principale }}</td>
+                                        <td>{{ AmortissementFixe.interet }}</td>
+                                        <td>{{ AmortissementFixe.montanttTotal }}</td>
+                                        <td>{{ AmortissementFixe.annuite }}</td>
+                                        <td>{{ AmortissementFixe.commission }}</td>
+                                        <td>{{ AmortissementFixe.typeamortissement }}</td>
+                                    </tr>
+                            {%  endfor %}
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+      </div>
+
+
+
+
+  </div>
+{{ form_end(form) }}
+
+
+>>>>>>> refs/remotes/origin/main

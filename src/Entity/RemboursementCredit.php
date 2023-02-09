@@ -44,6 +44,21 @@ class RemboursementCredit
     #[ORM\Column(nullable: true)]
     private ?float $penalite = null;
 
+<<<<<<< HEAD
+=======
+    #[ORM\Column(length: 255)]
+    private ?string $Commentaire = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Anticipe = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantEcheance = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $TypeClient = null;
+
+>>>>>>> refs/remotes/origin/main
     public function getId(): ?int
     {
         return $this->id;
@@ -168,4 +183,60 @@ class RemboursementCredit
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    public function getCommentaire(): ?string
+    {
+        return $this->Commentaire;
+    }
+
+    public function setCommentaire(string $Commentaire): self
+    {
+        $this->Commentaire = $Commentaire;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getId();
+    }
+
+    public function getAnticipe(): ?string
+    {
+        return $this->Anticipe;
+    }
+
+    public function setAnticipe(?string $Anticipe): self
+    {
+        $this->Anticipe = $Anticipe;
+
+        return $this;
+    }
+
+    public function getMontantEcheance(): ?float
+    {
+        return $this->MontantEcheance;
+    }
+
+    public function setMontantEcheance(?float $MontantEcheance): self
+    {
+        $this->MontantEcheance = $MontantEcheance;
+
+        return $this;
+    }
+
+    public function getTypeClient(): ?string
+    {
+        return $this->TypeClient;
+    }
+
+    public function setTypeClient(?string $TypeClient): self
+    {
+        $this->TypeClient = $TypeClient;
+
+        return $this;
+    }
+>>>>>>> refs/remotes/origin/main
 }

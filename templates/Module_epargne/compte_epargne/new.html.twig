@@ -6,6 +6,7 @@
 {% block body %}
 
     {{ include('modal.html.twig') }}
+<<<<<<< HEAD
 
     <div class="card p-3">
         <div class="card mb-3">
@@ -27,6 +28,20 @@
             <hr/>
         </div>
         {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
+=======
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 text-secondary">
+            <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>   
+            <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p> 
+            <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p>    
+        </div>
+    </div>
+              {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
+
+
+      {# /***************Messages succes ******************/#}
+            
+>>>>>>> refs/remotes/origin/main
         <div style="display: none;">
             <p> Text ecrit : <span id="text"> </span> </p>
             <p> Text ecrit : <span id="code_text"> </span> </p>
@@ -76,6 +91,7 @@
                     </tr>
                 </tbody>
             {% endfor %}
+<<<<<<< HEAD
         </table>
     </div>
 
@@ -84,5 +100,8 @@
       {# /***************Messages succes ******************/#}
             
 
+=======
+    </table>
+>>>>>>> refs/remotes/origin/main
 {% endblock %}
 
