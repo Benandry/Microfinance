@@ -29,36 +29,10 @@
         </div>
     </div>
 <hr/>
-<<<<<<< HEAD
-=======
-    <div class="row">
-        <h5 class="fw-bold text-center"> Comptabilité </h5>
-        <div class="col-sm-4 col-md-4">
-            <h6 class="text-primary text-center"> Plan comptable (PCEC)</h6>
-            {{ form_row(form.debit) }}
-            {{ form_row(form.credit) }}
-        </div>
-        <div class="col-sm-4 col-md-4">
-            <h6 class="text-primary text-center"> Plan analytique </h6>
-            {{ form_row(form.debitAnalytique) }}
-            {{ form_row(form.creditAnalytique) }}
-        </div>
-        <div class="col-sm-4 col-md-4">
-            <h6 class="text-primary text-center"> Plan Budgetaire </h6>
-            {# {{ form_row(form.papeterie) }}
-            {{ form_row(form.montant_bruite) }} #}
-        </div>
-    </div>
-
->>>>>>> refs/remotes/origin/main
     <div style="display: none;">
         {{ form_row(form.solde) }}
     </div>
     <div class="d-flex justify-content-center">
-<<<<<<< HEAD
         <button class="btn btn-primary">{{ button_label|default('Valider le dépôt') }}</button>
-=======
-        <button class="btn btn-primary btn-sm">{{ button_label|default('Valider le dépot') }}</button>
->>>>>>> refs/remotes/origin/main
     </div>
 {{ form_end(form) }}

@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block head %}
-<<<<<<< HEAD
-    Groupe>nouveau groupe
-=======
-    Ajout de nouvel groupe
->>>>>>> refs/remotes/origin/main
+    Client > Groupe>nouveau 
 {% endblock %}
 
 {% block body %}
@@ -20,7 +16,7 @@
     <div class="container">
             <div style="display:none;"> <span id="id_groupe">{{ last_id_gropue }}</span> <span id="id_agence">{{ id_agence }}</span></div>
 
-              {{ include('Module_client/groupe/_form.html.twig') }}
+              {{ include('Module_client/groupe/_form.html.twig' ,{ 'titre' : "Ajout de nouvel groupe" }) }}
     </div>
 
 {% endblock %}

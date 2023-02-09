@@ -32,6 +32,15 @@ class CompteGroupeEpType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
+
+           ->add('typeAfficher',ChoiceType::class,[
+                'label' => "Type client : ",
+                'choices'=>[
+                    'GROUPE'=>'GROUPE',
+                ],
+                'disabled' => true,
+                'mapped' => false
+            ])
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
                 'choice_label'=>'nomproduit',

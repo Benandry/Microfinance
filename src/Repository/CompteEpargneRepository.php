@@ -481,9 +481,9 @@ class CompteEpargneRepository extends ServiceEntityRepository
             App\Entity\Groupe g
             WITH ce.codeep = g.codegroupe
             WHERE ce.codeep = '$code'
+            GROUP BY ce.codeepargne
             ORDER BY ce.datedebut DESC
-            -- AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c LEFT JOIN App\Entity\Transaction tr  WITH tr.codeepargneclient = c.codegroupe  WHERE ce.codeep = '$code' )
-           ";
+            ";
             
             $stmt = $this->getEntityManager()->createQuery($query)->getResult();
       

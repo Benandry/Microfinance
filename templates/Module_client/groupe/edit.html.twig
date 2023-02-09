@@ -5,14 +5,10 @@
 {% endblock %}
 
 {% block head %}
-<<<<<<< HEAD
-    Groupe>Modification du {{ Groupe.nomGroupe }}
-=======
-    Modification du groupe {{ Groupe.nomGroupe }}
->>>>>>> refs/remotes/origin/main
+    Client > Groupe >Modification du {{ Groupe.nomGroupe }}
 {% endblock %}
 
 {% block body %}
-    {{ include('Module_client/groupe/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('Module_client/groupe/_form.html.twig', {'button_label': 'Modifier','titre' : "Modification du groupe "~ Groupe.nomGroupe }) }}
 
 {% endblock %}

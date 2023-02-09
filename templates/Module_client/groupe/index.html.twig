@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block head %}
-<<<<<<< HEAD
- Groupes>listes
-=======
-    Listes des groupes
->>>>>>> refs/remotes/origin/main
+    Client > Groupe >listes
 {% endblock %}
 
 {% block body %}
@@ -45,7 +41,7 @@
                             <a href="{{ path('app_groupe_show', {'id': Groupe.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                         </div>
                         <div class="col-4 col-sm-4">
-                            <a href="{{ path('app_groupe_edit', {'id': Groupe.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="{{ path('app_groupe_edit', {'id': Groupe.id}) }}" class="btn btn-danger btn-sm"><i class="fa fa-edit"></i></a>
                         </div>
                     </div>
                 </td>

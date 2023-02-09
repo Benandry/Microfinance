@@ -1,7 +1,6 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-<<<<<<< HEAD
     Compte epargne nouveau compte du groupe {{ nom }} 
 {% endblock %}
 
@@ -10,15 +9,22 @@
     {{ include('modal.html.twig') }}
 
     <div class="card p-3">
-        <div class="card">
-            <div class="row m-4">
-                <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-secondary">
+        <div class="card mb-3">
+            <div class="row text-secondary m-3">
+                <div class="col-xl-4 col-md-4 col-sm-4">
                     <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>     
                     <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
+                </div>
+                
+                <div class="col-md-4 col-sm-4 m-auto">
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Ouvrir compte epargne </h5></div>
+                </div>
+                <div class="col-xl-4 col-md-4 col-sm-4">
                     <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
                 </div>
-            </div>
+            </div>              
         </div>
+
 
         <div style="display: none;">
             <p> Text ecrit : <span id="text"> </span> </p>
@@ -27,19 +33,20 @@
         {{ form_start(form) }}
             <div class="row mt-3">
                 <div class="col-4 col-sm-4">
-                    {{ form_row(form.produit) }}
+                {{ form_row(form.typeAfficher) }} 
                 </div>
                 <div class="col-4 col-sm-4"> 
-                    {{ form_row(form.datedebut) }}
+                    {{ form_row(form.produit) }}
                 </div>
                 <div class="col-4 col-sm-4">
-                    {{ form_row(form.typeClient) }} 
+                    {{ form_row(form.datedebut) }}
                 </div>
             </div> 
 
             <div style="display: none;">
                     {{ form_row(form.codeep) }}
                     {{ form_row(form.codeepargne) }}
+                    {{ form_row(form.typeClient) }} 
             </div> 
             <div class="row">
                 <div class="d-flex justify-content-center">
@@ -86,92 +93,6 @@
             </tbody>
         </table>
     </div>
-=======
-    Compte epargne du groupe {{ nom }} 
-{% endblock %}
-
-{% block head %}
-    Compte epargne du groupe {{ nom }}
-{% endblock %}
-{% block body %}
-    {{ include('modal.html.twig') }}
-    <div class="card">
-        <div class="row m-4">
-            <div class="col-4 col-sm-4 col-xl-4 col-md-4 text-secondary">
-                <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>     
-                <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
-                <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
-            </div>
-        </div>
-    </div>
-
-    <div style="display: none;">
-        <p> Text ecrit : <span id="text"> </span> </p>
-        <p> Text ecrit : <span id="code"> </span> </p>
-    </div>
-    {{ form_start(form) }}
-        <div class="row mt-3">
-            <div class="col-4 col-sm-4">
-                {{ form_row(form.produit) }}
-            </div>
-            <div class="col-4 col-sm-4"> 
-                {{ form_row(form.datedebut) }}
-            </div>
-            <div class="col-4 col-sm-4">
-                {{ form_row(form.typeClient) }} 
-            </div>
-        </div> 
-
-        <div style="display: none;">
-                {{ form_row(form.codeep) }}
-                {{ form_row(form.codeepargne) }}
-        </div> 
-        <div class="row">
-            <div class="d-flex justify-content-center">
-                {{ form_row(form.Valider) }}
-            </div>
-        </div>
-    {{ form_end(form) }}
-    <div class="m-4"></div>
-    <h6 class="text-primary"> Compte existant du groupe {{ nom }} </h6>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Compte epargne groupe</th>
-                <th>Code groupe</th>
-                <th>Date d'ouverture </th>
-                <th>Produits</th>
-                <th>solde</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
-            {% for compte in compte_exist %}
-            <tr>
-                <td> {{ compte.codeepargne }}</td>
-                <td> {{ compte.codegroupe }}</td>
-                <td> {{ compte.datedebut|date('Y-m-d') }}</td>
-                <td> {{ compte.nomproduit }}</td>
-                <td>
-                    {% if compte.solde == null %}
-                        0
-                    {% else %}
-                        {{ compte.solde }}
-                    {% endif %}
-                </td>
-                <td> 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
->>>>>>> refs/remotes/origin/main
 {% endblock %}
 {% block javascript %}
     <script src="{{ asset('/api/api_codeepargne_groupe.js') }}"><script>

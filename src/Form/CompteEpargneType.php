@@ -32,7 +32,14 @@ class CompteEpargneType extends AbstractType
                 'choices'=>[
                     'INDIVIDUEL'=>'INDIVIDUEL',
                 ],
+            ])
+            ->add('typeAfficher',ChoiceType::class,[
+                'label' => "Type client : ",
+                'choices'=>[
+                    'INDIVIDUEL'=>'INDIVIDUEL',
+                ],
                 'disabled' => true,
+                'mapped' => false
             ])
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
