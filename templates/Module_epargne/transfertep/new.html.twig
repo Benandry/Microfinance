@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Transfert du compte epargne 
+{% endblock %}
+
+{% block head %}
+    Transfert du compte epargne 
+{% endblock %}
+
+{% block body %}
+                 {# /***************Messages succes ******************/#}
+    {% for message in app.flashes('success') %}
+        <div class="alert text-center alert-success">
+           <p> {{ message }} </p>
+        </div>
+    {% endfor %}
+    {# *************************************#}
+    {{ include('Module_epargne/transfertep/_form.html.twig') }}
+{% endblock %}

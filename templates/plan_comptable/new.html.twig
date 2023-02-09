@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nouveau compte {% endblock %}
+{% block head %}nouveau compte{% endblock %}
+
+{% block body %}
+
+    {{ include('plan_partial/_form.html.twig', {'button_label': 'Enregistrer','titre': 'Nouveau plan comptable'}) }}
+
+{% endblock %}

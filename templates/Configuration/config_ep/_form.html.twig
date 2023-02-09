@@ -1,0 +1,46 @@
+
+
+         <!-- The Modal -->
+          <div class="modal" tabindex="-1" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header titre_modal">
+                            <h5 class="modal-title text-center">Depot compte epargne </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        {{ form_start(form) }}
+                            <div class="modal-body">
+                                 <div class="row">
+                                    <div class="col-sm-6">
+                                        {{ form_row(form.produitEpargne) }}
+                                        {{ form_row(form.IsNegatif) }}
+                                        {{ form_row(form.deviseutiliser) }}
+                                        {{ form_row(form.nbrjInactif) }}
+                                
+                                        {{ form_row(form.nbMinRet) }}
+                                        {{ form_row(form.NbrJrMaxDep) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_row(form.ageMinCpt) }}
+                                        {{ form_row(form.fraisTenuCpt) }}       
+                                        {{ form_row(form.commissionRetCash) }}
+                                        {{ form_row(form.commissionTransf) }}
+                                
+                                        {{ form_row(form.fraisFermCpt) }}
+                                        {{ form_row(form.soldeouvert) }}
+                                    </div>
+                                </div>
+                                    
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary btn-sm" >{{ button_label|default('Enregistrer') }}</button>
+                                <a href="{{ path('app_config_ep_index') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Voir Liste</a>
+                            </div>
+                        {{ form_end(form)}}
+                    </div>
+                </div>
+            </div>
+         {# /***********Fin modal *********** #}

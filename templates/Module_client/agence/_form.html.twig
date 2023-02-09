@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+                <div class="modal-header titre_modal">
+                    <h5 class="text-center modal-title"> Agence</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 col-sm-6">
+                            {{ form_row(form.NomAgence) }}
+                            {{ form_row(form.AdressAgence) }}
+                        </div>
+                        <div class="col-sm-6 col-sm-6">
+                            {{ form_row(form.commune) }}
+                            <div style="display: none;">
+                                {{ form_row(form.codeAgence ) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm"> <i class="fa fa-check"></i> Sauvegarder</button>
+                    <a href="{{ path('app_agence_index') }}" class="btn btn-info btn-sm"><i class="fa fa-list"></i> Agence existe</a>
+                </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

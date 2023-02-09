@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Réinitialisation mot de passe </title>
+    {% block stylesheet %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock  %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <section class="container">
+            <div class="row align-items-center h-100">
+                <div class="col-md-6 mx-auto">
+
+                    <div class="d-flex justify-content-center mt-5">
+                        <div class="card " style="width: 29rem;padding: 20px;box-shadow: 5px 10px 8px #888888;">
+                            <div class="card-body">
+                                    {% for flash_error in app.flashes('reset_password_error') %}
+                                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                                    {% endfor %}
+                                    <h4>Réinitialiser votre mot de passe</h4>
+
+                                    {{ form_start(requestForm) }}
+                                        {{ form_row(requestForm.email) }}
+                                        <div>
+                                            <small>
+                                                Entrer votre addresse email et nous allons envoyer un lien pour reinitialiser votre mot de passe.
+                                            </small>
+                                        </div>
+
+                                        <button class="btn btn-primary m-2" id="login">Confirmer </button>
+                                    {{ form_end(requestForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+</body>
+</html>
+

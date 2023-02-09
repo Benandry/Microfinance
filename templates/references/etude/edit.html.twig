@@ -1,0 +1,9 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Edit Etude</h1>
+
+    {{ include('references/etude/_form.html.twig', {'button_label': 'Mofifier'}) }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

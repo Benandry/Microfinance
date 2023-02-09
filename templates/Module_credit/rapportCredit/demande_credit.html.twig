@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    {{ include('Module_credit/rapportCredit/_titre.html.twig',{ status: 'Credit' }) }}
+{% endblock %}
+
+{% block head %}
+    {{ include('Module_credit/rapportCredit/_head.html.twig',{ status: 'Credit' }) }}
+{% endblock %}
+
+{% block body %}
+    {% if affiche_table == false %}
+     <!-- The Modal -->
+       {{ include('Module_credit/rapportCredit/_filtre.html.twig',{ status: 'Credit' }) }}
+
+    {% else %}
+    <table class="table table1 mt-3">
+        <thead>
+            <tr>
+                    <th>Code credit</th>
+                    <th>Date de demande</th>
+                    <th>Nom et prenom</th>
+                    <th>Montant de credit </th>
+                    <th>Nombre tranche </th>
+                    <th> Agent de credit </th>
+                    <th> Status </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for liste in listes %} 
+                <tr>
+                    <td>{{ liste.NumeroCredit }}</td>
+                    <td> {{ liste.DateDemande|date('Y-m-d') }} </td>
+                    <td> {{ liste.nom_client }} {{ liste.prenom_client }} </td>
+                    <td> {{ liste.Montant }}</td>
+                    <td> {{ liste.NombreTranche }}</td>
+                    <td> {{ liste.Agent }}</td>
+                    <td> 
+                        {% if liste.statusApprobation == null %}
+                            En attente
+                        {% else %}
+                            {{ liste.statusApprobation }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html.twig" %}
+
+    {% block title %}
+        {% if affiche_tab  == false %}
+            Rapport groupe 
+        {% else %}
+            Liste des groupe {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+    {% block head %}
+        {% if affiche_tab  == false %}
+            Rapport groupe 
+        {% else %}
+            Liste des groupe {% if date_1 == true %} jusq'au {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+{% block body %}
+
+    {% if affiche_tab == false %}
+
+    <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                        <h4 class="modal-title text-center">Rapport groupe</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    {{ form_start(trierGroupe) }} 
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                             <div class="text-center" id="one_date">
+                                <h5 class="text-center"> Date </h5>
+                                {{ form_row(trierGroupe.one_date_search)}}
+                            </div>
+
+                           <div class="text-center" id="two_date">
+                                <h5 class="text-center">Entre deux période  </h5>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {{ form_row(trierGroupe.Date1) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_row(trierGroupe.Date2)}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                
+                        <!-- Modal footer -->
+                        <div class="modal-footer mb-0">
+                            {{ form_row(trierGroupe.Chercher) }}
+                        </div>
+                    {{ form_end(trierGroupe) }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <table class=" table table1 table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Code Groupe</th>
+                <th>Date de creation</th>
+                <th>Nom Groupe</th>
+                <th>Adresse Email</th>
+                <th>Nombre Membre</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for Groupe in groupe %}
+                <tr>
+                    <td class="fw-bold">{{ Groupe.codegroupe }}</td>
+                    <td>{{ Groupe.dateInscription | date('d-m-Y') }}</td>
+                    <td>{{ Groupe.nomGroupe }}</td>
+                    <td>{{ Groupe.email }}</td>
+                    <td> {{ Groupe.nombre_par_membre }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Pas de resultats</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+{% endblock %}

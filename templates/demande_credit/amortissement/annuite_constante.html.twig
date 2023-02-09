@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Par annuité constante {% endblock %}
+{% block head %} Par annuité constante {% endblock %}
+
+{% block body %}
+    <div class="card p-3">
+        {{ include('modal.html.twig') }}
+        {% for info in info %}
+            <div class="card">
+                <div class="row text-secondary m-3">
+                    <div class="col-md-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold"> Montant de credit : {{ info.Montant }}</p>
+                        <p class="fw-bold"> taux  : {{ info.TauxInteretAnnuel }} % </p>
+                    </div>
+                    <div class="col-md-4 col-xl-4 col-sm-4 m-auto">
+                        <p class="fw-bold"> Annuité constante : {{ info.annuite }}</p>
+                    </div>
+                    <div class="col-md-4 col-xl-4 col-sm-4">
+                        <p class="fw-bold">Numero de credit : {{ info.NumeroCredit }}</p>
+                        <p class="fw-bold"> Nombre tranche : {{ info.NombreTranche }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-12 col-sm-12 col-xl-12">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Periode (N) </th>
+                            <th>Date de Remboursement  </th>
+                            <th>Capital restant Du (K)</th>
+                            <th>Interet (I)</th>
+                            <th>Amortissemnent (r)</th>
+                            <th>Annuité (a) </th>
+                            <th>Solde du</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for amortissement in tableau_amortissement %}
+                            <tr>
+                                <td> {{ amortissement.periode }} </td>
+                                <td> {{ amortissement.dateRemborsement|date("d/m/Y") }} </td>
+                                <td> {{ amortissement.principale }}
+                                <td> {{ amortissement.interet }} </td>
+                                <td> {{ amortissement.remboursement }} </td>
+                                <td> {{ amortissement.annuite }} </td>
+                                <td> {{ amortissement.soldedu }} </td>
+                                <td> 
+                                    <a href="{{ path('app_amortissement_fixe_edit',{'id': amortissement.id}) }}" class="btn btn-sm btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    {# <tfoot>
+                        <tr>
+                            <th colspan="2">Total</th>
+                            <td> {{ totalInteret }} </td>
+                            <td> {{ totalMontant }} </td>
+                            <td> 0 </td>
+                        </tr>
+                    </tfoot> #}
+                </table>
+                <div class="d-flex justify-content-center">
+                    {{ form_start(form) }}
+                        <div class="my-custom-class-for-errors">
+                            {{ form_errors(form) }}
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                {{ form_row(form.submit) }}
+                            </div>
+                            <div class="col" id="some-custom-id">
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Approbation Credit{% endblock %}
+{% block head %}Approbation/Individuel/Credit{% endblock %}
+
+{% block body %}
+<div class="card p-3">
+    {% for demande in demandes %}
+        <div class="card">
+            <div class="row text-secondary m-3">
+                <div class="col-4 col-sm-4 col-md-4">
+                    <p> <span class="fw-bold">Nom du client : </span> <span id="nom"> {{ demande.nom_client }}</span> </p>
+                    <p> <span class="fw-bold">Prenom du client : </span> <span id="prenom">{{ demande.prenom_client }}</span> </p>
+                    <p> <span class="fw-bold">Code credit :  </span> <span id="codecredit">{{ demande.NumeroCredit }}</span> </p>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 m-auto">
+                <p class="fw-bold">Cycle de credit : {{ cycle }} </p>
+                </div> 
+                <div class="col-4 col-sm-4 col-md-4"> 
+                    <p> <span class="fw-bold">Montant du credit :  </span> <span id="montant">{{ demande.Montant }}</span> </p> 
+                    <p> <span class="fw-bold">Nombre tranche :  </span> <span id="nombreTranche">{{ demande.NombreTranche }}</span> </p> 
+                    <p> <span class="fw-bold">Type Tranche :  </span> <span id="typeTranche">{{ demande.TypeTranche }}</span> </p> 
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row mt-3">
+        <div class="col-12 col-md-12">
+            {{ include('Module_credit/approbation_credit/_form.html.twig') }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

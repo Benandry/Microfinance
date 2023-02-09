@@ -1,0 +1,31 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Code client</th>
+                <th>Nom client</th>
+                <th>Prenom client</th>
+                <th>Cin</th>
+                <th>Date inscription</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for individuelclient in client %}
+            {% for agence in agences %}
+                <tr>
+                    <td>I{{ "%02d" | format(agence.id)}}{{  "%05d" | format(individuelclient.id) }}</td>
+                    <td>{{ individuelclient.nomClient }}</td>
+                    <td>{{ individuelclient.prenomClient }}</td>
+                    <td>{{ individuelclient.cin }}</td>
+                    <td>{{ individuelclient.dateInscription ? individuelclient.dateInscription|date('Y-m-d') : '' }}</td>             
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

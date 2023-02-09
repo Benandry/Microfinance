@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan Budgetaire {% endblock %}
+{% block head %}Plan Budgetaire {% endblock %}
+
+{% block body %} 
+    {{ include('plan_partial/_form.html.twig', {'button_label': 'Enregistrer','titre': 'Nouveau plan budgetaire'}) }}
+{% endblock %}

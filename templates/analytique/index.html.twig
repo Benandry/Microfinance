@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan Analytique {% endblock %}
+{% block head %}Plan Analytique {% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-end me-3"><a href="{{ path('app_analytique_new') }}" class="btn btn-sm btn-primary">Inserer nouveau compte</a></div>
+    <table class="table table2 table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Libelle</th>
+                <th>Percent</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for analytique in analytiques %}
+            <tr>
+                <td>{{ analytique.id }}</td>
+                <td>{{ analytique.code }}</td>
+                <td>{{ analytique.libelle }}</td>
+                <td>{{ analytique.percent }}</td>
+                <td>
+                    <a href="{{ path('app_analytique_show', {'id': analytique.id}) }}">show</a>
+                    <a href="{{ path('app_analytique_edit', {'id': analytique.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

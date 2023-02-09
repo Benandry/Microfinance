@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comptabilité Journal {% endblock %}
+{% block head %}Comptabilité Journal {% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="row m-3">
+            <div class="col-md-4 col-sm-4">
+                <div class="d-flex justify-content-start text-secondary fw-bolder"> ONG Fidev </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Journal </h5></div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="d-flex justify-content-end text-secondary fw-bolder">Période </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-4"></div>
+    <table class="table table1 taable-bordered mt-3">
+            <thead>
+                <tr>
+                    <th> Date </th>
+                    <th> Code Transaction</th>
+                    <th> Réference </th>
+                    <th> N de compte</th>
+                    <th> Libéllé</th>
+                    <th> Débit </th>
+                    <th> Crédit </th>
+                    <th> Solde </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for journal in journals %}
+                    <tr>
+                        <td> {{ journal.dateMouvement|date('Y/m/d') }} </td>
+                        <td> {{ journal.refTransaction}} </td>
+                        <td> {{ journal.pieceComptable}} </td>
+                        <td>  {{ journal.planCompta.NumeroCompte}}   </td>
+                        <td> {{ journal.planCompta.Libelle}} </td>
+                        <td> {{ journal.debit}} </td>
+                        <td> {{ journal.credit}} </td>
+                        <td> {{ journal.solde}} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+{% endblock %}

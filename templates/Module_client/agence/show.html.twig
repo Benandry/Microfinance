@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Information du Agences {{ agence.NomAgence }}
+{% endblock %}
+
+{% block head %}
+    Information du Agences {{ agence.NomAgence }}
+{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Code agence</th>
+                <td>{{ "%02d" | format(agence.id) }}</td>
+            </tr>
+            <tr>
+                <th>Nom Agence</th>
+                <td>{{ agence.NomAgence }}</td>
+            </tr>
+            <tr>
+                <th>Adresse Agence</th>
+                <td>{{ agence.AdressAgence }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_agence_index') }}" class="btn btn-primary btn-sm"> <i class="fa fa-list"></i> Listes agences</a>
+{% endblock %}
+

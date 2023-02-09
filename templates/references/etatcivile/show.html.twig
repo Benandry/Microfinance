@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur l'etat {{ etatcivile.etatcivile }}
+{% endblock %}
+
+{% block head %}
+    Info sur l'etat {{ etatcivile.etatcivile }}
+{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etatcivile.id }}</td>
+            </tr>
+            <tr>
+                <th>Etat civile</th>
+                <td>{{ etatcivile.etatcivile }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_etatcivile_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Voir liste</a>
+    <a href="{{ path('app_etatcivile_edit', {'id': etatcivile.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>editer</a>
+{% endblock %}
+

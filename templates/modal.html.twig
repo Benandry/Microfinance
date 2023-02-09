@@ -1,0 +1,23 @@
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <p class="alert text-center alert-{{ type }}">
+                                        {{ message }}
+                                    </p>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    {% endfor %}

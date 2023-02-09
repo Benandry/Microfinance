@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Ouvrir un compte du '~ nom %}
+{% block head 'Ouvrir un compte du '~ nom %}
+
+{% block body %}
+
+    {{ include('modal.html.twig') }}
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 text-secondary">
+            <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>   
+            <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p> 
+            <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p>    
+        </div>
+    </div>
+              {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
+
+
+      {# /***************Messages succes ******************/#}
+            
+        <div style="display: none;">
+            <p> Text ecrit : <span id="text"> </span> </p>
+            <p> Text ecrit : <span id="code_text"> </span> </p>
+        </div>
+        <div class="fw-bold">
+            <hr/>
+        </div>
+        <h6 class="text-primary">Compte existant du client {{ nom }} {{ prenom }}</h6>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Code Epargne</th>
+                    <th>Code client</th>
+                    <th>Date d'ouverture </th>
+                    <th>Produits</th>
+                    <th>Solde</th>
+                    <th>Actions </th>
+                </tr>
+            </thead>
+            {% for compte_epargne in comptedujours %}
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                    <tr>
+                        <td class="fw-bold">{{ compte_epargne.codeepargne }}</td>
+                        <td>{{ compte_epargne.codeclient }}</td>
+                        <td>{{ compte_epargne.datedebut | date('d-m-Y') }}</td>
+                        <td>{{ compte_epargne.nomproduit }}</td>
+                        <td>
+                            {% if compte_epargne.solde != '' %}
+                                {{ compte_epargne.solde }}
+                                {% else %}
+                                0
+                            {% endif %}</td>
+                        <td>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="{{ path('app_compte_epargne_show', {'id': compte_epargne.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="{{ path('app_compte_epargne_edit', {'id': compte_epargne.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+            {% else %}
+                    <tr>
+                        <td class="text-center" colspan="5"> Pas de compte </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+    </table>
+{% endblock %}
+

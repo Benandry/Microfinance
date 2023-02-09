@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Titres
+{% endblock %}
+
+{% block head %}
+    Titres
+{% endblock %}
+
+{% block body %}
+        {# /***************Messages succes ******************/#}
+        {% for message in app.flashes('success') %}
+            <strong class="alert alert-success"> {{ message }} </strong> 
+        {% endfor %}
+
+    <table class="container table table-bordered">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluif">
+        {% for titre in titres %}
+            <tr>
+                <td>{{ titre.titre }}</td>
+                <td>
+                   <div class="row">
+                         <div class="col-sm-2">
+                            <a href="{{ path('app_titre_show', {'id': titre.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> </a>
+                        </div>
+                        <div class="col-sm-2">    
+                            <a href="{{ path('app_titre_edit', {'id': titre.id}) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                   </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('app_titre_new') }}" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i>Ajouter nouveau</a>
+    </div>
+{% endblock %}

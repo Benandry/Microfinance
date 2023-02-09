@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Approbation demande credit groupe{% endblock %}
+{% block head %}Approbation/Groupe/Demande credit en attente d'approbation{% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <table class="table table-bordered table2 mt-3">
+        <thead>
+            <tr>
+                <th>Numero credit </th>
+                <th>Nom du groupe </th>
+                <th>Montant du credit </th>
+                <th>Date du demande </th>
+                <th>Nombre tranche </th>
+                <th>Type de tranche </th>
+                <th>Operation </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                <td class="fw-bold">{{ demande.NumeroCredit }}</td>
+                <td>{{ demande.nomGroupe }}</td>
+                <td>{{ demande.Montant }}</td>
+                <td>{{ demande.DateDemande  ? demande.DateDemande |date('Y-m-d') : '' }}</td>
+                <td>{{ demande.NombreTranche }}</td>
+                <td>{{ demande.TypeTranche }}</td>
+                <td>
+                    <a href="{{ path('app_approbation_credit_new_groupe',{'demande': demande }) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Approbation</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

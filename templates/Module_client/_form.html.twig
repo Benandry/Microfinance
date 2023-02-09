@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+<div class="row " style="margin-left:250px;">
+    <div class="col-sm-5 jumbotron jumbotron-fluid">
+        {{ form_row(form.dateliste) }}
+        {{ form_row(form.raison) }}
+        {# {{ form_row(form.codegroupe ,{ 'class' : 'hidden'}) }} #}
+        {{ form_row(form.codeclient) }}<br>
+    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+    </div>
+</div>
+
+{{ form_end(form) }}

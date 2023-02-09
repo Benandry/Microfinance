@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Liste des utilisateurs {% endblock %}
+{% block head %} Liste des utilisateurs {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+        {% include('modal.html.twig') %}
+            <div class="d-flex justify-content-end me-3">
+                <a href="{{ path('app_inscription_') }}" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Créer un compte</a>
+            </div>
+            <div class="col-sm-12 col-md-12">
+                <table class="table table2 table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th> Nom utilisateur</th>
+                            <th> Prenom utilisateur </th>
+                            <th> Addresse e-mail </th>
+                            <th> Responsable </th>
+                            <th> Agence </th>
+                            <th> Code Agence </th>
+                            <th> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for liste in listes %}
+                            <tr>
+                                <td> {{ liste.nom }}</td>
+                                <td> {{ liste.prenom }}</td>
+                                <td> {{ liste.email }}</td>
+                                <td> {{ liste.responsabilite }}</td>
+                                <td> {{ liste.agence.NomAgence }}</td>
+                                <td> {{ liste.agence.codeAgence }}</td>
+                                <td> 
+                                    <div class="row">
+                                        <div class="col-6 col-sm-6 col-md-6">
+                                            <a href="{{ path('app_show_user', {'id': liste.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-md-6">
+                                            <a href="{{ path('app_edit_user', {'id': liste.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

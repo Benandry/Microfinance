@@ -1,0 +1,54 @@
+{{ form_start(form) }}
+    <ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
+  </ul>
+    <div class="tab-content">
+            {# Etape 1 #}
+            <div class="tab-pane active" id="etape1">
+                <div class="row shadow-sm p-3">
+                    <div class="col-12 col-sm-12 col-md-12">
+                    <h6 class="text-center text-primary">Etape 1</h6>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            {{ form_row(form.ProduitCredit) }}
+                            {{ form_row(form.Devise) }}
+                             {# {{ form_row(form.ProduitLieEpargne) }} #}
+                            {{ form_row(form.NombreJourInteretAnnee) }}
+                            {{ form_row(form.NombreSemaineAnnee) }}
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                             {{ form_row(form.RecalculDateEcheanceDecaissement) }}
+                            {{ form_row(form.TauxInteretVariableSoldeDegressif) }}
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+             </div>
+
+             {# Etape 2 #}
+
+                                 <div class="tab-pane" id="etape2">
+        <div class="row shadow-sm p-3">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Etape 2</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                        {{ form_row(form.MethodeSoldeDegressifComposeCalculInteret) }}
+                        {{ form_row(form.ExclurePrdtLimttionDmdeEtDecaissDeuxiemeCrdt) }}
+                        {{ form_row(form.AcrivePrioriteRemboursementCredit) }}
+                    </div>
+                    <div class="col-6 col-sm-6">
+                        {{ form_row(form.RecalculInteretRemboursementAmortissementDegressif) }}
+                        {{ form_row(form.AutorisationDecaissementPartiellement) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+        <button class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+        {# {{ form_widget(form) }} #}
+   
+{{ form_end(form) }}

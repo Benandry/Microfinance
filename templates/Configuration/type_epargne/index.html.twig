@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Types epargne 
+{% endblock %}
+
+{% block head %}
+    Types epargne 
+{% endblock %}
+
+{% block body %}
+
+    {# /***************Messages succes ******************/#}
+    <div class="text-center">
+        {% for message in app.flashes('success') %}
+            <strong class="alert alert-success">{{ message }}</strong>
+        {% endfor %}
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Code type</th>
+                <th>Nom type epargne</th>
+                <th>Abreviation</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid text-ligth">
+        {% for type_epargne in type_epargnes %}
+            <tr>
+                <td>{{ type_epargne.id }}</td>
+                <td>{{ type_epargne.NomTypeEp }}</td>
+                <td>{{ type_epargne.abreviation }}</td>
+                <td>{{ type_epargne.description }}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a href="{{ path('app_type_epargne_show', {'id': type_epargne.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="{{ path('app_type_epargne_edit', {'id': type_epargne.id}) }}" class="btn btn-info btn-sm"> <i class="fa fa-edit"></i></a>
+                        </div>
+                        <div class="col-sm-6">
+                            {{ include('Configuration/type_epargne/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+    <a href="{{ path('app_type_epargne_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajputer nouveau</a>
+    </div>
+{% endblock %}

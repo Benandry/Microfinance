@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande de credit{% endblock %}
+{% block head %}Demande de credit{% endblock %}
+
+{# {% block head %}
+{% endblock %} #}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <div style="display:none;">
+        solde :<p id="soldeepargne" ></p>
+        Montant :<p id="montant"></p>
+        montantgarantie :<p id="garantie"></p>
+    </div>
+
+    <div style="display:none">
+        TestLieEpargne : <p id="lieepargne"></p>
+        Agent de credit : <p id="prenom"> {{ app.user.prenom }}</p>
+    </div>
+    {# Ici on recupere le code agence #}
+    
+        <p style="display:none">Code agence</p><p id="codeagence"  style="display:none">{{ app.user.agence.codeagence }}</p>
+
+    {# Ici on recupere le dernier id dans le numero credit #}
+    
+        <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none"> {{ numeros }}</p>
+    {{ include('demande_credit/_form.html.twig') }}
+
+{% endblock %}

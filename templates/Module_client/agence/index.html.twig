@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Agences
+{% endblock %}
+
+{% block head %}
+    Agences
+{% endblock %}
+
+{% block body %}
+    {% include('modal.html.twig') %}
+    <div class="d-flex justify-content-end me-3">
+        <a href="{{ path('app_agence_new') }}" class="btn btn-primary btn-sm mb-3"><i class="fa fa-plus"></i> Nouveau</a>
+    </div>
+    <table class="table table2 table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Code Agence</th>
+                <th>Nom Agence</th>
+                <th>Adresse Agence</th>
+                <th>Commune</th>
+                <th>Code commune</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agence in agences %}
+            <tr>
+                <td>{{ agence.codeAgence }}</td>
+                <td>{{ agence.NomAgence }}</td>
+                <td>{{ agence.AdressAgence }}</td>
+                <td>{{ agence.commune.NomCommune }}</td>
+                <td>{{ agence.commune.CodeCommune }}</td>
+                <td>
+                   <div class="row">
+                        <div class="col-3 col-sm-3 col-md-3">
+                            <a href="{{ path('app_agence_show', {'id': agence.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-3 col-sm-3 col-md-3">
+                            <a href="{{ path('app_agence_edit', {'id': agence.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                        <div class="col-auto col-sm-auto col-md-auto">
+                                 {{ include('Module_client/agence/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

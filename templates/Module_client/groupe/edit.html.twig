@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modification du groupe {{ Groupe.nomGroupe }}
+{% endblock %}
+
+{% block head %}
+    Modification du groupe {{ Groupe.nomGroupe }}
+{% endblock %}
+
+{% block body %}
+    {{ include('Module_client/groupe/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}

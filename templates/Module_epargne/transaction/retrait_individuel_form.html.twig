@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Retrait compte epargne 
+{% endblock %}
+
+{% block head %}
+    Retrait compte epargne 
+{% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <div class="card p-3">
+        <div class="card mb-3">
+            <div class="row text-secondary m-3">
+                <div class="col-xl-3 col-md-3 col-sm-3">
+                    <p> <b>Compte epargne : </b><span id="code_epargne_client"> {{ code }}</span></p>
+                    <p> <b>Solde client : </b>
+                        {% if solde != '' %}
+                            <span id="solde_cli">{{ solde }}</span>     
+                        {% else %}
+                            <span id="solde_cli">0</span>  
+                        {% endif %} 
+                    </p>
+                </div>
+                <div class="col-xl-3 col-md-3 col-sm-3">
+                    <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>
+                    <p><b> Prenom Client :</b> <span id="prenom"> {{ prenom }}</span></p>
+                </div>
+            </div>
+        </div>
+        {{ form_start(form) }}
+            <div style="display:none;">
+                <p> Text ecrit : <span id="text"> </span> </p>
+            </div>
+            <div class="row jumbotron jumbotron-fluid" style="color:black;">
+                <div class="col-sm-5" style="display:none;">
+                    {{ form_row(form.typeClient) }}
+                    {{ form_row(form.codeepargneclient) }}
+                    {{ form_row(form.Description) }}
+                    {{ form_row(form.montant_bruite) }}
+                    {{ form_row(form.solde) }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-4 col-md-4">
+                    {{ form_row(form.DateTransaction) }}
+                    {{ form_row(form.Montant) }}
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    {{ form_row(form.PieceComptable) }}
+                    {{ form_row(form.papeterie) }}
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    {{ form_row(form.commission) }}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <h5 class="fw-bold text-center"> Comptabilité </h5>
+                <div class="col-sm-4 col-md-4">
+                    <h6 class="text-primary text-center"> Plan comptable (PCEC)</h6>
+                    {{ form_row(form.debit) }}
+                    {{ form_row(form.credit) }}
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <h6 class="text-primary text-center"> Plan analytique </h6>
+                    {# {{ form_row(form.debitAnalytique) }}
+                    {{ form_row(form.creditAnalytique) }} #}
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <h6 class="text-primary text-center"> Plan Budgetaire </h6>
+                    {# {{ form_row(form.papeterie) }}
+                    {{ form_row(form.montant_bruite) }} #}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary btn-sm">{{ button_label|default('Valider le retrait') }}</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProduitCredit{% endblock %}
+
+{% block body %}
+    <h1>ProduitCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>NomProduitCredit</th>
+                <td>{{ produit_credit.NomProduitCredit }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ produit_credit.status ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_produit_credit_edit', {'id': produit_credit.id}) }}">edit</a>
+
+    {{ include('produit_credit/_delete_form.html.twig') }}
+{% endblock %}

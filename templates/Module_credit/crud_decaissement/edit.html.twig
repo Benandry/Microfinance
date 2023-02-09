@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Decaissement{% endblock %}
+
+{% block body %}
+    <h1>Edit Decaissement</h1>
+
+    {{ include('crud_decaissement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_crud_decaissement_index') }}">back to list</a>
+
+    {{ include('crud_decaissement/_delete_form.html.twig') }}
+{% endblock %}

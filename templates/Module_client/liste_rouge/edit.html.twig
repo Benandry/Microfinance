@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Information sur liste rouge' %}
+{% block head 'Modification sur liste rouge'  %}
+
+{% block body %}
+    {{ include('Module_client/liste_rouge/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_liste_rouge_index') }}">back to list</a>
+
+    {{ include('Module_client/liste_rouge/_delete_form.html.twig') }}
+{% endblock %}

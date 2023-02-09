@@ -1,0 +1,71 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>DepotAterme index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datedepot</th>
+                <th>Piececomptable</th>
+                <th>Tauxinteret</th>
+                <th>Periodemois</th>
+                <th>Is_interetcapitalise</th>
+                <th>Date_echeance</th>
+                <th>Valeurecheance</th>
+                <th>Taxeretenue</th>
+                <th>Retenuetaxe</th>
+                <th>TVA</th>
+                <th>Is_depotcall</th>
+                <th>Is_interetecheance</th>
+                <th>Is_interetmois</th>
+                <th>Is_interettrimestrielle</th>
+                <th>Is_interetsemestrielle</th>
+                <th>Is_interetpayelorscalcul</th>
+                <th>_is_interettransferercptep</th>
+                <th>Is_retirealecheance</th>
+                <th>Is_remetreaucptalecheance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for depot_aterme in depot_atermes %}
+            <tr>
+                <td>{{ depot_aterme.id }}</td>
+                <td>{{ depot_aterme.datedepot ? depot_aterme.datedepot|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ depot_aterme.piececomptable }}</td>
+                <td>{{ depot_aterme.tauxinteret }}</td>
+                <td>{{ depot_aterme.periodemois }}</td>
+                <td>{{ depot_aterme.isInteretcapitalise ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.dateEcheance ? depot_aterme.dateEcheance|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ depot_aterme.valeurecheance }}</td>
+                <td>{{ depot_aterme.taxeretenue }}</td>
+                <td>{{ depot_aterme.retenuetaxe }}</td>
+                <td>{{ depot_aterme.TVA }}</td>
+                <td>{{ depot_aterme.isDepotcall ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isInteretecheance ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isInteretmois ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isInterettrimestrielle ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isInteretsemestrielle ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isInteretpayelorscalcul ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isInterettransferercptep ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isRetirealecheance ? 'Yes' : 'No' }}</td>
+                <td>{{ depot_aterme.isRemetreaucptalecheance ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_depot_aterme_show', {'id': depot_aterme.id}) }}">show</a>
+                    <a href="{{ path('app_depot_aterme_edit', {'id': depot_aterme.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="21">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_depot_aterme_new') }}">Create new</a>
+{% endblock %}
+
+{{ include('footer.html.twig') }}

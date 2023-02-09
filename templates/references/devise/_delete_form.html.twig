@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_devise_delete', {'id': devise.id}) }}" onsubmit="return confirm('Vous etes sur pour supprimer le devise {{ devise.devise}} ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ devise.id) }}">
+    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+</form>

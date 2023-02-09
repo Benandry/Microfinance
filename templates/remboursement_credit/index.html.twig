@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RemboursementCredit index{% endblock %}
+
+{% block body %}
+    <h1>RemboursementCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumeroCredit</th>
+                <th>DateRemboursement</th>
+                <th>PieceCompteble</th>
+                <th>MontantTotalPaye</th>
+                <th>Papeterie</th>
+                <th>TransactionEnLiquide</th>
+                <th>TransfertEpargne</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for remboursement_credit in remboursement_credits %}
+            <tr>
+                <td>{{ remboursement_credit.id }}</td>
+                <td>{{ remboursement_credit.NumeroCredit }}</td>
+                <td>{{ remboursement_credit.DateRemboursement ? remboursement_credit.DateRemboursement|date('Y-m-d') : '' }}</td>
+                <td>{{ remboursement_credit.PieceCompteble }}</td>
+                <td>{{ remboursement_credit.MontantTotalPaye }}</td>
+                <td>{{ remboursement_credit.Papeterie }}</td>
+                <td>{{ remboursement_credit.TransactionEnLiquide ? 'Yes' : 'No' }}</td>
+                <td>{{ remboursement_credit.TransfertEpargne ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_remboursement_credit_show', {'id': remboursement_credit.id}) }}">show</a>
+                    <a href="{{ path('app_remboursement_credit_edit', {'id': remboursement_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_remboursement_credit_new') }}">Create new</a>
+{% endblock %}

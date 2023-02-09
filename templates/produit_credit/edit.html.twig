@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProduitCredit{% endblock %}
+
+{% block body %}
+    <h1>Edit ProduitCredit</h1>
+
+    {{ include('produit_credit/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_produit_credit_index') }}"> <i class="fa fa-list"> listes produits </i></a>
+
+    {{ include('produit_credit/_delete_form.html.twig') }}
+{% endblock %}

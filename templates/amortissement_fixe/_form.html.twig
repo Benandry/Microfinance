@@ -1,0 +1,39 @@
+<div class="modal" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"  id="myModalLabel">Modification d'amortissement</h5>
+                    <button type="button" class="btn-close" aria-hidden="true" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            
+                {{ form_start(form) }}
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-xl-6">
+                                {{ form_row(form.periode) }}
+                                {{ form_row(form.principale) }}
+                                <div style="display: none">
+                                    {{ form_row(form.montanttTotal) }}
+                                </div>
+                                {{ form_row(form.remboursement) }}
+                                {{ form_row(form.annuite) }}
+                                <div style="display: none">
+                                    {{ form_row(form.typeamortissement )}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-6">
+                                {{ form_row(form.dateRemborsement) }}
+                                {{ form_row(form.interet) }}
+                                {{ form_row(form.penalite) }}
+                                {{ form_row(form.commission) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    
+                        <button class="btn btn-sm btn-primary">{{ button_label|default('Modifier') }}</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>

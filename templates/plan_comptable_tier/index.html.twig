@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan tier{% endblock %}
+{% block head %}Plan tier{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-end me-3"><a href="{{ path('app_plan_comptable_tier_new') }}" class="btn btn-sm btn-primary">Inserer nouveau compte</a></div>
+    <table class="table table2 table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Libelle</th>
+                <th>Contact</th>
+                <th>Adresse</th>
+                <th>TypeTier</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan_comptable_tier in plan_comptable_tiers %}
+            <tr>
+                <td>{{ plan_comptable_tier.id }}</td>
+                <td>{{ plan_comptable_tier.code }}</td>
+                <td>{{ plan_comptable_tier.libelle }}</td>
+                <td>{{ plan_comptable_tier.contact }}</td>
+                <td>{{ plan_comptable_tier.adresse }}</td>
+                <td>{{ plan_comptable_tier.typeTier }}</td>
+                <td>
+                    <a href="{{ path('app_plan_comptable_tier_show', {'id': plan_comptable_tier.id}) }}">show</a>
+                    <a href="{{ path('app_plan_comptable_tier_edit', {'id': plan_comptable_tier.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

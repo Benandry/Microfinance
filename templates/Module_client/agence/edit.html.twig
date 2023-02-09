@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modification de l'agence {{ agence.NomAgence }}
+{% endblock %}
+
+{% block head %}
+    Modification de l'agence {{ agence.NomAgence }}
+{% endblock %}
+
+{% block body %}
+    {{ include('Module_client/agence/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}

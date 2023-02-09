@@ -1,0 +1,8 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+   <a href="{{path('app_compte_epargne_index')}}"><button class="btn btn-primary">Liste</button></a>
+   <a href="{{path('app_compte_epargne_new')}}"><button class="btn btn-primary">Nouveau</button></a>
+{% endblock %}
+
+{{ include('footer.html.twig') }}

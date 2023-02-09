@@ -1,0 +1,122 @@
+{{ form_start(form) }}
+  <ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">Etat Civile</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#famille">Famille</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Adresse et Niveau d'etude</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe">Groupe</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Identité</a></li>
+  </ul>
+  <div class="tab-content">
+
+      <div class="tab-pane active" id="etat">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+              <h6 class="text-center text-primary">Etat civile</h6>
+              <div class="row">
+                  <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.photo) }}
+                      {{ form_row(form.nom_client) }}
+                      {{ form_row(form.prenom_client) }}
+                      {{ form_row(form.sexe) }}
+                      {{ form_row(form.titre) }}
+                      {{ form_row(form.date_inscription) }}
+                      {{ form_row(form.etatcivile) }}
+                  </div>
+                  <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.date_naissance) }}
+                      <span id="age"></span>
+                      {{ form_row(form.lieu_naissance) }}
+                      {{ form_row(form.numeroMobile) }}
+                      {{ form_row(form.profession) }}
+                      {{ form_row(form.nomConjoint) }}
+                      {{ form_row(form.garant) }}
+                      {{ form_row(form.Agence) }}
+                  </div>
+
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="famille">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Information familiale</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.parent_nom) }}
+                      {{ form_row(form.nb_enfant) }}
+                      {{ form_row(form.nb_personne_charge) }}
+                    </div>
+                    <div class="col-6 col-sm-6">
+                      {{ form_row(form.parent_adresse) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="adresse">
+        <div class="row shadow-sm p-1">
+            <div class="col-12">
+              <h6 class="text-center text-primary" >Adressse page</h6>
+              <div class="row">
+                    <div class="col-6 col-sm-6">
+                      {{ form_row(form.adressephysique) }}
+                      {{ form_row(form.commune) }}
+                      <div id="commune_suggest"></div>
+                    </div>
+                    <div class="col-6 col-sm-6">
+                      {{ form_row(form.etude) }}
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="groupe">
+        <div class="row shadow-sm p-1">
+            <div class="col-12">
+              <h6 class="text-center text-primary">Groupe Client</h6>
+                <div class="row">
+                  <div class="col-6 col-sm-6 col-md-6">
+                    {{ form_row(form.MembreGroupe) }}
+                    {{ form_row(form.TitreGroupe) }}
+                  </div>
+                  <div class="col-6 col-sm-6 col-md-6">
+                    {{ form_row(form.dateadhesion) }}
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="identite">
+        <div class="row shadow-sm p-1">
+            <div class="col-12">
+              <h6 class="text-center text-primary">Identite national </h6>
+                  <div class="row">                
+                      <div class="col-4 col-sm-4">
+                        {{ form_row(form.TypeIdentite) }}
+                        {{ form_row(form.cin) }}
+                        {{ form_row(form.datecin) }}
+                      </div>
+                      <div class="col-4 col-sm-4">
+                        {{ form_row(form.dateexpiration) }}
+                        {{ form_row(form.lieudelivrance) }}
+                        <div id="individuel" style="display:none">
+                          {{ form_row(form.codeclient) }}
+                        </div>
+                        <div class="user-log">
+                        {{ form_row(form.user) }}
+                        </div>
+                      </div>
+                      <div class="col-sm-4 mt-5">
+                          <button class="btn btn-sm btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+                      </div>
+                  </div>
+            </div>
+        </div>
+      </div>
+  </div>
+{{ form_end(form) }}

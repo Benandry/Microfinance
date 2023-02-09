@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FraisConfigCredit index{% endblock %}
+
+{% block body %}
+    <h1>FraisConfigCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TypeClient</th>
+                <th>Papeterie</th>
+                <th>Commission</th>
+                <th>FraisDeDeveloppement</th>
+                <th>FraisDeRefinancement</th>
+                <th>CommissionCreditChaqueTrancheInd</th>
+                <th>DroitTimbreSurCapital</th>
+                <th>SurInteretCours</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for frais_config_credit in frais_config_credits %}
+            <tr>
+                <td>{{ frais_config_credit.id }}</td>
+                <td>{{ frais_config_credit.TypeClient }}</td>
+                <td>{{ frais_config_credit.Papeterie }}</td>
+                <td>{{ frais_config_credit.Commission }}</td>
+                <td>{{ frais_config_credit.FraisDeDeveloppement }}</td>
+                <td>{{ frais_config_credit.FraisDeRefinancement }}</td>
+                <td>{{ frais_config_credit.CommissionCreditChaqueTrancheInd }}</td>
+                <td>{{ frais_config_credit.DroitTimbreSurCapital }}</td>
+                <td>{{ frais_config_credit.SurInteretCours }}</td>
+                <td>
+                    <a href="{{ path('app_frais_config_credit_show', {'id': frais_config_credit.id}) }}">show</a>
+                    <a href="{{ path('app_frais_config_credit_edit', {'id': frais_config_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_frais_config_credit_new') }}">Create new</a>
+{% endblock %}

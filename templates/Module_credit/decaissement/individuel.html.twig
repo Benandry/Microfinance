@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Decaissement de credit individuel {% endblock %}
+{% block head %}Decaissement/Liste de demande individuel approuver {% endblock %}
+
+
+{% block body %}
+        {{ include('modal.html.twig') }}
+        <table class="table table-bordered table2 mt-3">
+            <thead>
+                <th>Numero  de credit </th>
+                <th>Nom et Prenom</th>
+                <th>Montant credit</th>
+                <th>Action </th>
+            </thead>
+            <tbody> 
+                {% for liste in demandeApprouver %}
+                    <tr>
+                        <td> {{ liste.NumeroCredit }} </td>
+                        <td> {{ liste.nom_client }}  {{ liste.prenom_client }}  </td>
+                        <td> {{ liste.Montant }} </td>
+                        <td> <a href="{{ path('app_crud_decaissement_new_individuel',{'liste' : liste }) }}" class="btn btn-sm btn-info"> Decaisser</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {# <div class="modal" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"  id="myModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" aria-hidden="true" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            
+                <form action="{{ path('app_decaissement_credit') }}" method="post" name="formulario_login">
+                    <div class="modal-body">
+                            <label for="codecredit">Code credit :</label>
+                            <input type="text" class="form-control" id="codecredit" name="codecredit" value=""  />
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" name="login" value="Valider" class="btn btn-sm btn-primary"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> #}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Individuel client en liste rouge
+{% endblock %}
+
+{% block head %}
+    Individuel client en liste rouge
+{% endblock %}
+
+{% block body %}
+     <div class="row">
+        <div class="col-12 col-sm-12 d-flex justify-content-end">
+             <a href="{{ path('app_liste_rouge_individuel_new') }}" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i> Ajouter</a>
+        </div>
+    </div>
+    
+    {{ include('modal.html.twig') }}
+    <table class="table2 table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Code client</th>
+                <th>Nom Client et prenom</th>
+                <th>Raison</th>
+                <th> Action </th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for ListeRouge in listerouge %}
+            <tr>
+                <td>{{ ListeRouge.dateliste ? ListeRouge.dateliste|date('Y-m-d') : '' }}</td>
+                <td>
+                {{ ListeRouge.codeclient }}
+                </td>
+                <td>{{ ListeRouge.nom }} {{ ListeRouge.prenom }}</td>
+                <td>{{ ListeRouge.raison }}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-4 col-sm-4">
+                            <a href="{{ path('app_liste_rouge_show', {'id': ListeRouge.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-4 col-sm-4">
+                            <a href="{{ path('app_liste_rouge_edit', {'id': ListeRouge.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

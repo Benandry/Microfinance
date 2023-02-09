@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Info {{ devise.devise}}
+{% endblock %}
+
+{% block head %}
+    Info {{ devise.devise}}
+{% endblock %}
+
+{% block body %}
+    <h1>Devise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ devise.id }}</td>
+            </tr>
+            <tr>
+                <th>Devise</th>
+                <td>{{ devise.devise }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ devise.pays }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_devise_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i></a>
+    <a href="{{ path('app_devise_edit', {'id': devise.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+
+{% endblock %}

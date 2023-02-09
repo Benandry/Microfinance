@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Decaissement de credit de groupe{% endblock %}
+{% block head %} Decaissement/Liste de demande groupe approuver {% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <table class="table table-bordered table2 mt-3">
+        <thead>
+            <th>Numero  de credit </th>
+            <th>Nom du groupe</th>
+            <th>Numero mobile</th>
+            <th>Montant credit</th>
+            <th>Action </th>
+        </thead>
+        <tbody> 
+            {% for liste in demandeApprouver %}
+                <tr>
+                    <td> {{ liste.NumeroCredit }} </td>
+                    <td> {{ liste.nomGroupe }} </td>
+                    <td> {{ liste.numeroMobile }} </td>
+                    <td> {{ liste.Montant }} </td>
+                    <td> <a href="{{ path('app_crud_decaissement_new_groupe',{'liste' : liste }) }}" class="btn btn-sm btn-info"> Decaisser</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

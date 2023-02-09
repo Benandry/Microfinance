@@ -1,0 +1,18 @@
+{% for plan_comptable in plan_comptables %}
+{% if plan_comptable.classes.id == compteClase %}
+    <tr>
+        <td>{{ plan_comptable.NumeroCompte }}</td>
+        <td>{{ plan_comptable.Libelle }}</td>
+        {# <td>{{ plan_comptable.classes.id }} - {{ plan_comptable.classes.labelle }}</td> #}
+        <td>
+            <a href="{{ path('app_plan_comptable_show', {'id': plan_comptable.id}) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+            <a href="{{ path('app_plan_comptable_edit', {'id': plan_comptable.id}) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+        </td>
+    </tr>
+{% endif %}
+
+{% else %}
+<tr>
+    <td colspan="4">no records found</td>
+</tr>
+{% endfor %}

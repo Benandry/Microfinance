@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Fidev dashboard {% endblock %}</title>
+    
+        {% block stylesheet %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock  %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        
+</head>
+<body>
+
+    <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar_body" >
+                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline"> Menu du Fidev ({{ app.user.responsabilite}}) </span>
+                        </a>
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-white" id="menu">
+
+                            <!-- Module client -->
+                            <li class="w-100 nav-item ">
+                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-user-circle"></i> Client  <span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
+                                    <li class="nav-item w-100">
+                                            <a href="#submenu012" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-address-card"></i> Individuel  <span class="fa fa-chevron-down"></span> </span>
+                                            </a>
+                                            <ul class="collapse nav flex-column ms-4" id="submenu012">
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-plus-square"></i> nouveau </span></a>
+                                                </li>
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_individuel_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-list"></i> Liste client </span></a>
+                                                </li>
+                                            </ul>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{path('app_groupe_index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                    </li>
+                                    <li class="w-100"> 
+                                            <a href="#submenu01" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Liste rouge  <span class="fa fa-chevron-down"></span> </span>
+                                            </a>
+                                            <ul class="collapse nav flex-column ms-4" id="submenu01">
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_liste_rouge_individuel_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                                </li>
+                                                <li class="w-100">
+                                                    <a href="{{ path('app_liste_rouge_groupe_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                                </li>
+                                            </ul>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="#submenu02" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Rapport client  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu02">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapportclient') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapportgroupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_membre_groupe_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Membre groupe </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapportdocumentidentite') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Document  </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_par_agence') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-university"></i> Agence  </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_par_commune') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-building fa-fw"></i> Commune  </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>    
+                                </ul>
+                            </li>
+
+                            <!-- Module Epargne -->
+                            <li>
+                                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-database"></i> Epargne  <span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu2" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Ouvrir compte <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu06">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="w-100">
+
+                                        <a href="#submenu04" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-long-arrow-up"></i> Depot <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu04">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_compte_epargne_depot') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_epargne_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="w-100">
+                                        <a href="#submenu05" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-long-arrow-down"></i> Retrait <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu05">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_retrait_individuel') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transaction_retrait_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    {# <li class="w-100">
+                                        <a href="{{ path('app_transaction_retrait_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-long-arrow-up"></i> Retrait </span> </a>
+                                    </li> #}
+
+                                    
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transfertep_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transfert epargne </span> </a>
+                                    </li>
+
+                                    <li class="w-100">
+
+                                        <a href="#submenu07" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Rapports <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu07">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_rapport_compte') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> compte epargne </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transac_liste') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Solde </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transaction_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transaction </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_transaction_releve') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Relevé </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            {# Module credit #}
+
+                            <li>
+                                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu3" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"> </i> Demande </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="#submenu98" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Approbation <span class="fa fa-chevron-down"></span>  </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu98">
+                                            <li class="w-100">
+                                                <a href="{{path('app_approbation_credit_individuel')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Individuel</span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_approbation_credit_groupe')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Groupe </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="#submenu001" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="d-none d-sm-inline menu"> <i class="fa-solid fa-share"></i> Decaissement <span class="fa fa-chevron-down"></span>  </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu001">
+                                            <li class="w-100">
+                                                <a href="{{path('app_decaissement_credit_individuel')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Individuel </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_decaissement_credit_groupe')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ad"> </i> Groupe </span></a>
+                                            </li>
+                                        </ul>                                     
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_remboursement_modal') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-share"></i> Remboursement </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="#submenu66" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
+                                            <i class="fas fa-tasks"></i> Rapports 
+                                            <span class="fa fa-chevron-down"></span> </span> 
+                                        </a>   
+                                        <ul class="collapse nav flex-column ms-4" id="submenu66">
+                                            <li class="w-100">
+                                                <a href="#submenu03" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-list"></i> Approbation   <span class="fa fa-chevron-down"></span> </span>
+                                                </a>
+                                                <ul class="collapse nav flex-column ms-4" id="submenu03">
+                                                    <li class="w-100">
+                                                        <a href="{{ path('app_rapport_credit_approuver') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-check"></i> approuvé </span></a>
+                                                    </li>
+                                                    <li class="w-100">
+                                                        <a href="{{ path('app_rapport_credit_rejeter') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-ban"></i> rejeté </span></a>
+                                                    </li>
+                                                    <li class="w-100">
+                                                        <a href="{{ path('app_rapport_credit_differer') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-times"></i> differée </span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_rapport_demande_credit')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-list"></i> rapport demande </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_rapport_credit_decaissement')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-list"></i> rapport décaissement </span></a>
+                                            </li>
+                                        </ul> 
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Configuration -->
+                            <li>
+                                <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-toolbox"></i> Configuration  <span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu4" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#submenu10" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
+                                            <i class="fa fa-bars"></i> Epargnes 
+                                            <span class="fa fa-chevron-down"></span> </span> 
+                                        </a>   
+                                        <ul class="collapse show nav flex-column ms-4" id="submenu10">
+                                                <li class="w-100">
+                                                    <a href="{{path('app_type_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Type epargne</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{path('app_produit_epargne_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Epargne </span> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{path('app_config_ep_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Epargne </span></a>
+                                                </li>
+                                        </ul> 
+                                    </li>
+
+                                    <li class="w-100">
+                                        <a href="#submenu11" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline menu"> 
+                                            <i class="fa fa-coins"></i> Credits 
+                                            <span class="fa fa-chevron-down"></span> </span> 
+                                        </a>   
+                                        <ul class="collapse show nav flex-column ms-4" id="submenu11">
+                                            <li>
+                                                <a href="{{path('app_credit_individuel_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Credit Individuel </span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{path('app_produit_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Credit </span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{path('app_configuration_general_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration general</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{path('app_frais_config_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Frais</span></a>
+                                            </li>
+                                              <li>
+                                                <a href="{{path('app_penalite_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Penalité</span></a>
+                                            </li>
+                                               <li>
+                                                <a href="{{path('app_garantie_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Garantie</span></a>
+                                            </li>
+                                            {# compta GL1 #}
+                                               <li>
+                                                <a href="{{path('app_compte_g_l1_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Compte GL 1</span></a>
+                                            </li>
+                                        </ul> 
+                                    </li>
+
+                                </ul>
+                            </li> 
+
+                            {# Comptabilite #}
+                            <li>
+                                <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-calculator"></i> Comptabilité  <span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu5" data-bs-parent="#menu">
+
+                                    <li class="w-100">
+                                        <a href="#submenu0167" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-sitemap"></i> Structures  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-3" id="submenu0167">
+                                            <li class=" nav-item w-100">
+                                                <a href="#submenu019" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-book"></i> Plan Comptable <span class="fa fa-chevron-down"></span> </span>
+                                                </a>
+                                                <ul class="collapse nav flex-column ms-4" id="submenu019">
+                                                    <li class="w-100 nav-item">
+                                                        <a href="{{ path('app_plan_comptable_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-cogs"></i> Generale </span></a>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                        <a href="{{ path('app_analytique_index')}} " class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-map"></i> Analytique </span></a>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                        <a href="{{ path('app_plan_budget_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-money-bill-alt"></i> Budgetaire </span></a>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                        <a href="{{ path('app_plan_comptable_tier_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-layer-group"></i> Tier </span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{path('app_langue_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-pencil"> </i> Journal de saisie </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="#submenu447" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-bacon"></i> Etat  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-3" id="submenu447">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_journal_compta') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-pencil"> </i> Journals </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-book"> </i> Grand-livre </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fas fa-book-open"> </i> Balances </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            {# Fin Comptabilite #}
+
+
+                            <!-- Reference    -->
+
+                            <li>
+                                <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-gear"></i> Reference <span class="fa fa-chevron-down"></span>  </span></a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu6" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{path('app_langue_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-pencil"> </i> Langue </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{path('app_titre_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa-solid fa-user"></i>  Titres </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{path('app_etatcivile_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa-solid fa-flag"></i> Etat civile </span> </a>
+                                    </li>
+                                    <li class="w-100">
+
+                                        <a href="#submenu045" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="d-none d-sm-inline menu"> <i class="fa fa-home"></i> Agences  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu045">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_agence_new') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-plus-square"></i> nouveau </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_agence_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-list"></i> Listes </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{path('app_etude_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-book"></i> Niveau d'etude </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{path('app_devise_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Devise </span> </a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{path('app_categorie_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Categorie Credit</span> </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-sm-12">
+                            <div class="row head">
+                                <div class="col-6 col-xl-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h6 class="text_head mt-3">Fidev/{% block head %} Fidev {% endblock %}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-6">
+                                    <div class="d-flex justify-content-end">
+                                        <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.agence.NomAgence }} </p>
+                                        <p class="m-3"> Code : {{ app.user.agence.codeAgence }} </p>
+                                            <!-- Deconnection  et inscription  -->
+                                        <div class="dropdown m-3">
+                                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="d-none d-sm-inline mx-1 lien">{{ app.user.prenom }} ({{ app.user.responsabilite }})</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
+                                            {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
+                                                <li>
+                                                    <a class="dropdown-item down" href="{{path('app_liste_user')}}" >Gestion d'utilisateur <p style="display: none;" id="utilisateur">{{ app.user.prenom }} </p> 
+                                                        <div class="fw-bold">
+                                                            ({{ app.user.responsabilite }})
+                                                        </div> 
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item down" href="{{path('app_logout')}}" > <i class="fa fa-fw fa-sign-out"></i>  Déconnecté </a></li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="fw-bold">
+                            </div>
+                            <div class="row">
+                                <div class="rounded g-0 shadow-sm p-3 m-2">
+                                    {% block body %}
+                                        
+                                    {% endblock %}
+
+                                    <footer class="container text-center mt-5">
+                                        <div class="text-muted">
+                                            <p>
+                                                &copy; {{ 'now'|date('Y') }} &middot;
+                                                Build with <span class="text-danger">&hearts; </span> by <a href=""> Fidev </a>
+                                            </p>
+                                        </div>
+                                    </footer>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{{ asset('datatable/jquery-3.5.1.js') }}"></script>
+        <script>
+            $(document).ready(() => {
+                $('#myModal').modal('show');
+            })
+        </script>
+</body>
+</html>

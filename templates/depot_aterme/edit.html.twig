@@ -1,0 +1,13 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Edit DepotAterme</h1>
+
+    {{ include('depot_aterme/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_depot_aterme_index') }}">back to list</a>
+
+    {{ include('depot_aterme/_delete_form.html.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

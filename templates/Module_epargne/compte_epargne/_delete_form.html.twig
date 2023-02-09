@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_compte_epargne_delete', {'id': compte_epargne.id}) }}" onsubmit="return confirm('Suppression de compte {{ compte_epargne.codeepargne }} ');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ compte_epargne.id) }}">
+    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>  </button>
+</form>

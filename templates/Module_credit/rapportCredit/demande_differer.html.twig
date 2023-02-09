@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    {{ include('Module_credit/rapportCredit/_titre.html.twig',{ status: 'differée' }) }}
+{% endblock %}
+
+{% block head %}
+    {{ include('Module_credit/rapportCredit/_head.html.twig',{ status: 'differée' }) }}
+{% endblock %}
+
+{% block body %}
+
+
+    {% if affiche_table == false %}
+     <!-- The Modal -->
+       {{ include('Module_credit/rapportCredit/_filtre.html.twig',{ status: 'differée' }) }}
+
+    {% else %}
+       {{ include('Module_credit/rapportCredit/_table.html.twig') }}
+    {% endif %}
+{% endblock %}

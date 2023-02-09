@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProduitCredit index{% endblock %}
+
+{% block body %}
+    <h1>ProduitCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomProduitCredit</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit_credit in produit_credits %}
+            <tr>
+                <td>{{ produit_credit.id }}</td>
+                <td>{{ produit_credit.NomProduitCredit }}</td>
+                <td>{{ produit_credit.status ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_produit_credit_show', {'id': produit_credit.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_produit_credit_edit', {'id': produit_credit.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_credit_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Nouveau produits</a>
+{% endblock %}

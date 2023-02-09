@@ -1,0 +1,8 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+   <a href="{{path('app_produittransfert_index')}}"><button class="btn btn-primary">Nouveau Transfert</button></a>
+   <a href="{{path('app_produittransfert_new')}}"><button class="btn btn-primary">Liste des Transfert</button></a>
+{% endblock %}
+
+{{ include('footer.html.twig') }}

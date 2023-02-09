@@ -1,0 +1,71 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <h1>Transfertep</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ transfertep.id }}</td>
+            </tr>
+            <tr>
+                <th>Description_t</th>
+                <td>{{ transfertep.descriptionT }}</td>
+            </tr>
+            <tr>
+                <th>Piece_comptable_t</th>
+                <td>{{ transfertep.pieceComptableT }}</td>
+            </tr>
+            <tr>
+                <th>Date_transaction_t</th>
+                <td>{{ transfertep.dateTransactionT ? transfertep.dateTransactionT|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Montantdestinataire</th>
+                <td>{{ transfertep.montantdestinataire }}</td>
+            </tr>
+     
+            <tr>
+                <th>Papeterie</th>
+                <td>{{ transfertep.papeterie }}</td>
+            </tr>
+            <tr>
+                <th>Commission</th>
+                <td>{{ transfertep.commission }}</td>
+            </tr>
+            <tr>
+                <th>Type_client_t</th>
+                <td>{{ transfertep.typeClientT }}</td>
+            </tr>
+            <tr>
+                <th>Soldedestinataire</th>
+                <td>{{ transfertep.soldedestinataire }}</td>
+            </tr>
+            <tr>
+                <th>Soldeenvoyeur</th>
+                <td>{{ transfertep.soldeenvoyeur }}</td>
+            </tr>
+            <tr>
+                <th>Codetransaction_t</th>
+                <td>{{ transfertep.codetransactionT }}</td>
+            </tr>
+            <tr>
+                <th>Codedestinateur</th>
+                <td>{{ transfertep.codedestinateur }}</td>
+            </tr>
+            <tr>
+                <th>Codeenvoyeur</th>
+                <td>{{ transfertep.codeenvoyeur }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transfertep_index') }}">back to list</a>
+
+    <a href="{{ path('app_transfertep_edit', {'id': transfertep.id}) }}">edit</a>
+
+    {{ include('transfertep/_delete_form.html.twig') }}
+{% endblock %}
+
+{{ include('footer.html.twig') }}

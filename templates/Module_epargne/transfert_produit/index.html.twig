@@ -1,0 +1,34 @@
+{{ include('header.html.twig') }}
+
+{% block body %}
+    <a href="{{ path('app_transfert_produit_new') }}" class="btn btn-success">Nouveau</a>
+
+    <table class="table table-bordered">
+        <thead class="alert alert-success">
+            <tr>
+                <th>Datetransfert</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for transfert_produit in transfert_produits %}
+            <tr>
+                <td>{{ transfert_produit.datetransfert ? transfert_produit.datetransfert|date('Y-m-d') : '' }}</td>
+                <td>{{ transfert_produit.Montant }}</td>
+                <td>
+                    <a href="{{ path('app_transfert_produit_show', {'id': transfert_produit.id}) }}">show</a>
+                    <a href="{{ path('app_transfert_produit_edit', {'id': transfert_produit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{{ include('footer.html.twig') }}

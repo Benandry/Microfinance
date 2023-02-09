@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur Niveau {{ etude.niveau }}
+{% endblock %}
+{% block body %}
+    <h1>Etude</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etude.id }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ etude.niveau }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('app_etude_index', {'id': etude.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i></a>
+        <a href="{{ path('app_etude_edit', {'id': etude.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+{% endblock %}
+

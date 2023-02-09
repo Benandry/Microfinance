@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decaissement{% endblock %}
+
+{% block body %}
+    <h1>Decaissement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ decaissement.id }}</td>
+            </tr>
+            <tr>
+                <th>NumeroCredit</th>
+                <td>{{ decaissement.numeroCredit }}</td>
+            </tr>
+            <tr>
+                <th>MontantCredit</th>
+                <td>{{ decaissement.montantCredit }}</td>
+            </tr>
+            <tr>
+                <th>DateDecaissement</th>
+                <td>{{ decaissement.dateDecaissement ? decaissement.dateDecaissement|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>PieceComptable</th>
+                <td>{{ decaissement.pieceComptable }}</td>
+            </tr>
+            <tr>
+                <th>FraisPapeterie</th>
+                <td>{{ decaissement.fraisPapeterie }}</td>
+            </tr>
+            <tr>
+                <th>CommissionCredit</th>
+                <td>{{ decaissement.commissionCredit }}</td>
+            </tr>
+            <tr>
+                <th>FraisDeDeveloppement</th>
+                <td>{{ decaissement.fraisDeDeveloppement }}</td>
+            </tr>
+            <tr>
+                <th>CaisseCredit</th>
+                <td>{{ decaissement.caisseCredit }}</td>
+            </tr>
+            <tr>
+                <th>Cash</th>
+                <td>{{ decaissement.cash ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CycleDeCredit</th>
+                <td>{{ decaissement.cycleDeCredit }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crud_decaissement_index') }}">back to list</a>
+
+    <a href="{{ path('app_crud_decaissement_edit', {'id': decaissement.id}) }}">edit</a>
+
+    {{ include('crud_decaissement/_delete_form.html.twig') }}
+{% endblock %}

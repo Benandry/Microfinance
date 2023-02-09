@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GarantieCredit index{% endblock %}
+
+{% block body %}
+    <h1>GarantieCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreditBaseEpargne</th>
+                <th>MontantCreditDmdIndividuel</th>
+                <th>MontantCreditDmdGroupe</th>
+                <th>MontantCrdAnciensCreditenCours</th>
+                <th>MontantCrdAnciensCreditenCoursGrp</th>
+                <th>GarantieBaseMontantCredit</th>
+                <th>DeduireGarantieAuDecaissement</th>
+                <th>DeduireGarantieAuDecaissementGrp</th>
+                <th>GarantieObligatoireCreditInd</th>
+                <th>MontantExige</th>
+                <th>Regle</th>
+                <th>GarantObligatoireCreditInd</th>
+                <th>MontantGarant</th>
+                <th>GarantObligatoireCreditGrp</th>
+                <th>MontantGarantieGrp</th>
+                <th>Reglegrp</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for garantie_credit in garantie_credits %}
+            <tr>
+                <td>{{ garantie_credit.id }}</td>
+                <td>{{ garantie_credit.CreditBaseEpargne ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.MontantCreditDmdIndividuel }}</td>
+                <td>{{ garantie_credit.MontantCreditDmdGroupe }}</td>
+                <td>{{ garantie_credit.MontantCrdAnciensCreditenCours }}</td>
+                <td>{{ garantie_credit.MontantCrdAnciensCreditenCoursGrp }}</td>
+                <td>{{ garantie_credit.GarantieBaseMontantCredit ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.DeduireGarantieAuDecaissement ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.DeduireGarantieAuDecaissementGrp ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.GarantieObligatoireCreditInd ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.MontantExige }}</td>
+                <td>{{ garantie_credit.regle }}</td>
+                <td>{{ garantie_credit.GarantObligatoireCreditInd ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.MontantGarant }}</td>
+                <td>{{ garantie_credit.GarantObligatoireCreditGrp ? 'Yes' : 'No' }}</td>
+                <td>{{ garantie_credit.MontantGarantieGrp }}</td>
+                <td>{{ garantie_credit.reglegrp }}</td>
+                <td>
+                    <a href="{{ path('app_garantie_credit_show', {'id': garantie_credit.id}) }}">show</a>
+                    <a href="{{ path('app_garantie_credit_edit', {'id': garantie_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_garantie_credit_new') }}">Create new</a>
+{% endblock %}

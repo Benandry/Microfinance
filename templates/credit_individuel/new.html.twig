@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration credit Individuel{% endblock %}
+{% block head %}Configuration credit Individuel{% endblock %}
+
+{% block body %}
+
+        {% for message in app.flashes('success') %}
+            <strong class='text-alert alert-primary'>{{ message }}</strong>
+        {% endfor %}
+
+    {{ include('credit_individuel/_form.html.twig') }}
+
+{% endblock %}

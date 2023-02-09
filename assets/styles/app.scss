@@ -1,0 +1,187 @@
+@import './custom/custom';
+@import '~bootstrap/scss/bootstrap';
+@import "~datatables.net-bs5/css/dataTables.bootstrap5.min";
+//@import '~jquery/jquerymodal.css';
+
+
+body{
+    background: #f9f9fb;
+    min-height: 100vh;
+}
+.sidebar_body{
+    background-color: #275d71;
+}
+
+#text-paragraphe{
+    display: none;
+}
+
+// #inputEmail,#inputPassword,#registration_form_prenom,#registration_form_nom,#registration_form_email,#registration_form_responsabilite,#registration_form_password_first,#registration_form_password_second{
+//     font-size: small;
+//     height: 30px;
+// }
+
+.card{
+    font-size: 13px;
+}
+
+#age{
+    color: #000;
+    padding: 2px;
+}
+
+#login{
+    background-color: #4786a5;
+    font-weight: bold;
+    font-size: 15px;
+    height: 40px;
+}
+
+#login:hover{
+    background-color: #275d71;
+}
+
+.menu{
+    font-size:14px;
+    color: #fff;
+}
+
+.menu:hover{
+    color: #000;
+    font-size: 13px;
+}
+.lien,.rapport{
+    font-size: 13px;
+    color: #fff;
+}
+
+.lien:hover,.rapport:hover{
+    font-size: 13px;
+    color: #000;
+}
+.rapport:active{
+    color: #000;
+}
+.down{
+    font-size: 13px;
+    color: #fff;
+}
+
+.down:hover{
+    font-size: 13px;
+    color: #000;
+}
+.dropmenu{
+    background-color: #0d5772;
+    color: #000;
+}
+.paginate_button,.page-link{
+    text-decoration: none;
+    font-size: 13px;
+}
+
+// *******************Tabs ******************/
+.nav-tabs .active {
+    color: #0a5eb1;
+}
+
+.nav-tabs .nav-link{
+    color: #0a5eb1;
+    background-color: #fff;
+    margin-right: 1rem;
+    border: 2px solid #0a5eb1;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: 14px;
+}
+
+.nav-tabs{
+    border-bottom: 2px solid #275d71;
+}
+
+.tab-content{
+    border: 1px solid #275d71;
+    padding: 25px;
+}
+
+/******************Information individuel client **********************/
+// div input ,div select, option{
+//     font-size: small;
+//     height: 30px;
+// }
+label{
+    font-size: 13px;
+} 
+
+span #age{
+    font-size: 12px;
+}
+
+thead{
+    background-color: #275d71;
+    color: #fff;
+}
+
+p,td,th,.pagination,.dataTables_info{
+    font-size: 13px;
+}
+
+.suggestion{
+    font-size: 14px;
+}
+.suggestion:hover{
+    background-color: #275d71;
+    color: #fff;
+}
+#code_cli,#nom_cli,#prenom_cli{
+    font-style: italic;
+}
+.nav-link .rapport .dropdown-toggle{
+    color: red;
+}
+.titre_modal{
+    background-color: #275d71;
+    color: #fff;
+}
+
+.head{
+    background-color: #275d71;
+    color: #fff;
+    margin-top: 0rem;
+}
+
+.nav-link .rapport .dropdown-toggle:active {
+    color: #000;
+}
+
+.label-login{
+    color: #275d71;
+}
+
+form div a{
+    text-decoration: none;
+}
+
+/*******Chart Css **********************/
+
+.body-chart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container-chart{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 200px;
+}
+
+.chart{
+    padding: 2rem;
+    border: 1px solid #f49131;
+    border-radius: 1rem;
+    box-shadow: 0 0 16px rgba(0,0, 0,0.8);
+    background: #ccdbe3;
+}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanBudget{% endblock %}
+
+{% block body %}
+    <h1>PlanBudget</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plan_budget.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ plan_budget.code }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ plan_budget.titre }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ plan_budget.montant }}</td>
+            </tr>
+            <tr>
+                <th>TypeBudget</th>
+                <td>{{ plan_budget.TypeBudget }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plan_budget_index') }}">back to list</a>
+
+    <a href="{{ path('app_plan_budget_edit', {'id': plan_budget.id}) }}">edit</a>
+
+    {{ include('plan_budget/_delete_form.html.twig') }}
+{% endblock %}

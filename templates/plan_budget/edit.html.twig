@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan budgetaire{% endblock %}
+{% block head 'Modifier plan budgetaire' %}
+
+{% block body %}
+    {{ include('plan_partial/_form.html.twig', {'button_label': 'Modifier','titre': 'modifier plan budgetaire'}) }}
+{% endblock %}

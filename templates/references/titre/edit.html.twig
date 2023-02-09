@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Modifier le titre 
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    {{ include('references/titre/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}
+

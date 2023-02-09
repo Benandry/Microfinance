@@ -1,0 +1,110 @@
+{% extends "base.html.twig" %}
+
+    {% block title %}
+        {% if affiche_tab  == false %}
+            Rapport client 
+        {% else %}
+            Liste des clients {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+        {% endif %}
+    {% endblock %}
+
+    {% block head %}
+        {% if affiche_tab  == false %}
+            Rapport client 
+        {% else %}
+            Liste des clients 
+            {% if date_1 == true %}
+                     jusq'a {{ one_date| date('d-m-Y') }} 
+            {% elseif date_3 == true %} 
+                par agent {{ agent.prenom }}
+            {% else %}
+                     du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }} 
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+{% block body %}
+    {% if affiche_tab  == false %}
+
+     <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                        <h4 class="modal-title text-center">Recherche client par date</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    {{ form_start(trier) }} 
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <h5 class="text-center"> Par nom de l'agent : </h5>
+                                {{ form_row(trier.agent) }}
+
+                            <div class="text-center" id="one_date">
+                                <h5 class="text-center"> Date </h5>
+                                {{ form_row(trier.search_one_date) }}
+                            </div>
+
+                            <div class="row text-center" id="two_date">
+                                    <h5 class="text-center">Entre deux périodes  </h5>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            {{ form_row(trier.date1) }}
+                                        </div>
+                                        <div class="col-6 col-sm-6"> 
+                                            {{ form_row(trier.date2) }}
+                                        </div>
+                                    </div>
+                            </div>
+
+                        </div>
+                
+                        <!-- Modal footer -->
+                        <div class="modal-footer mb-0">
+                            {{ form_row(trier.Chercher) }}
+                        </div>
+                    {{ form_end(trier) }}
+                </div>
+            </div>
+        </div>
+
+ <p id="test">  <p>
+    {% else %}
+            <table class="table table1 table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Code client</th>
+                    <th>Nom et prenom client </th>
+                    <th>Téléphone </th>
+                    <th>Cin</th>
+                    <th>Proféssion </th>
+                    <th>Date inscription</th>
+                    <th>Agence </th>
+                    <th>Etat civil </th>
+                    <th>Adresse </th>
+                </tr>
+            </thead>
+            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+            {% for individuelclient in individuel %}
+                    <tr>
+                        <td> {{ individuelclient.codeclient }}</td>
+                        <td>{{ individuelclient.nomClient }} </td>
+                        <td> {{ individuelclient.numeroMobile }}</td>
+                        <td>{{ individuelclient.cin|number_format(0,',', ' ') }}</td>
+                        <td> {{ individuelclient.profession }}</td>
+                        <td>{{ individuelclient.dateInscription ? individuelclient.dateInscription|date('Y-m-d') : '' }}</td>     
+                        <td>{{ individuelclient.Agence.NomAgence }}</td>      
+                        <td>{{ individuelclient.etatcivile.etatcivile }}</td>      
+                        <td>{{ individuelclient.adressephysique }}</td>     
+                    </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Pas de resultats</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

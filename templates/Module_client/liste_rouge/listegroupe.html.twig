@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Groupe client en liste rouge' %} 
+{% block head 'Groupe client en liste rouge' %} 
+
+{% block body %}
+
+   
+    <div class="row">
+        <div class="col-12 col-sm-12 d-flex justify-content-end">
+             <a href="{{ path('app_liste_rouge_groupe_new') }}" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i> Ajouter groupe</a>
+        </div>
+    </div>
+     {{ include('modal.html.twig') }}
+     
+    <table class="table2 table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Code Groupe</th>
+                <th>Nom Groupe</th>
+                <th>Raison</th>
+                <th> Action </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ListeRouge in listerouge %}
+            <tr>
+                <td>{{ ListeRouge.dateliste ? ListeRouge.dateliste|date('Y-m-d') : '' }}</td>
+                <td>
+                 {{ ListeRouge.codegroupe }}
+                </td>
+                <td>{{ ListeRouge.nomgroupe }}</td>
+                <td>{{ ListeRouge.raison }}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-4 col-sm-4">
+                            <a href="{{ path('app_liste_rouge_show', {'id': ListeRouge.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-4 col-sm-4">
+                            <a href="{{ path('app_liste_rouge_edit', {'id': ListeRouge.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur le {{ produit_epargne.nomproduit }}
+{% endblock %}
+
+{% block head %}
+    Info sur le {{ produit_epargne.nomproduit }} 
+{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Type produit </th>
+                <td>{{ produit_epargne.id }}</td>
+            </tr>
+            <tr>
+                <th>Code produit</th>
+                <td>{{ "%03d" | format(produit_epargne.id) }}</td>
+            </tr>
+            <tr>
+                <th>Nom Produit</th>
+                <td>{{ produit_epargne.nomproduit }}</td>
+            </tr>
+            <tr>
+                <th>Desactive</th>
+                <td>{{ produit_epargne.isdesactive ? 'Activer' : 'Desactiver' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('app_produit_epargne_index') }}" class="btn btn-primary btn-sm"> <i class="fa fa-list"></i>Voir  listes </a>
+
+    <a href="{{ path('app_produit_epargne_edit', {'id': produit_epargne.id}) }}" class="btn btn-warning btn-sm" ><i class="fa fa-edit"></i></a>
+{% endblock %}

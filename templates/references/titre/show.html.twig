@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Info sur le titre {{ titre.titre }}
+{% endblock %}
+
+{% block head %}
+    Info sur le titre {{ titre.titre }}
+{% endblock %}
+
+{% block body %}
+    <h1>Titre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ titre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ titre.titre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('app_titre_index', {'id': titre.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i> Voir liste</a>    
+        <a href="{{ path('app_titre_edit', {'id': titre.id}) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+    </div>
+{% endblock %}

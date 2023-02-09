@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau d'amortissement simple {% endblock %}
+{% block head %}par amortissement simple {% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <div class="card p-3">
+        {% for data in info %}
+            <div class="card">
+                <div class="row text-secondary m-3">
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold">Montant credit : {{ data.Montant }}  </p>
+                        <p class="fw-bold"> Taux annuelle : {{ data.TauxInteretAnnuel }} % </p>
+                    </div>
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold">Code credit : {{ data.NumeroCredit }} </p>
+                        <p class="fw-bold"> Nombre tranche : {{ data.NombreTranche }} </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <table class="table table-bordered mt-2">
+            <thead>
+                <tr>
+                    <th>Periode(N)</th>
+                    <th>Date de remboursement</th>
+                    <th>Principale </th>
+                    <th>Interet </th>
+                    <th>Total </th>
+                    <th>Solde du </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tab in amortissement %}
+                    <tr>
+                        <td> {{ tab.periode}} </td>
+                        <td>{{ tab.dateRemborsement|date("d/m/Y")}}</td>
+                        <td>{{ tab.principale }}</td>
+                        <td>{{ tab.interet }}</td>
+                        <td>{{ tab.montanttTotal }}</td>
+                        <td>{{ tab.soldedu }}</td>
+                        <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="2">Total </th>
+                    <th> {{ totalMontant }} </th>
+                    <th> {{ totalInteret }} </th>
+                    <th> {{ totalNet}} </th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ form_start(form)}}
+                {{ form_widget(form) }}
+            {{ form_end(form)}}
+        </div>
+    </div>
+
+{# 
+
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Periode(N)</th>
+                    <th>Date de remboursement</th>
+                    <th>Principale </th>
+                    <th>Interet </th>
+                    <th>Total </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tab in amortissement %}
+                    <tr>
+                        <td> {{ tab.periode + 1 }} </td>
+                        <td>{{ tab.dateRemb|date("d/m/Y")}}</td>
+                        <td>{{ tab.CapitalDu }}</td>
+                        <td>{{ tab.interet }}</td>
+                        <td>{{ tab.montantPayer }}</td>
+                    </tr>
+                {% endfor %}
+               {# <!-- {% endfor %} -->#}
+           
+       {# <!-- <div class="row">
+            <div class="col-6 col-xl-6 col-sm-6"> 
+               <p> Montant Total :</p>
+               <p> Interet total : </p>
+               <p>Nombre tranche :</p>
+            </div>
+            <div class="col-6 col-xl-6 col-sm-6">
+                 <p>{{ montant}}</p>
+                 <p> {{ interet }} </p>
+                 <p>{{  tranche }}</p>
+            </div>
+        </div> -->#}
+{% endblock %}

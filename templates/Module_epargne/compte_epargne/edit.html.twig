@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Modification du Compte epargne du client 
+{% endblock %}
+
+{% block head %}
+    Modification du Compte epargne du client 
+{% endblock %}
+
+{% block body %}
+
+      {# /***************Messages succes ******************/#}
+      {% for message in app.flashes('success') %}
+            <strong>{{ message }}</strong>
+      {% endfor %}
+
+    {{ include('Module_epargne/compte_epargne/_form.html.twig', {'button_label': 'Modification'}) }}
+{% endblock %}

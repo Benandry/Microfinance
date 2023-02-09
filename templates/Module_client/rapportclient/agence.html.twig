@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% if affiche_tab == false %}
+        Rapport client par agence 
+    {% else %}
+        Rapport client  {{ debut|date('Y-m-d') }} au {{ fin|date('Y-m-d') }}
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    {% if affiche_tab == false %}
+        Rapport client par agence 
+    {% else %}
+        Rapport client  {{ debut|date('Y-m-d') }} au {{ fin|date('Y-m-d') }}
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+    {% if affiche_tab == false %}
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                        <h5 class="modal-title text-center">Recherche client par agence</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    {{ form_start(form) }} 
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="text-center p-3">
+                               {{ form_row(form.nomAgence) }}
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-md-6 col-sm-6 col-xl-6">
+                                    {{ form_row(form.debut) }}
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xl-6">
+                                    {{ form_row(form.fin) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer mb-0">
+                            <input type="submit" value="Chercher" class="btn btn-primary btn-sm"/>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <table class="table1 table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <td colspan="7" style="background-color: #fff; color: #000;"> 
+                        <p> Nom agence : {{ agence.getNomAgence }}</p>
+                        <p>Adresse agence : {{ agence.AdressAgence }} </p>
+                        <p>Commune agence : {{ agence.commune }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th> Code client</th>
+                    <th> Nom et prenom client</th>
+                    <th> CIN du client</th>
+                    <th> Adresse</th>
+                    <th> Date d'inscription</th>
+                    <th> Telephone </th>
+                    <th> Commune </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td> {{ client.codeclient }} </td>
+                        <td> {{ client.nomClient }} {{ client.prenomClient }} </td>
+                        <td> {{ client.cin|number_format(0,',', ' ') }} </td>
+                        <td> {{ client.adressephysique }} </td>
+                        <td> {{ client.dateInscription|date('Y-m-d') }} </td>
+                        <td> {{ client.numeroMobile }} </td>
+                        <td> {{ client.commune.NomCommune }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+
