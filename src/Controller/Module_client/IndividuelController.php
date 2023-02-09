@@ -70,6 +70,11 @@ class IndividuelController extends AbstractController
                 $brochureFileName = $fileUploader->upload($brochureFile);
                 $individuelclient->setPhoto($brochureFileName);
             }
+
+            $numero_cin = $individuelclient->getCin();
+
+            dd($numero_cin);
+
             $individuelclientRepository->add($individuelclient,True);
                 $this->addFlash('success', "Ajout de nouveau client:  ' ".$individuelclient-> getNomClient()."  " . $individuelclient->getPrenomClient()." ' avec code ".$individuelclient->getCodeclient()."  reussite!!");
                 return $this->redirectToRoute('app_individuel_new', [], Response::HTTP_SEE_OTHER);
