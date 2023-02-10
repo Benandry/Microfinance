@@ -11,7 +11,6 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
-
 import './epargne/groupe/depot';
 import './credit/decaissement'
 import './credit/amortissement';

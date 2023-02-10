@@ -2,10 +2,6 @@
     "api-platform/core": {
         "version": "2.7",
         "recipe": {
-<<<<<<< HEAD
-            "version": "2.5"
-        }
-=======
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "2.5",
@@ -16,7 +12,6 @@
             "./config/routes/api_platform.yaml",
             "./src/Entity/.gitignore"
         ]
->>>>>>> refs/remotes/origin/main
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -79,9 +74,6 @@
         }
     },
     "nelmio/cors-bundle": {
-<<<<<<< HEAD
-        "version": "2.2.0"
-=======
         "version": "2.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
@@ -92,7 +84,6 @@
         "files": [
             "./config/packages/nelmio_cors.yaml"
         ]
->>>>>>> refs/remotes/origin/main
     },
     "sensio/framework-extra-bundle": {
         "version": "6.2",

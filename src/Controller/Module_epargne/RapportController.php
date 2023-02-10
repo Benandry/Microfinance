@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Module_epargne;
 
 use App\Entity\CompteEpargne;
 use App\Entity\ProduitEpargne;
