@@ -9,34 +9,10 @@
 {% endblock %}
 {% block body %}
   {# /***************Messages succes ******************/#}
-<<<<<<< HEAD
   {{ include('modal.html.twig') }}
 
     <table class="table table-bordered">
         <thead>
-=======
-  {% for message in app.flashes('success') %}
-  <!-- The Modal -->
-  <div class="modal fade" id="myModal">
-      <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-              <!-- Modal body -->
-              <div class="modal-body">
-                  <strong>{{ message }}</strong>
-              </div>
-              
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
-              </div>
-          </div>
-      </div>
-  </div>
-{% endfor %}
-
-    <table class="table table-bordered">
-        <thead class="alert alert-success">
->>>>>>> refs/remotes/origin/main
             <tr>
                 <th>Code Nom Produit</th>
                 <th>Negatif</th>
@@ -48,16 +24,10 @@
                 <th>Commission retrait cash</th>
                 <th>Commission transaction</th>
                 <th>Frais Fermeture compte</th>
-<<<<<<< HEAD
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-=======
-            </tr>
-        </thead>
-        <tbody class="jumbotron jumbotron-fluid">
->>>>>>> refs/remotes/origin/main
         {% for config_ep in config_eps %}
             <tr>
                 <td>{{ config_ep.produitEpargne }}</td>

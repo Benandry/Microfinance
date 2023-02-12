@@ -51,7 +51,7 @@ class IndividuelController extends AbstractController
         ///MAKA an ilay id agence ///
 
         $get_id_agence = $individuelclientRepository->findByAgenceCode();
-       // dd($get_id_agence);
+    //    dd($get_id_agence);
         if ($get_id_agence == NULL ) {
             $agence_client = 0;
         }else{

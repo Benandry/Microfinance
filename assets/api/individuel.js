@@ -14,6 +14,7 @@ $(document).ready(() =>{
 
         // MAnova an ilay agence   
         var get_agence_id = parseInt($('#agence_id').text());
+        
         var  pad_agence_id = get_agence_id.toString().padStart(2,0)
         var code_client_ = 'I'+pad_agence_id+pad_last_client
 
