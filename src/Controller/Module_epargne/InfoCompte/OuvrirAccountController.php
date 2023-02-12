@@ -2,8 +2,10 @@
 
 namespace App\Controller\Module_epargne\InfoCompte;
 
+use App\Entity\CompteEpargne;
 use App\Entity\Groupe;
 use App\Entity\Individuelclient;
+use App\Repository\CompteEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,71 +94,28 @@ class OuvrirAccountController extends AbstractController
 
         
         $form = $this->createFormBuilder()
-        ->add('code', TextType::class,[
-            'label' => "Compte epargne client  : ",
-            'attr' =>[
-                'class' => 'form-control',
-                'maxlength' => 15,
-                'minLength' => 15
-            ]
-        ])
-        ->add('code_client', TextType::class,[
-            'label' => "Code client : ",
-            'attr' =>[
-                'class' => 'form-control',
-            ]
-        ])
+        ->add('code', EntityType::class,[
+                'class' => CompteEpargne::class,
 
-        ->add('produit', TextType::class,[
-            'label' => "Produit : ",
-            'attr' =>[
-                'class' => 'form-control',
-            ]
-        ])
-        ->add('nom', TextType::class,[
-            'label' => "Nom du client : ",
-            'attr' =>[
-                'class' => 'form-control',
-            ]
-        ])
-
-        ->add('prenom', TextType::class,[
-            'label' => "Preno, du client : ",
-            'attr' =>[
-                'class' => 'form-control',
-            ]
-        ])
-
-        ->add('submit', SubmitType::class,[
-            'label' => 'Valider',
-            'attr' => [
-                'class' => 'btn btn-primary btn-sm'
-            ]
+                'query_builder' => function (CompteEpargneRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->andWhere("c.typeClient = 'INDIVIDUEL' ");
+                },
+                'choice_label' => function ($c) {
+                    return $c->getCodeepargne();
+                },
+                'label' => "Compte epargne client individuel : ",
+                'placeholder' => "Choisissez le compte epargne individuel :"
+            
         ])
         ->getForm();
-    
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $data = $form->getData();
-            #dd($data);
-            /*****Inforamtion via lees formulaire************************ */
-            $code = $data['code'];
-            $code_client  = $data['code_client'];
-            $produit = $data['produit'];
-            $nom = $data['nom'];
-            $prenom = $data['prenom'];
-            return $this->redirectToRoute('app_transaction_new', [
-                'code' => $code,
-                'cod_client' => $code_client,
-                'code' => $code,
-                'nom' => $nom,
-                'prenom' => $prenom,
 
-                ], 
-            Response::HTTP_SEE_OTHER);
+        if ($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData()['code'];
+            return $this->redirectToRoute('app_transaction_new', ['code' => $data],Response::HTTP_SEE_OTHER);
         }
 
-         //dd("Compte epargne groupe");
          return $this->render('Module_epargne/transaction/infoTransaction/depot.html.twig',[
             'form' => $form->createView(),
          ]);

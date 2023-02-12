@@ -93,19 +93,20 @@ class TransactionController extends AbstractController
     public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
     {
 
-        $transaction = new Transaction();
         
-        $code = $request->query->get('code');
-        $code_client = $request->query->get('cod_client');
-        $nom = $request->query->get('nom');
-        $prenom = $request->query->get('prenom');
-        $soldeCurrent = $transactionRepository->soldeCurrent($code);
+        
+        $id = $request->query->get('code');
+            /***Information du compte epargne */
+        $infoCompte = $transactionRepository->getInfoCompteEpargne($id)[0];
+
+        $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
 
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
         }
 
         // dd($soldeCurrent);
+        $transaction = new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
@@ -123,23 +124,16 @@ class TransactionController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', " Depot de ".$transaction->getMontant()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
+            $this->addFlash('info', " Depot de ".$transaction->getMontant()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
             return $this->redirectToRoute('app_transaction_new', [
-                'code' => $code,
-                'cod_client' => $code_client,
-                'code' => $code,
-                'nom' => $nom,
-                'prenom' => $prenom,
+                'code' => $id,
             ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transaction/new.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
-            'code' => $code,
-            'code_client' => $code_client,
-            'nom' => $nom,
-            'prenom' => $prenom,
+            'info' => $infoCompte,
             'solde' => $soldeCurrent[0]['solde'],
         ]);
     }

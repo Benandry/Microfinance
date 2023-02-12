@@ -31,10 +31,6 @@ class CompteEpargne
     #[ORM\OneToMany(mappedBy: 'compte', targetEntity: TransfertProduit::class)]
     private Collection $compteTransfert;
 
-
-    #[ORM\Column(length: 50)]
-    private ?string $typeClient = null;
-
     #[ORM\ManyToMany(targetEntity: Individuelclient::class, mappedBy: 'CodeIndividuel')]
     private Collection $individuelclients;
 
@@ -53,8 +49,11 @@ class CompteEpargne
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $codegroupe = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $codegroupeepargne = null;
+    #[ORM\Column(length: 255)]
+    private ?string $typeClient = null;
+
+
+
 
     
     public function __construct()
@@ -174,17 +173,6 @@ class CompteEpargne
         return $this;
     }
 
-    public function getTypeClient(): ?string
-    {
-        return $this->typeClient;
-    }
-
-    public function setTypeClient(string $typeClient): self
-    {
-        $this->typeClient = $typeClient;
-
-        return $this;
-    }
     /**
      * @return Collection<int, Individuelclient>
      */
@@ -263,16 +251,15 @@ class CompteEpargne
         return $this;
     }
 
-    public function getCodegroupeepargne(): ?string
+    public function getTypeClient(): ?string
     {
-        return $this->codegroupeepargne;
+        return $this->typeClient;
     }
 
-    public function setCodegroupeepargne(?string $codegroupeepargne): self
+    public function setTypeClient(string $typeClient): self
     {
-        $this->codegroupeepargne = $codegroupeepargne;
+        $this->typeClient = $typeClient;
 
         return $this;
     }
-
 }

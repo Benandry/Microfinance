@@ -49,7 +49,7 @@ class MouvementEpargne
         $compta->setRefTransaction($transaction->getCodetransaction());
         $compta->setPieceComptable($transaction->getPieceComptable());
 
-        $produit = $this->produit->findByProduitDepot($transaction->getCodeepargneclient())[0]->getTypeEpargne()->getAbreviation();
+        $produit = $this->produit->findByProduitDepot($transaction->getCodeepargneclient())[0]->getAbbreviation();
         
         if($produit == "DAV"){
             $compta->setPlanCompta($this->plan->findPlanById(211)[0]);

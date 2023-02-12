@@ -512,5 +512,33 @@ class TransactionRepository extends ServiceEntityRepository
 
             return  $query->getResult();
         }
+
+        /**
+         * Information du compte epargne pour faire un transaction
+         *
+         * @param int $id
+         * @return void
+         */
+        public function getInfoCompteEpargne($id){
+            $entityManager=$this->getEntityManager();
+
+            $query=$entityManager->createQuery(
+            "SELECT 
+            ce.codeepargne code,
+            i.codeclient,
+            i.nom_client,
+            i.prenom_client
+            FROM
+            App\Entity\CompteEpargne ce
+
+            INNER JOIN 
+            App\Entity\Individuelclient i
+            WITH ce.codeep = i.codeclient
+            WHERE ce.id = '$id'
+            ");
+
+            return  $query->getResult();
+        }
 }
+
 
