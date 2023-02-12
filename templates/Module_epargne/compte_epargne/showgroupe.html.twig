@@ -1,48 +1,100 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Groupe {% endblock %}
-{% block head %} Groupe {% endblock %}
+{% block title %}
+  Information sur les compte epargne
+{% endblock %}
+
+{% block head %}
+  Information sur les compte epargne
+{% endblock %}
 
 {% block body %}
-    {% for Groupes in Groupes  %}
-      <div class="row">
-        <div class="col-xl-4 col-md-4 col-sm-4">
-            <p> <b>Code Epargne : </b> {{ Groupes.codegroupeepargne }}</p>
-            <p> <b> Nom :</b> {{ Groupes.nomGroupe }}</p>
-        </div>
-        <div class="col-xl-4 col-md-4 col-sm-4">
-          <p> <b> Date de creation :</b> {{ Groupes.dateInscription | date('d-m-y') }}</p>
-          <p><b>Numero mobile : </b>{{ Groupes.numeroMobile }}</p>
-        </div>
-        <div class="col-xl-4 col-md-4 col-sm-4">
-           <p><b> Eamil :</b> {{ Groupes.email }}</p>
+{% for Groupes in Groupes %}
+    <section style="background-color: #eee;" style="color:black;">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h6> Information du groupe </h6>
+                <hr/>
+                <div class="fw-bold">Nom : {{ Groupes.nomGroupe}} </div>
+                <hr/>
+                <div class="fw-bold"> Date de creation : {{ Groupes.dateInscription|date('Y-m-d') }}</div>
+                <hr/>
+                <div class="fw-bold">E-mail : {{ Groupes.email }}</div>
+                 <a href="{{ path('app_groupe_show',{'id': Groupes.id_groupe}) }}" style="color:#4786a5;text-decoration: none">
+                   
+                    <hr/>
+                    <div class="fw-bold"> Code groupe : {{ Groupes.codegroupe }}</div>
+                    <hr/>
+                  </a>
+                <p class="text-muted mb-1"></p>
+                <p class="text-muted mb-4"></p>
+                <div class="d-flex justify-content-center mb-2">
+                </div>
+              </div>
+            </div>
+            <br><br><br>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4 alert alert-Primary">
+              <div class="card-body">
+                <div class="row mb-2">
+
+                  <div class="col-sm-4">
+                    <p class="mb-0 fw-bold">Code compte epargne </p>
+                  </div>
+                  <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{ Groupes.codeepargne }}</p> 
+                  </div>
+                </div>
+                <div class="row">
+                  <hr/>
+                  <hr/>
+
+                  <div class="col-sm-4">
+                    <p class="mb-0 fw-bold">Produit epargne </p>
+                  </div>
+                  <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{Groupes.nomproduit}} -- {{Groupes.abbreviation}}</p> 
+                  </div>
+                </div>
+
+                <div class="row">
+                  <hr/>
+                  <hr/>
+
+                  <div class="col-sm-4">
+                    <p class="mb-0 fw-bold">Date de creation du compte </p>
+                  </div>
+                  <div class="col-sm-8">
+                        <p class="text-muted mb-0"> {{Groupes.datecreation|date('Y-m-d')}}</p> 
+                  </div>
+                </div>
+
+                <div class="row">
+                  <hr/>
+                  <hr/>
+                  <div class="col-sm-4">
+                    <p class="mb-0 fw-bold">Solde </p>
+                  </div>
+                  <div class="col-sm-8">
+                        <p class="text-muted mb-0">{% if  Groupes.solde == null %} 0 {% else %} {{ Groupes.solde }} {% endif %} Ariary</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <hr/>
+                  <hr/>
+                </div>
+              </div>
+            </div><br><br>
+          </div>
         </div>
       </div>
-      
-      <ul class="list-group list-group-flush alert alert-success" style="padding:50px;">
-      {# Type et profuit epargne #}
-        <div class="container">
-              <h5 class="card-title">Type et Produit Epargne</h5>
-              <div class="row">
-                  <div class="col-md-5">
-                    <p> Nom Produit<p>
-                    <li class="list-group-item" style="color:black;">{{Groupes.nomproduit }}</li></a><br>
-                  </div>
-                  {% if Groupes.solde == '' %}
-                <div class="col-md-5">
-                    <p>Solde</p>
-                      <li class="list-group-item" style="color:black;"> 0 </li></a><br>
-                </div>
-                {% else %}
-                <div class="col-md-5">
-                    <p>Solde</p>
-                      <li class="list-group-item" style="color:black;"> {{ Groupes.solde }} </li></a><br>
-                </div>
-                  {% endif %}
-              </div>
-        </div>
-      </ul>
-    {% endfor %}
+    </section>
+{% endfor %}
 
 {% endblock %}
 

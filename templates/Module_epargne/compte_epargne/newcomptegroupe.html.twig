@@ -1,10 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Compte epargne nouveau compte du groupe {{ nom }} 
+    Compte epargne nouveau compte du groupe {{info.nomGroupe }} 
 {% endblock %}
 
-{% block head 'Compte epargne>Nouveau compte du groupe '~ nom %}
+{% block head 'Compte epargne>Nouveau compte du groupe '~ info.nomGroupe %}
 {% block body %}
     {{ include('modal.html.twig') }}
 
@@ -12,24 +12,19 @@
         <div class="card mb-3">
             <div class="row text-secondary m-3">
                 <div class="col-xl-4 col-md-4 col-sm-4">
-                    <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ nom }}</span></p>     
-                    <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ email }}</span></p>
+                    <p class="fw-bold"> Nom groupe : <span id="nom_groupe"> {{ info.nomGroupe }}</span></p>     
+                    <p class="fw-bold"> Email groupe :  <span id="email_groupe"> {{ info.email }}</span></p>
                 </div>
                 
                 <div class="col-md-4 col-sm-4 m-auto">
                     <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Ouvrir compte epargne </h5></div>
                 </div>
                 <div class="col-xl-4 col-md-4 col-sm-4">
-                    <p class="fw-bold">Code groupe : <span id="code_groupe"> {{ code }}</span></p>
+                    <p class="fw-bold">Code groupe : <span id="code_groupe">{{ info.codegroupe }}</span></p>
                 </div>
             </div>              
         </div>
-
-
-        <div style="display: none;">
-            <p> Text ecrit : <span id="text"> </span> </p>
-            <p> Text ecrit : <span id="code"> </span> </p>
-        </div>
+            <p style="display: none;"> Text ecrit : <span id="text"> </span> </p>
         {{ form_start(form) }}
             <div class="row mt-3">
                 <div class="col-4 col-sm-4">
@@ -55,7 +50,7 @@
             </div>
         {{ form_end(form) }}
         
-        <h6 class="text-primary m-3"> Compte existant du groupe {{ nom }} </h6>
+        <h6 class="text-primary m-3"> Compte existant du groupe {{ info.nomGroupe }} </h6>
         <table class="table">
             <thead>
                 <tr>

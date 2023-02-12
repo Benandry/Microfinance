@@ -2,7 +2,7 @@
 
 namespace App\Controller\Module_epargne\InfoCompte;
 
-use App\Entity\CompteEpargne;
+use App\Entity\Groupe;
 use App\Entity\Individuelclient;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +26,7 @@ class OuvrirAccountController extends AbstractController
         ->add('code', EntityType ::class,[
                 'class' => Individuelclient:: class,
                 'label' => 'Individuel client : ',
+                'placeholder' => "Choisissez l'ndividuel client :",
                 'choice_label' => function($c){
                     return $c->getCodeclient()." -- ".$c->getNomClient();
                 }
@@ -44,62 +45,36 @@ class OuvrirAccountController extends AbstractController
         }
 
         return $this->render('Module_epargne/compte_epargne/infoCompte/ouvrir.html.twig',[
-            'nom' => 'Nandrianina ',
             'form' => $form->createView(),
         ]);
     }
-
-     ///Compte epargne groupeb  
-
+    /**
+     * Ouvrir compte epargne en groupe
+     *
+     * @param Request $request
+     * @return void
+     */
      #[Route('/ouvrirCompteEpargneEpargneGroupe', name: 'app_ouvrir_compte_groupe')]
      public function compteEpargneGroup(Request $request){
-
         
-        $form = $this->createFormBuilder()
-        ->add('code', TextType::class,[
-            'label' => "Code groupe a ouvrir un compte : ",
-            'attr' =>[
-                'class' => 'form-control',
-                'maxlength' => 10,
-                'minLength' => 10
-            ]
-        ])
-        ->add('nomgroupe', TextType::class,[
-            'label' => "Nom du groupe : ",
-            'attr' =>[
-                'class' => 'form-control',
-            ]
-        ])
-        ->add('email', TextType::class,[
-            'label' => "Adresse email : ",
-            'attr' =>[
-                'class' => 'form-control',
-            ]
-        ])
 
-        ->add('submit', SubmitType::class,[
-            'label' => 'Valider',
-            'attr' => [
-                'class' => 'btn btn-primary btn-sm'
-            ]
+        $form = $this->createFormBuilder()
+        ->add('code', EntityType ::class,[
+                'class' => Groupe:: class,
+                'label' => 'Groupe client : ',
+                'placeholder' => "Choisissez le groupe :",
+                'choice_label' => function($c){
+                    return $c->getCodegroupe()." -- ".$c->getNomGroupe();
+                }
         ])
         ->getForm();
+
+        // dd("tonga ato aloaha");
     
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $data = $form->getData();
-            //dd($data);
-            /*****Inforamtion via lees formulaire************************ */
-            $code = $data['code'];
-            $nom = $data['nomgroupe'];
-            $email = $data['email'];
-            return $this->redirectToRoute('app_compte_epargne_new_groupe', [
-                    'code' => $code,
-                    'nom' => $nom,
-                    'email' => $email,
-
-                ], 
-            Response::HTTP_SEE_OTHER);
+            $data = $form->getData()['code'];
+            return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $data], Response::HTTP_SEE_OTHER);
         }
 
          //dd("Compte epargne groupe");

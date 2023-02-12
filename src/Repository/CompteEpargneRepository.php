@@ -698,8 +698,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         i.id idcli,
         -- -- PRODUIT EPARGNE
         p.nomproduit,
-        p.nomproduit,
-        t.abreviation,
+        p.abbreviation abreviation,
         -- -- TYPE EPARGNE
         ----Solde --------------
         SUM(tr.Montant) solde
@@ -707,8 +706,10 @@ class CompteEpargneRepository extends ServiceEntityRepository
         FROM
         App\Entity\CompteEpargne ce
         INNER JOIN
+
         App\Entity\Individuelclient i
         WITH ce.codeep = i.codeclient
+
         LEFT JOIN
         App\Entity\Transaction tr
         with tr.codeepargneclient = ce.codeepargne
@@ -716,11 +717,6 @@ class CompteEpargneRepository extends ServiceEntityRepository
         App\Entity\ProduitEpargne p
         WITH
         ce.produit = p.id
-
-        INNER JOIN
-        App\Entity\TypeEpargne t
-        WITH
-        t.id = p.typeEpargne
         WHERE
         ce.id = $id 
         GROUP BY ce.codeepargne"
@@ -728,36 +724,6 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
-
-
-    // public function compteEpargneExist($code){
-
-    //     $query = " SELECT 
-    //     g.codegroupe,
-    //     g.nomGroupe nom,
-    //     pe.nomproduit,
-    //     ce.datedebut ,
-    //     ce.id,
-    //     ce.codeepargne ,
-    //     SUM(t.Montant) solde
-    //     FROM App\Entity\CompteEpargne ce 
-    //     LEFT JOIN
-    //     App\Entity\Transaction t
-    //     WITH t.codeepargneclient = ce.codeepargne
-    //     INNER JOIN
-    //     App\Entity\ProduitEpargne pe
-    //     with ce.produit = pe.id
-    //     INNER JOIN 
-    //     App\Entity\Groupe g
-    //     WITH ce.codeep = g.codegroupe
-    //     WHERE ce.codeep = '$code' 
-    //     --AND t.id = (SELECT MAX(tr.id) FROM App\Entity\CompteEpargne c RIGHT JOIN App\Entity\Transaction tr  WITH tr.codeepargnegroupe = c.codegroupeepargne  WHERE ce.codeep = '$code' )
-    //    ";
-        
-    //     $stmt = $this->getEntityManager()->createQuery($query)->getResult();
-  
-    //     return $stmt;
-    // }
 
 
     //   api code epargne
@@ -810,20 +776,25 @@ class CompteEpargneRepository extends ServiceEntityRepository
       }
 
     public function findyGroupeById($id){
-        $query = " SELECT DISTINCT(ce.id),
-        ce.codegroupeepargne,
+        $query = " SELECT 
+        g.id id_groupe,
+        ce.id,
+        ce.datedebut datecreation,
+        ce.codeepargne,
+        g.codegroupe,
         g.nomGroupe,
         g.dateInscription,
         g.numeroMobile,
         g.email,
         pe.nomproduit,
-        t.solde
+        pe.abbreviation,
+        SUM(t.Montant) solde
 
         FROM App\Entity\CompteEpargne ce
 
         INNER JOIN 
         App\Entity\Groupe g
-        WITH ce.codegroupe = g.codegroupe
+        WITH ce.codeep = g.codegroupe
 
         INNER JOIN
         App\Entity\ProduitEpargne pe
@@ -870,5 +841,24 @@ class CompteEpargneRepository extends ServiceEntityRepository
     
         return $stmt;
     }
+
+    /**
+     * Cette fonction permet de recuperer les information du groupe pour ouvrir un compte epargne de groupe
+     *
+     * @param int $id
+     * @return void
+     */
+    public function getInfoGroupe($id){
+        $query = " SELECT 
+        g.id,
+        g.nomGroupe,
+        g.email,
+        g.codegroupe
+        FROM App\Entity\Groupe g
+        WHERE g.id = $id";
+       
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
     
+        return $stmt;
+    }
 }

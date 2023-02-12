@@ -38,9 +38,6 @@ class CompteEpargneController extends AbstractController
 
         $info = $compteEpargneRepository->getInfoClient($code)[0];
 
-        // $nom = $request->query->get('nom');
-        // $prenom = $request->query->get('prenom');
-
         $compte_existe=$compteEpargneRepository->compteClientCourant($info['codeclient']);
 
         $compteEpargne = new CompteEpargne();
@@ -80,12 +77,11 @@ class CompteEpargneController extends AbstractController
     public function newgroupe(Request $request, CompteEpargneRepository $compteEpargneRepository): Response
     {
 
-        $code = $request->query->get('code');
-        $nom = $request->query->get('nom');
-        $email = $request->query->get('email');
+        $id = $request->query->get('code');
+        $info_groupe = $compteEpargneRepository->getInfoGroupe($id)[0];
+        // dd($info_groupe);
 
-        // dd($email);
-        $compteEpargneExiste = $compteEpargneRepository->compteEpargneExist($code);
+        $compteEpargneExiste = $compteEpargneRepository->compteEpargneExist($info_groupe['codegroupe']);
 
         // dd($compteEpargneExiste);
         $compteEpargne = new CompteEpargne();
@@ -94,25 +90,30 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
         // dd("Efa tonga ato ve");
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd();
-            $compteEpargneRepository->add($compteEpargne, true);
+            //Verifier le compte epargne groupe s'il est deja exister
+            $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
+            if ($verify_compte_epargne) {
+                /*** On ne peut pas creer un compte epargne car le numero de compte epargne existe */
+                $this->addFlash('danger', "On ne peut pas creer un compte epargne car le numero ".$compteEpargne->getCodeepargne()." deja existe ");
+                return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $id], Response::HTTP_SEE_OTHER);
 
+            }else{
+                /** On peut creer un compte epargne */
+                $compteEpargneRepository->add($compteEpargne, true);
+                $this->addFlash('primary', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
+                return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $id], Response::HTTP_SEE_OTHER);
+            }
+            
+            $compteEpargneRepository->add($compteEpargne, true);
             $this->addFlash('success', "Creation du compte epargne  ".$compteEpargne->getCodeepargne()." réussite!!!");
-            return $this->redirectToRoute('app_compte_epargne_new_groupe', [
-                'code' => $code,
-                'nom' => $nom,
-                'prenom' => $email,
-            ], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $id,], Response::HTTP_SEE_OTHER);
         }
        
         return $this->renderForm('Module_epargne/compte_epargne/newcomptegroupe.html.twig', [
             'compte_epargne' => $compteEpargne,
             'compte_exist' =>$compteEpargneExiste,
             'form' => $form,
-            'code'=>$code,
-            'nom' =>$nom,
-            'email'=>$email
-
+            'info'=>$info_groupe,
         ]);
     }
 
@@ -136,7 +137,7 @@ class CompteEpargneController extends AbstractController
        // $epargne=$doctrine->getRepository(CompteEpargne::class)->find($id);
         $Groupe=$compteEpargneRepository->findyGroupeById($id);
         $agenceRepos=$agence->findAll();
-
+        // dd($agenceRepos);
         return $this->render('Module_epargne/compte_epargne/showgroupe.html.twig', [
             'Groupes' => $Groupe,
             'agences'=>$agenceRepos,
