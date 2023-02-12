@@ -514,7 +514,7 @@ class TransactionRepository extends ServiceEntityRepository
         }
 
         /**
-         * Information du compte epargne pour faire un transaction
+         * Information du compte epargne  client individuel pour faire un transaction
          *
          * @param int $id
          * @return void
@@ -534,6 +534,34 @@ class TransactionRepository extends ServiceEntityRepository
             INNER JOIN 
             App\Entity\Individuelclient i
             WITH ce.codeep = i.codeclient
+            WHERE ce.id = '$id'
+            ");
+
+            return  $query->getResult();
+        }
+
+         /**
+         * Information du compte epargne  client groupe pour faire un transaction
+         *
+         * @param int $id
+         * @return void
+         */
+        public function getInfoGroupe($id){
+            $entityManager=$this->getEntityManager();
+
+            $query=$entityManager->createQuery(
+            "SELECT 
+            ce.codeepargne code,
+            g.codegroupe,
+            g.nomGroupe,
+            g.email
+            FROM
+            App\Entity\CompteEpargne ce
+
+            INNER JOIN 
+            App\Entity\Groupe g
+            WITH ce.codeep = g.codegroupe
+
             WHERE ce.id = '$id'
             ");
 

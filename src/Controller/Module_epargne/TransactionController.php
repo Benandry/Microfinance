@@ -111,20 +111,27 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $transaction->setCodetransaction(random_int(2,1000000000));
-            $entityManager=$doctrine->getManager();
 
-            /**Inserer dans la table Mouvement comptable */
-            $mouvement->operationJournal($entityManager,$transaction);
-            //Verifier si le solde n'est pas nombre 
-            if ($transaction->getSolde() == "NaN") {
-                $transaction->setSolde($transaction->getMontant());
+            if($transaction->getMontant() > 0){
+                $transaction->setCodetransaction(random_int(2,1000000000));
+                $entityManager=$doctrine->getManager();
+
+                /**Inserer dans la table Mouvement comptable */
+                $mouvement->operationJournal($entityManager,$transaction);
+                //Verifier si le solde n'est pas nombre 
+                if ($transaction->getSolde() == "NaN") {
+                    $transaction->setSolde($transaction->getMontant());
+                }
+            
+                $entityManager->persist($transaction);
+                $entityManager->flush();
+
+                $this->addFlash('info', " Depot de ".$transaction->getMontant()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
+                
             }
-        
-            $entityManager->persist($transaction);
-            $entityManager->flush();
-
-            $this->addFlash('info', " Depot de ".$transaction->getMontant()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
+            else {
+                $this->addFlash('danger','Vous avez entré un montant negative.Le montant entré doit etre strictement positive. Veuillez réessayer !!');
+            }
             return $this->redirectToRoute('app_transaction_new', [
                 'code' => $id,
             ], Response::HTTP_SEE_OTHER);
@@ -150,50 +157,52 @@ class TransactionController extends AbstractController
     #[Route('/depotgroupe', name: 'app_transaction_groupe_depot', methods: ['GET', 'POST'])]
     public function DepotGroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement)
     {
-        $transaction = new Transaction();
         
-        //information sur le groupe
-        $code = $request->query->get('code');
-        $nomgroupe = $request->query->get('nom');
-        $email = $request->query->get('email');
+        
+        //id du compte epargne groupe
+        $id = $request->query->get('code');
+        /**Information du compte epargne groupe */
+        $infoCompte = $transactionRepository->getInfoGroupe($id)[0];
 
         //Solde courant du groupe
-        $soldeCurrent = $transactionRepository->soldeCurrent($code);
+        $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
         }
 
+
+        $transaction = new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $transaction->setCodetransaction(random_int(2,1000000000));
-            $entityManager=$doctrine->getManager();
-            $mouvement->operationJournal($entityManager,$transaction);
+            // Verifier si le montant est positive (strictement positive)
+            if ($transaction->getMontant() > 0) {
+                $transaction->setCodetransaction(random_int(2,1000000000));
+                $entityManager=$doctrine->getManager();
+                $mouvement->operationJournal($entityManager,$transaction);
 
-            if ($transaction->getSolde()== "NaN") {
-                $transaction->setSolde($transaction->getMontant());
+                if ($transaction->getSolde()== "NaN") {
+                    $transaction->setSolde($transaction->getMontant());
+                }
+                
+                $entityManager->persist($transaction);
+                $entityManager->flush();
+                $this->addFlash('success', " Dépot ".$transaction->getMontant()." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
             }
-            
-            $entityManager->persist($transaction);
-            $entityManager->flush();
-
-            $this->addFlash('success', " Dépot ".$transaction->getMontant()." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
-
+            else {
+                $this->addFlash('danger','Vous avez entré un montant negative.Le montant entré doit etre strictement positive. Veuillez réessayer !!');
+            }
             return $this->redirectToRoute('app_transaction_groupe_depot', [
-                'code' => $code,
-                'nom' => $nomgroupe,
-                'email' => $email,
+                'code' => $id,
             ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transaction/depotgroupe.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
-            'codegroupe' => $code,
-            'nomgroupe' => $nomgroupe,
-            'email' => $email,
+            'info' => $infoCompte,
         'solde' => $soldeCurrent[0]['solde'],
         ]);
     }

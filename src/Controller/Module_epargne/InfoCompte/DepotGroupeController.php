@@ -2,12 +2,13 @@
 
 namespace App\Controller\Module_epargne\InfoCompte;
 
+use App\Entity\CompteEpargne;
+use App\Repository\CompteEpargneRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DepotGroupeController extends AbstractController
 {
@@ -18,62 +19,30 @@ class DepotGroupeController extends AbstractController
         {
     
             $form = $this->createFormBuilder()
-            ->add('code', TextType::class,[
-                'label' => "Compte epargne groupe : ",
-                'attr' =>[
-                    'class' => 'form-control',
-                ]
+            ->add('code', EntityType::class,[
+                'class' => CompteEpargne::class,
+                'query_builder' => function (CompteEpargneRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->andWhere("c.typeClient = 'GROUPE' ");
+                },
+                'choice_label' => function ($c) {
+                    return $c->getCodeepargne();
+                },
+                'label' => "Compte epargne client groupe : ",
+                'placeholder' => "Choisissez le compte epargne groupe :",
+                'autocomplete' => true,
             ])
-            ->add('nom', TextType::class,[
-                'label' => "Nom du groupe : ",
-                'attr' =>[
-                    'class' => 'form-control',
-                ]
-            ])
-
-            ->add('code_groupe', TextType::class,[
-                'label' => "code du groupe : ",
-                'attr' =>[
-                    'class' => 'form-control',
-                ]
-            ])
-
-            ->add('email', TextType::class,[
-                'label' => "Email du groupe : ",
-                'attr' =>[
-                    'class' => 'form-control',
-                ]
-            ])
-    
-            ->add('submit', SubmitType::class,[
-                'label' => 'Valider',
-                'attr' => [
-                    'class' => 'btn btn-primary btn-sm'
-                ]
-            ])
+           
             ->getForm();
-        
             $form->handleRequest($request);
         
             /* ===== Si les produits sont selectionnnés. On va executer les requests ci-dessous ====== */
             if ($form->isSubmitted() && $form->isValid()){
-                $data = $form->getData();
-                $code = $data['code'];
-                $nom = $data['nom'];
-                $email = $data['email'];
-                $code_groupe = $data['code_groupe'];
-                return $this->redirectToRoute('app_transaction_groupe_depot', [
-                        'code' => $code,
-                        'nom' => $nom,
-                        'email' => $email,
-                        'code_groupe' => $code_groupe
-    
-                    ], 
-                Response::HTTP_SEE_OTHER);
+                $data = $form->getData()['code'];
+                return $this->redirectToRoute('app_transaction_groupe_depot', ['code' => $data],Response::HTTP_SEE_OTHER);
             }
     
             return $this->render('Module_epargne/compte_epargne/infoCompte/depot_groupe.html.twig',[
-                'nom' => ' ',
                 'form' => $form->createView(),
             ]);
         }

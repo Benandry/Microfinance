@@ -31,7 +31,8 @@ class OuvrirAccountController extends AbstractController
                 'placeholder' => "Choisissez l'ndividuel client :",
                 'choice_label' => function($c){
                     return $c->getCodeclient()." -- ".$c->getNomClient();
-                }
+                },
+                'autocomplete' => true,
         ])
 
         ->getForm();
@@ -67,7 +68,8 @@ class OuvrirAccountController extends AbstractController
                 'placeholder' => "Choisissez le groupe :",
                 'choice_label' => function($c){
                     return $c->getCodegroupe()." -- ".$c->getNomGroupe();
-                }
+                },
+                'autocomplete' => true,
         ])
         ->getForm();
 
@@ -96,7 +98,6 @@ class OuvrirAccountController extends AbstractController
         $form = $this->createFormBuilder()
         ->add('code', EntityType::class,[
                 'class' => CompteEpargne::class,
-
                 'query_builder' => function (CompteEpargneRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->andWhere("c.typeClient = 'INDIVIDUEL' ");
@@ -105,7 +106,8 @@ class OuvrirAccountController extends AbstractController
                     return $c->getCodeepargne();
                 },
                 'label' => "Compte epargne client individuel : ",
-                'placeholder' => "Choisissez le compte epargne individuel :"
+                'placeholder' => "Choisissez le compte epargne individuel :",
+                'autocomplete' => true,
             
         ])
         ->getForm();
