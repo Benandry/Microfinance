@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block head %}
-    Retrait compte epargne {{ nom }}
+    Retrait compte epargne {{ info.nom_client }}
 {% endblock %}
 
 {% block body %}
@@ -14,7 +14,7 @@
         <div class="card mb-3">
             <div class="row text-secondary m-3">
                 <div class="col-md-4 col-sm-4 ">
-                    <p> <b>Compte epargne : </b><span id="code_epargne_client"> {{ code }}</span></p>
+                    <p> <b>Compte epargne : </b><span id="code_epargne_client"> {{ info.code }}</span></p>
                     <p> <b>Solde client : </b>
                         {% if solde != '' %}
                             <span id="solde_cli" style="display:none">{{ solde }}</span>   
@@ -29,8 +29,8 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4">
-                    <p><b> Nom Client :</b> <span id="nom"> {{ nom }} </span></p>
-                    <p><b> Prenom Client :</b> <span id="prenom"> {{ prenom }}</span></p>
+                    <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }} </span></p>
+                    <p><b> Prenom Client :</b> <span id="prenom"> {{ info.prenom_client }}</span></p>
                 </div>
             </div>
         </div>

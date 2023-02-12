@@ -91,10 +91,7 @@ class TransactionController extends AbstractController
      */
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
     public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
-    {
-
-        
-        
+    {     
         $id = $request->query->get('code');
             /***Information du compte epargne */
         $infoCompte = $transactionRepository->getInfoCompteEpargne($id)[0];
@@ -221,11 +218,11 @@ class TransactionController extends AbstractController
     {
 
         //inforamtion qui concerne le groupe(nom et code groupe);
-        $code = $request->query->get('code');
-        $nom = $request->query->get('nom');
+        $id = $request->query->get('code');
+        $infoCompte = $transactionRepository->getInfoGroupe($id)[0];
 
-        //solde actuel du groupe
-        $soldeCurrent = $transactionRepository->soldeCurrent($code);
+
+        $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
         }        
@@ -247,17 +244,13 @@ class TransactionController extends AbstractController
             $entityManager->flush();
             
             $this->addFlash('success', " Rétrait ".abs($transaction->getMontant())." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
-            return $this->redirectToRoute('app_transaction_retrait', [
-            'nom' => $nom,
-            'code' => $code
-           ], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_transaction_retrait', ['code' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transaction/retrait.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
-            'code'=>$code,
-            'nom'=>$nom,
+            'info' => $infoCompte,
             'solde' => $soldeCurrent[0]['solde']
         ]);
     }
@@ -267,24 +260,20 @@ class TransactionController extends AbstractController
     #[Route('/individuel', name: 'app_retrait', methods: ['GET', 'POST'])]
     public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementRetrait $mouvement): Response
     {
-        $transaction = new Transaction();
-
-        $code = $request->query->get('code');
-        $codeclient=$request->query->get('cod_client');
-        $nom = $request->query->get('nom');
-        $prenom=$request->query->get('prenom');
-
-        // dd($code,$nom,$prenom,$codeclient);
-
-        $soldeCurrent = $transactionRepository->soldeCurrent($code);
-
+        
+        $id = $request->query->get('code');
+        /***Information du compte epargne */
+        $infoCompte = $transactionRepository->getInfoCompteEpargne($id)[0];
+        $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
+        
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
         }        
-
+        
+        $transaction = new Transaction();
         $form = $this->createForm(TransactionretraitType::class, $transaction);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager=$doctrine->getManager();
 
@@ -297,21 +286,13 @@ class TransactionController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', " Rétrait de ".abs($transaction->getMontant())." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
-            return $this->redirectToRoute('app_retrait', [
-                'code' => $code,
-                'cod_client' => $codeclient,
-                'code' => $code,
-                'nom' => $nom,
-                'prenom' => $prenom,
-            ], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_retrait', ['code' => $id ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transaction/retrait_individuel_form.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
-            'code'=>$code,
-            'nom'=>$nom,
-            'prenom'=>$prenom,
+            'info' => $infoCompte,
             'solde' => $soldeCurrent[0]['solde']
         ]);
     }
