@@ -10,15 +10,15 @@
             {{ form_start(form) }} 
                <!-- Modal body -->
                <div class="modal-body">
-                    {{ form_row(form.typeEpargne) }}
                     {{ form_row(form.nomproduit) }}
+                    {{ form_row(form.abbreviation) }}
                     {{ form_row(form.isdesactive) }}
                </div>
          
                <!-- Modal footer -->
                <div class="modal-footer mb-0">
-                     <button t class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
-                     <a href="{{ path('app_produit_epargne_index') }}" class="btn btn-info btn-sm"> <i class="fa fa-eye"></i> Voir Liste</a>
+                  <a href="{{ path('app_produit_epargne_index') }}" class="btn btn-info btn-sm"> <i class="fa fa-eye"></i> Voir Liste</a>
+                  <button t class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
                </div>
              {{ form_end(form) }}
          </div>

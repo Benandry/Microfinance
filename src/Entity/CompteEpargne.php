@@ -25,9 +25,6 @@ class CompteEpargne
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datedebut = null;
 
-    #[ORM\OneToMany(mappedBy: 'produitatransferer', targetEntity: TransfertProduit::class)]
-    private Collection $transfertProduits;
-
     #[ORM\OneToMany(mappedBy: 'Produittransmis', targetEntity: TransfertProduit::class)]
     private Collection $produittransmis;
 
@@ -62,7 +59,6 @@ class CompteEpargne
     
     public function __construct()
     {
-        $this->transfertProduits = new ArrayCollection();
         $this->produittransmis = new ArrayCollection();
         $this->compteTransfert = new ArrayCollection();
         $this->individuelclients = new ArrayCollection();
@@ -116,36 +112,6 @@ class CompteEpargne
     public function __toString()
     {
         return (string) $this->getId();
-    }
-
-    /**
-     * @return Collection<int, TransfertProduit>
-     */
-    public function getTransfertProduits(): Collection
-    {
-        return $this->transfertProduits;
-    }
-
-    public function addTransfertProduit(TransfertProduit $transfertProduit): self
-    {
-        if (!$this->transfertProduits->contains($transfertProduit)) {
-            $this->transfertProduits[] = $transfertProduit;
-            $transfertProduit->setProduitatransferer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTransfertProduit(TransfertProduit $transfertProduit): self
-    {
-        if ($this->transfertProduits->removeElement($transfertProduit)) {
-            // set the owning side to null (unless already changed)
-            if ($transfertProduit->getProduitatransferer() === $this) {
-                $transfertProduit->setProduitatransferer(null);
-            }
-        }
-
-        return $this;
     }
 
     /**

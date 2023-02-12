@@ -55,14 +55,14 @@ class CompteEpargneController extends AbstractController
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
             if ($verify_compte_epargne) {
                 /*** On ne peut pas creer un compte epargne car le numero de compte epargne existe */
-                $this->addFlash('error', "On ne peut pas creer un compte epargne car le numero ".$compteEpargne->getCodeepargne()." deja existe ");
+                $this->addFlash('danger', "On ne peut pas creer un compte epargne car le numero ".$compteEpargne->getCodeepargne()." deja existe ");
                 return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
 
                 dd($verify_compte_epargne);
             }else{
                 /** On peut creer un compte epargne */
                 $compteEpargneRepository->add($compteEpargne, true);
-                $this->addFlash('info', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
+                $this->addFlash('primary', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
                 return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
             }
 

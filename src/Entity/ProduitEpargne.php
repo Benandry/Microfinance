@@ -28,8 +28,6 @@ class ProduitEpargne
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: CompteEpargne::class)]
     private Collection $produitcompteepargne;
 
-    #[ORM\ManyToOne(inversedBy: 'TypeProduit')]
-    private ?TypeEpargne $typeEpargne = null;
 
     #[ORM\OneToMany(mappedBy: 'produitEpargne', targetEntity: ConfigEp::class)]
     private Collection $ConfigProduit;
@@ -40,19 +38,15 @@ class ProduitEpargne
     #[ORM\OneToMany(mappedBy: 'ProduitEpargne', targetEntity: GarantieCredit::class)]
     private Collection $garantieCredits;
 
-    // #[ORM\OneToMany(mappedBy: 'Produit1', targetEntity: Produittransfert::class)]
-    // private Collection $produitepargne1;
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $abbreviation = null;
 
-    // #[ORM\OneToMany(mappedBy: 'ProduitEpargne2', targetEntity: Produittransfert::class)]
-    // private Collection $produitepargne2;
 
     public function __construct()
     {
         $this->peoduitep = new ArrayCollection();
         $this->produitcompteepargne = new ArrayCollection();
         $this->ConfigProduit = new ArrayCollection();
-        $this->produitepargne1 = new ArrayCollection();
-        $this->produitepargne2 = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
         $this->garantieCredits = new ArrayCollection();
     }
@@ -152,17 +146,6 @@ class ProduitEpargne
     }
 
 
-    public function getTypeEpargne(): ?TypeEpargne
-    {
-        return $this->typeEpargne;
-    }
-
-    public function setTypeEpargne(?TypeEpargne $typeEpargne): self
-    {
-        $this->typeEpargne = $typeEpargne;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, ConfigEp>
@@ -310,6 +293,18 @@ class ProduitEpargne
                 $garantieCredit->setProduitEpargne(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAbbreviation(): ?string
+    {
+        return $this->abbreviation;
+    }
+
+    public function setAbbreviation(?string $abbreviation): self
+    {
+        $this->abbreviation = $abbreviation;
 
         return $this;
     }

@@ -9,24 +9,24 @@
 {% endblock %}
 
 {% block body %}
-
+    {% include('modal.html.twig') %}
+    <div class="d-flex justify-content-end m-2">
+        <a href="{{ path('app_produit_epargne_new') }}" class="btn btn-primary btn-sm"> Nouveau produits </a>
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Code type</th>
                 <th>Code produit</th>
-                <th>Type produit</th>
                 <th>Nom produit</th>
                 <th>Status produit</th>
                 <th>Actions</th>
             </tr>
         </thead>
+
         <tbody class="jumbotron jumbotron-fluid">
         {% for produit_epargne in produit_epargnes %}
             <tr>
-                <td>{{ produit_epargne.codetype }}</td>
                 <td>{{ "%03d" | format(produit_epargne.id) }}</td>
-                <td>{{ produit_epargne.typeep }}</td>
                 <td>{{ produit_epargne.nomproduit }}</td>
                 <td>
                     <a class="btn btn-success btn-sm">{{ produit_epargne.isdesactive ? 'Active':'Desactive' }}</a>

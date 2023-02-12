@@ -57,31 +57,25 @@ class ProduitEpargneRepository extends ServiceEntityRepository
 
    public function Produit()
    {
+        $query = 'SELECT
+        p.nomproduit,
+        p.isdesactive,
+        p.id
+        FROM
+        App\Entity\ProduitEpargne p
+         ';
         $entityManager=$this->getEntityManager();
-        $query=$entityManager->createQuery(
-            'SELECT
-             p.nomproduit,
-             p.isdesactive,
-             p.id,
-             (t.NomTypeEp) AS typeep,
-             t.id AS codetype
-             FROM
-             App\Entity\ProduitEpargne p
-             INNER JOIN
-             App\Entity\TypeEpargne t 
-             WHERE
-             p.typeEpargne=t.id
-              ');
+        $query=$entityManager->createQuery($query);
 
               return $query->getResult();
     }
 
     public function findByApiProduit($id)
     {
-        $query = " SELECT p.nomproduit,p.id Produit_id,(t.NomTypeEp) AS typeep, t.id AS TypeProd 
+        $query = " SELECT
+             p.nomproduit,
+             p.id Produit_id
         FROM App\Entity\ProduitEpargne p 
-        INNER JOIN App\Entity\TypeEpargne t 
-        WITH t.id = p.typeEpargne 
         WHERE p.id = $id";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();

@@ -72,11 +72,12 @@ class ProduitEpargneController extends AbstractController
     #[Route('/{id}', name: 'app_produit_epargne_delete', methods: ['POST'])]
     public function delete(Request $request, ProduitEpargne $produitEpargne, ProduitEpargneRepository $produitEpargneRepository): Response
     {
+        // dd("alert");
         if ($this->isCsrfTokenValid('delete'.$produitEpargne->getId(), $request->request->get('_token'))) {
             $produitEpargneRepository->remove($produitEpargne, true);
         }
 
-        $this->addFlash('success', "Suppression de produit epargne :  ' ".$produitEpargne->getNomproduit()." ' reussite!!");
+        $this->addFlash('info', "Suppression de produit epargne :  ' ".$produitEpargne->getNomproduit()." ' reussite!!");
         return $this->redirectToRoute('app_produit_epargne_index', [], Response::HTTP_SEE_OTHER);
     }
 }
