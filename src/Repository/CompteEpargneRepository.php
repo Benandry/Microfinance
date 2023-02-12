@@ -447,7 +447,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         WITH ce.codeep = i.codeclient
         WHERE ce.codeep = '$code'
         GROUP BY ce.codeepargne
-        ORDER BY ce.datedebut DESC
+        ORDER BY ce.id DESC
       --  AND t.id = (SELECT MAX(tr.id) FROM App\Entity\Transaction tr INNER JOIN App\Entity\CompteEpargne c  WITH tr.codeepargneclient = c.codeepargne  WHERE ce.codeep = '$code' )
         "
         );
@@ -840,9 +840,35 @@ class CompteEpargneRepository extends ServiceEntityRepository
         return $stmt;
     }
 
+    /**
+     * Cette foncion permet de get l'iformatio du client pour ouvrir un compte epargne
+     *
+     * @param int $id id du client
+     * @return void
+     */
+    public function getInfoClient($id){
+        $query = " SELECT 
+        i.id,
+        i.nom_client,
+        i.prenom_client,
+        i.codeclient
+        FROM App\Entity\Individuelclient i
+        WHERE i.id = $id";
+       
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
     
-    public function compteGroupeExiste(){
-        
+        return $stmt;
+    }
+
+    public function compteEpargneVerify($compte_epargne){
+        $query = " SELECT 
+        ce.codeepargne
+        FROM App\Entity\CompteEpargne ce 
+        WHERE  ce.codeepargne = '$compte_epargne'";
+       
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+    
+        return $stmt;
     }
     
 }

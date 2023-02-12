@@ -26,7 +26,6 @@ import './api/jquery-3.6.0'
 import './api/jquery-ui'
 import './api/all_rapport'
 import './api/compte_epargne/compt_epargne_groupe'
-import './api/compte_epargne/ouvrir_compte_epargne_client'
 import './api/compte_epargne/compte_epargne_individuel'
 import './api/compte_epargne/api_rapport_releve'
 import './api/compte_epargne/api_transfert';

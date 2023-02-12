@@ -31,10 +31,17 @@ class CompteEpargneController extends AbstractController
     {
         //Information de client
         $code = $request->query->get('code');
-        $nom = $request->query->get('nom');
-        $prenom = $request->query->get('prenom');
 
-        $compte_existe=$compteEpargneRepository->compteClientCourant($code);
+        /**
+         * Information du client (nom,prennom,code client)
+         */
+
+        $info = $compteEpargneRepository->getInfoClient($code)[0];
+
+        // $nom = $request->query->get('nom');
+        // $prenom = $request->query->get('prenom');
+
+        $compte_existe=$compteEpargneRepository->compteClientCourant($info['codeclient']);
 
         $compteEpargne = new CompteEpargne();
         $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
@@ -42,22 +49,29 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($compteEpargne);
-            $compteEpargneRepository->add($compteEpargne, true);
-            $this->addFlash('success', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
-            return $this->redirectToRoute('app_compte_epargne_new', [
-                'code' => $code,
-                'nom' => $nom,
-                'prenom' => $prenom,
-            ], Response::HTTP_SEE_OTHER);
+            /** Verifier que le compte est deja exister ou pas */
+
+            //verifier dans la bas e de donne si le compte est deja existeE ou pas
+            $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
+            if ($verify_compte_epargne) {
+                /*** On ne peut pas creer un compte epargne car le numero de compte epargne existe */
+                $this->addFlash('error', "On ne peut pas creer un compte epargne car le numero ".$compteEpargne->getCodeepargne()." deja existe ");
+                return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
+
+                dd($verify_compte_epargne);
+            }else{
+                /** On peut creer un compte epargne */
+                $compteEpargneRepository->add($compteEpargne, true);
+                $this->addFlash('info', "Ajout de nouveau compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
+                return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
+            }
+
         }
         return $this->renderForm('Module_epargne/compte_epargne/new.html.twig', [
             'compte_epargne' => $compteEpargne,
             'form' => $form,
             'comptedujours'=>$compte_existe,
-            'code' => $code,
-            'nom' => $nom,
-            'prenom' => $prenom,
+            'info' => $info,
         ]);
     }
 

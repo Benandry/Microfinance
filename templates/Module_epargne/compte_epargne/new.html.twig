@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
-{% block title 'Ouvrir un compte du '~ nom %}
-{% block head 'Ouvrir un compte du '~ nom %}
+{% block title 'Ouvrir un compte du '~ info.nom_client %}
+{% block head 'Ouvrir un compte du '~ info.nom_client %}
 
 {% block body %}
 
@@ -11,15 +11,15 @@
         <div class="card mb-3">
             <div class="row text-secondary m-3">
                 <div class="col-xl-4 col-md-4 col-sm-4">
-                    <p><b> Nom Client :</b> <span id="nom"> {{ nom }}</span></p>   
-                    <p> <b>Prenom client : </b> <span id="prenom"> {{ prenom }}</span></p> 
+                    <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }}</span></p>   
+                    <p> <b>Prenom client : </b> <span id="prenom"> {{ info.prenom_client }}</span></p> 
                 </div>
                 
                 <div class="col-md-4 col-sm-4 m-auto">
                     <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Ouvrir compte epargne </h5></div>
                 </div>
                 <div class="col-xl-4 col-md-4 col-sm-4">
-                    <p> <b>Code client :</b> <span id="code_client"> {{ code }}</span></p> 
+                    <p> <b>Code client :</b> <span id="code_client"> {{ info.codeclient }}</span></p> 
                 </div>
             </div>              
         </div>
@@ -27,14 +27,14 @@
             <hr/>
         </div>
         {{ include('Module_epargne/compte_epargne/_form.html.twig') }}
-        <div style="display: none;">
+        <div style="display: block;">
             <p> Text ecrit : <span id="text"> </span> </p>
             <p> Text ecrit : <span id="code_text"> </span> </p>
         </div>
         <div class="fw-bold">
             <hr/>
         </div>
-        <h6 class="text-primary">Compte existant du client {{ nom }} {{ prenom }}</h6>
+        <h6 class="text-primary">Compte existant du client {{ info.prenom_client  }} {{ info.prenom_client  }}</h6>
         <table class="table mt-3">
             <thead>
                 <tr>
