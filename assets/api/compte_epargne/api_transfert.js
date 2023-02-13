@@ -5,7 +5,9 @@ const path = window.location.pathname
 $(document).ready(() =>{
     
     if (path === '/transfertep/new') {
-        $("#transfertep_codedestinateur").on('keyup',function(){
+        $("#transfertep_codedestinateur").on('change',function(){
+
+            console.log($(this).val());
             var url = "/api/transfert/"+$(this).val();
 
             $.ajax({
@@ -20,11 +22,12 @@ $(document).ready(() =>{
                         var element = result[i];
                         document.getElementById('solde_dest').innerHTML = parseInt(element.soldedestinateur);
                         document.getElementById('nom_dest').innerHTML = element.nom_client;
-                        document.getElementById('prenom_dest').innerHTML = element.prenom_client;
+                        document.getElementById('prenom_dest').innerHTML = element.prenom_client;  
+                        document.getElementById('code_dest').innerHTML = element.codedestinateur;  
 
                         $('#transfertep_nomdestinatare').val(element.nom_client);
                         $('#transfertep_prenomdestinataire').val(element.prenom_client);
-                        // $('#transfertep_soldedestinataire').val(parseInt(element.soldedestinateur));
+                        $('#transfertep_receveur').val(element.codedestinateur);
                     }
                 },
                 error: function (request, status, error) {
@@ -39,6 +42,7 @@ $(document).ready(() =>{
 
             var soldeenv = document.getElementById('solde_env').innerHTML;
             var soldeactuel = parseInt(soldeenv)-parseInt(Montant);
+
             $('#transfertep_soldeenvoyeur').val(soldeactuel);
 
             var soldedest = document.getElementById('solde_dest').innerHTML;
@@ -52,8 +56,8 @@ $(document).ready(() =>{
             //  $('#transfertep_soldedestinataire').val(parseInt(nouveausolde));
         });
 
-        $("#transfertep_codeenvoyeur").on('keyup',function(){
-
+        $("#transfertep_codeenvoyeur").on('change',function(){
+            console.log($(this).val());
             var url = "/api/transfert/"+$(this).val();
     
             console.log(url);
@@ -67,14 +71,15 @@ $(document).ready(() =>{
                     for (let i = 0; i < result.length; i++) {
                        
                         var element = result[i];
-                        // console.log(element);
+                        console.log(element);
                         document.getElementById('solde_env').innerHTML = +parseInt(element.soldedestinateur);
                         document.getElementById('nom_env').innerHTML = element.nom_client;
                         document.getElementById('prenom_env').innerHTML = element.prenom_client;
+                        document.getElementById('code_env').innerHTML = element.codedestinateur;
     
                         $('#transfertep_nomenvoyeur').val(element.nom_client);
                         $('#transfertep_prenomenvoyeur').val(element.prenom_client);
-                        // $('#transfertep_soldeenvoyeur').val(parseInt(element.soldedestinateur));
+                        $('#transfertep_expediteur').val(element.codedestinateur);
                         
                     }
                 },
@@ -84,14 +89,5 @@ $(document).ready(() =>{
     
             });    
         });
-
-        // $('#transfertep_montantdestinataire').on('keyup',function(){
-        //     var Montant=$(this).val();
-
-        //      var soldeenvoyeur = $('#soldeenvoyeur').text();
-        //      var nouveausolde=parseInt(soldeenvoyeur)-parseInt(Montant);
-    
-        //      $('#transfertep_soldeenvoyeur').val(nouveausolde);
-        // });
     }
 })

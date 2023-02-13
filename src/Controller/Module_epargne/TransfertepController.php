@@ -2,6 +2,7 @@
 
 namespace App\Controller\Module_epargne;
 
+use App\Entity\Transaction;
 use App\Entity\Transfertep;
 use App\Form\TransfertepType;
 use App\Repository\TransfertepRepository;
@@ -33,54 +34,43 @@ class TransfertepController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $transfertepRepository->add($transfertep, true);
-           // dd($form->getData());
-           
+            $transfertep->setCodetransactionT(random_int(1,1000000000));
             $entityManager=$doctrine->getManager();
 
-            $description=$transfertep->getDescriptionT();
-            $transfertep->setDescriptionT($description);
-
-            $piececomptable=$transfertep->getPieceComptableT();
-            $transfertep->setPieceComptableT($piececomptable);
-
-            $datetransaction=$transfertep->getDateTransactionT();
-            $transfertep->setDateTransactionT($datetransaction);
-
-            $montantdest=$transfertep->getMontantdestinataire();
-            $transfertep->setMontantdestinataire(-$montantdest);
-
-            $papeterie=$transfertep->getPapeterie();
-            $transfertep->setPapeterie($papeterie);
-
-            $commission=$transfertep->getCommission();
-            $transfertep->setCommission($commission);
-
-            $typeclient=$transfertep->getTypeClientT();
-            $transfertep->setTypeClientT($typeclient);
-
-            $soldedestinataire=$transfertep->getSoldedestinataire();
-            $transfertep->setSoldedestinataire($soldedestinataire);
-
-            $soldeenv=$transfertep->getSoldeenvoyeur();
-            $transfertep->setSoldeenvoyeur($soldeenv);
+            /**Compte expediteur Expediteur */
+            $transactionExp = new Transaction();
+            $transactionExp->setDescription($transfertep->getDescriptionT()." Compte expediteur ");
+            $transactionExp->setPieceComptable($transfertep->getPieceComptableT());
+            $transactionExp->setDateTransaction($transfertep->getDateTransactionT());
+            $transactionExp->setMontant(-$transfertep->getMontantdestinataire());
+            $transactionExp->setPapeterie($transfertep->getPapeterie());
+            $transactionExp->setCommission($transfertep->getCommission());
+            $transactionExp->setTypeClient($transfertep->getTypeClientT());
+            $transactionExp->setCodetransaction($transfertep->getCodetransactionT());
+            $transactionExp->setCodeepargneclient($form->get('expediteur')->getData());
+            $transactionExp->setSolde($form->get('soldeenvoyeur')->getData());
+            $entityManager->persist($transactionExp);
             
-            $code_transaction = random_int(1,1000000000);
-            $transfertep->setCodetransactionT($code_transaction);
 
-            $codedest=$transfertep->getCodedestinateur();
-            $transfertep->setCodedestinateur($codedest);
+             /**Compte expediteur Destinateur */
+             
+            $transfertep->setMontantdestinataire($transfertep->getMontantdestinataire());
+             $transactionDest = new Transaction();
+             $transactionDest->setDescription($transfertep->getDescriptionT()." Compte destinateur ");
+             $transactionDest->setPieceComptable($transfertep->getPieceComptableT());
+             $transactionDest->setDateTransaction($transfertep->getDateTransactionT());
+             $transactionDest->setMontant($transfertep->getMontantdestinataire());
+             $transactionDest->setPapeterie($transfertep->getPapeterie());
+             $transactionDest->setCommission($transfertep->getCommission());
+             $transactionDest->setTypeClient($transfertep->getTypeClientT());
+             $transactionDest->setCodetransaction($transfertep->getCodetransactionT());
+             $transactionDest->setCodeepargneclient($form->get('receveur')->getData());
+             $transactionDest->setSolde($form->get('soldedestinataire')->getData());
+             $entityManager->persist($transactionDest);
 
-            $codeenv=$transfertep->getCodeenvoyeur();
-            $transfertep->setCodeenvoyeur($codeenv);
-            
-            $entityManager->persist($transfertep);
-            
             $entityManager->flush();
-            //dd($form->getData());
-            $this->addFlash('success', " Transfert ".$transfertep->getMontantdestinataire()." Ar du  réussite!!!");
-
-             return $this->redirectToRoute('app_transfertep_new', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('info', " Le transfert du ".$form->get('expediteur')->getData()." ".$form->get('nomenvoyeur')->getData()."  ".$form->get('prenomenvoyeur')->getData(). "  vers ".$form->get('receveur')->getData()." ".$form->get('nomdestinatare')->getData()."  ".$form->get('prenomdestinataire')->getData()."  de ".abs($transfertep->getMontantdestinataire())." Ar du  réussite!!!");
+            return $this->redirectToRoute('app_transfertep_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/transfertep/new.html.twig', [

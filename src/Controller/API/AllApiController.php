@@ -98,13 +98,13 @@ class AllApiController extends AbstractController
     }
 
     //Api tranfert
-    #[Route('/api/transfert/{codeepargne}', name: 'app_api_transfert')]
+    #[Route('/api/transfert/{id}', name: 'app_api_transfert')]
 
-    public function api_transfert(TransactionRepository $transactionRepository,$codeepargne): Response
+    public function api_transfert(TransactionRepository $transactionRepository,$id): Response
     {
 
-        $api = $transactionRepository->api_transfert($codeepargne); 
-
+        $api = $transactionRepository->api_transfert($id); 
+        // dd($api);
         return new JsonResponse($api);
     }
 

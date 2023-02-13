@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TransactionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,8 +46,6 @@ class Transaction
     #[ORM\Column(length: 30,nullable:true)]
     private ?string $codeepargneclient = null;
 
-    #[ORM\Column(length: 30,nullable:true)]
-    private ?string $codeepargnegroupe = null;
 
     public function getId(): ?int
     {
@@ -168,18 +168,6 @@ class Transaction
     public function setCodeepargneclient(string $codeepargneclient): self
     {
         $this->codeepargneclient = $codeepargneclient;
-
-        return $this;
-    }
-
-    public function getCodeepargnegroupe(): ?string
-    {
-        return $this->codeepargnegroupe;
-    }
-
-    public function setCodeepargnegroupe(string $codeepargnegroupe): self
-    {
-        $this->codeepargnegroupe = $codeepargnegroupe;
 
         return $this;
     }

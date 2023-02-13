@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\CompteEpargne;
 use App\Entity\Transfertep;
+use App\Repository\CompteEpargneRepository;
 use Doctrine\DBAL\Types\FloatType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -83,16 +86,21 @@ class TransfertepType extends AbstractType
                 'required'=>false,
                 'label' => 'Code transaction:'
             ])
-            ->add('codedestinateur',TextType::class,[
-
-                'attr'=>[
-                    'class'=>'form-control'
-                ],
+            ->add('codedestinateur',EntityType::class,[
+                'class' => CompteEpargne ::class,
+                'query_builder' => function (CompteEpargneRepository $repo){
+                    return $repo->createQueryBuilder('c')
+                    ->join('App\Entity\Transaction', 'tr', 'WITH', 'c.codeepargne = tr.codeepargneclient');
+                },
+                'choice_label' => function ($c) {
+                    return $c->getCodeepargne();
+                },
+                'placeholder' => "Compte epargne destinateur ",
+                'autocomplete' => true,
                 'label'=> 'Compte epargne destinateur'
             ])
             ->add('nomdestinatare',TextType::class,[
                 'mapped'=>false,
-                'disabled'=>true,
                 'attr'=>[
                     'class'=>'form-control'
                 ],
@@ -101,24 +109,27 @@ class TransfertepType extends AbstractType
             ])
             ->add('prenomdestinataire',TextType::class,[
                 'mapped'=>false,
-                'disabled'=>true,
                 'attr'=>[
                     'class'=>'form-control'
                 ],
                 'required'=>false,
                 'label' => 'Prenom du destinataire :'
             ])
-            ->add('codeenvoyeur',TextType::class,[
-                'attr'=>[
-                    'class'=>'form-control',
-                    'label' => 'Compte epargne Envoyeur'
-                ],
-                'required'=>false,
-                'label' => 'Code envoyeur :'
+            ->add('codeenvoyeur',EntityType::class,[
+                'class' => CompteEpargne ::class,
+                'query_builder' => function (CompteEpargneRepository $repo){
+                    return $repo->createQueryBuilder('c')
+                    ->join('App\Entity\Transaction', 'tr', 'WITH', 'c.codeepargne = tr.codeepargneclient');
+                },
+                'choice_label' => function ($c) {
+                    return $c->getCodeepargne();
+                },
+                'placeholder' => "Compte epargne Envoyeur ",
+                'label' => 'Compte epargne envoyeur :',
+                'autocomplete' => true,
             ])
             ->add('nomenvoyeur',TextType::class,[
                 'mapped'=>false,
-                'disabled'=>true,
                 'attr'=>[
                     'class'=>'form-control'
                 ],
@@ -126,12 +137,27 @@ class TransfertepType extends AbstractType
             ])
             ->add('prenomenvoyeur',TextType::class,[
                 'mapped'=>false,
-                'disabled'=>true,
                 'attr'=>[
                     'class'=>'form-control'
                 ],
                 'label' => 'Prenom envoyeur :'
             ])
+
+            ->add('expediteur',TextType::class,[
+                'mapped'=>false,
+                'attr'=>[
+                    'class'=>'form-control'
+                ],
+            ])
+
+            ->add('receveur',TextType::class,[
+                'mapped'=>false,
+                'attr'=>[
+                    'class'=>'form-control'
+                ]
+            ])
+
+
         ;
     }
 

@@ -441,56 +441,46 @@ class TransactionRepository extends ServiceEntityRepository
         }
 
     // api pour les transferts
-    public function api_transfert($codeepargne){
-        $entityManager=$this->getEntityManager();
 
-        $query=$entityManager->createQuery(
-           'SELECT
-            --    transaction
-            MAX(tr.id) AS id,
-            tr.codeepargneclient AS codedestinateur,
-         --   tr.codeenvoyeur AS codeenv,
-            tr.codetransaction AS codetransac,
-            SUM(tr.Montant) AS soldedestinateur,
-            -- compte epargne
-            ce.codeep,
-            ce.codeepargne,
-            -- individuel client
-            i.nom_client,
-            i.prenom_client,
-            i.codeclient
-             FROM 
-             App\Entity\Transaction tr
-             INNER JOIN
-             App\Entity\CompteEpargne ce
-            INNER JOIN
-             App\Entity\Individuelclient i
-             WITH
-             tr.codeepargneclient = ce.codeepargne
-            --  AND
-            --  tr.codeenvoyeur=ce.codeepargne
-             AND
-             ce.codeep=i.codeclient
-             WHERE
-             tr.codeepargneclient =:codeepargne
-            --  OR
-            --  tr.codeenvoyeur =:codeepargne
-            ')
-            ->setParameter(':codeepargne',$codeepargne);
-             return $query->getResult();   
+    public function api_transfert($id){
+
+        $query = "SELECT
+        --    transaction
+        ce.id id_epargne,
+        MAX(tr.id) AS id,
+        tr.codeepargneclient AS codedestinateur,
+     --   tr.codeenvoyeur AS codeenv,
+        tr.codetransaction AS codetransac,
+        SUM(tr.Montant) AS soldedestinateur,
+        -- compte epargne
+        ce.codeep,
+        ce.codeepargne,
+        -- individuel client
+        i.nom_client,
+        i.prenom_client,
+        i.codeclient
+         FROM 
+         App\Entity\Transaction tr
+         INNER JOIN
+         App\Entity\CompteEpargne ce
+        INNER JOIN
+         App\Entity\Individuelclient i
+         WITH
+         tr.codeepargneclient = ce.codeepargne
+        --  AND
+        --  tr.codeenvoyeur=ce.codeepargne
+         AND
+         ce.codeep=i.codeclient
+         WHERE
+         ce.id = '$id'
+        ";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
     }
 
-
-//    public function findOneBySomeField($value): ?Transaction
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
+    
         public function soldeCurrent($code){
             $entityManager=$this->getEntityManager();
 

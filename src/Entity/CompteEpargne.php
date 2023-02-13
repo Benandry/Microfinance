@@ -46,15 +46,8 @@ class CompteEpargne
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $codeepargne = null;
 
-    #[ORM\Column(length: 255,nullable: true)]
-    private ?string $codegroupe = null;
-
     #[ORM\Column(length: 255)]
     private ?string $typeClient = null;
-
-
-
-
     
     public function __construct()
     {
@@ -235,18 +228,6 @@ class CompteEpargne
     public function setCodeepargne(?string $codeepargne): self
     {
         $this->codeepargne = $codeepargne;
-
-        return $this;
-    }
-
-    public function getCodegroupe(): ?string
-    {
-        return $this->codegroupe;
-    }
-
-    public function setCodegroupe(string $codegroupe): self
-    {
-        $this->codegroupe = $codegroupe;
 
         return $this;
     }
