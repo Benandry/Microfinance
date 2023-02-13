@@ -1,10 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    {# {% if showTable == false %}
+    {% if showTable == false %}
         Rapport solde
     {% else %}
-        Rapport solde  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
+        Rapport solde   jusq'a {{ one_date| date('d-m-Y') }} 
     {% endif %}
 {% endblock %}
 
@@ -12,8 +12,8 @@
     {% if showTable == false %}
 
     {% else %}
-        Rapport solde  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
-    {% endif %}#}
+        Rapport solde jusq'a {{ one_date| date('d-m-Y') }}
+    {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -26,7 +26,7 @@
         
                     <!-- Modal Header -->
                     <div class="modal-header titre_modal">
-                    <h4 class="modal-title text-center"> Rapport solde compte epargne  </h4>
+                    <h5 class="modal-title text-center"> Rapport solde compte epargne  </h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     {{ form_start(form1) }} 
@@ -36,21 +36,11 @@
                             <h4 class="text-center"> Date </h4>
                             {{ form_row(form1.date1) }}
                         </div>
-
-                        {# <div class="row text-center" id="two_date">
-                            <h4 class="text-center">Entre deux dates </h4>
-                            <div class="col-6 col-sm-6">
-                                {{ form_row(form1.Du) }}
-                            </div>
-                            <div class="col-6 col-sm-6">
-                                {{ form_row(form1.Au) }}
-                            </div>
-                        </div> #}
                     </div>
                 
                     <!-- Modal footer -->
                     <div class="modal-footer mb-0">
-                        {{ form_row(form1.Filtre) }}       
+                       <button type="submit" class="btn btn-primary"> Filtrer </button>      
                      </div>
                     {{ form_end(form1) }}
                 </div>
@@ -61,27 +51,25 @@
             <table class="table1 table table-bordered" style="margin-top:25px;">
                 <thead>
                     <tr>
-                        <th>Date transaction</th>
                         <th>Compte Epargne</th>
-                        {# <th>Description</th>  #}
-                        <th>Nom</th>
                         <th>Nom Produit</th>
+                        <th>Nom et prenom du client </th>
+                        <th>Type client </th>
                         <th>Solde</th>
                     </tr>
                 </thead>
                 <tbody class="jumbotron jumbotron-fluid" style="color:black;">
                 {% for CompteEpargne in compte_epargnes %}
                     <tr>
-                        <td>{{ CompteEpargne.DateTransaction | date('Y-m-d') }}</td>
                         <td>{{ CompteEpargne.codeepargne }}</td>
-                        {# <td>{{ CompteEpargne.Description }}</td>  #}
+                        <td> {{ CompteEpargne.nomproduit }}</td>
                         {% if CompteEpargne.typeClient == 'INDIVIDUEL' %}
                             <td>{{ CompteEpargne.nomclient }} {{ CompteEpargne.prenomclient }}</td>
                         {% else %}
                             <td>{{ CompteEpargne.nomGroupe }}</td>
                         {% endif %}
-                        <td> {{ CompteEpargne.nomproduit }}</td>
-                        <td>{{ CompteEpargne.soldes }} </td>
+                        <td> {{ CompteEpargne.typeClient }}</td>
+                        <td>{% if CompteEpargne.soldes %} {{ CompteEpargne.soldes|number_format(0,',', ' ') }}  {% else %} 0  {% endif %} Ar </td>
                     </tr>
                 {%  endfor %}
                 </tbody>

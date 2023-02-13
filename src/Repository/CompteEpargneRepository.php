@@ -161,8 +161,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         -- -- produit
         (p.id) as codeproduit,
         (p.nomproduit) as nomproduit,
-        -- -- type
-        (te.id) as codetypeepargne,
+
         -- -- solde
         SUM(tr.Montant) as soldes,
         tr.DateTransaction,
@@ -170,6 +169,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         tr.typeClient
         FROM 
         App\Entity\CompteEpargne c
+
         LEFT JOIN
         App\Entity\Individuelclient i
         WITH
@@ -182,16 +182,14 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
         INNER JOIN
         App\Entity\ProduitEpargne p
-        INNER JOIN
-        App\Entity\TypeEpargne te
+        With
+        c.produit = p.id
+
         INNER JOIN
         App\Entity\Transaction tr
         WITH
-        c.produit = p.id
-        AND
-        p.typeEpargne = te.id
-        AND
         tr.codeepargneclient = c.codeepargne
+
         GROUP BY tr.codeepargneclient
         '
         );
@@ -344,51 +342,45 @@ class CompteEpargneRepository extends ServiceEntityRepository
             $query=$entityManager->createQuery(
                 'SELECT DISTINCT
                     -- compte epargne
-                    c.id,
-                    c.codeepargne,
-                    c.codeep,
-                    -- individuel client
-                    (i.id) as codeclient,
-                    (i.nom_client) AS nomclient,
-                    (i.prenom_client) AS prenomclient,
-                     -- groupe
-                     g.nomGroupe,
-                    -- -- produit
-                    (p.id) as codeproduit,
-                    (p.nomproduit) as nomproduit,
-                    -- -- type
-                    (te.id) as codetypeepargne,
-                    -- -- solde
-                    SUM(tr.Montant) as soldes,
-                    tr.DateTransaction,
-                    tr.Description,
-                    tr.typeClient
+                    ce.datedebut,
+                    ce.codeepargne,
+                    ce.typeClient,
+                    -- INDIVIDUEL CLIENT
+                    i.nom_client nomclient ,
+                    i.prenom_client prenomclient ,
+                    -- GROUPE
+                    g.nomGroupe,
+                    -- PRODUIT EPARGNE
+                    p.nomproduit,
+                    -- TYPE EPARGNE
+                    SUM(tr.Montant) soldes,
+                    tr.DateTransaction 
+
                     FROM 
-                    App\Entity\CompteEpargne c
+                    App\Entity\CompteEpargne ce
                     LEFT JOIN
                     App\Entity\Individuelclient i
                     WITH
-                    c.codeep = i.codeclient
+                    ce.codeep = i.codeclient
 
                     LEFT JOIN
                     App\Entity\Groupe g
                     WITH
-                    c.codeep = g.codegroupe
+                    ce.codeep = g.codegroupe
 
                     INNER JOIN
                     App\Entity\ProduitEpargne p
-                    INNER JOIN
-                    App\Entity\TypeEpargne te
-                    INNER JOIN
-                    App\Entity\Transaction tr
                     WITH
-                    c.produit = p.id
-                    AND
-                    p.typeEpargne = te.id
-                    AND
-                    tr.codeepargneclient = c.codeepargne
-                AND tr.DateTransaction <= :Du
-                GROUP BY tr.codeepargneclient
+                    ce.produit = p.id
+
+                    LEFT JOIN
+                    App\Entity\Transaction tr
+                    with tr.codeepargneclient = ce.codeepargne
+                    WHERE
+                    ce.datedebut <= :Du 
+
+                    GROUP BY ce.codeepargne
+
                 ')
                 ->setParameter(':Du',$Du)
                 ;
@@ -591,8 +583,8 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 -- GROUPE
                 g.nomGroupe,
                 -- PRODUIT EPARGNE
-                p.nomproduit
-                -- TYPE EPARGNE
+                p.nomproduit,
+                SUM(tr.Montant) solde
                 
                 FROM
                 App\Entity\CompteEpargne ce
@@ -610,8 +602,15 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 App\Entity\ProduitEpargne p
                 WITH
                 ce.produit = p.id
+
+                LEFT JOIN
+                App\Entity\Transaction tr
+                with tr.codeepargneclient = ce.codeepargne
                 WHERE
-                ce.datedebut BETWEEN :datedebut AND :datefin
+                ce.datedebut BETWEEN :datedebut AND :datefin 
+
+                 GROUP BY ce.codeepargne
+               
                     '
                 )
                 ->setParameter(':datedebut',$datedebut)
@@ -640,9 +639,9 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 -- GROUPE
                 g.nomGroupe,
                 -- PRODUIT EPARGNE
-                p.nomproduit
+                p.nomproduit,
                 -- TYPE EPARGNE
-                
+                SUM(tr.Montant) solde
                 FROM
                 App\Entity\CompteEpargne ce
                 LEFT JOIN
@@ -657,10 +656,38 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
                 INNER JOIN
                 App\Entity\ProduitEpargne p
+                WITHApp\Entity\CompteEpargne ce
+                LEFT JOIN
+                App\Entity\Individuelclient i
+                WITH
+                ce.codeep = i.codeclient
+
+                LEFT JOIN
+                App\Entity\Groupe g
+                WITH
+                ce.codeep = g.codegroupe
+
+                INNER JOIN
+                App\Entity\ProduitEpargne p
                 WITH
                 ce.produit = p.id
+
+                LEFT JOIN
+                App\Entity\Transaction tr
+                with tr.codeepargneclient = ce.codeepargne
                 WHERE
                  ce.datedebut <= :datearrete 
+
+                 GROUP BY ce.codeepargne
+                ce.produit = p.id
+
+                LEFT JOIN
+                App\Entity\Transaction tr
+                with tr.codeepargneclient = ce.codeepargne
+                WHERE
+                 ce.datedebut <= :datearrete 
+
+                 GROUP BY ce.codeepargne
                  -- AND
                  -- ce.datedebut <=:datearrete
                      '

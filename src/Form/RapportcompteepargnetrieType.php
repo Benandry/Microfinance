@@ -16,17 +16,17 @@ class RapportcompteepargnetrieType extends AbstractType
             ->add('datedebut',DateType::class,[
                 'widget'=>'single_text',
                 'required'=>false,
-                'label' => 'Du : '
+                'label' => false
             ])
             ->add('datefin',DateType::class,[
                 'widget'=>'single_text',
                 'required'=>false,
-                'label' => ' Au : '
+                'label' => false
             ])
             ->add('datearrete',DateType::class,[
                 'widget'=>'single_text',
                 'required'=>false,
-                'label' => 'date arretée : '
+                'label' => false
             ])
             ->add('Filtre',SubmitType::class)
         ;

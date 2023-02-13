@@ -14,6 +14,7 @@ use App\Repository\GroupeRepository;
 use App\Repository\TransactionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,53 +26,32 @@ class RapportController extends AbstractController
     public function index(Request $request,CompteEpargneRepository $compteEpargneRepository,AgenceRepository $agenceRepos): Response
     {     
         $rapporttransaction=$compteEpargneRepository->rapportsolde();
-
         // Filtre entre deux date
 
         $showTable_ = false;
-        $date_du_ = '';
-        $date_au_ = '';
-        $date1 = '';
-        $date_2 = false;
-        $date_1 = false;
+        $data = '';
 
-        $form1=$this->createForm(FiltreRapportSoldeType::class);
-        $rapportsolde=$form1->handleRequest($request);
+        $form1=$this->createFormBuilder()
+            ->add('date1',DateType::class,[
+                'widget'=>'single_text',
+                'label'=> false,
+            ])
+            ->getForm();
+
+        $form1->handleRequest($request);
 
         if ($form1->isSubmitted() && $form1->isValid()){
             $showTable_ = true;
-
-            $data = $form1->getData();
-            // $date_du_ = $data['Du'];
-            // $date_au_ = $data['Au'];
-            $date1 = $data['date1'];
-
-            
-            if ($date1 != null) {
-               $date_1 = true;
-                $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete($date1);
-                
-            }
-            else {
-                $date_2 = true;
-                $rapporttransaction=$compteEpargneRepository->FiltreRapportSolde($date_du_,$date_au_);
-            }
-          
+            $data = $form1->getData()['date1'];
+            $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete($data); 
         }
 
-        //dd($date_1);
-
-        // Filtre pandant une journee
         return $this->renderForm('rapport/RapportSolde.html.twig', [
             'compte_epargnes' =>$rapporttransaction,
             'agences'=>$agenceRepos->findAll(),
             'form1'=>$form1,
             'showTable' => $showTable_,
-            // 'du' => $date_du_,
-            // 'au' => $date_au_,
-            'one_date' => $date1,
-            'date_1' => $date_1,
-            'date_2' => $date_2,
+            'one_date' => $data,
         ]);
     }
 
@@ -131,12 +111,11 @@ class RapportController extends AbstractController
     {
 
         $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne();
-        // dd($rapport_compteepargne);
 
-        
         $compteepargne = new CompteEpargne();
         $form=$this->createForm(RapportcompteepargnetrieType::class);
-        $filtrecompteep=$form->handleRequest($request);
+
+        $form->handleRequest($request);
 
         $showTable_=false;
 
@@ -159,7 +138,7 @@ class RapportController extends AbstractController
             if ($date1 != null){
                 $date_1 = true;
                 $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
-
+                // dd($rapport_compteepargne);
             }
             else{
                 $date_2 = true;
