@@ -5,10 +5,14 @@ $(document).ready(function(){
     // L'evenememnt se  produit a l'interieur de cette chemin
     if( path === '/configuration/credit/new'){
 
+        // Avant les deux champs sont hide()
         $('#configuration_credit_TauxGarantieMaterielle').hide();
         $('#configuration_credit_TauxGarantieFinanciere').hide();
         
+        // Si l'utilisateur coche sur garantie materielle 
         $('#configuration_credit_GarantieMaterielle').on('click',function(){
+            
+            // Le champ taux garantie materielle apparaisse
             $('#configuration_credit_TauxGarantieMaterielle').show();
         });
 
