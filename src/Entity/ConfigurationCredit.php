@@ -24,11 +24,19 @@ class ConfigurationCredit
     #[ORM\Column(nullable: true)]
     private ?float $InteretNormal = null;
 
+<<<<<<< HEAD
     // #[ORM\Column(nullable: true)]
     // private ?float $InteretDegressif = null;
 
     // #[ORM\Column(nullable: true)]
     // private ?float $InteretLineaire = null;
+=======
+    #[ORM\Column(nullable: true)]
+    private ?float $InteretDegressif = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $InteretLineaire = null;
+>>>>>>> f47fbee (reconfiguration credit)
 
     #[ORM\Column(nullable: true)]
     private ?bool $GarantieMoral = null;
@@ -85,9 +93,12 @@ class ConfigurationCredit
     #[ORM\Column(length: 255)]
     private ?string $Methode = null;
 
+<<<<<<< HEAD
     #[ORM\Column(nullable: true)]
     private ?float $Tranche = null;
 
+=======
+>>>>>>> f47fbee (reconfiguration credit)
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +140,7 @@ class ConfigurationCredit
         return $this;
     }
 
+<<<<<<< HEAD
     // public function getInteretDegressif(): ?float
     // {
     //     return $this->InteretDegressif;
@@ -152,6 +164,31 @@ class ConfigurationCredit
 
     //     return $this;
     // }
+=======
+    public function getInteretDegressif(): ?float
+    {
+        return $this->InteretDegressif;
+    }
+
+    public function setInteretDegressif(?float $InteretDegressif): self
+    {
+        $this->InteretDegressif = $InteretDegressif;
+
+        return $this;
+    }
+
+    public function getInteretLineaire(): ?float
+    {
+        return $this->InteretLineaire;
+    }
+
+    public function setInteretLineaire(?float $InteretLineaire): self
+    {
+        $this->InteretLineaire = $InteretLineaire;
+
+        return $this;
+    }
+>>>>>>> f47fbee (reconfiguration credit)
 
     public function isGarantieMoral(): ?bool
     {
@@ -368,6 +405,7 @@ class ConfigurationCredit
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function getTranche(): ?float
     {
@@ -380,4 +418,6 @@ class ConfigurationCredit
 
         return $this;
     }
+=======
+>>>>>>> f47fbee (reconfiguration credit)
 }

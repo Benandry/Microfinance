@@ -31,8 +31,9 @@ class ConfigurationCreditController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $configurationCreditRepository->save($configurationCredit, true);
 
-            $this->addFlash('success', 'Configuration du produit credit!'.$configurationCredit->getProduitCredit().'avec success !');
+            $this->addFlash('success', 'Configuration du produit credit avec success !');
             // return $this->redirectToRoute('app_configuration_credit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_configuration_credit_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('configuration_credit/new.html.twig', [

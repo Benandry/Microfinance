@@ -5,6 +5,7 @@ $(document).ready(function(){
     // L'evenememnt se  produit a l'interieur de cette chemin
     if( path === '/configuration/credit/new'){
 
+<<<<<<< HEAD
         // Avant les deux champs sont hide()
         $('#configuration_credit_TauxGarantieMaterielle').hide();
         $('#configuration_credit_TauxGarantieFinanciere').hide();
@@ -20,6 +21,16 @@ $(document).ready(function(){
         $('#configuration_credit_GarantieFinanciere').on('click',function(){
             
             // Le champ taux garantie financiere apparaisse
+=======
+        $('#configuration_credit_TauxGarantieMaterielle').hide();
+        $('#configuration_credit_TauxGarantieFinanciere').hide();
+        
+        $('#configuration_credit_GarantieMaterielle').on('click',function(){
+            $('#configuration_credit_TauxGarantieMaterielle').show();
+        });
+
+        $('#configuration_credit_GarantieFinanciere').on('click',function(){
+>>>>>>> f47fbee (reconfiguration credit)
             $('#configuration_credit_TauxGarantieFinanciere').show();
         });
         

@@ -23,7 +23,11 @@ class ConfigurationCreditType extends AbstractType
                 'placeholder'=>'Choisir produit credit'
             ])
             ->add('Methode',ChoiceType::class,[
+<<<<<<< HEAD
                 'placeholder'=>'Choisir Methode',
+=======
+                'placeholder'=>'Choisir produit',
+>>>>>>> f47fbee (reconfiguration credit)
                 'choices'=>[
                     'Lineaire'=>'Lineaire',
                     'Degressif'=>'Degressif'
@@ -33,9 +37,12 @@ class ConfigurationCreditType extends AbstractType
                 'label'=>'Montant Maximum',
                 'required'=>false,
             ])
+<<<<<<< HEAD
             ->add('Tranche',IntegerType::class,[
                 'required'=>false
             ])
+=======
+>>>>>>> f47fbee (reconfiguration credit)
             ->add('MontantMin',IntegerType::class,[
                 'label'=>'Montant Minimum',
                 'required'=>false,
@@ -44,6 +51,7 @@ class ConfigurationCreditType extends AbstractType
                 'label'=>'Interet Normal',
                 'required'=>false,
             ])
+<<<<<<< HEAD
             // ->add('InteretDegressif',IntegerType::class,[
             //     'label'=>'Interet Degressif'
             // ])
@@ -51,6 +59,15 @@ class ConfigurationCreditType extends AbstractType
             //     'label'=>'Interet Lineaire',
             //     'required'=>false,
             // ])
+=======
+            ->add('InteretDegressif',IntegerType::class,[
+                'label'=>'Interet Degressif'
+            ])
+            ->add('InteretLineaire',IntegerType::class,[
+                'label'=>'Interet Lineaire',
+                'required'=>false,
+            ])
+>>>>>>> f47fbee (reconfiguration credit)
             ->add('GarantieMoral',RadioType::class,[
                 'label'=>'Garantie Moral',
                 'required'=>false,
