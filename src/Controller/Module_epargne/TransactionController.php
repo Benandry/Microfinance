@@ -31,7 +31,6 @@ class TransactionController extends AbstractController
     public function index(Request $request,AgenceRepository $agenceRepository,TransactionRepository $transactionRepository): Response
     {
         $transaction=$transactionRepository->RapportTransaction();
-        // dd($transaction);
         #--------------Date afficher ---------------------------#
         $date_1 = false;
         $date_2 = false;
@@ -46,9 +45,7 @@ class TransactionController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $afficheTab_ = true;
-
             $data = $rapporttransaction->getData();
-
             
             $date1 = $data['date1'];
             $date_du_ = $data['Du'];
@@ -62,7 +59,6 @@ class TransactionController extends AbstractController
                 // Entre deux dates ///////////
                 $date_2 = true;
                 $transaction=$transactionRepository->FiltreRapportSolde($date_du_,$date_au_);
-                
             }
         }
 

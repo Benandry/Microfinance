@@ -106,8 +106,6 @@ class TransactionRepository extends ServiceEntityRepository
         -- produit
         (p.id) as codeproduit,
         (p.nomproduit) as nomproduit,
-        -- type
-        (te.id) as codetypeepargne,
         -- solde
         (tr.Montant) as soldes,
         tr.DateTransaction,
@@ -131,16 +129,11 @@ class TransactionRepository extends ServiceEntityRepository
 
         INNER JOIN
         App\Entity\ProduitEpargne p
-        INNER JOIN
-        App\Entity\TypeEpargne te
+        with c.produit = p.id
+        
         INNER JOIN
         App\Entity\Transaction tr
-        WITH
-        c.produit = p.id
-        AND
-        p.typeEpargne = te.id
-        AND
-        tr.codeepargneclient = c.codeepargne
+        WITH tr.codeepargneclient = c.codeepargne
         ');
 
              return $query->getResult();
@@ -156,18 +149,16 @@ class TransactionRepository extends ServiceEntityRepository
         c.id,
         c.codeepargne,
         c.codeep,
-        -- individuel client
+        -- -- individuel client
         (i.id) as codeclient,
         (i.nom_client) AS nomclient,
         (i.prenom_client) AS prenomclient,
-         -- groupe
+        --  -- groupe
          g.nomGroupe,
-        -- produit
+        -- -- produit
         (p.id) as codeproduit,
         (p.nomproduit) as nomproduit,
-        -- type
-        (te.id) as codetypeepargne,
-        -- solde
+        -- -- solde
         (tr.Montant) as soldes,
         tr.DateTransaction,
         tr.Description,
@@ -190,25 +181,14 @@ class TransactionRepository extends ServiceEntityRepository
 
         INNER JOIN
         App\Entity\ProduitEpargne p
-        INNER JOIN
-        App\Entity\TypeEpargne te
+        WITH c.produit = p.id 
+
         INNER JOIN
         App\Entity\Transaction tr
-        WITH
-        c.produit = p.id
-        AND
-        p.typeEpargne = te.id
-        AND
-        tr.codeepargneclient = c.codeepargne
-        AND
-             c.codeep = i.codeclient
-             AND
-             tr.DateTransaction
-             BETWEEN :Du AND :Au
-            ')
-            ->setParameter(':Du',$Du)
-            ->setParameter(':Au',$Au)
-            ;
+        WITH  tr.codeepargneclient = c.codeepargne
+        WHERE tr.DateTransaction BETWEEN :Du AND :Au ')
+        ->setParameter(':Du',$Du)
+        ->setParameter(':Au',$Au);
 
              return $query->getResult();
     }
@@ -231,8 +211,6 @@ class TransactionRepository extends ServiceEntityRepository
         -- produit
         (p.id) as codeproduit,
         (p.nomproduit) as nomproduit,
-        -- type
-        (te.id) as codetypeepargne,
         -- solde
         (tr.Montant) as soldes,
         tr.DateTransaction,
@@ -256,23 +234,16 @@ class TransactionRepository extends ServiceEntityRepository
 
         INNER JOIN
         App\Entity\ProduitEpargne p
-        INNER JOIN
-        App\Entity\TypeEpargne te
-        INNER JOIN
-        App\Entity\Transaction tr
         WITH
         c.produit = p.id
-        AND
-        p.typeEpargne = te.id
-        AND
-        tr.codeepargneclient = c.codeepargne
-             AND
-             tr.DateTransaction <= :Du
-            ')
-            ->setParameter(':Du',$Du)
-            ;
+        INNER JOIN
+        App\Entity\Transaction tr
+        WITH tr.codeepargneclient = c.codeepargne
 
-             return $query->getResult();
+        WHERE tr.DateTransaction <= :Du ')
+        ->setParameter(':Du',$Du);
+
+        return $query->getResult();
     }
 
     

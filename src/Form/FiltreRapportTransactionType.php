@@ -17,7 +17,7 @@ class FiltreRapportTransactionType extends AbstractType
                 'widget'=>'single_text',
                 'widget'=>'single_text',
                 'format' => 'yyyy-MM-dd',
-                'label'=>'date debut :',
+                'label'=> false,
                 'mapped'=>true,
                 'html5'=>true,
                 'required' =>false,
@@ -26,7 +26,7 @@ class FiltreRapportTransactionType extends AbstractType
                     'widget'=>'single_text',
                     'widget'=>'single_text',
                     'format' => 'yyyy-MM-dd',
-                    'label'=>'date fin :',
+                    'label'=> false,
                     'mapped'=>true,
                     'html5'=>true,
                     'required' =>false,
@@ -36,16 +36,16 @@ class FiltreRapportTransactionType extends AbstractType
                     'widget'=>'single_text',
                     'widget'=>'single_text',
                     'format' => 'yyyy-MM-dd',
-                    'label'=>'Une date :',
+                    'label'=> false,
                     'mapped'=>true,
                     'html5'=>true,
                     'required' =>false,
                 ])
             ->add('Filtre',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-primary btn-sm'
+                    'class'=>'btn btn-primary'
                 ],
-                'label' => "Rechercher"
+                'label' => "Filtrer"
             ])
         ;
     }
