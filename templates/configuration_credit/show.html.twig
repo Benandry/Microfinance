@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ConfigurationCredit{% endblock %}
+
+{% block body %}
+    <h1>ConfigurationCredit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ configuration_credit.id }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ configuration_credit.Montant }}</td>
+            </tr>
+            <tr>
+                <th>MontantMin</th>
+                <td>{{ configuration_credit.MontantMin }}</td>
+            </tr>
+            <tr>
+                <th>InteretNormal</th>
+                <td>{{ configuration_credit.InteretNormal }}</td>
+            </tr>
+            <tr>
+                <th>InteretDegressif</th>
+                <td>{{ configuration_credit.InteretDegressif }}</td>
+            </tr>
+            <tr>
+                <th>InteretLineaire</th>
+                <td>{{ configuration_credit.InteretLineaire }}</td>
+            </tr>
+            <tr>
+                <th>GarantieMoral</th>
+                <td>{{ configuration_credit.GarantieMoral ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GarantieMaterielle</th>
+                <td>{{ configuration_credit.GarantieMaterielle ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TauxGarantieMaterielle</th>
+                <td>{{ configuration_credit.TauxGarantieMaterielle }}</td>
+            </tr>
+            <tr>
+                <th>GarantieFinanciere</th>
+                <td>{{ configuration_credit.GarantieFinanciere ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TauxGarantieFinanciere</th>
+                <td>{{ configuration_credit.TauxGarantieFinanciere }}</td>
+            </tr>
+            <tr>
+                <th>FraisDossier</th>
+                <td>{{ configuration_credit.FraisDossier }}</td>
+            </tr>
+            <tr>
+                <th>FraisCommission</th>
+                <td>{{ configuration_credit.FraisCommission }}</td>
+            </tr>
+            <tr>
+                <th>FraisPapeterie</th>
+                <td>{{ configuration_credit.FraisPapeterie }}</td>
+            </tr>
+            <tr>
+                <th>PenaliteDiminutionIntrt</th>
+                <td>{{ configuration_credit.PenaliteDiminutionIntrt }}</td>
+            </tr>
+            <tr>
+                <th>PenalitePayementAntcp</th>
+                <td>{{ configuration_credit.PenalitePayementAntcp }}</td>
+            </tr>
+            <tr>
+                <th>RetardPourcentage</th>
+                <td>{{ configuration_credit.RetardPourcentage }}</td>
+            </tr>
+            <tr>
+                <th>PayementAnticipe</th>
+                <td>{{ configuration_credit.PayementAnticipe }}</td>
+            </tr>
+            <tr>
+                <th>RetardForfaitaire</th>
+                <td>{{ configuration_credit.RetardForfaitaire }}</td>
+            </tr>
+            <tr>
+                <th>RetardPeriode</th>
+                <td>{{ configuration_credit.RetardPeriode }}</td>
+            </tr>
+            <tr>
+                <th>RetardPeriodeJour</th>
+                <td>{{ configuration_credit.RetardPeriodeJour ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>RetardPeriodeMois</th>
+                <td>{{ configuration_credit.RetardPeriodeMois ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_configuration_credit_index') }}">back to list</a>
+
+    <a href="{{ path('app_configuration_credit_edit', {'id': configuration_credit.id}) }}">edit</a>
+
+    {{ include('configuration_credit/_delete_form.html.twig') }}
+{% endblock %}

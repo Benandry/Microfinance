@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ConfigurationCredit index{% endblock %}
+
+{% block body %}
+    <h1>ConfigurationCredit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant</th>
+                <th>MontantMin</th>
+                <th>InteretNormal</th>
+                <th>InteretDegressif</th>
+                <th>InteretLineaire</th>
+                <th>GarantieMoral</th>
+                <th>GarantieMaterielle</th>
+                <th>TauxGarantieMaterielle</th>
+                <th>GarantieFinanciere</th>
+                <th>TauxGarantieFinanciere</th>
+                <th>FraisDossier</th>
+                <th>FraisCommission</th>
+                <th>FraisPapeterie</th>
+                <th>PenaliteDiminutionIntrt</th>
+                <th>PenalitePayementAntcp</th>
+                <th>RetardPourcentage</th>
+                <th>PayementAnticipe</th>
+                <th>RetardForfaitaire</th>
+                <th>RetardPeriode</th>
+                <th>RetardPeriodeJour</th>
+                <th>RetardPeriodeMois</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for configuration_credit in configuration_credits %}
+            <tr>
+                <td>{{ configuration_credit.id }}</td>
+                <td>{{ configuration_credit.Montant }}</td>
+                <td>{{ configuration_credit.MontantMin }}</td>
+                <td>{{ configuration_credit.InteretNormal }}</td>
+                <td>{{ configuration_credit.InteretDegressif }}</td>
+                <td>{{ configuration_credit.InteretLineaire }}</td>
+                <td>{{ configuration_credit.GarantieMoral ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_credit.GarantieMaterielle ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_credit.TauxGarantieMaterielle }}</td>
+                <td>{{ configuration_credit.GarantieFinanciere ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_credit.TauxGarantieFinanciere }}</td>
+                <td>{{ configuration_credit.FraisDossier }}</td>
+                <td>{{ configuration_credit.FraisCommission }}</td>
+                <td>{{ configuration_credit.FraisPapeterie }}</td>
+                <td>{{ configuration_credit.PenaliteDiminutionIntrt }}</td>
+                <td>{{ configuration_credit.PenalitePayementAntcp }}</td>
+                <td>{{ configuration_credit.RetardPourcentage }}</td>
+                <td>{{ configuration_credit.PayementAnticipe }}</td>
+                <td>{{ configuration_credit.RetardForfaitaire }}</td>
+                <td>{{ configuration_credit.RetardPeriode }}</td>
+                <td>{{ configuration_credit.RetardPeriodeJour ? 'Yes' : 'No' }}</td>
+                <td>{{ configuration_credit.RetardPeriodeMois ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_configuration_credit_show', {'id': configuration_credit.id}) }}">show</a>
+                    <a href="{{ path('app_configuration_credit_edit', {'id': configuration_credit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="23">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_configuration_credit_new') }}">Create new</a>
+{% endblock %}
