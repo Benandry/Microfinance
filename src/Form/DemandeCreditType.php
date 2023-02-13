@@ -40,9 +40,9 @@ class DemandeCreditType extends AbstractType
             ->add('TauxInteretAnnuel')
             ->add('NombreTranche')
             ->add('TypeTranche')
-            ->add('MethodeCalculInteret')
-            ->add('DiffereDePaiement')
-            ->add('CapitalDerniereEcheance')
+            // ->add('MethodeCalculInteret')
+            // ->add('DiffereDePaiement')
+            // ->add('CapitalDerniereEcheance')
             ->add('FondCredit',EntityType::class,[
                 'class'=>FondCredit::class,
                 'choice_label'=>'NomBailleurs',
@@ -71,8 +71,8 @@ class DemandeCreditType extends AbstractType
                 'label'=>" Categorie de categorie :",
                 'placeholder'=>'Choix Categorie',
             ])
-            ->add('CalculInteretDiffere')
-            ->add('CalculInteretJours')
+            // ->add('CalculInteretDiffere')
+            // ->add('CalculInteretJours')
             ->add('ProduitCredit',EntityType::class,[
                 'class'=>ProduitCredit::class,
                 'choice_label'=>'NomProduitCredit',
@@ -92,10 +92,10 @@ class DemandeCreditType extends AbstractType
             ])
             ->add('garant')
             ->add('garantie')
-            ->add('Valeur')
-            ->add('Type')
-            ->add('ValeurUnitaure')
-            ->add('Unite')
+            // ->add('Valeur')
+            // ->add('Type')
+            // ->add('ValeurUnitaure')
+            // ->add('Unite')
             ->add('ValeurTotal')
             ->add('cycles')
         ;

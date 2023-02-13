@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ConfigurationCredit{% endblock %}
+{% block title %}Configuration Credit{% endblock %}
 
 {% block body %}
-    <h1>Create new ConfigurationCredit</h1>
+    <h1>Configuration Credit</h1>
+
+      {{ include('modal.html.twig') }}
 
     {{ include('configuration_credit/_form.html.twig') }}
 

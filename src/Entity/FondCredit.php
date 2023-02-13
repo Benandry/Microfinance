@@ -93,34 +93,33 @@ class FondCredit
     }
 
     /**
-     * @return Collection<int, DemandeCredit>
      */
-    public function getDemandeCredits(): Collection
-    {
-        return $this->demandeCredits;
-    }
+    // public function getDemandeCredits(): Collection
+    // {
+    //     return $this->demandeCredits;
+    // }
 
-    public function addDemandeCredit(DemandeCredit $demandeCredit): self
-    {
-        if (!$this->demandeCredits->contains($demandeCredit)) {
-            $this->demandeCredits[] = $demandeCredit;
-            $demandeCredit->setFondCredit($this);
-        }
+    // public function addDemandeCredit(DemandeCredit $demandeCredit): self
+    // {
+    //     if (!$this->demandeCredits->contains($demandeCredit)) {
+    //         $this->demandeCredits[] = $demandeCredit;
+    //         $demandeCredit->setFondCredit($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeDemandeCredit(DemandeCredit $demandeCredit): self
-    {
-        if ($this->demandeCredits->removeElement($demandeCredit)) {
-            // set the owning side to null (unless already changed)
-            if ($demandeCredit->getFondCredit() === $this) {
-                $demandeCredit->setFondCredit(null);
-            }
-        }
+    // public function removeDemandeCredit(DemandeCredit $demandeCredit): self
+    // {
+    //     if ($this->demandeCredits->removeElement($demandeCredit)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($demandeCredit->getFondCredit() === $this) {
+    //             $demandeCredit->setFondCredit(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function __toString()
     {

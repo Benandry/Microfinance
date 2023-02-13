@@ -41,23 +41,23 @@ class DemandeCredit
     #[ORM\Column(length: 255)]
     private ?string $TypeTranche = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $MethodeCalculInteret = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $MethodeCalculInteret = null;
 
-    #[ORM\Column]
-    private ?int $DiffereDePaiement = null;
+    // #[ORM\Column]
+    // private ?int $DiffereDePaiement = null;
 
-    #[ORM\Column]
-    private ?float $CapitalDerniereEcheance = null;
+    // #[ORM\Column]
+    // private ?float $CapitalDerniereEcheance = null;
 
     #[ORM\Column(length: 255,nullable:true)]
     private ?string $SoldeEpargne = null;
 
-    #[ORM\Column(nullable:true)]
-    private ?bool $CalculInteretDiffere = null;
+    // #[ORM\Column(nullable:true)]
+    // private ?bool $CalculInteretDiffere = null;
 
-    #[ORM\Column(nullable:true)]
-    private ?bool $CalculInteretJours = null;
+    // #[ORM\Column(nullable:true)]
+    // private ?bool $CalculInteretJours = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
@@ -66,9 +66,9 @@ class DemandeCredit
     private ?string $statusApp = null;
 
 
-    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    #[ORM\Column(nullable:true)]
-    private ?FondCredit $FondCredit = null;
+    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    // #[ORM\Column(nullable:true)]
+    // private ?FondCredit $FondCredit = null;
 
     #[ORM\Column(length: 255,nullable:true)]
     private ?string $typeAmortissement = null;
@@ -204,41 +204,41 @@ class DemandeCredit
         return $this;
     }
 
-    public function getMethodeCalculInteret(): ?string
-    {
-        return $this->MethodeCalculInteret;
-    }
+    // public function getMethodeCalculInteret(): ?string
+    // {
+    //     return $this->MethodeCalculInteret;
+    // }
 
-    public function setMethodeCalculInteret(string $MethodeCalculInteret): self
-    {
-        $this->MethodeCalculInteret = $MethodeCalculInteret;
+    // public function setMethodeCalculInteret(string $MethodeCalculInteret): self
+    // {
+    //     $this->MethodeCalculInteret = $MethodeCalculInteret;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getDiffereDePaiement(): ?int
-    {
-        return $this->DiffereDePaiement;
-    }
+    // public function getDiffereDePaiement(): ?int
+    // {
+    //     return $this->DiffereDePaiement;
+    // }
 
-    public function setDiffereDePaiement(int $DiffereDePaiement): self
-    {
-        $this->DiffereDePaiement = $DiffereDePaiement;
+    // public function setDiffereDePaiement(int $DiffereDePaiement): self
+    // {
+    //     $this->DiffereDePaiement = $DiffereDePaiement;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getCapitalDerniereEcheance(): ?float
-    {
-        return $this->CapitalDerniereEcheance;
-    }
+    // public function getCapitalDerniereEcheance(): ?float
+    // {
+    //     return $this->CapitalDerniereEcheance;
+    // }
 
-    public function setCapitalDerniereEcheance(float $CapitalDerniereEcheance): self
-    {
-        $this->CapitalDerniereEcheance = $CapitalDerniereEcheance;
+    // public function setCapitalDerniereEcheance(float $CapitalDerniereEcheance): self
+    // {
+    //     $this->CapitalDerniereEcheance = $CapitalDerniereEcheance;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getSoldeEpargne(): ?string
     {
@@ -252,29 +252,29 @@ class DemandeCredit
         return $this;
     }
 
-    public function isCalculInteretDiffere(): ?bool
-    {
-        return $this->CalculInteretDiffere;
-    }
+    // public function isCalculInteretDiffere(): ?bool
+    // {
+    //     return $this->CalculInteretDiffere;
+    // }
 
-    public function setCalculInteretDiffere(bool $CalculInteretDiffere): self
-    {
-        $this->CalculInteretDiffere = $CalculInteretDiffere;
+    // public function setCalculInteretDiffere(bool $CalculInteretDiffere): self
+    // {
+    //     $this->CalculInteretDiffere = $CalculInteretDiffere;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function isCalculInteretJours(): ?bool
-    {
-        return $this->CalculInteretJours;
-    }
+    // public function isCalculInteretJours(): ?bool
+    // {
+    //     return $this->CalculInteretJours;
+    // }
 
-    public function setCalculInteretJours(bool $CalculInteretJours): self
-    {
-        $this->CalculInteretJours = $CalculInteretJours;
+    // public function setCalculInteretJours(bool $CalculInteretJours): self
+    // {
+    //     $this->CalculInteretJours = $CalculInteretJours;
 
-        return $this;
-    }
+    //     return $this;
+    // }
     public function __toString()
     {
         return $this->getId();
@@ -304,17 +304,17 @@ class DemandeCredit
         return $this;
     }
 
-    public function getFondCredit(): ?FondCredit
-    {
-        return $this->FondCredit;
-    }
+    // public function getFondCredit(): ?FondCredit
+    // {
+    //     return $this->FondCredit;
+    // }
 
-    public function setFondCredit(?FondCredit $FondCredit): self
-    {
-        $this->FondCredit = $FondCredit;
+    // public function setFondCredit(?FondCredit $FondCredit): self
+    // {
+    //     $this->FondCredit = $FondCredit;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getTypeAmortissement(): ?string
     {

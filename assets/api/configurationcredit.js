@@ -16,7 +16,10 @@ $(document).ready(function(){
             $('#configuration_credit_TauxGarantieMaterielle').show();
         });
 
+        // Si l'utilisateur coche sur garantie financiere 
         $('#configuration_credit_GarantieFinanciere').on('click',function(){
+            
+            // Le champ taux garantie financiere apparaisse
             $('#configuration_credit_TauxGarantieFinanciere').show();
         });
         
