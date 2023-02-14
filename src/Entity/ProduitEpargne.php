@@ -245,27 +245,27 @@ class ProduitEpargne
         return $this->demandeCredits;
     }
 
-    public function addDemandeCredit(DemandeCredit $demandeCredit): self
-    {
-        if (!$this->demandeCredits->contains($demandeCredit)) {
-            $this->demandeCredits[] = $demandeCredit;
-            $demandeCredit->setProduitEpargne($this);
-        }
+    // public function addDemandeCredit(DemandeCredit $demandeCredit): self
+    // {
+    //     if (!$this->demandeCredits->contains($demandeCredit)) {
+    //         $this->demandeCredits[] = $demandeCredit;
+    //         $demandeCredit->setProduitEpargne($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeDemandeCredit(DemandeCredit $demandeCredit): self
-    {
-        if ($this->demandeCredits->removeElement($demandeCredit)) {
-            // set the owning side to null (unless already changed)
-            if ($demandeCredit->getProduitEpargne() === $this) {
-                $demandeCredit->setProduitEpargne(null);
-            }
-        }
+    // public function removeDemandeCredit(DemandeCredit $demandeCredit): self
+    // {
+    //     if ($this->demandeCredits->removeElement($demandeCredit)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($demandeCredit->getProduitEpargne() === $this) {
+    //             $demandeCredit->setProduitEpargne(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, GarantieCredit>

@@ -70,29 +70,29 @@ class DemandeCredit
     // #[ORM\Column(nullable:true)]
     // private ?FondCredit $FondCredit = null;
 
-    #[ORM\Column(length: 255,nullable:true)]
-    private ?string $typeAmortissement = null;
+    // #[ORM\Column(length: 255,nullable:true)]
+    // private ?string $typeAmortissement = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $garant = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $garantie = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $garantie = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $Valeur = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $Valeur = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Type = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $Type = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $ValeurUnitaure = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $ValeurUnitaure = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $Unite = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $Unite = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $ValeurTotal = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $ValeurTotal = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?User $agent = null;
@@ -102,6 +102,9 @@ class DemandeCredit
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?CategorieCredit $categorieCredit = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CompteEpargne = null;
 
     public function getId(): ?int
     {
@@ -316,17 +319,17 @@ class DemandeCredit
     //     return $this;
     // }
 
-    public function getTypeAmortissement(): ?string
-    {
-        return $this->typeAmortissement;
-    }
+    // public function getTypeAmortissement(): ?string
+    // {
+    //     return $this->typeAmortissement;
+    // }
 
-    public function setTypeAmortissement(string $typeAmortissement): self
-    {
-        $this->typeAmortissement = $typeAmortissement;
+    // public function setTypeAmortissement(string $typeAmortissement): self
+    // {
+    //     $this->typeAmortissement = $typeAmortissement;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getGarant(): ?string
     {
@@ -340,77 +343,77 @@ class DemandeCredit
         return $this;
     }
 
-    public function getGarantie(): ?string
-    {
-        return $this->garantie;
-    }
+    // public function getGarantie(): ?string
+    // {
+    //     return $this->garantie;
+    // }
 
-    public function setGarantie(?string $garantie): self
-    {
-        $this->garantie = $garantie;
+    // public function setGarantie(?string $garantie): self
+    // {
+    //     $this->garantie = $garantie;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getValeur(): ?int
-    {
-        return $this->Valeur;
-    }
+    // public function getValeur(): ?int
+    // {
+    //     return $this->Valeur;
+    // }
 
-    public function setValeur(?int $Valeur): self
-    {
-        $this->Valeur = $Valeur;
+    // public function setValeur(?int $Valeur): self
+    // {
+    //     $this->Valeur = $Valeur;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getType(): ?string
-    {
-        return $this->Type;
-    }
+    // public function getType(): ?string
+    // {
+    //     return $this->Type;
+    // }
 
-    public function setType(?string $Type): self
-    {
-        $this->Type = $Type;
+    // public function setType(?string $Type): self
+    // {
+    //     $this->Type = $Type;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getValeurUnitaure(): ?string
-    {
-        return $this->ValeurUnitaure;
-    }
+    // public function getValeurUnitaure(): ?string
+    // {
+    //     return $this->ValeurUnitaure;
+    // }
 
-    public function setValeurUnitaure(?string $ValeurUnitaure): self
-    {
-        $this->ValeurUnitaure = $ValeurUnitaure;
+    // public function setValeurUnitaure(?string $ValeurUnitaure): self
+    // {
+    //     $this->ValeurUnitaure = $ValeurUnitaure;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getUnite(): ?int
-    {
-        return $this->Unite;
-    }
+    // public function getUnite(): ?int
+    // {
+    //     return $this->Unite;
+    // }
 
-    public function setUnite(?int $Unite): self
-    {
-        $this->Unite = $Unite;
+    // public function setUnite(?int $Unite): self
+    // {
+    //     $this->Unite = $Unite;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getValeurTotal(): ?int
-    {
-        return $this->ValeurTotal;
-    }
+    // public function getValeurTotal(): ?int
+    // {
+    //     return $this->ValeurTotal;
+    // }
 
-    public function setValeurTotal(?int $ValeurTotal): self
-    {
-        $this->ValeurTotal = $ValeurTotal;
+    // public function setValeurTotal(?int $ValeurTotal): self
+    // {
+    //     $this->ValeurTotal = $ValeurTotal;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getAgent(): ?User
     {
@@ -444,6 +447,18 @@ class DemandeCredit
     public function setCategorieCredit(?CategorieCredit $categorieCredit): self
     {
         $this->categorieCredit = $categorieCredit;
+
+        return $this;
+    }
+
+    public function getCompteEpargne(): ?string
+    {
+        return $this->CompteEpargne;
+    }
+
+    public function setCompteEpargne(?string $CompteEpargne): self
+    {
+        $this->CompteEpargne = $CompteEpargne;
 
         return $this;
     }

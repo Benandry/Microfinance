@@ -106,7 +106,6 @@ $(document).ready(function(){
                     contentType:"application/json; charset=utf-8",
                     data : JSON.stringify(codecredit),
                     success : function(content){
-                        console.log('hello world')
                         for(let j=0;j<content.length;j++){
                             var remboursement=content[j];
                             // console.log(remboursement);

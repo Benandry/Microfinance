@@ -24,11 +24,11 @@ class ConfigurationCredit
     #[ORM\Column(nullable: true)]
     private ?float $InteretNormal = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $InteretDegressif = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?float $InteretDegressif = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $InteretLineaire = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?float $InteretLineaire = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $GarantieMoral = null;
@@ -85,6 +85,9 @@ class ConfigurationCredit
     #[ORM\Column(length: 255)]
     private ?string $Methode = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $Tranche = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,29 +129,29 @@ class ConfigurationCredit
         return $this;
     }
 
-    public function getInteretDegressif(): ?float
-    {
-        return $this->InteretDegressif;
-    }
+    // public function getInteretDegressif(): ?float
+    // {
+    //     return $this->InteretDegressif;
+    // }
 
-    public function setInteretDegressif(?float $InteretDegressif): self
-    {
-        $this->InteretDegressif = $InteretDegressif;
+    // public function setInteretDegressif(?float $InteretDegressif): self
+    // {
+    //     $this->InteretDegressif = $InteretDegressif;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getInteretLineaire(): ?float
-    {
-        return $this->InteretLineaire;
-    }
+    // public function getInteretLineaire(): ?float
+    // {
+    //     return $this->InteretLineaire;
+    // }
 
-    public function setInteretLineaire(?float $InteretLineaire): self
-    {
-        $this->InteretLineaire = $InteretLineaire;
+    // public function setInteretLineaire(?float $InteretLineaire): self
+    // {
+    //     $this->InteretLineaire = $InteretLineaire;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function isGarantieMoral(): ?bool
     {
@@ -362,6 +365,18 @@ class ConfigurationCredit
     public function setMethode(string $Methode): self
     {
         $this->Methode = $Methode;
+
+        return $this;
+    }
+
+    public function getTranche(): ?float
+    {
+        return $this->Tranche;
+    }
+
+    public function setTranche(?float $Tranche): self
+    {
+        $this->Tranche = $Tranche;
 
         return $this;
     }
