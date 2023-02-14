@@ -4,11 +4,9 @@ const path = window.location.pathname;
 
 $(document).ready(() =>{
     if (path === '/Releve') {
-        $("#filtre_releve_Codeclient").on('keyup',function(){
+        $("#filtre_releve_Codeclient").on('change',function(){
 
             var url = "/releve/client/"+$(this).val();
-
-
             $.ajax({
                 url: url,
                 method: "GET",
@@ -19,10 +17,16 @@ $(document).ready(() =>{
                     for (let i = 0; i < result.length; i++) {
                        
                         var element = result[i];
-                            document.getElementById('codeclient').innerHTML = element.codeclient;
-                            document.getElementById('compte_epargne').innerHTML = $("#filtre_releve_Codeclient").val() ;
-                            document.getElementById('nom').innerHTML = element.nom_client;
-                            document.getElementById('prenom').innerHTML = element.prenom_client;
+                            console.log(element);
+                            document.getElementById('codeclient').innerHTML = element.codeepargne;
+                            if (element.typeClient === "INDIVIDUEL") {
+                                document.getElementById('nom').innerHTML = element.nom_client+" "+element.prenom_client;
+                            }
+                            else if(element.typeClient === "GROUPE") {
+                                document.getElementById('nom').innerHTML = element.nomGroupe
+                            }
+                            
+                            // document.getElementById('prenom').innerHTML = ;
                         
                             $('#filtre_releve_NomClient').val(element.nom_client);
                             $('#filtre_releve_PrenomClient').val(element.prenom_client);
@@ -34,43 +38,6 @@ $(document).ready(() =>{
                 }
     
             });    
-
-
-            /*********Suggestion par api ********* */
-            const url_api = '/api/epargne'
-            const value_input = $(this).val();
-
-            $.ajax({
-                url: url_api,
-                method: "GET",
-                dataType : "json",
-                contentType: "application/json; charset=utf-8",
-                data : JSON.stringify(),
-                success: function(result){
-                    
-                    const getValue = result.filter(i => i.code.toLocaleLowerCase().includes(value_input.toLocaleLowerCase()))
-
-                    var suggestion = ''
-                    if( value_input != '' ){
-                        getValue.forEach(resultItem =>{
-                        
-                        suggestion += `<div class="suggestion">${resultItem.code}</div>`
-                        })
-                    }else{
-                        suggestion = '<div class="suggestion"> Pas de compte epargne </div>'
-                    }
-                    
-                    document.getElementById('code_suggest').innerHTML = suggestion
-                
-            
-                },
-                error: function (request, status, error) {
-                    console.log(request.responseText);
-                }
-
-            });
-
-
         });  
     }
 })

@@ -68,27 +68,22 @@ class RapportController extends AbstractController
         /************Date **** */
         $du = 0;
         $au = 0;
-        $code = '';
-        $nom = '';
-        $prenom = '';
-        $code_cli = ' ';
+        $client = '';
         /******* */
 
         if($form->isSubmitted() && $form->isValid()){
 
+            /**Information client */
+            // dd($filtrereleve->getData()['Codeclient']->getCodeep());
+            $client = $transactionRepository->findClientByNumero($filtrereleve->getData()['Codeclient']->getCodeep())[0];
             $showTable_=true;
             $data = $filtrereleve->getData();
             $du = $data['Du'];
             $au = $data['Au'];
-            $code = $data['Codeclient'];
-            $nom = $data['NomClient'];
-            $prenom = $data['PrenomClient'];
-            $code_cli = $data['code'];
-            $releve=$transactionRepository->filtreReleve(
-                $filtrereleve->getData()['Du'],
-                $filtrereleve->getData()['Au'],
-                $filtrereleve->getData()['Codeclient']
-            );
+            $Codeclient = $filtrereleve->getData()['Codeclient']->getCodeepargne();
+            
+            $releve=$transactionRepository->filtreReleve($du,$au,$Codeclient);
+            // dd($releve);
         }
 
         return $this->renderForm('rapport/relevetransaction.html.twig', [
@@ -98,10 +93,7 @@ class RapportController extends AbstractController
             'showTable'=>$showTable_,
             'du' =>$du,
             'au'=> $au,
-            'Codeclient'=>$code,
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'code_cli' => $code_cli
+            'info'=>$client
         ]);
     }  
 

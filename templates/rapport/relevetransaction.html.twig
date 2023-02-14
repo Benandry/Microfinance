@@ -27,26 +27,11 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         {{ form_row((form.Codeclient)) }}
-                                        <div id="code_suggest"></div>
                                     </div>
 
-                                    <div style="display: block">
-                                        <div class="col-sm-4">
-                                            {{ form_row((form.NomClient)) }}
-                                        </div>
-                                        <div class="col-sm-4">
-                                            {{ form_row((form.PrenomClient)) }}
-                                        </div>
-                                        <div class="col-sm-4">
-                                            {{ form_row((form.code)) }}
-                                        </div>
-                                    </div>
-
-                                        <div class="col-sm-6">
-                                            <p class="fw-bolder">Compte epargne  : <span id="compte_epargne"></span></p>
+                                        <div class="col-sm-6 mt-3">
                                             <p class="fw-bolder">Code  : <span id="codeclient"></span></p>
                                             <p class="fw-bolder">Nom  : <span id="nom"></span></p>
-                                            <p class="fw-bolder">Prenom : <span id="prenom"></span></p>
                                         </div>
                                     
                                 </div>
@@ -77,32 +62,37 @@
                 <tr>
                     <td colspan="7" style="background-color: #fff; color: #000;">
                         <div class="row">
-                           <h5 class="ms-2 ">
-                             Relevé transaction
-                           </h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 col-sm-6">
-                                <div class="p-2">
-                                    Nom du client : {{ nom }}
-                                </div>
-                                <div class="p-2">
-                                    Prenom du client : {{ prenom }}
-                                </div>
-                                <div class="p-2">
-                                    Code client : {{ code_cli }}
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-6">
-                                <div class="p-2">
-                                    Compte Epargne :  {{ Codeclient }}
-                                </div>
-                                <div class="p-2">
-                                    Du : {{ du| date('d-m-Y') }} 
-                                    Au : {{ au| date('d-m-Y')  }}
+                            <div class="col-md-4 col-sm-4">
+                                <div class="d-flex justify-content-start">
+                                    <div>
+                                        <p> ONG Fidev  </p>
+                                            {% if info.typeClient == "GROUPE" %}
+                                                <p>Nom du client : <span class="fw-normal">{{ info.nomGroupe }} </span> </p>
+                                                <p> Email: <span class="fw-normal"> {{ info.email }}</span>  </p>
+                                            {% else %}
+                                                <p>Nom du client : <span class="fw-normal">{{ info.nom_client }} </span> </p>
+                                                <p>Prenom du client :<span class="fw-normal"> {{ info.prenom_client }} </span></p>
+                                            {% endif %}
+                                                <p> Code client : <span class="fw-normal">{{ info.codeclient }}</span> </p>
+                                        
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Relevé transaction</h5> </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="d-flex justify-content-end ">
+                                    <div>
+                                        <p> Compte Epargne :  {{ info.codeepargne }} <br/>
+                                            Du {{ du| date('d-m-Y') }} </br> 
+                                            Au {{ au|date('d/m/Y') }} <br/>
+                                        </p> 
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
                     </td> 
                 </tr>
                 <tr class="tr_head">
@@ -124,15 +114,13 @@
                     <td>{{ Transaction.codeepargneclient }}</td>
                     <td>{{ Transaction.Description }}</td>
                     <td>{{ Transaction.PieceComptable }}</td>
-                    <td>{{ Transaction.Montant }}</td>
-                      <td>
-                            {% if Transaction.Montant < 0 %}
-                                <span style="color: red;">{{ Transaction.solde }}</span>
-                            {% else %}
-                                <span style="color: green;">{{ Transaction.solde }}</span>
-                            {% endif %}
-                        </td>
-                    {# <td>{{ Transaction.solde }}</td> #}
+                    <td>
+                        {% if Transaction.Montant < 0 %}
+                            <span style="color: red;"> {{ Transaction.Montant|number_format(0,',', ' ') }}</span>
+                        {% else %}
+                            <span style="color: green;">{{ Transaction.Montant|number_format(0,',', ' ')  }}</span>
+                        {% endif %}
+                    <td>{{ Transaction.solde|number_format(0,',', ' ')  }}</td>
                 </tr>
                 {% endfor %}
 

@@ -349,14 +349,14 @@ class TransactionRepository extends ServiceEntityRepository
 
     public function rechercheReleveClient($code){
         $query = " SELECT 
-         g.codegroupe,
+        ce.id,
          g.nomGroupe,
         client.nom_client nom_client,
         client.prenom_client prenom_client,
-        client.codeclient,
         ce.datedebut ,
-        ce.codegroupeepargne,
         ce.codeepargne,
+        ce.typeClient,
+        ce.codeep,
         t.solde
         FROM
          App\Entity\CompteEpargne ce 
@@ -365,11 +365,12 @@ class TransactionRepository extends ServiceEntityRepository
         WITH t.codeepargneclient = ce.codeepargne
         LEFT JOIN
         App\Entity\Groupe g
-        WITH ce.codegroupe = g.codegroupe
-       LEFT JOIN
+        WITH ce.codeep = g.codegroupe
+        LEFT JOIN
         App\Entity\Individuelclient client
         WITH client.codeclient = ce.codeep
-        WHERE ce.codeepargne = '$code' ";
+        WHERE ce.id = '$code' 
+        GROUP BY ce.codeep ";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
 
@@ -528,6 +529,37 @@ class TransactionRepository extends ServiceEntityRepository
 
             return  $query->getResult();
         }
+
+
+        
+    public function findClientByNumero($code){
+
+        $query = "SELECT
+        i.nom_client,
+        i.prenom_client,
+        ce.codeep codeclient,
+        ce.codeepargne,
+        ce.typeClient,
+        g.nomGroupe,
+        g.email
+
+        FROM 
+        App\Entity\CompteEpargne ce
+         LEFT JOIN 
+         App\Entity\Individuelclient i
+         WITH  ce.codeep=i.codeclient
+
+         LEFT JOIN
+         App\Entity\Groupe g
+         WITH ce.codeep = g.codegroupe
+        
+         WHERE ce.codeep = '$code'
+        ";
+
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
+
+        return $statement;
+    }
 }
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\CompteEpargne;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -15,17 +17,14 @@ class FiltreReleveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Codeclient',SearchType::class,[
-                'label'=>'Compte epargne '
-            ])
-            ->add('NomClient',TextType::class,[
-                'label'=>'Nom Client',
-                ])
-            ->add('PrenomClient',TextType::class,[
-                'label'=>'Prenom Client'
-            ])
-            ->add('code',TextType::class,[
-                'label'=>'code'
+            ->add('Codeclient',EntityType::class,[
+                'class' => CompteEpargne::class,
+                'choice_label' => function ($c) {
+                    return $c->getCodeepargne();
+                },
+                'autocomplete' => true,
+                'label' => "Compte epargne client : ",
+                'placeholder' => "Choisissez le compte epargne :",
             ])
             ->add('Du',DateType::class,[
                 'widget'=>'single_text'

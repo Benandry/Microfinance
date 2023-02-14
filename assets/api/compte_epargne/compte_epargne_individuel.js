@@ -42,4 +42,41 @@ $(document).ready(() =>{
             $('#code_text').text(code_client_)        
         });
     }
+    else if(path === "/CompteEpargneDepot" || path ==='/depot/epargne/groupe' || path === '/transaction/retrait/individuel' || path === '/transaction/retrait/groupe'){
+
+        $('#form_code').on('change',() => {
+            var url = "/releve/client/"+$('#form_code').val();
+                
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify($(this).val()),
+                success: function(result){
+
+                    for (let i = 0; i < result.length; i++) {
+                       
+                        var element = result[i];
+                            // console.log(element);
+
+                            document.getElementById('compte_epargne').innerHTML = element.codeepargne;
+                            document.getElementById('codeclient').innerHTML = element.codeep;
+                            if (element.typeClient === "INDIVIDUEL") {
+                                document.getElementById('nom').innerHTML = element.nom_client+" "+element.prenom_client;
+                            }
+                            else if(element.typeClient === "GROUPE") {
+                                document.getElementById('nom').innerHTML = element.nomGroupe
+                            }
+                            
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+    
+            });    
+        })
+
+    }
 })

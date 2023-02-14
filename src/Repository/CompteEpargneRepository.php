@@ -656,19 +656,6 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
                 INNER JOIN
                 App\Entity\ProduitEpargne p
-                WITHApp\Entity\CompteEpargne ce
-                LEFT JOIN
-                App\Entity\Individuelclient i
-                WITH
-                ce.codeep = i.codeclient
-
-                LEFT JOIN
-                App\Entity\Groupe g
-                WITH
-                ce.codeep = g.codegroupe
-
-                INNER JOIN
-                App\Entity\ProduitEpargne p
                 WITH
                 ce.produit = p.id
 
@@ -678,19 +665,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 WHERE
                  ce.datedebut <= :datearrete 
 
-                 GROUP BY ce.codeepargne
-                ce.produit = p.id
-
-                LEFT JOIN
-                App\Entity\Transaction tr
-                with tr.codeepargneclient = ce.codeepargne
-                WHERE
-                 ce.datedebut <= :datearrete 
-
-                 GROUP BY ce.codeepargne
-                 -- AND
-                 -- ce.datedebut <=:datearrete
-                     '
+                 GROUP BY ce.codeepargne '
                  )
                  ->setParameter(':datearrete',$datearrete)
                  ;

@@ -156,7 +156,7 @@ class AllApiController extends AbstractController
     public  function rechercheReleveClientFunc(TransactionRepository $repo,$code)
     {
         $api= $repo->rechercheReleveClient($code);
-       // dd($api);
+    //    dd($api);
         return new JsonResponse($api);
     }
 

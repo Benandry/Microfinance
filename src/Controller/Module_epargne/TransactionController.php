@@ -107,6 +107,7 @@ class TransactionController extends AbstractController
 
             if($transaction->getMontant() > 0){
                 $transaction->setCodetransaction(random_int(2,1000000000));
+                $transaction->setDescription($transaction->getDescription()." Compte epargne");
                 $entityManager=$doctrine->getManager();
 
                 /**Inserer dans la table Mouvement comptable */
@@ -173,6 +174,7 @@ class TransactionController extends AbstractController
             // Verifier si le montant est positive (strictement positive)
             if ($transaction->getMontant() > 0) {
                 $transaction->setCodetransaction(random_int(2,1000000000));
+                $transaction->setDescription($transaction->getDescription()." Compte epargne");
                 $entityManager=$doctrine->getManager();
                 $mouvement->operationJournal($entityManager,$transaction);
 
@@ -230,7 +232,7 @@ class TransactionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $entityManager=$doctrine->getManager();
-
+            $transaction->setDescription($transaction->getDescription()." Compte epargne");
             $transaction->setCodetransaction(random_int(1,2000000));
             $transaction->setMontant(-$transaction->getMontant());
 
@@ -272,7 +274,7 @@ class TransactionController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager=$doctrine->getManager();
-
+            $transaction->setDescription($transaction->getDescription()." Compte epargne");
             $transaction->setMontant(-$transaction->getMontant());
             $transaction->setCodetransaction(random_int(1,2000000));
 

@@ -35,8 +35,8 @@ import './api/dashboard';
 //Import les api retrait ////
 import './api/compte_epargne/depot'
 
-//import les api pour les compte epargne
-//import './api/api_compte_epargne'//
+//import les jspdf
+import jsPDF from 'jspdf';
 
 
 
@@ -53,6 +53,7 @@ import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.print';
 import 'datatables.net-bs5';
 import '@fortawesome/fontawesome-free/js/all';
+
 
 window.JSZip = jsZip;
 
@@ -209,5 +210,36 @@ $(document).ready(function(){
             let max_id_ = $('#id-max').text().padStart(2,0);
             $('#agence_codeAgence').val(max_id_);
         }
+
+        var carte = new jsPDF();
+        /***imprimer la carte de client */
+        const carte_print = document.querySelector('#carte-epargne').innerHTML;
+        
+        const code_epargne = document.querySelector('#code-epargne').textContent;
+        const date = new Date()
+
+        console.log(code_epargne);
+        $('#imprimer-carte').on('click',() => {
+            console.log("carte_print");
+            // Convertir le contenu HTML en PDF
+            carte.html(carte_print, {
+              callback: function (doc) {
+                //font
+                doc.setFont("times", "normal");
+                // Add new page
+                doc.addPage();
+
+                // Enregistrer le fichier PDF
+                doc.save(`carte-epargne-${code_epargne}${date.getFullYear()}.pdf`);
+
+              },
+              margin: [10, 10, 10, 10],
+              autoPaging: 'text',
+              x: 0,
+              y: 0,
+              width: 190, //target width in the PDF document
+              windowWidth: 675 //window width in CSS pixels
+            });
+        })
 });
 
