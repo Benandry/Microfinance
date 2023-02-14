@@ -6,6 +6,7 @@ use App\Entity\CompteEpargne;
 use App\Entity\Groupe;
 use App\Entity\Individuelclient;
 use App\Entity\ProduitEpargne;
+use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,13 +45,16 @@ class CompteEpargneType extends AbstractType
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
                 'mapped'=>true,
-                'choice_label'=>'nomproduit',
-                'placeholder' =>'Choisir un produit ',
+                'choice_label'=> function ($c){
+                    return $c->getNomproduit()." (".$c->getAbbreviation().")";
+                },
+                'query_builder' => function (ProduitEpargneRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->andWhere("p.isdesactive = 1 ");
+                },
+                'placeholder' =>'Choisissez un produit ',
                 'autocomplete'=>true,
                 'label'=>'Nom Produit',
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
                 ])
 
             ->add('codeep')

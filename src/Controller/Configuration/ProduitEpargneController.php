@@ -17,6 +17,7 @@ class ProduitEpargneController extends AbstractController
     public function index(ProduitEpargneRepository $produitEpargneRepository): Response
     {
         $produit=$produitEpargneRepository->Produit();
+        // dd($produit);
         return $this->render('Configuration/produit_epargne/index.html.twig', [
             'produit_epargnes' => $produit,
         ]);

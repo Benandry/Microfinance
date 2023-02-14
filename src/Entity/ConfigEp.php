@@ -17,9 +17,6 @@ class ConfigEp
     private ?bool $IsNegatif = null;
 
     #[ORM\Column]
-    private ?int $nbrjInactif = null;
-
-    #[ORM\Column]
     private ?int $nbMinRet = null;
 
     #[ORM\Column]
@@ -27,13 +24,7 @@ class ConfigEp
 
     #[ORM\Column]
     private ?int $ageMinCpt = null;
-
-    #[ORM\Column]
-    private ?float $fraisTenuCpt = null;
-
-    #[ORM\Column]
-    private ?float $commissionRetCash = null;
-
+    
     #[ORM\Column]
     private ?float $commissionTransf = null;
 
@@ -62,18 +53,6 @@ class ConfigEp
     public function setIsNegatif(bool $IsNegatif): self
     {
         $this->IsNegatif = $IsNegatif;
-
-        return $this;
-    }
-
-    public function getNbrjInactif(): ?int
-    {
-        return $this->nbrjInactif;
-    }
-
-    public function setNbrjInactif(int $nbrjInactif): self
-    {
-        $this->nbrjInactif = $nbrjInactif;
 
         return $this;
     }
@@ -110,30 +89,6 @@ class ConfigEp
     public function setAgeMinCpt(int $ageMinCpt): self
     {
         $this->ageMinCpt = $ageMinCpt;
-
-        return $this;
-    }
-
-    public function getFraisTenuCpt(): ?float
-    {
-        return $this->fraisTenuCpt;
-    }
-
-    public function setFraisTenuCpt(float $fraisTenuCpt): self
-    {
-        $this->fraisTenuCpt = $fraisTenuCpt;
-
-        return $this;
-    }
-
-    public function getCommissionRetCash(): ?float
-    {
-        return $this->commissionRetCash;
-    }
-
-    public function setCommissionRetCash(float $commissionRetCash): self
-    {
-        $this->commissionRetCash = $commissionRetCash;
 
         return $this;
     }

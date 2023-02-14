@@ -27,11 +27,13 @@ class ConfigEpController extends AbstractController
     #[Route('/new', name: 'app_config_ep_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ConfigEpRepository $configEpRepository): Response
     {
-        $configEp = new ConfigEp();
+        // $configEp = new ConfigEp();
         $form = $this->createForm(ConfigEpType::class, $configEp);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            dd($configEp);
             $configEpRepository->add($configEp, true);
 
             $this->addFlash('success', "Ajout de configuration epargne : reussite!!");

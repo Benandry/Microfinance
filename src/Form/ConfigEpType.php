@@ -4,11 +4,10 @@ namespace App\Form;
 
 use App\Entity\ConfigEp;
 use App\Entity\Devise;
-use App\Entity\PlanComptable;
 use App\Entity\ProduitEpargne;
+use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,24 +20,24 @@ class ConfigEpType extends AbstractType
         $builder
             ->add('produitEpargne',EntityType::class,[
                 'class'=>ProduitEpargne::class,
-                'choice_label'=>'nomproduit',
-                'mapped'=>true,
-                'label'=>'Produit',
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
+                'choice_label'=> function ($c){
+                    return $c->getNomproduit()." (".$c->getAbbreviation().")";
+                },
+                'query_builder' => function (ProduitEpargneRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->andWhere("p.isdesactive = 1 ");
+                },
+                'placeholder' =>'Choisissez un produit ',
+                'autocomplete'=>true,
+                'label'=>'Nom Produit',
             ])
             ->add('IsNegatif',ChoiceType::class,[
-                'required'=>false,
                 'choices'=>[
                     'Oui'=>1,
                     'Non'=>0
                 ],
                 'label'=>'Compte Negatif',
-                'attr'=>[
-                    'class'=>'form-control',
-                    ]
-                    ])
+            ])
             ->add('deviseutiliser',EntityType::class,[
                 'class'=>Devise::class,
                 'choice_label'=>'devise',
@@ -47,9 +46,7 @@ class ConfigEpType extends AbstractType
                     'class'=>'form-control',
                 ]
             ])
-            ->add('nbrjInactif',IntegerType::class,[
-                'label'=>'Nombre jour inactif',
-            ])
+
             ->add('nbMinRet',IntegerType::class,[
                 'label'=>'Nombre jour minimum retrait',
             ])
@@ -58,12 +55,6 @@ class ConfigEpType extends AbstractType
             ])
             ->add('ageMinCpt',IntegerType::class,[
                 'label'=>'Age minimum ouvrir compte',
-            ])
-            ->add('fraisTenuCpt',IntegerType::class,[
-                'label'=>'Frais tenu compte',
-            ])
-            ->add('commissionRetCash',IntegerType::class,[
-                'label'=>'Commission retrait cash',
             ])
             ->add('commissionTransf',IntegerType::class,[
                 'label'=>'Commission transaction',

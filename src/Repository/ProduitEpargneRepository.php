@@ -60,7 +60,8 @@ class ProduitEpargneRepository extends ServiceEntityRepository
         $query = 'SELECT
         p.nomproduit,
         p.isdesactive,
-        p.id
+        p.id,
+        p.abbreviation
         FROM
         App\Entity\ProduitEpargne p
          ';

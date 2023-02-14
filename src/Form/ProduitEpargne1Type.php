@@ -21,7 +21,8 @@ class ProduitEpargne1Type extends AbstractType
                 'label' => "Abreviation du produit : ",
             ])
             ->add('isdesactive',CheckboxType::class,[
-                'label'=>'Activer',
+                'label'=>'Enregistrer',
+                'required' => false,
             ]);
     }
 
