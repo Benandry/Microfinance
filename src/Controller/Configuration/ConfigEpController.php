@@ -33,7 +33,7 @@ class ConfigEpController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dd($configEp);
+            // dd($configEp);
             $configEpRepository->add($configEp, true);
 
             $this->addFlash('success', "Ajout de configuration epargne : reussite!!");
