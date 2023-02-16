@@ -16,32 +16,24 @@ class FiltreRapportGroupeType extends AbstractType
         $builder
             ->add('one_date_search',DateType::class,[
                 'widget'=>'single_text',
-                'format' => 'yyyy-MM-dd',
-                'label'=>' ',
-                'mapped'=>true,
-                'html5'=>true,
+                'label'=>false,
                 'required' =>false,
             ])
             ->add('Date1',DateType::class,[
-                    'widget'=>'single_text',
-                    'format' => 'yyyy-MM-dd',
-                    'label'=>'Du',
-                    'mapped'=>true,
-                    'html5'=>true,
-                    'required' =>false,
-                ])
-                ->add('Date2',DateType::class,[
-                    'widget'=>'single_text',
-                    'format' => 'yyyy-MM-dd',
-                    'label'=>'Au',
-                    'mapped'=>true,
-                    'html5'=>true,
-                    'required' =>false,
-                ])
+                'widget'=>'single_text',
+                'label'=>false,
+                'required' =>false,
+            ])
+            ->add('Date2',DateType::class,[
+                'widget'=>'single_text',
+                'label'=>false,
+                'required' =>false,
+            ])
             ->add('Chercher',SubmitType::class,[
                 'attr'=>[
-                    'class'=>'btn btn-primary btn-sm',
+                    'class'=>'btn btn-primary',
                     ],
+                'label' => "Filtrer"
             ])
         ;
     }

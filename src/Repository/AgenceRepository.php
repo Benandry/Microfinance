@@ -54,21 +54,17 @@ class AgenceRepository extends ServiceEntityRepository
             return $query->getResult();
         }
 
-        public function findClientParAgence($agence,$debut,$fin)
+        public function findClientParAgence($agence)
         {
             $query = "SELECT 
              client
              FROM App\Entity\Individuelclient client
              WHERE client.Agence = $agence
-             AND client.date_inscription >= :debut
-             AND client.date_inscription <= :fin 
              AND client.garant = 0
              ";
 
              $statement = $this->getEntityManager()
                 ->createQuery($query)
-                ->setParameter('debut',$debut)
-                ->setParameter('fin',$fin)
                 ->execute();        
              return $statement;
         }

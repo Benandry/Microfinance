@@ -61,21 +61,25 @@ class CommuneRepository extends ServiceEntityRepository
      
    }
 
-   public function findClientParCommune($commune,$debut,$fin)
+   /**
+    * Fonction fitrer par commune
+    *
+    * @param [type] $commune
+    * @param [type] $debut
+    * @param [type] $fin
+    * @return void
+    */
+   public function findClientParCommune($commune)
    {
        $query = "SELECT 
         client
         FROM App\Entity\Individuelclient client
         WHERE client.commune = $commune
-        AND client.date_inscription >= :debut
-        AND client.date_inscription <= :fin 
         AND client.garant = 0
         ";
 
         $statement = $this->getEntityManager()
             ->createQuery($query)
-            ->setParameter('debut',$debut)
-            ->setParameter('fin',$fin)
             ->execute();        
         return $statement;
    }

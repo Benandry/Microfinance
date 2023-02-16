@@ -169,15 +169,15 @@ class IndividuelclientRepository extends ServiceEntityRepository
     }
 
 
-     ///Rechercher client  carte d'identite par date
+     ///Rechercher client  par agent 
      public function findClientByAgent($user){
 
-        //dd($agent);
+        // dd($user);
         $query = "SELECT 
         client
         FROM App\Entity\Individuelclient client
-        WHERE client.user = $user
-        AND client.garant = 0
+        WHERE client.garant = 0 
+        AND client.user = $user
         ";
 
         
@@ -264,6 +264,15 @@ class IndividuelclientRepository extends ServiceEntityRepository
 
         $statement = $this->getEntityManager()->createQuery($query)->execute();
 
+        return $statement;
+    }
+
+    public function FindByClientByGroupe($groupe){
+        $query = "SELECT client
+                 FROM App\Entity\IndividuelClient client
+                 WHERE client.MembreGroupe = $groupe
+                 ";
+        $statement = $this->getEntityManager()->createQuery($query)->execute();
         return $statement;
     }
 }

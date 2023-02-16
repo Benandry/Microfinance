@@ -4,7 +4,13 @@
         {% if affiche_tab  == false %}
             Rapport client 
         {% else %}
-            Liste des clients {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}  
+            {% if  date_one != null %}
+                Listes de client jusqu'a {{ date_one|date('Y-m-d') }}
+            {% elseif date1 != null and date2 != null %}
+                Listes de client du {{ date1|date('Y-m-d') }} au  {{ date1|date('Y-m-d') }}
+            {% else %}
+                {{ titre }}
+            {% endif %}
         {% endif %}
     {% endblock %}
 
@@ -12,13 +18,12 @@
         {% if affiche_tab  == false %}
             Rapport client 
         {% else %}
-            Liste des clients 
-            {% if date_1 == true %}
-                     jusq'a {{ one_date| date('d-m-Y') }} 
-            {% elseif date_3 == true %} 
-                par agent {{ agent.prenom }}
+            {% if  date_one != null %}
+               Rapport > Listes de client jusqu'a {{ date_one|date('Y-m-d') }}
+            {% elseif date1 != null and date2 != null %}
+                Rapport > Listes de client du {{ date1|date('Y-m-d') }} au  {{ date1|date('Y-m-d') }}
             {% else %}
-                     du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }} 
+                Rapport > {{ titre }}
             {% endif %}
         {% endif %}
     {% endblock %}
@@ -33,22 +38,23 @@
             
                         <!-- Modal Header -->
                     <div class="modal-header titre_modal">
-                        <h4 class="modal-title text-center">Recherche client par date</h4>
+                        <h5 class="modal-title text-center">Recherche client par date</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     {{ form_start(trier) }} 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <h5 class="text-center"> Par nom de l'agent : </h5>
                                 {{ form_row(trier.agent) }}
-
+                                {{ form_row(trier.groupe) }}
+                                {{ form_row(trier.nomAgence) }}
+                                {{ form_row(trier.commune) }}
                             <div class="text-center" id="one_date">
-                                <h5 class="text-center"> Date </h5>
+                                <p class="text-center"> Date </p>
                                 {{ form_row(trier.search_one_date) }}
                             </div>
 
                             <div class="row text-center" id="two_date">
-                                    <h5 class="text-center">Entre deux périodes  </h5>
+                                <p class="text-center">Entre deux périodes  </p>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             {{ form_row(trier.date1) }}
@@ -82,6 +88,7 @@
                     <th>Proféssion </th>
                     <th>Date inscription</th>
                     <th>Agence </th>
+                    <th>Commune </th>
                     <th>Etat civil </th>
                     <th>Adresse </th>
                 </tr>
@@ -90,12 +97,13 @@
             {% for individuelclient in individuel %}
                     <tr>
                         <td> {{ individuelclient.codeclient }}</td>
-                        <td>{{ individuelclient.nomClient }} </td>
+                        <td>{{ individuelclient.nomClient }}   {{ individuelclient.prenomClient }} </td>
                         <td> {{ individuelclient.numeroMobile }}</td>
                         <td>{{ individuelclient.cin|number_format(0,',', ' ') }}</td>
                         <td> {{ individuelclient.profession }}</td>
                         <td>{{ individuelclient.dateInscription ? individuelclient.dateInscription|date('Y-m-d') : '' }}</td>     
                         <td>{{ individuelclient.Agence.NomAgence }}</td>      
+                        <td>{{ individuelclient.Commune.NomCommune }}</td>      
                         <td>{{ individuelclient.etatcivile.etatcivile }}</td>      
                         <td>{{ individuelclient.adressephysique }}</td>     
                     </tr>
