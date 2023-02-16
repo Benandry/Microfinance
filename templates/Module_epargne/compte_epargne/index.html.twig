@@ -11,27 +11,27 @@
 {% block body %}
 
     {% if afficher == false %}
-                        <h4 class="modal-title text-center"> Compte Epargne </h4>
-                        {{ form_start(trierEp) }}
-                        <!-- Modal body -->
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        {{ form_row(trierEp.date1) }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        {{ form_row(trierEp.Au) }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ form_row(trierEp.Du) }}
-                                    </div>
-                                </div>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            {{ form_row(trierEp.Filtre) }}
+                <h4 class="modal-title text-center"> Compte Epargne </h4>
+                {{ form_start(trierEp) }}
+                <!-- Modal body -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{ form_row(trierEp.date1) }}
                             </div>
-                        {{ form_end(trierEp) }}
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(trierEp.Au) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(trierEp.Du) }}
+                            </div>
+                        </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    {{ form_row(trierEp.Filtre) }}
+                    </div>
+                {{ form_end(trierEp) }}
                     
             </div>
             </div>

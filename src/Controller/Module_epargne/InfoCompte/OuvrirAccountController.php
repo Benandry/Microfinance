@@ -30,7 +30,7 @@ class OuvrirAccountController extends AbstractController
                 'label' => 'Individuel client : ',
                 'placeholder' => "Choisissez l'ndividuel client :",
                 'choice_label' => function($c){
-                    return $c->getCodeclient()." -- ".$c->getNomClient();
+                    return $c->getCodeclient();
                 },
                 'autocomplete' => true,
         ])
@@ -41,8 +41,6 @@ class OuvrirAccountController extends AbstractController
     
         /* ===== Si les produits sont selectionnnés. On va executer les requests ci-dessous ====== */
         if ($form->isSubmitted() && $form->isValid()){
-
-
             $data = $form->getData()['code'];
             return $this->redirectToRoute('app_compte_epargne_new', ['code' => $data],Response::HTTP_SEE_OTHER);
         }
@@ -57,17 +55,16 @@ class OuvrirAccountController extends AbstractController
      * @param Request $request
      * @return void
      */
-     #[Route('/ouvrirCompteEpargneEpargneGroupe', name: 'app_ouvrir_compte_groupe')]
+     #[Route('/ouvrir/CompteEpargne/Groupe', name: 'app_ouvrir_compte_groupe')]
      public function compteEpargneGroup(Request $request){
-        
-
+                
         $form = $this->createFormBuilder()
         ->add('code', EntityType ::class,[
                 'class' => Groupe:: class,
                 'label' => 'Groupe client : ',
                 'placeholder' => "Choisissez le groupe :",
                 'choice_label' => function($c){
-                    return $c->getCodegroupe()." -- ".$c->getNomGroupe();
+                    return $c->getCodegroupe();
                 },
                 'autocomplete' => true,
         ])

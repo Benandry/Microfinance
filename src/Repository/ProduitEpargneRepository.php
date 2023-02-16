@@ -84,12 +84,12 @@ class ProduitEpargneRepository extends ServiceEntityRepository
         return $stmt;
     }
 
-    //Fonction api code client 
-    public function code_client_api($code)
+    //Fonction api code client pour ouvrir un compte epargne
+    public function code_client_api($id)
     {
         $query = " SELECT client.codeclient ,client.nom_client nom, client.prenom_client prenom 
         FROM App\Entity\Individuelclient client
-        WHERE client.codeclient = '$code'";
+        WHERE client.id = '$id'";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
 
@@ -98,8 +98,12 @@ class ProduitEpargneRepository extends ServiceEntityRepository
 
     //Code client
     public function code_client(){
-        $query = " SELECT client.codeclient code
-        FROM App\Entity\Individuelclient client ";
+        $query = " SELECT 
+            client.codeclient code,
+            client.nom_client,
+            cli.prenom_client
+        FROM
+             App\Entity\Individuelclient client ";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
 

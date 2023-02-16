@@ -6,6 +6,7 @@ use App\Entity\CompteEpargne;
 use App\Entity\Groupe;
 use App\Entity\Individuelclient;
 use App\Entity\ProduitEpargne;
+use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -43,12 +44,16 @@ class CompteGroupeEpType extends AbstractType
             ])
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
-                'choice_label'=>'nomproduit',
+                'choice_label'=> function ($c){
+                    return $c->getNomproduit()." (".$c->getAbbreviation().")";
+                },
+                'query_builder' => function (ProduitEpargneRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->andWhere("p.isdesactive = 1 ");
+                },
+                'placeholder' =>'Choisissez un produit ',
                 'autocomplete'=>true,
-                'placeholder'=>'Choisir produit . . .',
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
+                'label'=>'Nom Produit',
             ])
             ->add('codeep',TextType::class,[
                 'mapped'=>true,
@@ -67,7 +72,7 @@ class CompteGroupeEpType extends AbstractType
             
             ->add('Valider',SubmitType::class,[
                 'attr' => [
-                    'class' => 'btn btn-primary btn-sm'
+                    'class' => 'btn btn-primary'
                 ],
                 'label' => "Créer compte"
             ])

@@ -268,4 +268,24 @@ class GroupeRepository extends ServiceEntityRepository
     return $stmt;
   }
   
+  /**
+   * Fonction pour creer un compte epargne groupe
+   *
+   * @param [type] $id
+   * @return void
+   */
+  public function findGroupByIdOpenAccount($id)
+  {
+    $query = " SELECT
+      gr.nomGroupe,
+      gr.email,
+      gr.codegroupe,
+      gr.numeroMobile
+    FROM  App\Entity\Groupe gr
+    WHERE gr.id = '$id'";
+    
+    $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+    return $stmt;
+  }
 }

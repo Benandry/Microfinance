@@ -65,7 +65,9 @@ class AllApiController extends AbstractController
         return new JsonResponse($api);
     }
 
-
+    /**
+     * Fonctin pour creer un api pour les client en ouvrir compte
+     */
     #[Route('/api/code-client/{code}', name: 'app_api_code_client')]
 
     public function api_code_client(ProduitEpargneRepository $repo,$code): Response
@@ -177,6 +179,16 @@ class AllApiController extends AbstractController
     {
         $api = $repo->api_compte_epargne_groupe_code($code); 
 
+        return new JsonResponse($api);
+    }
+
+
+    #[Route('/api/groupe/by/{id}', name: 'app_all_code_groupe')]
+
+    public function api_group_id(GroupeRepository $repo,$id): Response
+    {
+
+        $api = $repo->findGroupByIdOpenAccount($id); 
         return new JsonResponse($api);
     }
 

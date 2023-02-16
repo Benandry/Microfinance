@@ -211,11 +211,16 @@ $(document).ready(function(){
             $('#agence_codeAgence').val(max_id_);
         }
 
+        // if (path === '/compte/epargne/') {
+        //     alert("alert");
+        // }
         var carte = new jsPDF();
         /***imprimer la carte de client */
         const carte_print = document.querySelector('#carte-epargne').innerHTML;
         
         const code_epargne = document.querySelector('#code-epargne').textContent;
+
+        // alert(code_epargne);
         const date = new Date()
 
         console.log(code_epargne);

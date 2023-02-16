@@ -42,9 +42,10 @@ $(document).ready(() =>{
             $('#code_text').text(code_client_)        
         });
     }
-    else if(path === "/CompteEpargneDepot" || path ==='/depot/epargne/groupe' || path === '/transaction/retrait/individuel' || path === '/transaction/retrait/groupe'){
-
+    else if(path === "/CompteEpargneDepot" || path ==='/depot/epargne/groupe' || path === '/transaction/retrait/individuel' || path === '/transaction/retrait/groupe')
+    { 
         $('#form_code').on('change',() => {
+            // alert("alert");
             var url = "/releve/client/"+$('#form_code').val();
                 
             $.ajax({
@@ -54,7 +55,7 @@ $(document).ready(() =>{
                 contentType: "application/json; charset=utf-8",
                 data : JSON.stringify($(this).val()),
                 success: function(result){
-
+                    console.log(result);
                     for (let i = 0; i < result.length; i++) {
                        
                         var element = result[i];
@@ -77,6 +78,36 @@ $(document).ready(() =>{
     
             });    
         })
-
+    }
+     //Information du client pour ouvrir un compte epargne
+    if(path === '/ouvrirCompteEpargneClient'){
+        $('#form_code').on('change',() => {
+            // alert("alert");
+            var url = "/api/code-client/"+$('#form_code').val();
+                
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify($(this).val()),
+                success: function(result){
+                    console.log(result);
+                    for (let i = 0; i < result.length; i++) {
+                       
+                        var element = result[i];
+                            // console.log(element);
+                            document.getElementById('codeclient').innerHTML = element.codeclient;
+                            document.getElementById('nom').innerHTML = element.nom;
+                            document.getElementById('prenom').innerHTML = element.prenom;
+                            
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+    
+            });    
+        })
     }
 })

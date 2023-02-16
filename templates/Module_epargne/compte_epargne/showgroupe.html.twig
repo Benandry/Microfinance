@@ -92,6 +92,23 @@
             </div><br><br>
           </div>
         </div>
+        
+        <div class="row d-flex justify-content-center" >
+          <div class="card mb-4" style="width: 250px; height: 300px; display:none;" id="carte-epargne">
+              <div class="card-body text-center">
+                <h6> Information du groupe </h6>
+                <hr/>
+                <div class="fw-bold">Compte : <span id="code-epargne"> {{ Groupes.codeepargne}}<span></div>
+                <hr/>
+                <div class="fw-bold"> Produit : {{ Groupes.nomproduit }}</div>
+                <hr/>
+                  <div class="fw-bold">Nom du groupe : {{ Groupes.nomGroupe }}</div>
+                <hr/>
+                <div class="fw-bold">E-mail : {{ Groupes.email }}</div>
+              </div>
+          </div>
+        </div>
+      <button class="btn btn-primary btn-sm" id="imprimer-carte">Télécharger la carte compte epargne </button>
       </div>
     </section>
 {% endfor %}
