@@ -24,11 +24,25 @@ class RemboursementCreditController extends AbstractController
     }
 
     #[Route('/new', name: 'app_remboursement_credit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, RemboursementCreditRepository $remboursementCreditRepository): Response
-    {   
+    public function new(EntityManagerInterface $em, ManagerRegistry $doctrine, Request $request, RemboursementCreditRepository $remboursementCreditRepository): Response
+    {
         // Recuperation du code credit
-        $codecredit=$request->query->get('codecredit');
+        // dd($request);
+        $typeclient=$request->query->get('typeclient');
+        $codecredit = $request->query->get('codecredit');
+        $penalitenonrmebourser = $request->query->get('penalite');
+        $montantprecedent = $request->query->get('montant');
+        $montantdu = $request->query->get('montantdu');
+        $periode = $request->query->get('periode');
+        $restemontant = $request->query->get('restemontant');
+        $resteprecedent=$restemontant+$penalitenonrmebourser;
+        
+        // dd($typeclient);
 
+        $historique = $remboursementCreditRepository->HistoriqueRemboursement($codecredit);
+        $tableauAmmortissemnt = $remboursementCreditRepository->TableauAmmortissement($codecredit);
+
+        
         $remboursementCredit = new RemboursementCredit();
 
         $form = $this->createForm(RemboursementCreditType::class, $remboursementCredit);
@@ -37,7 +51,7 @@ class RemboursementCreditController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $doctrine->getManager();
-             
+            
             // Anticipe
             
             // $anticipe = $remboursementCredit->getAnticipe();
@@ -379,10 +393,27 @@ class RemboursementCreditController extends AbstractController
     #[Route('/{id}', name: 'app_remboursement_credit_delete', methods: ['POST'])]
     public function delete(Request $request, RemboursementCredit $remboursementCredit, RemboursementCreditRepository $remboursementCreditRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$remboursementCredit->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $remboursementCredit->getId(), $request->request->get('_token'))) {
             $remboursementCreditRepository->remove($remboursementCredit, true);
         }
 
         return $this->redirectToRoute('app_remboursement_credit_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+     * @method mixed HistoriqueRemboursement()
+     *
+     * @return void
+     */
+    
+    // #[Route('/historique/remboursement/{codecredit}',name:'app_historique_remboursement')]
+    // public function HistoriqueRemboursement(RemboursementCreditRepository $remboursementCreditRepository,string $codecredit)
+    // {
+    //     $historique=$remboursementCreditRepository->HistoriqueRemboursement($codecredit);
+
+    //     return $this->renderForm('remboursement_credit/new.html.twig', [
+    //         'historique'=>$historique,
+    //     ]);
+
+    // }
 }
