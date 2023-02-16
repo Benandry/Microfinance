@@ -217,13 +217,12 @@ $(document).ready(function(){
         var carte = new jsPDF();
         /***imprimer la carte de client */
         const carte_print = document.querySelector('#carte-epargne').innerHTML;
-        
-        const code_epargne = document.querySelector('#code-epargne').textContent;
+        const code_imprimer = document.querySelector('#code_imprimer').textContent;
 
         // alert(code_epargne);
         const date = new Date()
 
-        console.log(code_epargne);
+        console.log(code_imprimer.length);
         $('#imprimer-carte').on('click',() => {
             console.log("carte_print");
             // Convertir le contenu HTML en PDF
@@ -235,7 +234,12 @@ $(document).ready(function(){
                 doc.addPage();
 
                 // Enregistrer le fichier PDF
-                doc.save(`carte-epargne-${code_epargne}${date.getFullYear()}.pdf`);
+                if(code_imprimer.length === 10){
+                    doc.save(`carte-client-${code_imprimer}${date.getFullYear()}.pdf`);
+                }
+                else if(code_imprimer.length === 13) {
+                    doc.save(`carte-epargne-${code_imprimer}${date.getFullYear()}.pdf`);
+                }
 
               },
               margin: [10, 10, 10, 10],

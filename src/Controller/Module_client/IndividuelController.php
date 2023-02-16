@@ -99,10 +99,8 @@ class IndividuelController extends AbstractController
     // #[ParamConverter('get',class:'SensioBlogBundle:Get')]
     public function show(IndividuelclientRepository $individuelclientRepository,Individuelclient $client,int $id ): Response
     {
-        $individuelclient = $individuelclientRepository->findClient($id);
         return $this->render('Module_client/individuel/show.html.twig', [
-            'individuelclient' => $individuelclient[0],
-            'client'=> $client
+            'individuelclient'=> $client
         ]);
     }
 
