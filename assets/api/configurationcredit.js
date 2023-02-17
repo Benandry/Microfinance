@@ -31,6 +31,6 @@ $(document).ready(function(){
             $('#configuration_credit_TauxGarantieFinanciere').show();
         });
         
+    });
     }
-}
 });
