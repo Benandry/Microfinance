@@ -18,14 +18,9 @@ import './credit/approbation'
 import './api/retrait'
 import './api/individuel'
 import './api/groupe'
-<<<<<<< HEAD
 // import './api/credit'
 import './api/configurationcredit'
 import './api/DemandeCredit'
-=======
-import './api/credit'
-import './api/configurationcredit'
->>>>>>> f47fbee (reconfiguration credit)
 import './api/remboursement'
 import './api/penalitecredit'
 import './api/agence'
