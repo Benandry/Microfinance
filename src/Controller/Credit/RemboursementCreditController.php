@@ -338,13 +338,13 @@ class RemboursementCreditController extends AbstractController
 
         return $this->renderForm('remboursement_credit/new.html.twig', [
             'codecredit' => $codecredit,
-            // 'penalite' => $penalitenonrmebourser,
-            // 'montant' => $montantprecedent,
-            // 'historique' => $historique,
-            // 'montantdu' => $montantdu,
-            // 'periode'=>$periode,
-            // 'restemontant'=>$restemontant,
-            // 'tableauAmmortissemnt' => $tableauAmmortissemnt,
+            'penalite' => $penalitenonrmebourser,
+            'montant' => $montantprecedent,
+            'historique' => $historique,
+            'montantdu' => $montantdu,
+            'periode'=>$periode,
+            'restemontant'=>$restemontant,
+            'tableauAmmortissemnt' => $tableauAmmortissemnt,
             'remboursement_credit' => $remboursementCredit,
             'form' => $form,
         ]);
