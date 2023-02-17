@@ -40,30 +40,22 @@ class DemandeCreditController extends AbstractController
            $demandeCreditRepository->add($demandeCredit, true);
 
             /***Amortissement simple */
-           if($data->getTypeAmortissement() == "simple")
+           if($data->getTypeTranche() == "Lineaire")
            {
                 $traitement->amortissementSimple($data);
                 return $this->redirectToRoute('app_tableau_amortissement', [
                     'codecredit' => $codecredit,
                 ], Response::HTTP_SEE_OTHER);
            }
-           /***Amortissement simple annuite constante */
-           elseif($data->getTypeAmortissement() == "annuite constante")
-           {
-                $traitement->annuiteConstante($data);
-                return $this->redirectToRoute('app_tableau_amortissement_annuite_constante', [
-                    'codecredit' => $codecredit,
-                ], Response::HTTP_SEE_OTHER);
-           }
 
-           elseif($data->getTypeAmortissement() == "amortissement constante") 
-           {
-                $traitement->amortissementConstant($data);
-                return $this->redirectToRoute('app_tableau_amortissement_remboursement_constante', [
-                    'codecredit' => $codecredit,
-                ], Response::HTTP_SEE_OTHER);
-           }
-          
+             /***Amortissement Degressif */
+             if($data->getTypeTranche() == "Degressif")
+             {
+                  $traitement->Degressif($data);
+                  return $this->redirectToRoute('app_degressif_ammortissement', [
+                      'codecredit' => $codecredit,
+                  ], Response::HTTP_SEE_OTHER);
+             }          
            
         }
 

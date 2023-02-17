@@ -98,11 +98,12 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         a.dateRemborsement,
         a.principale,
         a.interet,
-        a.montanttTotal ,
+        a.montanttTotal,
         a.remboursement,
         a.annuite,
         a.soldedu,
-        a.codecredit
+        a.codecredit,
+        a.MontantRestantDu
         FROM App\Entity\AmortissementFixe a
         where a.codecredit = '$codeCredit'
 
@@ -121,7 +122,8 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         d.NombreTranche ,
         d.TauxInteretAnnuel,
         a.annuite,
-        a.remboursement
+        a.remboursement,
+        a.MontantRestantDu
         FROM App\Entity\DemandeCredit d
         LEFT JOIN
         App\Entity\AmortissementFixe a

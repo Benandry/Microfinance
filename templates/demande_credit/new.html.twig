@@ -14,12 +14,31 @@
         montantgarantie :<p id="garantie"></p>
     </div>
 
+    {# Affichage de l'information individuel #}
+    <div class="card" id="individuel" style="display:none;">
+        <div class="card-body">
+            <h2>individuel</h2>
+            <p><b>Code client</b> :<span id="codeclientindividuel"></span></p>
+            <p><b>Nom</b> :<span id="nom"></span></p>
+            <p><b>Prenom</b> :<span id="prenom"></span></p>
+        </div>
+     
+    </div>
+
+    {# Affichage de l'information groupe #}
+    <div class="card" id="groupe" style="display:none;">
+        <div class="card-body">
+            <h2>Groupe</h2>
+            <p><b>Nom groupe</b> :<span id="nom_groupe"></span></p>
+        </div>
+    </div>
+
     <div style="display:none">
         TestLieEpargne : <p id="lieepargne"></p>
         Agent de credit : <p id="prenom"> {{ app.user.prenom }}</p>
     </div>
         <p style="display:none">Code agence</p><p id="codeagence"  style="display:none">{{ app.user.agence.codeAgence }}</p>
-        <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none"> {{ numeros }}</p>
+        <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none">{{ numeros }}</p>
     {{ include('demande_credit/_form.html.twig') }}
 
 {% endblock %}

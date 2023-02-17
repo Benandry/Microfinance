@@ -63,6 +63,7 @@ class DemandeCreditType extends AbstractType
                     'label' => "Agent de credit :",
                     'placeholder' => "agent de credit",
                     'autocomplete' => true,
+                    'required'=>true
             ])
             ->add('categorieCredit',EntityType::class,[
                 'class'=>CategorieCredit::class,

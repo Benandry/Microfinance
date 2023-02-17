@@ -53,6 +53,9 @@ class AmortissementFixe
     #[ORM\Column(nullable: true)]
     private ?float $soldedu = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantRestantDu = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -210,6 +213,18 @@ class AmortissementFixe
     public function setSoldedu(?float $soldedu): self
     {
         $this->soldedu = $soldedu;
+
+        return $this;
+    }
+
+    public function getMontantRestantDu(): ?float
+    {
+        return $this->MontantRestantDu;
+    }
+
+    public function setMontantRestantDu(?float $MontantRestantDu): self
+    {
+        $this->MontantRestantDu = $MontantRestantDu;
 
         return $this;
     }

@@ -1,9 +1,135 @@
 import $ from 'jquery'
 
 var path = window.location.pathname;
+
 $(document).ready(function(){
     // L'evenememnt se  produit a l'interieur de cette chemin
-    if( path === '/demande/credit/new'){
+    if( path === '/demande/credit/new'){   
+            
+                // L'affichage du nom est caché en premier
+                    //  $('#individuel').hide();
+                    //  $('#groupe').hide();
+                    //  $('#garant').hide();
+                // L'utilisateur tape sur le champ code client
+                
+                $('#demande_credit_codeclient').on('blur',function(){
+                    // Code client
+                    var codeclient=$('#demande_credit_codeclient').val();
+                    var typeclient=$('#demande_credit_TypeClient').val();
+                    
+                    // Test si le type soit individuel ou groupe
+
+                    // Si client individuel
+                    if(typeclient == 'INDIVIDUEL'){
+
+                    // url
+                    var url_client='/infodemande/credit/individuel/'+codeclient;
+                    // Ajax
+                    $.ajax({
+                        url:url_client,
+                        method:'GET',
+                        dataType:"json",
+                        contentType:"application/json; charset=utf-8",
+                        data : JSON.stringify(codeclient),   
+                        success : function(content){
+                            for(let j=0;j<content.length;j++){    
+                               var individuel=content[j];
+
+                               var codeclient=individuel.codeclient;
+                               var nomclient=individuel.nom_client;
+                               var prenom=individuel.prenom_client;
+
+                            //    Affichage du nom client
+                               document.getElementById('codeclientindividuel').innerHTML=codeclient;
+                               document.getElementById('nom').innerHTML=nomclient;
+                               document.getElementById('prenom').innerHTML=prenom;
+
+                            // Affichage du bloc nom et prenom
+                            $('#individuel').show();
+                                
+                            }
+                        }
+                    });
+                }
+                else if(typeclient == 'GROUPE'){
+
+                    // url
+                    var url_groupe='/infodemandecredit/groupe/'+codeclient;
+                    // Ajax
+                    $.ajax({
+                        url:url_groupe,
+                        method:'GET',
+                        dataType:"json",
+                        contentType:"application/json; charset=utf-8",
+                        data : JSON.stringify(codeclient),   
+                        success : function(content){
+                            for(let j=0;j<content.length;j++){    
+                                var groupe=content[j];
+                                
+                                var nomgroupe=groupe.nomGroupe;
+
+                            //    Affichage du nom client
+                                document.getElementById('nom_groupe').innerHTML=nomgroupe;
+
+                            // Affichage du bloc nom et prenom
+                            $('#groupe').show();
+                                
+                            }
+                        }
+                    });
+                    
+                }
+                });
+
+                // Si le produit credit demande des garants
+                $('#demande_credit_garant').on('blur',function(){
+
+                    // Recuperation des garants
+
+                    var garant=$('#demande_credit_garant').val();
+
+                    // Url
+                    var url_garant='/infogarant/individuelclient/'+garant;
+
+                    // Ajax
+                    $.ajax({
+                        url:url_garant,
+                        method:'GET',
+                        dataType:"json",
+                        contentType:"application/json; charset=utf-8",
+                        data : JSON.stringify(garant),   
+                        success : function(content){
+                            for(let j=0;j<content.length;j++){    
+                                var garant=content[j];
+
+                                // Affichage du nom client
+
+                                var codeclient=garant.codeclient;
+                                var nomclient=garant.nom_client;
+                                var prenomclient=garant.prenom_client;
+                                var cin=garant.cin;
+
+                            // Si les contenu dans le code client,nom client,prenom client,cin sont
+                            // vide
+                            if(codeclient != ' ' && nomclient != ' ' && prenomclient != ' ' && cin != ' '){
+
+                                document.getElementById('codeclient').innerHTML=codeclient;
+                                document.getElementById('nomgarant').innerHTML=nomclient;
+                                document.getElementById('prenomgarant').innerHTML=prenomclient;
+                                document.getElementById('cin').innerHTML=cin;      
+                                $('#garant').show();
+                            }
+                            else if(codeclient == ' ' && nomclient == ' ' && prenomclient == ' ' && cin == ' ') {
+                                alert('Cette personne n\'est pas garant');
+                                $('#garant').hide();
+                            }
+                            }
+                        }
+
+                    });
+
+
+                });
 
         // On va mettre automatiquement la date machine
                 // Date automatique
@@ -15,16 +141,34 @@ $(document).ready(function(){
         
         // today = mm + '/' + dd + '/' + yyyy;
         today = yyyy +'-' +mm + '-' + dd;
+
         $("#demande_credit_DateDemande").val(today);
 
           // Si l'utilisateur selectionne individuel on affiche I sinon G
           $('#demande_credit_TypeClient').on('change',function(){
             var client = $('#demande_credit_TypeClient').val();
+            // Recuperer la derinier id en demande
+            var derniernumero=$('#lastnumero').text();
+            // Recuperer code agence
+            var codeagence = $('#codeagence').text();
+            
+            // On incremente la derniere id
+            derniernumero++;
+
+            // convertir en zerofill
+            var pad_last_id=derniernumero.toString().padStart(7,0);
+
+            // on aura le code credit
+            var numerocredit=codeagence+pad_last_id;
+
             if(client == 'INDIVIDUEL'){ 
                 $('#demande_credit_codeclient').val('I');
+                $('#demande_credit_NumeroCredit').val('I'+numerocredit);
             }
             else if(client == 'GROUPE'){
                 $('#demande_credit_codeclient').val('G');
+                $('#demande_credit_NumeroCredit').val('G'+numerocredit);
+
             }  
 
           })
@@ -52,7 +196,6 @@ $(document).ready(function(){
                 success : function(content){
                     for(let j=0;j<content.length;j++){
                         var config=content[j];
-
                         console.log(config);
 
                         // Afficher le nombre tranche 
@@ -79,13 +222,16 @@ $(document).ready(function(){
                             // Test garantie
                             // Si le garantie financiere est vrai
                             if(config.GarantieFinanciere == true){
+                                
+                                // On affiche le champ à remplir pour le garantie financiere
+                                $('#garantiefinanciere').show();
 
-                                // Recuperation numero client
-                                var codeclient=$('#demande_credit_codeclient').val();
                                 // L'utilisateur tape sur le compte epargne
                                 $('#demande_credit_CompteEpargne').on('blur',function(){
                                     // On recupere le compte epargne
                                     var compteepargne=$('#demande_credit_CompteEpargne').val();
+                                    // Recuperation numero client
+                                    var codeclient=$('#demande_credit_codeclient').val();
 
                                                 // url
                                         var url_demande='/api/demandecredit/'+compteepargne;
@@ -100,9 +246,8 @@ $(document).ready(function(){
                                             success : function(content){
                                                 for(let j=0;j<content.length;j++){
                                                     var garantiefinanciere=content[j];
-                                                        console.log(garantiefinanciere);
                                                         // Si le code client taper sur le champ code client est different
-                                                        // de celui de 
+                                                        // de celui de
                                                         if(codeclient == garantiefinanciere.codeclient){
                                                             $('#demande_credit_SoldeEpargne').val(garantiefinanciere.solde);
                                                         }
@@ -117,6 +262,13 @@ $(document).ready(function(){
                                 })
 
                              
+                            }
+                            // Garantie moral
+                            if( config.GarantieMoral == true){
+                                // On affiche le champ à remplir pour le garantie Moral
+                                $('#garantiemorale').show();
+
+
                             }
                     }
                 }
