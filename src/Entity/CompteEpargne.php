@@ -25,12 +25,6 @@ class CompteEpargne
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datedebut = null;
 
-    #[ORM\OneToMany(mappedBy: 'Produittransmis', targetEntity: TransfertProduit::class)]
-    private Collection $produittransmis;
-
-    #[ORM\OneToMany(mappedBy: 'compte', targetEntity: TransfertProduit::class)]
-    private Collection $compteTransfert;
-
     #[ORM\ManyToMany(targetEntity: Individuelclient::class, mappedBy: 'CodeIndividuel')]
     private Collection $individuelclients;
 
@@ -51,8 +45,6 @@ class CompteEpargne
     
     public function __construct()
     {
-        $this->produittransmis = new ArrayCollection();
-        $this->compteTransfert = new ArrayCollection();
         $this->individuelclients = new ArrayCollection();
         $this->CodeIndividuelClient = new ArrayCollection();
         $this->codeindcl = new ArrayCollection();
@@ -104,66 +96,6 @@ class CompteEpargne
     public function __toString()
     {
         return (string) $this->getId();
-    }
-
-    /**
-     * @return Collection<int, TransfertProduit>
-     */
-    public function getProduittransmis(): Collection
-    {
-        return $this->produittransmis;
-    }
-
-    public function addProduittransmi(TransfertProduit $produittransmi): self
-    {
-        if (!$this->produittransmis->contains($produittransmi)) {
-            $this->produittransmis[] = $produittransmi;
-            $produittransmi->setProduittransmis($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduittransmi(TransfertProduit $produittransmi): self
-    {
-        if ($this->produittransmis->removeElement($produittransmi)) {
-            // set the owning side to null (unless already changed)
-            if ($produittransmi->getProduittransmis() === $this) {
-                $produittransmi->setProduittransmis(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, TransfertProduit>
-     */
-    public function getCompteTransfert(): Collection
-    {
-        return $this->compteTransfert;
-    }
-
-    public function addCompteTransfert(TransfertProduit $compteTransfert): self
-    {
-        if (!$this->compteTransfert->contains($compteTransfert)) {
-            $this->compteTransfert[] = $compteTransfert;
-            $compteTransfert->setCompte($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompteTransfert(TransfertProduit $compteTransfert): self
-    {
-        if ($this->compteTransfert->removeElement($compteTransfert)) {
-            // set the owning side to null (unless already changed)
-            if ($compteTransfert->getCompte() === $this) {
-                $compteTransfert->setCompte(null);
-            }
-        }
-
-        return $this;
     }
 
     /**

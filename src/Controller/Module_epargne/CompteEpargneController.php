@@ -9,6 +9,13 @@ use App\Form\CompteGroupeEpType;
 use App\Repository\AgenceRepository;
 use App\Repository\CompteEpargneRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +54,7 @@ class CompteEpargneController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** Verifier que le compte est deja exister ou pas */
-            // dd($compteEpargne);
+            dd($compteEpargne->getProduit());
             //verifier dans la bas e de donne si le compte est deja existeE ou pas
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
             if ($verify_compte_epargne) {
@@ -72,7 +79,13 @@ class CompteEpargneController extends AbstractController
         ]);
     }
 
-    // Compte epargne pour groupe
+    /**
+     * Compte epargne pour groupe
+     *
+     * @param Request $request
+     * @param CompteEpargneRepository $compteEpargneRepository
+     * @return Response
+     */
     #[Route('/new/groupe', name: 'app_compte_epargne_new_groupe', methods: ['GET', 'POST'])]
     public function newgroupe(Request $request, CompteEpargneRepository $compteEpargneRepository): Response
     {
@@ -122,11 +135,33 @@ class CompteEpargneController extends AbstractController
     public function show(CompteEpargneRepository $compteEpargneRepository,$id,AgenceRepository $agence,CompteEpargne $epargne): Response
     {
 
-        $client=$compteEpargneRepository->clientCompteEpargne($id);
-        // dd($client); 
+
+        $clients=$compteEpargneRepository->clientCompteEpargne($id);
+        $client = $clients[0] ; 
+        $solde = $client['solde'] === null ? 0 : $client['solde'];
+        $writer = new PngWriter();
+        $qrCode = QrCode::create("
+                Compte epargne : ".$epargne->getCodeepargne()." \n
+                Nom : ".$client['nom_client']."\n
+                Prenom : ".$client['prenom_client']."\n
+                Produit Epargne : ". $client['nomproduit']."\n
+                Solde : ".$solde." Ariary "
+                )
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize(120)
+            ->setMargin(0)
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $label = Label::create('')->setFont(new NotoSans(8));
+        $qrCodes['simple'] = $writer->write($qrCode,null,$label->setText('compteEpargne-client'))->getDataUri();
+
+
         return $this->render('Module_epargne/compte_epargne/show.html.twig', [
-            'clients' => $client,
+            'clients' => $clients,
             'epargnes' => $epargne,
+            'qr_code' => $qrCodes['simple']
         ]);
     }
 

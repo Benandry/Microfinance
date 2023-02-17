@@ -24,10 +24,9 @@
                     <div class="fw-bold"> {{ client.prenom_client }} </div>
                     <div class="fw-bold">{{ client.codeclient }}</div>
                   </a>
-                <p class="text-muted mb-1"></p>
-                <p class="text-muted mb-4"></p>
-                <div class="d-flex justify-content-center mb-2">
-                </div>
+                  <div class="d-flex justify-content-center m-2">
+                    <img src="{{ qr_code }}" />
+                  </div>
               </div>
             </div>
             <br><br><br>
@@ -102,6 +101,9 @@
                   <div class="fw-bold"> {{ client.nom_client }} </div>
                   <div class="fw-bold"> {{ client.prenom_client }} </div>
                   <div class="fw-bold" id="code_imprimer">{{ client.code_epargne }}</div>
+                  <div class="d-flex justify-content-center mb-2">
+                    <img src="{{ qr_code }}" />
+                </div>
             </div>
           </div>
         </div>

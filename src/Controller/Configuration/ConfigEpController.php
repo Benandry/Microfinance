@@ -18,6 +18,7 @@ class ConfigEpController extends AbstractController
     public function index(ConfigEpRepository $configEpRepository): Response
     {
         $config=$configEpRepository->Configuration();
+        // dd($configEpRepository->findAll());
         return $this->render('Configuration/config_ep/index.html.twig', [
             'config_eps' => $configEpRepository->findAll(),
             'configs'=>$config,
@@ -32,11 +33,18 @@ class ConfigEpController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // dd($configEp);
-            $configEpRepository->add($configEp, true);
-
-            $this->addFlash('success', "Ajout de configuration epargne : reussite!!");
+            /**Verifier les produit s'il est deja configurer ou pas */
+            $_is_configured = $configEpRepository->findProduitConfigEp($configEp->getProduitEpargne());
+            if($_is_configured){
+                //If les produit est deja configurer on ne pas le refaire
+                // dd("deja configurer");
+                $this->addFlash('info', "Configuration epargne échoué parce que le produit ' ".$configEp->getProduitEpargne()->getNomproduit()." ' est déja configuré!!");
+            }else {
+                // Sinon On peut configurer
+                // dd("On peut configurer");
+                $configEpRepository->add($configEp, true);
+                $this->addFlash('success', "Ajout de configuration du produits '".$configEp->getProduitEpargne()->getNomproduit()." '  réussite!!");
+            }
             return $this->redirectToRoute('app_config_ep_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -47,13 +55,11 @@ class ConfigEpController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_config_ep_show', methods: ['GET'])]
-    public function show(ManagerRegistry $doctrine,int $id): Response
+    public function show(ManagerRegistry $doctrine,ConfigEp $config): Response
     {
-        $configEp=$doctrine->getRepository(ConfigEp::class)->find($id);
-        $produit=$configEp->getProduitEp();
+        // dd($config);
         return $this->render('Configuration/config_ep/show.html.twig', [
-            'configs' => $configEp,
-            'produits'=>$produit
+            'configs' => $config,
         ]);
     }
 

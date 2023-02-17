@@ -65,6 +65,11 @@ class ConfigEpType extends AbstractType
             ->add('soldeouvert',IntegerType::class,[
                 'label'=>'Solde d\'ouverture',
             ])
+
+            //  Comptabilite
+            // ->add('debit',IntegerType::class,[
+            //     'label'=>'Solde d\'ouverture',
+            // ])
         ;
     }
 

@@ -8,9 +8,11 @@
     Configuration compte epargne 
 {% endblock %}
 {% block body %}
-  {# /***************Messages succes ******************/#}
-  {{ include('modal.html.twig') }}
 
+  {{ include('modal.html.twig') }}
+    <div class="d-flex justify-content-end m-3">
+        <a href="{{ path('app_config_ep_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Ajouter nouveau</a>
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -27,7 +29,7 @@
         <tbody>
         {% for config_ep in config_eps %}
             <tr>
-                <td>{{ config_ep.produitEpargne }}</td>
+                <td>{{ config_ep.produitEpargne.nomproduit }}</td>
                 <td>{{ config_ep.IsNegatif ? 'Oui' : 'Non' }}</td>
                 <td>{{ config_ep.nbMinRet }}</td>
                 <td>{{ config_ep.NbrJrMaxDep }}</td>
@@ -48,9 +50,6 @@
         {% endfor %}
         </tbody>
     </table>
-    <div>
-        <a href="{{ path('app_config_ep_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Ajouter nouveau</a>
-    </div>
 {% endblock %}
 
 {% block javascript %}

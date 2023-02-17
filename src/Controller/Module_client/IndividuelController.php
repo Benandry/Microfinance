@@ -13,6 +13,13 @@ use App\Repository\IndividuelclientRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -97,10 +104,30 @@ class IndividuelController extends AbstractController
 
     #[Route('/{id}', name: 'app_individuel_show', methods: ['GET'])]
     // #[ParamConverter('get',class:'SensioBlogBundle:Get')]
-    public function show(IndividuelclientRepository $individuelclientRepository,Individuelclient $client,int $id ): Response
+    public function show(Individuelclient $client ): Response
     {
+        // dd($client);
+        $writer = new PngWriter();
+        $qrCode = QrCode::create("
+                Code : ".$client->getCodeclient()." \n
+                Nom :".$client->getNomClient()."\n
+                Prenom : ".$client->getPrenomClient()."\n
+                Numero CIN : ". $client->getCin()."\n
+                Adresse : ".$client->getAdressephysique()."\n
+                Tel : ".$client->getNumeroMobile())
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize(120)
+            ->setMargin(0)
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $label = Label::create('')->setFont(new NotoSans(8));
+        $qrCodes['simple'] = $writer->write($qrCode,null,$label->setText('Individuel-client'))->getDataUri();
+        // dd($qrCodes);
         return $this->render('Module_client/individuel/show.html.twig', [
-            'individuelclient'=> $client
+            'individuelclient'=> $client,
+            'qr_code' => $qrCodes['simple']
         ]);
     }
 

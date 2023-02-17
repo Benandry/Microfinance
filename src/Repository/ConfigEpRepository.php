@@ -50,13 +50,22 @@ class ConfigEpRepository extends ServiceEntityRepository
        ;
    }
 
-//    public function findOneBySomeField($value): ?ConfigEp
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+       /**
+        * Fonction recuperer les config epargne 
+        *
+        * @return void
+        */ 
+       public function findProduitConfigEp($produit)
+       {
+           $query = "SELECT
+                config
+           FROM App\Entity\ConfigEp config
+           WHERE config.produitEpargne = $produit
+           ";
+   
+           $statement = $this->getEntityManager()->createQuery($query)->execute();
+   
+           return $statement;
+       }
+   
 }

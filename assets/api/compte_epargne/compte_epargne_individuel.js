@@ -15,7 +15,7 @@ $(document).ready(() =>{
 
         /***************************Code compte epargne************************ */
         $("#compte_epargne_produit").on('change',function(){
-        
+            alert($(this).val());
             var url = "/api/individuel/"+$(this).val();
     
             $.ajax({
