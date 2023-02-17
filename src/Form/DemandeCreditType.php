@@ -43,14 +43,14 @@ class DemandeCreditType extends AbstractType
             // ->add('MethodeCalculInteret')
             // ->add('DiffereDePaiement')
             // ->add('CapitalDerniereEcheance')
-            ->add('FondCredit',EntityType::class,[
-                'class'=>FondCredit::class,
-                'choice_label'=>'NomBailleurs',
-                'mapped'=>true,
-                'required'=>false,
-                'by_reference'=>true,
-                'placeholder'=>'Choix fond credit'
-            ])
+            // ->add('FondCredit',EntityType::class,[
+            //     'class'=>FondCredit::class,
+            //     'choice_label'=>'NomBailleurs',
+            //     'mapped'=>true,
+            //     'required'=>false,
+            //     'by_reference'=>true,
+            //     'placeholder'=>'Choix fond credit'
+            // ])
             // ->add('MontantEpargneTranche')
             // ->add('MontantFixe')
             ->add('SoldeEpargne',TextType::class,[
@@ -80,24 +80,19 @@ class DemandeCreditType extends AbstractType
                 'placeholder'=>'Choisir Produit Credit'
             ])
             
-            ->add('typeAmortissement',ChoiceType::class,[
-                'choices'=>[
-                    'Simple'=>'simple',
-                    'annuite constante'=>'annuite constante',
-                    'amortissement constante'=>'amortissement constante',
-                ],
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
-            ])
+            // ->add('typeAmortissement',TextType::class,[
+            //     'label' => " Methode :",
+            //     'required'=>false,
+            // ])
             ->add('garant')
-            ->add('garantie')
+            // ->add('garantie')
             // ->add('Valeur')
             // ->add('Type')
             // ->add('ValeurUnitaure')
             // ->add('Unite')
-            ->add('ValeurTotal')
+            // ->add('ValeurTotal')
             ->add('cycles')
+            ->add('CompteEpargne')
         ;
     }
 

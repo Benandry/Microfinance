@@ -39,6 +39,53 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     *@method mixed ConfigurationCredit():Methode permet de lister tout les configurations credit
+     * @param mixed $produitcredit:
+     * @return void
+     */
+    public function ConfigurationCredit($produitcredit){
+        
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT
+                configcredit.Montant,
+                configcredit.MontantMin,
+                configcredit.InteretNormal,
+                configcredit.GarantieMoral,
+                configcredit.GarantieMaterielle,
+                configcredit.TauxGarantieMaterielle,
+                configcredit.GarantieFinanciere,
+                configcredit.TauxGarantieFinanciere,
+                configcredit.FraisDossier,
+                configcredit.FraisCommission,
+                configcredit.FraisPapeterie,
+                configcredit.PenaliteDiminutionIntrt,
+                configcredit.PenalitePayementAntcp,
+                configcredit.RetardPourcentage,
+                configcredit.PayementAnticipe,
+                configcredit.RetardForfaitaire,
+                configcredit.RetardPeriode,
+                configcredit.RetardPeriodeJour,
+                configcredit.RetardPeriodeMois,
+                configcredit.Methode,
+                configcredit.Tranche
+            FROM
+                App\Entity\ConfigurationCredit configcredit
+                INNER JOIN
+                App\Entity\ProduitCredit produitcredit
+                WITH
+                configcredit.ProduitCredit=produitcredit.id
+            WHERE
+                configcredit.ProduitCredit = :produitcredit
+            '
+        )
+        ->setParameter(':produitcredit',$produitcredit);
+
+        return $query->getResult();
+        
+    }
+
 //    /**
 //     * @return ConfigurationCredit[] Returns an array of ConfigurationCredit objects
 //     */

@@ -3,6 +3,7 @@
 namespace App\Controller\API;
 
 use App\Repository\AmortissementFixeRepository;
+use App\Repository\ConfigurationCreditRepository;
 use App\Repository\CreditIndividuelRepository;
 use App\Repository\DemandeCreditRepository;
 use App\Repository\RemboursementCreditRepository;
@@ -40,10 +41,10 @@ class ApiCreditController extends AbstractController
     /*
     *ici on verifie si le client est deja emprunté
     */
-    #[Route('api/credit/{codeclient}',name:'app_demende_credit')]
-    public function DemandeCredit(CreditIndividuelRepository $creditIndividuelRepository,$codeclient):Response
+    #[Route('api/demandecredit/{compteepargne}',name:'app_demende_credit')]
+    public function DemandeCredit(CreditIndividuelRepository $creditIndividuelRepository,$compteepargne):Response
     {
-        $demandecredit=$creditIndividuelRepository->api_demandecredit($codeclient);
+        $demandecredit=$creditIndividuelRepository->api_demandecredit($compteepargne);
         return new JsonResponse($demandecredit);
     }
     
@@ -104,6 +105,20 @@ class ApiCreditController extends AbstractController
     public function ApiRemboursementAmmortissemnt(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit,int $periode):Response
     {
         $remboursement=$remboursementCreditRepository->ApiRemboursementAmmortissement($numerocredit,$periode);
+
+     
+       return new JsonResponse($remboursement);
+    }
+    /**
+     * @method mixed ConfigurationDemande():on recupere ici la liste des configurations 
+     * afin qu'on puisse utilise dans le demande
+     * 
+     * @param mixed $produitcredit : produit credit
+     */
+    #[Route('/demandecredit/credit/{produitcredit}',name:'app_configuration_demande')]
+    public function ConfigurationDemande(ConfigurationCreditRepository $configurationCreditRepository,$produitcredit):Response
+    {
+        $remboursement=$configurationCreditRepository->ConfigurationCredit($produitcredit);
 
      
        return new JsonResponse($remboursement);
