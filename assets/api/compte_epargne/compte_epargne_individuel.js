@@ -5,6 +5,53 @@ var path = window.location.pathname
 $(document).ready(() =>{
      /********Cache les info */
     if (path === '/compte/epargne/new') {
+        
+        const modal_container = document.getElementById('modal-container');
+        const modal_text = document.getElementById('modal-text');
+        const close_btn = document.querySelector('#close-btn');
+        close_btn.addEventListener('click',() => {
+            modal_container.style.display = "none";
+        })
+
+        window.addEventListener('click',e => {
+            if (e.target === modal_container) {
+                modal_container.style.display = "none";
+            }
+        })
+
+        $("#compte_epargne_produit").on('change',function(){
+            const api_produit = '/api/compte-epargne/individuel/'+$(this).val();
+            /** information sur les configuration epargne */
+            $('.btn').show();
+            $.ajax({
+                url : api_produit,
+                method : "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify($(this).val()),
+                success : (result) =>  {
+                    for(let i = 0; i < result.length; i++){
+                        
+                        var element = result[i];
+                        const year_client = $('#age_client').text();
+                        console.log(element);
+                        if( element.age_minimum_ouvrir_compte  > year_client ){
+                            modal_text.textContent = "On ne peut creer un compte epargne pour cette produits car l'age de client assez moins";
+                            modal_container.style.display = "block";
+                            modal_text.style.color = "red";
+                            $('.btn').hide();
+                        }
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+            });
+            // modal_text.textContent = "Produits epargne";
+           
+        });
+
+
         var code_client_ = $('#code_client').text()
         var nom_client_ = $('#nom').text()
         var prenom_client_ = $('#prenom').text()
@@ -15,7 +62,8 @@ $(document).ready(() =>{
 
         /***************************Code compte epargne************************ */
         $("#compte_epargne_produit").on('change',function(){
-            alert($(this).val());
+
+            // Veriifier les produit pour creer un compte epargne 
             var url = "/api/individuel/"+$(this).val();
     
             $.ajax({
@@ -27,6 +75,7 @@ $(document).ready(() =>{
                 success: function(result){
                     for (let i = 0; i < result.length; i++) {
                         var element = result[i];
+                        // console.log(element);
                         document.getElementById('text').innerHTML ="<span id=\'id_prod\'>"+element.Produit_id.toString().padStart(3,0)+"</span>";
                         var id_produits = $('#id_prod').text();
                         $('#compte_epargne_codeepargne').val(code_client_+id_produits);

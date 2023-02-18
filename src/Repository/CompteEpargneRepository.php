@@ -824,7 +824,8 @@ class CompteEpargneRepository extends ServiceEntityRepository
         i.id,
         i.nom_client,
         i.prenom_client,
-        i.codeclient
+        i.codeclient,
+        i.date_naissance
         FROM App\Entity\Individuelclient i
         WHERE i.id = $id";
        

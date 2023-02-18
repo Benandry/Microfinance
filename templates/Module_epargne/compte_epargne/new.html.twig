@@ -6,13 +6,13 @@
 {% block body %}
 
     {{ include('modal.html.twig') }}
-
     <div class="card p-3">
         <div class="card mb-3">
             <div class="row text-secondary m-3">
                 <div class="col-xl-4 col-md-4 col-sm-4">
                     <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }}</span></p>   
                     <p> <b>Prenom client : </b> <span id="prenom"> {{ info.prenom_client }}</span></p> 
+                    <p style="display: none;" id="age_client">{{ year_client }}</p>
                 </div>
                 
                 <div class="col-md-4 col-sm-4 m-auto">
@@ -77,6 +77,13 @@
                 </tbody>
             {% endfor %}
         </table>
+        
+        <div id="modal-container">
+            <div id="modal">
+                <p id="modal-text"></p>
+                <div id="close-btn">&times;</div>
+            </div>
+        </div>
     </div>
 
             

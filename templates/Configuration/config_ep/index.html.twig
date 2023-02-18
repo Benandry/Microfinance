@@ -18,9 +18,10 @@
             <tr>
                 <th>Code Nom Produit</th>
                 <th>Negatif</th>
-                <th>Nombre jour minimum retrait</th>
-                <th>Nombre jour maximum depot</th>
-                <th>Age minimmum</th>
+                <th>Status</th>
+                <th>Jour minimum retrait</th>
+                <th>Jour maximum depot</th>
+                <th>Age minimum</th>
                 <th>Commission transaction</th>
                 <th>Frais Fermeture compte</th>
                 <th>Actions</th>
@@ -31,6 +32,7 @@
             <tr>
                 <td>{{ config_ep.produitEpargne.nomproduit }}</td>
                 <td>{{ config_ep.IsNegatif ? 'Oui' : 'Non' }}</td>
+                <td>{{ config_ep.statusProduit ? 'activé' : 'desactivé' }}</td>
                 <td>{{ config_ep.nbMinRet }}</td>
                 <td>{{ config_ep.NbrJrMaxDep }}</td>
                 <td>{{ config_ep.ageMinCpt }}</td>

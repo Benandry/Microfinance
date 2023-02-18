@@ -24,6 +24,16 @@ class AllApiController extends AbstractController
         return new JsonResponse($api);
     }
 
+    /**
+     * Configuration compte epargne
+     */
+    #[Route('/api/compte-epargne/individuel/{id}', name: 'app_api_individuel_compte_epargne')]
+    public function produit(ProduitEpargneRepository $produitRepo,$id): Response
+    {
+        $api = $produitRepo->findByConfigurationProduitEpargne($id); 
+        return new JsonResponse($api);
+    }
+
     #[Route('/api/transaction/{code}', name: 'app_api_transaction')]
 
     public function api_transaction(TransactionRepository $transactionRepository,$code): Response

@@ -59,7 +59,6 @@ class ProduitEpargneRepository extends ServiceEntityRepository
    {
         $query = 'SELECT
         p.nomproduit,
-        p.isdesactive,
         p.id,
         p.abbreviation
         FROM
@@ -129,6 +128,36 @@ class ProduitEpargneRepository extends ServiceEntityRepository
         INNER JOIN App\Entity\CompteEpargne ce
         WITH p.id = ce.produit 
          WHERE ce.codeepargne = '$code'
+        ";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+        return $stmt;
+    }
+
+    /**
+     * Fonction qui relier les produit epargne et configuration epargne
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function findByConfigurationProduitEpargne($id)
+    {
+        $query = " SELECT
+             p.nomproduit,
+             p.id Produit_id,
+             conf.IsNegatif,
+             conf.nbMinRet nombre_minimum_retrait,
+             conf.NbrJrMaxDep valeur_maximum_depot,
+             conf.ageMinCpt age_minimum_ouvrir_compte,
+             conf.commissionTransf commission_de_transaction,
+             conf.fraisFermCpt Frais_compte_tenu,
+             conf.soldeouvert solde_ouverture
+        FROM App\Entity\ProduitEpargne p 
+        INNER JOIN 
+        App\Entity\ConfigEp conf
+        WITH conf.produitEpargne = p.id
+        WHERE p.id = $id
         ";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();

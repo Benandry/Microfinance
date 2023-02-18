@@ -40,6 +40,9 @@ class ConfigEp
     #[ORM\ManyToOne(inversedBy: 'ConfigDevise')]
     private ?Devise $deviseutiliser = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $statusProduit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +152,18 @@ class ConfigEp
     public function setDeviseutiliser(?Devise $deviseutiliser): self
     {
         $this->deviseutiliser = $deviseutiliser;
+
+        return $this;
+    }
+
+    public function isStatusProduit(): ?bool
+    {
+        return $this->statusProduit;
+    }
+
+    public function setStatusProduit(?bool $statusProduit): self
+    {
+        $this->statusProduit = $statusProduit;
 
         return $this;
     }

@@ -19,9 +19,6 @@ class ProduitEpargne
     #[ORM\Column(length: 255)]
     private ?string $nomproduit = null;
 
-    #[ORM\Column]
-    private ?bool $isdesactive = null;
-
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: DepotAterme::class)]
     private Collection $peoduitep;
 
@@ -68,17 +65,6 @@ class ProduitEpargne
         return $this;
     }
 
-    public function isIsdesactive(): ?bool
-    {
-        return $this->isdesactive;
-    }
-
-    public function setIsdesactive(bool $isdesactive): self
-    {
-        $this->isdesactive = $isdesactive;
-
-        return $this;
-    }
 
     public function __toString()
     {

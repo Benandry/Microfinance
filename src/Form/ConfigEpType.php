@@ -8,6 +8,7 @@ use App\Entity\ProduitEpargne;
 use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,11 +24,7 @@ class ConfigEpType extends AbstractType
                 'choice_label'=> function ($c){
                     return $c->getNomproduit()." (".$c->getAbbreviation().")";
                 },
-                'query_builder' => function (ProduitEpargneRepository $er) {
-                    return $er->createQueryBuilder('p')
-                        ->andWhere("p.isdesactive = 1 ");
-                },
-                'placeholder' =>'Choisissez un produit ',
+                'placeholder' =>'Choisissez un produit : ',
                 'autocomplete'=>true,
                 'label'=>'Nom Produit',
             ])
@@ -36,7 +33,11 @@ class ConfigEpType extends AbstractType
                     'Oui'=>1,
                     'Non'=>0
                 ],
-                'label'=>'Compte Negatif',
+                'label'=>'Compte Negatif : ',
+            ])
+            ->add('statusProduit',CheckboxType::class,[
+                'required' => false,
+                'label' => "Activer "
             ])
             ->add('deviseutiliser',EntityType::class,[
                 'class'=>Devise::class,
@@ -48,22 +49,22 @@ class ConfigEpType extends AbstractType
             ])
 
             ->add('nbMinRet',IntegerType::class,[
-                'label'=>'Nombre jour minimum retrait',
+                'label'=>'Nombre jour minimum retrait : ',
             ])
             ->add('NbrJrMaxDep',IntegerType::class,[
-                'label'=>'Nombre maximum depot',
+                'label'=>'Nombre maximum depot : ',
             ])
             ->add('ageMinCpt',IntegerType::class,[
-                'label'=>'Age minimum ouvrir compte',
+                'label'=>'Age minimum ouvrir compte : ',
             ])
             ->add('commissionTransf',IntegerType::class,[
-                'label'=>'Commission transaction',
+                'label'=>'Commission transaction : ',
             ])
             ->add('fraisFermCpt',IntegerType::class,[
-                'label'=>'Frais compte tenu',
+                'label'=>'Frais compte tenu : ',
             ])
             ->add('soldeouvert',IntegerType::class,[
-                'label'=>'Solde d\'ouverture',
+                'label'=>'Solde d\'ouverture : ',
             ])
 
             //  Comptabilite

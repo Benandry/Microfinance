@@ -19,7 +19,6 @@
                 <th>Code produit</th>
                 <th>Nom produit</th>
                 <th>Abreviation </th>
-                <th>Status produit</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,9 +29,6 @@
                 <td>{{ "%03d" | format(produit_epargne.id) }}</td>
                 <td>{{ produit_epargne.nomproduit }}</td>
                 <td>{{ produit_epargne.abbreviation }}</td>
-                <td>
-                    <a class="btn btn-info btn-sm" style="color: #fff;">{{ produit_epargne.isdesactive ? 'Active':'Desactive' }}</a>
-                </td>
                 <td>
                     <div class="row">
                         <div class="col-sm-2">

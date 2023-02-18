@@ -3,16 +3,12 @@
 namespace App\Form;
 
 use App\Entity\CompteEpargne;
-use App\Entity\Groupe;
-use App\Entity\Individuelclient;
 use App\Entity\ProduitEpargne;
 use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,7 +46,8 @@ class CompteEpargneType extends AbstractType
                 },
                 'query_builder' => function (ProduitEpargneRepository $er) {
                     return $er->createQueryBuilder('p')
-                        ->andWhere("p.isdesactive = 1 ");
+                        ->join('p.ConfigProduit','config')
+                        ->andWhere("config.statusProduit = 1 ");
                 },
                 'placeholder' =>'Choisissez un produit ',
                 'autocomplete'=>true,

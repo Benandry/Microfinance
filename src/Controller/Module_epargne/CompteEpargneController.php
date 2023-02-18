@@ -42,8 +42,8 @@ class CompteEpargneController extends AbstractController
         /**
          * Information du client (nom,prennom,code client)
          */
-
         $info = $compteEpargneRepository->getInfoClient($code)[0];
+        $year_client = date("Y") - $info['date_naissance']->format('Y');
 
         $compte_existe=$compteEpargneRepository->compteClientCourant($info['codeclient']);
 
@@ -54,7 +54,6 @@ class CompteEpargneController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** Verifier que le compte est deja exister ou pas */
-            dd($compteEpargne->getProduit());
             //verifier dans la bas e de donne si le compte est deja existeE ou pas
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
             if ($verify_compte_epargne) {
@@ -62,7 +61,7 @@ class CompteEpargneController extends AbstractController
                 $this->addFlash('danger', "On ne peut pas creer un compte epargne car le numero ".$compteEpargne->getCodeepargne()." deja existe ");
                 return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
 
-                dd($verify_compte_epargne);
+                // dd($verify_compte_epargne);
             }else{
                 /** On peut creer un compte epargne */
                 $compteEpargneRepository->add($compteEpargne, true);
@@ -76,6 +75,7 @@ class CompteEpargneController extends AbstractController
             'form' => $form,
             'comptedujours'=>$compte_existe,
             'info' => $info,
+            'year_client' => $year_client
         ]);
     }
 
@@ -92,7 +92,6 @@ class CompteEpargneController extends AbstractController
 
         $id = $request->query->get('code');
         $info_groupe = $compteEpargneRepository->getInfoGroupe($id)[0];
-        // dd($info_groupe);
 
         $compteEpargneExiste = $compteEpargneRepository->compteEpargneExist($info_groupe['codegroupe']);
 
