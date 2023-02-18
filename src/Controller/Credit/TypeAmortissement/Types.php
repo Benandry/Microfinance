@@ -82,7 +82,7 @@ class Types
             $amortissement->setPeriode($tableau_amort[$i]['periode']);
             $amortissement->setCodeclient($codeclient);
             $amortissement->setCodecredit($codecredit);
-            $amortissement->setTypeamortissement('simple');
+            $amortissement->setTypeamortissement('Lineaire');
             $amortissement->setSoldedu($tableau_amort[$i]['soldedu']);
             $amortissement->setMontantRestantDu($tableau_amort[$i]['MontantRestantDu']);
             
@@ -109,13 +109,32 @@ class Types
          $dateRemb = date('Y/m/d');
          $dateRemb = date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
          $capitalDu = $data->getMontant() / $tranche;
+         $capital=$data->getMontant();
          $interetTotal = $data->getTauxInteretAnnuel();
          $interetDu = $interetTotal / $tranche;
          $CRD=$data->getMontant()-$capitalDu;
-         
+
+            
+                  
          $interet=$CRD*$interetDu/100;
          $MontantPayer=$capitalDu+$interet;
-         
+        /**
+         * Somme total des interets
+         */
+        $SommeInterets=$interet;
+         for ( $i = 1 ; $i < $tranche; $i++ ) {
+            $SommeInterets+=$interet;
+            $SommI=$SommeInterets/2;
+        }
+        /**
+         * Somme des interet et capital
+         */
+        $InteretCap=$SommI+$capital;
+        // dd($InteretCap);
+        $MRD=$InteretCap-$MontantPayer;
+        // dd($InteretCap);
+
+        // dd($SommI);
 
          $tableau_amort = [
              [
@@ -125,21 +144,22 @@ class Types
                  "interet" => $interet,
                  "montantPayer" =>$MontantPayer,
                  "soldedu"=>$CRD,
+                 "MontantRestantDu"=>$MRD,
              ],
-         ];
+         ]; 
+
  
-         // dd($tableau_amort);
          /******************************Amortissement simple ******************* */
          for ( $i = 1 ; $i < $tranche; $i++ ) {
              $dateRemb =  date("Y-m-d", strtotime($dateRemb.'+ 1 month'));
              /**
-              * S
+              * 
               */
  
              $CRD-=$capitalDu;
              $interet=$CRD*$interetDu/100;
              $MontantPayer=$capitalDu+$interet;
-             $MRD=($CRD+$interet)-$MontantPayer;
+             $MRD-=$MontantPayer;
  
             array_push($tableau_amort,[
                  'periode'=> $i+1,
@@ -148,11 +168,13 @@ class Types
                  'interet'=>$interet,
                  'montantPayer'=>$MontantPayer,
                  "soldedu"=>$CRD,
+                 "MontantRestantDu"=>$MRD,
              ]);
+
  
-         }
- 
-        //  dd($tableau_amort);
+            }
+            // dd($tableau_amort);
+
  
          /***Insertion dans la base de donner */
                          
@@ -166,8 +188,9 @@ class Types
              $amortissement->setPeriode($tableau_amort[$i]['periode']);
              $amortissement->setCodeclient($codeclient);
              $amortissement->setCodecredit($codecredit);
-             $amortissement->setTypeamortissement('simple');
+             $amortissement->setTypeamortissement('Degressif');
              $amortissement->setSoldedu($tableau_amort[$i]['soldedu']);
+             $amortissement->setMontantRestantDu($tableau_amort[$i]['MontantRestantDu']);
              
              $entityManager->persist($amortissement);
              $entityManager->flush();

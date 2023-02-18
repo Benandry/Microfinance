@@ -28,6 +28,7 @@
                     <th>Capital </th>
                     <th>Interet </th>
                     <th>Remboursement </th>
+                    <th>Montant Restant du </th>
                     <th>Capital restant du </th>
                     <th></th>
                 </tr>
@@ -40,6 +41,7 @@
                         <td>{{ tab.principale }}</td>
                         <td>{{ tab.interet }}</td>
                         <td>{{ tab.montanttTotal }}</td>
+                        <td>{{ tab.MontantRestantDu }}</td>
                         <td>{{ tab.soldedu }}</td>
                         <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td>
                     </tr>

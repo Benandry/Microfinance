@@ -25,13 +25,17 @@ $(document).ready(function(){
                         // console.log('hello world')
                         for(let j=0;j<content.length;j++){
                             var remboursementmodal=content[j];
+                            console.log(remboursementmodal.crd);
                             
-                            console.log(remboursementmodal);
                                 var resetapayer=parseFloat(remboursementmodal.montanttTotal)-parseFloat(remboursementmodal.montantrembourseModal);
                                 // console.log(resetapayer);
                                 $('#remboursement_modal_penaliteprecedent').val(remboursementmodal.penaliteremboursementModal);
                                 $('#remboursement_modal_montantprecedent').val(remboursementmodal.montantrembourseModal);
-                                $('#remboursement_modal_restemontant').val(resetapayer);
+                                if(remboursementmodal.montantrembourseModal == null){
+                                    $('#remboursement_modal_restemontant').val(0);
+                                }else{
+                                    $('#remboursement_modal_restemontant').val(resetapayer);
+                                }
                                 // consoletypeof(remboursementmodal.montanttTotal);
                                 if(remboursementmodal.penaliteremboursementModal != null){
                                     $('#remboursement_modal_montantdu').val(parseFloat(remboursementmodal.montanttTotal)+parseFloat(remboursementmodal.penaliteremboursementModal)+parseFloat(resetapayer));
@@ -46,6 +50,7 @@ $(document).ready(function(){
                                     console.log(remboursementmodal.perioderemboursementModal);
                                     $('#remboursement_modal_periode').val(remboursementmodal.perioderemboursementModal);
                                 }
+                                $('#remboursement_modal_crd').val(remboursementmodal.crd);
                                 
                         }
                     }
@@ -94,26 +99,22 @@ $(document).ready(function(){
             // console.log('code credit'+codecredit);
             
             $('#remboursement_credit_NumeroCredit').val(codecredit);
-
+                var periode = $('#periodeprecedent').text();
+                periode++;
                 // url
-                var url_api='/remboursement/periode/'+codecredit;
-                console.log(url_api);
+                var url_api='/remboursement/periode/'+codecredit+'/'+periode;
 
                 $.ajax({
                     url:url_api,
                     method:'GET',
                     dataType:"json",
                     contentType:"application/json; charset=utf-8",
-                    data : JSON.stringify(codecredit),
+                    data : JSON.stringify(codecredit,periode),
                     success : function(content){
                         for(let j=0;j<content.length;j++){
                             var remboursement=content[j];
-                            // console.log(remboursement);
 
-                            // $('#montant').val(remboursement.montanttTotal)
-                            // document.getElementById('montant').innerHTML=remboursement.montanttTotal;
                             document.getElementById('periode').innerHTML=remboursement.maxperiode;
-                            // console.log('maxperiode'+remboursement.maxperiode);
 
                             // Si remboursement égal a null
                             // On recupere la periode dans ammortissement
@@ -121,15 +122,9 @@ $(document).ready(function(){
                             if(remboursement.perioderemboursement == null)
                             {
                                 $('#remboursement_credit_periode').val(remboursement.periode);
-                                // if(periode == NaN){
-                                //     periode = 1;
-                                //     var url_api_ammortissement='/remboursement/ammortissement/'+codecredit+'/'+periode;
-                                // }
-                                // else{
-                                    var url_api_ammortissement='/remboursement/ammortissement/'+codecredit+'/'+periode;
-                                // }
-                                // console.log(url_api_ammortissement);
-                                
+
+                                    var url_api_ammortissement='/remboursement/ammortissement/'+codecredit+'/'+periode;                                
+
                                 $.ajax({
                                     url:url_api_ammortissement,
                                     method:'GET',
@@ -201,10 +196,7 @@ $(document).ready(function(){
                                         }
                                             // Sinon on complete le remboursement ,
                                         else{
-                                                // Si le montant precedent n'est pas complet
-
-                                                
-                                                
+                                                // Si le montant precedent n'est pas complet    
                                                 // Si le somme des montant sont encore minimum par
                                                 // rapport au montant du ,encore penalisé
                                                     var montantprecedent=remboursement.montantrembourse;

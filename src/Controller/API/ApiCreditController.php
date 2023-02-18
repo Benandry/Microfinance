@@ -79,7 +79,7 @@ class ApiCreditController extends AbstractController
      /**
      * Fonction qui recupere les api remboursement sur le modal
      */
-    #[Route('/remboursement/modal/{numerocredit}',name:'app_remboursement_periode_modal')]
+    #[Route('/remboursement/modal/{numerocredit}',name:'app_modalremb')]
     public function ApiRemboursementModal(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
     {
         $remboursement=$remboursementCreditRepository->ApiRemboursementModal($numerocredit);

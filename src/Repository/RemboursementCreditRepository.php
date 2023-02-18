@@ -269,6 +269,7 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 amortissement.commission,
                 amortissement.codecredit,
                 amortissement.typeamortissement,
+                SUM(amortissement.montanttTotal) crd,
             -- remboursement
                 remboursement.periode perioderemboursementModal,
                 remboursement.MontantTotalPaye montantrembourseModal,

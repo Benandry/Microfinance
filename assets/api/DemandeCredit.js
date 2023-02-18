@@ -101,6 +101,7 @@ $(document).ready(function(){
                         success : function(content){
                             for(let j=0;j<content.length;j++){    
                                 var garant=content[j];
+                                console.log(garant.codeclient);
 
                                 // Affichage du nom client
 
@@ -111,7 +112,7 @@ $(document).ready(function(){
 
                             // Si les contenu dans le code client,nom client,prenom client,cin sont
                             // vide
-                            if(codeclient != ' ' && nomclient != ' ' && prenomclient != ' ' && cin != ' '){
+                            if(codeclient != ""){
 
                                 document.getElementById('codeclient').innerHTML=codeclient;
                                 document.getElementById('nomgarant').innerHTML=nomclient;
@@ -119,8 +120,7 @@ $(document).ready(function(){
                                 document.getElementById('cin').innerHTML=cin;      
                                 $('#garant').show();
                             }
-                            else if(codeclient == ' ' && nomclient == ' ' && prenomclient == ' ' && cin == ' ') {
-                                alert('Cette personne n\'est pas garant');
+                            else {
                                 $('#garant').hide();
                             }
                             }
@@ -198,6 +198,10 @@ $(document).ready(function(){
                         var config=content[j];
                         console.log(config);
 
+                        // Recuperation du taux garantie financiere
+                        var tauxgarantiefinanciere=config.TauxGarantieFinanciere;
+
+
                         // Afficher le nombre tranche 
                         $('#demande_credit_NombreTranche').val(config.Tranche);
                         // Afficher la methode
@@ -215,7 +219,7 @@ $(document).ready(function(){
                             // de [Montantmin,MontantMax]  
                             if(montant < config.MontantMin || montant > config.Montant ){
                                 alert('Montant refusé');
-
+                                $('.btn').hide();
                             }
                         });
 
@@ -246,8 +250,17 @@ $(document).ready(function(){
                                             success : function(content){
                                                 for(let j=0;j<content.length;j++){
                                                     var garantiefinanciere=content[j];
+
+                                                        // Si le compte epargne n'est pas un depot de garantie
+                                                        var compteepargne=garantiefinanciere.nomproduit;
+                                                        if( compteepargne != "D\u00e9p\u00f4ts de garantie"){
+                                                            alert("Vous n'avez pas de depot de garantie");
+                                                            $('.btn').hide();
+                                                        }
+
                                                         // Si le code client taper sur le champ code client est different
                                                         // de celui de
+                                                    
                                                         if(codeclient == garantiefinanciere.codeclient){
                                                             $('#demande_credit_SoldeEpargne').val(garantiefinanciere.solde);
                                                         }
@@ -255,6 +268,23 @@ $(document).ready(function(){
                                                             alert('Deux compte differente');
                                                             $('.btn').hide();
                                                         }
+
+                                                        // Si le solde du compte epargne est inferieur a celui du demande
+                                                        var solde=garantiefinanciere.solde;
+                                                        var montant=$('#demande_credit_Montant').val();
+                                                        // Regle de 3  sur le pourcentage solde
+                                                        // montant->100%
+                                                        // solde->?
+                                                        var pourcentagesolde=solde*100/montant;
+
+                                                        console.log(pourcentagesolde+" "+tauxgarantiefinanciere);
+
+                                                        // Si le pourcetage solde est inferieur au config
+                                                        if(pourcentagesolde < tauxgarantiefinanciere){
+                                                            alert('Le montant demandé est plus de '+tauxgarantiefinanciere+' % par rapport au demande');
+                                                            $('.btn').hide();
+                                                        }
+                                                         
                                                 }
                                             }                    
                                         });
@@ -267,8 +297,6 @@ $(document).ready(function(){
                             if( config.GarantieMoral == true){
                                 // On affiche le champ à remplir pour le garantie Moral
                                 $('#garantiemorale').show();
-
-
                             }
                     }
                 }

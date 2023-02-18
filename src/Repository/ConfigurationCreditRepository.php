@@ -39,7 +39,6 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
         }
     }
 
-<<<<<<< HEAD
     /**
      *@method mixed ConfigurationCredit():Methode permet de lister tout les configurations credit
      * @param mixed $produitcredit:
@@ -87,8 +86,6 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
         
     }
 
-=======
->>>>>>> f47fbee (reconfiguration credit)
 //    /**
 //     * @return ConfigurationCredit[] Returns an array of ConfigurationCredit objects
 //     */
