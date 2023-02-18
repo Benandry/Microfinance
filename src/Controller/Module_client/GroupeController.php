@@ -12,6 +12,7 @@ use App\Repository\AgenceRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\MembreGroupeRepository;
 use App\Repository\IndividuelclientRepository;
+use App\Service\QRcode;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,17 +53,12 @@ class GroupeController extends AbstractController
         }else{
             $agence_client = $get_id_agence[0]['id'];
         }
-       # agence_client = 0
-      #  dd($agence_client);
-
 
         $groupe = new Groupe();
         $form = $this->createForm(GroupeType::class, $groupe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-          //  dd($form->getData());
 
             $groupeRepository->add($groupe, true);
             
@@ -79,22 +75,18 @@ class GroupeController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'app_groupe_show')]
-    public function show(GroupeRepository $groupeRepo, ManagerRegistry $doctrine,$id): Response
+    public function show(GroupeRepository $groupeRepo, ManagerRegistry $doctrine,$id, QRcode $qr_code): Response
     {        
         $groupes=$doctrine->getRepository(Groupe::class)->find($id);
-
-
         $membre=$groupes->getIndividuelMembre();
 
         $membreGroupe = $groupeRepo->membreGroupe($id);
-
-        #dd($membreGroupe);
-        #dd($membre);
-        // Agence
         $agence=$doctrine->getRepository(Agence::class)->findAll();
 
+        // dd($qr_code->getQrCode($groupes));
         return $this->render('Module_client/groupe/show.html.twig',
                 [
+                    'qr_code' => $qr_code->getQrCode($groupes),
                     'agences'=>$agence,
                     'membre'=>$membre,
                     'groupe'=>$groupes,

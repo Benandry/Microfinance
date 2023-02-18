@@ -251,5 +251,19 @@ $(document).ready(function(){
               windowWidth: 675 //window width in CSS pixels
             });
         })
+
+        // $('#imprimer-carte').on('click',() => {
+        //     var node = document.querySelector('#carte-epargne');
+
+        //     domtoimage.toPng(node).then(dataUrl => {
+        //         var image = new Image();
+        //         image.src = dataUrl;
+        //         dowloadURI(dataUrl,'stafff.png');
+        //     })
+        //     .catch(error => {
+        //         console.error(error,"Error zoky eee");
+        //     })
+        // });
+        
 });
 
