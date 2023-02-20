@@ -578,6 +578,48 @@ class TransactionRepository extends ServiceEntityRepository
 
         return $statement;
     }
+
+    /**
+     * Cette fonction qui recupere tous configuraton du produit epargne pour comptabiliser
+     *
+     * @param [type] $code
+     * @return void
+     */
+    public function findConfigEpDepotDebit(){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+        "SELECT 
+            pc
+        FROM
+        App\Entity\ConfigEp conf
+        INNER JOIN App\Entity\ProduitEpargne pe
+        WITH conf.produitEpargne = pe.id
+
+        INNER JOIN App\Entity\Plancomptable pc 
+        with conf.comptedebiteE = pc.id
+        ");
+
+        return  $query->getResult();
+    }
+
+    public function findConfigEpDepotCredit(){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+        "SELECT 
+            pc
+        FROM
+        App\Entity\ConfigEp conf
+        INNER JOIN App\Entity\ProduitEpargne pe
+        WITH conf.produitEpargne = pe.id
+
+        INNER JOIN App\Entity\Plancomptable pc 
+        with conf.compteCrediteE = pc.id
+        ");
+
+        return  $query->getResult();
+    }
 }
 
 

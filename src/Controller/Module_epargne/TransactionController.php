@@ -104,6 +104,12 @@ class TransactionController extends AbstractController
 
         // dd($transaction);
         if ($form->isSubmitted() && $form->isValid()) {
+            /**Configuration du produit epargne */
+            $configDebit = $transactionRepository->findConfigEpDepotDebit();
+            $configCredit = $transactionRepository->findConfigEpDepotCredit();
+
+            // dd($configDebit,$configCredit);
+
             if($transaction->getMontant() > 0){
                 $transaction->setCodetransaction(random_int(2,1000000000));
                 $transaction->setDescription($transaction->getDescription()." Compte epargne");
