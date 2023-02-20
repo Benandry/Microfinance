@@ -9,53 +9,135 @@ $(document).ready(function(){
      */
     if( path === '/modal/remboursement' ){
         
-        $('#remboursement_modal_codecredit').on('keyup',function(){
+            /**
+             * Recuperation des informations groupe ou individuel
+             */
+            $('#remboursement_modal_typeclient').on('change',function(){
+                var typeclient=$('#remboursement_modal_typeclient').val();
+                if(typeclient == 'INDIVIDUEL'){
+                    $('#remboursement_modal_codecredit').val('I');
+                }
+                else if(typeclient == 'GROUPE'){
+                    $('#remboursement_modal_codecredit').val('G');
+                }
 
-            var numerocredit=$('#remboursement_modal_codecredit').val();
 
-            var url_modal='/remboursement/modal/'+numerocredit;
+                $('#remboursement_modal_codecredit').on('keyup',function(){
 
-                $.ajax({
-                    url:url_modal,
-                    method:'GET',
-                    dataType:"json",
-                    contentType:"application/json; charset=utf-8",
-                    data : JSON.stringify(numerocredit),
-                    success : function(content){
-                        // console.log('hello world')
-                        for(let j=0;j<content.length;j++){
-                            var remboursementmodal=content[j];
-                            console.log(remboursementmodal.crd);
-                            
-                                var resetapayer=parseFloat(remboursementmodal.montanttTotal)-parseFloat(remboursementmodal.montantrembourseModal);
-                                // console.log(resetapayer);
-                                $('#remboursement_modal_penaliteprecedent').val(remboursementmodal.penaliteremboursementModal);
-                                $('#remboursement_modal_montantprecedent').val(remboursementmodal.montantrembourseModal);
-                                if(remboursementmodal.montantrembourseModal == null){
-                                    $('#remboursement_modal_restemontant').val(0);
-                                }else{
-                                    $('#remboursement_modal_restemontant').val(resetapayer);
-                                }
-                                // consoletypeof(remboursementmodal.montanttTotal);
-                                if(remboursementmodal.penaliteremboursementModal != null){
-                                    $('#remboursement_modal_montantdu').val(parseFloat(remboursementmodal.montanttTotal)+parseFloat(remboursementmodal.penaliteremboursementModal)+parseFloat(resetapayer));
-                                }
-                                // $('#remboursement_modal_montantdu').val(parseFloat(remboursementmodal.montanttTotal));
+                    var numerocredit=$('#remboursement_modal_codecredit').val();
 
-                                if(remboursementmodal.perioderemboursementModal == null){
-                                    // console.log(0);
-                                    $('#remboursement_modal_periode').val(0);
+                    if(typeclient == 'INDIVIDUEL'){
+                        var url_individuel="/modalindividuel/"+numerocredit;
+                        $.ajax({
+                            url:url_individuel,
+                            method:'GET',
+                            dataType:"json",
+                            contentType:"application/json; charset=utf-8",
+                            data : JSON.stringify(numerocredit),
+                            success : function(content){
+                                for(let j=0;j<content.length;j++){
+                                    var individuel=content[j];
+    
+                                    console.log(individuel);
+                                    var nomclient=individuel.nom_client;
+                                    var prenomclient=individuel.prenom_client;
+    
+                                    document.getElementById('nom').innerHTML=nomclient+" "+prenomclient;
+    
                                 }
-                                else{
-                                    console.log(remboursementmodal.perioderemboursementModal);
-                                    $('#remboursement_modal_periode').val(remboursementmodal.perioderemboursementModal);
-                                }
-                                $('#remboursement_modal_crd').val(remboursementmodal.crd);
-                                
-                        }
+                            }
+                        })      
                     }
-                }) 
-        })
+                    else if(typeclient == 'GROUPE'){
+                        var url_groupe="/groupemodal/"+numerocredit;
+                        $.ajax({
+                            url:url_groupe,
+                            method:'GET',
+                            dataType:"json",
+                            contentType:"application/json; charset=utf-8",
+                            data : JSON.stringify(numerocredit),
+                            success : function(content){
+                                for(let j=0;j<content.length;j++){
+                                    var groupe=content[j];
+                                    var nomgroupe=groupe.nomGroupe;
+                                    console.log(groupe);
+    
+                                    document.getElementById('nom').innerHTML=nomgroupe;
+                                          
+                                }
+                            }
+                        })      
+                    }
+    
+        
+                    var url_modal='/remboursement/modal/'+numerocredit;
+        
+                        $.ajax({
+                            url:url_modal,
+                            method:'GET',
+                            dataType:"json",
+                            contentType:"application/json; charset=utf-8",
+                            data : JSON.stringify(numerocredit),
+                            success : function(content){
+                                // console.log('hello world')
+                                for(let j=0;j<content.length;j++){
+                                    var remboursementmodal=content[j];
+                                    console.log(remboursementmodal);
+                                    
+                                        var resetapayer=parseFloat(remboursementmodal.montanttTotal)-parseFloat(remboursementmodal.montantrembourseModal);
+                                        // console.log(resetapayer);
+                                        $('#remboursement_modal_penaliteprecedent').val(remboursementmodal.penaliteremboursementModal);
+                                        $('#remboursement_modal_montantprecedent').val(remboursementmodal.montantrembourseModal);
+                                        if(remboursementmodal.montantrembourseModal == null){
+                                            $('#remboursement_modal_restemontant').val(0);
+                                        }else{
+                                            $('#remboursement_modal_restemontant').val(resetapayer);
+                                        }
+                                        // consoletypeof(remboursementmodal.montanttTotal);
+                                        if(remboursementmodal.penaliteremboursementModal != null){
+                                            $('#remboursement_modal_montantdu').val(parseFloat(remboursementmodal.montanttTotal)+parseFloat(remboursementmodal.penaliteremboursementModal)+parseFloat(resetapayer));
+                                        }
+                                        // $('#remboursement_modal_montantdu').val(parseFloat(remboursementmodal.montanttTotal));
+        
+                                        if(remboursementmodal.perioderemboursementModal == null){
+                                            // console.log(0);
+                                            $('#remboursement_modal_periode').val(0);
+                                        }
+                                        else{
+                                            console.log(remboursementmodal.perioderemboursementModal);
+                                            $('#remboursement_modal_periode').val(remboursementmodal.perioderemboursementModal);
+                                        }
+                                        $('#remboursement_modal_TotalPeriode').val(remboursementmodal.NombreTranche);
+                                        
+                                        
+                                }
+                            }
+                        }) 
+        
+                /**
+                 * Recuperation des somme des valeurs
+                **/
+                    var url_somme="/sommeremboursement/somme/"+numerocredit;
+                    $.ajax({
+                        url:url_somme,
+                        method:'GET',
+                        dataType:"json",
+                        contentType:"application/json; charset=utf-8",
+                        data : JSON.stringify(numerocredit),
+                        success : function(content){
+                            for(let j=0;j<content.length;j++){
+                                var sommecredit=content[j];
+                                $('#remboursement_modal_crd').val(sommecredit.crd);
+                                $('#remboursement_modal_TotalRembourser').val(sommecredit.TotalRembourser);
+                                $('#remboursement_modal_TotalaRembourser').val(sommecredit.TotalARembourser);
+                            }
+                        }
+                    })
+                    
+                })
+        
+        
+            })
 
     }
 
@@ -160,8 +242,8 @@ $(document).ready(function(){
 
                                         }
                                     }
-                                })                                 
-                                
+                                })    
+                                                                
                             }
                             // sinon on incremente le periode
                             else{

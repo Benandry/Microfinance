@@ -67,6 +67,73 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
     }
 
+
+        /**
+     * Undocumented function
+     *@method mixed InfoClientModalIndividuel() : Mehode permet de connaitre l'information 
+     *individuel
+     *@param mixed $NumeroCredit:code client individuel
+     * @return void
+     */
+    public function InfoClientModalIndividuel($NumeroCredit){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                individuel.codeclient,
+                individuel.nom_client,
+                individuel.prenom_client
+                FROM
+                    App\Entity\DemandeCredit demande
+                    INNER JOIN
+                    App\Entity\IndividuelClient individuel
+                    WITH
+                    demande.codeclient=individuel.codeclient
+                WHERE
+                    demande.NumeroCredit = :NumeroCredit
+            '
+        )
+        ->setParameter(':NumeroCredit',$NumeroCredit);
+
+        return $query->getResult();
+
+    }
+
+       /**
+     * Undocumented function
+     *@method mixed InfoClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return void
+     */
+    public function InfoClientModalGroupe($NumeroCredit){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                groupe.nomGroupe,
+                groupe.dateInscription,
+                groupe.numeroMobile,
+                groupe.email
+                FROM
+                    App\Entity\DemandeCredit demande
+                    INNER JOIN
+                    App\Entity\Groupe groupe
+                    WITH
+                    demande.codeclient=groupe.codegroupe
+                WHERE
+                    demande.NumeroCredit = :NumeroCredit
+            '
+        )
+        ->setParameter(':NumeroCredit',$NumeroCredit);
+
+        return $query->getResult();
+
+    }
+
+
        /**
      * Undocumented function
      *@method mixed InfoClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 

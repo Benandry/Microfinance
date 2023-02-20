@@ -14,7 +14,7 @@
             <div class="col-12 col-sm-12 col-md-12">
               <h6 class="text-center text-primary">Etat civile</h6>
                     <div class="row" >
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" style="display:none;">
                                 {{ form_row(form.NumeroCredit) }}
                             </div>
                             <div class="col-sm-3">
@@ -23,7 +23,7 @@
                             <div class="col-sm-3">
                                 {{ form_row(form.MontantTotalPaye) }}
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" style="display:none;">
                                 {{ form_row(form.periode) }}
                             </div>
                     </div>
@@ -33,10 +33,12 @@
                     <div class="col-sm-5">
                         {{ form_row(form.PieceCompteble) }}
                         {{ form_row(form.Papeterie) }}
+                        <div  style="display:none;">
                         {{ form_row(form.Commentaire) }}
                         {{ form_row(form.penalite) }}
                         {{ form_row(form.Anticipe) }}
                         {{ form_row(form.MontantEcheance) }}
+                        </div>
                     </div>
 
                     <div class="col-sm-3" style="margin-top:25px;margin-left:100px">
@@ -63,8 +65,8 @@
                                     <th scope="col">Date defini</th>
                                     <th scope="col">Date de remboursement</th>
                                     <th scope="col">Periode</th>
-                                    <th scope="col">Montant du</th>
-                                    <th scope="col">Montant paye</th>
+                                    <th scope="col">Remboursement</th>
+                                    <th scope="col">Payement</th>
                                     <th scope="col">Penalite</th>
                                 </tr>
                             </thead>
@@ -111,8 +113,8 @@
                                     <th scope="col">Principale</th>
                                     <th scope="col">interet</th>
                                     <th scope="col">montant Total</th>
-                                    <th scope="col">annuite</th>
-                                    <th scope="col">commission</th>
+                                    {# <th scope="col">annuite</th>
+                                    <th scope="col">commission</th> #}
                                     <th scope="col">type amortissement</th>
                                 </tr>
                             </thead>
@@ -124,8 +126,8 @@
                                         <td>{{ AmortissementFixe.principale }}</td>
                                         <td>{{ AmortissementFixe.interet }}</td>
                                         <td>{{ AmortissementFixe.montanttTotal }}</td>
-                                        <td>{{ AmortissementFixe.annuite }}</td>
-                                        <td>{{ AmortissementFixe.commission }}</td>
+                                        {# <td>{{ AmortissementFixe.annuite }}</td>
+                                        <td>{{ AmortissementFixe.commission }}</td> #}
                                         <td>{{ AmortissementFixe.typeamortissement }}</td>
                                     </tr>
                             {%  endfor %}

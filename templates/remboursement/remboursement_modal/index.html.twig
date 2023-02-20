@@ -22,25 +22,33 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-4 col-sm-4">
-                                <div id="code_suggest"></div>
 
                                 <div id="info_client">
                                     {{ form_row(form.typeclient)}}
                                     {{ form_row(form.codecredit)}}
-                                    {{ form_row(form.penaliteprecedent)}}
-                                    {{ form_row(form.montantprecedent)}}
-                                    {{ form_row(form.montantdu)}}
-                                    {{ form_row(form.periode)}}
-                                    {{ form_row(form.restemontant)}}
-                                    {{ form_row(form.crd)}}
+                                    <div style="display:none;">
+                                        {{ form_row(form.penaliteprecedent)}}
+                                        {{ form_row(form.montantprecedent)}}
+                                        {{ form_row(form.montantdu)}}
+                                        {{ form_row(form.periode)}}
+                                        {{ form_row(form.restemontant)}}
+                                        {{ form_row(form.crd)}}
+                                        {{ form_row(form.TotalRembourser)}}
+                                        {{ form_row(form.TotalaRembourser)}}
+                                        {{ form_row(form.TotalPeriode)}}
+                                    </div>
 
                                 </div>
                             </div>
-                            {# <div class="col-auto col-sm-auto mt-3 ms-5" >
-                                <p class="fw-bold"> Code Client : <span id="code_cli"></span> </p>
-                                <p class="fw-bold"> Nom Client : <span id="nom_cli"></span> </p>
-                                <p class="fw-bold"> Prenom Client : <span id="prenom_cli"></span> </p>
-                            </div> #}
+
+                             <div class="col-4 col-sm-4">
+
+                                <div id="info_client">
+                                   <b>Nom:<span id="nom"></span></b>
+                                   <hr>
+                                   {# <b>Prenom:<span id=""></span></b> #}
+                                </div>
+                            </div>
                             
                         </div>
 

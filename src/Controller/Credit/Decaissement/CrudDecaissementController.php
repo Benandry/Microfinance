@@ -4,8 +4,10 @@ namespace App\Controller\Credit\Decaissement;
 
 use App\Controller\Comptabilite\TraitementCompta\ComptaDecaissement;
 use App\Entity\Decaissement;
+use App\Entity\Transaction;
 use App\Form\DecaissementType;
 use App\Repository\DecaissementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +26,11 @@ class CrudDecaissementController extends AbstractController
     }
 
     #[Route('/new/individuel', name: 'app_crud_decaissement_new_individuel', methods: ['GET', 'POST'])]
-    public function individuel(ManagerRegistry $doctrine, Request $request, DecaissementRepository $decaissementRepository,ComptaDecaissement $compta): Response
+    public function individuel(EntityManagerInterface $em,ManagerRegistry $doctrine, Request $request, DecaissementRepository $decaissementRepository,ComptaDecaissement $compta): Response
     {
         $demandeApprouver = $request->query->all();
         $decaissement = new Decaissement();
+        $transaction= new Transaction();
         // dd($demandeApprouver);
 
         $codecredit = $demandeApprouver['liste']['codeclient'];
@@ -38,10 +41,42 @@ class CrudDecaissementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Reference de decaissement
+            //Envoi du solde dans le compte epargne
+            $transaction->setDescription('TRANSFERT');
+
+            $piececomptable=$decaissement->getPieceComptable();
+            $transaction->setPieceComptable($piececomptable);
+
+            $datedecaissement=$decaissement->getDateDecaissement();
+            $transaction->setDateTransaction($datedecaissement);
+
+            $montant=$decaissement->getMontantCredit();
+            $transaction->setMontant($montant);
+
+            $papeterie=$decaissement->getFraisPapeterie();
+            $transaction->setPapeterie($papeterie);
+
+            $commission=$decaissement->getCommissionCredit();
+            $transaction->setCommission($commission);
+
+            $transaction->setTypeClient("INDIVIDUEL");
+
+            $transaction->setSolde($montant);
+
+            $codetransaction=random_int(2,1000000000);
+            $transaction->setCodetransaction($codetransaction);
+
+            $codeepargne=$decaissement->getNumeroCompteEpargne();
+            $transaction->setCodeepargneclient($codeepargne);
+
+
+            $em->persist($transaction);
+            $em->flush();
+
+
 
             // dd($decaissement->getNumeroCredit());
-            $decaissement->setRefDecaissement(random_int(2,1000000000));
+            $decaissement->setRefDecaissement($codetransaction);
 
             $em=$doctrine->getManager();
             
@@ -64,10 +99,11 @@ class CrudDecaissementController extends AbstractController
     }
 
     #[Route('/new/groupe', name: 'app_crud_decaissement_new_groupe', methods: ['GET', 'POST'])]
-    public function groupe(ManagerRegistry $doctrine, ComptaDecaissement $compta, Request $request, DecaissementRepository $decaissementRepository): Response
+    public function groupe(EntityManagerInterface $em,ManagerRegistry $doctrine, ComptaDecaissement $compta, Request $request, DecaissementRepository $decaissementRepository): Response
     {
         $demandeApprouver = $request->query->all();
         $decaissement = new Decaissement();
+        $transaction=new Transaction();
         $codecredit = $demandeApprouver['liste']['codeclient'];
         
         $cycle = $decaissementRepository->findByCycle($codecredit)[0][1];
@@ -76,10 +112,42 @@ class CrudDecaissementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Reference de decaissement
+                        //Envoi du solde dans le compte epargne
+                        $transaction->setDescription('TRANSFERT');
+
+                        $piececomptable=$decaissement->getPieceComptable();
+                        $transaction->setPieceComptable($piececomptable);
+            
+                        $datedecaissement=$decaissement->getDateDecaissement();
+                        $transaction->setDateTransaction($datedecaissement);
+            
+                        $montant=$decaissement->getMontantCredit();
+                        $transaction->setMontant($montant);
+            
+                        $papeterie=$decaissement->getFraisPapeterie();
+                        $transaction->setPapeterie($papeterie);
+            
+                        $commission=$decaissement->getCommissionCredit();
+                        $transaction->setCommission($commission);
+            
+                        $transaction->setTypeClient("GROUPE");
+            
+                        $transaction->setSolde($montant);
+            
+                        $codetransaction=random_int(2,1000000000);
+                        $transaction->setCodetransaction($codetransaction);
+            
+                        $codeepargne=$decaissement->getNumeroCompteEpargne();
+                        $transaction->setCodeepargneclient($codeepargne);
+            
+            
+                        $em->persist($transaction);
+                        $em->flush();
+            
+
 
             // dd($decaissement);
-            $decaissement->setRefDecaissement(random_int(2,1000000000));
+            $decaissement->setRefDecaissement($codetransaction);
 
             $em=$doctrine->getManager();
             

@@ -34,9 +34,12 @@ class RemboursementCreditController extends AbstractController
         $montantprecedent = $request->query->get('montant');
         $montantdu = $request->query->get('montantdu');
         $periode = $request->query->get('periode');
+        $totalperiode=$request->query->get('TotalPeriode');
         $restemontant = $request->query->get('restemontant');
         $resteprecedent=$restemontant+$penalitenonrmebourser;
         $crd=$request->query->get('crd');
+        $TotalRembourser=$request->query->get('TotalRembourser');
+        $TotalaRembourser=$request->query->get('TotalaRembourser');
         
         // dd($typeclient);
 
@@ -64,25 +67,21 @@ class RemboursementCreditController extends AbstractController
 
             $montantrembourser = $remboursementCredit->getMontantTotalPaye();
 
-            if ($montantrembourser > $echeance) {
+            if ($montantrembourser > $echeance && $restemontant == 0) {
                 $periodeactuel=$remboursementCredit->getPeriode();
                 $commentaire='ANTICIPE';
 
-                // Test du montant anticipe
-                $MontantAnticipe=$montantrembourser-$echeance;
+                // Calcul des periodes restant
+                $resteperiode=$totalperiode-$periode;
+                // dd($resteperiode); 
 
-                $montantrembourseranticipe=$montantrembourser-$MontantAnticipe;
 
-                // Test periode
+                // Regle de 3
+                $tranche=$montantrembourser*$resteperiode/$TotalaRembourser;
+                // dd($tranche);
 
-                // $periodeanticipe=$MontantAnticipe;
-
-                // dd($MontantAnticipe);
-
-                // dd($periodeactuel);
-                // recuperation montant
-
-                // $montantanticp=$montantrembourser/$anticipe;
+                // Montant anticipé
+                $montantrembourseranticipe=$montantrembourser/$tranche;
 
                 $montant=[
                     [
@@ -102,16 +101,15 @@ class RemboursementCreditController extends AbstractController
                     ]
                 ];
 
-                // for($i=1 ; $i < $anticipe ;$i++){
+                for($i=1 ; $i < $tranche ;$i++){
 
                     // On incremente la periode 
-                    // $periodeactuel++;
                     
                     array_push($montant,[
                         'NumeroCredit' => $remboursementCredit->getNumeroCredit(),
                         'DateRemboursement'=>$remboursementCredit->getDateRemboursement(),
                         'PieceCompteble' => $remboursementCredit->getPieceCompteble(),
-                        'MontantTotalPaye' => $MontantAnticipe,
+                        'MontantTotalPaye' => $montantrembourseranticipe,
                         'Papeterie' => $remboursementCredit->getPapeterie(),
                         'TransactionEnLiquide' => $remboursementCredit->isTransactionEnLiquide(),
                         'TransfertEpargne' => $remboursementCredit->isTransfertEpargne(),
@@ -122,7 +120,9 @@ class RemboursementCreditController extends AbstractController
                         'TypeClient'=>$typeclient
                     ]);
 
-                // }
+                }
+
+                // dd($montant);
 
                 // On inserer dans la base de donnees
                 foreach($montant as $montant){
@@ -160,18 +160,21 @@ class RemboursementCreditController extends AbstractController
 
                 $MontantEcheance=$remboursementCredit->getMontantEcheance();
 
-                // La somme que le crediteur doit payer
-                $montantducredit=$MontantEcheance+$resteprecedent;
-
-                // dd($montantducredit);
-
-
                 // On recuperer le montant taper par l'utilisateur
                 $montantrembourser = $remboursementCredit->getMontantTotalPaye();
 
                 // On recupere le montant precedent et on fait la difference pour avoir 
                 // le reste a payer
                 $resteapayeravecpenalite = $resteprecedent;
+                // dd($resteapayeravecpenalite);
+
+                // dd($montantrembourser.'-'.$restemontant.'='.$montantacomplementer);
+
+                // Reste sans penalite
+                $restemontant;
+
+                // penalite
+                $penalitenonrmebourser;
 
                 // avec les penalites
                 // $resteapayeravecpenalite = $resteapayer + $penalitenonrmebourser;
@@ -180,9 +183,15 @@ class RemboursementCreditController extends AbstractController
                 $reste = $montantrembourser - $resteapayeravecpenalite;
 
                 // Complement du manque precedent
-                $complement = $resteapayeravecpenalite + $montantprecedent;
+                $complement = $resteapayeravecpenalite-$penalitenonrmebourser;
 
+                // penelite
+                $penalitearemb=$penalitenonrmebourser;
+                // Autre
+                $penal=0;
                 // Stocke dans la table
+
+                // dd($reste,$complement,$penalitearemb);
 
                 // dd($reste,$complement);
                 // Si le reste egal au montant du
@@ -202,7 +211,8 @@ class RemboursementCreditController extends AbstractController
                             'Periode' => $remboursementCredit->getPeriode()-1,
                             'Penalite' => $remboursementCredit->getPenalite(),
                             'Commentaire' => $remboursementCredit->getCommentaire(),
-                            'TypeClient'=>$typeclient
+                            'TypeClient'=>$typeclient,
+                            'PenalitePaye'=>$penalitearemb,
                         ),
                         // ligne 2
                         array(
@@ -217,7 +227,8 @@ class RemboursementCreditController extends AbstractController
                             'Periode' => $remboursementCredit->getPeriode(),
                             'Penalite' => $remboursementCredit->getPenalite(),
                             'Commentaire' => $remboursementCredit->getCommentaire(),
-                            'TypeClient'=>$typeclient
+                            'TypeClient'=>$typeclient,
+                            'PenalitePaye'=>$penal,
                         ),
 
                     ];
@@ -240,6 +251,7 @@ class RemboursementCreditController extends AbstractController
                         $remb->setPenalite($remboursementData['Penalite']);
                         $remb->setCommentaire($remboursementData['Commentaire']);
                         $remb->setTypeClient($remboursementData['TypeClient']);
+                        $remb->setPenalitePaye($remboursementData['PenalitePaye']);
 
                         $em->persist($remb);
 
@@ -372,7 +384,10 @@ class RemboursementCreditController extends AbstractController
             'restemontant'=>$restemontant,
             'tableauAmmortissemnt' => $tableauAmmortissemnt,
             'remboursement_credit' => $remboursementCredit,
+            'TotalRembourser' => $TotalRembourser,
+            'TotalaRembourser' => $TotalaRembourser,
             'crd'=>$crd,
+            'totalperiode'=>$totalperiode,
             'form' => $form,
         ]);
     }

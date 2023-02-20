@@ -80,11 +80,22 @@ class ApiCreditController extends AbstractController
      * Fonction qui recupere les api remboursement sur le modal
      */
     #[Route('/remboursement/modal/{numerocredit}',name:'app_modalremb')]
-    public function ApiRemboursementModal(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
+    public function ApiRemboursementModal(RemboursementCreditRepository $remboursementCreditRepository,$numerocredit):Response
     {
         $remboursement=$remboursementCreditRepository->ApiRemboursementModal($numerocredit);
 
         return new JsonResponse($remboursement);
+    }
+
+      /**
+     * Fonction qui recupere les api remboursement sur le modal
+     */
+    #[Route('/sommeremboursement/somme/{numerocredit}',name:'app_sommecredit')]
+    public function SommeCredit(RemboursementCreditRepository $remboursementCreditRepository,$numerocredit):Response
+    {
+        $somme=$remboursementCreditRepository->CreditSomme($numerocredit);
+
+        return new JsonResponse($somme);
     }
 
        /**
@@ -151,6 +162,37 @@ class ApiCreditController extends AbstractController
 
         return new JsonResponse($infodemandegroupe);
     }
+
+       /**
+     * Undocumented function
+     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return json
+     */
+    #[Route('/modalindividuel/{NumeroCredit}',name:'app_imodal')]
+    public function InformationModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
+    {
+        $infodemandegroupe=$demandeCreditRepository->InfoClientModalIndividuel($NumeroCredit);
+
+        return new JsonResponse($infodemandegroupe);
+    }
+
+          /**
+     * Undocumented function
+     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return json
+     */
+    #[Route('/groupemodal/{NumeroCredit}',name:'app_modalg')]
+    public function InfoClientModalGroupe(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
+    {
+        $infodemandegroupe=$demandeCreditRepository->InfoClientModalGroupe($NumeroCredit);
+
+        return new JsonResponse($infodemandegroupe);
+    }
+
 
     /**
      * @method mixed InformationGarant():Fonction permet de recuperer le liste des garants
