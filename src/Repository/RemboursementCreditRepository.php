@@ -430,7 +430,9 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 amortissement.penalite,
                 amortissement.commission,
                 amortissement.codecredit,
-                amortissement.typeamortissement
+                amortissement.typeamortissement,
+                amortissement.soldedu,
+                amortissement.MontantRestantDu
 
             FROM
                 App\Entity\AmortissementFixe amortissement

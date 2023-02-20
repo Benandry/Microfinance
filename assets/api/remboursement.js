@@ -154,9 +154,12 @@ $(document).ready(function(){
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0');
         var yyyy = today.getFullYear();
+
       
         // today = mm + '/' + dd + '/' + yyyy;
-        today = yyyy +'-' +mm + '-' + dd;
+        // today = yyyy +'-' +mm + '-' + dd;
+
+        today=yyy+'-'+mm+'-'+dd;
         $("#remboursement_credit_DateRemboursement").val(today);
       
         

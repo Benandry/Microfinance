@@ -378,6 +378,7 @@ class RemboursementCreditController extends AbstractController
             'codecredit' => $codecredit,
             'penalite' => $penalitenonrmebourser,
             'montant' => $montantprecedent,
+            'motantdu'=>$montantdu,
             'historique' => $historique,
             'montantdu' => $montantdu,
             'periode'=>$periode,
