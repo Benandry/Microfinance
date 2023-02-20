@@ -1,4 +1,0 @@
-<form method="post" action="{{ path('app_type_epargne_delete', {'id': type_epargne.id}) }}" onsubmit="return confirm('Vous etes sur pour supprimer le type {{ type_epargne.NomTypeEp  }} ');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ type_epargne.id) }}">
-    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-</form>

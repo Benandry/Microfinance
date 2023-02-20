@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -40,7 +41,6 @@ class TransactionType extends AbstractType
                     'class'=>'form-control'
                 ],
                 'label'=>'Montant',
-                'required'=>false,
                 ])
             ->add('montant_bruite',IntegerType::class,[
             'label' => "Montant du depot",
@@ -49,34 +49,14 @@ class TransactionType extends AbstractType
                 'class'=>'form-control'
                 ]
              ])
-            ->add('papeterie',IntegerType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
-            ])
-            ->add('commission',IntegerType::class,[
+            ->add('commission',NumberType::class,[
                 'attr'=>[
                     'class'=>'form-control'
                 ],
+                'label' => "Commission de transaction : "
             ])
             ->add('codeepargneclient',TextType::class,[
                 'label'=>'Code client'
-            ])
-            ->add('nom',TextType::class,[
-                'mapped'=>false,
-                'required'=>false,
-                'attr'=>[
-                    'class'=>'form-control',
-                    'disabled'=>true,
-                ]
-                ])
-            ->add('prenom',TextType::class,[
-                'mapped'=>false,
-                'required'=>false,
-                'attr'=>[
-                    'class'=>'form-control',
-                    'disabled'=>true,
-                ]
             ])
             ->add('nomgroupe',TextType::class,[
                 'mapped'=>false,
@@ -99,6 +79,11 @@ class TransactionType extends AbstractType
 
             ->add('solde',TextType::class,[
                 'label'=>'Solde de compte'
+            ])
+
+            ->add('devise',TextType::class,[
+                'label'=>'devise utiliser :',
+                'mapped' => false,
             ])
         ;
     }

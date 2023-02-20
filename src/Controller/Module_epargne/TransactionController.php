@@ -91,20 +91,19 @@ class TransactionController extends AbstractController
         $id = $request->query->get('code');
             /***Information du compte epargne */
         $infoCompte = $transactionRepository->getInfoCompteEpargne($id)[0];
-
+        // dd();
         $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
 
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
         }
 
-        // dd($soldeCurrent);
         $transaction = new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
+        // dd($transaction);
         if ($form->isSubmitted() && $form->isValid()) {
-
             if($transaction->getMontant() > 0){
                 $transaction->setCodetransaction(random_int(2,1000000000));
                 $transaction->setDescription($transaction->getDescription()." Compte epargne");
@@ -120,7 +119,7 @@ class TransactionController extends AbstractController
                 $entityManager->persist($transaction);
                 $entityManager->flush();
 
-                $this->addFlash('info', " Depot de ".$transaction->getMontant()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
+                $this->addFlash('info', " Depot de ".$form->get('montant_bruite')->getData()." ".$form->get('devise')->getData()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient().". Commission de transaction : ".$transaction->getCommission()."  ".$form->get('devise')->getData().". Le solde de depot est :  ".$transaction->getMontant()."  ".$form->get('devise')->getData().". Réference : ".$transaction->getCodetransaction().". Le nouveau solde total est : ".$transaction->getSolde()." ".$form->get('devise')->getData());
                 
             }
             else {
@@ -136,6 +135,7 @@ class TransactionController extends AbstractController
             'form' => $form,
             'info' => $infoCompte,
             'solde' => $soldeCurrent[0]['solde'],
+            'id_produit' => $infoCompte['id_produit_epargne']
         ]);
     }
 
@@ -151,9 +151,6 @@ class TransactionController extends AbstractController
     #[Route('/depotgroupe', name: 'app_transaction_groupe_depot', methods: ['GET', 'POST'])]
     public function DepotGroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement)
     {
-        
-        
-        //id du compte epargne groupe
         $id = $request->query->get('code');
         /**Information du compte epargne groupe */
         $infoCompte = $transactionRepository->getInfoGroupe($id)[0];
@@ -163,8 +160,6 @@ class TransactionController extends AbstractController
         if($soldeCurrent == null ){
             $soldeCurrent[0]['solde'] = 0;
         }
-
-
         $transaction = new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
@@ -184,7 +179,7 @@ class TransactionController extends AbstractController
                 
                 $entityManager->persist($transaction);
                 $entityManager->flush();
-                $this->addFlash('success', " Dépot ".$transaction->getMontant()." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
+                $this->addFlash('info', " Depot de ".$form->get('montant_bruite')->getData()." ".$form->get('devise')->getData()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient().". Commission de transaction : ".$transaction->getCommission()."  ".$form->get('devise')->getData().". Le solde de depot est :  ".$transaction->getMontant()."  ".$form->get('devise')->getData().". Réference : ".$transaction->getCodetransaction().". Le nouveau solde total est : ".$transaction->getSolde()." ".$form->get('devise')->getData());
             }
             else {
                 $this->addFlash('danger','Vous avez entré un montant negative.Le montant entré doit etre strictement positive. Veuillez réessayer !!');
@@ -198,7 +193,8 @@ class TransactionController extends AbstractController
             'transaction' => $transaction,
             'form' => $form,
             'info' => $infoCompte,
-        'solde' => $soldeCurrent[0]['solde'],
+            'solde' => $soldeCurrent[0]['solde'],
+            'id_produit' => $infoCompte['id_produit']
         ]);
     }
     

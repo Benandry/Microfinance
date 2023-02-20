@@ -18,7 +18,6 @@ class ConfigEpController extends AbstractController
     public function index(ConfigEpRepository $configEpRepository): Response
     {
         $config=$configEpRepository->Configuration();
-        // dd($configEpRepository->findAll());
         return $this->render('Configuration/config_ep/index.html.twig', [
             'config_eps' => $configEpRepository->findAll(),
             'configs'=>$config,

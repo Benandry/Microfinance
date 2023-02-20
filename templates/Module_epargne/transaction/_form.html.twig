@@ -4,28 +4,24 @@
         <div class="col-sm-12" style="display:none;">
             {{ form_row(form.typeClient) }}
             {{ form_row(form.codeepargneclient) }}
-            <span id="ind">{{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}</span>
             <span id="grp">{{ form_row(form.nomgroupe) }}</span>
             {{ form_row(form.donneessolde) }}
             {{ form_row(form.Description) }}
             {{ form_row(form.Montant) }}
+            {{ form_row(form.devise) }}
             </div>
             {# ********************fin ***************************** #}
         </div>
     </div>
 <hr>
     <div class="row">
-        <div class="col-sm-4 col-md-4">
+        <div class="col-sm-4 col-md-4 m-auto">
             {{ form_row(form.DateTransaction) }}
-            {{ form_row(form.montant_bruite) }}
-        </div>
-        <div class="col-sm-4 col-md-4">
-            {{ form_row(form.PieceComptable) }}
-            {{ form_row(form.papeterie) }}
-        </div>
-        <div class="col-sm-4 col-md-4">
             {{ form_row(form.commission) }}
+        </div>
+        <div class="col-sm-4 col-md-4 m-auto">
+            {{ form_row(form.PieceComptable) }}
+            {{ form_row(form.montant_bruite) }}
         </div>
     </div>
 <hr/>

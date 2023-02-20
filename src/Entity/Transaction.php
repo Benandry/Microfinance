@@ -28,8 +28,6 @@ class Transaction
     #[ORM\Column(nullable:true)]
     private ?float $Montant = null;
 
-    #[ORM\Column(nullable:true)]
-    private ?float $papeterie = null;
 
     #[ORM\Column]
     private ?float $commission = null;
@@ -99,19 +97,6 @@ class Transaction
 
         return $this;
     }
-
-    public function getPapeterie(): ?float
-    {
-        return $this->papeterie;
-    }
-
-    public function setPapeterie(float $papeterie): self
-    {
-        $this->papeterie = $papeterie;
-
-        return $this;
-    }
-
     public function getCommission(): ?float
     {
         return $this->commission;

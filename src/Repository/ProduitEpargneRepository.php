@@ -147,16 +147,29 @@ class ProduitEpargneRepository extends ServiceEntityRepository
              p.nomproduit,
              p.id Produit_id,
              conf.IsNegatif,
-             conf.nbMinRet nombre_minimum_retrait,
-             conf.NbrJrMaxDep valeur_maximum_depot,
+             conf.nbMinRet jour_minimum_retrait,
+             conf.NbrJrMaxDep jour_maximum_depot,
              conf.ageMinCpt age_minimum_ouvrir_compte,
              conf.commissionTransf commission_de_transaction,
              conf.fraisFermCpt Frais_compte_tenu,
-             conf.soldeouvert solde_ouverture
+             conf.soldeouvert solde_ouverture,
+            --  plan.Libelle compte_debit,
+            --  plan.Libelle compte_credit,
+             devise.devise
         FROM App\Entity\ProduitEpargne p 
+
         INNER JOIN 
         App\Entity\ConfigEp conf
         WITH conf.produitEpargne = p.id
+
+        -- INNER JOIN 
+        -- App\Entity\PlanComptable plan
+        -- WITH  conf.compteCrediteE = plan.id
+
+        INNER JOIN 
+        App\Entity\Devise devise
+        WITH conf.deviseutiliser = devise.id
+
         WHERE p.id = $id
         ";
         

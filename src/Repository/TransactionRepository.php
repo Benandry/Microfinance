@@ -489,13 +489,26 @@ class TransactionRepository extends ServiceEntityRepository
             ce.codeepargne code,
             i.codeclient,
             i.nom_client,
-            i.prenom_client
+            i.prenom_client,
+            conf.statusProduit status_produit,
+            conf.IsNegatif compte_negative,
+            pe.nomproduit produit_epargne,
+            pe.id  id_produit_epargne
             FROM
             App\Entity\CompteEpargne ce
 
             INNER JOIN 
             App\Entity\Individuelclient i
             WITH ce.codeep = i.codeclient
+
+            INNER JOIN 
+            App\Entity\ProduitEpargne pe
+            WITH ce.produit = pe.id
+
+            INNER JOIN 
+            App\Entity\ConfigEp conf
+            WITH conf.produitEpargne = pe.id
+
             WHERE ce.id = '$id'
             ");
 
@@ -516,13 +529,18 @@ class TransactionRepository extends ServiceEntityRepository
             ce.codeepargne code,
             g.codegroupe,
             g.nomGroupe,
-            g.email
+            g.email,
+            pe.id id_produit
             FROM
             App\Entity\CompteEpargne ce
 
             INNER JOIN 
             App\Entity\Groupe g
             WITH ce.codeep = g.codegroupe
+
+            INNER JOIN 
+            App\Entity\ProduitEpargne pe
+            WITH ce.produit = pe.id
 
             WHERE ce.id = '$id'
             ");

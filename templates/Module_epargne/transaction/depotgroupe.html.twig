@@ -22,11 +22,14 @@
                         <p> <b>Solde client : </b>
                             {% if solde != '' %}
                                 <span id="solde_cli" style="display:none">{{ solde }}</span>  
-                                <span>{{ solde|number_format(0,',', ' ') }}</span>     
+                                <span>{{ solde|number_format(0,',', ' ') }}</span> 
+                                <span class="devise-solde"></span>    
                             {% else %}
                                 <span id="solde_cli">0</span>  
+                                <span class="devise-solde"></span>
                             {% endif %} 
                         </p>
+                        <p style="display: none;" id="produit-id">{{ id_produit }}</p>
                     </div>
                     <div class="col-md-4 col-sm-4 m-auto">
                         <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Dépôt epargne </h5></div>

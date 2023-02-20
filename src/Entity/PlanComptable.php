@@ -28,9 +28,17 @@ class PlanComptable
     #[ORM\OneToMany(mappedBy: 'planCompta', targetEntity: MouvementComptable::class)]
     private Collection $mouvementComptables;
 
+    #[ORM\OneToMany(mappedBy: 'comptedebiteE', targetEntity: ConfigEp::class)]
+    private Collection $configEps;
+
+    #[ORM\OneToMany(mappedBy: 'compteCrediteE', targetEntity: ConfigEp::class)]
+    private Collection $ConfiEpsCredit;
+
     public function __construct()
     {
         $this->mouvementComptables = new ArrayCollection();
+        $this->configEps = new ArrayCollection();
+        $this->ConfiEpsCredit = new ArrayCollection();
     }
 
 
@@ -104,6 +112,66 @@ class PlanComptable
             // set the owning side to null (unless already changed)
             if ($mouvementComptable->getPlanCompta() === $this) {
                 $mouvementComptable->setPlanCompta(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConfigEp>
+     */
+    public function getConfigEps(): Collection
+    {
+        return $this->configEps;
+    }
+
+    public function addConfigEp(ConfigEp $configEp): self
+    {
+        if (!$this->configEps->contains($configEp)) {
+            $this->configEps->add($configEp);
+            $configEp->setComptedebiteE($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfigEp(ConfigEp $configEp): self
+    {
+        if ($this->configEps->removeElement($configEp)) {
+            // set the owning side to null (unless already changed)
+            if ($configEp->getComptedebiteE() === $this) {
+                $configEp->setComptedebiteE(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConfigEp>
+     */
+    public function getConfiEpsCredit(): Collection
+    {
+        return $this->ConfiEpsCredit;
+    }
+
+    public function addConfiEpsCredit(ConfigEp $confiEpsCredit): self
+    {
+        if (!$this->ConfiEpsCredit->contains($confiEpsCredit)) {
+            $this->ConfiEpsCredit->add($confiEpsCredit);
+            $confiEpsCredit->setCompteCrediteE($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfiEpsCredit(ConfigEp $confiEpsCredit): self
+    {
+        if ($this->ConfiEpsCredit->removeElement($confiEpsCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($confiEpsCredit->getCompteCrediteE() === $this) {
+                $confiEpsCredit->setCompteCrediteE(null);
             }
         }
 

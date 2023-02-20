@@ -20,13 +20,16 @@
                 <div class="col-xl-4 col-md-4 col-sm-4">
                     <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }}</span></p>
                     <p><b>Prenom client :</b>  <span id="prenom"> {{ info.prenom_client }}</span></p>
+                    <p style="display: none;" id="produit-id">{{ id_produit }}</p>
                     <p> 
                         <b>Solde client : </b>
                         {% if solde != '' %}
                             <span id="solde_cli" style="display:none;">{{ solde }}</span>     
                             <span>{{ solde|number_format(0,',', ' ') }} </span>     
+                            <span class="devise-solde"></span>
                         {% else %}
-                            <span id="solde_cli">0</span>  
+                            <span id="solde_cli">0</span>
+                            <span class="devise-solde"></span>  
                         {% endif %} 
                     </p>
                 </div>

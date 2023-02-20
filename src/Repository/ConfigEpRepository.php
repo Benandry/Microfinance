@@ -42,7 +42,7 @@ class ConfigEpRepository extends ServiceEntityRepository
    public function Configuration()
    {
        return $this->createQueryBuilder('c')
-           ->leftJoin('c.produitEpargne','p')
+           ->join('c.produitEpargne','p')
            ->where('p.id = c.produitEpargne')
             // ->groupBy('c.id')
            ->getQuery()

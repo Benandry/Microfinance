@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ConfigEp;
 use App\Entity\Devise;
+use App\Entity\PlanComptable;
 use App\Entity\ProduitEpargne;
 use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -68,9 +69,25 @@ class ConfigEpType extends AbstractType
             ])
 
             //  Comptabilite
-            // ->add('debit',IntegerType::class,[
-            //     'label'=>'Solde d\'ouverture',
-            // ])
+            ->add('comptedebiteE',EntityType::class,[
+                'label'=>'Compte debité : ',
+                'class' => PlanComptable::class,
+                'placeholder' => "Compte a debiter",
+                'choice_label' => function($c) {
+                    return $c->getNumeroCompte()." -- ".$c->getLibelle();
+                },
+                'autocomplete' => true,
+            ])
+
+            ->add('compteCrediteE',EntityType::class,[
+                'label'=>'Compte credité : ',
+                'class' => PlanComptable::class,
+                'placeholder' => "Compte a crediter",
+                'choice_label' => function($c) {
+                    return $c->getNumeroCompte()." -- ".$c->getLibelle();
+                },
+                'autocomplete' => true,
+            ])
         ;
     }
 

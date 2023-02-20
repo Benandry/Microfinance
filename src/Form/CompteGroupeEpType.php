@@ -49,7 +49,8 @@ class CompteGroupeEpType extends AbstractType
                 },
                 'query_builder' => function (ProduitEpargneRepository $er) {
                     return $er->createQueryBuilder('p')
-                        ->andWhere("p.isdesactive = 1 ");
+                        ->join('p.ConfigProduit','config')
+                        ->andWhere("config.statusProduit = 1 ");
                 },
                 'placeholder' =>'Choisissez un produit ',
                 'autocomplete'=>true,

@@ -6,7 +6,34 @@ var path = window.location.pathname;
 $(document).ready(() =>{
 
     if (path === '/transaction/new') {
-        
+        var montant_bruit_ = 0
+        var commission= 0
+
+        const id_produit = $('#produit-id').text();
+        //PRoduit epargne configuration sur depot
+        const api_produit = '/api/compte-epargne/individuel/'+id_produit;
+        $.ajax({
+            url : api_produit,
+            method : "GET",
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify($(this).val()),
+            success : (result) =>  {
+                for(let i = 0; i < result.length; i++){
+                    var element = result[i];
+                    console.log(element);
+                    $('#transaction_commission').val(element.commission_de_transaction);
+                    $('#transaction_devise').val(element.devise);
+                    $('.devise-solde').text(element.devise);
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+        });
+
+
+
         var code_client = $('#code_client').text()
         $('#transaction_codeepargneclient').val(code_client)
 
@@ -25,19 +52,15 @@ $(document).ready(() =>{
 
 
 
-        var montant_bruit_ = 0
-        var commission= 0
-        var papeterie = 0
+        $('#transaction_commission').on('change',()=>{
+            commission=$('#transaction_commission').val();
+        })
 
         $('#transaction_montant_bruite').on('keyup',()=>{
             montant_bruit_= $('#transaction_montant_bruite').val();
-           // alert(": I010000015")
-            console.log(montant_bruit_);
 
-            papeterie = $('#transaction_papeterie').val()
-            var montant_total = parseInt(montant_bruit_) -(parseInt(commission) + parseInt(papeterie))
+            var montant_total = parseInt(montant_bruit_) -parseInt($('#transaction_commission').val());
 
-                //lert("mETY VEE")
             $('#transaction_Montant').val(montant_total)
             
             //Ajouter valeur sur la formulaire solde
@@ -45,60 +68,56 @@ $(document).ready(() =>{
 
             $('#transaction_solde').val(solde)
         })
-
-        $('#transaction_commission').val(0)
-        $('#transaction_commission').on('change',()=>{
-            commission=$('#transaction_commission').val();
-            // alert(commission);
-        })
-
-        $('#transaction_papeterie').val(0)
-        
-
-
     }
     // epargne groupe : ici on recupere toute les informations 
     // concernant le groupe
 
     if( path === '/transaction/depotgroupe' ){
-        var codegroupe = $('#code_client').text()
-        var nomgroupe = $('#nom').text()
-        var solde = $('#solde_cli').text()
-        
-        // alert(codegroupe+' '+ nomgroupe+' '+solde)
 
-        $('#transaction_nom').val('nom')
+        var solde_ouverture = 0;
+        const id_produit = $('#produit-id').text();
+        //PRoduit epargne configuration sur depot
+        const api_produit = '/api/compte-epargne/individuel/'+id_produit;
+        // alert(api_produit);
+        $.ajax({
+            url : api_produit,
+            method : "GET",
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify($(this).val()),
+            success : (result) =>  {
+                for(let i = 0; i < result.length; i++){
+                    var element = result[i];
+                    solde_ouverture = element.solde_ouverture;
+                    $('#transaction_commission').val(element.commission_de_transaction);
+                    $('#transaction_devise').val(element.devise);
+                    $('.devise-solde').text(element.devise);
+                    
+                // alert(solde_ouverture);
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+        });
+        var codegroupe = $('#code_client').text();
+        var nomgroupe = $('#nom').text();
+        var solde = $('#solde_cli').text();
 
-        $('#transaction_prenom').val('nom')
+        $('#transaction_typeClient').val('GROUPE');
+        $('#transaction_Description').val('DEPOT');
 
-        $('#transaction_typeClient').val('GROUPE')
-
-        $('#transaction_Description').val('DEPOT')
-
-        $('#transaction_codeepargneclient').val(codegroupe)
-
-        // $('#transaction_prenom').val(nom)
+        $('#transaction_codeepargneclient').val(codegroupe);
 
         var solde = $('#solde_cli').text()
         $('#transaction_donneessolde').val(solde)
         $('#transaction_nomgroupe').val(nomgroupe)
 
-
-
-        var montant_bruit_ = 0
-        var commission= 0
-        var papeterie = 0
-
         $('#transaction_montant_bruite').on('keyup',()=>{
-            // alert('bonsoir')
-            montant_bruit_= $('#transaction_montant_bruite').val();
-           // alert(": I010000015")
-            console.log(montant_bruit_);
+            var montant_bruit_= $('#transaction_montant_bruite').val();
 
-            papeterie = $('#transaction_papeterie').val()
-            var montant_total = parseInt(montant_bruit_) -(parseInt(commission) + parseInt(papeterie))
+            var montant_total = parseInt(montant_bruit_) - parseInt( $('#transaction_commission').val())
 
-                // alert("mETY VEE")
             $('#transaction_Montant').val(montant_total)
             
             //Ajouter valeur sur la formulaire solde
@@ -110,12 +129,6 @@ $(document).ready(() =>{
         $('#transaction_commission').val(0)
         $('#transaction_commission').on('change',()=>{
             commission=$('#transaction_commission').val();
-            // alert(commission);000000000
-        })
-
-        $('#transaction_papeterie').val(0)
-        
-
+        });
     }
-
 })
