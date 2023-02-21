@@ -50,17 +50,4 @@ class PlanComptableRepository extends ServiceEntityRepository
 
         return $statement;
     }
-
-    public function findPlanById($numero)
-    {
-        $query = "SELECT
-        plan
-        FROM App\Entity\PlanComptable  plan
-        WHERE plan.NumeroCompte = $numero
-        ";
-
-        $statement = $this->getEntityManager()->createQuery($query)->execute();
-
-        return $statement;
-    }
 }

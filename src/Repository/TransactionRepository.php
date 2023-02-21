@@ -585,7 +585,7 @@ class TransactionRepository extends ServiceEntityRepository
      * @param [type] $code
      * @return void
      */
-    public function findConfigEpDepotDebit(){
+    public function findConfigEpDepotDebit($id){
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
@@ -598,12 +598,13 @@ class TransactionRepository extends ServiceEntityRepository
 
         INNER JOIN App\Entity\Plancomptable pc 
         with conf.comptedebiteE = pc.id
+        WHERE pe.id = $id
         ");
 
         return  $query->getResult();
     }
 
-    public function findConfigEpDepotCredit(){
+    public function findConfigEpDepotCredit($id){
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
@@ -616,6 +617,7 @@ class TransactionRepository extends ServiceEntityRepository
 
         INNER JOIN App\Entity\Plancomptable pc 
         with conf.compteCrediteE = pc.id
+        WHERE pe.id = $id
         ");
 
         return  $query->getResult();

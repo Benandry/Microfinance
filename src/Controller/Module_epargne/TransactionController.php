@@ -104,19 +104,15 @@ class TransactionController extends AbstractController
 
         // dd($transaction);
         if ($form->isSubmitted() && $form->isValid()) {
-            /**Configuration du produit epargne */
-            $configDebit = $transactionRepository->findConfigEpDepotDebit();
-            $configCredit = $transactionRepository->findConfigEpDepotCredit();
-
-            // dd($configDebit,$configCredit);
-
+            //produit epragne utiliseer
+            $get_produits_id = $infoCompte['id_produit_epargne'];
             if($transaction->getMontant() > 0){
                 $transaction->setCodetransaction(random_int(2,1000000000));
-                $transaction->setDescription($transaction->getDescription()." Compte epargne");
+                $transaction->setDescription($transaction->getDescription()." Compte epargne INDIVIDUEL");
                 $entityManager=$doctrine->getManager();
 
                 /**Inserer dans la table Mouvement comptable */
-                $mouvement->operationJournal($entityManager,$transaction);
+                $mouvement->operationJournal($entityManager,$transaction,$get_produits_id);
                 //Verifier si le solde n'est pas nombre 
                 if ($transaction->getSolde() == "NaN") {
                     $transaction->setSolde($transaction->getMontant());
@@ -171,13 +167,15 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
+            //produit epragne utiliseer
+            $get_produits_id = $infoCompte['id_produit'];
             // Verifier si le montant est positive (strictement positive)
             if ($transaction->getMontant() > 0) {
                 $transaction->setCodetransaction(random_int(2,1000000000));
-                $transaction->setDescription($transaction->getDescription()." Compte epargne");
+                $transaction->setDescription($transaction->getDescription()." GROUPE Compte epargne");
                 $entityManager=$doctrine->getManager();
-                $mouvement->operationJournal($entityManager,$transaction);
+                $mouvement->operationJournal($entityManager,$transaction,$get_produits_id);
 
                 if ($transaction->getSolde()== "NaN") {
                     $transaction->setSolde($transaction->getMontant());
