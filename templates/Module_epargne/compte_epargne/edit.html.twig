@@ -13,6 +13,37 @@
       {% for message in app.flashes('success') %}
             <strong>{{ message }}</strong>
       {% endfor %}
+      {{ form_start(form) }}
 
-    {{ include('Module_epargne/compte_epargne/_form.html.twig', {'button_label': 'Modification'}) }}
+      <div class="row">
+          <div class="col-sm-4" style="display: none;">
+              {{ form_row(form.typeAfficher) }}
+          </div>
+          <div class="col-sm-4 m-auto">
+              {{ form_row(form.produit) }}
+          </div>
+          <div class="col-sm-4 m-auto">
+              {{ form_row(form.datedebut) }}
+              
+          </div>
+      </div>
+      <div class="row" style="display:none;">
+          <div class="col-sm-4">
+              {{ form_row(form.codeep) }}
+              {{ form_row(form.typeClient) }}
+          </div>
+          <div class="col-sm-4">
+              {{ form_row(form.nom) }}
+          </div>
+          <div class="col-sm-4">
+              {{ form_row(form.prenom) }}
+              {{ form_row(form.codeepargne) }}
+          </div>
+      </div>
+      <div class="d-flex justify-content-center">
+          <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+      </div>
+{{ form_end(form) }}
+          
+  {# /***********Fin modal *********** #}
 {% endblock %}

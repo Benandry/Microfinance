@@ -101,8 +101,7 @@ class RapportController extends AbstractController
     #[Route('/CompteEpargne',name:'app_rapport_compte')]
     public function rapport_compteepargne(Request $request,CompteEpargneRepository $compteEpargneRepository):Response
     {
-
-        $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne();
+        $report=$compteEpargneRepository->rapport_compte_epargne();
 
         $compteepargne = new CompteEpargne();
         $form=$this->createForm(RapportcompteepargnetrieType::class);
@@ -117,40 +116,59 @@ class RapportController extends AbstractController
         $date1 = '';
         $date_2 = false;
         $date_1 = false;
+        $titre = " ";
+        $agence = "";
 
         if($form->isSubmitted() && $form->isValid()){
             $showTable_=true;
 
             $data = $form->getData();
+
+            // dd($data['agence']);
             $date_du_ = $data['datedebut'];
             $date_au_ = $data['datefin'];
             $date1 = $data['datearrete'];
 
-           
-            if ($date1 != null){
+            //Individuel client //
+            if($data['individuel']) {
+                $titre = $data['individuel']->getNomClient().' '.$data['individuel']->getPrenomClient();
+                $report=$compteEpargneRepository->findCompteEpargneByClient($data['individuel']->getCodeclient());
+                // dd($report);
+            }
+            elseif ($data['groupe']) {
+                $titre = $data['groupe']->getNomGroupe();
+                $report=$compteEpargneRepository->findCompteEpargneByClient($data['groupe']->getCodegroupe());
+                // dd($report);
+            }
+            elseif ($data['agence']) {
+                $agence = "Agence ".$data['agence']->getNomAgence();
+                $report=$compteEpargneRepository->findCompteEpargneByAgence($data['agence']->getId());
+                // dd($agence);
+            }
+            elseif ($date1 != null){
                 $date_1 = true;
-                $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
-                // dd($rapport_compteepargne);
+                $report=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
             }
             else{
                 $date_2 = true;
-                $rapport_compteepargne=$compteEpargneRepository->rapport_compte_epargne_triedate($date_du_,$date_au_);   
+                $report=$compteEpargneRepository->rapport_compte_epargne_triedate($date_du_,$date_au_); 
             }
 
         }
-        // dd($rapport_compteepargne);
+        // dd($agence);
 
         return  $this->renderForm('rapport/rapport_compte_epargne.html.twig',[
-            'rapportcompteep'=>$rapport_compteepargne,
+            'rapportcompteep'=>$report,
             'showTable'=>$showTable_,
             'form'=>$form,
+            'titre' => $titre,
             'compteepargne'=>$compteepargne,
             'du' => $date_du_,
             'au' => $date_au_,
             'one_date' => $date1,
             'date_1' => $date_1,
             'date_2' => $date_2,
+            'agence' => $agence,
         ]);
     }
- 
  }

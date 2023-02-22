@@ -34,6 +34,7 @@ class TransfertepController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $transfertep->setCodetransactionT(random_int(1,1000000000));
             $entityManager=$doctrine->getManager();
 
@@ -43,7 +44,6 @@ class TransfertepController extends AbstractController
             $transactionExp->setPieceComptable($transfertep->getPieceComptableT());
             $transactionExp->setDateTransaction($transfertep->getDateTransactionT());
             $transactionExp->setMontant(-$transfertep->getMontantdestinataire());
-            $transactionExp->setPapeterie($transfertep->getPapeterie());
             $transactionExp->setCommission($transfertep->getCommission());
             $transactionExp->setTypeClient($transfertep->getTypeClientT());
             $transactionExp->setCodetransaction($transfertep->getCodetransactionT());
@@ -51,7 +51,6 @@ class TransfertepController extends AbstractController
             $transactionExp->setSolde($form->get('soldeenvoyeur')->getData());
             $entityManager->persist($transactionExp);
             
-
              /**Compte expediteur Destinateur */
              
             $transfertep->setMontantdestinataire($transfertep->getMontantdestinataire());
@@ -60,7 +59,6 @@ class TransfertepController extends AbstractController
              $transactionDest->setPieceComptable($transfertep->getPieceComptableT());
              $transactionDest->setDateTransaction($transfertep->getDateTransactionT());
              $transactionDest->setMontant($transfertep->getMontantdestinataire());
-             $transactionDest->setPapeterie($transfertep->getPapeterie());
              $transactionDest->setCommission($transfertep->getCommission());
              $transactionDest->setTypeClient($transfertep->getTypeClientT());
              $transactionDest->setCodetransaction($transfertep->getCodetransactionT());

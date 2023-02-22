@@ -4,16 +4,31 @@
     {% if showTable == false %}
         Rapport compte epargne
     {% else %}
-        Rapport compte epargne  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
+        Rapport compte epargne  
+            {% if date_1 %} 
+                jusq'a {{ one_date| date('d-m-Y') }} 
+            {% elseif du and au %} 
+                du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}
+            {% else %}
+                {{ titre }}
+            {% endif %}
     {% endif %}
 {% endblock %}
 
 
 {% block head %}
     {% if showTable == false %}
-    
     {% else %}
-        Rapport compte epargne  {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
+        Compte epargne > Rapport >  
+            {% if date_1 %} 
+                jusq'a {{ one_date| date('d-m-Y') }} 
+            {% elseif du and au %} 
+                du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}
+            {% elseif agence %}
+                {{ agence }}
+            {% else %}
+                {{ titre }}
+            {% endif %}
     {% endif %}
 {% endblock %}
 
@@ -33,26 +48,29 @@
                     {{ form_start(form) }} 
                     <!-- Modal body -->
                      <div class="modal-body">    
-                        <div class="text-center ps-5 pe-5" id="one_date">
-                            <h4 class="text-center"> Date </h4>
-                           {{ form_row(form.datearrete) }}
-                        </div>
-
-                        <div class="row text-center" id="two_date">
-                            <h4 class="text-center">Entre deux périodes </h4>
-                            <div class="col-6 col-sm-6">
-                                {{ form_row(form.datedebut) }}
-                                    
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xl-8 m-auto">
+                                {{ form_row(form.individuel) }} 
+                                {{ form_row(form.groupe) }} 
+                                {{ form_row(form.agence) }}
+                                <h6 class="text-center"> Date </h6>
+                                {{ form_row(form.datearrete) }} 
                             </div>
-                            <div class="col-6 col-sm-6">
-                                {{ form_row(form.datefin) }}
-                            </div>
+                            <h6 class="text-center">Entre deux periode </h6>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-xl-6">
+                                    {{ form_row(form.datedebut) }} 
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-xl-6">
+                                    {{ form_row(form.datefin) }} 
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 
                     <!-- Modal footer -->
                     <div class="modal-footer mb-0">
-                        {{ form_row(form.Filtre) }}       
+                        <button type="submit" class="btn btn-sm btn-primary"> Filtrer </button>      
                      </div>
                     {{ form_end(form) }}
                 </div>
@@ -65,8 +83,12 @@
                     <th>Date d'ouverture</th>
                     <th>Compte Epargne</th>
                     <th>Produit Epargne</th>
-                    <th>Nom et prenom du client </th>
-                    <th>Type client </th>
+                    {% if titre %} 
+                    {% else %}
+                        <th>Info client Epargne</th>
+                            {{ titre }}
+                    {% endif %}
+                    <th>Solde</th>
                 </tr>
             </thead>
             <tbody class="jumbotron jumbotron-fluid" style="color:black;">
@@ -74,13 +96,19 @@
                 <tr>
                     <td>{{ CompteEpargne.datedebut | date('Y-m-d') }}</td>
                     <td>{{ CompteEpargne.codeepargne }}</td>
-                    <td> {{ CompteEpargne.nomproduit }}</td>
-                    {% if CompteEpargne.typeClient == 'INDIVIDUEL' %}
-                        <td>{{ CompteEpargne.nom_client }} {{ CompteEpargne.prenom_client }}</td>
+                    <td>{{ CompteEpargne.nomproduit }}</td>
+                    {% if titre %} 
                     {% else %}
-                        <td>{{ CompteEpargne.nomGroupe }}</td>
-                    {%  endif %}
-                    <td>{{ CompteEpargne.typeClient }}</td>
+                        {% if  CompteEpargne.typeClient ==  "INDIVIDUEL"  %}
+                            <td> {{ CompteEpargne.nom_client }} {{ CompteEpargne.prenom_client }} </td>
+                        {% elseif CompteEpargne.typeClient ==  "GROUPE"  %}
+                            <td> {{ CompteEpargne.nomGroupe }} </td>
+                        {% endif %}
+                    {% endif %}
+
+                    
+                <td> {% if CompteEpargne.solde %} {{CompteEpargne.solde}} {% else %} 0 {% endif %}
+                 </td>
                 </tr>
             {%  endfor %}
             </tbody>

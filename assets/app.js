@@ -38,6 +38,7 @@ import './api/compte_epargne/depot'
 
 //import les jspdf
 import jsPDF from 'jspdf';
+import domtoimage from "dom-to-image";
 
 
 
@@ -212,9 +213,6 @@ $(document).ready(function(){
             $('#agence_codeAgence').val(max_id_);
         }
 
-        // if (path === '/compte/epargne/') {
-        //     alert("alert");
-        // }
         var carte = new jsPDF();
         /***imprimer la carte de client */
         const carte_print = document.querySelector('#carte-epargne').innerHTML;
@@ -252,17 +250,25 @@ $(document).ready(function(){
             });
         })
 
-        // $('#imprimer-carte').on('click',() => {
-        //     var node = document.querySelector('#carte-epargne');
+        // alert("alert zalah ");
 
-        //     domtoimage.toPng(node).then(dataUrl => {
-        //         var image = new Image();
-        //         image.src = dataUrl;
-        //         dowloadURI(dataUrl,'stafff.png');
-        //     })
-        //     .catch(error => {
-        //         console.error(error,"Error zoky eee");
-        //     })
+        // $('#imprimer-carte').on('click',() => {
+        //     alert("alert zalah ");
+
+        //     const render = node => {
+                
+        //         domtoimage.toPng(node)
+        //         .then(function (dataUrl) {
+        //                 var img = new Image();
+        //                 img.src = dataUrl;
+        //                 document.body.appendChild(img);
+        //         })
+        //         .catch(error => {
+        //             console.error(error,"Error zoky eee");
+        //         })
+        //     }
+        //     const node = document.querySelector('#carte-epargne');
+        //     render(node);
         // });
         
 });

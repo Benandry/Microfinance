@@ -81,6 +81,9 @@
                             <div class="col-sm-6">
                                 <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
                             </div>
+                            <div class="col-sm-6">
+                                <a href="{{ path('app_compte_epargne_edit_groupe', {'id': compte.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -88,7 +91,4 @@
             </tbody>
         </table>
     </div>
-{% endblock %}
-{% block javascript %}
-    <script src="{{ asset('/api/api_codeepargne_groupe.js') }}"><script>
 {% endblock %}

@@ -75,7 +75,8 @@ class CompteEpargneController extends AbstractController
             'form' => $form,
             'comptedujours'=>$compte_existe,
             'info' => $info,
-            'year_client' => $year_client
+            'year_client' => $year_client,
+            'code' => $code,
         ]);
     }
 
@@ -102,6 +103,7 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
         // dd("Efa tonga ato ve");
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($compteEpargne);
             //Verifier le compte epargne groupe s'il est deja exister
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
             if ($verify_compte_epargne) {
@@ -126,6 +128,7 @@ class CompteEpargneController extends AbstractController
             'compte_exist' =>$compteEpargneExiste,
             'form' => $form,
             'info'=>$info_groupe,
+            'code' => $id
         ]);
     }
 
@@ -179,17 +182,18 @@ class CompteEpargneController extends AbstractController
     }
 
 
-    #[Route('/{id}/edit', name: 'app_compte_epargne_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository): Response
+    #[Route('/{id}/edit/{code}', name: 'app_compte_epargne_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository,$code): Response
     {
         $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $compteEpargneRepository->add($compteEpargne, true);
+            // dd($compteEpargne);
 
             $this->addFlash('success', "Modification compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
-            return $this->redirectToRoute('app_compte_epargne_index', [], Response::HTTP_SEE_OTHER);
+            $compteEpargneRepository->add($compteEpargne, true);
+            return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_epargne/compte_epargne/edit.html.twig', [
@@ -197,6 +201,27 @@ class CompteEpargneController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    #[Route('/{id}/editgroupe/{code}', name: 'app_compte_epargne_edit_groupe', methods: ['GET', 'POST'])]
+    public function editGroupe(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository,$code): Response
+    {
+        $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+                $compteEpargne->setTypeClient("GROUPE");
+                $compteEpargneRepository->add($compteEpargne, true);
+                $this->addFlash('success', "Modification compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
+                return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $code], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Module_epargne/compte_epargne/edit.html.twig', [
+            'compte_epargne' => $compteEpargne,
+            'form' => $form,
+        ]);
+    }
+
 
     #[Route('/{id}', name: 'app_compte_epargne_delete', methods: ['POST'])]
     public function delete(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository): Response
