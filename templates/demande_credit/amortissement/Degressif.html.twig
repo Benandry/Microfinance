@@ -61,41 +61,4 @@
         </div>
     </div>
 
-{# 
-
-    <div class="card-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Periode(N)</th>
-                    <th>Date de remboursement</th>
-                    <th>Principale </th>
-                    <th>Interet </th>
-                    <th>Total </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for tab in amortissement %}
-                    <tr>
-                        <td> {{ tab.periode + 1 }} </td>
-                        <td>{{ tab.dateRemb|date("d/m/Y")}}</td>
-                        <td>{{ tab.CapitalDu }}</td>
-                        <td>{{ tab.interet }}</td>
-                        <td>{{ tab.montantPayer }}</td>
-                    </tr>
-                {% endfor %}
-               {# <!-- {% endfor %} -->#}
-           
-       {# <!-- <div class="row">
-            <div class="col-6 col-xl-6 col-sm-6"> 
-               <p> Montant Total :</p>
-               <p> Interet total : </p>
-               <p>Nombre tranche :</p>
-            </div>
-            <div class="col-6 col-xl-6 col-sm-6">
-                 <p>{{ montant}}</p>
-                 <p> {{ interet }} </p>
-                 <p>{{  tranche }}</p>
-            </div>
-        </div> -->#}
 {% endblock %}

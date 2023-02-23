@@ -23,7 +23,7 @@ class ConfigurationCreditType extends AbstractType
                 'placeholder'=>'Choisir produit credit'
             ])
             ->add('Methode',ChoiceType::class,[
-                'placeholder'=>'Choisir Methode',
+                'placeholder'=>'Choisir produit',
                 'choices'=>[
                     'Lineaire'=>'Lineaire',
                     'Degressif'=>'Degressif'

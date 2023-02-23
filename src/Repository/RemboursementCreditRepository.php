@@ -90,6 +90,7 @@ class RemboursementCreditRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+
     /**
      * Undocumented function
      *@method mixed ComparaisonRemboursement() : Methode permet de comparer le montant rembourser et l'echeance
@@ -257,6 +258,8 @@ class RemboursementCreditRepository extends ServiceEntityRepository
 
         $query=$entityManager->createQuery(
             'SELECT
+            -- demande credit
+                demande.NombreTranche,
             -- amortissement
                 amortissement.periode,
                 amortissement.dateRemborsement,
@@ -269,7 +272,9 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 amortissement.commission,
                 amortissement.codecredit,
                 amortissement.typeamortissement,
+                -- SUM(amortissement.montanttTotal) crd,
             -- remboursement
+                remboursement.id,
                 remboursement.periode perioderemboursementModal,
                 remboursement.MontantTotalPaye montantrembourseModal,
                 remboursement.penalite penaliteremboursementModal,
@@ -279,20 +284,28 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 remboursement.Papeterie,
                 remboursement.TransactionEnLiquide,
                 remboursement.TransfertEpargne,
-                remboursement.Commentaire
-
+                remboursement.Commentaire,
+                remboursement.PieceCompteble
+                -- credit deja rembourser
+                -- SUM(remboursement.MontantTotalPaye) TotalRembourser,
+                -- credit pas encore rembourser
+                -- (SUM(amortissement.montanttTotal)-SUM(remboursement.MontantTotalPaye)) TotalARembourser
             FROM
                 App\Entity\AmortissementFixe amortissement
-            LEFT JOIN
+                LEFT JOIN
                 App\Entity\RemboursementCredit remboursement
             WITH
-                amortissement.periode = remboursement.periode
-                AND 
                 amortissement.codecredit = remboursement.NumeroCredit
+                INNER JOIN
+                App\Entity\DemandeCredit demande
+            WITH
+                amortissement.codecredit = demande.NumeroCredit
+
             WHERE
-            amortissement.codecredit = :numerocredit
+                amortissement.codecredit = :numerocredit
+                -- remboursement.NumeroCredit = :numerocredit
             ORDER BY remboursement.periode DESC
-                '
+            '
         )
         ->setParameter(':numerocredit',$numerocredit)
         ->setMaxResults(1)
@@ -300,6 +313,51 @@ class RemboursementCreditRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+
+    /**
+     * @method mixed CreditSomme():Permet de recuperer la somme des argents concernant le credit
+     * @param mixed $numerocredit
+     * @return mixed array()
+    */
+
+     public function CreditSomme($numerocredit){
+
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT DISTINCT
+            -- amortissement
+                (demande.Montant+(demande.Montant*demande.TauxInteretAnnuel/100)) crd,
+            -- credit deja rembourser
+                SUM(remboursement.MontantTotalPaye) TotalRembourser,
+            -- credit pas encore rembourser
+            (demande.Montant+(demande.Montant*demande.TauxInteretAnnuel/100))-SUM(remboursement.MontantTotalPaye) TotalARembourser
+
+             FROM
+                App\Entity\DemandeCredit demande
+                INNER JOIN
+                App\Entity\AmortissementFixe ammortissement
+                WITH
+                demande.NumeroCredit=ammortissement.codecredit
+             
+             LEFT JOIN
+                App\Entity\RemboursementCredit remboursement
+             WITH
+                ammortissement.periode = remboursement.periode
+                AND
+                ammortissement.codecredit=remboursement.NumeroCredit
+             WHERE
+                ammortissement.codecredit =  :numerocredit
+            '
+            )
+            ->setParameter(':numerocredit',$numerocredit);
+
+        return  $query->getResult();
+
+
+    }
+
+
     /**
      * @method   HistoriqueRemboursement() : Methode permet de suivre
      * l'historique du remboursement
@@ -372,7 +430,9 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 amortissement.penalite,
                 amortissement.commission,
                 amortissement.codecredit,
-                amortissement.typeamortissement
+                amortissement.typeamortissement,
+                amortissement.soldedu,
+                amortissement.MontantRestantDu
 
             FROM
                 App\Entity\AmortissementFixe amortissement

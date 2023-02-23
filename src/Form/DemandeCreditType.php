@@ -21,7 +21,13 @@ class DemandeCreditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('codeclient')
+            ->add('codeclient',TextType::class,[
+                'attr' => [
+                    'class'=>'form-control',
+                    'maxLength' =>10,
+                    'minLength' =>10,
+                ]
+            ])
             ->add('TypeClient',ChoiceType::class,[
                 'placeholder' => "Type de client ...",
                 'choices'=>[
@@ -63,6 +69,7 @@ class DemandeCreditType extends AbstractType
                     'label' => "Agent de credit :",
                     'placeholder' => "agent de credit",
                     'autocomplete' => true,
+                    'required'=>true
             ])
             ->add('categorieCredit',EntityType::class,[
                 'class'=>CategorieCredit::class,

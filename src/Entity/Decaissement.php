@@ -44,6 +44,9 @@ class Decaissement
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $refDecaissement = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $NumeroCompteEpargne = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +168,18 @@ class Decaissement
     public function setRefDecaissement(?string $refDecaissement): self
     {
         $this->refDecaissement = $refDecaissement;
+
+        return $this;
+    }
+
+    public function getNumeroCompteEpargne(): ?string
+    {
+        return $this->NumeroCompteEpargne;
+    }
+
+    public function setNumeroCompteEpargne(?string $NumeroCompteEpargne): self
+    {
+        $this->NumeroCompteEpargne = $NumeroCompteEpargne;
 
         return $this;
     }

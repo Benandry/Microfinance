@@ -20,8 +20,17 @@ $(document).ready(function(){
         $('#configuration_credit_GarantieFinanciere').on('click',function(){
             
             // Le champ taux garantie financiere apparaisse
+        $('#configuration_credit_TauxGarantieMaterielle').hide();
+        $('#configuration_credit_TauxGarantieFinanciere').hide();
+        
+        $('#configuration_credit_GarantieMaterielle').on('click',function(){
+            $('#configuration_credit_TauxGarantieMaterielle').show();
+        });
+
+        $('#configuration_credit_GarantieFinanciere').on('click',function(){
             $('#configuration_credit_TauxGarantieFinanciere').show();
         });
         
+    });
     }
-})
+});

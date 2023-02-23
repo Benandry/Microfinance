@@ -129,29 +129,6 @@ class ConfigurationCredit
         return $this;
     }
 
-    // public function getInteretDegressif(): ?float
-    // {
-    //     return $this->InteretDegressif;
-    // }
-
-    // public function setInteretDegressif(?float $InteretDegressif): self
-    // {
-    //     $this->InteretDegressif = $InteretDegressif;
-
-    //     return $this;
-    // }
-
-    // public function getInteretLineaire(): ?float
-    // {
-    //     return $this->InteretLineaire;
-    // }
-
-    // public function setInteretLineaire(?float $InteretLineaire): self
-    // {
-    //     $this->InteretLineaire = $InteretLineaire;
-
-    //     return $this;
-    // }
 
     public function isGarantieMoral(): ?bool
     {

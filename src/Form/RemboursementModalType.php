@@ -37,6 +37,18 @@ class RemboursementModalType extends AbstractType
             ->add('restemontant',TextType::class,[
                 'required'=>false
             ])
+            ->add('crd',TextType::class,[
+                'required'=>false
+            ])
+            ->add('TotalRembourser',TextType::class,[
+                'required'=>false
+            ])
+            ->add('TotalaRembourser',TextType::class,[
+                'required'=>false
+            ])
+            ->add('TotalPeriode',TextType::class,[
+                'required'=>false
+            ])
             ;
     }
 

@@ -40,19 +40,82 @@ class IndividuelclientRepository extends ServiceEntityRepository
         }
     }
 
-    // public function profil(int $id):array
-    // {
-    //     $entityManager = $this->getEntityManager();
+        /**
+     * Undocumented function
+     *@method mixed AjoutMembre():Cette methode permet d'ajouter des membres groupe
+     * @param [type] $idclient
+     * @return array
+     */
 
-    //     $query = $entityManager->createQuery(
-    //         'SELECT i,a
-    //         FROM App\Entity\Individuelclient i INNER JOIN App\Entity\Agence a'
-    //     )->setParameter('id',$id);
+     public function AjoutMembre($idclient){
+        $entityManager=$this->getEntityManager();
+  
+        $query=$entityManager->createQuery(
+          'SELECT
+          i
+          FROM
+          App\Entity\Individuelclient  i
+          WHERE
+          i.id=:idclient'
+        )
+        ->setParameter(':idclient',$idclient);
+  
+        return $query->getResult();
+      }
+  
 
-    //     return $query->getResult();
-    // }
+    /**
+     * Undocumented function
+     *@method mixed profil():Cette methode affiche le client à changer en garant
+     * @param integer $idclient
+     * @return array
+     */
+    public function profil(int $idclient):array
+    {
+        $entityManager = $this->getEntityManager();
 
+        $query = $entityManager->createQuery(
+            'SELECT 
+            i
+            FROM App\Entity\Individuelclient i
+            WHERE
+            i.id = :idclient'
+        )->setParameter('idclient',$idclient);
 
+        return $query->getResult();
+    }
+
+    /**
+     * Undocumented function
+     *@method mixed ListeGarant():Permet de lister tout les garants
+     * @return void
+     */
+    public function ListeGarant()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT 
+                i.codeclient,
+                i.nom_client,
+                i.prenom_client,
+                i.cin,
+                i.date_inscription,
+                i.sexe
+            FROM 
+                App\Entity\Individuelclient i
+            WHERE
+                i.garant = true'
+        );
+
+        return $query->getResult();
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
    public function CompteEpargne()
    {
        return $this->createQueryBuilder('i')

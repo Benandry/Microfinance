@@ -79,12 +79,23 @@ class ApiCreditController extends AbstractController
      /**
      * Fonction qui recupere les api remboursement sur le modal
      */
-    #[Route('/remboursement/modal/{numerocredit}',name:'app_remboursement_periode_modal')]
-    public function ApiRemboursementModal(RemboursementCreditRepository $remboursementCreditRepository,string $numerocredit):Response
+    #[Route('/remboursement/modal/{numerocredit}',name:'app_modalremb')]
+    public function ApiRemboursementModal(RemboursementCreditRepository $remboursementCreditRepository,$numerocredit):Response
     {
         $remboursement=$remboursementCreditRepository->ApiRemboursementModal($numerocredit);
 
         return new JsonResponse($remboursement);
+    }
+
+      /**
+     * Fonction qui recupere les api remboursement sur le modal
+     */
+    #[Route('/sommeremboursement/somme/{numerocredit}',name:'app_sommecredit')]
+    public function SommeCredit(RemboursementCreditRepository $remboursementCreditRepository,$numerocredit):Response
+    {
+        $somme=$remboursementCreditRepository->CreditSomme($numerocredit);
+
+        return new JsonResponse($somme);
     }
 
        /**
@@ -122,6 +133,78 @@ class ApiCreditController extends AbstractController
 
      
        return new JsonResponse($remboursement);
+    }
+
+    /**
+     * @method mixed InfoClientDemandeCredit() : Cette methode permet de connaitre l'information concernant
+     * le client qui fait le demande
+     * @param mixed $codeclient : parametre qui recupere le code individuel ou groupe
+     */
+    #[Route('/infodemande/credit/individuel/{codeclient}',name:'app_info_demande_credit_individuel')]
+    public function InformationClientDemandeCreditIndividuel(DemandeCreditRepository $demandeCreditRepository,$codeclient):Response
+    {
+        $infodemandeindividuel=$demandeCreditRepository->InfoClientDemandeCreditIndividuel($codeclient);
+
+        return new JsonResponse($infodemandeindividuel);
+    }
+
+    /**
+     * Undocumented function
+     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return json
+     */
+    #[Route('/infodemandecredit/groupe/{codegroupe}',name:'app_groupe_info')]
+    public function InformationClientDemandeCreditGroupe(DemandeCreditRepository $demandeCreditRepository,$codegroupe):Response
+    {
+        $infodemandegroupe=$demandeCreditRepository->InfoClientDemandeCreditGroupe($codegroupe);
+
+        return new JsonResponse($infodemandegroupe);
+    }
+
+       /**
+     * Undocumented function
+     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return json
+     */
+    #[Route('/modalindividuel/{NumeroCredit}',name:'app_imodal')]
+    public function InformationModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
+    {
+        $infodemandegroupe=$demandeCreditRepository->InfoClientModalIndividuel($NumeroCredit);
+
+        return new JsonResponse($infodemandegroupe);
+    }
+
+          /**
+     * Undocumented function
+     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return json
+     */
+    #[Route('/groupemodal/{NumeroCredit}',name:'app_modalg')]
+    public function InfoClientModalGroupe(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
+    {
+        $infodemandegroupe=$demandeCreditRepository->InfoClientModalGroupe($NumeroCredit);
+
+        return new JsonResponse($infodemandegroupe);
+    }
+
+
+    /**
+     * @method mixed InformationGarant():Fonction permet de recuperer le liste des garants
+     * @param mixed $codeclient
+     * @return  json
+     */
+    #[Route('/infogarant/individuelclient/{codeclient}',name:'app_info_garant')]
+    public function InformationGarant(DemandeCreditRepository $demandeCreditRepository,$codeclient):Response
+    {
+        $garant=$demandeCreditRepository->InfoGarant($codeclient);
+
+        return new JsonResponse($garant);
     }
 
 

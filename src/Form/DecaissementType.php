@@ -77,6 +77,7 @@ class DecaissementType extends AbstractType
                 'required' => false,
                 'autocomplete' => true,
             ])
+            ->add('NumeroCompteEpargne')
         ;
     }
 

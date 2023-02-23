@@ -56,6 +56,9 @@ class RemboursementCredit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $TypeClient = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $PenalitePaye = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -230,6 +233,18 @@ class RemboursementCredit
     public function setTypeClient(?string $TypeClient): self
     {
         $this->TypeClient = $TypeClient;
+
+        return $this;
+    }
+
+    public function getPenalitePaye(): ?float
+    {
+        return $this->PenalitePaye;
+    }
+
+    public function setPenalitePaye(?float $PenalitePaye): self
+    {
+        $this->PenalitePaye = $PenalitePaye;
 
         return $this;
     }

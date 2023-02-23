@@ -49,7 +49,8 @@ class DecaissementRepository extends ServiceEntityRepository
         demande.NumeroCredit,
         demande.Montant,
         appro.statusApprobation,
-        decaissement.numeroCredit
+        decaissement.numeroCredit,
+        decaissement.NumeroCompteEpargne
 
         FROM App\Entity\DemandeCredit demande
         INNER JOIN 

@@ -39,6 +39,160 @@ class DemandeCreditRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Undocumented function
+     *@method mixed InfoClientDemandeCreditIndividuel() : Mehode permet de connaitre l'information 
+     *individuel
+     *@param mixed $codeclient:code client individuel
+     * @return void
+     */
+    public function InfoClientDemandeCreditIndividuel($codeclient){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                individuel.codeclient,
+                individuel.nom_client,
+                individuel.prenom_client
+                FROM
+                    App\Entity\IndividuelClient individuel
+                WHERE
+                    individuel.codeclient = :codeclient
+            '
+        )
+        ->setParameter(':codeclient',$codeclient);
+
+        return $query->getResult();
+
+    }
+
+
+        /**
+     * Undocumented function
+     *@method mixed InfoClientModalIndividuel() : Mehode permet de connaitre l'information 
+     *individuel
+     *@param mixed $NumeroCredit:code client individuel
+     * @return void
+     */
+    public function InfoClientModalIndividuel($NumeroCredit){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                individuel.codeclient,
+                individuel.nom_client,
+                individuel.prenom_client
+                FROM
+                    App\Entity\DemandeCredit demande
+                    INNER JOIN
+                    App\Entity\IndividuelClient individuel
+                    WITH
+                    demande.codeclient=individuel.codeclient
+                WHERE
+                    demande.NumeroCredit = :NumeroCredit
+            '
+        )
+        ->setParameter(':NumeroCredit',$NumeroCredit);
+
+        return $query->getResult();
+
+    }
+
+       /**
+     * Undocumented function
+     *@method mixed InfoClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return void
+     */
+    public function InfoClientModalGroupe($NumeroCredit){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                groupe.nomGroupe,
+                groupe.dateInscription,
+                groupe.numeroMobile,
+                groupe.email
+                FROM
+                    App\Entity\DemandeCredit demande
+                    INNER JOIN
+                    App\Entity\Groupe groupe
+                    WITH
+                    demande.codeclient=groupe.codegroupe
+                WHERE
+                    demande.NumeroCredit = :NumeroCredit
+            '
+        )
+        ->setParameter(':NumeroCredit',$NumeroCredit);
+
+        return $query->getResult();
+
+    }
+
+
+       /**
+     * Undocumented function
+     *@method mixed InfoClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
+     *groupe
+     *@param mixed $codegroupe:code client groupe
+     * @return void
+     */
+    public function InfoClientDemandeCreditGroupe($codegroupe){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                groupe.nomGroupe,
+                groupe.dateInscription,
+                groupe.numeroMobile,
+                groupe.email
+                FROM
+                    App\Entity\Groupe groupe
+                WHERE
+                    groupe.codegroupe = :codegroupe
+            '
+        )
+        ->setParameter(':codegroupe',$codegroupe);
+
+        return $query->getResult();
+
+    }
+
+    /**
+     * Undocumented function
+     *@method mixed InfoGarant():Cette fonction permet de savoir 
+     *si c'est un client garant ou pas
+     *@param mixed $codeclient : code client individuel
+     * @return void
+     */
+    public function InfoGarant($codeclient){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                individuel.codeclient,
+                individuel.nom_client,
+                individuel.prenom_client,
+                individuel.cin
+             FROM
+                App\Entity\IndividuelClient individuel
+             WHERE
+                individuel.garant = 1
+                    AND
+                individuel.codeclient = :codeclient
+            '
+        )
+        ->setParameter(':codeclient',$codeclient);
+
+        return $query->getResult();
+    }
+
     // Cette fonction permet de creer des numero credits
     public function DernierNumeroCredit(){
         $entityManager=$this->getEntityManager();

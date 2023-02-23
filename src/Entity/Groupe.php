@@ -178,27 +178,27 @@ class Groupe
         return $this->codegroupeEpargne;
     }
 
-    public function addCodegroupeEpargne(CompteEpargne $codegroupeEpargne): self
-    {
-        if (!$this->codegroupeEpargne->contains($codegroupeEpargne)) {
-            $this->codegroupeEpargne[] = $codegroupeEpargne;
-            $codegroupeEpargne->setCodeGroupe($this);
-        }
+    // public function addCodegroupeEpargne(CompteEpargne $codegroupeEpargne): self
+    // {
+    //     if (!$this->codegroupeEpargne->contains($codegroupeEpargne)) {
+    //         $this->codegroupeEpargne[] = $codegroupeEpargne;
+    //         $codegroupeEpargne->setCodeGroupe($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCodegroupeEpargne(CompteEpargne $codegroupeEpargne): self
-    {
-        if ($this->codegroupeEpargne->removeElement($codegroupeEpargne)) {
-            // set the owning side to null (unless already changed)
-            if ($codegroupeEpargne->getCodeGroupe() === $this) {
-                $codegroupeEpargne->setCodeGroupe(null);
-            }
-        }
+    // public function removeCodegroupeEpargne(CompteEpargne $codegroupeEpargne): self
+    // {
+    //     if ($this->codegroupeEpargne->removeElement($codegroupeEpargne)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($codegroupeEpargne->getCodeGroupe() === $this) {
+    //             $codegroupeEpargne->setCodeGroupe(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCodegroupe(): ?string
     {
