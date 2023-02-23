@@ -261,8 +261,8 @@ class TransactionRepository extends ServiceEntityRepository
     }
  // Cette fonction permet de filtre entre deux date
 
-        public function filtreReleve($Du,$Au,$codeepargne){
-
+        public function filtreReleve($Du,$Au,$codeepargne)
+        {
             $entityManager=$this->getEntityManager();
             $query=$entityManager->createQuery(
                 'SELECT
@@ -621,6 +621,53 @@ class TransactionRepository extends ServiceEntityRepository
         ");
 
         return  $query->getResult();
+    }
+
+    public function findSoldeInitial($Date_arrete,$codeepargne)
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT
+            -- transaction 
+            tr.id,
+            tr.Description,
+            tr.PieceComptable,
+            tr.DateTransaction,
+            tr.Montant,
+            tr.codetransaction,
+            tr.codeepargneclient,
+            tr.solde,
+            -- compte epargne
+            ce.codeep,
+            ce.codeepargne,
+            -- individuel
+            i.codeclient,
+            i.nom_client,
+            i.prenom_client
+            FROM
+            App\Entity\Transaction tr
+            INNER JOIN
+            App\Entity\CompteEpargne ce
+            INNER JOIN 
+            App\Entity\Individuelclient i
+            WITH
+            tr.codeepargneclient = ce.codeepargne
+            AND
+            ce.codeep = i.codeclient
+            WHERE
+            tr.DateTransaction < :Du 
+            AND
+             tr.codeepargneclient =:codeepargne
+            AND  tr.id = (SELECT MAX(t.id) FROM App\Entity\Transaction t WHERE t.codeepargneclient =:codeepargne )
+            ORDER BY tr.id
+            '
+        )
+        ->setParameter(':Du',$Date_arrete)
+        ->setParameter(':codeepargne',$codeepargne)
+        ;
+
+
+            return $query->getResult();
     }
 }
 

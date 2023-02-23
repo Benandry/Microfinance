@@ -69,6 +69,7 @@ class RapportController extends AbstractController
         $du = 0;
         $au = 0;
         $client = '';
+        $soldeinitiale = 0;
         /******* */
 
         if($form->isSubmitted() && $form->isValid()){
@@ -80,10 +81,19 @@ class RapportController extends AbstractController
             $data = $filtrereleve->getData();
             $du = $data['Du'];
             $au = $data['Au'];
+
             $Codeclient = $filtrereleve->getData()['Codeclient']->getCodeepargne();
             
             $releve=$transactionRepository->filtreReleve($du,$au,$Codeclient);
             // dd($releve);
+
+            // Solde initialise 
+            if ($transactionRepository->findSoldeInitial($du,$Codeclient)) {
+                $soldeinitiale = $transactionRepository->findSoldeInitial($du,$Codeclient)[0]['solde'];
+                # code...
+            }else {
+                $soldeinitiale = 0;
+            }
         }
 
         return $this->renderForm('rapport/relevetransaction.html.twig', [
@@ -93,7 +103,8 @@ class RapportController extends AbstractController
             'showTable'=>$showTable_,
             'du' =>$du,
             'au'=> $au,
-            'info'=>$client
+            'info'=>$client,
+            'solde_initial' => $soldeinitiale
         ]);
     }  
 

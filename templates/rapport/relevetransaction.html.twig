@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-4">
+                            <div class="col-md-4 col-sm-4 m-auto">
                                 <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Relevé transaction</h5> </div>
                             </div>
                             <div class="col-md-4 col-sm-4">
@@ -87,6 +87,7 @@
                                         <p> Compte Epargne :  {{ info.codeepargne }} <br/>
                                             Du {{ du| date('d-m-Y') }} </br> 
                                             Au {{ au|date('d/m/Y') }} <br/>
+                                            Solde initiale : {{ solde_initial }}
                                         </p> 
                                     </div>
                                 </div>
