@@ -2,8 +2,11 @@
   <ul class="nav nav-tabs">
       <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">Etat Civile</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#famille">Famille</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Adresse et Niveau d'etude</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe">Groupe</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#parent">Parent</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#formation">Formation</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#activite">Activite</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Adresse</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe" style="display:none;">Groupe</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Identité</a></li>
   </ul>
   <div class="tab-content">
@@ -31,10 +34,9 @@
 
                   <div class="col-4 col-sm-4 col-md-4">
                       {{ form_row(form.profession) }}
-                      {{ form_row(form.nomConjoint) }}
                       {{ form_row(form.date_inscription) }}
                       {{ form_row(form.Agence) }}
-                      {{ form_row(form.garant) }}
+                      <div style="display:none;">{{ form_row(form.garant) }}</div>
                   </div>
               </div>
             </div>
@@ -47,31 +49,125 @@
                 <h6 class="text-center text-primary">Information familiale</h6>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6">
-                      {{ form_row(form.nb_enfant) }}
-                      {{ form_row(form.nb_personne_charge) }}
+                      {{ form_row(form.nomConjoint) }}
+                      {{ form_row(form.PrenomConjoint) }}
+                      {{ form_row(form.DateNaissanceConjoint) }}
+                      {{ form_row(form.CINConjoint) }}
+                      {{ form_row(form.ProfessionConjoint) }}
                     </div>
                     <div class="col-6 col-sm-6">
-                      {{ form_row(form.parent_nom) }}
-                      {{ form_row(form.parent_adresse) }}
+                      {{ form_row(form.nb_enfant) }}
+                      {{ form_row(form.nb_personne_charge) }}
                     </div>
                 </div>
             </div>
         </div>
       </div>
 
+
+            <div class="tab-pane" id="formation">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Formation</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.etude) }}
+                      {{ form_row(form.FormationProfessionnelle) }}
+                      {{ form_row(form.Information) }}        
+                    </div>
+                  </div>
+            </div>
+        </div>
+      </div>
+
+
+                  <div class="tab-pane" id="activite">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Activite</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                    <h6>Activite principale</h6>
+                      {{ form_row(form.Activite) }}
+                      {{ form_row(form.SecteurActivite) }}
+                      {{ form_row(form.LibelleMoyenProduction) }}        
+                      {{ form_row(form.MontantMoyenProduction) }}  
+                      {{ form_row(form.LibelleMoyenProduction2) }}        
+                      {{ form_row(form.MontantMoyenProduction2) }}        
+                      {{ form_row(form.LibelleMoyenProduction3) }}        
+                      {{ form_row(form.MontantMoyenProduction3) }}        
+                      {{ form_row(form.LibelleMoyenProduction4) }}        
+                      {{ form_row(form.MontantMoyenProduction4) }}        
+                      {{ form_row(form.EmployeTemporaire) }}        
+                      {{ form_row(form.CoutEmployeTemporaire) }}        
+                      {{ form_row(form.EmployePermanant) }}        
+                      {{ form_row(form.CoutEmployePermanent) }}        
+                    </div>
+                      <div class="col-6 col-sm-6 col-md-6">
+                    <h6>Activite Complementaire</h6>
+                      {{ form_row(form.ActiviteComplementaire) }}
+                      {{ form_row(form.SecteurActvtComplmtr) }}
+                      {{ form_row(form.LibellMoyenProdCmplmtr) }}        
+                      {{ form_row(form.MontantMoyenProdCmplmtr) }}  
+                      {{ form_row(form.LibellMoyenProdCmplmtr2) }}        
+                      {{ form_row(form.MontantMoyenProdCmplmtr2) }}        
+                      {{ form_row(form.LibellMoyenProdCmplmtr3) }}        
+                      {{ form_row(form.MontantMoyenProdCmplmtr3) }}        
+                      {{ form_row(form.LibellMoyenProdCmplmtr4) }}        
+                      {{ form_row(form.MontantMoyenProdCmplmtr4) }}        
+                      {{ form_row(form.EmployeTemprarCmplt) }}        
+                      {{ form_row(form.CoutEmployeTmprCmplmt) }}        
+                      {{ form_row(form.EmployePermntCmpltmt) }}        
+                      {{ form_row(form.CoutEmployePermntCmpltmt) }}        
+                    </div>
+                  </div>
+            </div>
+        </div>
+      </div>
+
+
+
+      <div class="tab-pane" id="parent">
+        <div class="row shadow-sm p-1">
+            <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="text-center text-primary">Parent</h6>
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.parent_nom) }}
+                      {{ form_row(form.PrenomParent) }}
+                      {{ form_row(form.CINParent) }}
+                    </div>
+                    <div class="col-6 col-sm-6">
+                      {{ form_row(form.parent_adresse) }}
+                      {{ form_row(form.FokontanyParent) }}
+                      {{ form_row(form.CommuneParent) }}
+                      {{ form_row(form.DistrictParent) }}
+                      {{ form_row(form.RegionParent) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+
       <div class="tab-pane" id="adresse">
         <div class="row shadow-sm p-1">
             <div class="col-12">
               <h6 class="text-center text-primary" >Adressse page</h6>
               <div class="row">
-                    <div class="col-6 col-sm-6">
+                    <div class="col-4 col-sm-4">
                       {{ form_row(form.adressephysique) }}
                       {{ form_row(form.commune) }}
-                      <div id="commune_suggest"></div>
+                      {{ form_row(form.Fokontany) }}
                     </div>
-                    <div class="col-6 col-sm-6">
-                      {{ form_row(form.etude) }}
-              </div>
+                    <div class="col-4 col-sm-4">
+                      {{ form_row(form.District) }}
+                      {{ form_row(form.Region) }}
+                      {{ form_row(form.Longitude) }}
+                      {{ form_row(form.Latitude) }}
+                    </div>
+                   
               </div>
             </div>
         </div>

@@ -136,6 +136,141 @@ class Individuelclient
     #[ORM\ManyToOne(inversedBy: 'individuelclients')]
     private ?Commune $commune = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PrenomConjoint = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $DateNaissanceConjoint = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CINConjoint = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ProfessionConjoint = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PrenomParent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CINParent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $FokontanyParent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CommuneParent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $DistrictParent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $RegionParent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Fokontany = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $District = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Region = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Longitude = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Latitude = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $FormationProfessionnelle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Information = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $Activite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $SecteurActivite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibelleMoyenProduction = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProduction = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibelleMoyenProduction2 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProduction2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibelleMoyenProduction3 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProduction3 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibelleMoyenProduction4 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProduction4 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $EmployeTemporaire = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $EmployePermanant = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $CoutEmployePermanent = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $CoutEmployeTemporaire = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $ActiviteComplementaire = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $SecteurActvtComplmtr = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibellMoyenProdCmplmtr = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProdCmplmtr = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibellMoyenProdCmplmtr2 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProdCmplmtr2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibellMoyenProdCmplmtr3 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProdCmplmtr3 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $LibellMoyenProdCmplmtr4 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $MontantMoyenProdCmplmtr4 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $EmployeTemprarCmplt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $CoutEmployeTmprCmplmt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $EmployePermntCmpltmt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $CoutEmployePermntCmpltmt = null;
+
     
     public function __construct()
     {
@@ -710,6 +845,546 @@ class Individuelclient
     public function setCommune(?Commune $commune): self
     {
         $this->commune = $commune;
+
+        return $this;
+    }
+
+    public function getPrenomConjoint(): ?string
+    {
+        return $this->PrenomConjoint;
+    }
+
+    public function setPrenomConjoint(?string $PrenomConjoint): self
+    {
+        $this->PrenomConjoint = $PrenomConjoint;
+
+        return $this;
+    }
+
+    public function getDateNaissanceConjoint(): ?\DateTimeInterface
+    {
+        return $this->DateNaissanceConjoint;
+    }
+
+    public function setDateNaissanceConjoint(?\DateTimeInterface $DateNaissanceConjoint): self
+    {
+        $this->DateNaissanceConjoint = $DateNaissanceConjoint;
+
+        return $this;
+    }
+
+    public function getCINConjoint(): ?string
+    {
+        return $this->CINConjoint;
+    }
+
+    public function setCINConjoint(?string $CINConjoint): self
+    {
+        $this->CINConjoint = $CINConjoint;
+
+        return $this;
+    }
+
+    public function getProfessionConjoint(): ?string
+    {
+        return $this->ProfessionConjoint;
+    }
+
+    public function setProfessionConjoint(?string $ProfessionConjoint): self
+    {
+        $this->ProfessionConjoint = $ProfessionConjoint;
+
+        return $this;
+    }
+
+    public function getPrenomParent(): ?string
+    {
+        return $this->PrenomParent;
+    }
+
+    public function setPrenomParent(?string $PrenomParent): self
+    {
+        $this->PrenomParent = $PrenomParent;
+
+        return $this;
+    }
+
+    public function getCINParent(): ?string
+    {
+        return $this->CINParent;
+    }
+
+    public function setCINParent(?string $CINParent): self
+    {
+        $this->CINParent = $CINParent;
+
+        return $this;
+    }
+
+    public function getFokontanyParent(): ?string
+    {
+        return $this->FokontanyParent;
+    }
+
+    public function setFokontanyParent(?string $FokontanyParent): self
+    {
+        $this->FokontanyParent = $FokontanyParent;
+
+        return $this;
+    }
+
+    public function getCommuneParent(): ?string
+    {
+        return $this->CommuneParent;
+    }
+
+    public function setCommuneParent(?string $CommuneParent): self
+    {
+        $this->CommuneParent = $CommuneParent;
+
+        return $this;
+    }
+
+    public function getDistrictParent(): ?string
+    {
+        return $this->DistrictParent;
+    }
+
+    public function setDistrictParent(?string $DistrictParent): self
+    {
+        $this->DistrictParent = $DistrictParent;
+
+        return $this;
+    }
+
+    public function getRegionParent(): ?string
+    {
+        return $this->RegionParent;
+    }
+
+    public function setRegionParent(?string $RegionParent): self
+    {
+        $this->RegionParent = $RegionParent;
+
+        return $this;
+    }
+
+    public function getFokontany(): ?string
+    {
+        return $this->Fokontany;
+    }
+
+    public function setFokontany(?string $Fokontany): self
+    {
+        $this->Fokontany = $Fokontany;
+
+        return $this;
+    }
+
+    public function getDistrict(): ?string
+    {
+        return $this->District;
+    }
+
+    public function setDistrict(?string $District): self
+    {
+        $this->District = $District;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->Region;
+    }
+
+    public function setRegion(?string $Region): self
+    {
+        $this->Region = $Region;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?string
+    {
+        return $this->Longitude;
+    }
+
+    public function setLongitude(?string $Longitude): self
+    {
+        $this->Longitude = $Longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?string
+    {
+        return $this->Latitude;
+    }
+
+    public function setLatitude(?string $Latitude): self
+    {
+        $this->Latitude = $Latitude;
+
+        return $this;
+    }
+
+    public function getFormationProfessionnelle(): ?string
+    {
+        return $this->FormationProfessionnelle;
+    }
+
+    public function setFormationProfessionnelle(?string $FormationProfessionnelle): self
+    {
+        $this->FormationProfessionnelle = $FormationProfessionnelle;
+
+        return $this;
+    }
+
+    public function getInformation(): ?string
+    {
+        return $this->Information;
+    }
+
+    public function setInformation(?string $Information): self
+    {
+        $this->Information = $Information;
+
+        return $this;
+    }
+
+    public function getActivite(): ?string
+    {
+        return $this->Activite;
+    }
+
+    public function setActivite(?string $Activite): self
+    {
+        $this->Activite = $Activite;
+
+        return $this;
+    }
+
+    public function getSecteurActivite(): ?string
+    {
+        return $this->SecteurActivite;
+    }
+
+    public function setSecteurActivite(?string $SecteurActivite): self
+    {
+        $this->SecteurActivite = $SecteurActivite;
+
+        return $this;
+    }
+
+    public function getLibelleMoyenProduction(): ?string
+    {
+        return $this->LibelleMoyenProduction;
+    }
+
+    public function setLibelleMoyenProduction(?string $LibelleMoyenProduction): self
+    {
+        $this->LibelleMoyenProduction = $LibelleMoyenProduction;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProduction(): ?float
+    {
+        return $this->MontantMoyenProduction;
+    }
+
+    public function setMontantMoyenProduction(?float $MontantMoyenProduction): self
+    {
+        $this->MontantMoyenProduction = $MontantMoyenProduction;
+
+        return $this;
+    }
+
+    public function getLibelleMoyenProduction2(): ?string
+    {
+        return $this->LibelleMoyenProduction2;
+    }
+
+    public function setLibelleMoyenProduction2(?string $LibelleMoyenProduction2): self
+    {
+        $this->LibelleMoyenProduction2 = $LibelleMoyenProduction2;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProduction2(): ?float
+    {
+        return $this->MontantMoyenProduction2;
+    }
+
+    public function setMontantMoyenProduction2(?float $MontantMoyenProduction2): self
+    {
+        $this->MontantMoyenProduction2 = $MontantMoyenProduction2;
+
+        return $this;
+    }
+
+    public function getLibelleMoyenProduction3(): ?string
+    {
+        return $this->LibelleMoyenProduction3;
+    }
+
+    public function setLibelleMoyenProduction3(?string $LibelleMoyenProduction3): self
+    {
+        $this->LibelleMoyenProduction3 = $LibelleMoyenProduction3;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProduction3(): ?float
+    {
+        return $this->MontantMoyenProduction3;
+    }
+
+    public function setMontantMoyenProduction3(?float $MontantMoyenProduction3): self
+    {
+        $this->MontantMoyenProduction3 = $MontantMoyenProduction3;
+
+        return $this;
+    }
+
+    public function getLibelleMoyenProduction4(): ?string
+    {
+        return $this->LibelleMoyenProduction4;
+    }
+
+    public function setLibelleMoyenProduction4(?string $LibelleMoyenProduction4): self
+    {
+        $this->LibelleMoyenProduction4 = $LibelleMoyenProduction4;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProduction4(): ?float
+    {
+        return $this->MontantMoyenProduction4;
+    }
+
+    public function setMontantMoyenProduction4(?float $MontantMoyenProduction4): self
+    {
+        $this->MontantMoyenProduction4 = $MontantMoyenProduction4;
+
+        return $this;
+    }
+
+    public function getEmployeTemporaire(): ?float
+    {
+        return $this->EmployeTemporaire;
+    }
+
+    public function setEmployeTemporaire(?float $EmployeTemporaire): self
+    {
+        $this->EmployeTemporaire = $EmployeTemporaire;
+
+        return $this;
+    }
+
+    public function getEmployePermanant(): ?float
+    {
+        return $this->EmployePermanant;
+    }
+
+    public function setEmployePermanant(?float $EmployePermanant): self
+    {
+        $this->EmployePermanant = $EmployePermanant;
+
+        return $this;
+    }
+
+    public function getCoutEmployePermanent(): ?float
+    {
+        return $this->CoutEmployePermanent;
+    }
+
+    public function setCoutEmployePermanent(?float $CoutEmployePermanent): self
+    {
+        $this->CoutEmployePermanent = $CoutEmployePermanent;
+
+        return $this;
+    }
+
+    public function getCoutEmployeTemporaire(): ?float
+    {
+        return $this->CoutEmployeTemporaire;
+    }
+
+    public function setCoutEmployeTemporaire(?float $CoutEmployeTemporaire): self
+    {
+        $this->CoutEmployeTemporaire = $CoutEmployeTemporaire;
+
+        return $this;
+    }
+
+    public function getActiviteComplementaire(): ?string
+    {
+        return $this->ActiviteComplementaire;
+    }
+
+    public function setActiviteComplementaire(?string $ActiviteComplementaire): self
+    {
+        $this->ActiviteComplementaire = $ActiviteComplementaire;
+
+        return $this;
+    }
+
+    public function getSecteurActvtComplmtr(): ?string
+    {
+        return $this->SecteurActvtComplmtr;
+    }
+
+    public function setSecteurActvtComplmtr(?string $SecteurActvtComplmtr): self
+    {
+        $this->SecteurActvtComplmtr = $SecteurActvtComplmtr;
+
+        return $this;
+    }
+
+    public function getLibellMoyenProdCmplmtr(): ?string
+    {
+        return $this->LibellMoyenProdCmplmtr;
+    }
+
+    public function setLibellMoyenProdCmplmtr(?string $LibellMoyenProdCmplmtr): self
+    {
+        $this->LibellMoyenProdCmplmtr = $LibellMoyenProdCmplmtr;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProdCmplmtr(): ?float
+    {
+        return $this->MontantMoyenProdCmplmtr;
+    }
+
+    public function setMontantMoyenProdCmplmtr(?float $MontantMoyenProdCmplmtr): self
+    {
+        $this->MontantMoyenProdCmplmtr = $MontantMoyenProdCmplmtr;
+
+        return $this;
+    }
+
+    public function getLibellMoyenProdCmplmtr2(): ?string
+    {
+        return $this->LibellMoyenProdCmplmtr2;
+    }
+
+    public function setLibellMoyenProdCmplmtr2(?string $LibellMoyenProdCmplmtr2): self
+    {
+        $this->LibellMoyenProdCmplmtr2 = $LibellMoyenProdCmplmtr2;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProdCmplmtr2(): ?float
+    {
+        return $this->MontantMoyenProdCmplmtr2;
+    }
+
+    public function setMontantMoyenProdCmplmtr2(?float $MontantMoyenProdCmplmtr2): self
+    {
+        $this->MontantMoyenProdCmplmtr2 = $MontantMoyenProdCmplmtr2;
+
+        return $this;
+    }
+
+    public function getLibellMoyenProdCmplmtr3(): ?string
+    {
+        return $this->LibellMoyenProdCmplmtr3;
+    }
+
+    public function setLibellMoyenProdCmplmtr3(?string $LibellMoyenProdCmplmtr3): self
+    {
+        $this->LibellMoyenProdCmplmtr3 = $LibellMoyenProdCmplmtr3;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProdCmplmtr3(): ?float
+    {
+        return $this->MontantMoyenProdCmplmtr3;
+    }
+
+    public function setMontantMoyenProdCmplmtr3(?float $MontantMoyenProdCmplmtr3): self
+    {
+        $this->MontantMoyenProdCmplmtr3 = $MontantMoyenProdCmplmtr3;
+
+        return $this;
+    }
+
+    public function getLibellMoyenProdCmplmtr4(): ?string
+    {
+        return $this->LibellMoyenProdCmplmtr4;
+    }
+
+    public function setLibellMoyenProdCmplmtr4(?string $LibellMoyenProdCmplmtr4): self
+    {
+        $this->LibellMoyenProdCmplmtr4 = $LibellMoyenProdCmplmtr4;
+
+        return $this;
+    }
+
+    public function getMontantMoyenProdCmplmtr4(): ?float
+    {
+        return $this->MontantMoyenProdCmplmtr4;
+    }
+
+    public function setMontantMoyenProdCmplmtr4(?float $MontantMoyenProdCmplmtr4): self
+    {
+        $this->MontantMoyenProdCmplmtr4 = $MontantMoyenProdCmplmtr4;
+
+        return $this;
+    }
+
+    public function getEmployeTemprarCmplt(): ?float
+    {
+        return $this->EmployeTemprarCmplt;
+    }
+
+    public function setEmployeTemprarCmplt(?float $EmployeTemprarCmplt): self
+    {
+        $this->EmployeTemprarCmplt = $EmployeTemprarCmplt;
+
+        return $this;
+    }
+
+    public function getCoutEmployeTmprCmplmt(): ?float
+    {
+        return $this->CoutEmployeTmprCmplmt;
+    }
+
+    public function setCoutEmployeTmprCmplmt(?float $CoutEmployeTmprCmplmt): self
+    {
+        $this->CoutEmployeTmprCmplmt = $CoutEmployeTmprCmplmt;
+
+        return $this;
+    }
+
+    public function getEmployePermntCmpltmt(): ?float
+    {
+        return $this->EmployePermntCmpltmt;
+    }
+
+    public function setEmployePermntCmpltmt(?float $EmployePermntCmpltmt): self
+    {
+        $this->EmployePermntCmpltmt = $EmployePermntCmpltmt;
+
+        return $this;
+    }
+
+    public function getCoutEmployePermntCmpltmt(): ?float
+    {
+        return $this->CoutEmployePermntCmpltmt;
+    }
+
+    public function setCoutEmployePermntCmpltmt(?float $CoutEmployePermntCmpltmt): self
+    {
+        $this->CoutEmployePermntCmpltmt = $CoutEmployePermntCmpltmt;
 
         return $this;
     }

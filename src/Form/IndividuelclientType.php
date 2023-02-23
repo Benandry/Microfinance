@@ -11,6 +11,7 @@ use App\Entity\Groupe;
 use App\Entity\Individuelclient;
 use App\Entity\Langue;
 use App\Entity\Titre;
+use App\Repository\GroupeRepository;
 use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -44,7 +45,25 @@ class IndividuelclientType extends AbstractType
             ->add('prenom_client',TextType::class,[
                 'label'=>'Prenom',
             ])
-            ->add('nomConjoint')
+            ->add('nomConjoint',TextType::class,[
+                'label'=>'Nom Conjoint',
+            ])
+            ->add('PrenomConjoint',TextType::class,[
+                'label'=>'Prenom Conjoint'
+            ])
+            ->add('DateNaissanceConjoint',DateType::class,[
+                'widget'=>'single_text'
+            ])
+            ->add('CINConjoint',TextType::class,[
+                'label'=>'CIN Conjoint',
+                'attr'=>[
+                    'minlength'=>12,
+                    'maxlength'=>12,
+                ]
+            ])
+            ->add('ProfessionConjoint',TextType::class,[
+                'label'=>'Profession Conjoint'
+            ])
             ->add('date_inscription',DateType::class,[
                 'widget'=>'single_text',
                 'label'=>'Date Inscription',
@@ -83,6 +102,11 @@ class IndividuelclientType extends AbstractType
                 },
                 'attr'=>['class'=>'form-control']
                 ])
+                ->add('Fokontany')
+                ->add('District')
+                ->add('Region')
+                ->add('Longitude')
+                ->add('Latitude')
             ->add('etatcivile',EntityType::class,[
                 'class'=>Etatcivile::class,
                 'choice_label'=>'etatcivile',
@@ -98,6 +122,8 @@ class IndividuelclientType extends AbstractType
                 'mapped' => true,
                 'autocomplete' => true,
             ])
+            ->add('FormationProfessionnelle')
+            ->add('Information')
             ->add('titre',EntityType::class,[
                 'class'=>Titre::class,
                 'choice_label'=>'titre',
@@ -117,9 +143,27 @@ class IndividuelclientType extends AbstractType
             ->add('parent_adresse',TextType::class,[
                 'label'=>'Parent adresse',
             ])
+            ->add('PrenomParent')
+            ->add('CINParent',TextType::class,[
+                'attr'=>[
+                    'class'=>'form-control',
+                    'maxLength' =>12,
+                    'minLength' =>12,
+                ]
+            ])
+            ->add('FokontanyParent')
+            ->add('CommuneParent')
+            ->add('DistrictParent')
+            ->add('RegionParent')
             ->add('MembreGroupe',EntityType::class,[
                 'class'=>Groupe::class,
-                'choice_label'=>'nomGroupe',
+                'choice_label'=>function($mg){
+                    return $mg->getNomGroupe()." ".$mg->getCodegroupe();
+                },
+                // 'query_builder'=>function(GroupeRepository $mg){
+                //     return $mg->createQueryBuilder('mg')
+                //               ->where('mg.');
+                // },
                 'required'=>false,
                 'by_reference'=>true,
                 'mapped'=>true,
@@ -206,6 +250,35 @@ class IndividuelclientType extends AbstractType
                 }
             ])       
             ->add('garant') 
+            ->add('Activite')
+            ->add('SecteurActivite')
+            ->add('LibelleMoyenProduction')
+            ->add('MontantMoyenProduction')
+            ->add('LibelleMoyenProduction2')
+            ->add('MontantMoyenProduction2')
+            ->add('LibelleMoyenProduction3')
+            ->add('MontantMoyenProduction3')
+            ->add('LibelleMoyenProduction4')
+            ->add('MontantMoyenProduction4')
+            ->add('EmployeTemporaire')
+            ->add('CoutEmployeTemporaire')
+            ->add('EmployePermanant')
+            ->add('CoutEmployePermanent')
+            
+            ->add('ActiviteComplementaire')
+            ->add('SecteurActvtComplmtr')
+            ->add('LibellMoyenProdCmplmtr')
+            ->add('MontantMoyenProdCmplmtr')
+            ->add('LibellMoyenProdCmplmtr2')
+            ->add('MontantMoyenProdCmplmtr2')
+            ->add('LibellMoyenProdCmplmtr3')
+            ->add('MontantMoyenProdCmplmtr3')
+            ->add('LibellMoyenProdCmplmtr4')
+            ->add('MontantMoyenProdCmplmtr4')
+            ->add('EmployeTemprarCmplt')
+            ->add('CoutEmployeTmprCmplmt')
+            ->add('EmployePermntCmpltmt')
+            ->add('CoutEmployePermntCmpltmt')
         ;
     }
 

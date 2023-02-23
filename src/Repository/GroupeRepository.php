@@ -41,6 +41,11 @@ class GroupeRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
    public function Groupe()
    {
         $entityManager=$this->getEntityManager();
@@ -50,6 +55,11 @@ class GroupeRepository extends ServiceEntityRepository
         return $query->getResult();
    }
 
+   /**
+    * Undocumented function
+    *
+    * @return void
+    */
    public function RapportGroupe()
    {
         $entityManager=$this->getEntityManager();
@@ -71,6 +81,13 @@ class GroupeRepository extends ServiceEntityRepository
         return $query->getResult();
    }
 
+   /**
+    * Undocumented function
+    *
+    * @param [type] $date1
+    * @param [type] $date2
+    * @return void
+    */
    public function FiltreGroupe($date1,$date2)
    { 
 

@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Listes individuel client
+{% endblock %}
+{% block head %}
+    Client>Individuels>Listes individuel client
+{% endblock %}
+{% block body %}
+    {{ include('modal.html.twig')}}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 mt-3">
+            <table class="table table2 table-borderd mt-3">
+                <thead>
+                    <tr>
+                        <th>Code Client</th>
+                        <th>Nom client</th>
+                        <th>Prenom client</th>
+                        <th>Cin</th>
+                        <th>Date inscription</th>
+                        <th>Sexe</th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                {% for listegarant in listegarant %}
+                 
+                    <tr>
+                        <td class="fw-bold"> {{ listegarant.codeclient }} </td>
+                        <td>{{ listegarant.nom_client }}</td>
+                        <td>{{ listegarant.prenom_client }}</td>
+                        <td>{{ listegarant.cin }}</td>
+                        <td>{{ listegarant.date_inscription ? listegarant.date_inscription|date('Y-m-d') : '' }}</td>
+                        <td>{{ listegarant.sexe }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="28">Pas de garant</td>
+                    </tr>
+              
+                 {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
