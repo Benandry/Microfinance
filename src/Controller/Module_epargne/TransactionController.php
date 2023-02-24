@@ -39,6 +39,7 @@ class TransactionController extends AbstractController
         $date1 = 0;
         $SommeMontant = 0;
 
+        $titre = "";
         // Filtre entre deux date d'une rapport
         $afficheTab_ = false;
         $form=$this->createForm(FiltreRapportTransactionType::class);
@@ -51,12 +52,16 @@ class TransactionController extends AbstractController
             $date1 = $data['date1'];
             $date_du_ = $data['Du'];
             $date_au_ = $data['Au'];
-            
-            if ($date1 != null) {
+
+            if ($data['compteEpargne']) {
+                $transaction=$transactionRepository->findTransactionByCode($data['compteEpargne']->getCodeepargne());
+                $titre = " du client : ".$transaction[0]['nomclient']." ".$transaction[0]['prenomclient'];
+                $SommeMontant = array_sum(array_column($transaction,'Montant'));
+             }
+            elseif ($date1 != null) {
                 // En une date ///////////
                 $date_1 = true;
                 $transaction=$transactionRepository->FiltreDateArreteTransac($date1);
-                // dd($transaction);
                 $SommeMontant = array_sum(array_column($transaction,'Montant'));
                 // dd($SommeMontant);
                 
@@ -79,6 +84,7 @@ class TransactionController extends AbstractController
             'one_date' => $date1,
             'date_1' => $date_1,
             'date_2' => $date_2,
+            'titre' => $titre,
             'total_montant' => $SommeMontant,
         ]);
     }

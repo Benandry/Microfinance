@@ -10,7 +10,14 @@
 
 {% block head %}
     {% if  affiche_tab_  == true %}
-        Rapport  transaction   {% if date_1 == true %} jusq'a {{ one_date| date('d-m-Y') }} {% else %} du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}{% endif %}
+        Rapport  transaction   
+            {% if date_1 %}
+                 jusq'a {{ one_date| date('d-m-Y') }}
+            {% elseif titre %} 
+                {{ titre }}
+            {% else %}
+            du {{ du| date('d-m-Y') }} au {{ au| date('d-m-Y')  }}
+        {% endif %}
     {% else %}
         Rapport  transaction 
     {% endif %}
@@ -30,7 +37,13 @@
                     </div>
                     {{ form_start(form) }} 
                     <!-- Modal body -->
-                     <div class="modal-body">    
+                     <div class="modal-body">   
+                     
+                     <div class="row">
+                        <div class="col-sm-10 col-md-10 m-auto">
+                            {{ form_row(form.compteEpargne) }}
+                        </div> 
+                    </div> 
                         <div class="text-center ps-5 pe-5" id="one_date">
                             <h4 class="text-center"> Date </h4>
                             {{ form_row(form.date1) }}
@@ -62,7 +75,10 @@
                     <th>Date Transaction</th>
                     <th>Code transaction</th>
                     <th>Compte epargne</th>
-                    <th>Nom</th>
+                    {% if titre %}
+                    {% else %}
+                        <th>Nom</th>
+                    {% endif %}
                     <th>Description</th>
                     <th>Piece Comptable</th>
                     <th>Produit</th>
@@ -77,10 +93,13 @@
                     <td>{{ transaction.DateTransaction ? transaction.DateTransaction|date('Y-m-d') : '' }}</td>
                     <td>{{transaction.codetransaction}}</td>
                     <td>{{ transaction.codeepargneclient }}</td>
-                      {% if transaction.typeClient == 'INDIVIDUEL' %}
-                            <td>{{ transaction.nomclient }} {{ transaction.prenomclient }}</td>
+                        {% if titre %}
                         {% else %}
-                            <td>{{ transaction.nomGroupe }}</td>
+                            {% if transaction.typeClient == 'INDIVIDUEL' %}
+                                <td>{{ transaction.nomclient }} {{ transaction.prenomclient }}</td>
+                            {% else %}
+                                <td>{{ transaction.nomGroupe }}</td>
+                            {% endif %}
                         {% endif %}
                     <td>{{ transaction.Description }}</td>
                     <td>{{ transaction.PieceComptable }}</td>
@@ -102,7 +121,12 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="7">Total </th>
+                    {% if titre %}
+                        <th colspan="6">Total </th>
+                    {% else %}
+                        <th colspan="7">Total </th>
+                    {% endif %}
+                    
                     <th> {{ total_montant|number_format(0,',', ' ') }} </th>
                 </tr>
             </tfoot>

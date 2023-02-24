@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\CompteEpargne;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,6 +15,16 @@ class FiltreRapportTransactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('compteEpargne',EntityType::class,[
+                'class' => CompteEpargne::class,
+                'placeholder' => "Compte epargne",
+                'attr' => [
+                    'class' => 'form-control border-0'
+                ],
+                'choice_label' => 'codeepargne',
+                'autocomplete' => true,
+                'required' =>false,
+                ])
             ->add('Du',DateType::class,[
                 'widget'=>'single_text',
                 'widget'=>'single_text',
