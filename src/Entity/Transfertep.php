@@ -26,12 +26,6 @@ class Transfertep
     #[ORM\Column]
     private ?int $montantdestinataire = null;
 
-    #[ORM\Column]
-    private ?int $papeterie = null;
-
-    #[ORM\Column]
-    private ?int $commission = null;
-
     #[ORM\Column(length: 100)]
     private ?string $type_client_t = null;
 
@@ -99,30 +93,6 @@ class Transfertep
     public function setMontantdestinataire(int $montantdestinataire): self
     {
         $this->montantdestinataire = $montantdestinataire;
-
-        return $this;
-    }
-
-    public function getPapeterie(): ?int
-    {
-        return $this->papeterie;
-    }
-
-    public function setPapeterie(int $papeterie): self
-    {
-        $this->papeterie = $papeterie;
-
-        return $this;
-    }
-
-    public function getCommission(): ?int
-    {
-        return $this->commission;
-    }
-
-    public function setCommission(int $commission): self
-    {
-        $this->commission = $commission;
 
         return $this;
     }

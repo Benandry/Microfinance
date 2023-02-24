@@ -52,10 +52,7 @@ class TransactionretraitType extends AbstractType
                     'mapped' => false,
                     'attr'=>[
                         'class'=>'form-control'
-                    ],])
-                    
-            ->add('papeterie',IntegerType::class)
-            ->add('commission',IntegerType::class)        
+                    ],])       
             ->add('codeepargneclient',TextType::class,[
                 'label' => "Compte Epargne",
                 'attr'=>[

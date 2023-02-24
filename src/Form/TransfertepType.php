@@ -45,17 +45,6 @@ class TransfertepType extends AbstractType
                 ],
                 'label' => 'Montant a transfert :'
             ])
-           
-            ->add('papeterie',IntegerType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
-            ])
-            ->add('commission',IntegerType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
-            ])
             ->add('type_client_t',ChoiceType::class,[
                 'choices'=>[
                     'INDIVIDUEL'=>'INDIVIDUEL',
@@ -95,6 +84,9 @@ class TransfertepType extends AbstractType
                 'choice_label' => function ($c) {
                     return $c->getCodeepargne();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'placeholder' => "Compte epargne destinateur ",
                 'autocomplete' => true,
                 'label'=> 'Compte epargne destinateur'
@@ -124,6 +116,9 @@ class TransfertepType extends AbstractType
                 'choice_label' => function ($c) {
                     return $c->getCodeepargne();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'placeholder' => "Compte epargne Envoyeur ",
                 'label' => 'Compte epargne envoyeur :',
                 'autocomplete' => true,

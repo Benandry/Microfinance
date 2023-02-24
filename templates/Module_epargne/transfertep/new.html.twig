@@ -10,6 +10,10 @@
 
 {% block body %}
     {% include('modal.html.twig') %}
-    
+    <div class="row">
+        <div class="col-md-4 col-sm-4 m-auto">
+            <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Transfert d'argent epargne </h5></div>
+        </div>
+    </div>
     {{ include('Module_epargne/transfertep/_form.html.twig') }}
 {% endblock %}

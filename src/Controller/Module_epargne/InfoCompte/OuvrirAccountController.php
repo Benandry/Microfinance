@@ -60,14 +60,13 @@ class OuvrirAccountController extends AbstractController
      */
      #[Route('/ouvrir/CompteEpargne/Groupe', name: 'app_ouvrir_compte_groupe')]
      public function compteEpargneGroup(Request $request){
-                
         $form = $this->createFormBuilder()
         ->add('code', EntityType ::class,[
                 'class' => Groupe:: class,
                 'label' => 'Groupe client : ',
                 'placeholder' => "Choisissez le groupe :",
                 'choice_label' => function($c){
-                    return $c->getCodegroupe();
+                    return $c->getNomGroupe();
                 },
                 'attr'=>[
                     'class' => 'form-control border-0 custom-select-no-arrow',
@@ -97,6 +96,7 @@ class OuvrirAccountController extends AbstractController
      #[Route('/CompteEpargneDepot', name: 'app_compte_epargne_depot')]
      public function compteEpargneDepot(Request $request){
 
+        // dd( new CompteEpargne);
         
         $form = $this->createFormBuilder()
         ->add('code', EntityType::class,[

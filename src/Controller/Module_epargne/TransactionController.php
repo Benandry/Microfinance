@@ -37,6 +37,7 @@ class TransactionController extends AbstractController
         $date_du_ = 0;
         $date_au_ = 0;
         $date1 = 0;
+        $SommeMontant = 0;
 
         // Filtre entre deux date d'une rapport
         $afficheTab_ = false;
@@ -55,10 +56,16 @@ class TransactionController extends AbstractController
                 // En une date ///////////
                 $date_1 = true;
                 $transaction=$transactionRepository->FiltreDateArreteTransac($date1);
+                // dd($transaction);
+                $SommeMontant = array_sum(array_column($transaction,'Montant'));
+                // dd($SommeMontant);
+                
             }else{
                 // Entre deux dates ///////////
                 $date_2 = true;
                 $transaction=$transactionRepository->FiltreRapportSolde($date_du_,$date_au_);
+                $SommeMontant = array_sum(array_column($transaction,'Montant'));
+                // dd($SommeMontant);
             }
         }
 
@@ -72,6 +79,7 @@ class TransactionController extends AbstractController
             'one_date' => $date1,
             'date_1' => $date_1,
             'date_2' => $date_2,
+            'total_montant' => $SommeMontant,
         ]);
     }
 
@@ -229,14 +237,13 @@ class TransactionController extends AbstractController
         $form = $this->createForm(TransactionretraitType::class, $transaction);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) {  
             $entityManager=$doctrine->getManager();
             $transaction->setDescription($transaction->getDescription()." Compte epargne");
             $transaction->setCodetransaction(random_int(1,2000000));
             $transaction->setMontant(-$transaction->getMontant());
 
-            $mouvement->operationJournal($entityManager,$transaction);
+            // $mouvement->operationJournal($entityManager,$transaction);
 
             $entityManager->persist($transaction);
             $entityManager->flush();
@@ -277,8 +284,10 @@ class TransactionController extends AbstractController
             $transaction->setDescription($transaction->getDescription()." Compte epargne");
             $transaction->setMontant(-$transaction->getMontant());
             $transaction->setCodetransaction(random_int(1,2000000));
+            
 
-            $mouvement->operationJournal($entityManager,$transaction);
+            // $mouvement->operationJournal($entityManager,$transaction);
+            // dd($transaction);
 
             $entityManager->persist($transaction);
             $entityManager->flush();

@@ -16,14 +16,8 @@
     {% endif %}
 {% endblock %}
 
-
-
 {% block body %}
-   
     {% if  affiche_tab_  == false%}
-
-
-
         <!-- The Modal -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
@@ -93,9 +87,9 @@
                     <td>{{ transaction.nomproduit }}</td>
                     <td>
                         {% if transaction.Montant < 0 %}
-                        <span style="color: red;">{{ transaction.Montant }}</span>
+                        <span style="color: red;">{{ transaction.Montant|number_format(0,',', ' ') }}</span>
                         {% else %}
-                            <span style="color: green;">{{ transaction.Montant }}</span>
+                            <span style="color: green;">{{ transaction.Montant|number_format(0,',', ' ') }}</span>
                         {% endif %}    
                     </td>
                     {# <td>{{ transaction.solde }}</td> #}
@@ -106,6 +100,12 @@
                 </tr>
             {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="7">Total </th>
+                    <th> {{ total_montant|number_format(0,',', ' ') }} </th>
+                </tr>
+            </tfoot>
         </table>
     {% endif %}
 {% endblock %}

@@ -38,15 +38,11 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-4 col-4">
+        <div class="col-sm-4 col-4 m-auto">
             {{ form_row(form.montantdestinataire) }}
             {{ form_row(form.date_transaction_t) }}
         </div>
-        <div class="col-4 col-sm-4">
-            {{ form_row(form.papeterie) }}
-            {{ form_row(form.commission) }}
-        </div>
-        <div class="col-4 col-sm-4">    
+        <div class="col-4 col-sm-4 m-auto">    
             {{ form_row(form.type_client_t	) }}
             {{ form_row(form.piece_comptable_t) }}
             <div style="display: none">
@@ -55,6 +51,7 @@
             </div>
         </div>
     </div>
+<hr/>
     <div class="d-flex justify-content-center">
         <button class="btn btn-primary m-2">{{ button_label|default('Valider la transfert') }}</button>
     </div>
