@@ -40,7 +40,6 @@ class PatrimoineController extends AbstractController
             
             $codeclient=$patrimoineind->getCodeclient();
             $patrimoineindividuel->setIdClient($codeclient);
-<<<<<<< HEAD
 
             /**
              * Somme des montant des patrimoines
@@ -55,8 +54,6 @@ class PatrimoineController extends AbstractController
              * Setter ds somme des patrimoine
              */
             $patrimoineindividuel->setTotalPatrimoine($montant1+$montant2+$montant3+$montant4);
-=======
->>>>>>> 291b63e
             
             // $PatrimoineRepository->add($patrimoineindividuel, true);
 
@@ -69,7 +66,6 @@ class PatrimoineController extends AbstractController
 
         return $this->renderForm('Module_client/individuel/Patrimoine.html.twig', [
             'form' => $form,
-<<<<<<< HEAD
             'idclient'=>$idclient
         ]); 
     }
@@ -94,11 +90,6 @@ class PatrimoineController extends AbstractController
                 'liste'=>$liste,
             ]); 
 
-=======
-        ]);
-
-        
->>>>>>> 291b63e
     }
 
 }
