@@ -6,6 +6,7 @@
     Client>Individuels>Patrimoine
 {% endblock %}
 {% block body %}
+<<<<<<< HEAD
     {{ include('modal.html.twig') }}
 
 {{ form_start(form) }}
@@ -18,6 +19,19 @@
         </div>
     </div>
       <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">Patrimoine</a></li>
+=======
+
+{{ form_start(form) }}
+  <ul class="nav nav-tabs">
+      <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">Patrimoine</a></li>
+      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#famille">Famille</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#parent">Parent</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#formation">Formation</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#activite">Activite</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Adresse</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe" style="display:none;">Groupe</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Identité</a></li> #}
+>>>>>>> 291b63e
   </ul>
   <div class="tab-content">
 
@@ -40,6 +54,16 @@
                       {{ form_row(form.Libelle4) }}
                       {{ form_row(form.Montant4) }}
                   </div>
+<<<<<<< HEAD
+=======
+
+                  {# <div class="col-4 col-sm-4 col-md-4">
+                      {{ form_row(form.profession) }}
+                      {{ form_row(form.date_inscription) }}
+                      {{ form_row(form.Agence) }}
+                      <div style="display:none;">{{ form_row(form.garant) }}</div>
+                  </div> #}
+>>>>>>> 291b63e
               </div>
             </div>
         </div>

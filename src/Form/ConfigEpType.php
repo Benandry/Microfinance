@@ -58,12 +58,6 @@ class ConfigEpType extends AbstractType
             ->add('ageMinCpt',IntegerType::class,[
                 'label'=>'Age minimum ouvrir compte : ',
             ])
-            ->add('commissionTransf',IntegerType::class,[
-                'label'=>'Commission transaction : ',
-            ])
-            ->add('fraisFermCpt',IntegerType::class,[
-                'label'=>'Frais compte tenu : ',
-            ])
             ->add('soldeouvert',IntegerType::class,[
                 'label'=>'Solde d\'ouverture : ',
             ])

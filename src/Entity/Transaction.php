@@ -28,10 +28,6 @@ class Transaction
     #[ORM\Column(nullable:true)]
     private ?float $Montant = null;
 
-
-    #[ORM\Column]
-    private ?float $commission = null;
-
     #[ORM\Column(length: 100)]
     private ?string $typeClient = null;
 
@@ -97,18 +93,7 @@ class Transaction
 
         return $this;
     }
-    public function getCommission(): ?float
-    {
-        return $this->commission;
-    }
-
-    public function setCommission(float $commission): self
-    {
-        $this->commission = $commission;
-
-        return $this;
-    }
-
+    
     public function getTypeClient(): ?string
     {
         return $this->typeClient;

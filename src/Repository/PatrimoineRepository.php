@@ -60,6 +60,7 @@ class PatrimoineRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+<<<<<<< HEAD
     /**
      * Undocumented function
      *@method mixed ListePatrimoine():Permet de lister les patrimoines d'une personne
@@ -97,6 +98,10 @@ class PatrimoineRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+=======
+
+
+>>>>>>> 291b63e
 //    /**
 //     * @return Patrimoine[] Returns an array of Patrimoine objects
 //     */

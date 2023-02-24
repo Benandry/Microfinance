@@ -44,7 +44,10 @@ class TransfertepController extends AbstractController
             $transactionExp->setPieceComptable($transfertep->getPieceComptableT());
             $transactionExp->setDateTransaction($transfertep->getDateTransactionT());
             $transactionExp->setMontant(-$transfertep->getMontantdestinataire());
+<<<<<<< HEAD
             // $transactionExp->setPapeterie($transfertep->getPapeterie());
+=======
+>>>>>>> 291b63e
             $transactionExp->setCommission($transfertep->getCommission());
             $transactionExp->setTypeClient($transfertep->getTypeClientT());
             $transactionExp->setCodetransaction($transfertep->getCodetransactionT());
@@ -60,7 +63,10 @@ class TransfertepController extends AbstractController
              $transactionDest->setPieceComptable($transfertep->getPieceComptableT());
              $transactionDest->setDateTransaction($transfertep->getDateTransactionT());
              $transactionDest->setMontant($transfertep->getMontantdestinataire());
+<<<<<<< HEAD
             //  $transactionDest->setPapeterie($transfertep->getPapeterie());
+=======
+>>>>>>> 291b63e
              $transactionDest->setCommission($transfertep->getCommission());
              $transactionDest->setTypeClient($transfertep->getTypeClientT());
              $transactionDest->setCodetransaction($transfertep->getCodetransactionT());
