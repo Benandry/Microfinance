@@ -16,8 +16,8 @@ class Patrimoine
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $IdClient = null;
+    #[ORM\Column(length: 255,nullable: true)]
+    private ?string $IdClient = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Libelle1 = null;
@@ -31,8 +31,8 @@ class Patrimoine
     #[ORM\Column(nullable: true)]
     private ?float $Montant2 = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $Montant3 = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $Montant3 = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Libelle3 = null;
@@ -46,17 +46,20 @@ class Patrimoine
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateenregistrement = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $TotalPatrimoine = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdClient(): ?int
+    public function getIdClient(): ?string
     {
         return $this->IdClient;
     }
 
-    public function setIdClient(?int $IdClient): self
+    public function setIdClient(?string $IdClient): self
     {
         $this->IdClient = $IdClient;
 
@@ -111,12 +114,12 @@ class Patrimoine
         return $this;
     }
 
-    public function getMontant3(): ?string
+    public function getMontant3(): ?float
     {
         return $this->Montant3;
     }
 
-    public function setMontant3(?string $Montant3): self
+    public function setMontant3(?float $Montant3): self
     {
         $this->Montant3 = $Montant3;
 
@@ -167,6 +170,18 @@ class Patrimoine
     public function setDateenregistrement(?\DateTimeInterface $dateenregistrement): self
     {
         $this->dateenregistrement = $dateenregistrement;
+
+        return $this;
+    }
+
+    public function getTotalPatrimoine(): ?float
+    {
+        return $this->TotalPatrimoine;
+    }
+
+    public function setTotalPatrimoine(?float $TotalPatrimoine): self
+    {
+        $this->TotalPatrimoine = $TotalPatrimoine;
 
         return $this;
     }
