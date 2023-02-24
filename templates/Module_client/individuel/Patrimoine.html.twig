@@ -6,17 +6,18 @@
     Client>Individuels>Patrimoine
 {% endblock %}
 {% block body %}
+    {{ include('modal.html.twig') }}
 
 {{ form_start(form) }}
-  <ul class="nav nav-tabs">
+    <div class="row mb-3">
+      {{ idclient }}
+        <div class="col-12">
+            <div class="d-flex justify-content-start me-3">
+                <a href="{{ path('app_liste_patrimoine',{'IdClient':idclient}) }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Liste Patrimoine</a>
+            </div>
+        </div>
+    </div>
       <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">Patrimoine</a></li>
-      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#famille">Famille</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#parent">Parent</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#formation">Formation</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#activite">Activite</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Adresse</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe" style="display:none;">Groupe</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Identité</a></li> #}
   </ul>
   <div class="tab-content">
 
@@ -39,13 +40,6 @@
                       {{ form_row(form.Libelle4) }}
                       {{ form_row(form.Montant4) }}
                   </div>
-
-                  {# <div class="col-4 col-sm-4 col-md-4">
-                      {{ form_row(form.profession) }}
-                      {{ form_row(form.date_inscription) }}
-                      {{ form_row(form.Agence) }}
-                      <div style="display:none;">{{ form_row(form.garant) }}</div>
-                  </div> #}
               </div>
             </div>
         </div>

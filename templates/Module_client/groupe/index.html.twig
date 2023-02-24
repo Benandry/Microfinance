@@ -10,11 +10,15 @@
 
 {% block body %}
     <div class="row mb-3">
-       <div class="d-flex justify-content-start me-3">
-            <a href="{{ path('app_membregroupe_modal') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter membre</a>
+        <div class="col-6">
+        <div class="d-flex justify-content-start me-3">
+                <a href="{{ path('app_membregroupe_modal') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter membre</a>
+            </div>
         </div>
-        <div class="d-flex justify-content-end me-3">
-            <a href="{{ path('app_groupe_new') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter nouveau groupe</a>
+        <div class="col-6">
+            <div class="d-flex justify-content-end me-3">
+                <a href="{{ path('app_groupe_new') }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>Ajouter nouveau groupe</a>
+            </div>
         </div>
     </div>
 {{ include('modal.html.twig') }}

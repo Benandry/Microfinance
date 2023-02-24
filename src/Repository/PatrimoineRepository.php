@@ -60,7 +60,42 @@ class PatrimoineRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    /**
+     * Undocumented function
+     *@method mixed ListePatrimoine():Permet de lister les patrimoines d'une personne
+     * @param [type] $codeclient:Code client individuel
+     * @return array
+    */
+    public function ListePatrimoine(){
+        $entityManager=$this->getEntityManager();
 
+        $query=$entityManager->createQuery(
+            'SELECT
+                i.nom_client,
+                i.prenom_client,
+                p.IdClient,
+                p.Libelle1,
+                p.Montant1,
+                p.Libelle2,
+                p.Montant2,
+                p.Libelle3,
+                p.Montant3,
+                p.Libelle4,
+                p.Montant4,
+                p.dateenregistrement,
+                p.TotalPatrimoine
+            FROM
+                App\Entity\Individuelclient i
+                INNER JOIN
+                App\Entity\Patrimoine p
+            WITH
+                i.codeclient=p.IdClient
+                '
+        );
+
+
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Patrimoine[] Returns an array of Patrimoine objects

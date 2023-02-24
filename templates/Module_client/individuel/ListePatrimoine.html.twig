@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Listes Patrimoine
+{% endblock %}
+{% block head %}
+    Client>Individuels>Patrimoine
+{% endblock %}
+{% block body %}
+
+        <div class="row">
+        <div class="col-md-12 col-sm-12 mt-3">
+            <table class="table table2 table-borderd mt-3">
+                <thead>
+                    <tr>
+                        <th>Code Client</th>
+                        <th>Nom client</th>
+                        <th>Prenom client</th>
+                        <th>Date d'enregistrement</th>
+                        <th>Libelle 1</th>
+                        <th>Montant 1</th>
+                        <th>Libelle 2</th>
+                        <th>Montant 2</th>
+                        <th>Libelle 3</th>
+                        <th>Montant 3</th>
+                        <th>Libelle 4</th>
+                        <th>Montant 4</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                {% for liste in liste %}
+                 
+                    <tr>
+                        <td class="fw-bold"> {{ liste.IdClient }} </td>
+                        <td>{{ liste.dateenregistrement ? liste.dateenregistrement|date('Y-m-d') : '' }}</td>
+                        <td>{{ liste.nom_client }}</td>
+                        <td>{{ liste.prenom_client }}</td>
+                        <td>{{ liste.Libelle1 }}</td>
+                        <td>{{ liste.Montant1 }}</td>
+                        <td>{{ liste.Libelle2 }}</td>
+                        <td>{{ liste.Montant2 }}</td>
+                        <td>{{ liste.Libelle3 }}</td>
+                        <td>{{ liste.Montant3 }}</td>
+                        <td>{{ liste.Libelle4 }}</td>
+                        <td>{{ liste.Montant4 }}</td>
+                        <td>{{ liste.TotalPatrimoine }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="28">Pas de patrimoine</td>
+                    </tr>
+              
+                 {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

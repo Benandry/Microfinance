@@ -40,6 +40,20 @@ class PatrimoineController extends AbstractController
             
             $codeclient=$patrimoineind->getCodeclient();
             $patrimoineindividuel->setIdClient($codeclient);
+
+            /**
+             * Somme des montant des patrimoines
+             */
+
+            $montant1=$patrimoineindividuel->getMontant1();
+            $montant2=$patrimoineindividuel->getMontant2();
+            $montant3=$patrimoineindividuel->getMontant3();
+            $montant4=$patrimoineindividuel->getMontant4();
+
+            /**
+             * Setter ds somme des patrimoine
+             */
+            $patrimoineindividuel->setTotalPatrimoine($montant1+$montant2+$montant3+$montant4);
             
             // $PatrimoineRepository->add($patrimoineindividuel, true);
 
@@ -52,9 +66,30 @@ class PatrimoineController extends AbstractController
 
         return $this->renderForm('Module_client/individuel/Patrimoine.html.twig', [
             'form' => $form,
-        ]);
+            'idclient'=>$idclient
+        ]); 
+    }
 
-        
+    /**
+     * Undocumented function
+     *
+     * @method mixed ListePatrimoine():Permet de lister les patrimoines
+     * @param PatrimoineRepository $PatrimoineRepository
+     * @param [type] $codeclient
+     * @return array
+     */
+    #[Route('/Liste/Patrimoine/',name:'app_liste_patrimoine')]
+    public function ListePatrimoine(PatrimoineRepository $PatrimoineRepository)
+    {
+        $liste=$PatrimoineRepository->ListePatrimoine();
+
+        // dd($liste);
+
+        return $this->render('Module_client/individuel/ListePatrimoine.html.twig',
+            [
+                'liste'=>$liste,
+            ]); 
+
     }
 
 }
