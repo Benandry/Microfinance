@@ -16,8 +16,8 @@ class Patrimoine
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $IdClient = null;
+    #[ORM\Column(length: 255,nullable: true)]
+    private ?string $IdClient = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Libelle1 = null;
@@ -51,12 +51,12 @@ class Patrimoine
         return $this->id;
     }
 
-    public function getIdClient(): ?int
+    public function getIdClient(): ?string
     {
         return $this->IdClient;
     }
 
-    public function setIdClient(?int $IdClient): self
+    public function setIdClient(?string $IdClient): self
     {
         $this->IdClient = $IdClient;
 

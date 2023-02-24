@@ -39,6 +39,29 @@ class PatrimoineRepository extends ServiceEntityRepository
         }
     }
 
+            /**
+     * Undocumented function
+     *@method mixed Patrimoine():Methode permet de liste les individuels pour enregistrer sont patrimoine
+     * @param integer $idclient
+     * @return array
+     */
+    public function Patrimoine($idclient):array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT 
+            i
+            FROM App\Entity\Individuelclient i
+            WHERE
+            i.id = :idclient'
+        )->setParameter('idclient',$idclient);
+
+        return $query->getResult();
+    }
+
+
+
 //    /**
 //     * @return Patrimoine[] Returns an array of Patrimoine objects
 //     */
