@@ -5,7 +5,6 @@
             {{ form_row(form.typeClient) }}
             {{ form_row(form.codeepargneclient) }}
             <span id="grp">{{ form_row(form.nomgroupe) }}</span>
-            {{ form_row(form.donneessolde) }}
             {{ form_row(form.Description) }}
             {{ form_row(form.Montant) }}
             {{ form_row(form.devise) }}
@@ -17,10 +16,13 @@
     <div class="row">
         <div class="col-sm-4 col-md-4 m-auto">
             {{ form_row(form.DateTransaction) }}
-            {{ form_row(form.commission) }}
         </div>
         <div class="col-sm-4 col-md-4 m-auto">
             {{ form_row(form.PieceComptable) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-md-4 m-auto">
             {{ form_row(form.montant_bruite) }}
         </div>
     </div>

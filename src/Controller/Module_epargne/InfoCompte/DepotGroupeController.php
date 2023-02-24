@@ -28,6 +28,9 @@ class DepotGroupeController extends AbstractController
                 'choice_label' => function ($c) {
                     return $c->getCodeepargne();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'label' => "Compte epargne client groupe : ",
                 'placeholder' => "Choisissez le compte epargne groupe :",
                 'autocomplete' => true,
@@ -62,6 +65,9 @@ class DepotGroupeController extends AbstractController
             'choice_label' => function ($c) {
                 return $c->getCodeepargne();
             },
+            'attr'=>[
+                'class' => 'form-control border-0 custom-select-no-arrow',
+            ],
             'label' => "Compte epargne client groupe : ",
             'placeholder' => "Choisissez le compte epargne groupe :",
             'autocomplete' => true,
@@ -98,6 +104,9 @@ class DepotGroupeController extends AbstractController
                 'choice_label' => function ($c) {
                     return $c->getCodeepargne();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'label' => "Compte epargne client individuel : ",
                 'placeholder' => "Choisissez le compte epargne individuel :",
                 'autocomplete' => true,

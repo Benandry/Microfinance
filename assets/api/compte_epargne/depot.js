@@ -7,7 +7,6 @@ $(document).ready(() =>{
 
     if (path === '/transaction/new') {
         var montant_bruit_ = 0
-        var commission= 0
 
         const id_produit = $('#produit-id').text();
         //PRoduit epargne configuration sur depot
@@ -22,7 +21,7 @@ $(document).ready(() =>{
                 for(let i = 0; i < result.length; i++){
                     var element = result[i];
                     console.log(element);
-                    $('#transaction_commission').val(element.commission_de_transaction);
+                    // $('#transaction_commission').val(element.commission_de_transaction);
                     $('#transaction_devise').val(element.devise);
                     $('.devise-solde').text(element.devise);
                 }
@@ -52,19 +51,19 @@ $(document).ready(() =>{
 
 
 
-        $('#transaction_commission').on('change',()=>{
-            commission=$('#transaction_commission').val();
-        })
+        // $('#transaction_commission').on('change',()=>{
+        //     commission=$('#transaction_commission').val();
+        // })
 
         $('#transaction_montant_bruite').on('keyup',()=>{
             montant_bruit_= $('#transaction_montant_bruite').val();
 
-            var montant_total = parseInt(montant_bruit_) -parseInt($('#transaction_commission').val());
+            // var montant_total = parseInt(montant_bruit_) -parseInt($('#transaction_commission').val());
 
-            $('#transaction_Montant').val(montant_total)
+            $('#transaction_Montant').val(montant_bruit_)
             
             //Ajouter valeur sur la formulaire solde
-            var solde = montant_total + parseInt($('#solde_cli').text())
+            var solde = parseFloat(montant_bruit_ )+ parseFloat($('#solde_cli').text())
 
             $('#transaction_solde').val(solde)
         })
@@ -89,7 +88,7 @@ $(document).ready(() =>{
                 for(let i = 0; i < result.length; i++){
                     var element = result[i];
                     solde_ouverture = element.solde_ouverture;
-                    $('#transaction_commission').val(element.commission_de_transaction);
+                    // $('#transaction_commission').val(element.commission_de_transaction);
                     $('#transaction_devise').val(element.devise);
                     $('.devise-solde').text(element.devise);
                     
@@ -116,19 +115,19 @@ $(document).ready(() =>{
         $('#transaction_montant_bruite').on('keyup',()=>{
             var montant_bruit_= $('#transaction_montant_bruite').val();
 
-            var montant_total = parseInt(montant_bruit_) - parseInt( $('#transaction_commission').val())
+            // var montant_total = parseInt(montant_bruit_) - parseInt( $('#transaction_commission').val())
 
-            $('#transaction_Montant').val(montant_total)
+            $('#transaction_Montant').val(montant_bruit_)
             
             //Ajouter valeur sur la formulaire solde
-            var soldegroupe = montant_total + parseInt($('#solde_cli').text())
+            var soldegroupe = parseFloat(montant_bruit_) + parseFloat($('#solde_cli').text())
 
             $('#transaction_solde').val(soldegroupe)
         })
 
-        $('#transaction_commission').val(0)
-        $('#transaction_commission').on('change',()=>{
-            commission=$('#transaction_commission').val();
-        });
+        // $('#transaction_commission').val(0)
+        // $('#transaction_commission').on('change',()=>{
+        //     commission=$('#transaction_commission').val();
+        // });
     }
 })

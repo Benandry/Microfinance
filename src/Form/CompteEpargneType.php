@@ -40,7 +40,9 @@ class CompteEpargneType extends AbstractType
             ])
             ->add('produit',EntityType::class,[
                 'class'=>ProduitEpargne::class,
-                'mapped'=>true,
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'choice_label'=> function ($c){
                     return $c->getNomproduit()." (".$c->getAbbreviation().")";
                 },
@@ -50,7 +52,7 @@ class CompteEpargneType extends AbstractType
                         ->andWhere("config.statusProduit = 1 ");
                 },
                 'placeholder' =>'Choisissez un produit ',
-                'autocomplete'=>true,
+                'autocomplete'=> true,
                 'label'=>'Nom Produit',
                 ])
 

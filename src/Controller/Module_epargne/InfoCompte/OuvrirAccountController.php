@@ -29,9 +29,12 @@ class OuvrirAccountController extends AbstractController
                 'class' => Individuelclient:: class,
                 'label' => 'Individuel client : ',
                 'placeholder' => "Choisissez l'ndividuel client :",
-                'choice_label' => function($c){
-                    return $c->getCodeclient();
+                'choice_label' => function($client){
+                    return $client->getNomClient()." ".$client->getPrenomClient();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'autocomplete' => true,
         ])
 
@@ -66,6 +69,9 @@ class OuvrirAccountController extends AbstractController
                 'choice_label' => function($c){
                     return $c->getCodegroupe();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'autocomplete' => true,
         ])
         ->getForm();
@@ -102,6 +108,9 @@ class OuvrirAccountController extends AbstractController
                 'choice_label' => function ($c) {
                     return $c->getCodeepargne();
                 },
+                'attr'=>[
+                    'class' => 'form-control border-0 custom-select-no-arrow',
+                ],
                 'label' => "Compte epargne client individuel : ",
                 'placeholder' => "Choisissez le compte epargne individuel :",
                 'autocomplete' => true,

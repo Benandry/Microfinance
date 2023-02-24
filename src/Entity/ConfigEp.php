@@ -24,12 +24,6 @@ class ConfigEp
 
     #[ORM\Column]
     private ?int $ageMinCpt = null;
-    
-    #[ORM\Column]
-    private ?float $commissionTransf = null;
-
-    #[ORM\Column]
-    private ?float $fraisFermCpt = null;
 
     #[ORM\Column]
     private ?float $soldeouvert = null;
@@ -98,30 +92,6 @@ class ConfigEp
     public function setAgeMinCpt(int $ageMinCpt): self
     {
         $this->ageMinCpt = $ageMinCpt;
-
-        return $this;
-    }
-
-    public function getCommissionTransf(): ?float
-    {
-        return $this->commissionTransf;
-    }
-
-    public function setCommissionTransf(float $commissionTransf): self
-    {
-        $this->commissionTransf = $commissionTransf;
-
-        return $this;
-    }
-
-    public function getFraisFermCpt(): ?float
-    {
-        return $this->fraisFermCpt;
-    }
-
-    public function setFraisFermCpt(float $fraisFermCpt): self
-    {
-        $this->fraisFermCpt = $fraisFermCpt;
 
         return $this;
     }

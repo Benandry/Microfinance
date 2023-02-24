@@ -49,12 +49,6 @@ class TransactionType extends AbstractType
                 'class'=>'form-control'
                 ]
              ])
-            ->add('commission',NumberType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
-                ],
-                'label' => "Commission de transaction : "
-            ])
             ->add('codeepargneclient',TextType::class,[
                 'label'=>'Code client'
             ])
@@ -66,15 +60,6 @@ class TransactionType extends AbstractType
                     'disabled'=>true,
                 ],
                 'label'=>'groupe'
-            ])
-            ->add('donneessolde',TextType::class,[
-                'mapped'=>false,
-                'required'=>false,
-                'attr'=>[
-                    'class'=>'form-control',
-                    'disabled'=>true,
-                ],
-                'label'=>false
             ])
 
             ->add('solde',TextType::class,[
