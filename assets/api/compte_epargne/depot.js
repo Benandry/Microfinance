@@ -11,6 +11,7 @@ $(document).ready(() =>{
         const id_produit = $('#produit-id').text();
         //PRoduit epargne configuration sur depot
         const api_produit = '/api/compte-epargne/individuel/'+id_produit;
+        // console.log(api_produit);
         $.ajax({
             url : api_produit,
             method : "GET",
@@ -22,6 +23,7 @@ $(document).ready(() =>{
                     var element = result[i];
                     console.log(element);
                     // $('#transaction_commission').val(element.commission_de_transaction);
+                    // $('#transaction_devise').val(element.devise);
                     $('#transaction_devise').val(element.devise);
                     $('.devise-solde').text(element.devise);
                 }
@@ -124,10 +126,5 @@ $(document).ready(() =>{
 
             $('#transaction_solde').val(soldegroupe)
         })
-
-        // $('#transaction_commission').val(0)
-        // $('#transaction_commission').on('change',()=>{
-        //     commission=$('#transaction_commission').val();
-        // });
     }
 })

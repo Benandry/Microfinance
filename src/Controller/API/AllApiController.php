@@ -27,7 +27,7 @@ class AllApiController extends AbstractController
     /**
      * Configuration compte epargne
      */
-    #[Route('/api/compte-epargne/individuel/{id}', name: 'app_api_individuel_compte_epargne')]
+    #[Route('/api/compte-epargne/individuel/{id}', name: 'app_api_individuel_compte_epargne_depot')]
     public function produit(ProduitEpargneRepository $produitRepo,$id): Response
     {
         $api = $produitRepo->findByConfigurationProduitEpargne($id); 
@@ -213,6 +213,18 @@ class AllApiController extends AbstractController
     public function compteEpargneSimple(ProduitEpargneRepository $produitRepo): Response
     {
         $api = $produitRepo->findAllProduct(); 
+        return new JsonResponse($api);
+    }
+
+
+    /**
+     * Tous les client possedent des compte epaargne
+     */
+    #[Route('/client/epargne/tous', name: 'relever_recherche_cli')]
+    public  function tousCompteEpargne(TransactionRepository $repo)
+    {
+        $api= $repo->findAllClientByEpargne();
+    //    dd($api);
         return new JsonResponse($api);
     }
 }

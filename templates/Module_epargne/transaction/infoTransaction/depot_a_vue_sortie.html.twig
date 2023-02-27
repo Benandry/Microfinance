@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Sortie de compte epargne 
+{% endblock %}
+
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+
+{{ include('Module_epargne/transaction/infoTransaction/_modal.html.twig', {'etat': 'Sortie'}) }}
+{% endblock %}

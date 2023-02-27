@@ -132,41 +132,31 @@ $(document).ready(() =>{
         });
     }
     else if(path === "/CompteEpargneDepot" || path ==='/depot/epargne/groupe' || path === '/transaction/retrait/individuel' || path === '/transaction/retrait/groupe')
-    { 
-        $('#form_code').on('change',() => {
-            // alert("alert");
-            var url = "/releve/client/"+$('#form_code').val();
-                
-            $.ajax({
-                url: url,
-                method: "GET",
-                dataType : "json",
-                contentType: "application/json; charset=utf-8",
-                data : JSON.stringify($(this).val()),
-                success: function(result){
-                    console.log(result);
-                    for (let i = 0; i < result.length; i++) {
-                       
-                        var element = result[i];
-                            // console.log(element);
-
-                            document.getElementById('compte_epargne').innerHTML = element.codeepargne;
-                            document.getElementById('codeclient').innerHTML = element.codeep;
-                            if (element.typeClient === "INDIVIDUEL") {
-                                document.getElementById('nom').innerHTML = element.nom_client+" "+element.prenom_client;
-                            }
-                            else if(element.typeClient === "GROUPE") {
-                                document.getElementById('nom').innerHTML = element.nomGroupe
-                            }
-                            
-                    }
-                },
-                error: function (request, status, error) {
-                    console.log(request.responseText);
+    {           
+        $.ajax({
+            url: '/client/epargne/tous',
+            method: "GET",
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(),
+            success: function(result){
+                $('#form_code').children('option').remove();
+                for (let i = 0; i < result.length; i++) {
+                    var element = result[i];
+                        console.log(element);
+                        if(element.typeClient == 'GROUPE'){
+                            $('#form_code').append('<option value="'+element.id+'">'+element.nomGroupe+' '+ element.codeepargne+'</option>'); 
+                        }else{
+                            $('#form_code').append('<option value="'+element.id+'">'+element.nom_client+' '+element.prenom_client+' '+element.codeepargne+'</option>'); 
+                        }
+                        
                 }
-    
-            });    
-        })
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+
+        }); 
     }
      //Information du client pour ouvrir un compte epargne
     if(path === '/ouvrirCompteEpargneClient'){

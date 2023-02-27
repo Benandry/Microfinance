@@ -218,42 +218,42 @@ $(document).ready(function(){
             $('#agence_codeAgence').val(max_id_);
         }
 
-        var carte = new jsPDF();
-        /***imprimer la carte de client */
-        const carte_print = document.querySelector('#carte-epargne').innerHTML;
-        const code_imprimer = document.querySelector('#code_imprimer').textContent;
+        // var carte = new jsPDF();
+        // /***imprimer la carte de client */
+        // const carte_print = document.querySelector('#carte-epargne').innerHTML;
+        // const code_imprimer = document.querySelector('#code_imprimer').textContent;
 
-        // alert(code_epargne);
-        const date = new Date()
+        // // alert(code_epargne);
+        // const date = new Date()
 
-        console.log(code_imprimer.length);
-        $('#imprimer-carte').on('click',() => {
-            console.log("carte_print");
-            // Convertir le contenu HTML en PDF
-            carte.html(carte_print, {
-              callback: function (doc) {
-                //font
-                doc.setFont("times", "normal");
-                // Add new page
-                doc.addPage();
+        // console.log(code_imprimer.length);
+        // $('#imprimer-carte').on('click',() => {
+        //     console.log("carte_print");
+        //     // Convertir le contenu HTML en PDF
+        //     carte.html(carte_print, {
+        //       callback: function (doc) {
+        //         //font
+        //         doc.setFont("times", "normal");
+        //         // Add new page
+        //         doc.addPage();
 
-                // Enregistrer le fichier PDF
-                if(code_imprimer.length === 10){
-                    doc.save(`carte-client-${code_imprimer}${date.getFullYear()}.pdf`);
-                }
-                else if(code_imprimer.length === 13) {
-                    doc.save(`carte-epargne-${code_imprimer}${date.getFullYear()}.pdf`);
-                }
+        //         // Enregistrer le fichier PDF
+        //         if(code_imprimer.length === 10){
+        //             doc.save(`carte-client-${code_imprimer}${date.getFullYear()}.pdf`);
+        //         }
+        //         else if(code_imprimer.length === 13) {
+        //             doc.save(`carte-epargne-${code_imprimer}${date.getFullYear()}.pdf`);
+        //         }
 
-              },
-              margin: [10, 10, 10, 10],
-              autoPaging: 'text',
-              x: 0,
-              y: 0,
-              width: 190, //target width in the PDF document
-              windowWidth: 675 //window width in CSS pixels
-            });
-        })
+        //       },
+        //       margin: [10, 10, 10, 10],
+        //       autoPaging: 'text',
+        //       x: 0,
+        //       y: 0,
+        //       width: 190, //target width in the PDF document
+        //       windowWidth: 675 //window width in CSS pixels
+        //     });
+        // })
 
 
         // alert("alert zalah ");

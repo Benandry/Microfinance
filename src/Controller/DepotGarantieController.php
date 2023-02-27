@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DepotGarantieController extends AbstractController
 {
+    /**
+     * depot de garantie pour les individuel client
+     *
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/depot/garantie/individuel', name: 'app_depot_garantie')]
     public function index(Request $request): Response
     {
@@ -81,4 +87,21 @@ class DepotGarantieController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * Traitement de depot de garantie
+     *
+     * @return void
+     */
+    #[Route('/depot/garantie/traitement', name: 'app_depot_garantie_traitement')]
+    public function traitement(Request $request){
+        $id = $request->query->get('code');
+        
+        // $info_groupe = $compteEpargneRepository->getInfoGroupe($id)[0];
+        return $this->render('depot_garantie/traitement.html.twig',[
+            'form'
+        ]);
+    }
+
+
 }

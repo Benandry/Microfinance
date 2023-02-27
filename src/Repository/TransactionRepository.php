@@ -371,7 +371,7 @@ class TransactionRepository extends ServiceEntityRepository
         App\Entity\Individuelclient client
         WITH client.codeclient = ce.codeep
         WHERE ce.id = '$code' 
-        GROUP BY ce.codeep ";
+        GROUP BY ce.codeepargne ";
         
         $stmt = $this->getEntityManager()->createQuery($query)->getResult();
 
@@ -722,4 +722,47 @@ class TransactionRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+
+    public function findAllClientByEpargne(){
+        $query = " SELECT 
+        ce.id,
+         g.nomGroupe,
+        client.nom_client nom_client,
+        client.prenom_client prenom_client,
+        ce.datedebut ,
+        ce.codeepargne,
+        ce.typeClient,
+        ce.codeep,
+        t.solde,
+        pe.nomproduit,
+        pe.abbreviation,
+        ce.activated
+        FROM
+         App\Entity\CompteEpargne ce 
+
+        INNER JOIN
+        App\Entity\ProduitEpargne pe
+        WITH ce.produit = pe.id
+
+        LEFT JOIN
+        App\Entity\Transaction t
+        WITH t.codeepargneclient = ce.codeepargne
+
+        LEFT JOIN
+        App\Entity\Groupe g
+        WITH ce.codeep = g.codegroupe
+        LEFT JOIN
+        App\Entity\Individuelclient client
+        WITH client.codeclient = ce.codeep
+        WHERE ce.activated = 1 
+        AND pe.abbreviation = 'DAV' OR pe.nomproduit = 'Dépôts a vue'
+        GROUP BY ce.codeepargne ";
+        
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+
+        return $stmt;
+    }
 }
+
+
