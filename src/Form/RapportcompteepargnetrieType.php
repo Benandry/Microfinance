@@ -29,7 +29,10 @@ class RapportcompteepargnetrieType extends AbstractType
                         ->andWhere("c.garant = 0 ");
                 },
                 'autocomplete' => true,
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control border-0'
+                ],
             ])
             ->add('groupe',EntityType::class,[
                 'class' => Groupe::class,
@@ -39,7 +42,10 @@ class RapportcompteepargnetrieType extends AbstractType
                     return $g->getCodegroupe()."  ".$g->getNomGroupe();
                 },
                 'autocomplete' => true,
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control border-0'
+                ],
             ])
             ->add('agence',EntityType::class,[
                 'class' => Agence::class,
@@ -49,7 +55,10 @@ class RapportcompteepargnetrieType extends AbstractType
                     return $a->getNomAgence()."  ".$a->getCodeAgence();
                 },
                 'autocomplete' => true,
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control border-0'
+                ],
             ])
             ->add('datedebut',DateType::class,[
                 'widget'=>'single_text',

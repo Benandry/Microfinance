@@ -11,15 +11,22 @@
          <p> Nombre compte agence : <span id="agence">{{ agence|length }}</span> </p>
          <p> Nombre compte credit : <span id="credit">{{ credit|length }}</span> </p>
       </div>
-
-        <div class="body-chart">
-            <div class="container-chart">
-                <div class="chart">
-                    <canvas id="myChart" width="300" height="300" ></canvas>
-                </div>
-                <div class="chart">
-                    <canvas id="doughnut" width="300" height="300" ></canvas>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="body-chart">
+                        <div class="container-chart">
+                            <div class="chart">
+                                <canvas id="myChart" width="300" height="300" ></canvas>
+                            </div>
+                            <div class="chart">
+                                <canvas id="doughnut" width="300" height="300" ></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+    </div>
 {% endblock %}

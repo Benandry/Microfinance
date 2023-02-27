@@ -202,4 +202,17 @@ class AllApiController extends AbstractController
         return new JsonResponse($api);
     }
 
+    #[Route('/api/json/produit', name: 'app_api_individuel_compte_epargne')]
+    public function depotDegarantie(ProduitEpargneRepository $produitRepo): Response
+    {
+        $api = $produitRepo->findDepotDeGaarantie(); 
+        return new JsonResponse($api);
+    }
+
+    #[Route('/api/json/produit/all', name: 'app_api_produit_all')]
+    public function compteEpargneSimple(ProduitEpargneRepository $produitRepo): Response
+    {
+        $api = $produitRepo->findAllProduct(); 
+        return new JsonResponse($api);
+    }
 }

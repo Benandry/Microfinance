@@ -17,7 +17,15 @@
                 </div>
                 
                 <div class="col-md-4 col-sm-4 m-auto">
-                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Ouvrir compte epargne </h5></div>
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> 
+                        {% if status == null %}
+                            <span style="display: none;" id="compte-type">epargne</span>
+                            Ouvrir compte epargne 
+                        {% else %}
+                            <span style="display: none;" id="compte-type">garantie</span>
+                            Depot de garantie 
+                        {% endif %}
+                    </h5></div>
                 </div>
                 <div class="col-xl-4 col-md-4 col-sm-4">
                     <p class="fw-bold">Code groupe : <span id="code_groupe">{{ info.codegroupe }}</span></p>
@@ -25,6 +33,9 @@
             </div>              
         </div>
             <p style="display: none;"> Text ecrit : <span id="text"> </span> </p>
+        <div class="fw-bold">
+            <hr/>
+        </div>
         {{ form_start(form) }}
             <div class="row mt-3">
                 <div class="col-4 col-sm-4">
@@ -45,50 +56,58 @@
             </div> 
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    {{ form_row(form.Valider) }}
+                    {% if status == null %}
+                        <button type="submit" class="btn btn-primary btn-sm"> Compte Epargne </button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary btn-sm"> Depot de garantie </button>
+                    {% endif %}
                 </div>
             </div>
         {{ form_end(form) }}
-        
-        <h6 class="text-primary m-3"> Compte existant du groupe {{ info.nomGroupe }} </h6>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Compte epargne groupe</th>
-                    <th>Code groupe</th>
-                    <th>Date d'ouverture </th>
-                    <th>Produits</th>
-                    <th>solde</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody class="jumbotron jumbotron-fluid" style="color:black;">
-                {% for compte in compte_exist %}
-                <tr>
-                    <td> {{ compte.codeepargne }}</td>
-                    <td> {{ compte.codegroupe }}</td>
-                    <td> {{ compte.datedebut|date('Y-m-d') }}</td>
-                    <td> {{ compte.nomproduit }}</td>
-                    <td>
-                        {% if compte.solde == null %}
-                            0
-                        {% else %}
-                            {{ compte.solde }}
-                        {% endif %}
-                    </td>
-                    <td> 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
+        <div class="fw-bold">
+            <hr/>
+        </div>
+        {% if status == null %}
+            <h6 class="text-primary m-3"> Compte existant du groupe {{ info.nomGroupe }} </h6>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Compte epargne groupe</th>
+                        <th>Code groupe</th>
+                        <th>Date d'ouverture </th>
+                        <th>Produits</th>
+                        <th>solde</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                    {% for compte in compte_exist %}
+                    <tr>
+                        <td> {{ compte.codeepargne }}</td>
+                        <td> {{ compte.codegroupe }}</td>
+                        <td> {{ compte.datedebut|date('Y-m-d') }}</td>
+                        <td> {{ compte.nomproduit }}</td>
+                        <td>
+                            {% if compte.solde == null %}
+                                0
+                            {% else %}
+                                {{ compte.solde }}
+                            {% endif %}
+                        </td>
+                        <td> 
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="{{ path('app_compte_epargne_edit_groupe', {'id': compte.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <a href="{{ path('app_compte_epargne_edit_groupe', {'id': compte.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 {% endblock %}

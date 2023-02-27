@@ -5,7 +5,47 @@ var path = window.location.pathname
 $(document).ready(() =>{
      /********Cache les info */
     if (path === '/compte/epargne/new') {
+        //Depot de garantie
+        const type_compte = $('#compte-type').html();
         
+        $('#compte_epargne_produit').children('option').remove();
+        if (type_compte === 'garantie') {  
+            $.ajax({
+                url : '/api/json/produit',
+                method : "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify($(this).val()),
+                success : (result) =>  {
+                    for(let i = 0; i < result.length; i++){
+                        var element = result[i];
+                        console.log(element);
+                        $('#compte_epargne_produit').append('<option value="'+element.id+'" selected>'+element.nomproduit+'</option>');
+                    }
+                }
+            });
+        }else{
+            $.ajax({
+                url : '/api/json/produit/all',
+                method : "GET",
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify($(this).val()),
+                success : (result) =>  {
+                    $('#compte_epargne_produit').children('option').remove();
+                    for(let i = 0; i < result.length; i++){
+                        var element = result[i];
+                        console.log(element);
+                        $('#compte_epargne_produit').append('<option value="'+element.id+'">'+element.nomproduit+' 898898989</option>');
+                    }
+                }
+            });
+        }
+       
+
+
+
+
         const modal_container = document.getElementById('modal-container');
         const modal_text = document.getElementById('modal-text');
         const close_btn = document.querySelector('#close-btn');

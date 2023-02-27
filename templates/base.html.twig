@@ -166,7 +166,20 @@
 
                                 </ul>
                             </li>
-
+                            {# Depot de garantie #}
+                            <li class="w-100">
+                                <a href="#submenu76" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Dépot de garantie <span class="fa fa-chevron-down"></span>  </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu76" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{ path('app_depot_garantie') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> Individuel  </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_depot_garantie_groupe') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe  </span></a>
+                                    </li>
+                                </ul>
+                            </li>
                             {# Module credit #}
 
                             <li>

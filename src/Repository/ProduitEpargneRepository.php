@@ -177,4 +177,32 @@ class ProduitEpargneRepository extends ServiceEntityRepository
 
         return $stmt;
     }
+
+    public function findDepotDeGaarantie(){
+        $query = "SELECT 
+            p.id,
+            p.nomproduit,
+            p.abbreviation
+            FROM 
+            App\Entity\ProduitEpargne p
+            WHERE p.nomproduit = 'Dépôts de garantie' OR p.abbreviation = 'DDG'
+        ";
+
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+        return $stmt;
+    }
+
+    public function findAllProduct(){
+        $query = "SELECT 
+            p.id,
+            p.nomproduit,
+            p.abbreviation
+            FROM 
+            App\Entity\ProduitEpargne p
+            WHERE p.nomproduit != 'Dépôts de garantie' OR p.abbreviation != 'DDG'
+        ";
+
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+        return $stmt;
+    }
 }

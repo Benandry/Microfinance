@@ -15,7 +15,15 @@
                 </div>
                 
                 <div class="col-md-4 col-sm-4 m-auto">
-                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Ouvrir compte epargne </h5></div>
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary">
+                        {% if status == null %}
+                            <span style="display: none;" id="compte-type">epargne</span>
+                            Ouvrir compte epargne 
+                        {% else %}
+                            <span style="display: none;" id="compte-type">garantie</span>
+                            Depot de garantie 
+                        {% endif %}
+                    </h5></div>
                 </div>
                 <div class="col-xl-4 col-md-4 col-sm-4">
                     <p> <b>Code client :</b> <span id="code_client"> {{ info.codeclient }}</span></p> 
@@ -33,49 +41,51 @@
         <div class="fw-bold">
             <hr/>
         </div>
-        <h6 class="text-primary">Compte existant du client {{ info.prenom_client  }} {{ info.prenom_client  }}</h6>
-        <table class="table mt-3">
-            <thead>
-                <tr>
-                    <th>Code Epargne</th>
-                    <th>Code client</th>
-                    <th>Date d'ouverture </th>
-                    <th>Produits</th>
-                    <th>Solde</th>
-                    <th>Actions </th>
-                </tr>
-            </thead>
-            {% for compte_epargne in comptedujours %}
-                <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% if status == null %}
+            <h6 class="text-primary">Compte existant du client {{ info.prenom_client  }} {{ info.prenom_client  }}</h6>
+            <table class="table mt-3">
+                <thead>
                     <tr>
-                        <td class="fw-bold">{{ compte_epargne.codeepargne }}</td>
-                        <td>{{ compte_epargne.codeclient }}</td>
-                        <td>{{ compte_epargne.datedebut | date('d-m-Y') }}</td>
-                        <td>{{ compte_epargne.nomproduit }}</td>
-                        <td>
-                            {% if compte_epargne.solde != '' %}
-                                {{ compte_epargne.solde }}
-                                {% else %}
-                                0
-                            {% endif %}</td>
-                        <td>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a href="{{ path('app_compte_epargne_show', {'id': compte_epargne.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a href="{{ path('app_compte_epargne_edit', {'id': compte_epargne.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                            </div>
-                        </div>
-                        </td>
+                        <th>Code Epargne</th>
+                        <th>Code client</th>
+                        <th>Date d'ouverture </th>
+                        <th>Produits</th>
+                        <th>Solde</th>
+                        <th>Actions </th>
                     </tr>
-            {% else %}
-                    <tr>
-                        <td class="text-center" colspan="5"> Pas de compte </td>
-                    </tr>
-                </tbody>
-            {% endfor %}
-        </table>
+                </thead>
+                {% for compte_epargne in comptedujours %}
+                    <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+                        <tr>
+                            <td class="fw-bold">{{ compte_epargne.codeepargne }}</td>
+                            <td>{{ compte_epargne.codeclient }}</td>
+                            <td>{{ compte_epargne.datedebut | date('d-m-Y') }}</td>
+                            <td>{{ compte_epargne.nomproduit }}</td>
+                            <td>
+                                {% if compte_epargne.solde != '' %}
+                                    {{ compte_epargne.solde }}
+                                    {% else %}
+                                    0
+                                {% endif %}</td>
+                            <td>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <a href="{{ path('app_compte_epargne_show', {'id': compte_epargne.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="{{ path('app_compte_epargne_edit', {'id': compte_epargne.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                </div>
+                            </div>
+                            </td>
+                        </tr>
+                {% else %}
+                        <tr>
+                            <td class="text-center" colspan="5"> Pas de compte </td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        {% endif %}
         
         <div id="modal-container">
             <div id="modal">

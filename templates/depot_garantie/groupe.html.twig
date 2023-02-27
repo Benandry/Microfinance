@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Depot de Garantie{% endblock %}
+{% block head %}  Depot de Garantie{% endblock %}
+
+{% block body %}
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal body -->
+                {{form_start(form)}}
+                    <div class="modal-header titre_modal">
+                        <h5> Depot de garantie</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="ms-2"> Groupe client : </h6>
+                        {{ form_row(form.client) }}
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary btn-sm" >Ajouter</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

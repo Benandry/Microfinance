@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Depot de compte epargne {{ info.nomGroupe }}
+    Entrée de compte epargne {{ info.nomGroupe }}
 {% endblock %}
 
 {% block head %}
-    Depot client groupe {{ info.nomGroupe }}
+    Entrée client groupe {{ info.nomGroupe }}
 {% endblock %}
 
 {% block body %}
@@ -32,7 +32,7 @@
                         <p style="display: none;" id="produit-id">{{ id_produit }}</p>
                     </div>
                     <div class="col-md-4 col-sm-4 m-auto">
-                        <div class="d-flex justify-content-center"> <h5 class="text-secondary"> Dépôt epargne </h5></div>
+                        <div class="d-flex justify-content-center"> <h5 class="text-secondary"><i class="fas fa-sign-in"></i> Entrée epargne </h5></div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <p><b>Code client :</b> <span id="code_client"> {{ info.codegroupe }}</span></p>

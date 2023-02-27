@@ -38,6 +38,11 @@ class CompteEpargneController extends AbstractController
     {
         //Information de client
         $code = $request->query->get('code');
+        if ($request->query->get('status')) {
+            $status = $request->query->get('status');
+        }else {
+            $status = null;
+        }
 
         /**
          * Information du client (nom,prennom,code client)
@@ -53,6 +58,8 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // dd()
             /** Verifier que le compte est deja exister ou pas */
             //verifier dans la bas e de donne si le compte est deja existeE ou pas
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
@@ -77,6 +84,7 @@ class CompteEpargneController extends AbstractController
             'info' => $info,
             'year_client' => $year_client,
             'code' => $code,
+            'status' => $status
         ]);
     }
 
@@ -92,6 +100,13 @@ class CompteEpargneController extends AbstractController
     {
 
         $id = $request->query->get('code');
+
+        if ($request->query->get('status')) {
+            $status = $request->query->get('status');
+        }else {
+            $status = null;
+        }
+
         $info_groupe = $compteEpargneRepository->getInfoGroupe($id)[0];
 
         $compteEpargneExiste = $compteEpargneRepository->compteEpargneExist($info_groupe['codegroupe']);
@@ -128,7 +143,8 @@ class CompteEpargneController extends AbstractController
             'compte_exist' =>$compteEpargneExiste,
             'form' => $form,
             'info'=>$info_groupe,
-            'code' => $id
+            'code' => $id,
+            'status' => $status
         ]);
     }
 
