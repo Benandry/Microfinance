@@ -42,6 +42,9 @@ class CompteEpargne
 
     #[ORM\Column(length: 255)]
     private ?string $typeClient = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $activated = null;
     
     public function __construct()
     {
@@ -172,6 +175,18 @@ class CompteEpargne
     public function setTypeClient(string $typeClient): self
     {
         $this->typeClient = $typeClient;
+
+        return $this;
+    }
+
+    public function isActivated(): ?bool
+    {
+        return $this->activated;
+    }
+
+    public function setActivated(?bool $activated): self
+    {
+        $this->activated = $activated;
 
         return $this;
     }

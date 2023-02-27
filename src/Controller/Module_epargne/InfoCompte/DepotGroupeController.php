@@ -23,6 +23,7 @@ class DepotGroupeController extends AbstractController
                 'class' => CompteEpargne::class,
                 'query_builder' => function (CompteEpargneRepository $er) {
                     return $er->createQueryBuilder('c')
+                        ->where("c.activated = 0")
                         ->andWhere("c.typeClient = 'GROUPE' ");
                 },
                 'choice_label' => function ($c) {
@@ -60,6 +61,7 @@ class DepotGroupeController extends AbstractController
             'class' => CompteEpargne::class,
             'query_builder' => function (CompteEpargneRepository $er) {
                 return $er->createQueryBuilder('c')
+                    ->where("c.activated = 0")
                     ->andWhere("c.typeClient = 'GROUPE' ");
             },
             'choice_label' => function ($c) {
@@ -99,6 +101,7 @@ class DepotGroupeController extends AbstractController
                 'class' => CompteEpargne::class,
                 'query_builder' => function (CompteEpargneRepository $er) {
                     return $er->createQueryBuilder('c')
+                        ->where("c.activated = 0")
                         ->andWhere("c.typeClient = 'INDIVIDUEL' ");
                 },
                 'choice_label' => function ($c) {
