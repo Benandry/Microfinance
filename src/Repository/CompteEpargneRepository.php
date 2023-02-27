@@ -412,6 +412,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         "SELECT DISTINCT
         ---code epargne
         ce.codeepargne,
+        ce.activated,
         ce.codeep,
         -- produit
          p.nomproduit,
@@ -422,8 +423,6 @@ class CompteEpargneRepository extends ServiceEntityRepository
         i.nom_client,
         i.codeclient,
         i.prenom_client,
-        
-        
          SUM(t.Montant) solde
         FROM
         App\Entity\CompteEpargne ce
@@ -458,6 +457,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
             ce.id,
             ce.codeep,
             ce.codeepargne,
+            ce.activated,
             SUM(t.Montant) solde
 
             FROM App\Entity\CompteEpargne ce 

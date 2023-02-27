@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Activation du compte epargne {% endblock %}
+{% block head %} Activation du compte epargne {% endblock %}
+
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6 m-auto">
+                                {{ form_row(form.activated) }}
+                            </div>
+                        </div>
+                        <div class="row" style="display:none;">
+                            <div class="col-sm-4">
+                                {{ form_row(form.typeAfficher) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_row(form.produit) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_row(form.datedebut) }}
+                            </div>
+                        
+                            <div class="col-sm-4">
+                                {{ form_row(form.codeep) }}
+                                {{ form_row(form.typeClient) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_row(form.nom) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_row(form.prenom) }}
+                                {{ form_row(form.codeepargne) }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+                        <button class="btn btn-primary btn-sm">{{ button_label|default('Enregistrer') }}</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+            
+    {# /***********Fin modal *********** #}
+{% endblock %}

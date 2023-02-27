@@ -69,11 +69,14 @@
                                 {% endif %}</td>
                             <td>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <a href="{{ path('app_compte_epargne_show', {'id': compte_epargne.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <a href="{{ path('app_compte_epargne_edit', {'id': compte_epargne.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="{{ path('app_compte_epargne_activated', {'id': compte_epargne.id,'code': code }) }}" class="btn btn-warning btn-sm"> {% if compte_epargne.activated %} Desactiver {% else %} Activer {% endif %}</a>
                                 </div>
                             </div>
                             </td>

@@ -53,6 +53,7 @@
                     {{ form_row(form.codeep) }}
                     {{ form_row(form.codeepargne) }}
                     {{ form_row(form.typeClient) }} 
+                    {{ form_row(form.activated) }}
             </div> 
             <div class="row">
                 <div class="d-flex justify-content-center">
@@ -96,11 +97,14 @@
                         </td>
                         <td> 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <a href="{{ path('app_compte_epargne_details_groupe', {'id': compte.id}) }}" class="btn btn-primary btn-sm "> <i class="fa fa-eye"></i></a>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <a href="{{ path('app_compte_epargne_edit_groupe', {'id': compte.id,'code': code }) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="{{ path('app_compte_epargne_activated_groupe', {'id': compte.id,'code': code }) }}" class="btn btn-warning btn-sm"> {% if compte.activated %} Desactiver {% else %} Activer {% endif %}</a>
                                 </div>
                             </div>
                         </td>

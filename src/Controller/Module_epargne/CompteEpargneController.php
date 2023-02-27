@@ -198,6 +198,9 @@ class CompteEpargneController extends AbstractController
     }
 
 
+    /**
+     * Modification du compte epargne
+     */
     #[Route('/{id}/edit/{code}', name: 'app_compte_epargne_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository,$code): Response
     {
@@ -213,6 +216,29 @@ class CompteEpargneController extends AbstractController
         }
 
         return $this->renderForm('Module_epargne/compte_epargne/edit.html.twig', [
+            'compte_epargne' => $compteEpargne,
+            'form' => $form,
+        ]);
+    }
+
+
+    /**
+     * Activation du compte epargne
+     * 
+     */
+    #[Route('/{id}/activated/{code}', name: 'app_compte_epargne_activated', methods: ['GET', 'POST'])]
+    public function activated(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository,$code): Response
+    {
+        $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est Activer!!");
+            $compteEpargneRepository->add($compteEpargne, true);
+            return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Module_epargne/compte_epargne/activated.html.twig', [
             'compte_epargne' => $compteEpargne,
             'form' => $form,
         ]);
@@ -237,6 +263,31 @@ class CompteEpargneController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    /**
+     * Activation du compte epargne groupe
+     * 
+     */
+    #[Route('/{id}/activated_groupe/{code}', name: 'app_compte_epargne_activated_groupe', methods: ['GET', 'POST'])]
+    public function activated_groupe(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository,$code): Response
+    {
+        $form = $this->createForm(CompteEpargneType::class, $compteEpargne);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est Activer!!");
+            $compteEpargneRepository->add($compteEpargne, true);
+            return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $code], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Module_epargne/compte_epargne/activated.html.twig', [
+            'compte_epargne' => $compteEpargne,
+            'form' => $form,
+        ]);
+    }
+
+
 
 
     #[Route('/{id}', name: 'app_compte_epargne_delete', methods: ['POST'])]

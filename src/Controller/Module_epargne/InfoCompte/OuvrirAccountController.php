@@ -103,7 +103,7 @@ class OuvrirAccountController extends AbstractController
                 'class' => CompteEpargne::class,
                 'query_builder' => function (CompteEpargneRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->where("c.activated = 0")
+                        ->where("c.activated = 1")
                         ->andWhere("c.typeClient = 'INDIVIDUEL' ");
                 },
                 'choice_label' => function ($c) {

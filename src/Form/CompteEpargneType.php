@@ -7,6 +7,7 @@ use App\Entity\ProduitEpargne;
 use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -82,6 +83,10 @@ class CompteEpargneType extends AbstractType
                     'class'=>'hidden',
                 ],
                 'label'=>false
+            ])
+            ->add('activated',CheckboxType::class,[
+                'label'=>"Activer",
+                'required' => false
             ])
         ;
     }
