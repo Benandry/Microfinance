@@ -20,12 +20,14 @@ class PatrimoineController extends AbstractController
      * @param PatrimoineRepository $PatrimoineRepository
      * @return void
      */
-    #[Route('/Patrimoineindividuel/patr/',name:'app_individuelpatrimoine')]
+    #[Route('/Patrimoineindividuel/patr',name:'app_individuelpatrimoine')]
     public function Patrimoine(EntityManagerInterface $emi,PatrimoineRepository $PatrimoineRepository,Request $request):Response
     {
         $idclient=$request->query->get('nom');
 
         $patrimoineindividuel=new Patrimoine();
+
+        // $information_client = $PatrimoineRepository->Patrimoine($idclient);
 
         $patrimoineind=$PatrimoineRepository->Patrimoine($idclient)[0];
         
@@ -61,12 +63,13 @@ class PatrimoineController extends AbstractController
             $emi->flush();
 
             $this->addFlash('success', 'La patrimoine de'.$patrimoineind-> getNomClient()." ".$patrimoineind->getPrenomClient()." est bien ajoutés");
-
+            return $this->redirectToRoute('app_individuelpatrimoine', ['nom' => $idclient], Response::HTTP_SEE_OTHER);
         }
-
+        // dd($patrimoineind);
         return $this->renderForm('Module_client/individuel/Patrimoine.html.twig', [
             'form' => $form,
-            'idclient'=>$idclient
+            'idclient'=>$idclient,
+            'info' => $patrimoineind,
         ]); 
     }
 

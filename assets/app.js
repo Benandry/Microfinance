@@ -207,6 +207,11 @@ $(document).ready(function(){
         $("#rapport_credit_datefin").on('change',function(){
             $('#one_date').hide(); 
         });
+        
+
+        if(path === '/Patrimoineindividuel/patr'){
+            $('#patrimoine_IdClient').val($('#id-client-ind').text());
+        }
 
         if(path === '/agence/new'){
             let max_id_ = $('#id-max').text().padStart(2,0);
@@ -249,6 +254,7 @@ $(document).ready(function(){
               windowWidth: 675 //window width in CSS pixels
             });
         })
+
 
         // alert("alert zalah ");
 
