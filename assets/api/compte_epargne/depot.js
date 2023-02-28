@@ -5,9 +5,8 @@ var path = window.location.pathname;
 
 $(document).ready(() =>{
 
-    if (path === '/transaction/new') {
-        var montant_bruit_ = 0
-
+    if (path === '/transaction/depot') {
+        var montant_bruit_ = 0;
         const id_produit = $('#produit-id').text();
         //PRoduit epargne configuration sur depot
         const api_produit = '/api/compte-epargne/individuel/'+id_produit;

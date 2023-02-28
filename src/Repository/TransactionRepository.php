@@ -494,13 +494,22 @@ class TransactionRepository extends ServiceEntityRepository
             conf.statusProduit status_produit,
             conf.IsNegatif compte_negative,
             pe.nomproduit produit_epargne,
-            pe.id  id_produit_epargne
+            pe.id  id_produit_epargne,
+            --Groupe --
+            g.nomGroupe,
+            g.email,
+            g.codegroupe,
+            ce.typeClient
             FROM
             App\Entity\CompteEpargne ce
 
-            INNER JOIN 
+            LEFT JOIN 
             App\Entity\Individuelclient i
             WITH ce.codeep = i.codeclient
+
+            LEFT JOIN 
+            App\Entity\Groupe g
+            WITH ce.codeep = g.codegroupe
 
             INNER JOIN 
             App\Entity\ProduitEpargne pe

@@ -18,28 +18,43 @@
                     <p> <b>Solde client : </b>
                         {% if solde != '' %}
                             <span id="solde_cli" style="display:none">{{ solde }}</span>   
-                            <span>{{ solde|number_format(0,',', ' ') }}</span>     
+                            <span>{{ solde|number_format(0,',', ' ') }}</span>   
+                            <span class="devise-solde"></span>    
                         {% else %}
                             <span id="solde_cli">0</span>  
+                        <span class="devise-solde"></span>  
                         {% endif %} 
                     </p>
                 </div>
                 <div class="col-md-4 col-sm-4 m-auto">
-                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"><i class="fas fa-sign-out"></i> Sortie epargne </h5></div>
+                    <div class="d-flex justify-content-center"> <h5 class="text-secondary"><i class="fas fa-sign-out"></i> 
+                    {% if status == "depot_a_vue_sortie" %}
+                        Sortie Depot a Vue 
+                    {% elseif status == "depot_garantie_sortie" %}
+                        Sortie Dépot de garantie 
+                     {% else %}
+                        Sortie epargne 
+                     {% endif %}
+                    </h5></div>
                 </div>
 
                 <div class="col-md-4 col-sm-4">
-                    <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }} </span></p>
-                    <p><b> Prenom Client :</b> <span id="prenom"> {{ info.prenom_client }}</span></p>
+                    {% if info.typeClient == "GROUPE" %}
+                        <p><b> Nom Client :</b> <span id="nom"> {{ info.nomGroupe }} </span></p>
+                        <p><b> Email:</b> <span id="prenom"> {{ info.email }}</span></p>
+                    {% else %}
+                        <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }} </span></p>
+                        <p><b> Prenom Client :</b> <span id="prenom"> {{ info.prenom_client }}</span></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
         {{ form_start(form) }}
-            <div style="display:none;">
-                <p> Text ecrit : <span id="text"> </span> </p>
-            </div>
             <div class="row jumbotron jumbotron-fluid" style="color:black;">
                 <div class="col-sm-5" style="display:none;">
+                    <p> Text ecrit : <span id="text"> </span> </p>
+                    <p id="produit-id">{{ id_produit }}</p>
+                    {{ form_row(form.devise) }}
                     {{ form_row(form.typeClient) }}
                     {{ form_row(form.codeepargneclient) }}
                     {{ form_row(form.Description) }}

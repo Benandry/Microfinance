@@ -73,10 +73,11 @@ $(document).ready(() =>{
                     for(let i = 0; i < result.length; i++){
                         
                         var element = result[i];
-                        const year_client = $('#age_client').text();
+                        const year_client = parseInt(document.querySelector("#age_client").textContent);
+                        // alert(year_client);
                         console.log(element);
                         if( element.age_minimum_ouvrir_compte  > year_client ){
-                            modal_text.textContent = "On ne peut creer un compte epargne pour cette produits car l'age de client assez moins";
+                            modal_text.textContent = "On ne peut creer un compte epargne pour cette produits car l'age de client assez moins. Il est "+year_client+" ans ";
                             modal_container.style.display = "block";
                             modal_text.style.color = "red";
                             $('.btn').hide();
@@ -131,7 +132,7 @@ $(document).ready(() =>{
             $('#code_text').text(code_client_)        
         });
     }
-    else if(path === "/CompteEpargneDepot" || path ==='/depot/epargne/groupe' || path === '/transaction/retrait/individuel' || path === '/transaction/retrait/groupe')
+    else if(path === "/CompteEpargneDepot" || path ==='/depot/epargne/groupe' )
     {           
         $.ajax({
             url: '/client/epargne/tous',
@@ -157,36 +158,5 @@ $(document).ready(() =>{
             }
 
         }); 
-    }
-     //Information du client pour ouvrir un compte epargne
-    if(path === '/ouvrirCompteEpargneClient'){
-        $('#form_code').on('change',() => {
-            // alert("alert");
-            var url = "/api/code-client/"+$('#form_code').val();
-                
-            $.ajax({
-                url: url,
-                method: "GET",
-                dataType : "json",
-                contentType: "application/json; charset=utf-8",
-                data : JSON.stringify($(this).val()),
-                success: function(result){
-                    console.log(result);
-                    for (let i = 0; i < result.length; i++) {
-                       
-                        var element = result[i];
-                            // console.log(element);
-                            document.getElementById('codeclient').innerHTML = element.codeclient;
-                            document.getElementById('nom').innerHTML = element.nom;
-                            document.getElementById('prenom').innerHTML = element.prenom;
-                            
-                    }
-                },
-                error: function (request, status, error) {
-                    console.log(request.responseText);
-                }
-    
-            });    
-        })
     }
 })

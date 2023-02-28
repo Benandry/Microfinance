@@ -91,7 +91,7 @@ class TransactionController extends AbstractController
 
 
     /**
-     * Depot individuel client
+     * Depot solde de tous les produits  epargne
      *
      * @param ManagerRegistry $doctrine
      * @param Request $request
@@ -99,13 +99,19 @@ class TransactionController extends AbstractController
      * @param MouvementEpargne $mouvement
      * @return Response
      */
-    #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
+    #[Route('/depot', name: 'app_transaction_new', methods: ['GET', 'POST'])]
     public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
     {     
         $id = $request->query->get('code');
+
+        if ($request->query->get('status')) {
+            $status = $request->query->get('status');
+        }else {
+            $status = "";
+        }
             /***Information du compte epargne */
         $infoCompte = $transactionRepository->getInfoCompteEpargne($id)[0];
-        // dd();
+        // dd($infoCompte);
         $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
 
         if($soldeCurrent == null ){
@@ -142,82 +148,25 @@ class TransactionController extends AbstractController
                 $this->addFlash('danger','Vous avez entré un montant negative.Le montant entré doit etre strictement positive. Veuillez réessayer !!');
             }
             return $this->redirectToRoute('app_transaction_new', [
-                'code' => $id,
+                'code' => $id
+                ,"status" => $status
             ], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Module_epargne/transaction/new.html.twig', [
+        // dd($status);
+        return $this->renderForm('Module_epargne/transaction/depot_epargne.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
             'info' => $infoCompte,
             'solde' => $soldeCurrent[0]['solde'],
-            'id_produit' => $infoCompte['id_produit_epargne']
+            'id_produit' => $infoCompte['id_produit_epargne'],
+            'status' => $status,
         ]);
     }
 
+
     /**
-     * Transaction depot groupe client
-     *
-     * @param ManagerRegistry $doctrine
-     * @param Request $request
-     * @param TransactionRepository $transactionRepository
-     * @param MouvementEpargne $mouvement
-     * @return void
-     */
-    #[Route('/depotgroupe', name: 'app_transaction_groupe_depot', methods: ['GET', 'POST'])]
-    public function DepotGroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement)
-    {
-        $id = $request->query->get('code');
-        /**Information du compte epargne groupe */
-        $infoCompte = $transactionRepository->getInfoGroupe($id)[0];
-
-        //Solde courant du groupe
-        $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
-        if($soldeCurrent == null ){
-            $soldeCurrent[0]['solde'] = 0;
-        }
-        $transaction = new Transaction();
-        $form = $this->createForm(TransactionType::class, $transaction);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            //produit epragne utiliseer
-            $get_produits_id = $infoCompte['id_produit'];
-            // Verifier si le montant est positive (strictement positive)
-            if ($transaction->getMontant() > 0) {
-                $transaction->setCodetransaction(random_int(2,1000000000));
-                $transaction->setDescription($transaction->getDescription()." GROUPE Compte epargne");
-                $entityManager=$doctrine->getManager();
-                $mouvement->operationJournal($entityManager,$transaction,$get_produits_id);
-
-                if ($transaction->getSolde()== "NaN") {
-                    $transaction->setSolde($transaction->getMontant());
-                }
-                
-                $entityManager->persist($transaction);
-                $entityManager->flush();
-                $this->addFlash('info', " Depot de ".$form->get('montant_bruite')->getData()." ".$form->get('devise')->getData()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient().". Le solde de depot est :  ".$transaction->getMontant()."  ".$form->get('devise')->getData().". Réference : ".$transaction->getCodetransaction().". Le nouveau solde total est : ".$transaction->getSolde()." ".$form->get('devise')->getData());
-            }
-            else {
-                $this->addFlash('danger','Vous avez entré un montant negative.Le montant entré doit etre strictement positive. Veuillez réessayer !!');
-            }
-            return $this->redirectToRoute('app_transaction_groupe_depot', [
-                'code' => $id,
-            ], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('Module_epargne/transaction/depotgroupe.html.twig', [
-            'transaction' => $transaction,
-            'form' => $form,
-            'info' => $infoCompte,
-            'solde' => $soldeCurrent[0]['solde'],
-            'id_produit' => $infoCompte['id_produit']
-        ]);
-    }
-    
-    /**
-     * Transaction retrait du groupe client
+     * Retrait de tous les produits sur compte epargne
      *
      * @param ManagerRegistry $doctrine
      * @param Request $request
@@ -225,56 +174,18 @@ class TransactionController extends AbstractController
      * @param MouvementRetrait $mouvement
      * @return Response
      */
-    #[Route('/retrait', name: 'app_transaction_retrait', methods: ['GET', 'POST'])]
-    public function Retraitgroupe(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementRetrait $mouvement): Response
-    {
-
-        //inforamtion qui concerne le groupe(nom et code groupe);
-        $id = $request->query->get('code');
-        $infoCompte = $transactionRepository->getInfoGroupe($id)[0];
-
-
-        $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
-        if($soldeCurrent == null ){
-            $soldeCurrent[0]['solde'] = 0;
-        }        
-
-        $transaction = new Transaction();
-        $form = $this->createForm(TransactionretraitType::class, $transaction);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {  
-            $entityManager=$doctrine->getManager();
-            $transaction->setDescription($transaction->getDescription()." Compte epargne");
-            $transaction->setCodetransaction(random_int(1,2000000));
-            $transaction->setMontant(-$transaction->getMontant());
-
-            // $mouvement->operationJournal($entityManager,$transaction);
-
-            $entityManager->persist($transaction);
-            $entityManager->flush();
-            
-            $this->addFlash('success', " Rétrait ".abs($transaction->getMontant())." réussite du compte epargne groupe " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
-            return $this->redirectToRoute('app_transaction_retrait', ['code' => $id], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('Module_epargne/transaction/retrait.html.twig', [
-            'transaction' => $transaction,
-            'form' => $form,
-            'info' => $infoCompte,
-            'solde' => $soldeCurrent[0]['solde']
-        ]);
-    }
-
-    // Retrait individuel
-        // Retrait
-    #[Route('/individuel', name: 'app_retrait', methods: ['GET', 'POST'])]
+    #[Route('/retrait', name: 'app_retrait', methods: ['GET', 'POST'])]
     public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementRetrait $mouvement): Response
     {
-        
         $id = $request->query->get('code');
+        if ($request->query->get('status')) {
+            $status = $request->query->get('status');
+        }else {
+            $status = "";
+        }
         /***Information du compte epargne */
         $infoCompte = $transactionRepository->getInfoCompteEpargne($id)[0];
+        // dd($infoCompte);
         $soldeCurrent = $transactionRepository->soldeCurrent($infoCompte['code']);
         
         if($soldeCurrent == null ){
@@ -298,18 +209,21 @@ class TransactionController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', " Rétrait de ".abs($transaction->getMontant())." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde());
-            return $this->redirectToRoute('app_retrait', ['code' => $id ], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', " Rétrait de ".abs($transaction->getMontant())." ".$form->get('devise')->getData()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient()." . Réference : ".$transaction->getCodetransaction().". Le nouveau solde est : ".$transaction->getSolde()." ".$form->get('devise')->getData());
+            return $this->redirectToRoute('app_retrait', ['code' => $id,"status" => $status ], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Module_epargne/transaction/retrait_individuel_form.html.twig', [
+        return $this->renderForm('Module_epargne/transaction/retrait_epargne.html.twig', [
             'transaction' => $transaction,
             'form' => $form,
             'info' => $infoCompte,
-            'solde' => $soldeCurrent[0]['solde']
+            'solde' => $soldeCurrent[0]['solde'],
+            'status' => $status,
+            'id_produit' => $infoCompte['id_produit_epargne'],
         ]);
     }
 
+    
     #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
     public function show(Transaction $transaction): Response
     {

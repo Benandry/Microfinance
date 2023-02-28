@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Ouvrir un compte epargne groupe
+{% endblock %}
+{% block head 'compte epargne>Ouvrir une compte groupe' %}
+
+{% block body %}
+    {{ include('Module_epargne/transaction/infoTransaction/_modal.html.twig', {'etat': 'Ouverture Compte epargne Groupe'}) }}
+{% endblock %}

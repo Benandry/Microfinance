@@ -24,6 +24,10 @@ class TransactionretraitType extends AbstractType
                     'value'=>'RETRAIT'
                 ]
             ])
+            ->add('devise',TextType::class,[
+                'label'=>'devise utiliser :',
+                'mapped' => false,
+            ])
             ->add('typeClient',TextType::class,[
                 
                 'attr'=>[

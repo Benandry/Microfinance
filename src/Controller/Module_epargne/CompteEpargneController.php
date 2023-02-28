@@ -21,13 +21,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-        
-
 #[Route('/compte/epargne')]
 class CompteEpargneController extends AbstractController
 {
     /**
-     * Ouvrir un compte epargne client individuel
+     * Ouverture d'un compte epargne client individuel
      *
      * @param Request $request
      * @param CompteEpargneRepository $compteEpargneRepository
@@ -88,8 +86,10 @@ class CompteEpargneController extends AbstractController
         ]);
     }
 
+
+
     /**
-     * Compte epargne pour groupe
+     * Ouverture d'un Compte epargne pour groupe
      *
      * @param Request $request
      * @param CompteEpargneRepository $compteEpargneRepository
@@ -147,6 +147,8 @@ class CompteEpargneController extends AbstractController
             'status' => $status
         ]);
     }
+
+
 
     // Show individuel
     #[Route('/{id}', name: 'app_compte_epargne_show', methods: ['GET'])]
@@ -286,10 +288,6 @@ class CompteEpargneController extends AbstractController
             'form' => $form,
         ]);
     }
-
-
-
-
     #[Route('/{id}', name: 'app_compte_epargne_delete', methods: ['POST'])]
     public function delete(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository): Response
     {
