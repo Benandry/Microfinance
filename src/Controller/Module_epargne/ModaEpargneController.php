@@ -112,7 +112,15 @@ class ModaEpargneController extends AbstractController
                         ->orWhere("prod.nomproduit = 'Dépôts a vue' ");
                 },
                 'choice_label' => function ($c) {
-                    return $c->getCodeepargne();
+                    // return $c->getCodeepargne();
+                    if ($c->getIndividuelclient()) {
+                        // dd();
+                        return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                    }
+                    else {
+                        return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                    }
+                    
                 },
                 'attr'=>[
                     'class' => 'form-control border-0 custom-select-no-arrow',
@@ -156,7 +164,13 @@ class ModaEpargneController extends AbstractController
                         ->orWhere("prod.nomproduit = 'Dépôts a vue' ");
                 },
                 'choice_label' => function ($c) {
-                    return $c->getCodeepargne();
+                    if ($c->getIndividuelclient()) {
+                        // dd();
+                        return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                    }
+                    else {
+                        return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                    }
                 },
                 'attr'=>[
                     'class' => 'form-control border-0 custom-select-no-arrow',
@@ -199,7 +213,13 @@ class ModaEpargneController extends AbstractController
                     ->orWhere("prod.nomproduit = 'Dépôts de garantie' ");
             },
             'choice_label' => function ($c) {
-                return $c->getCodeepargne();
+                if ($c->getIndividuelclient()) {
+                    // dd();
+                    return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                }
+                else {
+                    return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                }
             },
             'attr'=>[
                 'class' => 'form-control border-0 custom-select-no-arrow',
@@ -245,7 +265,13 @@ class ModaEpargneController extends AbstractController
                     ->orWhere("prod.nomproduit = 'Dépôts de garantie' ");
             },
             'choice_label' => function ($c) {
-                return $c->getCodeepargne();
+                if ($c->getIndividuelclient()) {
+                    // dd();
+                    return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                }
+                else {
+                    return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                }
             },
             'attr'=>[
                 'class' => 'form-control border-0 custom-select-no-arrow',

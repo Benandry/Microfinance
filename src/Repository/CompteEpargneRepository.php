@@ -952,4 +952,37 @@ class CompteEpargneRepository extends ServiceEntityRepository
          $statement = $this->getEntityManager()->createQuery($query)->execute();        
          return $statement;
     }
+
+
+    /**
+     * Cette fonction permet de recuperer les groupe en ouvrant un compte epargne
+     *
+     * @param int $id
+     * @return void
+     */
+    public function findGroupeByCode($code){
+        $query = " SELECT 
+        g
+        FROM App\Entity\Groupe g
+        WHERE g.codegroupe= '$code'";
+       
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+        return $stmt;
+    }
+
+    /**
+     * Cette fonction permet de recuperer les Individuel en ouvrant un compte epargne
+     *
+     * @param int $id
+     * @return void
+     */
+    public function findIndividuelByCode($code){
+        $query = " SELECT 
+        i
+        FROM App\Entity\Individuelclient i
+        WHERE i.codeclient= '$code'";
+       
+        $stmt = $this->getEntityManager()->createQuery($query)->getResult();
+        return $stmt;
+    }
 }

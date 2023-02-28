@@ -43,6 +43,9 @@ class Groupe
     #[ORM\Column(length: 255)]
     private ?string $codegroupe = null;
 
+    #[ORM\OneToMany(mappedBy: 'groupe', targetEntity: CompteEpargne::class)]
+    private Collection $compteEpargnes;
+
 
     public function __construct()
     {
@@ -50,6 +53,7 @@ class Groupe
         $this->listeRouges = new ArrayCollection();
         $this->codegroupeEpargne = new ArrayCollection();
         $this->transactions = new ArrayCollection();
+        $this->compteEpargnes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +212,36 @@ class Groupe
     public function setCodegroupe(string $codegroupe): self
     {
         $this->codegroupe = $codegroupe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompteEpargne>
+     */
+    public function getCompteEpargnes(): Collection
+    {
+        return $this->compteEpargnes;
+    }
+
+    public function addCompteEpargne(CompteEpargne $compteEpargne): self
+    {
+        if (!$this->compteEpargnes->contains($compteEpargne)) {
+            $this->compteEpargnes->add($compteEpargne);
+            $compteEpargne->setGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteEpargne(CompteEpargne $compteEpargne): self
+    {
+        if ($this->compteEpargnes->removeElement($compteEpargne)) {
+            // set the owning side to null (unless already changed)
+            if ($compteEpargne->getGroupe() === $this) {
+                $compteEpargne->setGroupe(null);
+            }
+        }
 
         return $this;
     }

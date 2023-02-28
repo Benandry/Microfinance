@@ -74,7 +74,8 @@ class CompteGroupeEpType extends AbstractType
                 'label'=>false
             ])
             ->add('activated',CheckboxType::class,[
-                'label'=>"Activer"
+                'label'=>"Activer",
+                'required' => false
             ])
         ;
     }

@@ -56,8 +56,8 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // dd()
+            $client = $compteEpargneRepository->findIndividuelByCode($compteEpargne->getCodeep())[0];
+            $compteEpargne->setIndividuelclient($client);
             /** Verifier que le compte est deja exister ou pas */
             //verifier dans la bas e de donne si le compte est deja existeE ou pas
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
@@ -118,7 +118,9 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
         // dd("Efa tonga ato ve");
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($compteEpargne);
+
+            $client = $compteEpargneRepository->findGroupeByCode($compteEpargne->getCodeep())[0];
+            $compteEpargne->setGroupe($client);
             //Verifier le compte epargne groupe s'il est deja exister
             $verify_compte_epargne = $compteEpargneRepository->compteEpargneVerify($compteEpargne->getCodeepargne());
             if ($verify_compte_epargne) {
@@ -235,7 +237,11 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est Activer!!");
+            if ($compteEpargne->isActivated()) {
+                $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est activer!!");
+            }else {
+                $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est desactiver!!");
+            }
             $compteEpargneRepository->add($compteEpargne, true);
             return $this->redirectToRoute('app_compte_epargne_new', ['code' => $code], Response::HTTP_SEE_OTHER);
         }
@@ -255,6 +261,7 @@ class CompteEpargneController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
                 $compteEpargne->setTypeClient("GROUPE");
+                // dd($compteEpargne);
                 $compteEpargneRepository->add($compteEpargne, true);
                 $this->addFlash('success', "Modification compte epargne '".$compteEpargne->getCodeepargne()."' reussite!!");
                 return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $code], Response::HTTP_SEE_OTHER);
@@ -278,7 +285,13 @@ class CompteEpargneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est Activer!!");
+            $compteEpargne->setTypeClient("GROUPE");
+            // dd($compteEpargne);
+            if ($compteEpargne->isActivated()) {
+                $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est activer!!");
+            }else {
+                $this->addFlash('primary', "Le compte epargne '".$compteEpargne->getCodeepargne()."' est desactiver!!");
+            }
             $compteEpargneRepository->add($compteEpargne, true);
             return $this->redirectToRoute('app_compte_epargne_new_groupe', ['code' => $code], Response::HTTP_SEE_OTHER);
         }
@@ -292,7 +305,9 @@ class CompteEpargneController extends AbstractController
     public function delete(Request $request, CompteEpargne $compteEpargne, CompteEpargneRepository $compteEpargneRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$compteEpargne->getId(), $request->request->get('_token'))) {
-          #  dd($compteEpargne);
+            if ($compteEpargne->getGroupe()) {
+                $compteEpargne->setTypeClient("GROUPE");
+            }
             $compteEpargneRepository->remove($compteEpargne, true);
         }
 

@@ -16,23 +16,12 @@ class CompteEpargne
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'codecompteepargne')]
-    private ?Individuelclient $codeclient = null;
 
     #[ORM\ManyToOne(inversedBy: 'produitcompteepargne')]
     private ?ProduitEpargne $produit = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datedebut = null;
-
-    #[ORM\ManyToMany(targetEntity: Individuelclient::class, mappedBy: 'CodeIndividuel')]
-    private Collection $individuelclients;
-
-    #[ORM\ManyToMany(targetEntity: Individuelclient::class, mappedBy: 'codeclientindividuel')]
-    private Collection $CodeIndividuelClient;
-
-    #[ORM\ManyToMany(targetEntity: Individuelclient::class, mappedBy: 'codeclientind')]
-    private Collection $codeindcl;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $codeep = null;
@@ -45,29 +34,16 @@ class CompteEpargne
 
     #[ORM\Column(nullable: true)]
     private ?bool $activated = null;
-    
-    public function __construct()
-    {
-        $this->individuelclients = new ArrayCollection();
-        $this->CodeIndividuelClient = new ArrayCollection();
-        $this->codeindcl = new ArrayCollection();
-    }
+
+    #[ORM\ManyToOne(inversedBy: 'compteEpargnes')]
+    private ?Individuelclient $individuelclient = null;
+
+    #[ORM\ManyToOne(inversedBy: 'compteEpargnes')]
+    private ?Groupe $groupe = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCodeclient(): ?Individuelclient
-    {
-        return $this->codeclient;
-    }
-
-    public function setCodeclient(?Individuelclient $codeclient): self
-    {
-        $this->codeclient = $codeclient;
-
-        return $this;
     }
 
     public function getProduit(): ?ProduitEpargne
@@ -99,48 +75,6 @@ class CompteEpargne
     public function __toString()
     {
         return (string) $this->getId();
-    }
-
-    /**
-     * @return Collection<int, Individuelclient>
-     */
-    public function getIndividuelclients(): Collection
-    {
-        return $this->individuelclients;
-    }
-    /**
-     * @return Collection<int, Individuelclient>
-     */
-    public function getCodeIndividuelClient(): Collection
-    {
-        return $this->CodeIndividuelClient;
-    }
-
-    /**
-     * @return Collection<int, Individuelclient>
-     */
-    public function getCodeindcl(): Collection
-    {
-        return $this->codeindcl;
-    }
-
-    public function addCodeindcl(Individuelclient $codeindcl): self
-    {
-        if (!$this->codeindcl->contains($codeindcl)) {
-            $this->codeindcl[] = $codeindcl;
-            $codeindcl->addCodeclientind($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCodeindcl(Individuelclient $codeindcl): self
-    {
-        if ($this->codeindcl->removeElement($codeindcl)) {
-            $codeindcl->removeCodeclientind($this);
-        }
-
-        return $this;
     }
 
     public function getCodeep(): ?string
@@ -187,6 +121,30 @@ class CompteEpargne
     public function setActivated(?bool $activated): self
     {
         $this->activated = $activated;
+
+        return $this;
+    }
+
+    public function getIndividuelclient(): ?Individuelclient
+    {
+        return $this->individuelclient;
+    }
+
+    public function setIndividuelclient(?Individuelclient $individuelclient): self
+    {
+        $this->individuelclient = $individuelclient;
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Groupe $groupe): self
+    {
+        $this->groupe = $groupe;
 
         return $this;
     }

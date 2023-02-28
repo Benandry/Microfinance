@@ -271,6 +271,9 @@ class Individuelclient
     #[ORM\Column(nullable: true)]
     private ?float $CoutEmployePermntCmpltmt = null;
 
+    #[ORM\OneToMany(mappedBy: 'individuelclient', targetEntity: CompteEpargne::class)]
+    private Collection $compteEpargnes;
+
     
     public function __construct()
     {
@@ -281,6 +284,7 @@ class Individuelclient
        // $this->docIdentites = new ArrayCollection();
         $this->listeRouges = new ArrayCollection();
         $this->codeclientind = new ArrayCollection();
+        $this->compteEpargnes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -1385,6 +1389,36 @@ class Individuelclient
     public function setCoutEmployePermntCmpltmt(?float $CoutEmployePermntCmpltmt): self
     {
         $this->CoutEmployePermntCmpltmt = $CoutEmployePermntCmpltmt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompteEpargne>
+     */
+    public function getCompteEpargnes(): Collection
+    {
+        return $this->compteEpargnes;
+    }
+
+    public function addCompteEpargne(CompteEpargne $compteEpargne): self
+    {
+        if (!$this->compteEpargnes->contains($compteEpargne)) {
+            $this->compteEpargnes->add($compteEpargne);
+            $compteEpargne->setIndividuelclient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteEpargne(CompteEpargne $compteEpargne): self
+    {
+        if ($this->compteEpargnes->removeElement($compteEpargne)) {
+            // set the owning side to null (unless already changed)
+            if ($compteEpargne->getIndividuelclient() === $this) {
+                $compteEpargne->setIndividuelclient(null);
+            }
+        }
 
         return $this;
     }
