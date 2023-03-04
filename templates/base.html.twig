@@ -143,24 +143,6 @@
                                             </li>
                                         </ul> 
                                     </li>
-
-                                    {# <li class="w-100">
-                                        <a href="#submenu05" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Retrait compte epargne">
-                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-sign-out"></i> Sortie <span class="fa fa-chevron-down"></span> </span>
-                                        </a>
-                                        <ul class="collapse nav flex-column ms-4" id="submenu05">
-                                            <li class="w-100">
-                                                <a href="{{ path('app_retrait_individuel') }}" class="nav-link px-0" title="Retrait compte epargne individuel"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
-                                            </li>
-                                            <li class="w-100">
-                                                <a href="{{ path('app_transaction_retrait_groupe') }}" class="nav-link px-0" title="Retrait compte epargne groupe"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
-                                            </li>
-                                        </ul>
-                                    </li> #}
-                                    
-                                    <li class="w-100">
-                                        <a href="{{ path('app_transfertep_new') }}" class="nav-link px-0" title="Transfert compte epargne"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transfert epargne </span> </a>
-                                    </li>
                                 </ul>
                             </li>
                             {# Depot de garantie #}
@@ -184,6 +166,11 @@
                                         </ul> 
                                     </li>
                                 </ul>
+                            </li>
+                            
+                            {# Transfert Compte #}
+                            <li class="w-100">
+                                <a href="{{ path('app_transfertep_new') }}" class="nav-link px-0" title="Transfert compte epargne"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transfert epargne </span> </a>
                             </li>
 
                             {# Rapport compte epargne #}

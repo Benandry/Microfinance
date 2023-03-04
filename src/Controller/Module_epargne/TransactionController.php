@@ -131,6 +131,9 @@ class TransactionController extends AbstractController
             //Verifier les solde de depot s 'il est positive
             if($transaction->getMontant() > 0){
 
+                //Verfier s
+                // dd(,$transaction->getMontant());
+
                 $transaction->setCodetransaction(random_int(2,1000000000));
                 $transaction->setDescription($transaction->getDescription()." Compte epargne INDIVIDUEL");
 

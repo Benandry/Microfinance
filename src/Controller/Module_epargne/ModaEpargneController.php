@@ -108,8 +108,7 @@ class ModaEpargneController extends AbstractController
                     return $er->createQueryBuilder('c')
                         ->join("c.produit","prod")
                         ->where("c.activated = 1")
-                        ->andWhere("prod.abbreviation = 'DAV'")
-                        ->orWhere("prod.nomproduit = 'Dépôts a vue' ");
+                        ->andWhere("prod.abbreviation = 'DAV'");
                 },
                 'choice_label' => function ($c) {
                     // return $c->getCodeepargne();
@@ -160,8 +159,7 @@ class ModaEpargneController extends AbstractController
                     return $er->createQueryBuilder('c')
                         ->join("c.produit","prod")
                         ->where("c.activated = 1")
-                        ->andWhere("prod.abbreviation = 'DAV'")
-                        ->orWhere("prod.nomproduit = 'Dépôts a vue' ");
+                        ->andWhere("prod.abbreviation = 'DAV'");
                 },
                 'choice_label' => function ($c) {
                     if ($c->getIndividuelclient()) {
@@ -209,8 +207,7 @@ class ModaEpargneController extends AbstractController
                 return $er->createQueryBuilder('c')
                     ->join("c.produit","prod")
                     ->where("c.activated = 1")
-                    ->andWhere("prod.abbreviation = 'DDG'")
-                    ->orWhere("prod.nomproduit = 'Dépôts de garantie' ");
+                    ->andWhere("prod.abbreviation = 'DDG'");
             },
             'choice_label' => function ($c) {
                 if ($c->getIndividuelclient()) {
@@ -261,8 +258,7 @@ class ModaEpargneController extends AbstractController
                 return $er->createQueryBuilder('c')
                     ->join("c.produit","prod")
                     ->where("c.activated = 1")
-                    ->andWhere("prod.abbreviation = 'DDG'")
-                    ->orWhere("prod.nomproduit = 'Dépôts de garantie' ");
+                    ->andWhere("prod.abbreviation = 'DDG'");
             },
             'choice_label' => function ($c) {
                 if ($c->getIndividuelclient()) {
@@ -314,9 +310,8 @@ class ModaEpargneController extends AbstractController
             'query_builder' => function (CompteEpargneRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->join("c.produit","prod")
-                    ->where("c.activated = 1")
-                    ->andWhere("prod.abbreviation = 'DAT'")
-                    ->orWhere("prod.nomproduit = 'Dépôts à terme' ");
+                    ->where("c.activated = 1 ")
+                    ->andWhere("prod.abbreviation = 'DAT'");
             },
             'choice_label' => function ($c) {
                 if ($c->getIndividuelclient()) {
@@ -367,8 +362,7 @@ class ModaEpargneController extends AbstractController
                 return $er->createQueryBuilder('c')
                     ->join("c.produit","prod")
                     ->where("c.activated = 1")
-                    ->andWhere("prod.abbreviation = 'DAT'")
-                    ->orWhere("prod.nomproduit = 'Dépôts à terme' ");
+                    ->andWhere("prod.abbreviation = 'DAT'");
             },
             'choice_label' => function ($c) {
                 if ($c->getIndividuelclient()) {

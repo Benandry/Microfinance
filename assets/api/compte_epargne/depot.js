@@ -7,6 +7,8 @@ $(document).ready(() =>{
 
     if (path === '/transaction/depot') {
         var montant_bruit_ = 0;
+
+        // alert(montant_bruit_);
         const id_produit = $('#produit-id').text();
         //PRoduit epargne configuration sur depot
         const api_produit = '/api/compte-epargne/individuel/'+id_produit;
