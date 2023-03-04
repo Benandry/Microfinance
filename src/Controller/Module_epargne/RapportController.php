@@ -140,8 +140,13 @@ class RapportController extends AbstractController
             $date_au_ = $data['datefin'];
             $date1 = $data['datearrete'];
 
+
+            if($data['type']){
+                $titre = $data['type']->getNomproduit()." ".$data['type']->getAbbreviation();
+                $report = $compteEpargneRepository->findCompteEpargneByProduit($data['type']->getId());
+            }
             //Individuel client //
-            if($data['individuel']) {
+            elseif($data['individuel']) {
                 $titre = $data['individuel']->getNomClient().' '.$data['individuel']->getPrenomClient();
                 $report=$compteEpargneRepository->findCompteEpargneByClient($data['individuel']->getCodeclient());
                 // dd($report);

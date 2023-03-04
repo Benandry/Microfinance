@@ -95,15 +95,15 @@
 
                                                                 
                             <li class="w-100">
-                                <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Ouvrir un compte epargne">
+                                <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Ouvrir un compte">
                                     <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-user-plus"></i> Ouverture du compte <span class="fa fa-chevron-down"></span> </span>
                                 </a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu06" data-bs-parent="#menu">
                                     <li class="w-100">
-                                        <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0" title="Ouvrir un compte epargne individuel"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                        <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0" title="Ouvrir un compte  individuel"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
                                     </li>
                                     <li class="w-100">
-                                        <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0" title="Ouvrir un compte epargne groupes"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                        <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0" title="Ouvrir un compte groupes"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -128,6 +128,7 @@
 
                                     </li>
 
+                                    {# Depot a terme #}
                                     <li class="w-100">
                                         <a href="#submenu22" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
                                             <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-calendar-check"></i> Dépôt à terme <span class="fa fa-chevron-down"></span> </span>
@@ -160,28 +161,6 @@
                                     <li class="w-100">
                                         <a href="{{ path('app_transfertep_new') }}" class="nav-link px-0" title="Transfert compte epargne"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transfert epargne </span> </a>
                                     </li>
-
-                                    <li class="w-100">
-
-                                        <a href="#submenu07" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Rapports <span class="fa fa-chevron-down"></span> </span>
-                                        </a>
-                                        <ul class="collapse nav flex-column ms-4" id="submenu07">
-                                            <li class="w-100">
-                                                <a href="{{ path('app_rapport_compte') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> compte epargne </span></a>
-                                            </li>
-                                            <li class="w-100">
-                                                <a href="{{ path('app_transac_liste') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Solde </span></a>
-                                            </li>
-                                            <li class="w-100">
-                                                <a href="{{ path('app_transaction_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transaction </span></a>
-                                            </li>
-                                            <li class="w-100">
-                                                <a href="{{ path('app_transaction_releve') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Relevé </span></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
                                 </ul>
                             </li>
                             {# Depot de garantie #}
@@ -203,6 +182,28 @@
                                                 <a href="{{ path('app_depot_de_garantie_sortie') }}" class="nav-link px-0" title="Depot de garantie sortie"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
                                             </li>
                                         </ul> 
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {# Rapport compte epargne #}
+
+                            <li class="w-100">
+                                <a href="#submenu07" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Rapports Epargne<span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu07">
+                                    <li class="w-100">
+                                        <a href="{{ path('app_rapport_compte') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> compte epargne </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transac_liste') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Solde </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transaction_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transaction </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transaction_releve') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Relevé </span></a>
                                     </li>
                                 </ul>
                             </li>

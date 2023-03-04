@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\Agence;
 use App\Entity\Groupe;
 use App\Entity\Individuelclient;
+use App\Entity\ProduitEpargne;
 use App\Repository\IndividuelclientRepository;
+use App\Repository\ProduitEpargneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -17,6 +19,22 @@ class RapportcompteepargnetrieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('type',EntityType::class,[
+                'class' => ProduitEpargne::class,
+                'choice_label' => function($pr){
+                    return $pr->getNomproduit()." ".$pr->getAbbreviation();
+                },
+                'placeholder' => " Type : ",
+                'query_builder' => function(ProduitEpargneRepository $repo){
+                    return $repo->createQueryBuilder('pr')
+                            ->join('pr.ConfigProduit','config');
+                },
+                'attr' => [
+                    'class' => "border-0"
+                ],
+                'autocomplete' => true,
+                "required" => false,
+            ])
             ->add('individuel',EntityType::class,[
                 'class' => Individuelclient::class,
                 'label' => 'individuel Client : ',
