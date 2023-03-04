@@ -1,0 +1,34 @@
+<!-- The Modal -->
+<div class="modal" tabindex="-1" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header titre_modal">
+                <h5 class="modal-title text-center">Compte Caisse Utilisateur </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            {{ form_start(form) }}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{ form_row(form.nomCaisse) }}
+                            {{ form_row(form.responsable) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.planComptable) }} 
+                            {{ form_row(form.agence) }}
+                        </div>
+                        <div style="display: none;">
+                            {{ form_row(form.codecaisse) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <a href="{{ path('app_compte_caisse_index') }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Voir Liste</a>
+                    <button class="btn btn-primary btn-sm" >{{ button_label|default('Enregistrer') }}</button>
+                </div>
+            {{ form_end(form)}}
+        </div>
+    </div>
+</div>
+{# /***********Fin modal *********** #}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Compte Caisse{% endblock %}
+{% block head %}Configuration > Compte Caisse {% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <div class="d-flex justify-content-end m-3">
+        <a href="{{ path('app_compte_caisse_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Ajouter nouveau</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Code caisse</th>
+                <th>Nom Caisse</th>
+                <th>Agence </th>
+                <th>responsable </th>
+                <th> Plan comptable </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compte_caisse in compte_caisse %}
+                <tr>
+                    <td>{{ compte_caisse.codecaisse }}</td>
+                    <td>{{ compte_caisse.nomCaisse }}</td>
+                    <td>{{ compte_caisse.agence.NomAgence }}</td>
+                    <td>{{ compte_caisse.responsable.nom }} {{ compte_caisse.responsable.prenom }}</td>
+                    <td> {{ compte_caisse.planComptable.NumeroCompte }}  {{ compte_caisse.planComptable.Libelle }} </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-4 col-sm-4">
+                                <a href="{{ path('app_compte_caisse_show', {'id': compte_caisse.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                            </div>
+                            <div class="col-4 col-sm-4">
+                                <a href="{{ path('app_compte_caisse_edit', {'id': compte_caisse.id}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block title "Configuration  Compte caisse " %}
+{% block head " Configuration > Compte caisse " %}
+
+{% block body %}
+
+<div class="container py-3">
+    <section>
+        <div class="row">
+            <div class="col-md-4 col-ms-4 m-auto">
+                <div class="fw-bold">{{ compte_caisse.nomCaisse }}</div>
+            </div>
+            <div class="col-md-8 col-ms-8">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Code caisse </th>
+                            <td>{{ compte_caisse.codecaisse }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom du caisse </th>
+                            <td>{{ compte_caisse.nomCaisse }}</td>
+                        </tr>
+                        <tr>
+                            <th>Agence </th>
+                            <td>{{ compte_caisse.agence.NomAgence }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom et prenom de la responsable </th>
+                            <td>{{ compte_caisse.responsable.nom }} {{ compte_caisse.responsable.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Compte caisse sur plan comptable </th>
+                            <td> Numero de compte : {{ compte_caisse.planComptable.NumeroCompte }} Libelle : {{ compte_caisse.planComptable.Libelle }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-md-2">
+        <a href="{{ path('app_compte_caisse_index') }}" class="btn btn-sm btn-info ">Compte caisse  </a>
+    </div>
+    <div class="col-sm-2 col-md-2">
+        <a href="{{ path('app_compte_caisse_edit', {'id': compte_caisse.id}) }}"  class="btn btn-sm btn-warning "> Modifier </a>
+    </div>
+    <div class="col-sm-2 col-md-2">
+        {{ include('Configuration/compte_caisse/_delete.html.twig') }}
+    </div>
+</div>
+
+
+
+{% endblock %}
+

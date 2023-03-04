@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Compte Caisse {% endblock %}
+
+{% block head %}
+    Configuration compte Caisse 
+{% endblock %}
+
+{% block body %}
+    {{ include('Configuration/compte_caisse/_form.html.twig') }}
+    <span id="id-max-caisse" style="display: none;">{{ id_max_caisse }}</span>
+{% endblock %}
+
