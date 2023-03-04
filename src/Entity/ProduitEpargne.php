@@ -19,9 +19,6 @@ class ProduitEpargne
     #[ORM\Column(length: 255)]
     private ?string $nomproduit = null;
 
-    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: DepotAterme::class)]
-    private Collection $peoduitep;
-
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: CompteEpargne::class)]
     private Collection $produitcompteepargne;
 
@@ -41,7 +38,6 @@ class ProduitEpargne
 
     public function __construct()
     {
-        $this->peoduitep = new ArrayCollection();
         $this->produitcompteepargne = new ArrayCollection();
         $this->ConfigProduit = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
@@ -69,36 +65,6 @@ class ProduitEpargne
     public function __toString()
     {
         return (string) $this->getId();
-    }
-
-    /**
-     * @return Collection<int, DepotAterme>
-     */
-    public function getPeoduitep(): Collection
-    {
-        return $this->peoduitep;
-    }
-
-    public function addPeoduitep(DepotAterme $peoduitep): self
-    {
-        if (!$this->peoduitep->contains($peoduitep)) {
-            $this->peoduitep[] = $peoduitep;
-            $peoduitep->setProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removePeoduitep(DepotAterme $peoduitep): self
-    {
-        if ($this->peoduitep->removeElement($peoduitep)) {
-            // set the owning side to null (unless already changed)
-            if ($peoduitep->getProduit() === $this) {
-                $peoduitep->setProduit(null);
-            }
-        }
-
-        return $this;
     }
 
     /**

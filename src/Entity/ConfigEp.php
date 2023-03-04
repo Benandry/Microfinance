@@ -38,10 +38,7 @@ class ConfigEp
     private ?bool $statusProduit = null;
 
     #[ORM\ManyToOne(inversedBy: 'configEps')]
-    private ?PlanComptable $comptedebiteE = null;
-
-    #[ORM\ManyToOne(inversedBy: 'ConfiEpsCredit')]
-    private ?PlanComptable $compteCrediteE = null;
+    private ?PlanComptable $compteProduit = null;
 
     public function getId(): ?int
     {
@@ -144,26 +141,14 @@ class ConfigEp
         return $this;
     }
 
-    public function getComptedebiteE(): ?PlanComptable
+    public function getCompteProduit(): ?PlanComptable
     {
-        return $this->comptedebiteE;
+        return $this->compteProduit;
     }
 
-    public function setComptedebiteE(?PlanComptable $comptedebiteE): self
+    public function setCompteProduit(?PlanComptable $compteProduit): self
     {
-        $this->comptedebiteE = $comptedebiteE;
-
-        return $this;
-    }
-
-    public function getCompteCrediteE(): ?PlanComptable
-    {
-        return $this->compteCrediteE;
-    }
-
-    public function setCompteCrediteE(?PlanComptable $compteCrediteE): self
-    {
-        $this->compteCrediteE = $compteCrediteE;
+        $this->compteProduit = $compteProduit;
 
         return $this;
     }

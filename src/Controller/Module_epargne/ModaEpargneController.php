@@ -246,7 +246,7 @@ class ModaEpargneController extends AbstractController
 
             //Compte epargne individuel client
     /**
-     * Entree depot de garantie
+     * Entree sortie de garantie
      *
      * @param Request $request
      * @return void
@@ -294,6 +294,110 @@ class ModaEpargneController extends AbstractController
         }
 
         return $this->render('Module_epargne/transaction/infoTransaction/depot_garantie_sortie.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+        /**
+     * Entree depot a terme
+     *
+     * @param Request $request
+     * @return void
+     */ 
+    #[Route('/depot/aterme/entree', name: 'app_depot_a_terme_entree')]
+    public function depot_a_terme_entree(Request $request)
+    {
+        $form = $this->createFormBuilder()
+        ->add('code', EntityType::class,[
+            'class' => CompteEpargne::class,
+            'query_builder' => function (CompteEpargneRepository $er) {
+                return $er->createQueryBuilder('c')
+                    ->join("c.produit","prod")
+                    ->where("c.activated = 1")
+                    ->andWhere("prod.abbreviation = 'DAT'")
+                    ->orWhere("prod.nomproduit = 'Dépôts à terme' ");
+            },
+            'choice_label' => function ($c) {
+                if ($c->getIndividuelclient()) {
+                    // dd();
+                    return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                }
+                else {
+                    return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                }
+            },
+            'attr'=>[
+                'class' => 'form-control border-0 custom-select-no-arrow',
+            ],
+            'label' => "Compte client Dépôts à terme : ",
+            'placeholder' => "Choisissez le compte client :'  :",
+            'autocomplete' => true,
+        ])
+        
+        ->getForm();
+        $form->handleRequest($request);
+    
+        /* ===== Si les produits sont selectionnnés. On va executer les requests ci-dessous ====== */
+        if ($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData()['code'];
+            $status = "depot_a_terme_entree";
+            return $this->redirectToRoute('app_transaction_new', ['code' => $data,'status' => $status],Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('Module_epargne/transaction/infoTransaction/depot_a_terme_entree.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+            /**
+     * Sortie depot a terme
+     *
+     * @param Request $request
+     * @return void
+     */ 
+    #[Route('/depot/aterme/sortie', name: 'app_depot_a_terme_sortie')]
+    public function depot_a_terme_sortie(Request $request)
+    {
+        $form = $this->createFormBuilder()
+        ->add('code', EntityType::class,[
+            'class' => CompteEpargne::class,
+            'query_builder' => function (CompteEpargneRepository $er) {
+                return $er->createQueryBuilder('c')
+                    ->join("c.produit","prod")
+                    ->where("c.activated = 1")
+                    ->andWhere("prod.abbreviation = 'DAT'")
+                    ->orWhere("prod.nomproduit = 'Dépôts à terme' ");
+            },
+            'choice_label' => function ($c) {
+                if ($c->getIndividuelclient()) {
+                    // dd();
+                    return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                }
+                else {
+                    return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                }
+            },
+            'attr'=>[
+                'class' => 'form-control border-0 custom-select-no-arrow',
+            ],
+            'label' => "Compte client Dépôts à terme : ",
+            'placeholder' => "Choisissez le compte client :'  :",
+            'autocomplete' => true,
+        ])
+        
+        ->getForm();
+        $form->handleRequest($request);
+    
+        /* ===== Si les produits sont selectionnnés. On va executer les requests ci-dessous ====== */
+        if ($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData()['code'];
+            $status = "depot_a_terme_sortie";
+            return $this->redirectToRoute('app_retrait', ['code' => $data,'status' => $status],Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('Module_epargne/transaction/infoTransaction/depot_a_terme_sortie.html.twig',[
             'form' => $form->createView(),
         ]);
     }

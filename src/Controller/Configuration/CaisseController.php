@@ -52,7 +52,6 @@ class CaisseController extends AbstractController
                 $compteCaisseRepository->save($caisse, true);
                 $this->addFlash('primary',"Nouveau compte caisse est ajouter : ".$caisse->getCodecaisse()." ".$caisse->getNomCaisse());
             }
-
             return $this->redirectToRoute('app_compte_caisse_index', [], Response::HTTP_SEE_OTHER);
         }
 

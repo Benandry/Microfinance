@@ -4,9 +4,8 @@ const path = window.location.pathname
 
 $(document).ready(() =>{
     if( path === '/transaction/retrait' ){
-
-        
         const id_produit = $('#produit-id').text();
+        
         //PRoduit epargne configuration sur depot
         const api_produit = '/api/compte-epargne/individuel/'+id_produit;
         $.ajax({
@@ -21,7 +20,7 @@ $(document).ready(() =>{
                     console.log(element);
                     // $('#transaction_commission').val(element.commission_de_transaction);
                     // $('#transaction_devise').val(element.devise);
-                    $('#transactionretrait_devise').val(element.devise);
+                    $('#transaction_devise').val(element.devise);
                     $('.devise-solde').text(element.devise);
                 }
             },
@@ -45,30 +44,30 @@ $(document).ready(() =>{
 
         var codeepargnegroupe=$('#code_epargne_client').text();
 
-        $('#transactionretrait_codeepargneclient').val(codeepargnegroupe)
+        $('#transaction_codeepargneclient').val(codeepargnegroupe)
 
-        $('#transactionretrait_typeClient').val('INDIVIDUEL')
+        $('#transaction_typeClient').val('INDIVIDUEL')
 
-        $('#transactionretrait_solde').hide();
+        $('#transaction_solde').hide();
 
         var solde=document.getElementById('solde_cli').innerHTML;
         console.log(solde)
 
-        $('#transactionretrait_Montant').on('keyup',()=>{
-            var montant=$('#transactionretrait_Montant').val();
+        $('#transaction_Montant').on('keyup',()=>{
+            var montant=$('#transaction_Montant').val();
 
             var soldeactuel =solde - montant
 
             console.log(soldeactuel);
 
-            $('#transactionretrait_montant_bruite').val(montant);
+            $('#transaction_montant_bruite').val(montant);
 
             if(soldeactuel < 0){
                 modal_container.style.display = "block";
                 modal_text.textContent = "Solde epuisé";
                 $('.btn').hide();
             }else{
-                $('#transactionretrait_solde').val(soldeactuel)
+                $('#transaction_solde').val(soldeactuel)
                 $('.btn').show()
             }
         })

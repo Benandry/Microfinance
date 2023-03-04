@@ -19,7 +19,6 @@ class Individuelclient
     #[ORM\Column()]
     private ?int $id = null;
 
-
     #[ORM\Column(length: 100)]
     private ?string $nom_client = null;
 
@@ -68,11 +67,6 @@ class Individuelclient
     #[ORM\OneToMany(mappedBy: 'codeclient', targetEntity: ApprouverClient::class)]
     private Collection $CodeIndividuel;
 
-    #[ORM\OneToMany(mappedBy: 'compte', targetEntity: DepotAterme::class)]
-    private Collection $NumCompte;
-
-    #[ORM\OneToMany(mappedBy: 'codeclient', targetEntity: CompteEpargne::class)]
-    private Collection $codecompteepargne;
 
     #[ORM\ManyToOne(inversedBy: 'etatcivileind')]
     private ?Etatcivile $etatcivile = null;
@@ -278,7 +272,6 @@ class Individuelclient
     public function __construct()
     {
         $this->CodeIndividuel = new ArrayCollection();
-        $this->codecompteepargne = new ArrayCollection();
        // $this->CompteMembreIndividuel = new ArrayCollection();
         $this->mobiles = new ArrayCollection();
        // $this->docIdentites = new ArrayCollection();
@@ -502,67 +495,6 @@ class Individuelclient
             // set the owning side to null (unless already changed)
             if ($codeIndividuel->getCodeclient() === $this) {
                 $codeIndividuel->setCodeclient(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, DepotAterme>
-     */
-    public function getNumCompte(): Collection
-    {
-        return $this->NumCompte;
-    }
-
-    public function addNumCompte(DepotAterme $numCompte): self
-    {
-        if (!$this->NumCompte->contains($numCompte)) {
-            $this->NumCompte[] = $numCompte;
-            $numCompte->setCompte($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNumCompte(DepotAterme $numCompte): self
-    {
-        if ($this->NumCompte->removeElement($numCompte)) {
-            // set the owning side to null (unless already changed)
-            if ($numCompte->getCompte() === $this) {
-                $numCompte->setCompte(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * @return Collection<int, CompteEpargne>
-     */
-    public function getCodecompteepargne(): Collection
-    {
-        return $this->codecompteepargne;
-    }
-
-    public function addCodecompteepargne(CompteEpargne $codecompteepargne): self
-    {
-        if (!$this->codecompteepargne->contains($codecompteepargne)) {
-            $this->codecompteepargne[] = $codecompteepargne;
-            $codecompteepargne->setCodeclient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCodecompteepargne(CompteEpargne $codecompteepargne): self
-    {
-        if ($this->codecompteepargne->removeElement($codecompteepargne)) {
-            // set the owning side to null (unless already changed)
-            if ($codecompteepargne->getCodeclient() === $this) {
-                $codecompteepargne->setCodeclient(null);
             }
         }
 

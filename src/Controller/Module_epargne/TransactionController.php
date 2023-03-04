@@ -3,7 +3,6 @@
 namespace App\Controller\Module_epargne;
 
 use App\Controller\Comptabilite\TraitementCompta\MouvementEpargne;
-use App\Controller\Comptabilite\TraitementCompta\MouvementRetrait;
 use App\Entity\Transaction;
 use App\Form\FiltreRapportTransactionType;
 use App\Form\TransactionretraitType;
@@ -119,6 +118,8 @@ class TransactionController extends AbstractController
         }
 
         $transaction = new Transaction();
+
+        // dd("Qui saura");
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
@@ -126,13 +127,18 @@ class TransactionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //produit epragne utiliseer
             $get_produits_id = $infoCompte['id_produit_epargne'];
+
+            //Verifier les solde de depot s 'il est positive
             if($transaction->getMontant() > 0){
+
                 $transaction->setCodetransaction(random_int(2,1000000000));
                 $transaction->setDescription($transaction->getDescription()." Compte epargne INDIVIDUEL");
+
                 $entityManager=$doctrine->getManager();
 
                 /**Inserer dans la table Mouvement comptable */
                 $mouvement->operationJournal($entityManager,$transaction,$get_produits_id);
+
                 //Verifier si le solde n'est pas nombre 
                 if ($transaction->getSolde() == "NaN") {
                     $transaction->setSolde($transaction->getMontant());
@@ -144,6 +150,8 @@ class TransactionController extends AbstractController
                 $this->addFlash('info', " Depot de ".$form->get('montant_bruite')->getData()." ".$form->get('devise')->getData()." réussite du compte epargne individuel " .$transaction->getCodeepargneclient().". Le solde de depot est :  ".$transaction->getMontant()."  ".$form->get('devise')->getData().". Réference : ".$transaction->getCodetransaction().". Le nouveau solde total est : ".$transaction->getSolde()." ".$form->get('devise')->getData());
                 
             }
+
+            // Sinon on ne peut pas faire le transaction
             else {
                 $this->addFlash('danger','Vous avez entré un montant negative.Le montant entré doit etre strictement positive. Veuillez réessayer !!');
             }
@@ -175,7 +183,7 @@ class TransactionController extends AbstractController
      * @return Response
      */
     #[Route('/retrait', name: 'app_retrait', methods: ['GET', 'POST'])]
-    public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementRetrait $mouvement): Response
+    public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
     {
         $id = $request->query->get('code');
         if ($request->query->get('status')) {
@@ -193,18 +201,22 @@ class TransactionController extends AbstractController
         }        
         
         $transaction = new Transaction();
-        $form = $this->createForm(TransactionretraitType::class, $transaction);
+        $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager=$doctrine->getManager();
+
             $transaction->setDescription($transaction->getDescription()." Compte epargne");
             $transaction->setMontant(-$transaction->getMontant());
             $transaction->setCodetransaction(random_int(1,2000000));
-            
 
-            // $mouvement->operationJournal($entityManager,$transaction);
-            // dd($transaction);
+            
+            //Recuperer le produit epragne utiliseer
+            $get_produits_id = $infoCompte['id_produit_epargne'];
+
+            /**Inserer dans la table Mouvement comptable */
+            $mouvement->operationJournal($entityManager,$transaction,$get_produits_id);
 
             $entityManager->persist($transaction);
             $entityManager->flush();

@@ -32,6 +32,8 @@
                         Sortie Depot a Vue 
                     {% elseif status == "depot_garantie_sortie" %}
                         Sortie Dépot de garantie 
+                    {% elseif status == "depot_a_terme_sortie" %}
+                        Sortie Dépot a terme 
                      {% else %}
                         Sortie epargne 
                      {% endif %}
@@ -57,7 +59,6 @@
                     {{ form_row(form.devise) }}
                     {{ form_row(form.typeClient) }}
                     {{ form_row(form.codeepargneclient) }}
-                    {{ form_row(form.Description) }}
                     {{ form_row(form.montant_bruite) }}
                     {{ form_row(form.solde) }}
                 </div>
@@ -75,6 +76,9 @@
             <div class="row">
                 <div class="col-sm-4 col-md-4 m-auto">
                     {{ form_row(form.Montant) }}
+                </div>
+                <div class="col-sm-4 col-md-4 m-auto">
+                    {{ form_row(form.compteCaisse) }}
                 </div>
             </div>
             <hr/>

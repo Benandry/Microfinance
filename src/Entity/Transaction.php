@@ -16,6 +16,9 @@ class Transaction
     #[ORM\Column()]
     private ?int $id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'planComptable')]
+    private ?CompteCaisse $compteCaisse = null;
+
     #[ORM\Column(length: 255)]
     private ?string $Description = null;
 
@@ -44,6 +47,19 @@ class Transaction
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    
+    public function getCompteCaisse(): ?CompteCaisse
+    {
+        return $this->compteCaisse;
+    }
+
+    public function setCompteCaisse(?CompteCaisse $compteCaisse): self
+    {
+        $this->compteCaisse = $compteCaisse;
+
+        return $this;
     }
 
     public function getDescription(): ?string

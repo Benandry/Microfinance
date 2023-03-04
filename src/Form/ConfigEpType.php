@@ -28,6 +28,9 @@ class ConfigEpType extends AbstractType
                 'placeholder' =>'Choisissez un produit : ',
                 'autocomplete'=>true,
                 'label'=>'Nom Produit',
+                'attr' => [
+                    'class' => 'border-0'
+                ],
             ])
             ->add('IsNegatif',ChoiceType::class,[
                 'choices'=>[
@@ -63,24 +66,17 @@ class ConfigEpType extends AbstractType
             ])
 
             //  Comptabilite
-            ->add('comptedebiteE',EntityType::class,[
-                'label'=>'Compte debité : ',
+            ->add('compteProduit',EntityType::class,[
+                'label'=>'Compte Produits : ',
                 'class' => PlanComptable::class,
                 'placeholder' => "Compte a debiter",
                 'choice_label' => function($c) {
                     return $c->getNumeroCompte()." -- ".$c->getLibelle();
                 },
                 'autocomplete' => true,
-            ])
-
-            ->add('compteCrediteE',EntityType::class,[
-                'label'=>'Compte credité : ',
-                'class' => PlanComptable::class,
-                'placeholder' => "Compte a crediter",
-                'choice_label' => function($c) {
-                    return $c->getNumeroCompte()." -- ".$c->getLibelle();
-                },
-                'autocomplete' => true,
+                'attr' => [
+                    'class' => 'border-0'
+                ],
             ])
         ;
     }
