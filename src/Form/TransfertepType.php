@@ -82,7 +82,13 @@ class TransfertepType extends AbstractType
                     ->join('App\Entity\Transaction', 'tr', 'WITH', 'c.codeepargne = tr.codeepargneclient');
                 },
                 'choice_label' => function ($c) {
-                    return $c->getCodeepargne();
+                    if ($c->getIndividuelclient()) {
+                        // dd();
+                        return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                    }
+                    else {
+                        return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                    }
                 },
                 'attr'=>[
                     'class' => 'form-control border-0 custom-select-no-arrow',
@@ -114,7 +120,13 @@ class TransfertepType extends AbstractType
                     ->join('App\Entity\Transaction', 'tr', 'WITH', 'c.codeepargne = tr.codeepargneclient');
                 },
                 'choice_label' => function ($c) {
-                    return $c->getCodeepargne();
+                    if ($c->getIndividuelclient()) {
+                        // dd();
+                        return $c->getCodeepargne()." -- ".$c->getIndividuelclient()->getNomClient()."  ".$c->getIndividuelclient()->getPrenomClient();
+                    }
+                    else {
+                        return $c->getCodeepargne()." -- ".$c->getGroupe()->getNomGroupe()."  ".$c->getGroupe()->getEmail();
+                    }
                 },
                 'attr'=>[
                     'class' => 'form-control border-0 custom-select-no-arrow',
