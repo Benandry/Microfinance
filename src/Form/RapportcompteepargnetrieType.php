@@ -78,21 +78,6 @@ class RapportcompteepargnetrieType extends AbstractType
                     'class' => 'form-control border-0'
                 ],
             ])
-            ->add('datedebut',DateType::class,[
-                'widget'=>'single_text',
-                'required'=>false,
-                'label' => false
-            ])
-            ->add('datefin',DateType::class,[
-                'widget'=>'single_text',
-                'required'=>false,
-                'label' => false
-            ])
-            ->add('datearrete',DateType::class,[
-                'widget'=>'single_text',
-                'required'=>false,
-                'label' => false
-            ])
         ;
     }
 

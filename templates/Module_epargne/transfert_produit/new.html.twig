@@ -3,8 +3,7 @@
 {% block body %}
 
     {{ include('Module_epargne/transfert_produit/_form.html.twig') }}
-                <button class="btn btn-success">{{ button_label|default('Save') }}</button>
-
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
     <a href="{{ path('app_transfert_produit_index') }}" class="btn btn-success">Afficher</a>
 {% endblock %}
 

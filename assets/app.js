@@ -90,22 +90,6 @@ $(document).ready(function(){
                 last:       "Dernier"
             }
         },
-        lengthMenu:  [
-            [
-                15,
-                25,
-                50,
-                100,
-                -1
-            ],
-            [
-                15,
-                25,
-                50,
-                100,
-                "All"
-            ]
-        ],
         order : true,
         info : true,
         responsive : {

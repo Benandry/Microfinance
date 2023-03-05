@@ -866,7 +866,7 @@ class CompteEpargneRepository extends ServiceEntityRepository
         return $stmt;
     }
 
-    public function findCompteEpargneByClient($individuel)
+    public function findCompteEpargneByClient($codeep)
     {
         $query = "SELECT 
         --Conmpte epargne  --
@@ -900,7 +900,8 @@ class CompteEpargneRepository extends ServiceEntityRepository
          LEFT JOIN App\Entity\Transaction tr
          with ce.codeepargne = tr.codeepargneclient 
 
-         WHERE ce.codeep ='$individuel'
+         WHERE ce.codeep ='$codeep'
+         GROUP BY ce.codeepargne
          ";
  
          $statement = $this->getEntityManager()->createQuery($query)->execute();        
@@ -932,11 +933,16 @@ class CompteEpargneRepository extends ServiceEntityRepository
 
         --   ----Groupe ----
           g.nomGroupe,
-          g.email
+          g.email,
+        --  Agence -
+        agence.NomAgence
          FROM App\Entity\CompteEpargne ce
 
          LEFT JOIN App\Entity\Individuelclient i
          with ce.codeep = i.codeclient
+
+         JOIN App\Entity\Agence agence
+         with agence.id = i.Agence
 
          LEFT JOIN App\Entity\Groupe g
          with ce.codeep = g.codegroupe
@@ -945,8 +951,11 @@ class CompteEpargneRepository extends ServiceEntityRepository
          with pe.id = ce.produit
 
          LEFT JOIN App\Entity\Transaction tr
-         with ce.codeepargne = tr.codeepargneclient 
+         with ce.codeepargne = tr.codeepargneclient
+
+         WHERE agence.id = $id_agence 
          GROUP BY ce.codeepargne
+
          ";
  
          $statement = $this->getEntityManager()->createQuery($query)->execute();        
@@ -1021,6 +1030,47 @@ class CompteEpargneRepository extends ServiceEntityRepository
          with ce.codeepargne = tr.codeepargneclient 
             WHERE ce.produit = $id
         GROUP BY ce.codeepargne 
+         ";
+ 
+         $statement = $this->getEntityManager()->createQuery($query)->execute();        
+         return $statement;
+    }
+
+    public function findCompteEpargneAll()
+    {
+        $query = "SELECT 
+        --Conmpte epargne  --
+          ce.datedebut,
+          ce.codeepargne,
+          ce.typeClient,
+          -- Produit epargne --
+          pe.nomproduit,
+        --   -- Solde  --
+          SUM(tr.Montant) solde,
+
+        --   -- individuel client --
+          i.nom_client,
+          i.prenom_client,
+        --   -----------------------
+
+        --   ----Groupe ----
+          g.nomGroupe,
+          g.email
+         FROM App\Entity\CompteEpargne ce
+
+         LEFT JOIN App\Entity\Individuelclient i
+         with ce.codeep = i.codeclient
+
+
+         LEFT JOIN App\Entity\Groupe g
+         with ce.codeep = g.codegroupe
+
+         INNER JOIN App\Entity\ProduitEpargne pe
+         with pe.id = ce.produit
+
+         LEFT JOIN App\Entity\Transaction tr
+         with ce.codeepargne = tr.codeepargneclient
+         GROUP BY ce.codeepargne
          ";
  
          $statement = $this->getEntityManager()->createQuery($query)->execute();        

@@ -11,6 +11,8 @@ use App\Form\RapportSoldeDuJourType;
 use App\Repository\AgenceRepository;
 use App\Repository\CompteEpargneRepository;
 use App\Repository\GroupeRepository;
+use App\Repository\IndividuelclientRepository;
+use App\Repository\ProduitEpargneRepository;
 use App\Repository\TransactionRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -109,82 +111,82 @@ class RapportController extends AbstractController
     }  
 
         // rapport compte epargne
-    #[Route('/CompteEpargne',name:'app_rapport_compte')]
+    #[Route('/Rapport/CompteEpargne',name:'app_rapport_compte')]
     public function rapport_compteepargne(Request $request,CompteEpargneRepository $compteEpargneRepository):Response
     {
-        $report=$compteEpargneRepository->rapport_compte_epargne();
 
         $compteepargne = new CompteEpargne();
         $form=$this->createForm(RapportcompteepargnetrieType::class);
 
         $form->handleRequest($request);
 
-        $showTable_=false;
-
-        
-        $date_du_ = '';
-        $date_au_ = '';
-        $date1 = '';
-        $date_2 = false;
-        $date_1 = false;
-        $titre = " ";
-        $agence = "";
 
         if($form->isSubmitted() && $form->isValid()){
-            $showTable_=true;
-
             $data = $form->getData();
-
-            // dd($data['agence']);
-            $date_du_ = $data['datedebut'];
-            $date_au_ = $data['datefin'];
-            $date1 = $data['datearrete'];
-
-
-            if($data['type']){
-                $titre = $data['type']->getNomproduit()." ".$data['type']->getAbbreviation();
-                $report = $compteEpargneRepository->findCompteEpargneByProduit($data['type']->getId());
-            }
-            //Individuel client //
-            elseif($data['individuel']) {
-                $titre = $data['individuel']->getNomClient().' '.$data['individuel']->getPrenomClient();
-                $report=$compteEpargneRepository->findCompteEpargneByClient($data['individuel']->getCodeclient());
-                // dd($report);
-            }
-            elseif ($data['groupe']) {
-                $titre = $data['groupe']->getNomGroupe();
-                $report=$compteEpargneRepository->findCompteEpargneByClient($data['groupe']->getCodegroupe());
-                // dd($report);
-            }
-            elseif ($data['agence']) {
-                $agence = "Agence ".$data['agence']->getNomAgence();
-                $report=$compteEpargneRepository->findCompteEpargneByAgence($data['agence']->getId());
-                // dd($agence);
-            }
-            elseif ($date1 != null){
-                $date_1 = true;
-                $report=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
-            }
-            else{
-                $date_2 = true;
-                $report=$compteEpargneRepository->rapport_compte_epargne_triedate($date_du_,$date_au_); 
-            }
+            return $this->redirectToRoute('app_rapport_compte_epargne_by_data',['data' => $data],Response::HTTP_SEE_OTHER);
 
         }
         // dd($agence);
 
-        return  $this->renderForm('rapport/rapport_compte_epargne.html.twig',[
-            'rapportcompteep'=>$report,
-            'showTable'=>$showTable_,
+        return  $this->renderForm('Module_epargne/rapport/modal.html.twig',[
             'form'=>$form,
-            'titre' => $titre,
             'compteepargne'=>$compteepargne,
-            'du' => $date_du_,
-            'au' => $date_au_,
-            'one_date' => $date1,
-            'date_1' => $date_1,
-            'date_2' => $date_2,
-            'agence' => $agence,
+        ]);
+    }
+
+    #[Route('Rapport/compte/epargne/data',name:'app_rapport_compte_epargne_by_data',methods:['POST','GET'])]
+    public function getData(Request $request,CompteEpargneRepository $compteEpargneRepository,
+    ProduitEpargneRepository $produitEpargneRepository,IndividuelclientRepository $individuelclientRepository,
+    GroupeRepository $groupeRepository,AgenceRepository $agenceRepository):Response
+    {
+        $data = $request->query->get('data');
+        
+        /***PAr type de produits */
+        if(isset($data['type'])){
+            $type = $produitEpargneRepository->find($data['type']);
+            $titre = $type->getNomproduit()." ".$type->getAbbreviation();
+            $report = $compteEpargneRepository->findCompteEpargneByProduit($type->getId());
+            $trier = "produit";
+        }
+        //Individuel client //
+        elseif(isset($data['individuel'])) {
+            $individuel = $individuelclientRepository->find($data['individuel']);
+            $titre = $individuel->getNomClient().' '.$individuel->getPrenomClient();
+            $report=$compteEpargneRepository->findCompteEpargneByClient($individuel->getCodeclient());
+            $trier = "individuel";
+        }
+        //Gtroupe client //
+        elseif (isset($data['groupe'])) {
+            $groupe = $groupeRepository->find($data['groupe']);
+            $titre = $groupe->getNomGroupe();
+            $report=$compteEpargneRepository->findCompteEpargneByClient($groupe->getCodegroupe());
+            $trier = "groupe";
+        }
+        //Par agence 
+        elseif (isset($data['agence'])) {
+            $agence = $agenceRepository->find($data['agence']);
+            $titre = "Agence ".$agence->getNomAgence();
+            $report=$compteEpargneRepository->findCompteEpargneByAgence($agence->getId());
+            $trier = "agence";
+        }
+        //Limiter par un date 
+        elseif (isset($data['datearrete'])){
+            $date1 = $data['datearrete'];
+            $report=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
+        }
+        //Entrer deux periode
+        elseif (isset($data['datedebut']) and isset($data['datefin'])) {
+            $report=$compteEpargneRepository->rapport_compte_epargne_triedate($data['datedebut'],$data['datefin']); 
+        }
+        else {
+            $report = $compteEpargneRepository->findCompteEpargneAll();
+            $trier = "agence";
+        }
+
+        return $this->render('Module_epargne/rapport/index.html.twig',[
+            'compte_epargne' => $report,
+            "titre" => $titre,
+            "trier" => $trier
         ]);
     }
  }

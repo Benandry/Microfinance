@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Rapport compte epargne par {{ titre }} {% endblock %}
+{% block head %} Rapport > compte epargne par {{ titre }} {% endblock %}
+
+{% block body %}
+
+<div class="card p-3">
+    <div class="card mb-3">
+        <div class="row text-secondary m-3">
+            <div class="col-xl-3 col-md-4 col-sm-3">
+                {# <p><b> Nom Client :</b> <span id="nom"> {{ info.nom_client }}</span></p>   
+                <p> <b>Prenom client : </b> <span id="prenom"> {{ info.prenom_client }}</span></p>  #}
+            </div>
+            
+            <div class="col-md-6 col-sm-6 m-auto">
+                <div class="d-flex justify-content-center"> <h5 class="text-secondary">
+                        <i class="fa fa-wallet"></i> Compte epargne par  {{ titre }} 
+                </h5></div>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-3">
+                {# <p> <b>Code client :</b> <span id="code_client"> {{ info.codeclient }}</span></p>  #}
+            </div>
+        </div>              
+    </div>
+    <hr/>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12">
+                <table class="table table-bordered table1">
+                    <thead>
+                       <tr>
+                            <th>Date de creation du compte</th>
+                            <th>Compte epargne </th>
+                                {# Groupe #}
+                            {% if trier != "groupe" %}    
+                                <th>Nom Client </th>
+                                <th>Type client </th>
+                            {% endif %}
+
+                            {% if trier != "produit" %}
+                                <th> Nom produits</th>
+                            {% endif %}
+                            <th>Solde</th>
+                       </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for compte in compte_epargne %}
+                            <tr>
+                                <td> {{ compte.datedebut|date('Y-m-d') }} </td>
+                                <td> {{ compte.codeepargne }} </td>
+                                {% if trier != "groupe" %}
+                                    {% if compte.typeClient == "INDIVIDUEL" %}
+                                        <td> {{ compte.nom_client }}  {{ compte.prenom_client }}  </td>
+                                        <td> {{ compte.typeClient }} </td>
+                                    {% else %}
+                                        <td> {{ compte.nomGroupe }} </td>
+                                        <td> {{ compte.typeClient }} </td>
+                                    {% endif %}
+                                {% endif %}
+                                {% if trier != "produit" %}
+                                    <td> {{ compte.nomproduit }} </td>
+                                {% endif %}
+                                {% if compte.solde %}
+                                    <td> {{ compte.solde|number_format(0,',', ' ') }} </td>
+                                {% else %}
+                                    <td> 0 </td>
+                                {% endif %}
+                                    
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
