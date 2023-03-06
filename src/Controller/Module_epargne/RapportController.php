@@ -180,7 +180,7 @@ class RapportController extends AbstractController
         }
         else {
             $report = $compteEpargneRepository->findCompteEpargneAll();
-            $trier = "agence";
+            $trier = "tous";
         }
 
         return $this->render('Module_epargne/rapport/index.html.twig',[

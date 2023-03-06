@@ -44,8 +44,8 @@ class MouvementComptableRepository extends ServiceEntityRepository
         $query = "SELECT 
                 journal.dateMouvement,
                 journal.pieceComptable,
-                journal.debit,
-                journal.credit,
+                SUM (journal.debit) debit,
+                SUM (journal.credit) credit, 
                 compta.NumeroCompte,
                 compta.Libelle
             FROM 
@@ -54,7 +54,8 @@ class MouvementComptableRepository extends ServiceEntityRepository
             INNER JOIN
             App\Entity\PlanComptable compta
             with compta.id = journal.planCompta
-            WHERE journal.dateMouvement BETWEEN :debut AND :fin
+            WHERE journal.dateMouvement >= :debut AND journal.dateMouvement <= :fin
+            GROUP BY compta.NumeroCompte
         ";
 
         $stmt = $this->getEntityManager()
