@@ -37,6 +37,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    
+    #[ORM\Column(length: 255)]
+    private ?string $sexe = null;
+
     #[ORM\Column(length: 255)]
     private ?string $responsabilite = null;
 
@@ -45,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Agence $agence = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?CompteCaisse $caisse = null;
 
     #[ORM\OneToMany(mappedBy: 'agent', targetEntity: DemandeCredit::class)]
     private Collection $demandeCredits;
@@ -161,6 +168,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
     public function getPrenom(): ?string
     {
         return $this->prenom;
@@ -222,6 +241,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAgence(?Agence $agence): self
     {
         $this->agence = $agence;
+
+        return $this;
+    }
+
+    
+    public function getCaisse(): ?CompteCaisse
+    {
+        return $this->caisse;
+    }
+
+    public function setCaisse(?CompteCaisse $caisse): self
+    {
+        $this->caisse = $caisse;
 
         return $this;
     }

@@ -7,25 +7,21 @@
     <div class="row">
         <div class="col">
             <div class="d-flex justify-content-center mt-5">
-                <div class="card " style="width: 29rem; padding: 20px;box-shadow: 5px 10px 8px #888888;">
+                <div class="card " style="width: 32rem; padding: 20px;box-shadow: 5px 10px 8px #888888;">
 
-                    <h5 class="fw-bold text-center">Page d'inscription</h5>
+                    <h5 class="fw-bold text-center">Modification de compte utilisateur</h5>
                     {{ form_start(form) }}
                         <div class="row">
                             <div class="col-6">
                                 {{ form_row(form.nom) }}
                                 {{ form_row(form.prenom) }}
+                                {{ form_row(form.sexe) }}
+                                {{ form_row(form.agence, { label: 'Agence' }) }}
                             </div>
                             <div class="col-6">
                                 {{ form_row(form.responsabilite) }}
                                 {{ form_row(form.email) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                {{ form_row(form.agence, {
-                                    label: 'Code agence'
-                                }) }}
+                                {{ form_row(form.caisse) }}
                             </div>
                         </div>
                         <div class="row m-2">
@@ -38,7 +34,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
+                            <div class="col-sm-12 col-md-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
+                            </div>
                         </div>
                     {{ form_end(form) }}
                 </div>

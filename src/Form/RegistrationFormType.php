@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Agence;
+use App\Entity\CompteCaisse;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -91,11 +93,36 @@ class RegistrationFormType extends AbstractType
                 ],
                 
             ])
+
+            ->add('sexe',ChoiceType::class,[
+                'label' => "Sexe : ",
+                'choices'=>[ 
+                    'Masculin'=>'masculin',
+                    'Féminin'=>'féminin',
+                ],
+            ])
             ->add('agence',EntityType::class,[
                 'class' => Agence::class,
-                'choice_label' => 'NomAgence',
+                'choice_label' => function($agence){
+                    return $agence->getCodeAgence()." ".$agence->getNomAgence();
+                },
                 'autocomplete' => true,
-                'label' => 'Agence :'
+                'attr' => [
+                    'class' => 'border-0',
+                ],
+                'label' => 'Agence :',
+            ])
+
+            ->add('caisse',EntityType::class,[
+                'class' => CompteCaisse::class,
+                'choice_label' => function($caisse){
+                    return $caisse->getCodecaisse()." ".$caisse->getNomCaisse();
+                },
+                'autocomplete' => true,
+                'attr' => [
+                    'class' => 'border-0',
+                ],
+                'label' => 'Compte Caisse :',
             ])
         ;
     }
