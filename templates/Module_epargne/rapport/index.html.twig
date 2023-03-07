@@ -32,8 +32,8 @@
                        <tr>
                             <th>Date de creation du compte</th>
                             <th>Compte epargne </th>
-                                {# Groupe #}
-                            {% if trier != "groupe" %}    
+                                {# Groupe et individuel client #}
+                            {% if (trier != "groupe") or (trier != "individuel") %}    
                                 <th>Nom Client </th>
                                 <th>Type client </th>
                             {% endif %}

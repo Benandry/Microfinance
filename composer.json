@@ -20,10 +20,8 @@
         "nelmio/cors-bundle": "^2.2",
         "nesbot/carbon": "*",
         "phpdocumentor/reflection-docblock": "^5.3",
-        "phpoffice/phpexcel": "^1.8",
         "phpoffice/phpspreadsheet": "*",
         "phpstan/phpdoc-parser": "^1.16",
-        "sensio/framework-extra-bundle": "^6.2",
         "symfony/asset": "5.4.*",
         "symfony/console": "5.4.*",
         "symfony/dotenv": "5.4.*",
@@ -106,6 +104,7 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.4"
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "symfony/maker-bundle": "^1.48"
     }
 }

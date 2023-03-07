@@ -3,6 +3,8 @@
 namespace App\Entity;
     
 use App\Repository\CompteCaisseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CompteCaisseRepository::class)]
@@ -27,6 +29,14 @@ class CompteCaisse {
 
     #[ORM\Column(length: 255)]
     private ?string $codecaisse = null;
+
+    #[ORM\OneToMany(mappedBy: 'caisse', targetEntity: User::class)]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -94,6 +104,36 @@ class CompteCaisse {
     public function setPlanComptable(?PlanComptable $planComptable): self
     {
         $this->planComptable = $planComptable;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setCaisse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getCaisse() === $this) {
+                $user->setCaisse(null);
+            }
+        }
 
         return $this;
     }
