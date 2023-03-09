@@ -38,7 +38,6 @@ class CompteCaisseRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
     public function findMaxIdCaisse()
     {
         $query = "SELECT
@@ -50,19 +49,4 @@ class CompteCaisseRepository extends ServiceEntityRepository
 
         return $statement;
     }
-
-    public function findCaisseByUser($user)
-    {
-        $query = "SELECT
-            caisse
-        FROM App\Entity\CompteCaisse caisse
-        WHERE caisse.responsable = $user
-        ";
-
-        $statement = $this->getEntityManager()->createQuery($query)->execute();
-
-        return $statement;
-    }
-
-
 }

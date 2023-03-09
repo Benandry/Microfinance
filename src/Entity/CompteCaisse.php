@@ -1,47 +1,32 @@
 <?php
 
 namespace App\Entity;
-    
+
 use App\Repository\CompteCaisseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CompteCaisseRepository::class)]
-class CompteCaisse {
-
+class CompteCaisse
+{
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $nomCaisse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'agences')]
-    private ?Agence $agence = null;
+    #[ORM\Column(length: 255)]
+    private ?string $codeCaisse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'User')]
-    private ?User $responsable = null;
-
-    #[ORM\ManyToOne(inversedBy: 'planComptable')]
+    #[ORM\ManyToOne(inversedBy: 'compteCaisses')]
     private ?PlanComptable $planComptable = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $codecaisse = null;
+    #[ORM\ManyToOne(inversedBy: 'caisse')]
+    private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'caisse', targetEntity: User::class)]
-    private Collection $users;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->getId();
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -52,49 +37,24 @@ class CompteCaisse {
         return $this->nomCaisse;
     }
 
-    public function setNomCaisse(string $nomCaisse): self
+    public function setNomCaisse(?string $nomCaisse): self
     {
         $this->nomCaisse = $nomCaisse;
 
         return $this;
     }
 
-    public function getCodecaisse(): ?string
+    public function getCodeCaisse(): ?string
     {
-        return $this->codecaisse;
+        return $this->codeCaisse;
     }
 
-    public function setCodecaisse(string $codecaisse): self
+    public function setCodeCaisse(string $codeCaisse): self
     {
-        $this->codecaisse = $codecaisse;
+        $this->codeCaisse = $codeCaisse;
 
         return $this;
     }
-
-    public function getAgence(): ?Agence
-    {
-        return $this->agence;
-    }
-
-    public function setAgence(?Agence $agence): self
-    {
-        $this->agence = $agence;
-
-        return $this;
-    }
-
-    public function getResponsable(): ?User
-    {
-        return $this->responsable;
-    }
-
-    public function setResponsable(?User $responsable): self
-    {
-        $this->responsable = $responsable;
-
-        return $this;
-    }
-
 
     public function getPlanComptable(): ?PlanComptable
     {
@@ -108,33 +68,16 @@ class CompteCaisse {
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setCaisse($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getCaisse() === $this) {
-                $user->setCaisse(null);
-            }
-        }
-
-        return $this;
-    }
 }

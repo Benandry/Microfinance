@@ -34,11 +34,15 @@ class PlanComptable
     #[ORM\OneToMany(mappedBy: 'compteCrediteE', targetEntity: ConfigEp::class)]
     private Collection $ConfiEpsCredit;
 
+    #[ORM\OneToMany(mappedBy: 'planComptable', targetEntity: CompteCaisse::class)]
+    private Collection $compteCaisses;
+
     public function __construct()
     {
         $this->mouvementComptables = new ArrayCollection();
         $this->configEps = new ArrayCollection();
         $this->ConfiEpsCredit = new ArrayCollection();
+        $this->compteCaisses = new ArrayCollection();
     }
 
 
@@ -172,6 +176,36 @@ class PlanComptable
             // set the owning side to null (unless already changed)
             if ($confiEpsCredit->getCompteCrediteE() === $this) {
                 $confiEpsCredit->setCompteCrediteE(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompteCaisse>
+     */
+    public function getCompteCaisses(): Collection
+    {
+        return $this->compteCaisses;
+    }
+
+    public function addCompteCaiss(CompteCaisse $compteCaiss): self
+    {
+        if (!$this->compteCaisses->contains($compteCaiss)) {
+            $this->compteCaisses->add($compteCaiss);
+            $compteCaiss->setPlanComptable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteCaiss(CompteCaisse $compteCaiss): self
+    {
+        if ($this->compteCaisses->removeElement($compteCaiss)) {
+            // set the owning side to null (unless already changed)
+            if ($compteCaiss->getPlanComptable() === $this) {
+                $compteCaiss->setPlanComptable(null);
             }
         }
 

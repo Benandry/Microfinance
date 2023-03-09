@@ -39,19 +39,10 @@ class CaisseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $codecaisse = $caisse->getPlanComptable()->getNumeroCompte()."".$caisse->getCodecaisse();
             $caisse->setCodecaisse($codecaisse);
-
-            // Verifier si le client a de compte caisse 
-            $reponsable = $caisse->getResponsable();
-            $user = $compteCaisseRepository->findCaisseByUser($reponsable);
-
-            if ($user) {
-                // On nee peut pas de creer un compte caisse
-                $this->addFlash('warning',"On ne peut pas creer un compte caisse car le responsable ".$caisse->getResponsable()->getNom()." ".$caisse->getResponsable()->getPrenom(). " a deja un compte  ");
-            }else {
+            
                 // On peut creer un compte caissr
-                $compteCaisseRepository->save($caisse, true);
-                $this->addFlash('primary',"Nouveau compte caisse est ajouter : ".$caisse->getCodecaisse()." ".$caisse->getNomCaisse());
-            }
+            $compteCaisseRepository->save($caisse, true);
+            $this->addFlash('primary',"Nouveau compte caisse est ajouter : ".$caisse->getCodecaisse()." ".$caisse->getNomCaisse());
             return $this->redirectToRoute('app_compte_caisse_index', [], Response::HTTP_SEE_OTHER);
         }
 

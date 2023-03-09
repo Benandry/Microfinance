@@ -20,30 +20,6 @@ class CompteCaisseType extends AbstractType
             ->add('nomCaisse',TextType::class,[
                 'label' => "Nom du caisse : ",
             ])
-            ->add('agence',EntityType::class,[
-                'class' => Agence::class,
-                'choice_label' => function($agence){
-                    return $agence->getCodeAgence()." -- ".$agence->getNomAgence();
-                },
-                'attr' => [
-                    'class' => 'border-0',
-                ],
-                'autocomplete' => true,
-                'label' => "Agence : ",
-                'placeholder' => "Agence de client : "
-            ])
-            ->add('responsable',EntityType::class,[
-                'class' => User::class,
-                'choice_label' => function($user){
-                    return $user->getNom()." ".$user->getPrenom();
-                },
-                'attr' => [
-                    'class' => 'border-0',
-                ],
-                'autocomplete' => true,
-                'label' => "Caissier(e) responsable : ",
-                'placeholder' => "Caissier(e) responsable : "
-            ])
 
             ->add('planComptable',EntityType::class,[
                 'class' => PlanComptable::class,

@@ -50,16 +50,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Agence $agence = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?CompteCaisse $caisse = null;
-
     #[ORM\OneToMany(mappedBy: 'agent', targetEntity: DemandeCredit::class)]
     private Collection $demandeCredits;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CompteCaisse::class)]
+    private Collection $caisse;
 
     public function __construct()
     {
         $this->individuelclients = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
+        $this->caisse = new ArrayCollection();
     }
 
     public function __toString()
@@ -245,19 +246,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
-    public function getCaisse(): ?CompteCaisse
-    {
-        return $this->caisse;
-    }
-
-    public function setCaisse(?CompteCaisse $caisse): self
-    {
-        $this->caisse = $caisse;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, DemandeCredit>
      */
@@ -288,4 +276,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, CompteCaisse>
+     */
+    public function getCaisse(): Collection
+    {
+        return $this->caisse;
+    }
+
+    public function addCaisse(CompteCaisse $caisse): self
+    {
+        if (!$this->caisse->contains($caisse)) {
+            $this->caisse->add($caisse);
+            $caisse->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCaisse(CompteCaisse $caisse): self
+    {
+        if ($this->caisse->removeElement($caisse)) {
+            // set the owning side to null (unless already changed)
+            if ($caisse->getUser() === $this) {
+                $caisse->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

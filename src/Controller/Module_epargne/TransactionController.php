@@ -101,6 +101,8 @@ class TransactionController extends AbstractController
     #[Route('/depot', name: 'app_transaction_new', methods: ['GET', 'POST'])]
     public function new(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
     {     
+        
+        $entityManager=$doctrine->getManager();
         $id = $request->query->get('code');
 
         if ($request->query->get('status')) {
@@ -118,12 +120,13 @@ class TransactionController extends AbstractController
         }
 
         $transaction = new Transaction();
-
-        // dd($infoCompte);
-        $form = $this->createForm(TransactionType::class, $transaction);
+        $form = $this->createForm(TransactionType::class, $transaction,[
+            'em' => $entityManager
+        ]);
         $form->handleRequest($request);
 
-        // dd($transaction);
+        // dd($this->getUser());
+        
         if ($form->isSubmitted() && $form->isValid()) {
             //produit epragne utiliseer
             $get_produits_id = $infoCompte['id_produit_epargne'];
@@ -188,6 +191,8 @@ class TransactionController extends AbstractController
     #[Route('/retrait', name: 'app_retrait', methods: ['GET', 'POST'])]
     public function Retraitindividuel(ManagerRegistry $doctrine,Request $request, TransactionRepository $transactionRepository,MouvementEpargne $mouvement): Response
     {
+        
+        $entityManager=$doctrine->getManager();
         $id = $request->query->get('code');
         if ($request->query->get('status')) {
             $status = $request->query->get('status');
@@ -204,11 +209,12 @@ class TransactionController extends AbstractController
         }        
         
         $transaction = new Transaction();
-        $form = $this->createForm(TransactionType::class, $transaction);
+        $form = $this->createForm(TransactionType::class, $transaction,[
+            'em' => $entityManager
+        ]);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager=$doctrine->getManager();
 
             $transaction->setDescription($transaction->getDescription()." Compte epargne");
             $transaction->setMontant(-$transaction->getMontant());
@@ -273,6 +279,10 @@ class TransactionController extends AbstractController
         }
 
         return $this->redirectToRoute('app_transaction_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    public function testUser(){
+        return $this->getUser();
     }
 
 }

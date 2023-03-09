@@ -123,6 +123,9 @@ class RegistrationFormType extends AbstractType
                     'class' => 'border-0',
                 ],
                 'label' => 'Compte Caisse :',
+                 'multiple' => true,
+                 'expanded' => true,
+                 'required' => true
             ])
         ;
     }
