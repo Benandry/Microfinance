@@ -31,11 +31,10 @@ class TransactionType extends AbstractType
         $user = $this->security->getUser()->getId();
         $em = $options['em'];
         $query = " SELECT 
-                caisse 
-                FROM App\Entity\CompteCaisse caisse
-                JOIN App\Entity\User user
-                With user.caisse = caisse.id
-                WHERE user.id = $user
+                c 
+                FROM App\Entity\CompteCaisse c
+                JOIN c.users u
+                WHERE u.id = $user
                 ";
         $stmt = $em->createQuery($query)->getResult();
         // dd($stmt);

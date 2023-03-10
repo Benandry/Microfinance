@@ -53,8 +53,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'agent', targetEntity: DemandeCredit::class)]
     private Collection $demandeCredits;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CompteCaisse::class)]
+    #[ORM\ManyToMany(targetEntity: CompteCaisse::class, inversedBy: 'users')]
     private Collection $caisse;
+
+
 
     public function __construct()
     {
@@ -288,7 +290,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->caisse->contains($caisse)) {
             $this->caisse->add($caisse);
-            $caisse->setUser($this);
         }
 
         return $this;
@@ -296,12 +297,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeCaisse(CompteCaisse $caisse): self
     {
-        if ($this->caisse->removeElement($caisse)) {
-            // set the owning side to null (unless already changed)
-            if ($caisse->getUser() === $this) {
-                $caisse->setUser(null);
-            }
-        }
+        $this->caisse->removeElement($caisse);
 
         return $this;
     }

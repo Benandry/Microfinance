@@ -23,10 +23,15 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // foreach ($user->getCaisse() as $caisse) {
+            //     $entityManager->persist($caisse);
+            // }
+
+            //Insertion de la plusieur value sur database
+            // $user->getCaisse()->add();
+
             // encode the plain password
-
-            // dd($user);
-
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,

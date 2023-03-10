@@ -24,8 +24,14 @@ class CompteCaisse
     #[ORM\ManyToOne(inversedBy: 'compteCaisses')]
     private ?PlanComptable $planComptable = null;
 
-    #[ORM\ManyToOne(inversedBy: 'caisse')]
-    private ?User $user = null;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'caisse')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -68,16 +74,30 @@ class CompteCaisse
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?User $user): self
+    public function addUser(User $user): self
     {
-        $this->user = $user;
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addCaisse($this);
+        }
 
         return $this;
     }
 
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeCaisse($this);
+        }
+
+        return $this;
+    }
 }

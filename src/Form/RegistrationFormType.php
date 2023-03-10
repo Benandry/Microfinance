@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -112,6 +113,19 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Agence :',
             ])
+
+            // ->add('caisse', CollectionType::class, [
+            //     'entry_type' => EntityType::class,
+            //     'entry_options' => [
+            //         'class' => CompteCaisse::class,
+            //         'choice_label' => function($caisse){
+            //             return $caisse->getCodecaisse()." ".$caisse->getNomCaisse();
+            //         },
+            //     ],
+            //     'allow_add' => true,
+            //     'allow_delete' => true,
+            //     'by_reference' => false,
+            // ])
 
             ->add('caisse',EntityType::class,[
                 'class' => CompteCaisse::class,
