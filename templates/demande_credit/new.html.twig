@@ -39,6 +39,36 @@
     </div>
         <p style="display:none">Code agence</p><p id="codeagence"  style="display:none">{{ app.user.agence.codeAgence }}</p>
         <p  style="display:none">Dernier numero</p><p id="lastnumero"  style="display:none">{{ numeros }}</p>
+
+    {# A propos du client individuel #}
+    {% if TypeClient == 'INDIVIDUEL' %}
+    <div class="card" style="width: 28rem;" id='individuel'>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Type client :</b><p id="typeclient">{{ TypeClient }}</p></li>
+            <li class="list-group-item"><b>Code Individuel :</b><p id="codeclient">{{ codeclient }}</p></li>
+            <li class="list-group-item"><b>Nom :</b>{{ nom }}</li>
+            <li class="list-group-item"><b>Prenom :</b>{{ prenom }}</li>
+            {# {% if codecreditindividuelprecedent == 0 %}
+                <div style="display:none"><li class="list-group-item"><b>Dernier numero credit :</b>{{ codecreditindividuelprecedent }}</li>
+            {% else %} #}
+                <div><li class="list-group-item"><b>Dernier numero credit :</b><p id="numerocreditprecedent">{{ codecreditindividuelprecedent }}</p></li>
+            {# {% endif %} #}
+        </ul>
+    </div>
+
+    {% elseif  TypeClient == 'GROUPE' %}
+    {# A propos du client groupe #}
+    <div class="card" style="width: 28rem;" id='groupe'>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Type client :</b><p id="typeclient">{{ TypeClient }}</p></li>
+            <li class="list-group-item"><b>Code Groupe :</b><p id="codeclient">{{ codegroupe }}</p></li>
+            <li class="list-group-item"><b>Nom :</b>{{ nomgroupe }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    <hr>
+
     {{ include('demande_credit/_form.html.twig') }}
 
 {% endblock %}
