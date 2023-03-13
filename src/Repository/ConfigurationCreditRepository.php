@@ -121,9 +121,9 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
                 INNER JOIN
                 App\Entity\ProduitCredit produitcredit
                 WITH
-                configcredit.ProduitCredit=produitcredit.id
+                configcredit.idProduit=produitcredit.id
             WHERE
-                configcredit.ProduitCredit = :produitcredit
+                configcredit.idProduit = :produitcredit
             '
         )
         ->setParameter(':produitcredit',$produitcredit);

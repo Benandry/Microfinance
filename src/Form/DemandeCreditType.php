@@ -100,34 +100,42 @@ class DemandeCreditType extends AbstractType
                 'required'=>false
             ])
             ->add('Libelle1',TextType::class,[
+                'label'=>'Libelle 1',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Montant0',NumberType::class,[
+                'label'=>'Montant 1',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Libelle2',TextType::class,[
+                'label'=>'Libelle 2',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Montant2',NumberType::class,[
+                'label'=>'Montant 2',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Libelle3',TextType::class,[
+                'label'=>'Libelle 3',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Montant3',NumberType::class,[
+                'label'=>'Montant 3',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Libelle4',TextType::class,[
+                'label'=>'Libelle 4',
                 'mapped'=>false,
                 'required'=>false
             ])
             ->add('Montant4',NumberType::class,[
+                'label'=>'Montant 4',
                 'mapped'=>false,
                 'required'=>false
             ])

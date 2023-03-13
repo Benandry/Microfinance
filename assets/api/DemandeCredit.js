@@ -81,8 +81,10 @@ $(document).ready(function(){
             }
         })
     }
-    // L'evenememnt se  produit a l'interieur de cette chemin
-    if( path === '/demande/credit/new'){               
+    // L'evenemement se  produit a l'interieur de cette chemin
+    if( path === '/demande/credit/new'){             
+                // Cycle de credit
+                $('#patrimoine').hide();
                 // L'affichage du nom est caché en premier
                     //  $('#individuel').hide();
                     //  $('#groupe').hide();
