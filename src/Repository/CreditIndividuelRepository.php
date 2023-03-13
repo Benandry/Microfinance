@@ -222,7 +222,8 @@ class CreditIndividuelRepository extends ServiceEntityRepository
                 individuel.codeclient,
                 compteepargne.codeepargne,
                 SUM(transaction.Montant) solde,
-                produitepargne.nomproduit
+                produitepargne.nomproduit,
+                COUNT(demande.codeclient) nombrecycle
             FROM
                 App\Entity\IndividuelClient individuel
                     INNER JOIN 
@@ -236,9 +237,15 @@ class CreditIndividuelRepository extends ServiceEntityRepository
                 produitepargne.id = compteepargne.produit
                 
                     LEFT JOIN
-                App\Entity\Transaction transaction
+                    App\Entity\Transaction transaction
                 WITH    
                 compteepargne.codeepargne = transaction.codeepargneclient
+
+                LEFT JOIN
+                App\Entity\DemandeCredit demande
+                WITH
+                individuel.codeclient=demande.codeclient
+                
                 -- WITH
                 -- individuel.codeclient=compteepargne.codeep
                     -- AND

@@ -184,13 +184,12 @@ class ApiCreditController extends AbstractController
         return new JsonResponse($infodemandegroupe);
     }
 
-       /**
+    /**
      * Undocumented function
-     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information 
-     *groupe
+     *@method mixed InformationClientDemandeCreditGroupe() : Mehode permet de connaitre l'information groupe
      *@param mixed $codegroupe:code client groupe
      * @return json
-     */
+    */
     #[Route('/modalindividuel/{NumeroCredit}',name:'app_imodal')]
     public function InformationModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
     {

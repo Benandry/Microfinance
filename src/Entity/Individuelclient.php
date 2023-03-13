@@ -111,8 +111,6 @@ class Individuelclient
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $codeclient = null;
 
-
-
     #[ORM\Column(nullable: true)]
     private ?bool $garant = null;
 

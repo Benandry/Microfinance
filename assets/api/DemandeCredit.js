@@ -9,6 +9,7 @@ $(document).ready(function(){
         // Les champs code client et groupe sont cachées
         $('#codeclient').hide();
         $('#codegroupe').hide();
+        $('.btn').hide();
 
         $('#demande_credit_modal_TypeClient').on('change',function(){
             var typeclient=$('#demande_credit_modal_TypeClient').val();
@@ -22,11 +23,9 @@ $(document).ready(function(){
                 // Si l'utilasateur choisi une client
                 $('#demande_credit_modal_CodeClient').on('change',function(){
                     var codeindividuel=$('#demande_credit_modal_CodeClient').val();
-                    // console.log("Code client"+codeclient);
                     
                     // Chemin de recuperation du code client
                     var url_individuel='/modaldemandecredit/'+codeindividuel;
-                    // console.log(url_individuel);
 
                     $.ajax({
                         url:url_individuel,
@@ -38,10 +37,17 @@ $(document).ready(function(){
                             for(let j=0;j<content.length;j++){    
                                 var individuel=content[j];
 
-                                $('#demande_credit_modal_nom').val(individuel.nom_client)
-                                $('#demande_credit_modal_prenom').val(individuel.prenom_client)
-                                $('#demande_credit_modal_codeclient').val(individuel.codeclient)
-                                // console.log(individuel);
+                                // console.log(individuel.NumeroCredit);
+
+                                $('#demande_credit_modal_nom').val(individuel.nom_client);
+                                $('#demande_credit_modal_prenom').val(individuel.prenom_client);
+                                $('#demande_credit_modal_codeclient').val(individuel.codeclient);
+                                if(individuel.NumeroCredit != null ){
+                                    $('#demande_credit_modal_codecreditindividuelprecedent').val(individuel.NumeroCredit);
+                                }else{
+                                    $('#demande_credit_modal_codecreditindividuelprecedent').val(0);
+                                }
+                                $('.btn').show();
                             }
                         }
                     });
@@ -85,79 +91,6 @@ $(document).ready(function(){
     if( path === '/demande/credit/new'){             
                 // Cycle de credit
                 $('#patrimoine').hide();
-                // L'affichage du nom est caché en premier
-                    //  $('#individuel').hide();
-                    //  $('#groupe').hide();
-                    //  $('#garant').hide();
-                // L'utilisateur tape sur le champ code client
-                $('#demande_credit_codeclient').on('blur',function(){
-                    // Code client
-                    var codeclient=$('#demande_credit_codeclient').val();
-                    var typeclient=$('#demande_credit_TypeClient').val();
-                    
-                    // Test si le type soit individuel ou groupe
-
-                    // Si client individuel
-                    if(typeclient == 'INDIVIDUEL'){
-
-                    // url
-                    var url_client='/infodemande/credit/individuel/'+codeclient;
-                    // Ajax
-                    $.ajax({
-                        url:url_client,
-                        method:'GET',
-                        dataType:"json",
-                        contentType:"application/json; charset=utf-8",
-                        data : JSON.stringify(codeclient),   
-                        success : function(content){
-                            for(let j=0;j<content.length;j++){    
-                               var individuel=content[j];
-
-                               var codeclient=individuel.codeclient;
-                               var nomclient=individuel.nom_client;
-                               var prenom=individuel.prenom_client;
-
-                            //    Affichage du nom client
-                               document.getElementById('codeclientindividuel').innerHTML=codeclient;
-                               document.getElementById('nom').innerHTML=nomclient;
-                               document.getElementById('prenom').innerHTML=prenom;
-
-                            // Affichage du bloc nom et prenom
-                            $('#individuel').show();
-                                
-                            }
-                        }
-                    });
-                }
-                else if(typeclient == 'GROUPE'){
-
-                    // url
-                    var url_groupe='/infodemandecredit/groupe/'+codeclient;
-                    // Ajax
-                    $.ajax({
-                        url:url_groupe,
-                        method:'GET',
-                        dataType:"json",
-                        contentType:"application/json; charset=utf-8",
-                        data : JSON.stringify(codeclient),   
-                        success : function(content){
-                            for(let j=0;j<content.length;j++){    
-                                var groupe=content[j];
-                                
-                                var nomgroupe=groupe.nomGroupe;
-
-                            //    Affichage du nom client
-                                document.getElementById('nom_groupe').innerHTML=nomgroupe;
-
-                            // Affichage du bloc nom et prenom
-                            $('#groupe').show();
-                                
-                            }
-                        }
-                    });
-                    
-                }
-                });
 
                 // Si le produit credit demande des garants
                 $('#demande_credit_garant').on('blur',function(){
@@ -236,6 +169,40 @@ $(document).ready(function(){
             // on recupere le type client
             var typeclient=document.getElementById('typeclient').innerHTML;
 
+            // Recupere le nombre credit
+            // var nombrecredit=document.getElementById('nombrecredit').innerHTML;
+
+            // On recupere la derniere numero credit
+            var codecreditprecedent=document.getElementById('numerocreditprecedent').innerHTML;
+
+            // Recuperation du code credit
+
+            var codeindividuel=document.getElementById('codeclient').innerHTML;
+
+            // Chemin du recuperation du code client
+            var codeclientindividuel='/credit/cycle/'+codeindividuel;
+
+            // Nommbre de credit deja eu par le client
+            $.ajax({
+                url:codeclientindividuel,
+                method:'GET',
+                dataType:"json",
+                contentType:"application/json; charset=utf-8",
+                data : JSON.stringify(codeindividuel),
+                success: function(cyclecredit){
+                    for(let c=0;c<cyclecredit.length;c++){
+                        var cycleindividuel=cyclecredit[c];
+                        // console.log(cycleindividuel.nombre);
+                        // $('#nombrecredit').text(cycleindividuel.nombre);
+                        if(cycleindividuel.nombre != 0){
+                            // On affiche l'onglet patrimomine si le demandeur a deja fait une credit
+                            $('#patrimoine').show();
+                            $('#demande_credit_cycles').val(cycleindividuel.nombre);
+                        }
+                    }
+                }
+            });
+
             // On insere la type client
 
             $('#demande_credit_TypeClient').val(typeclient);
@@ -257,6 +224,8 @@ $(document).ready(function(){
             if(typeclient == 'INDIVIDUEL'){ 
                 $('#demande_credit_codeclient').val('I');
                 $('#demande_credit_NumeroCredit').val('I'+numerocredit);
+                $('#demande_credit_codecreditprecedent').val(codecreditprecedent);
+                
             }
             else if(typeclient == 'GROUPE'){
                 $('#demande_credit_codeclient').val('G');

@@ -57,6 +57,9 @@ class DemandeCreditModalType extends AbstractType
         ->add('codeclient',TextType::class,[
             'required'=>false
         ])
+        ->add('codecreditindividuelprecedent',TextType::class,[
+            'required'=>false,
+        ])
         ->add('CodeGroupe',EntityType::class,[
             'class'=>Groupe::class,
             'placeholder'=>'Nom groupe',

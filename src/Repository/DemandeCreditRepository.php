@@ -81,14 +81,21 @@ class DemandeCreditRepository extends ServiceEntityRepository
         'SELECT
             individuel.codeclient,
             individuel.nom_client,
-            individuel.prenom_client
+            individuel.prenom_client,
+            demande.NumeroCredit
             FROM
                 App\Entity\IndividuelClient individuel
+                LEFT JOIN
+                App\Entity\DemandeCredit demande
+                WITH
+                individuel.codeclient=demande.codeclient
             WHERE
                 individuel.id = :id
+            ORDER BY demande.id DESC
         '
         )
-        ->setParameter('id',$id);
+        ->setParameter('id',$id)
+        ->setMaxResults(1);
 
         return $query->getResult();
     }

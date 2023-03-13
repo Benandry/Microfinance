@@ -32,6 +32,7 @@ class DemandeCreditController extends AbstractController
     #[Route('/new', name: 'app_demande_credit_new', methods: ['GET', 'POST'])]
     public function new(EntityManagerInterface $em,Request $request,PatrimoineCreditRepository $patrimoineCreditRepository, DemandeCreditRepository $demandeCreditRepository,Types $traitement,ManagerRegistry $doctine ): Response
     {
+
         /**
          * Individuel client
          */
@@ -41,6 +42,8 @@ class DemandeCreditController extends AbstractController
         $nom=$request->query->get('nom');
         $prenom=$request->query->get('prenom');
         $codeclient=$request->query->get('codeclient');
+        $codecreditindividuelprecedent=$request->query->get('codecreditindividuelprecedent');
+        $nombrecreditindividuel=$request->query->get('nombrecreditindividuel');
 
         // dd($TypeClient,$CodeClient,$nom,$prenom,$codeclient);
 
@@ -152,6 +155,8 @@ class DemandeCreditController extends AbstractController
             'prenom'=>$prenom,
             'TypeClient'=>$TypeClient,
             'codeclient'=>$codeclient,
+            'nombrecreditindividuel'=>$nombrecreditindividuel,
+            'codecreditindividuelprecedent'=>$codecreditindividuelprecedent,
             'nomgroupe'=>$nomgroupe,
             'codegroupe'=>$codegroupe,
             'form' => $form,

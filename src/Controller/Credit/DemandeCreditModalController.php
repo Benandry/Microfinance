@@ -26,6 +26,7 @@ class DemandeCreditModalController extends AbstractController
             $nom=$data['nom'];
             $prenom=$data['prenom'];
             $codeclient=$data['codeclient'];
+            $codecreditindividuelprecedent=$data['codecreditindividuelprecedent'];
 
             // Groupe
 
@@ -44,6 +45,7 @@ class DemandeCreditModalController extends AbstractController
                 'nom'=>$nom,
                 'prenom'=>$prenom,
                 'codeclient'=>$codeclient,
+                'codecreditindividuelprecedent'=>$codecreditindividuelprecedent,
                 'CodeGroupe'=>$CodeGroupe,
                 'nomgroupe'=>$nomgroupe,
                 'codegroupe'=>$codegroupe
