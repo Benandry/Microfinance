@@ -3,18 +3,15 @@
 namespace App\Controller\Module_epargne;
 
 use App\Entity\CompteEpargne;
-use App\Entity\ProduitEpargne;
-use App\Form\FiltreRapportSoldeType;
 use App\Form\FiltreReleveType;
 use App\Form\RapportcompteepargnetrieType;
-use App\Form\RapportSoldeDuJourType;
 use App\Repository\AgenceRepository;
 use App\Repository\CompteEpargneRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\IndividuelclientRepository;
 use App\Repository\ProduitEpargneRepository;
 use App\Repository\TransactionRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,8 +41,13 @@ class RapportController extends AbstractController
 
         if ($form1->isSubmitted() && $form1->isValid()){
             $showTable_ = true;
-            $data = $form1->getData()['date1'];
-            $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete($data); 
+
+            $data = $form1->getData()['date1']->format('Y-m-d');
+
+            return $this->redirectToRoute('app_rapport_solde',[
+                'begin' => $data['debut']->format('Y-m-d'),
+                'end'  =>  $data['fin']->format('Y-m-d'),
+            ],Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('rapport/RapportSolde.html.twig', [
@@ -54,6 +56,18 @@ class RapportController extends AbstractController
             'form1'=>$form1,
             'showTable' => $showTable_,
             'one_date' => $data,
+        ]);
+    }
+
+
+    #[Route('/rapport/solde', name: 'app_rapport_solde')]
+    public function rapport_solde(Request $request,CompteEpargneRepository $compteEpargneRepository): Response
+    {
+        
+        $data = $request->query->get('data');
+        $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete($data); 
+        return $this->render('',[
+            'compte_epargnes' => $rapporttransaction,
         ]);
     }
 
@@ -123,11 +137,25 @@ class RapportController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
+
+            //We post the one date to filter the reporting loan
+            if ($data['date']) {
+                $data['arreter'] = $data['date']->format('Y-m-d');
+            }
+
+            //We post the one date to filter the reporting loan
+            if ($data['debut'] && $data['fin'] ) {
+                return $this->redirectToRoute('app_rapport_compte_epargne_by_data',[
+                    'begin' => $data['debut']->format('Y-m-d'),
+                    'end'  =>  $data['fin']->format('Y-m-d'),
+                ],Response::HTTP_SEE_OTHER);
+
+            }
+
+
             return $this->redirectToRoute('app_rapport_compte_epargne_by_data',['data' => $data],Response::HTTP_SEE_OTHER);
 
         }
-        // dd($agence);
-
         return  $this->renderForm('Module_epargne/rapport/modal.html.twig',[
             'form'=>$form,
             'compteepargne'=>$compteepargne,
@@ -140,13 +168,18 @@ class RapportController extends AbstractController
     GroupeRepository $groupeRepository,AgenceRepository $agenceRepository):Response
     {
         $data = $request->query->get('data');
-        
+        $begin = $request->query->get('begin');
+        $end = $request->query->get('end');
+        $date = "";
         /***PAr type de produits */
         if(isset($data['type'])){
             $type = $produitEpargneRepository->find($data['type']);
             $titre = $type->getNomproduit()." ".$type->getAbbreviation();
             $report = $compteEpargneRepository->findCompteEpargneByProduit($type->getId());
             $trier = "produit";
+            $date = "";
+            $begin = '';
+            $end = '';
         }
         //Individuel client //
         elseif(isset($data['individuel'])) {
@@ -154,6 +187,9 @@ class RapportController extends AbstractController
             $titre = $individuel->getNomClient().' '.$individuel->getPrenomClient();
             $report=$compteEpargneRepository->findCompteEpargneByClient($individuel->getCodeclient());
             $trier = "individuel";
+            $date = "";
+            $begin = '';
+            $end = '';
         }
         //Gtroupe client //
         elseif (isset($data['groupe'])) {
@@ -161,6 +197,9 @@ class RapportController extends AbstractController
             $titre = $groupe->getNomGroupe();
             $report=$compteEpargneRepository->findCompteEpargneByClient($groupe->getCodegroupe());
             $trier = "groupe";
+            $date = "";
+            $begin = '';
+            $end = '';
         }
         //Par agence 
         elseif (isset($data['agence'])) {
@@ -168,25 +207,41 @@ class RapportController extends AbstractController
             $titre = "Agence ".$agence->getNomAgence();
             $report=$compteEpargneRepository->findCompteEpargneByAgence($agence->getId());
             $trier = "agence";
+            $date = "";
+            $begin = '';
+            $end = '';
         }
         //Limiter par un date 
-        elseif (isset($data['datearrete'])){
-            $date1 = $data['datearrete'];
-            $report=$compteEpargneRepository->rapport_compte_epargne_arrete($date1);
+        elseif (isset($data['arreter'])){
+            $date = $data['arreter'];
+            $report=$compteEpargneRepository->rapport_compte_epargne_arrete($date);
+            $titre = "jusqu'a : ";
+            $trier = "";
+            $begin = '';
+            $end = '';
         }
         //Entrer deux periode
-        elseif (isset($data['datedebut']) and isset($data['datefin'])) {
-            $report=$compteEpargneRepository->rapport_compte_epargne_triedate($data['datedebut'],$data['datefin']); 
+        elseif (isset($begin) and isset($end)) {
+            $report=$compteEpargneRepository->rapport_compte_epargne_triedate($begin,$end); 
+            $titre = "";
+            $trier = "";
         }
         else {
             $report = $compteEpargneRepository->findCompteEpargneAll();
             $trier = "tous";
+            $date = "";
+            $begin = '';
+            $end = '';
         }
 
+        // dd($date);
         return $this->render('Module_epargne/rapport/index.html.twig',[
             'compte_epargne' => $report,
             "titre" => $titre,
-            "trier" => $trier
+            "trier" => $trier,
+            'dateArreter' =>$date,
+            'begin' => $begin ,
+            'end'  => $end
         ]);
     }
  }

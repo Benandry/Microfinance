@@ -1,7 +1,15 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Rapport compte epargne par {{ titre }} {% endblock %}
-{% block head %} Rapport > compte epargne par {{ titre }} {% endblock %}
+{% block title %} Rapport compte epargne  {{ titre }} 
+    {% if dateArreter != "" %} {{ dateArreter|date("Y-d-m")}} {% endif %}
+{% endblock %}
+
+{% block head %} Rapport > compte epargne  {{ titre }} 
+    {% if dateArreter != "" %} {{ dateArreter|date("Y-d-m")}} {% endif %}
+    
+{% if begin != ""  and end != "" %} {{ begin|date("Y-d-m") }} jusqu'a  {{ end|date("Y-d-m") }}  {% endif %}
+
+{% endblock %}
 
 {% block body %}
 
@@ -15,7 +23,9 @@
             
             <div class="col-md-6 col-sm-6 m-auto">
                 <div class="d-flex justify-content-center"> <h5 class="text-secondary">
-                        <i class="fa fa-wallet"></i> Compte epargne par  {{ titre }} 
+                        <i class="fa fa-wallet"></i> Compte epargne   {{ titre }}
+                        {% if dateArreter != "" %} {{ dateArreter|date("Y-d-m")}} {% endif %}
+                        {% if begin != ""  and end != "" %} {{ begin|date("Y-d-m") }} jusqu'a  {{ end|date("Y-d-m") }}  {% endif %}
                 </h5></div>
             </div>
             <div class="col-xl-3 col-md-3 col-sm-3">

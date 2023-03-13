@@ -666,7 +666,9 @@ class CompteEpargneRepository extends ServiceEntityRepository
                 WHERE
                  ce.datedebut <= :datearrete 
 
-                 GROUP BY ce.codeepargne '
+                 GROUP BY ce.codeepargne
+                ORDER BY ce.datedebut DESC
+                '
                  )
                  ->setParameter(':datearrete',$datearrete)
                  ;
