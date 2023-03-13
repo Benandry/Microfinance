@@ -78,11 +78,7 @@ class UserEditType extends AbstractType
                 'choice_label' => function($caisse){
                     return $caisse->getCodecaisse()." ".$caisse->getNomCaisse();
                 },
-                'autocomplete' => true,
-                'attr' => [
-                    'class' => 'border-0',
-                ],
-                'label' => 'Compte Caisse :',
+                'label' => false,
                  'multiple' => true,
                  'expanded' => true,
                  'required' => true

@@ -23,14 +23,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // foreach ($user->getCaisse() as $caisse) {
-            //     $entityManager->persist($caisse);
-            // }
-
-            //Insertion de la plusieur value sur database
-            // $user->getCaisse()->add();
-
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -38,10 +30,17 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+
+            // $message = SendNotificationForm::getTextChoices()[$form->getData()['message']];
+
+        
+            // $notification = new Notification($message, ['chat/custom_mercure_chatter_transport']);
+            // $notifier->send($notification);
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            $this->addFlash('success', "Vous avez reussite pour l'inscription !");
+            $this->addFlash('primary','success', "Vous avez reussite pour l'inscription !");
             return $this->redirectToRoute('app_liste_user');
             
         }

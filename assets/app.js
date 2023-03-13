@@ -11,24 +11,25 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
-import './credit/decaissement'
+import './credit/decaissement';
 import './credit/amortissement';
-import './credit/approbation'
-import './api/retrait'
-import './api/individuel'
-import './api/groupe'
-import './api/Garant.js'
-import './api/configurationcredit'
-import './api/DemandeCredit'
-import './api/remboursement'
-import './api/penalitecredit'
-import './api/agence'
-import './api/jquery-3.6.0'
-import './api/jquery-ui'
-import './api/all_rapport'
-import './api/compte_epargne/compt_epargne_groupe'
-import './api/compte_epargne/compte_epargne_individuel'
-import './api/compte_epargne/api_rapport_releve'
+import './credit/approbation';
+import './api/retrait';
+import './api/individuel';
+import './api/users';
+import './api/groupe';
+import './api/Garant.js';
+import './api/configurationcredit';
+import './api/DemandeCredit';
+import './api/remboursement';
+import './api/penalitecredit';
+import './api/agence';
+import './api/jquery-3.6.0';
+import './api/jquery-ui';
+import './api/all_rapport';
+import './api/compte_epargne/compt_epargne_groupe';
+import './api/compte_epargne/compte_epargne_individuel';
+import './api/compte_epargne/api_rapport_releve';
 import './api/compte_epargne/api_transfert';
 import './api/dashboard';
 

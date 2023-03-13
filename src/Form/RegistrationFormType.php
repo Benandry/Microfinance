@@ -132,12 +132,9 @@ class RegistrationFormType extends AbstractType
                 'choice_label' => function($caisse){
                     return $caisse->getCodecaisse()." ".$caisse->getNomCaisse();
                 },
-                'autocomplete' => true,
-                'attr' => [
-                    'class' => 'border-0',
-                ],
                 'label' => 'Compte Caisse :',
                  'multiple' => true,
+                 'label' => false,
                  'expanded' => true,
                  'required' => true
             ])
