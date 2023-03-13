@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Controller\Credit\TypeAmortissement\Types;
+use App\Entity\PatrimoineCredit;
+use App\Form\PatrimoineCreditType;
+use App\Repository\PatrimoineCreditRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/demande/credit')]
 class DemandeCreditController extends AbstractController
@@ -26,14 +30,84 @@ class DemandeCreditController extends AbstractController
     }
 
     #[Route('/new', name: 'app_demande_credit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, DemandeCreditRepository $demandeCreditRepository,Types $traitement,ManagerRegistry $doctine ): Response
+    public function new(EntityManagerInterface $em,Request $request,PatrimoineCreditRepository $patrimoineCreditRepository, DemandeCreditRepository $demandeCreditRepository,Types $traitement,ManagerRegistry $doctine ): Response
     {
+        /**
+         * Individuel client
+         */
+
+        $TypeClient=$request->query->get('TypeClient');
+        $CodeClient=$request->query->get('CodeClient');
+        $nom=$request->query->get('nom');
+        $prenom=$request->query->get('prenom');
+        $codeclient=$request->query->get('codeclient');
+
+        // dd($TypeClient,$CodeClient,$nom,$prenom,$codeclient);
+
+        $Codegroupe =$request->query->get('CodeGroupe');
+        $nomgroupe=$request->query->get('nomgroupe');
+        $codegroupe=$request->query->get('codegroupe');
+
+        // Patrimoine credit
+
+        
+        // Patrimoine credit
+        
+        $patrimoinecredit=new PatrimoineCredit();
+
+        // Demande credit
         $demandeCredit = new DemandeCredit();
         
         $form = $this->createForm(DemandeCreditType::class, $demandeCredit);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+                         
+            //  Patrimoine
+            
+            // Code client
+            $codeclient=$demandeCredit->getCodeclient();
+            $patrimoinecredit->setCodeClient($codeclient);
+
+            // Libelle 1
+            $libelle1=$form->get('Libelle1')->getData();
+            $patrimoinecredit->setLibelle1($libelle1);
+
+            // Montant1
+            $montant1=$form->get('Montant0')->getData();
+            $patrimoinecredit->setMontant($montant1);
+
+            // Libelle 2
+            $libelle2=$form->get('Libelle2')->getData();
+            $patrimoinecredit->setLibelle2($libelle2);
+
+            // Montant2
+            $montant2=$form->get('Montant2')->getData();
+            $patrimoinecredit->setMontant2($montant2);
+
+            // Libelle 3
+            $libelle3=$form->get('Libelle3')->getData();
+            $patrimoinecredit->setLibelle3($libelle3);
+
+            // Montant3
+            $montant3=$form->get('Montant3')->getData();
+            $patrimoinecredit->setMontant3($montant3);
+
+            // Libelle 4
+            $libelle4=$form->get('Libelle4')->getData();
+            $patrimoinecredit->setLibelle4($libelle4);
+
+            // Montant4
+            $montant4=$form->get('Montant4')->getData();
+            $patrimoinecredit->setMontant4($montant4);
+
+            $em->persist($patrimoinecredit);
+
+            // Demande credit
+
            $data = $form->getData();
+
            $demandeCredit->setStatusApp("en attente ");
            $codecredit = $demandeCredit->getNumeroCredit();
 
@@ -55,7 +129,7 @@ class DemandeCreditController extends AbstractController
                   return $this->redirectToRoute('app_degressif_ammortissement', [
                       'codecredit' => $codecredit,
                   ], Response::HTTP_SEE_OTHER);
-             }          
+             } 
            
         }
 
@@ -74,7 +148,14 @@ class DemandeCreditController extends AbstractController
         return $this->renderForm('demande_credit/new.html.twig', [
             'demande_credit' => $demandeCredit,
             'numeros'=>$numero,
+            'nom'=>$nom,
+            'prenom'=>$prenom,
+            'TypeClient'=>$TypeClient,
+            'codeclient'=>$codeclient,
+            'nomgroupe'=>$nomgroupe,
+            'codegroupe'=>$codegroupe,
             'form' => $form,
+            // 'patrimoine'=>$patrimoine
         ]);
     }
 

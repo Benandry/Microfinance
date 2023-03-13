@@ -17,13 +17,8 @@ class ConfigurationCreditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('ProduitCredit',EntityType::class,[
-                'class'=>ProduitCredit::class,
-                'choice_label'=>'NomProduitCredit',
-                'placeholder'=>'Choisir produit credit'
-            ])
             ->add('Methode',ChoiceType::class,[
-                'placeholder'=>'Choisir produit',
+                'placeholder'=>'Choisir Methode',
                 'choices'=>[
                     'Lineaire'=>'Lineaire',
                     'Degressif'=>'Degressif'

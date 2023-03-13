@@ -7,7 +7,7 @@
 
     <table class="table">
         <tbody>
-            <tr>
+            <tr style="display:none;">
                 <th>Id</th>
                 <td>{{ configuration_credit.id }}</td>
             </tr>
@@ -16,91 +16,91 @@
                 <td>{{ configuration_credit.Montant }}</td>
             </tr>
             <tr>
-                <th>MontantMin</th>
+                <th>Montant Minimum</th>
                 <td>{{ configuration_credit.MontantMin }}</td>
             </tr>
             <tr>
-                <th>InteretNormal</th>
+                <th>Interet Normal</th>
                 <td>{{ configuration_credit.InteretNormal }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>InteretDegressif</th>
                 <td>{{ configuration_credit.InteretDegressif }}</td>
-            </tr>
-            <tr>
+            </tr> #}
+            {# <tr>
                 <th>InteretLineaire</th>
                 <td>{{ configuration_credit.InteretLineaire }}</td>
-            </tr>
+            </tr> #}
             <tr>
-                <th>GarantieMoral</th>
+                <th>Garantie Moral</th>
                 <td>{{ configuration_credit.GarantieMoral ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>GarantieMaterielle</th>
+                <th>Garantie Materielle</th>
                 <td>{{ configuration_credit.GarantieMaterielle ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>TauxGarantieMaterielle</th>
+                <th>TauxGarantie Materielle</th>
                 <td>{{ configuration_credit.TauxGarantieMaterielle }}</td>
             </tr>
             <tr>
-                <th>GarantieFinanciere</th>
+                <th>Garantie Financiere</th>
                 <td>{{ configuration_credit.GarantieFinanciere ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>TauxGarantieFinanciere</th>
+                <th>TauxGarantie Financiere</th>
                 <td>{{ configuration_credit.TauxGarantieFinanciere }}</td>
             </tr>
             <tr>
-                <th>FraisDossier</th>
+                <th>Frais Dossier</th>
                 <td>{{ configuration_credit.FraisDossier }}</td>
             </tr>
             <tr>
-                <th>FraisCommission</th>
+                <th>Frais Commission</th>
                 <td>{{ configuration_credit.FraisCommission }}</td>
             </tr>
             <tr>
-                <th>FraisPapeterie</th>
+                <th>Frais Papeterie</th>
                 <td>{{ configuration_credit.FraisPapeterie }}</td>
             </tr>
             <tr>
-                <th>PenaliteDiminutionIntrt</th>
+                <th>Penalite Diminution Interet</th>
                 <td>{{ configuration_credit.PenaliteDiminutionIntrt }}</td>
             </tr>
             <tr>
-                <th>PenalitePayementAntcp</th>
+                <th>Penalite Payement Anticipé</th>
                 <td>{{ configuration_credit.PenalitePayementAntcp }}</td>
             </tr>
             <tr>
-                <th>RetardPourcentage</th>
+                <th>Retard Pourcentage</th>
                 <td>{{ configuration_credit.RetardPourcentage }}</td>
             </tr>
             <tr>
-                <th>PayementAnticipe</th>
+                <th>Payement Anticipe</th>
                 <td>{{ configuration_credit.PayementAnticipe }}</td>
             </tr>
             <tr>
-                <th>RetardForfaitaire</th>
+                <th>Retard Forfaitaire</th>
                 <td>{{ configuration_credit.RetardForfaitaire }}</td>
             </tr>
             <tr>
-                <th>RetardPeriode</th>
+                <th>Retard Periode</th>
                 <td>{{ configuration_credit.RetardPeriode }}</td>
             </tr>
             <tr>
-                <th>RetardPeriodeJour</th>
+                <th>Retard PeriodeJour</th>
                 <td>{{ configuration_credit.RetardPeriodeJour ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>RetardPeriodeMois</th>
+                <th>Retard Periode Mois</th>
                 <td>{{ configuration_credit.RetardPeriodeMois ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_configuration_credit_index') }}">back to list</a>
+    {# <a href="{{ path('app_configuration_credit_index') }}">back to list</a> #}
 
-    <a href="{{ path('app_configuration_credit_edit', {'id': configuration_credit.id}) }}">edit</a>
+    {# <a href="{{ path('app_configuration_credit_edit', {'id': configuration_credit.id}) }}">edit</a> #}
 
     {{ include('configuration_credit/_delete_form.html.twig') }}
 {% endblock %}

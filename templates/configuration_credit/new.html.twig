@@ -3,11 +3,13 @@
 {% block title %}Configuration Credit{% endblock %}
 
 {% block body %}
+    {{ include('modal.html.twig') }}
+
     <h1>Configuration Credit</h1>
 
       {{ include('modal.html.twig') }}
 
     {{ include('configuration_credit/_form.html.twig') }}
 
-    <a href="{{ path('app_configuration_credit_index') }}">back to list</a>
+    <a href="{{ path('app_liste_produit_configure') }}">back to list</a>
 {% endblock %}

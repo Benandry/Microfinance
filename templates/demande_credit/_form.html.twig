@@ -1,8 +1,8 @@
 {{ form_start(form) }}
   <ul class="nav nav-tabs">
-      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Etape 1</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Etape 2</a></li>
-      <li class="nav-item"id="garantiecredit"> <a class="nav-link" data-bs-toggle="tab" href="#etape3" >Etape 3</a></li>
+      <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#etape1">Renseignement</a></li>
+      <li class="nav-item"id="garantiecredit"> <a class="nav-link" data-bs-toggle="tab" href="#etape3" >Garantie</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#etape2">Patrimoine</a></li>
   </ul>
 
     <div class="tab-content">
@@ -10,43 +10,23 @@
         <div class="tab-pane active" id="etape1">
         <div class="row shadow-sm p-3">
             <div class="col-12 col-sm-12 col-md-12">
-              <h6 class="text-center text-primary">Etape 1</h6>
+              <h6 class="text-center text-primary">Renseignement</h6>
               <div class="row">
                   <div class="col-6 col-sm-6 col-md-6">
                       {{ form_row(form.ProduitCredit) }}
-                      {{ form_row(form.TypeClient) }}
-                      {{ form_row(form.codeclient) }}
-                      <div style="display:;">
+                      <div style="display:none;">
+                        {{ form_row(form.TypeClient) }}
+                        {{ form_row(form.codeclient) }}
                         {{ form_row(form.NumeroCredit) }}
-                        {{ form_row(form.cycles) }}
                       </div>
                       {{ form_row(form.DateDemande) }}
+                      {{ form_row(form.NombreTranche) }}
+                      {{ form_row(form.cycles) }}
                   </div>
                   <div class="col-6 col-sm-6 col-md-6">
-                      {{ form_row(form.NombreTranche) }}
                       {{ form_row(form.TypeTranche) }}
                       {{ form_row(form.TauxInteretAnnuel) }}
                       {{ form_row(form.Montant) }}
-                  </div>
-
-              </div>
-            </div>
-        </div>
-      </div>
-
-      {# etape4 #}
-            <div class="tab-pane" id="etape2">
-        <div class="row shadow-sm p-3">
-            <div class="col-12 col-sm-12 col-md-12">
-              <h6 class="text-center text-primary">Etape 2</h6>
-              <div class="row">
-                  <div class="col-6 col-sm-6 col-md-6">
-                    <div id="soldeepargneform">  
-                    </div>  
-                      {{ form_row(form.categorieCredit) }}
-                      {# {{ form_row(form.typeAmortissement) }} #}
-                  </div>
-                   <div class="col-6 col-sm-6 col-md-6">
                       {{ form_row(form.agent) }}
                   </div>
 
@@ -57,10 +37,10 @@
 
               {# Etape 3 #}
 
-            <div class="tab-pane" id="etape3">
+      <div class="tab-pane" id="etape3">
         <div class="row shadow-sm p-3">
             <div class="col-12 col-sm-12 col-md-12">
-                <h6 class="text-center text-primary">Etape 3</h6>
+                <h6 class="text-center text-primary">Garantie</h6>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6" style="display:none" id="garantiemorale">
                       {{ form_row(form.garant) }}
@@ -85,6 +65,35 @@
         </div>
         </div>
       </div>
+
+      <div class="tab-pane" id="etape2">
+        <div class="row shadow-sm p-3">
+            <div class="col-12 col-sm-12 col-md-12">
+              <h6 class="text-center text-primary">Patrimoine</h6>
+              <div class="row">
+                  <div class="col-6 col-sm-6 col-md-6">
+                    <div id="soldeepargneform">  
+                    </div>  
+                      {{ form_row(form.codecreditprecedent) }}
+                      {{ form_row(form.Libelle1) }}
+                      {{ form_row(form.Montant0) }}
+                      {{ form_row(form.Libelle2) }}
+                      {{ form_row(form.Montant2) }}
+
+                  </div>
+                   <div class="col-6 col-sm-6 col-md-6">
+                      {{ form_row(form.Libelle3) }}
+                      {{ form_row(form.Montant3) }}
+                      {{ form_row(form.Libelle4) }}
+                      {{ form_row(form.Montant4) }}
+
+                  </div>
+
+              </div>
+            </div>
+        </div>
+      </div>
+
     </div>
     <button class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> {{ button_label|default('Suivant') }}</button> 
 {{ form_end(form) }}

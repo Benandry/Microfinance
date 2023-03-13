@@ -40,6 +40,52 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
     }
 
     /**
+     * Undocumented function
+     *
+     * @method mixed ListeProduitConfigure():Liste des produits déjà configuré
+     * @return void
+     */
+    public function ListeProduitConfigure()
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT
+                produitcredit.NomProduitCredit,
+                configcredit.id,
+                configcredit.Montant,
+                configcredit.MontantMin,
+                configcredit.InteretNormal,
+                configcredit.GarantieMoral,
+                configcredit.GarantieMaterielle,
+                configcredit.TauxGarantieMaterielle,
+                configcredit.GarantieFinanciere,
+                configcredit.TauxGarantieFinanciere,
+                configcredit.FraisDossier,
+                configcredit.FraisCommission,
+                configcredit.FraisPapeterie,
+                configcredit.PenaliteDiminutionIntrt,
+                configcredit.PenalitePayementAntcp,
+                configcredit.RetardPourcentage,
+                configcredit.PayementAnticipe,
+                configcredit.RetardForfaitaire,
+                configcredit.RetardPeriode,
+                configcredit.RetardPeriodeJour,
+                configcredit.RetardPeriodeMois,
+                configcredit.Methode,
+                configcredit.Tranche
+            FROM
+                App\Entity\ConfigurationCredit configcredit
+            INNER JOIN
+                App\Entity\ProduitCredit produitcredit
+            WITH
+                configcredit.idProduit=produitcredit.id
+            '
+        );
+
+        return $query->getResult();
+    }
+
+    /**
      *@method mixed ConfigurationCredit():Methode permet de lister tout les configurations credit
      * @param mixed $produitcredit:
      * @return void
@@ -85,6 +131,8 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
         return $query->getResult();
         
     }
+
+
 
 //    /**
 //     * @return ConfigurationCredit[] Returns an array of ConfigurationCredit objects

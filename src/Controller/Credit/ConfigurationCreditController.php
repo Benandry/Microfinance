@@ -13,31 +13,48 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/configuration/credit')]
 class ConfigurationCreditController extends AbstractController
 {
-    #[Route('/', name: 'app_configuration_credit_index', methods: ['GET'])]
-    public function index(ConfigurationCreditRepository $configurationCreditRepository): Response
+    // #[Route('/', name: 'app_configuration_credit_index', methods: ['GET'])]
+    // public function index(ConfigurationCreditRepository $configurationCreditRepository): Response
+    // {
+    //     return $this->render('configuration_credit/index.html.twig', [
+    //         'configuration_credits' => $configurationCreditRepository->findAll(),
+    //     ]);
+    // }
+
+    #[Route('/',name:'app_liste_produit_configure')]
+    public function ListeProduitConfigure(ConfigurationCreditRepository $configurationCreditRepository)
     {
+        $configuration_credit=$configurationCreditRepository->ListeProduitConfigure();
+
         return $this->render('configuration_credit/index.html.twig', [
-            'configuration_credits' => $configurationCreditRepository->findAll(),
+            'configuration_credits' => $configuration_credit,
         ]);
+
     }
 
     #[Route('/new', name: 'app_configuration_credit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ConfigurationCreditRepository $configurationCreditRepository): Response
     {
+        $produit=$request->query->get('ProduitCredit');
+        // dd($produit);
+
         $configurationCredit = new ConfigurationCredit();
         $form = $this->createForm(ConfigurationCreditType::class, $configurationCredit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $configurationCredit->setIdProduit($produit);
+            
             $configurationCreditRepository->save($configurationCredit, true);
 
-            $this->addFlash('success', 'Configuration du produit credit!'.$configurationCredit->getProduitCredit().'avec success !');
+            $this->addFlash('success', 'Configuration du produit credit Reussi !');
             // return $this->redirectToRoute('app_configuration_credit_index', [], Response::HTTP_SEE_OTHER);
-            return $this->redirectToRoute('app_configuration_credit_index', [], Response::HTTP_SEE_OTHER);
+            // return $this->redirectToRoute('app_configuration_credit_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('configuration_credit/new.html.twig', [
             'configuration_credit' => $configurationCredit,
+            'produit'=>$produit,
             'form' => $form,
         ]);
     }

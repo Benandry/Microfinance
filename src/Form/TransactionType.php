@@ -4,8 +4,6 @@ namespace App\Form;
 
 use App\Entity\CompteCaisse;
 use App\Entity\Transaction;
-use App\Repository\CompteCaisseRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -13,19 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Security;
 
 class TransactionType extends AbstractType
 {
-    private $em;
-    private $security;
-
-    public function __construct(EntityManagerInterface $em,Security $security)
-    {
-        $this->em = $em; 
-        $this->security = $security;  
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $this->security->getUser()->getId();
@@ -45,7 +33,6 @@ class TransactionType extends AbstractType
                 'choice_label' => function($caisse){
                     return $caisse->getCodecaisse()." -- ".$caisse->getNomCaisse();
                 },
-              'choices' => $stmt,
                 'placeholder' => "Choisissez le compte caisse ",
                 'label' => "Compte caisse ",
                 'autocomplete' => true,
@@ -94,8 +81,6 @@ class TransactionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Transaction::class,
-            // Définition de l'option "em"
-            'em' => null,
         ]);
     }
 }

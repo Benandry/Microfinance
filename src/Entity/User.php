@@ -37,10 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    
-    #[ORM\Column(length: 255)]
-    private ?string $sexe = null;
-
     #[ORM\Column(length: 255)]
     private ?string $responsabilite = null;
 
@@ -60,7 +56,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->individuelclients = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
-        $this->caisse = new ArrayCollection();
     }
 
     public function __toString()
@@ -165,18 +160,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getSexe(): ?string
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe(string $sexe): self
-    {
-        $this->sexe = $sexe;
 
         return $this;
     }

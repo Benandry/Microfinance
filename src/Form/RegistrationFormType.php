@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Agence;
-use App\Entity\CompteCaisse;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -94,19 +93,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 
             ])
-
-            ->add('sexe',ChoiceType::class,[
-                'label' => "Sexe : ",
-                'choices'=>[ 
-                    'Masculin'=>'masculin',
-                    'Féminin'=>'féminin',
-                ],
-            ])
             ->add('agence',EntityType::class,[
                 'class' => Agence::class,
-                'choice_label' => function($agence){
-                    return $agence->getCodeAgence()." ".$agence->getNomAgence();
-                },
+                'choice_label' => 'NomAgence',
                 'autocomplete' => true,
                 'attr' => [
                     'class' => 'border-0',

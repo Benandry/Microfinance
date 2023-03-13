@@ -8,10 +8,13 @@ use App\Entity\FondCredit;
 use App\Entity\ProduitCredit;
 use App\Entity\ProduitEpargne;
 use App\Entity\User;
+use Doctrine\DBAL\Types\FloatType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,16 +31,7 @@ class DemandeCreditType extends AbstractType
                     'minLength' =>10,
                 ]
             ])
-            ->add('TypeClient',ChoiceType::class,[
-                'placeholder' => "Type de client ...",
-                'choices'=>[
-                    'INDIVIDUEL'=>'INDIVIDUEL',
-                    'GROUPE'=>'GROUPE',
-                ],
-                'attr'=>[
-                    'class'=>'form-control',
-                ]
-            ])
+            ->add('TypeClient',TextType::class)
             ->add('NumeroCredit')
             ->add('DateDemande',DateType::class,[
                 'widget'=>'single_text'
@@ -71,13 +65,13 @@ class DemandeCreditType extends AbstractType
                     'autocomplete' => true,
                     'required'=>true
             ])
-            ->add('categorieCredit',EntityType::class,[
-                'class'=>CategorieCredit::class,
-                'choice_label'=>'NomCategorieCredit',
-                'autocomplete'=>true,
-                'label'=>" Categorie de categorie :",
-                'placeholder'=>'Choix Categorie',
-            ])
+            // ->add('categorieCredit',EntityType::class,[
+            //     'class'=>CategorieCredit::class,
+            //     'choice_label'=>'NomCategorieCredit',
+            //     'autocomplete'=>true,
+            //     'label'=>" Categorie de categorie :",
+            //     'placeholder'=>'Choix Categorie',
+            // ])
             // ->add('CalculInteretDiffere')
             // ->add('CalculInteretJours')
             ->add('ProduitCredit',EntityType::class,[
@@ -100,6 +94,44 @@ class DemandeCreditType extends AbstractType
             // ->add('ValeurTotal')
             ->add('cycles')
             ->add('CompteEpargne')
+            // On recupere les donnees pour les patrimoines ici
+            ->add('codecreditprecedent',TextType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Libelle1',TextType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Montant0',NumberType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Libelle2',TextType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Montant2',NumberType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Libelle3',TextType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Montant3',NumberType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Libelle4',TextType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+            ->add('Montant4',NumberType::class,[
+                'mapped'=>false,
+                'required'=>false
+            ])
+
         ;
     }
 

@@ -1,27 +1,28 @@
 <?php
 
 namespace App\Entity;
-
+    
 use App\Repository\CompteCaisseRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CompteCaisseRepository::class)]
-class CompteCaisse
-{
+class CompteCaisse {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $nomCaisse = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $codeCaisse = null;
+    #[ORM\ManyToOne(inversedBy: 'agences')]
+    private ?Agence $agence = null;
 
-    #[ORM\ManyToOne(inversedBy: 'compteCaisses')]
+    #[ORM\ManyToOne(inversedBy: 'User')]
+    private ?User $responsable = null;
+
+    #[ORM\ManyToOne(inversedBy: 'planComptable')]
     private ?PlanComptable $planComptable = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'caisse')]
@@ -33,6 +34,10 @@ class CompteCaisse
     }
 
 
+    public function __toString()
+    {
+        return $this->getId();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -43,24 +48,49 @@ class CompteCaisse
         return $this->nomCaisse;
     }
 
-    public function setNomCaisse(?string $nomCaisse): self
+    public function setNomCaisse(string $nomCaisse): self
     {
         $this->nomCaisse = $nomCaisse;
 
         return $this;
     }
 
-    public function getCodeCaisse(): ?string
+    public function getCodecaisse(): ?string
     {
-        return $this->codeCaisse;
+        return $this->codecaisse;
     }
 
-    public function setCodeCaisse(string $codeCaisse): self
+    public function setCodecaisse(string $codecaisse): self
     {
-        $this->codeCaisse = $codeCaisse;
+        $this->codecaisse = $codecaisse;
 
         return $this;
     }
+
+    public function getAgence(): ?Agence
+    {
+        return $this->agence;
+    }
+
+    public function setAgence(?Agence $agence): self
+    {
+        $this->agence = $agence;
+
+        return $this;
+    }
+
+    public function getResponsable(): ?User
+    {
+        return $this->responsable;
+    }
+
+    public function setResponsable(?User $responsable): self
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
 
     public function getPlanComptable(): ?PlanComptable
     {

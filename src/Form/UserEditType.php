@@ -3,12 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Agence;
-use App\Entity\CompteCaisse;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,14 +61,9 @@ class UserEditType extends AbstractType
             ])
             ->add('agence',EntityType::class,[
                 'class' => Agence::class,
-                'choice_label' => function($agence){
-                    return $agence->getCodeAgence()." ".$agence->getNomAgence();
-                },
+                'choice_label' => 'NomAgence',
                 'autocomplete' => true,
-                'attr' => [
-                    'class' => 'border-0',
-                ],
-                'label' => 'Agence :',
+                'label' => 'Agence :'
             ])
 
             ->add('caisse',EntityType::class,[

@@ -13,7 +13,9 @@
             <tr>
                 <th>Code caisse</th>
                 <th>Nom Caisse</th>
-                <th>Plan comptable </th>
+                <th>Agence </th>
+                <th>responsable </th>
+                <th> Plan comptable </th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +24,8 @@
                 <tr>
                     <td>{{ compte_caisse.codecaisse }}</td>
                     <td>{{ compte_caisse.nomCaisse }}</td>
+                    <td>{{ compte_caisse.agence.NomAgence }}</td>
+                    <td>{{ compte_caisse.responsable.nom }} {{ compte_caisse.responsable.prenom }}</td>
                     <td> {{ compte_caisse.planComptable.NumeroCompte }}  {{ compte_caisse.planComptable.Libelle }} </td>
                     <td>
                         <div class="row">

@@ -147,6 +147,27 @@ class ApiCreditController extends AbstractController
 
         return new JsonResponse($infodemandeindividuel);
     }
+    
+    /**
+     * @method mixed DemandeCreditModal():Afficher les informations individuel
+     * @param mixed $demandecreditrepository
+     * @param mixed $id
+     */
+    #[Route('/modaldemandecredit/{id}',name:'app_modal_demande_credit')]
+    public function DemandeCreditModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$id):Response
+    {
+        $modaldemandecredit=$demandeCreditRepository->InfoDemandeCreditModal($id);
+
+        return new JsonResponse($modaldemandecredit);
+    }
+
+    #[Route('/demandecreditinfogroupe/{id}',name:'app_demandecredit_groupe')]
+    public function DemandeCreditModalGroupe(DemandeCreditRepository $demandeCreditRepository,$id)
+    {
+        $modaldemandecreditgroupe=$demandeCreditRepository->InfoDemandeCreditGroupe($id);
+
+        return new JsonResponse($modaldemandecreditgroupe);
+    }
 
     /**
      * Undocumented function

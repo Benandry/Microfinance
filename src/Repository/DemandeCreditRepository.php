@@ -67,6 +67,32 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
     }
 
+    /**
+     * Undocumented function
+     *@method mixed InfoDemandeCreditModal():Methode permet d'afficher les informations individuel sur le modal demande credit
+     * @param [type] $id: id client
+     * @return void
+     */
+    public function InfoDemandeCreditModal($id)
+    {
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+        'SELECT
+            individuel.codeclient,
+            individuel.nom_client,
+            individuel.prenom_client
+            FROM
+                App\Entity\IndividuelClient individuel
+            WHERE
+                individuel.id = :id
+        '
+        )
+        ->setParameter('id',$id);
+
+        return $query->getResult();
+    }
+
 
         /**
      * Undocumented function
@@ -128,6 +154,35 @@ class DemandeCreditRepository extends ServiceEntityRepository
             '
         )
         ->setParameter(':NumeroCredit',$NumeroCredit);
+
+        return $query->getResult();
+
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @method mixed InfoDemandeCreditGroupe():Methode permet d'afficher les informations groupes sur le modal demande credit
+     * @param [type] $id
+     * @return void
+     */
+    public function InfoDemandeCreditGroupe($id)
+    {
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                groupe.nomGroupe,
+                groupe.dateInscription,
+                groupe.numeroMobile,
+                groupe.codegroupe
+                FROM
+                    App\Entity\Groupe groupe
+                WHERE
+                    groupe.id = :id
+            '
+        )
+        ->setParameter(':id',$id);
 
         return $query->getResult();
 

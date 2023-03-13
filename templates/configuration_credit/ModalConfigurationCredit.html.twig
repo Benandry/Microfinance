@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Configuration credit
+{% endblock %}
+
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                <div class="modal-header titre_modal">
+                    <h4 class="modal-title text-center">Configuration credit </h4>
+                </div>
+                {{ form_start(form) }} 
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                {{ form_widget(form.ProduitCredit) }}
+                            </div>
+                        </div>
+
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                        <input type="submit" value="valider">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div> 
+{% endblock %}

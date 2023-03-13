@@ -78,15 +78,18 @@ class ConfigurationCredit
     #[ORM\Column(nullable: true)]
     private ?bool $RetardPeriodeMois = null;
 
-    #[ORM\ManyToOne(inversedBy: 'configurationCredits')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?ProduitCredit $ProduitCredit = null;
+    // #[ORM\ManyToOne(inversedBy: 'configurationCredits')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private ?ProduitCredit $ProduitCredit = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Methode = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $Tranche = null;
+
+    #[ORM\Column]
+    private ?int $idProduit = null;
 
     public function getId(): ?int
     {
@@ -322,17 +325,17 @@ class ConfigurationCredit
         return $this;
     }
 
-    public function getProduitCredit(): ?ProduitCredit
-    {
-        return $this->ProduitCredit;
-    }
+    // public function getProduitCredit(): ?ProduitCredit
+    // {
+    //     return $this->ProduitCredit;
+    // }
 
-    public function setProduitCredit(?ProduitCredit $ProduitCredit): self
-    {
-        $this->ProduitCredit = $ProduitCredit;
+    // public function setProduitCredit(?ProduitCredit $ProduitCredit): self
+    // {
+    //     $this->ProduitCredit = $ProduitCredit;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getMethode(): ?string
     {
@@ -354,6 +357,18 @@ class ConfigurationCredit
     public function setTranche(?float $Tranche): self
     {
         $this->Tranche = $Tranche;
+
+        return $this;
+    }
+
+    public function getIdProduit(): ?int
+    {
+        return $this->idProduit;
+    }
+
+    public function setIdProduit(int $idProduit): self
+    {
+        $this->idProduit = $idProduit;
 
         return $this;
     }

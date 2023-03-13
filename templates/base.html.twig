@@ -92,123 +92,117 @@
                             </li>
 
                             <!-- Module Epargne -->
-                        <li>
-                            <a href="#submenu-epargne" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Depot et Epargne <span class="fa fa-chevron-down"></span>  </span>
-                            </a>  
-                            <ul class="collapse nav flex-column ms-4" id="submenu-epargne" data-bs-parent="#menu">                             
-                                <li class="w-100">
-                                    <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Ouvrir un compte">
-                                        <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-user-plus"></i> Ouverture <span class="fa fa-chevron-down"></span> </span>
-                                    </a>
-                                    <ul class="collapse nav flex-column ms-4" id="submenu06">
-                                        <li class="w-100">
-                                            <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0" title="Ouvrir un compte  individuel"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
-                                        </li>
-                                        <li class="w-100">
-                                            <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0" title="Ouvrir un compte groupes"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Compte epargne">
-                                        <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-wallet"></i> Epargne  <span class="fa fa-chevron-down"></span> </span>
-                                    </a>
-                                    <ul class="collapse nav flex-column ms-4" id="submenu2">
-                                        <li class="w-100">
-                                            <a href="#submenu21" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
-                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-money-check-alt"></i> Dépôt à vue  <span class="fa fa-chevron-down"></span> </span>
-                                            </a>
 
-                                            <ul class="collapse nav flex-column ms-4" id="submenu21">
-                                                <li class="w-100">
-                                                    <a href="{{ path('app_compte_epargne_depot') }}" class="nav-link px-0" title="Depot compte epargne individuel"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-in"></i> Entrée </span></a>
-                                                </li>
-                                                <li class="w-100">
-                                                    <a href="{{ path('app_depot_a_vu_sortie') }}" class="nav-link px-0" title="Depot compte epargne groupes"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
-                                                </li>
-                                            </ul>
+                                                                
+                            <li class="w-100">
+                                <a href="#submenu06" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Ouvrir un compte">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-user-plus"></i> Ouverture du compte <span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu06" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{ path('app_ouvrir_compte_epargne') }}" class="nav-link px-0" title="Ouvrir un compte  individuel"> <span class="d-none d-sm-inline lien"> <i class="fa fa-id-badge"></i> Individuel </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_ouvrir_compte_groupe') }}" class="nav-link px-0" title="Ouvrir un compte groupes"> <span class="d-none d-sm-inline lien"> <i class="fa fa-users"></i> Groupe </span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Compte epargne">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-wallet"></i> Epargne  <span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu2" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#submenu21" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-money-check-alt"></i> Dépôt à vue  <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
 
-                                        </li>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu21">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_compte_epargne_depot') }}" class="nav-link px-0" title="Depot compte epargne individuel"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-in"></i> Entrée </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_a_vu_sortie') }}" class="nav-link px-0" title="Depot compte epargne groupes"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
+                                            </li>
+                                        </ul>
 
-                                        {# Depot a terme #}
-                                        <li class="w-100">
-                                            <a href="#submenu22" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
-                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-calendar-check"></i> Dépôt à terme <span class="fa fa-chevron-down"></span> </span>
-                                            </a>
+                                    </li>
 
-                                            <ul class="collapse nav flex-column ms-4" id="submenu22">
-                                                <li class="w-100">
-                                                    <a href="{{ path('app_depot_a_terme_entree') }}" class="nav-link px-0" title="Depot compte epargne individuel"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-in"></i> Entrée </span></a>
-                                                </li>
-                                                <li class="w-100">
-                                                    <a href="{{ path('app_depot_a_terme_sortie') }}" class="nav-link px-0" title="Depot compte epargne groupes"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
-                                                </li>
-                                            </ul> 
-                                        </li>
-                                    </ul>
-                                </li>
-                                {# Depot de garantie #}
-                                <li class="w-100">
-                                    <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                        <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-star"></i> Epargne spécial <span class="fa fa-chevron-down"></span>  </span>
-                                    </a>
-                                    <ul class="collapse nav flex-column ms-4" id="submenu7">
-                                        <li class="w-100">
-                                            <a href="#submenu71" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
-                                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-shield-alt"></i> Dépôt de garantie <span class="fa fa-chevron-down"></span> </span>
-                                            </a>
+                                    {# Depot a terme #}
+                                    <li class="w-100">
+                                        <a href="#submenu22" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-calendar-check"></i> Dépôt à terme <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
 
-                                            <ul class="collapse nav flex-column ms-4" id="submenu71">
-                                                <li class="w-100">
-                                                    <a href="{{ path('app_depot_de_garantie_entree') }}" class="nav-link px-0" title="Depot de garantie entree"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-in"></i> Entrée </span></a>
-                                                </li>
-                                                <li class="w-100">
-                                                    <a href="{{ path('app_depot_de_garantie_sortie') }}" class="nav-link px-0" title="Depot de garantie sortie"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
-                                                </li>
-                                            </ul> 
-                                        </li>
-                                    </ul>
-                                </li>
-                                
-                                {# Transfert Compte #}
-                                <li class="w-100">
-                                    <a href="{{ path('app_transfertep_new') }}" class="nav-link px-0" title="Transfert compte epargne"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transfert epargne </span> </a>
-                                </li>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu22">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_a_terme_entree') }}" class="nav-link px-0" title="Depot compte epargne individuel"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-in"></i> Entrée </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_a_terme_sortie') }}" class="nav-link px-0" title="Depot compte epargne groupes"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
+                                            </li>
+                                        </ul> 
+                                    </li>
+                                </ul>
+                            </li>
+                            {# Depot de garantie #}
+                            <li class="w-100">
+                                <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-star"></i> Epargne spécial <span class="fa fa-chevron-down"></span>  </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu7" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#submenu71" data-bs-toggle="collapse" class="nav-link px-0 align-middle" title="Depot compte epargne">
+                                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fas fa-shield-alt"></i> Dépôt de garantie <span class="fa fa-chevron-down"></span> </span>
+                                        </a>
 
-                                {# Rapport compte epargne #}
-
-                                <li class="w-100">
-                                    <a href="#submenu07" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                        <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Rapports Epargne<span class="fa fa-chevron-down"></span> </span>
-                                    </a>
-                                    <ul class="collapse nav flex-column ms-4" id="submenu07">
-                                        <li class="w-100">
-                                            <a href="{{ path('app_rapport_compte') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> compte epargne </span></a>
-                                        </li>
-                                        <li class="w-100">
-                                            <a href="{{ path('app_transac_liste') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Solde </span></a>
-                                        </li>
-                                        <li class="w-100">
-                                            <a href="{{ path('app_transaction_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transaction </span></a>
-                                        </li>
-                                        <li class="w-100">
-                                            <a href="{{ path('app_transaction_releve') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Relevé </span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                                        <ul class="collapse nav flex-column ms-4" id="submenu71">
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_de_garantie_entree') }}" class="nav-link px-0" title="Depot de garantie entree"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-in"></i> Entrée </span></a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="{{ path('app_depot_de_garantie_sortie') }}" class="nav-link px-0" title="Depot de garantie sortie"> <span class="d-none d-sm-inline lien"> <i class="fas fa-sign-out"></i> Sortie </span></a>
+                                            </li>
+                                        </ul> 
+                                    </li>
+                                </ul>
+                            </li>
                             
+                            {# Transfert Compte #}
+                            <li class="w-100">
+                                <a href="{{ path('app_transfertep_new') }}" class="nav-link px-0" title="Transfert compte epargne"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transfert epargne </span> </a>
+                            </li>
+
+                            {# Rapport compte epargne #}
+
+                            <li class="w-100">
+                                <a href="#submenu07" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa fa-down-left-and-up-right-to-center"></i> Rapports Epargne<span class="fa fa-chevron-down"></span> </span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-4" id="submenu07">
+                                    <li class="w-100">
+                                        <a href="{{ path('app_rapport_compte') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-user"></i> compte epargne </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transac_liste') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-dollar"></i> Solde </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transaction_index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-exchange"></i> Transaction </span></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ path('app_transaction_releve') }}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-newspaper"></i> Relevé </span></a>
+                                    </li>
+                                </ul>
+                            </li>
                             {# Module credit #}
 
                             <li>
                                 <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-credit-card"></i> Credit <span class="fa fa-chevron-down"></span>  </span>
+                                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline menu"> <i class="fa-solid fa-piggy-bank"></i> Credit <span class="fa fa-chevron-down"></span>  </span>
                                 </a>
                                 <ul class="collapse nav flex-column ms-4" id="submenu3" data-bs-parent="#menu">
                                     <li class="w-100">
-                                        <a href="{{path('app_demande_credit_new')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-money-check"> </i> Demande </span></a>
+                                        <a href="{{path('app_modaldemandecredit')}}" class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-money-check"> </i> Demande </span></a>
                                     </li>
                                     <li class="w-100">
                                         <a href="#submenu98" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -303,10 +297,13 @@
                                         </a>   
                                         <ul class="collapse nav flex-column ms-4" id="submenu11">
                                             <li>
-                                                <a href="{{path('app_configuration_credit_index')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration </span></a>
+                                                <a href="{{path('app_configuration_modal_credit')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration </span></a>
                                             </li>
                                             <li>
                                                 <a href="{{path('app_produit_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Produit Credit </span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{path('app_liste_produit_configure')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-bars"></i> Liste Produit configuré</span></a>
                                             </li>
                                             {# <li>
                                                 <a href="{{path('app_configuration_general_credit_new')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline lien"> <i class="fa fa-edit"></i> Configuration general</span></a>

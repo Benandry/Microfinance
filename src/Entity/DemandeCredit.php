@@ -100,8 +100,8 @@ class DemandeCredit
     #[ORM\Column(nullable: true)]
     private ?int $cycles = null;
 
-    #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    private ?CategorieCredit $categorieCredit = null;
+    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
+    // private ?CategorieCredit $categorieCredit = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $CompteEpargne = null;
@@ -439,17 +439,17 @@ class DemandeCredit
         return $this;
     }
 
-    public function getCategorieCredit(): ?CategorieCredit
-    {
-        return $this->categorieCredit;
-    }
+    // public function getCategorieCredit(): ?CategorieCredit
+    // {
+    //     return $this->categorieCredit;
+    // }
 
-    public function setCategorieCredit(?CategorieCredit $categorieCredit): self
-    {
-        $this->categorieCredit = $categorieCredit;
+    // public function setCategorieCredit(?CategorieCredit $categorieCredit): self
+    // {
+    //     $this->categorieCredit = $categorieCredit;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCompteEpargne(): ?string
     {

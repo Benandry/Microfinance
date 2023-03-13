@@ -3,15 +3,91 @@ import $ from 'jquery'
 var path = window.location.pathname;
 
 $(document).ready(function(){
+    // L'evenement se produit durant le choix du type client
+    if( path == '/DemandeCredit/Modal/'){
+
+        // Les champs code client et groupe sont cachées
+        $('#codeclient').hide();
+        $('#codegroupe').hide();
+
+        $('#demande_credit_modal_TypeClient').on('change',function(){
+            var typeclient=$('#demande_credit_modal_TypeClient').val();
+
+            // Type client individuel
+
+            if(typeclient == 'INDIVIDUEL'){
+                $('#codeclient').show();
+                $('#codegroupe').hide();
+                
+                // Si l'utilasateur choisi une client
+                $('#demande_credit_modal_CodeClient').on('change',function(){
+                    var codeindividuel=$('#demande_credit_modal_CodeClient').val();
+                    // console.log("Code client"+codeclient);
+                    
+                    // Chemin de recuperation du code client
+                    var url_individuel='/modaldemandecredit/'+codeindividuel;
+                    // console.log(url_individuel);
+
+                    $.ajax({
+                        url:url_individuel,
+                        method:'GET',
+                        dataType:"json",
+                        contentType:"application/json; charset=utf-8",
+                        data : JSON.stringify(codeindividuel),   
+                        success : function(content){
+                            for(let j=0;j<content.length;j++){    
+                                var individuel=content[j];
+
+                                $('#demande_credit_modal_nom').val(individuel.nom_client)
+                                $('#demande_credit_modal_prenom').val(individuel.prenom_client)
+                                $('#demande_credit_modal_codeclient').val(individuel.codeclient)
+                                // console.log(individuel);
+                            }
+                        }
+                    });
+
+                    
+                });
+            }
+            // Type client groupe
+            else if(typeclient == 'GROUPE'){
+                $('#codegroupe').show();
+                $('#codeclient').hide();
+
+                $('#demande_credit_modal_CodeGroupe').on('change',function(){
+                    // Id groupe
+                    var idgroupe=$('#demande_credit_modal_CodeGroupe').val();
+
+                    var url_groupe='/demandecreditinfogroupe/'+idgroupe;
+
+                    $.ajax({
+                        url:url_groupe,
+                        method:'GET',
+                        dataType:"json",
+                        contentType:"application/json; charset=utf-8",
+                        data : JSON.stringify(idgroupe),   
+                        success : function(content){
+                            for(let j=0;j<content.length;j++){    
+                                var groupe=content[j];
+
+                                $('#demande_credit_modal_nomgroupe').val(groupe.nomGroupe);
+                                $('#demande_credit_modal_codegroupe').val(groupe.codegroupe);
+                                // console.log(individuel);
+                            }
+                        }
+                    });
+
+                })
+            }
+        })
+    }
     // L'evenememnt se  produit a l'interieur de cette chemin
-    if( path === '/demande/credit/new'){   
-            
+    if( path === '/demande/credit/new'){               
                 // L'affichage du nom est caché en premier
                     //  $('#individuel').hide();
                     //  $('#groupe').hide();
                     //  $('#garant').hide();
                 // L'utilisateur tape sur le champ code client
-                
                 $('#demande_credit_codeclient').on('blur',function(){
                     // Code client
                     var codeclient=$('#demande_credit_codeclient').val();
@@ -147,6 +223,21 @@ $(document).ready(function(){
           // Si l'utilisateur selectionne individuel on affiche I sinon G
           $('#demande_credit_TypeClient').on('change',function(){
             var client = $('#demande_credit_TypeClient').val();
+
+          })
+        
+
+        // Si l'utilisateur selectionne une produit credit
+        // Touts les configuration correspondantes sera affiché automatiquement
+        $('#demande_credit_ProduitCredit').on('change',function(){
+
+            // on recupere le type client
+            var typeclient=document.getElementById('typeclient').innerHTML;
+
+            // On insere la type client
+
+            $('#demande_credit_TypeClient').val(typeclient);
+
             // Recuperer la derinier id en demande
             var derniernumero=$('#lastnumero').text();
             // Recuperer code agence
@@ -161,23 +252,25 @@ $(document).ready(function(){
             // on aura le code credit
             var numerocredit=codeagence+pad_last_id;
 
-            if(client == 'INDIVIDUEL'){ 
+            if(typeclient == 'INDIVIDUEL'){ 
                 $('#demande_credit_codeclient').val('I');
                 $('#demande_credit_NumeroCredit').val('I'+numerocredit);
             }
-            else if(client == 'GROUPE'){
+            else if(typeclient == 'GROUPE'){
                 $('#demande_credit_codeclient').val('G');
                 $('#demande_credit_NumeroCredit').val('G'+numerocredit);
 
             }  
-
-          })
-        
-
-        // Si l'utilisateur selectionne une produit credit
-        // Touts les configuration correspondantes sera affiché automatiquement
-        $('#demande_credit_ProduitCredit').on('change',function(){
             
+            
+            // On recupere le code client
+            var codeclient= document.getElementById('codeclient').innerHTML;
+
+            // console.log('code client'+codeclient);
+
+            $('#demande_credit_codeclient').val(codeclient);
+
+
             // On recupere le produit credit
 
             var produitcredit=$('#demande_credit_ProduitCredit').val();
@@ -196,7 +289,7 @@ $(document).ready(function(){
                 success : function(content){
                     for(let j=0;j<content.length;j++){
                         var config=content[j];
-                        console.log(config);
+                        // console.log(config);
 
                         // Recuperation du taux garantie financiere
                         var tauxgarantiefinanciere=config.TauxGarantieFinanciere;

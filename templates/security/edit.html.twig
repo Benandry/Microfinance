@@ -23,6 +23,14 @@
                                 {{ form_row(form.email) }}
                         <p id="label-caisse" class="btn btn-warning btn-sm">Compte Caisse :</p> <br/><br/>
                                 {{ form_row(form.caisse) }}
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form_row(form.agence, {
+                                    label: 'Code agence'
+                                }) }}
                             </div>
                         </div>
                         <div class="row m-2">

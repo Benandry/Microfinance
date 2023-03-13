@@ -34,15 +34,11 @@ class PlanComptable
     #[ORM\OneToMany(mappedBy: 'compteCrediteE', targetEntity: ConfigEp::class)]
     private Collection $ConfiEpsCredit;
 
-    #[ORM\OneToMany(mappedBy: 'planComptable', targetEntity: CompteCaisse::class)]
-    private Collection $compteCaisses;
-
     public function __construct()
     {
         $this->mouvementComptables = new ArrayCollection();
         $this->configEps = new ArrayCollection();
         $this->ConfiEpsCredit = new ArrayCollection();
-        $this->compteCaisses = new ArrayCollection();
     }
 
 
@@ -130,85 +126,55 @@ class PlanComptable
         return $this->configEps;
     }
 
-    public function addConfigEp(ConfigEp $configEp): self
-    {
-        if (!$this->configEps->contains($configEp)) {
-            $this->configEps->add($configEp);
-            $configEp->setComptedebiteE($this);
-        }
+    // public function addConfigEp(ConfigEp $configEp): self
+    // {
+    //     if (!$this->configEps->contains($configEp)) {
+    //         $this->configEps->add($configEp);
+    //         $configEp->setComptedebiteE($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeConfigEp(ConfigEp $configEp): self
-    {
-        if ($this->configEps->removeElement($configEp)) {
-            // set the owning side to null (unless already changed)
-            if ($configEp->getComptedebiteE() === $this) {
-                $configEp->setComptedebiteE(null);
-            }
-        }
+    // public function removeConfigEp(ConfigEp $configEp): self
+    // {
+    //     if ($this->configEps->removeElement($configEp)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($configEp->getComptedebiteE() === $this) {
+    //             $configEp->setComptedebiteE(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * @return Collection<int, ConfigEp>
-     */
-    public function getConfiEpsCredit(): Collection
-    {
-        return $this->ConfiEpsCredit;
-    }
+    // /**
+    //  * @return Collection<int, ConfigEp>
+    //  */
+    // public function getConfiEpsCredit(): Collection
+    // {
+    //     return $this->ConfiEpsCredit;
+    // }
 
-    public function addConfiEpsCredit(ConfigEp $confiEpsCredit): self
-    {
-        if (!$this->ConfiEpsCredit->contains($confiEpsCredit)) {
-            $this->ConfiEpsCredit->add($confiEpsCredit);
-            $confiEpsCredit->setCompteCrediteE($this);
-        }
+    // public function addConfiEpsCredit(ConfigEp $confiEpsCredit): self
+    // {
+    //     if (!$this->ConfiEpsCredit->contains($confiEpsCredit)) {
+    //         $this->ConfiEpsCredit->add($confiEpsCredit);
+    //         $confiEpsCredit->setCompteCrediteE($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeConfiEpsCredit(ConfigEp $confiEpsCredit): self
-    {
-        if ($this->ConfiEpsCredit->removeElement($confiEpsCredit)) {
-            // set the owning side to null (unless already changed)
-            if ($confiEpsCredit->getCompteCrediteE() === $this) {
-                $confiEpsCredit->setCompteCrediteE(null);
-            }
-        }
+    // public function removeConfiEpsCredit(ConfigEp $confiEpsCredit): self
+    // {
+    //     if ($this->ConfiEpsCredit->removeElement($confiEpsCredit)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($confiEpsCredit->getCompteCrediteE() === $this) {
+    //             $confiEpsCredit->setCompteCrediteE(null);
+    //         }
+    //     }
 
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CompteCaisse>
-     */
-    public function getCompteCaisses(): Collection
-    {
-        return $this->compteCaisses;
-    }
-
-    public function addCompteCaiss(CompteCaisse $compteCaiss): self
-    {
-        if (!$this->compteCaisses->contains($compteCaiss)) {
-            $this->compteCaisses->add($compteCaiss);
-            $compteCaiss->setPlanComptable($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompteCaiss(CompteCaisse $compteCaiss): self
-    {
-        if ($this->compteCaisses->removeElement($compteCaiss)) {
-            // set the owning side to null (unless already changed)
-            if ($compteCaiss->getPlanComptable() === $this) {
-                $compteCaiss->setPlanComptable(null);
-            }
-        }
-
-        return $this;
-    }
+    //     return $this;
+    // }
 }

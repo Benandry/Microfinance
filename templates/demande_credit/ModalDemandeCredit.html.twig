@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Demande credit
+{% endblock %}
+
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                <div class="modal-header titre_modal">
+                    <h4 class="modal-title text-center">Demande Credit </h4>
+                </div>
+                {{ form_start(form) }} 
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                <div id="info_client">
+                                    {{ form_row(form.TypeClient)}}
+                                    <div id="codeclient">{{ form_row(form.CodeClient)}}</div>
+                                    <div id="individuel" style="display:none">
+                                        {{ form_row(form.nom)}}
+                                        {{ form_row(form.prenom)}}
+                                        {{ form_row(form.codeclient)}}
+                                    </div>
+                                    <div id="codegroupe">{{ form_row(form.CodeGroupe)}}<div>
+                                    <div id="groupe"  style="display:none">
+                                        {{ form_row(form.nomgroupe)}}
+                                        {{ form_row(form.codegroupe)}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                        <input type="submit" value="valider">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div> 
+{% endblock %}
