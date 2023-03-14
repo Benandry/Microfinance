@@ -192,61 +192,6 @@ class TransactionRepository extends ServiceEntityRepository
 
              return $query->getResult();
     }
-
-    // Filtre date arrete transaction
-    public function FiltreDateArreteTransac($Du)
-    {
-        $entityManager=$this->getEntityManager();
-        $query=$entityManager->createQuery(
-            'SELECT
-        -- compte epargne
-        c.id,
-        c.codeepargne,
-        c.codeep,
-        -- individuel client
-        (i.id) as codeclient,
-        (i.nom_client) AS nomclient,
-        (i.prenom_client) AS prenomclient,
-         -- groupe
-         g.nomGroupe,
-        -- produit
-        (p.id) as codeproduit,
-        (p.nomproduit) as nomproduit,
-        -- solde
-        (tr.Montant) as soldes,
-        tr.DateTransaction,
-        tr.Description,
-        tr.typeClient,
-        tr.codetransaction,
-        tr.codeepargneclient,
-        tr.PieceComptable,
-        tr.Montant
-        FROM 
-        App\Entity\CompteEpargne c
-        LEFT JOIN
-        App\Entity\Individuelclient i
-        WITH
-        c.codeep = i.codeclient
-
-        LEFT JOIN
-        App\Entity\Groupe g
-        WITH
-        c.codeep = g.codegroupe
-
-        INNER JOIN
-        App\Entity\ProduitEpargne p
-        WITH
-        c.produit = p.id
-        INNER JOIN
-        App\Entity\Transaction tr
-        WITH tr.codeepargneclient = c.codeepargne
-
-        WHERE tr.DateTransaction <= :Du ')
-        ->setParameter(':Du',$Du);
-
-        return $query->getResult();
-    }
-
     
     // Cette fonction permet de filtrer les rapports soldes
 
@@ -654,7 +599,7 @@ class TransactionRepository extends ServiceEntityRepository
 
             return $query->getResult();
     }
-    public function findTransactionByCode($code_ep)
+    public function findTransactionByCode($code_ep,$du)
     {
         $entityManager=$this->getEntityManager();
         $query=$entityManager->createQuery(
@@ -701,8 +646,10 @@ class TransactionRepository extends ServiceEntityRepository
         App\Entity\Transaction tr
         WITH tr.codeepargneclient = c.codeepargne
 
-        WHERE c.codeepargne = :code_ep ')
-        ->setParameter(':code_ep',$code_ep);
+        WHERE c.codeepargne = :code_ep  AND  tr.DateTransaction <= :Du ')
+        
+        ->setParameter(':code_ep',$code_ep)
+        ->setParameter(':Du',$du);
 
         return $query->getResult();
     }

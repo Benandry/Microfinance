@@ -23,13 +23,7 @@ class RapportController extends AbstractController
 
     #[Route('/rapport', name: 'app_transac_liste')]
     public function index(Request $request,CompteEpargneRepository $compteEpargneRepository,AgenceRepository $agenceRepos): Response
-    {     
-        $rapporttransaction=$compteEpargneRepository->rapportsolde();
-        // Filtre entre deux date
-
-        $showTable_ = false;
-        $data = '';
-
+    {   
         $form1=$this->createFormBuilder()
             ->add('date1',DateType::class,[
                 'widget'=>'single_text',
@@ -40,22 +34,13 @@ class RapportController extends AbstractController
         $form1->handleRequest($request);
 
         if ($form1->isSubmitted() && $form1->isValid()){
-            $showTable_ = true;
-
             $data = $form1->getData()['date1']->format('Y-m-d');
-
-            return $this->redirectToRoute('app_rapport_solde',[
-                'begin' => $data['debut']->format('Y-m-d'),
-                'end'  =>  $data['fin']->format('Y-m-d'),
-            ],Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_rapport_solde',['data' => $data ],Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('rapport/RapportSolde.html.twig', [
-            'compte_epargnes' =>$rapporttransaction,
-            'agences'=>$agenceRepos->findAll(),
+        return $this->renderForm('Module_epargne/rapport/modalReportPay.html.twig', [
             'form1'=>$form1,
-            'showTable' => $showTable_,
-            'one_date' => $data,
+ 
         ]);
     }
 
@@ -65,11 +50,79 @@ class RapportController extends AbstractController
     {
         
         $data = $request->query->get('data');
+        // dd($data);
         $rapporttransaction=$compteEpargneRepository->FiltreSoldeArrete($data); 
-        return $this->render('',[
+        return $this->render('Module_epargne/rapport/reportPay.html.twig',[
             'compte_epargnes' => $rapporttransaction,
+            'dateSolde' => $data
         ]);
     }
+
+
+        /**
+     * Function index de la transaction epargne (Depot et retrait)
+     *
+     * @param Request $request
+     * @param AgenceRepository $agenceRepository
+     * @param TransactionRepository $transactionRepository
+     * @return Response
+     */
+    #[Route('/rapport/transaction/', name: 'app_transaction_index')]
+    public function transaction(Request $request,AgenceRepository $agenceRepository,TransactionRepository $transactionRepository): Response
+    {
+        $form=$this->createForm(FiltreRapportTransactionType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            
+            $date1 = $data['date1'];
+            dd($data);
+            return $this->redirectToRoute('app_rapport_transaction_',['data' => $data],Response::HTTP_SEE_OTHER);
+
+        }
+
+        return $this->renderForm('Module_epargne/transaction/DernierTransaction.html.twig', [
+            'form'=>$form,
+           
+        ]);
+    }
+
+    #[Route('/rapport/transaction/action', name: 'app_rapport_transaction_')]
+    public function raporting_transaction(Request $request,TransactionRepository $transactionRepository): Response
+    {
+        
+        $data = $request->query->get('data');
+        
+        if ($data['compteEpargne']) {
+            $transaction=$transactionRepository->findTransactionByCode($data['compteEpargne']->getCodeepargne(),);
+            $titre = " du client : ".$transaction[0]['nomclient']." ".$transaction[0]['prenomclient'];
+            $SommeMontant = array_sum(array_column($transaction,'Montant'));
+
+         }
+        elseif ($date1 != null) {
+            // En une date ///////////
+            $date_1 = true;
+            $transaction=$transactionRepository->FiltreDateArreteTransac($date1);
+            $SommeMontant = array_sum(array_column($transaction,'Montant'));
+            // dd($SommeMontant);
+            
+        }else{
+            // Entre deux dates ///////////
+            $date_2 = true;
+            $transaction=$transactionRepository->FiltreRapportSolde($date_du_,$date_au_);
+            $SommeMontant = array_sum(array_column($transaction,'Montant'));
+            // dd($SommeMontant);
+        }
+        
+        return $this->render('Module_epargne/rapport/reportPay.html.twig',[
+            'compte_epargnes' => $rapporttransaction,
+            'dateSolde' => $data
+        ]);
+    }
+
+
+
 
     // Releve transaction
     #[Route('/Releve', name: 'app_transaction_releve')]

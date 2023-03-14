@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+        Rapport solde
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                    <div class="modal-header titre_modal">
+                    <h5 class="modal-title text-center"> Rapport solde compte epargne  </h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    {{ form_start(form1) }} 
+                    <!-- Modal body -->
+                     <div class="modal-body">    
+                        <div class="text-center ps-5 pe-5" id="one_date">
+                            <h4 class="text-center"> Date </h4>
+                            {{ form_row(form1.date1) }}
+                        </div>
+                    </div>
+                
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                       <button type="submit" class="btn btn-primary"> Filtrer </button>      
+                     </div>
+                    {{ form_end(form1) }}
+                </div>
+            </div>
+        </div>
+{% endblock %}

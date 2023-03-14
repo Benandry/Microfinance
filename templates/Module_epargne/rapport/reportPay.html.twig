@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}
+    Rapport solde   du :  {{ dateSolde }} 
+{% endblock %}
+{% block head %}  Rapport solde   du :  {{ dateSolde }}  {% endblock %}
+
+{% block body %}
+
+    <table class="table1 table table-bordered" style="margin-top:25px;">
+        <thead>
+            <tr>
+                <th>Compte Epargne</th>
+                <th>Nom Produit</th>
+                <th>Nom et prenom du client </th>
+                <th>Type client </th>
+                <th>Solde</th>
+            </tr>
+        </thead>
+        <tbody class="jumbotron jumbotron-fluid" style="color:black;">
+        {% for CompteEpargne in compte_epargnes %}
+            <tr>
+                <td>{{ CompteEpargne.codeepargne }}</td>
+                <td> {{ CompteEpargne.nomproduit }}</td>
+                {% if CompteEpargne.typeClient == 'INDIVIDUEL' %}
+                    <td>{{ CompteEpargne.nomclient }} {{ CompteEpargne.prenomclient }}</td>
+                {% else %}
+                    <td>{{ CompteEpargne.nomGroupe }}</td>
+                {% endif %}
+                <td> {{ CompteEpargne.typeClient }}</td>
+                <td>{% if CompteEpargne.soldes %} {{ CompteEpargne.soldes|number_format(0,',', ' ') }}  {% else %} 0  {% endif %} Ar </td>
+            </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+{% endblock %}

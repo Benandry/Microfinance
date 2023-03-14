@@ -23,7 +23,9 @@ class FiltreRapportTransactionType extends AbstractType
                 ],
                 'choice_label' => 'codeepargne',
                 'autocomplete' => true,
-                'required' =>false,
+                'attr' => [
+                    'class' => 'border-0',
+                ]
                 ])
             ->add('Du',DateType::class,[
                 'widget'=>'single_text',
