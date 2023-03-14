@@ -30,7 +30,7 @@ class DecaissementType extends AbstractType
             // ->add('fraisPapeterie')
             ->add('commissionCredit')
             ->add('fraisDeDeveloppement')
-            ->add('cash')
+            ->add('OrigineFond')
             // ->add('debit',EntityType::class,[
             //     'class' => PlanComptable::class,
             //     'choice_label' => function($c){

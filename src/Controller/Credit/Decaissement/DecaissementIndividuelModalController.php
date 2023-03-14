@@ -19,13 +19,13 @@ class DecaissementIndividuelModalController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             // Recuperer les donnees du formulaires
             $Client=$form->get('Client')->getData();
+            $Mode=$form->get('Mode')->getData();
             $nomclient=$form->get('nomclient')->getData();
             $prenomclient=$form->get('prenomclient')->getData();
             $numerocredit=$form->get('numerocredit')->getData();
             $montantcredit=$form->get('montantcredit')->getData();
 
             $Date=$form->get('Date')->getData();
-            $Mode=$form->get('Mode')->getData();
             
             return $this->redirectToRoute('app_crud_decaissement_new_individuel',[
 
@@ -34,8 +34,8 @@ class DecaissementIndividuelModalController extends AbstractController
                 'prenomclient'=>$prenomclient,
                 'numerocredit'=>$numerocredit,
                 'montantcredit'=>$montantcredit,
+                'Mode'=>$Mode,
                 'Date'=>$Date,
-                'Mode'=>$Mode
             ],Response::HTTP_SEE_OTHER
         );
         }

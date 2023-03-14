@@ -38,14 +38,17 @@ class Decaissement
     // #[ORM\Column]
     // private ?float $caisseCredit = null;
 
-    #[ORM\Column]
-    private ?bool $cash = null;
+    // #[ORM\Column]
+    // private ?bool $cash = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $refDecaissement = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $NumeroCompteEpargne = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $OrigineFond = null;
 
     public function getId(): ?int
     {
@@ -148,17 +151,17 @@ class Decaissement
     //     return $this;
     // }
 
-    public function isCash(): ?bool
-    {
-        return $this->cash;
-    }
+    // public function isCash(): ?bool
+    // {
+    //     return $this->cash;
+    // }
 
-    public function setCash(bool $cash): self
-    {
-        $this->cash = $cash;
+    // public function setCash(bool $cash): self
+    // {
+    //     $this->cash = $cash;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getRefDecaissement(): ?string
     {
@@ -180,6 +183,18 @@ class Decaissement
     public function setNumeroCompteEpargne(?string $NumeroCompteEpargne): self
     {
         $this->NumeroCompteEpargne = $NumeroCompteEpargne;
+
+        return $this;
+    }
+
+    public function getOrigineFond(): ?string
+    {
+        return $this->OrigineFond;
+    }
+
+    public function setOrigineFond(?string $OrigineFond): self
+    {
+        $this->OrigineFond = $OrigineFond;
 
         return $this;
     }

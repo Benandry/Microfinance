@@ -28,6 +28,7 @@ class CrudDecaissementController extends AbstractController
     #[Route('/new/individuel', name: 'app_crud_decaissement_new_individuel', methods: ['GET', 'POST'])]
     public function individuel(EntityManagerInterface $em,ManagerRegistry $doctrine, Request $request, DecaissementRepository $decaissementRepository,ComptaDecaissement $compta): Response
     {
+        $Mode=$request->query->get('Mode');
         $Client=$request->query->get('Client');
         $nomclient=$request->query->get('nomclient');
         $prenomclient=$request->query->get('prenomclient');
@@ -100,7 +101,8 @@ class CrudDecaissementController extends AbstractController
             'numerocredit'=>$numerocredit,
             'montantcredit'=>$montantcredit,    
             'form' => $form,
-            'demandes' => $demandeApprouver
+            'demandes' => $demandeApprouver,
+            'Mode'=>$Mode
                 ]);
     }
 

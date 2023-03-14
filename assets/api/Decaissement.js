@@ -4,6 +4,10 @@ var path=window.location.pathname;
 
 $(document).ready(function(){
     if(path == '/Decaissement/Modal'){
+
+        // Le bouton validation est vide
+        $('.btn').hide();
+
         $('#decaissement_individuel_modal_Client').on('change',function(){
             // Recuperer l'id client 
             var idclient=$('#decaissement_individuel_modal_Client').val();
@@ -24,6 +28,7 @@ $(document).ready(function(){
                         $('#decaissement_individuel_modal_prenomclient').val(infoindividuel.prenom_client);
                         $('#decaissement_individuel_modal_numerocredit').val(infoindividuel.NumeroCredit);
                         $('#decaissement_individuel_modal_montantcredit').val(infoindividuel.Montant);
+                        $('.btn').show();
                     }
                 }
             });
