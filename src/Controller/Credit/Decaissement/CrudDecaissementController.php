@@ -28,14 +28,22 @@ class CrudDecaissementController extends AbstractController
     #[Route('/new/individuel', name: 'app_crud_decaissement_new_individuel', methods: ['GET', 'POST'])]
     public function individuel(EntityManagerInterface $em,ManagerRegistry $doctrine, Request $request, DecaissementRepository $decaissementRepository,ComptaDecaissement $compta): Response
     {
+        $Client=$request->query->get('Client');
+        $nomclient=$request->query->get('nomclient');
+        $prenomclient=$request->query->get('prenomclient');
+        $numerocredit=$request->query->get('numerocredit');
+        $montantcredit=$request->query->get('montantcredit');
+        // dd($Client,$nomclient,$prenomclient,$numerocredit,$montantcredit);
+
+
         $demandeApprouver = $request->query->all();
         $decaissement = new Decaissement();
         $transaction= new Transaction();
         // dd($demandeApprouver);
 
-        $codecredit = $demandeApprouver['liste']['codeclient'];
+        // $codecredit = $demandeApprouver['liste']['codeclient'];
 
-        $cycle = $decaissementRepository->findByCycle($codecredit)[0][1];
+        // $cycle = $decaissementRepository->findByCycle($codecredit)[0][1];
 
         $form = $this->createForm(DecaissementType::class, $decaissement);
         $form->handleRequest($request);
@@ -53,11 +61,6 @@ class CrudDecaissementController extends AbstractController
             $montant=$decaissement->getMontantCredit();
             $transaction->setMontant($montant);
 
-            $papeterie=$decaissement->getFraisPapeterie();
-            $transaction->setPapeterie($papeterie);
-
-            $commission=$decaissement->getCommissionCredit();
-            $transaction->setCommission($commission);
 
             $transaction->setTypeClient("INDIVIDUEL");
 
@@ -80,10 +83,10 @@ class CrudDecaissementController extends AbstractController
 
             $em=$doctrine->getManager();
             
-            $debit = $form->get('debit')->getData();
-            $credit = $form->get('credit')->getData();
+            // $debit = $form->get('debit')->getData();
+            // $credit = $form->get('credit')->getData();
             // dd($debit);
-            $compta->decaissement($em,$decaissement,$debit,$credit);
+            // $compta->decaissement($em,$decaissement);
 
             $decaissementRepository->add($decaissement, true);
             $this->addFlash('success', "Décaissement de credit  ".$decaissement->getNumeroCredit()." reuissite .Réferences : ".$decaissement->getRefDecaissement());
@@ -92,10 +95,13 @@ class CrudDecaissementController extends AbstractController
 
         return $this->renderForm('Module_credit/crud_decaissement/individuel.html.twig', [
             'decaissement' => $decaissement,
+            'nomclient'=>$nomclient,
+           'prenomclient'=>$prenomclient,
+            'numerocredit'=>$numerocredit,
+            'montantcredit'=>$montantcredit,    
             'form' => $form,
-            'demandes' => $demandeApprouver,
-            'cycle' => $cycle
-        ]);
+            'demandes' => $demandeApprouver
+                ]);
     }
 
     #[Route('/new/groupe', name: 'app_crud_decaissement_new_groupe', methods: ['GET', 'POST'])]
@@ -124,11 +130,6 @@ class CrudDecaissementController extends AbstractController
                         $montant=$decaissement->getMontantCredit();
                         $transaction->setMontant($montant);
             
-                        $papeterie=$decaissement->getFraisPapeterie();
-                        $transaction->setPapeterie($papeterie);
-            
-                        $commission=$decaissement->getCommissionCredit();
-                        $transaction->setCommission($commission);
             
                         $transaction->setTypeClient("GROUPE");
             

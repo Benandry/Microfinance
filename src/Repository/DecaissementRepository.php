@@ -39,8 +39,54 @@ class DecaissementRepository extends ServiceEntityRepository
         }
     }
 
-    //Liste de individuelclient approuver
-    public function decaissementApprouverIndividuel()
+    /**
+     * Undocumented function
+     *
+     * @method mixed IndividuelInfoDecaissementModal():Information utile dans le modal decaissement
+     * @param [type] $id
+     * @return void
+     */
+    public function IndividuelInfoDecaissementModal($id){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+        client.nom_client,
+        client.prenom_client,
+        demande.codeclient,
+        demande.NumeroCredit,
+        demande.Montant,
+        decaissement.numeroCredit,
+        decaissement.NumeroCompteEpargne
+
+        FROM App\Entity\DemandeCredit demande
+        INNER JOIN 
+        App\Entity\Individuelclient client
+        With demande.codeclient = client.codeclient 
+
+        LEFT JOIN 
+        App\Entity\ApprobationCredit appro
+        With appro.codecredit = demande.NumeroCredit
+
+        LEFT JOIN 
+        App\Entity\Decaissement decaissement
+        With decaissement.numeroCredit = appro.codecredit
+
+        where  client.id=:id
+        AND decaissement.numeroCredit IS NULL
+            '
+        )
+        ->setParameter(':id',$id);
+
+        return $query->getResult();
+    }
+
+
+    /**
+     * @method mixed decaissementApprouverIndividuel()
+     */
+
+    public function decaissementApprouverIndividuel($Client)
     {
         $query = "SELECT
         client.nom_client,
@@ -66,10 +112,11 @@ class DecaissementRepository extends ServiceEntityRepository
         With decaissement.numeroCredit = appro.codecredit
 
         where appro.statusApprobation = 'approuvé'
+        AND client.id=:Client
         AND decaissement.numeroCredit IS NULL
         ";
 
-        $statement = $this->getEntityManager()->createQuery($query)->execute();
+        $statement = $this->getEntityManager()->createQuery($query)->setParameter(':Client',$Client)->execute();
 
         return $statement;
     }

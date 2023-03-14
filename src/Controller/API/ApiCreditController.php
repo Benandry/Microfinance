@@ -5,6 +5,7 @@ namespace App\Controller\API;
 use App\Repository\AmortissementFixeRepository;
 use App\Repository\ConfigurationCreditRepository;
 use App\Repository\CreditIndividuelRepository;
+use App\Repository\DecaissementRepository;
 use App\Repository\DemandeCreditRepository;
 use App\Repository\RemboursementCreditRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -225,6 +226,19 @@ class ApiCreditController extends AbstractController
         $garant=$demandeCreditRepository->InfoGarant($codeclient);
 
         return new JsonResponse($garant);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @method mixed DecaissementModalIndividuel()
+     * @return void
+     */
+    #[Route('/DecaissementCredit/Modal/individuel/{id}',name:'app_decaissement_modal_individuel')]
+    public function DecaissementModalIndividuel(DecaissementRepository $decaissementRepository,$id){
+        $decaissement=$decaissementRepository->IndividuelInfoDecaissementModal($id);
+
+        return new JsonResponse($decaissement);
     }
 
 

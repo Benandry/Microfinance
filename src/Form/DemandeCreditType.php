@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\CategorieCredit;
 use App\Entity\DemandeCredit;
 use App\Entity\FondCredit;
+use App\Entity\Individuelclient;
 use App\Entity\ProduitCredit;
 use App\Entity\ProduitEpargne;
 use App\Entity\User;
+use App\Repository\IndividuelclientRepository;
 use Doctrine\DBAL\Types\FloatType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -40,19 +42,6 @@ class DemandeCreditType extends AbstractType
             ->add('TauxInteretAnnuel')
             ->add('NombreTranche')
             ->add('TypeTranche')
-            // ->add('MethodeCalculInteret')
-            // ->add('DiffereDePaiement')
-            // ->add('CapitalDerniereEcheance')
-            // ->add('FondCredit',EntityType::class,[
-            //     'class'=>FondCredit::class,
-            //     'choice_label'=>'NomBailleurs',
-            //     'mapped'=>true,
-            //     'required'=>false,
-            //     'by_reference'=>true,
-            //     'placeholder'=>'Choix fond credit'
-            // ])
-            // ->add('MontantEpargneTranche')
-            // ->add('MontantFixe')
             ->add('SoldeEpargne',TextType::class,[
                 'label' => " Solde Epargne :",
                 'required'=>false,
@@ -65,15 +54,6 @@ class DemandeCreditType extends AbstractType
                     'autocomplete' => true,
                     'required'=>true
             ])
-            // ->add('categorieCredit',EntityType::class,[
-            //     'class'=>CategorieCredit::class,
-            //     'choice_label'=>'NomCategorieCredit',
-            //     'autocomplete'=>true,
-            //     'label'=>" Categorie de categorie :",
-            //     'placeholder'=>'Choix Categorie',
-            // ])
-            // ->add('CalculInteretDiffere')
-            // ->add('CalculInteretJours')
             ->add('ProduitCredit',EntityType::class,[
                 'class'=>ProduitCredit::class,
                 'choice_label'=>'NomProduitCredit',
@@ -81,17 +61,19 @@ class DemandeCreditType extends AbstractType
                 'placeholder'=>'Choisir Produit Credit'
             ])
             
-            // ->add('typeAmortissement',TextType::class,[
-            //     'label' => " Methode :",
-            //     'required'=>false,
-            // ])
-            ->add('garant')
-            // ->add('garantie')
-            // ->add('Valeur')
-            // ->add('Type')
-            // ->add('ValeurUnitaure')
-            // ->add('Unite')
-            // ->add('ValeurTotal')
+            ->add('garant',EntityType::class,[
+                'class'=>Individuelclient::class,
+                'placeholder'=>'Choisir garant',
+                'choice_label'=>function($garant){
+                    return $garant->getNomClient().' '.$garant->getPrenomClient().'-'.$garant->getCodeClient();
+                },
+                'query_builder'=>function(IndividuelclientRepository $garant){
+                    return $garant->createQueryBuilder('i')
+                                  ->where('i.garant = true')
+                                  ->setMaxResults(5);
+                },
+                'autocomplete'=>true
+            ])
             ->add('cycles')
             ->add('CompteEpargne')
             // On recupere les donnees pour les patrimoines ici

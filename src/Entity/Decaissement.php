@@ -26,8 +26,8 @@ class Decaissement
     #[ORM\Column(length: 255)]
     private ?string $pieceComptable = null;
 
-    #[ORM\Column]
-    private ?float $fraisPapeterie = null;
+    // #[ORM\Column]
+    // private ?float $fraisPapeterie = null;
 
     #[ORM\Column]
     private ?float $commissionCredit = null;
@@ -35,8 +35,8 @@ class Decaissement
     #[ORM\Column]
     private ?float $fraisDeDeveloppement = null;
 
-    #[ORM\Column]
-    private ?float $caisseCredit = null;
+    // #[ORM\Column]
+    // private ?float $caisseCredit = null;
 
     #[ORM\Column]
     private ?bool $cash = null;
@@ -100,17 +100,17 @@ class Decaissement
         return $this;
     }
 
-    public function getFraisPapeterie(): ?float
-    {
-        return $this->fraisPapeterie;
-    }
+    // public function getFraisPapeterie(): ?float
+    // {
+    //     return $this->fraisPapeterie;
+    // }
 
-    public function setFraisPapeterie(float $fraisPapeterie): self
-    {
-        $this->fraisPapeterie = $fraisPapeterie;
+    // public function setFraisPapeterie(float $fraisPapeterie): self
+    // {
+    //     $this->fraisPapeterie = $fraisPapeterie;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCommissionCredit(): ?float
     {
@@ -136,17 +136,17 @@ class Decaissement
         return $this;
     }
 
-    public function getCaisseCredit(): ?float
-    {
-        return $this->caisseCredit;
-    }
+    // public function getCaisseCredit(): ?float
+    // {
+    //     return $this->caisseCredit;
+    // }
 
-    public function setCaisseCredit(float $caisseCredit): self
-    {
-        $this->caisseCredit = $caisseCredit;
+    // public function setCaisseCredit(float $caisseCredit): self
+    // {
+    //     $this->caisseCredit = $caisseCredit;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function isCash(): ?bool
     {

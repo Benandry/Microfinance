@@ -41,23 +41,9 @@ class DemandeCredit
     #[ORM\Column(length: 255)]
     private ?string $TypeTranche = null;
 
-    // #[ORM\Column(length: 255)]
-    // private ?string $MethodeCalculInteret = null;
-
-    // #[ORM\Column]
-    // private ?int $DiffereDePaiement = null;
-
-    // #[ORM\Column]
-    // private ?float $CapitalDerniereEcheance = null;
-
     #[ORM\Column(length: 255,nullable:true)]
     private ?string $SoldeEpargne = null;
 
-    // #[ORM\Column(nullable:true)]
-    // private ?bool $CalculInteretDiffere = null;
-
-    // #[ORM\Column(nullable:true)]
-    // private ?bool $CalculInteretJours = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?ProduitCredit $ProduitCredit = null;
@@ -66,33 +52,9 @@ class DemandeCredit
     private ?string $statusApp = null;
 
 
-    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    // #[ORM\Column(nullable:true)]
-    // private ?FondCredit $FondCredit = null;
-
-    // #[ORM\Column(length: 255,nullable:true)]
-    // private ?string $typeAmortissement = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $garant = null;
 
-    // #[ORM\Column(length: 255, nullable: true)]
-    // private ?string $garantie = null;
-
-    // #[ORM\Column(nullable: true)]
-    // private ?int $Valeur = null;
-
-    // #[ORM\Column(length: 255, nullable: true)]
-    // private ?string $Type = null;
-
-    // #[ORM\Column(length: 255, nullable: true)]
-    // private ?string $ValeurUnitaure = null;
-
-    // #[ORM\Column(nullable: true)]
-    // private ?int $Unite = null;
-
-    // #[ORM\Column(nullable: true)]
-    // private ?int $ValeurTotal = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
     private ?User $agent = null;
@@ -100,8 +62,6 @@ class DemandeCredit
     #[ORM\Column(nullable: true)]
     private ?int $cycles = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'demandeCredits')]
-    // private ?CategorieCredit $categorieCredit = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $CompteEpargne = null;
