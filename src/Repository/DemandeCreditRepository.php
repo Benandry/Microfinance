@@ -124,7 +124,7 @@ class DemandeCreditRepository extends ServiceEntityRepository
                     WITH
                     demande.codeclient=individuel.codeclient
                 WHERE
-                    demande.NumeroCredit = :NumeroCredit
+                    demande.id = :NumeroCredit
             '
         )
         ->setParameter(':NumeroCredit',$NumeroCredit);

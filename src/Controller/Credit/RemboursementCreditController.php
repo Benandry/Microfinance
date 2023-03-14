@@ -30,6 +30,7 @@ class RemboursementCreditController extends AbstractController
         // dd($request);
         $typeclient=$request->query->get('typeclient');
         $codecredit = $request->query->get('codecredit');
+        $numerocredit=$request->query->get('numerocredit');
         $penalitenonrmebourser = $request->query->get('penalite');
         $montantprecedent = $request->query->get('montant');
         $montantdu = $request->query->get('montantdu');
@@ -40,11 +41,12 @@ class RemboursementCreditController extends AbstractController
         $crd=$request->query->get('crd');
         $TotalRembourser=$request->query->get('TotalRembourser');
         $TotalaRembourser=$request->query->get('TotalaRembourser');
+        $Mode=$request->query->get('Mode');
         
-        // dd($typeclient);
+        // dd($Mode);
 
-        $historique = $remboursementCreditRepository->HistoriqueRemboursement($codecredit);
-        $tableauAmmortissemnt = $remboursementCreditRepository->TableauAmmortissement($codecredit);
+        $historique = $remboursementCreditRepository->HistoriqueRemboursement($numerocredit);
+        $tableauAmmortissemnt = $remboursementCreditRepository->TableauAmmortissement($numerocredit);
 
         
         $remboursementCredit = new RemboursementCredit();
@@ -388,8 +390,10 @@ class RemboursementCreditController extends AbstractController
             'TotalRembourser' => $TotalRembourser,
             'TotalaRembourser' => $TotalaRembourser,
             'crd'=>$crd,
+            'numerocredit'=>$numerocredit,
             'totalperiode'=>$totalperiode,
             'form' => $form,
+            'Mode'=>$Mode
         ]);
     }
 

@@ -26,6 +26,7 @@ class RemboursementCreditType extends AbstractType
             ->add('Papeterie')
             ->add('TransactionEnLiquide')
             ->add('TransfertEpargne')
+            ->add('CompteEpargne')
             ->add('periode')
             ->add('Caisse',EntityType::class,[
                 'class'=>PlanComptable::class,

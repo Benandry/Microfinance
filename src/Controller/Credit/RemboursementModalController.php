@@ -21,6 +21,7 @@ class RemboursementModalController extends AbstractController
 
             $typeclient=$data['typeclient'];
             $codecredit=$data['codecredit'];
+            $numerocredit=$data['numerocredit'];
             $penalite=$data['penaliteprecedent'];
             $montant=$data['montantprecedent'];
             $montantdu=$data['montantdu'];
@@ -30,11 +31,13 @@ class RemboursementModalController extends AbstractController
             $TotalRembourser=$data['TotalRembourser'];
             $TotalaRembourser=$data['TotalaRembourser'];
             $TotalPeriode=$data['TotalPeriode'];
+            $Mode=$data['Mode'];
             // dd($codecredit);
 
             return $this->redirectToRoute('app_remboursement_credit_new',
             [
                 'typeclient'=>$typeclient,
+                'numerocredit'=>$numerocredit,
                 'codecredit'=>$codecredit,
                 'penalite'=>$penalite,
                 'montant'=>$montant,
@@ -45,6 +48,7 @@ class RemboursementModalController extends AbstractController
                 'TotalRembourser'=>$TotalRembourser,
                 'TotalaRembourser'=>$TotalaRembourser,
                 'TotalPeriode'=>$TotalPeriode,
+                'Mode'=>$Mode
 
             ],Response::HTTP_SEE_OTHER);
 
@@ -56,11 +60,13 @@ class RemboursementModalController extends AbstractController
             'montant'=>'montant',
             'periode'=>'periode',
             'montantdu'=>'montantdu',
+            'numerocredit'=>'numerocredit',
             'crd'=>'crd',
             'TotalRembourser'=>'TotalRembourser',
             'TotalaRembourser'=>'TotalaRembourser',
             'restemontant'=>'restemontant',
             'TotalPeriode'=>'TotalPeriode',
+            'Mode'=>'Mode',
             'form'=>$form
         ]);
     }

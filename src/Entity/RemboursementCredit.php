@@ -59,6 +59,9 @@ class RemboursementCredit
     #[ORM\Column(nullable: true)]
     private ?float $PenalitePaye = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $CompteEpargne = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -245,6 +248,18 @@ class RemboursementCredit
     public function setPenalitePaye(?float $PenalitePaye): self
     {
         $this->PenalitePaye = $PenalitePaye;
+
+        return $this;
+    }
+
+    public function getCompteEpargne(): ?string
+    {
+        return $this->CompteEpargne;
+    }
+
+    public function setCompteEpargne(?string $CompteEpargne): self
+    {
+        $this->CompteEpargne = $CompteEpargne;
 
         return $this;
     }

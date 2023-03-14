@@ -14,7 +14,7 @@
             <div class="col-12 col-sm-12 col-md-12">
               <h6 class="text-center text-primary">Payement</h6>
                     <div class="row" >
-                            <div class="col-sm-3" style="display:none;">
+                            <div class="col-sm-3" style="display:;">
                                 {{ form_row(form.NumeroCredit) }}
                             </div>
                             <div class="col-sm-3">
@@ -25,6 +25,7 @@
                             </div>
                             <div class="col-sm-3" style="display:none;">
                                 {{ form_row(form.periode) }}
+                                {{ form_row(form.TypeClient) }}
                             </div>
                     </div>
                 <hr>
@@ -40,12 +41,26 @@
                         {{ form_row(form.MontantEcheance) }}
                         </div>
                     </div>
-
+                {% if Mode == 'ESPECE' %}
                     <div class="col-sm-3" style="margin-top:25px;margin-left:100px">
-                        {{ form_row(form.TransactionEnLiquide) }}
-                        <div style="display:none;" id="caisse">{{ form_row(form.Caisse) }}</div>
-                        {{ form_row(form.TransfertEpargne) }}
+                        <div s>{{ form_row(form.TransactionEnLiquide) }}</div>
+                        <div>{{ form_row(form.Caisse) }}</div>
+                        <div style="display:none;">{{ form_row(form.TransfertEpargne) }}</div>
+                        <div style="display:none;">{{ form_row(form.CompteEpargne) }}</div>
+
                     </div>
+                {% elseif Mode == 'DAG' %}
+                    <div class="col-sm-3" style="margin-top:25px;margin-left:100px">
+                        <div style="display:none">{{ form_row(form.TransactionEnLiquide) }}</div>
+                        <div style="display:none;">{{ form_row(form.Caisse) }}</div>
+                        </div>{{ form_row(form.TransfertEpargne) }}<div>
+                        <div>{{ form_row(form.CompteEpargne) }}</div>
+
+                    </div>
+                {% endif %}
+                
+
+
                 </div>
                 <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 
@@ -114,6 +129,7 @@
                                     <th scope="col">interet</th>
                                     <th scope="col">Remboursement</th>
                                     <th scope="col">Capital restant du</th> 
+                                    <th scope="col">Interet restant du</th> 
                                     <th scope="col">Credit restant du</th>
                                 </tr>
                             </thead>
@@ -127,6 +143,7 @@
                                         <td>{{ AmortissementFixe.montanttTotal }}</td>
                                         {# <td>{{ AmortissementFixe.annuite }}</td> #}
                                         <td>{{ AmortissementFixe.soldedu }}</td>
+                                        <td>{{ AmortissementFixe.InteretDu }}</td>
                                         <td>{{ AmortissementFixe.MontantRestantDu }}</td>
                                     </tr>
                             {%  endfor %}

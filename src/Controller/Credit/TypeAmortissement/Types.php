@@ -32,6 +32,7 @@ class Types
         $netPayer = $capitalDu + $interet;
         $CRD=$data->getMontant()-$capitalDu;
         $MRD=($data->getMontant()+$interetTotal)-$netPayer;
+        $IRD= $interetTotal-$interet;
 
         $tableau_amort = [
             [
@@ -41,7 +42,8 @@ class Types
                 "interet" => $interet,
                 "montantPayer" =>$netPayer,
                 "soldedu"=>$CRD,
-                "MontantRestantDu"=>$MRD
+                "MontantRestantDu"=>$MRD,
+                "InteretDu"=>$IRD
             ],
         ];
 
@@ -55,6 +57,7 @@ class Types
 
             $CRD-=$capitalDu;
             $MRD-=$netPayer;
+            $interetTotal-=$interet;
 
            array_push($tableau_amort,[
                 'periode'=> $i+1,
@@ -63,7 +66,8 @@ class Types
                 'interet'=>$interet,
                 'montantPayer'=>$netPayer,
                 "soldedu"=>$CRD,
-                "MontantRestantDu"=>$MRD
+                "MontantRestantDu"=>$MRD,
+                "InteretDu"=>$interetTotal
             ]);
 
         }
@@ -85,6 +89,7 @@ class Types
             $amortissement->setTypeamortissement('Lineaire');
             $amortissement->setSoldedu($tableau_amort[$i]['soldedu']);
             $amortissement->setMontantRestantDu($tableau_amort[$i]['MontantRestantDu']);
+            $amortissement->setInteretDu($tableau_amort[$i]['InteretDu']);
             
             $entityManager->persist($amortissement);
             $entityManager->flush();

@@ -103,7 +103,8 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         a.annuite,
         a.soldedu,
         a.codecredit,
-        a.MontantRestantDu
+        a.MontantRestantDu,
+        a.InteretDu
         FROM App\Entity\AmortissementFixe a
         where a.codecredit = '$codeCredit'
 
@@ -114,6 +115,12 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         return $statement;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param string $codeCredit
+     * @return void
+     */
     public function findInfoCredit(string $codeCredit)
     {
         $query = "SELECT
@@ -123,7 +130,8 @@ class AmortissementFixeRepository extends ServiceEntityRepository
         d.TauxInteretAnnuel,
         a.annuite,
         a.remboursement,
-        a.MontantRestantDu
+        a.MontantRestantDu,
+        a.InteretDu
         FROM App\Entity\DemandeCredit d
         LEFT JOIN
         App\Entity\AmortissementFixe a

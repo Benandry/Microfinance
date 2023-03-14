@@ -1,28 +1,24 @@
 import $ from 'jquery'
 
-var path = window.location.pathname
+var path = window.location.pathname;
 
 $(document).ready(function(){
 
     /**
      * La route /modal/remboursement est pour le modal remboursement
      */
-    if( path === '/modal/remboursement' ){
-        
+    if( path === '/modal/remboursement' ){  
+            $('#remboursement_modal_codecredit').hide();
+            $('.btn').hide();
             /**
              * Recuperation des informations groupe ou individuel
              */
             $('#remboursement_modal_typeclient').on('change',function(){
                 var typeclient=$('#remboursement_modal_typeclient').val();
-                if(typeclient == 'INDIVIDUEL'){
-                    $('#remboursement_modal_codecredit').val('I');
-                }
-                else if(typeclient == 'GROUPE'){
-                    $('#remboursement_modal_codecredit').val('G');
-                }
+                // Une fois le client choisir sur type
+                    $('#remboursement_modal_codecredit').show();                
 
-
-                $('#remboursement_modal_codecredit').on('keyup',function(){
+                $('#remboursement_modal_codecredit').on('change',function(){
 
                     var numerocredit=$('#remboursement_modal_codecredit').val();
 
@@ -86,6 +82,7 @@ $(document).ready(function(){
                                     
                                         var resetapayer=parseFloat(remboursementmodal.montanttTotal)-parseFloat(remboursementmodal.montantrembourseModal);
                                         // console.log(resetapayer);
+                                        $('#remboursement_modal_numerocredit').val(remboursementmodal.codecredit);
                                         $('#remboursement_modal_penaliteprecedent').val(remboursementmodal.penaliteremboursementModal);
                                         $('#remboursement_modal_montantprecedent').val(remboursementmodal.montantrembourseModal);
                                         if(remboursementmodal.montantrembourseModal == null){
@@ -108,6 +105,7 @@ $(document).ready(function(){
                                             $('#remboursement_modal_periode').val(remboursementmodal.perioderemboursementModal);
                                         }
                                         $('#remboursement_modal_TotalPeriode').val(remboursementmodal.NombreTranche);
+                                        $('.btn').show();
                                         
                                         
                                 }
@@ -145,15 +143,17 @@ $(document).ready(function(){
      * la route /remboursement/credit/new est pour le remboursement
      */
 
-    if( path === '/remboursement/credit/new' ){
+    // if( path === '/remboursement/credit/new'){
+        console.log('path');
         // var reste= document.getElementById('reste').innerHTML;
-
+  
         // Date automatique
 
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0');
         var yyyy = today.getFullYear();
+
 
       
         // today = mm + '/' + dd + '/' + yyyy;
@@ -165,14 +165,21 @@ $(document).ready(function(){
         
         // Ici on va cacher en premier le formulaire caisse
         
-        
+        $('#caisse').hide();
+
         // On va afficher le numero credit du client individuel
         $('#remboursement_credit_TransactionEnLiquide').on('click',function(){
             $('#caisse').show();
-        })
+        });
+
+        $('#remboursement_credit_MontantTotalPaye').on('blur',function(){
+            console.log('Poinsa');
+        });
 
         
         $('#remboursement_credit_MontantTotalPaye').on('blur',function(){
+
+            console.log('Bonjour');
             
             // On recupere le montant a payer par le client
             var montant = $('#remboursement_credit_MontantTotalPaye').val();
@@ -336,5 +343,5 @@ $(document).ready(function(){
         });
 
       
-    }
+    // }
     });

@@ -28,6 +28,7 @@ class AmortissementController extends AbstractController
         $sumInteret = array_sum(array_column($tableau_amortissement,'interet'));
         $sumNet = array_sum(array_column($tableau_amortissement,'montanttTotal'));
         $soldedu=array_sum(array_column($tableau_amortissement,'soldedu'));
+        $InteretDu=array_sum(array_column($tableau_amortissement,'InteretDu'));
 
         // dd($soldedu);
 
@@ -56,6 +57,7 @@ class AmortissementController extends AbstractController
             'totalInteret' => $sumInteret,
             'totalNet' => $sumNet,
             'soldedu'=>$soldedu,
+            'InteretDu '=>$InteretDu,
             'form' => $form->createView(),
              'codecredit' => $codecredit,
         ]);

@@ -39,6 +39,34 @@ class DecaissementRepository extends ServiceEntityRepository
         }
     }
 
+    public function test(){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+        client,
+        demande,
+        decaissement
+
+        FROM App\Entity\DemandeCredit demande
+        INNER JOIN 
+        App\Entity\Individuelclient client
+        With demande.codeclient = client.codeclient 
+
+        LEFT JOIN 
+        App\Entity\ApprobationCredit appro
+        With appro.codecredit = demande.NumeroCredit
+
+        LEFT JOIN 
+        App\Entity\Decaissement decaissement
+        With decaissement.numeroCredit = appro.codecredit
+            '
+        );
+
+        return $query->getResult();
+
+    }
+
     /**
      * Undocumented function
      *
