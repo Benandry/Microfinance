@@ -66,7 +66,6 @@ class ConfigurationCreditRepository extends ServiceEntityRepository
                 configcredit.PenaliteDiminutionIntrt,
                 configcredit.PenalitePayementAntcp,
                 configcredit.RetardPourcentage,
-                configcredit.PayementAnticipe,
                 configcredit.RetardForfaitaire,
                 configcredit.RetardPeriode,
                 configcredit.RetardPeriodeJour,

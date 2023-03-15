@@ -25,8 +25,6 @@ class DecaissementIndividuelModalController extends AbstractController
             $numerocredit=$form->get('numerocredit')->getData();
             $montantcredit=$form->get('montantcredit')->getData();
 
-            $Date=$form->get('Date')->getData();
-            
             return $this->redirectToRoute('app_crud_decaissement_new_individuel',[
 
                 'Client'=>$Client,
@@ -35,7 +33,6 @@ class DecaissementIndividuelModalController extends AbstractController
                 'numerocredit'=>$numerocredit,
                 'montantcredit'=>$montantcredit,
                 'Mode'=>$Mode,
-                'Date'=>$Date,
             ],Response::HTTP_SEE_OTHER
         );
         }

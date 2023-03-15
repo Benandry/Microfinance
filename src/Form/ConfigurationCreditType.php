@@ -81,8 +81,14 @@ class ConfigurationCreditType extends AbstractType
             // ->add('PayementAnticipe',IntegerType::class,[
             //     'label'=>'P'
             // ])
-            ->add('RetardForfaitaire')
-            ->add('RetardPeriode')
+            ->add('RetardForfaitaire',IntegerType::class,[
+                'label'=>'Forfaitaire',
+                'required'=>false
+            ])
+            ->add('RetardPeriode',IntegerType::class,[
+                'label'=>'Retard par periode(Deduit dans tous les credits)',
+                'required'=>false
+            ])
             ->add('RetardPeriodeJour',RadioType::class,[
                 'label'=>'Retard Periode Jour',
                 'required'=>false,

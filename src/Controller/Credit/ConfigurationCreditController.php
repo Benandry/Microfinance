@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/configuration/credit')]
 class ConfigurationCreditController extends AbstractController
 {
-    // #[Route('/', name: 'app_configuration_credit_index', methods: ['GET'])]
-    // public function index(ConfigurationCreditRepository $configurationCreditRepository): Response
-    // {
-    //     return $this->render('configuration_credit/index.html.twig', [
-    //         'configuration_credits' => $configurationCreditRepository->findAll(),
-    //     ]);
-    // }
-
     #[Route('/',name:'app_liste_produit_configure')]
     public function ListeProduitConfigure(ConfigurationCreditRepository $configurationCreditRepository)
     {
@@ -75,8 +67,8 @@ class ConfigurationCreditController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $configurationCreditRepository->save($configurationCredit, true);
-
-            return $this->redirectToRoute('app_configuration_credit_index', [], Response::HTTP_SEE_OTHER);
+            
+            return $this->redirectToRoute('app_liste_produit_configure', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('configuration_credit/edit.html.twig', [
