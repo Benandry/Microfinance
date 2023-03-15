@@ -3,6 +3,7 @@
 namespace App\Controller\API;
 
 use App\Repository\AmortissementFixeRepository;
+use App\Repository\CompteEpargneRepository;
 use App\Repository\ConfigurationCreditRepository;
 use App\Repository\CreditIndividuelRepository;
 use App\Repository\DecaissementRepository;
@@ -239,6 +240,20 @@ class ApiCreditController extends AbstractController
         $decaissement=$decaissementRepository->IndividuelInfoDecaissementModal($id);
 
         return new JsonResponse($decaissement);
+    }
+
+    /**
+     * @method mixed DepotDeGarantieDecaissement()
+     * 
+     * @param mixed $compteEpargneRepository
+     * @param mixed $idepargne
+     */
+    #[Route('/Epargne/Decaissement/Individuel/{idepargne}',name:'app_decaissement_individuel')]
+    public function DepotDeGarantieDecaissement(CompteEpargneRepository $compteEpargneRepository,$idepargne)
+    {
+        $DecaissementIndividuel=$compteEpargneRepository->DepotDeGarantieDecaissement($idepargne);
+
+        return new JsonResponse($DecaissementIndividuel);
     }
 
 

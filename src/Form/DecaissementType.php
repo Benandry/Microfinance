@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Analytique;
+use App\Entity\CompteEpargne;
 use App\Entity\Decaissement;
 use App\Entity\PlanComptable;
 use App\Entity\User;
+use App\Repository\CompteEpargneRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,56 +29,29 @@ class DecaissementType extends AbstractType
                 'by_reference'=>true
                 ])
             ->add('pieceComptable')
-            // ->add('fraisPapeterie')
             ->add('commissionCredit')
             ->add('fraisDeDeveloppement')
             ->add('OrigineFond')
-            // ->add('debit',EntityType::class,[
-            //     'class' => PlanComptable::class,
-            //     'choice_label' => function($c){
-            //         return $c->getNumeroCompte().' - '.$c->getLibelle();
-            //     },
-            //     'label'=>'Compte debit :',
-            //     'mapped'=>false,
-            //     'placeholder'=>"Compte debit ... ",
-            //     'required' => false,
-            //     'autocomplete' => true,
-            // ])
-
-            // ->add('credit',EntityType::class,[
-            //         'class' => PlanComptable::class,
-            //         'choice_label' => function($c){
-            //             return $c->getNumeroCompte().' - '.$c->getLibelle();
-            //         },
-            //     'label'=>'Compte credit :',
-            //     'mapped'=>false,
-            //     'required' => false,
-            //     'autocomplete' => true,
-            //     'placeholder'=>"Compte credit ... ",
-            // ])
-
-            // ->add('debitAnalytique',EntityType::class,[
-            //     'class' => Analytique ::class,
-            //     'choice_label' => function($c){
-            //         return $c->getCode().' - '.$c->getLibelle();
-            //     },
-            //     'label'=>'Compte debit :',
-            //     'mapped'=>false,
-            //     'placeholder'=>"Compte debit ... ",
-            //     'required' => false,
-            //     'autocomplete' => true,
-            // ])
-            // ->add('creditAnalytique',EntityType::class,[
-            //     'class' => Analytique ::class,
-            //     'choice_label' => function($c){
-            //         return $c->getCode().' - '.$c->getLibelle();
-            //     },
-            //     'label'=>'Compte debit :',
-            //     'mapped'=>false,
-            //     'placeholder'=>"Compte debit ... ",
-            //     'required' => false,
-            //     'autocomplete' => true,
-            // ])
+            ->add('Filiere')
+            ->add('ChaineValeur')
+            ->add('idepargne',EntityType::class,[
+                'class'=>CompteEpargne::class,
+                'placeholder'=>'Choisir un compte',
+                'choice_label'=>function ($DAV){
+                    return $DAV->getCodeepargne();
+                },
+                'query_builder'=>function(CompteEpargneRepository $DAV){
+                    return $DAV->createQueryBuilder('c')
+                        ->join('c.produit','p')
+                        ->where('c.produit = p.id')
+                        ->andWhere('p.nomproduit = \'Dépôts de garantie\'')
+                    ;
+                },
+                'autocomplete'=>true,
+                'label'=>'Depot de garantie',
+                'mapped'=>false,
+                'required'=>false
+            ])
             ->add('NumeroCompteEpargne',TextType::class,[
                 'required'=>false
             ])

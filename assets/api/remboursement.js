@@ -1,13 +1,13 @@
 import $ from 'jquery'
 
-var path = window.location.pathname;
+const path = window.location.pathname;
 
 $(document).ready(function(){
 
     /**
      * La route /modal/remboursement est pour le modal remboursement
      */
-    if( path === '/modal/remboursement' ){  
+    if( path == '/modal/remboursement' ){  
             $('#remboursement_modal_codecredit').hide();
             $('.btn').hide();
             /**
@@ -143,7 +143,7 @@ $(document).ready(function(){
      * la route /remboursement/credit/new est pour le remboursement
      */
 
-    // if( path === '/remboursement/credit/new'){
+    if( path == '/remboursement/credit/new'){
         console.log('path');
         // var reste= document.getElementById('reste').innerHTML;
   
@@ -156,8 +156,8 @@ $(document).ready(function(){
 
 
       
-        // today = mm + '/' + dd + '/' + yyyy;
-        // today = yyyy +'-' +mm + '-' + dd;
+        today = mm + '/' + dd + '/' + yyyy;
+        today = yyyy +'-' +mm + '-' + dd;
 
         today=yyy+'-'+mm+'-'+dd;
         $("#remboursement_credit_DateRemboursement").val(today);
@@ -343,5 +343,5 @@ $(document).ready(function(){
         });
 
       
-    // }
+    }
     });

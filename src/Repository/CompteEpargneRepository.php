@@ -39,12 +39,44 @@ class CompteEpargneRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }   
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $idepargne
+     * @return void
+     */
+    public function DepotDeGarantieDecaissement($idepargne)
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT
+                compte.codeepargne,
+                produit.nomproduit
+            FROM
+                App\Entity\CompteEpargne compte
+            INNER JOIN
+                App\Entity\ProduitEpargne produit
+            WITH
+                compte.produit = produit.id
+            WHERE
+                compte.id = :idepargne'
+        )
+        ->setParameter(':idepargne',$idepargne);
+
+        return $query->getResult();
     }
 
 
-    // Filtre entre deux date des comptes epargnes pour les individuels
-
-   public function FiltreDateIndividuelClient($date1,$date2): array
+    /**
+     * Undocumented function
+     *
+     * @param [type] $date1
+     * @param [type] $date2
+     * @return array
+     */
+    public function FiltreDateIndividuelClient($date1,$date2): array
    {
         $entityManager=$this->getEntityManager();
         $query=$entityManager->createQuery(

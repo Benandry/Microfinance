@@ -3,6 +3,7 @@ import $ from 'jquery'
 var path=window.location.pathname;
 
 $(document).ready(function(){
+    // Chemin vers le modal
     if(path == '/Decaissement/Modal'){
 
         // Le bouton validation est vide
@@ -35,4 +36,33 @@ $(document).ready(function(){
 
         });
     }
+
+    // Chemin vers le decaissement
+    if( path == '/decaissement/credit/crud/new/individuel'){
+        $('#decaissement_idepargne').on('change',function(){
+            var idepargne=$('#decaissement_idepargne').val();
+
+            // Recuperation du chemin qui contient les infos
+            var url_id='/Epargne/Decaissement/Individuel/'+idepargne;
+
+            $.ajax({
+                url:url_id,
+                method:'GET',
+                dataType:"json",
+                contentType:"application/json; charset=utf-8",
+                data : JSON.stringify(idepargne),   
+                success : function(compteerpagne){
+                    for(let j=0;j<compteerpagne.length;j++){    
+                        var compte=compteerpagne[j];
+                        console.log('Bonjour');
+                        console.log(compte);
+
+                        $('#decaissement_NumeroCompteEpargne').val(compte.codeepargne);
+                    }
+                }
+            });
+
+        });
+    }
+
 });

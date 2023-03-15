@@ -50,6 +50,12 @@ class Decaissement
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $OrigineFond = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Filiere = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ChaineValeur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +201,30 @@ class Decaissement
     public function setOrigineFond(?string $OrigineFond): self
     {
         $this->OrigineFond = $OrigineFond;
+
+        return $this;
+    }
+
+    public function getFiliere(): ?string
+    {
+        return $this->Filiere;
+    }
+
+    public function setFiliere(?string $Filiere): self
+    {
+        $this->Filiere = $Filiere;
+
+        return $this;
+    }
+
+    public function getChaineValeur(): ?string
+    {
+        return $this->ChaineValeur;
+    }
+
+    public function setChaineValeur(?string $ChaineValeur): self
+    {
+        $this->ChaineValeur = $ChaineValeur;
 
         return $this;
     }

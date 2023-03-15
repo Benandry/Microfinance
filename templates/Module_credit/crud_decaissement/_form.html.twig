@@ -9,11 +9,11 @@
                 {{ form_row(form.montantCredit) }}
             </div>
                 {{ form_row(form.dateDecaissement) }}
-                {{ form_row(form.NumeroCompteEpargne) }}
+                {{ form_row(form.idepargne) }}
         {% else %}
             <div style="display:none">
                 {{ form_row(form.numeroCredit) }}
-                {{ form_row(form.NumeroCompteEpargne) }}
+                {{ form_row(form.idepargne) }}
             </div>
                 {{ form_row(form.dateDecaissement) }}
                 {{ form_row(form.montantCredit) }}
@@ -24,12 +24,22 @@
             </div>
         </div>
         <div class="col-sm-4 col-xl-4">
-                    {{ form_row(form.OrigineFond) }}
+            {{ form_row(form.OrigineFond) }}
             {{ form_row(form.pieceComptable) }}
         </div>
         <div class="col-sm-4 col-xl-4">
             {{ form_row(form.fraisDeDeveloppement) }}
             {{ form_row(form.commissionCredit) }}
+            <div style="display:none">{{ form_row(form.NumeroCompteEpargne) }}</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4 col-xl-4">
+            {{ form_row(form.Filiere) }}
+        </div>
+        <div class="col-sm-4 col-xl-4">
+            {{ form_row(form.ChaineValeur) }}
         </div>
     </div>
 

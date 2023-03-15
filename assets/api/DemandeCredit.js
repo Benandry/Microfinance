@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-var path = window.location.pathname;
+const path = window.location.pathname;
 
 $(document).ready(function(){
     // L'evenement se produit durant le choix du type client
