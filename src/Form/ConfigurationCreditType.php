@@ -39,13 +39,10 @@ class ConfigurationCreditType extends AbstractType
                 'label'=>'Interet Normal',
                 'required'=>false,
             ])
-            // ->add('InteretDegressif',IntegerType::class,[
-            //     'label'=>'Interet Degressif'
-            // ])
-            // ->add('InteretLineaire',IntegerType::class,[
-            //     'label'=>'Interet Lineaire',
-            //     'required'=>false,
-            // ])
+            ->add('InteretRetard',IntegerType::class,[
+                'label'=>'Interet de retard',
+                'required'=>false
+            ])
             ->add('GarantieMoral',RadioType::class,[
                 'label'=>'Garantie Moral',
                 'required'=>false,
@@ -74,11 +71,16 @@ class ConfigurationCreditType extends AbstractType
                 'required'=>false,
             ])
             ->add('PenalitePayementAntcp',IntegerType::class,[
-                'label'=>'Penalite Payement Anticipé',
+                'label'=>'Penalite Payement Anticipé(deduit dans tous les credits)',
                 'required'=>false,
             ])
-            ->add('RetardPourcentage')
-            ->add('PayementAnticipe')
+            ->add('RetardPourcentage',IntegerType::class,[
+                'label'=>'Penalite par pourcentage(deduit dans tous les credits)',
+                'required'=>false
+            ])
+            // ->add('PayementAnticipe',IntegerType::class,[
+            //     'label'=>'P'
+            // ])
             ->add('RetardForfaitaire')
             ->add('RetardPeriode')
             ->add('RetardPeriodeJour',RadioType::class,[

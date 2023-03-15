@@ -24,12 +24,6 @@ class ConfigurationCredit
     #[ORM\Column(nullable: true)]
     private ?float $InteretNormal = null;
 
-    // #[ORM\Column(nullable: true)]
-    // private ?float $InteretDegressif = null;
-
-    // #[ORM\Column(nullable: true)]
-    // private ?float $InteretLineaire = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $GarantieMoral = null;
 
@@ -63,8 +57,8 @@ class ConfigurationCredit
     #[ORM\Column(nullable: true)]
     private ?float $RetardPourcentage = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $PayementAnticipe = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?float $PayementAnticipe = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $RetardForfaitaire = null;
@@ -78,10 +72,6 @@ class ConfigurationCredit
     #[ORM\Column(nullable: true)]
     private ?bool $RetardPeriodeMois = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'configurationCredits')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?ProduitCredit $ProduitCredit = null;
-
     #[ORM\Column(length: 255)]
     private ?string $Methode = null;
 
@@ -90,6 +80,9 @@ class ConfigurationCredit
 
     #[ORM\Column]
     private ?int $idProduit = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $InteretRetard = null;
 
     public function getId(): ?int
     {
@@ -265,17 +258,17 @@ class ConfigurationCredit
         return $this;
     }
 
-    public function getPayementAnticipe(): ?float
-    {
-        return $this->PayementAnticipe;
-    }
+    // public function getPayementAnticipe(): ?float
+    // {
+    //     return $this->PayementAnticipe;
+    // }
 
-    public function setPayementAnticipe(?float $PayementAnticipe): self
-    {
-        $this->PayementAnticipe = $PayementAnticipe;
+    // public function setPayementAnticipe(?float $PayementAnticipe): self
+    // {
+    //     $this->PayementAnticipe = $PayementAnticipe;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getRetardForfaitaire(): ?float
     {
@@ -325,18 +318,6 @@ class ConfigurationCredit
         return $this;
     }
 
-    // public function getProduitCredit(): ?ProduitCredit
-    // {
-    //     return $this->ProduitCredit;
-    // }
-
-    // public function setProduitCredit(?ProduitCredit $ProduitCredit): self
-    // {
-    //     $this->ProduitCredit = $ProduitCredit;
-
-    //     return $this;
-    // }
-
     public function getMethode(): ?string
     {
         return $this->Methode;
@@ -369,6 +350,18 @@ class ConfigurationCredit
     public function setIdProduit(int $idProduit): self
     {
         $this->idProduit = $idProduit;
+
+        return $this;
+    }
+
+    public function getInteretRetard(): ?float
+    {
+        return $this->InteretRetard;
+    }
+
+    public function setInteretRetard(?float $InteretRetard): self
+    {
+        $this->InteretRetard = $InteretRetard;
 
         return $this;
     }

@@ -5,15 +5,16 @@
 
 {{ form_start(form) }}
   <ul class="nav nav-tabs">
-      <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#etat">General</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#famille">Interet</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adresse">Garantie</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#groupe">Frais</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#identite">Penalite</a></li>
+      <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#General">General</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Interet">Interet</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Garantie">Garantie</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Frais">Frais</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Penalite">Penalite</a></li>
+      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Promotion">Promotion</a></li>
   </ul>
   <div class="tab-content">
 
-      <div class="tab-pane active" id="etat">
+      <div class="tab-pane active" id="General">
         <div class="row shadow-sm p-1">
             <div class="col-12 col-sm-12 col-md-12">
               <h6 class="text-center text-primary">General</h6>
@@ -33,7 +34,7 @@
         </div>
       </div>
 
-      <div class="tab-pane" id="famille">
+      <div class="tab-pane" id="Interet">
         <div class="row shadow-sm p-1">
             <div class="col-12 col-sm-12 col-md-12">
                 <h6 class="text-center text-primary">Interet</h6>
@@ -42,15 +43,14 @@
                       {{ form_row(form.InteretNormal) }}
                     </div>
                     <div class="col-6 col-sm-6">
-                      {# {{ form_row(form.InteretDegressif) }}
-                      {{ form_row(form.InteretLineaire) }} #}
+                      {{ form_row(form.InteretRetard) }}
                     </div>
                 </div>
             </div>
         </div>
       </div>
 
-      <div class="tab-pane" id="adresse">
+      <div class="tab-pane" id="Garantie">
         <div class="row shadow-sm p-1">
             <div class="col-12">
               <h6 class="text-center text-primary" >Garantie</h6>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="tab-pane" id="groupe">
+      <div class="tab-pane" id="Frais">
         <div class="row shadow-sm p-1">
             <div class="col-12">
               <h6 class="text-center text-primary">Frais</h6>
@@ -86,29 +86,48 @@
         </div>
       </div>
 
-      <div class="tab-pane" id="identite">
+      <div class="tab-pane" id="Penalite">
         <div class="row shadow-sm p-1">
             <div class="col-12">
               <h6 class="text-center text-primary">Penalite </h6>
                   <div class="row">                
                       <div class="col-4 col-sm-4">
-                         {{ form_row(form.PenaliteDiminutionIntrt) }}
                         {{ form_row(form.PenalitePayementAntcp) }}
                         {{ form_row(form.RetardPourcentage) }}
                         {{ form_row(form.RetardForfaitaire) }}
                       </div>
                       <div class="col-4 col-sm-4">
-                        {{ form_row(form.PayementAnticipe) }}
+                        {# {{ form_row(form.PayementAnticipe) }} #}
                         {{ form_row(form.RetardPeriodeJour) }}
                         {{ form_row(form.RetardPeriodeMois) }}
                           {{ form_row(form.RetardPeriode) }}
-                      </div>
-                      <div class="col-sm-4 mt-5">
-                          <button class="btn btn-sm btn-primary">{{ button_label|default('Sauvegarder') }}</button>
                       </div>
                   </div>
             </div>
         </div>
       </div>
+
+
+            <div class="tab-pane" id="Promotion">
+        <div class="row shadow-sm p-1">
+            <div class="col-12">
+              <h6 class="text-center text-primary">Promotion </h6>
+                  <div class="row">                
+                      <div class="col-4 col-sm-4">
+                         {{ form_row(form.PenaliteDiminutionIntrt) }}
+                      </div>
+                      <div class="col-4 col-sm-4">
+                      </div>
+                  </div>
+            </div>
+        </div>
+      </div>
+
+
+
+
   </div>
+                      <div class="col-sm-4 mt-5">
+                          <button class="btn btn-sm btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+                      </div>
 {{ form_end(form) }}
