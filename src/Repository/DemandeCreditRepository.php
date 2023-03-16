@@ -41,6 +41,35 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
     /**
      * Undocumented function
+     *
+     * @method mixed Ammortissement():Methode permet de recuperer le code credit pour afficher le tableau d'ammortissement
+     * 
+     * @param [type] $codecredit
+     * @return void
+     */
+    public function Ammortissement($codecredit){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                demande.Montant,
+                demande.TauxInteretAnnuel,
+                demande.NombreTranche,
+                demande.TypeTranche,
+                demande.codeclient
+                FROM
+                    App\Entity\DemandeCredit demande
+                WHERE
+                demande.NumeroCredit = :codecredit
+            '
+        )
+        ->setParameter(':codecredit',$codecredit);
+
+        return $query->getResult();
+    }
+
+    /**
+     * Undocumented function
      *@method mixed InfoClientDemandeCreditIndividuel() : Mehode permet de connaitre l'information 
      *individuel
      *@param mixed $codeclient:code client individuel

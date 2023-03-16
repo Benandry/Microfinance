@@ -16,7 +16,7 @@ class Types
     }
 
     /**Amortissement simple */
-    public function amortissementSimple($data)
+    public function Lineaire($data)
     {
 
         /**Code credit */

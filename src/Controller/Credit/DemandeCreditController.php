@@ -16,6 +16,7 @@ use App\Controller\Credit\TypeAmortissement\Types;
 use App\Entity\PatrimoineCredit;
 use App\Form\PatrimoineCreditType;
 use App\Repository\PatrimoineCreditRepository;
+use App\Service\TableauAmmortissementDemandeService;
 use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/demande/credit')]
@@ -30,7 +31,7 @@ class DemandeCreditController extends AbstractController
     }
 
     #[Route('/new', name: 'app_demande_credit_new', methods: ['GET', 'POST'])]
-    public function new(EntityManagerInterface $em,Request $request,PatrimoineCreditRepository $patrimoineCreditRepository, DemandeCreditRepository $demandeCreditRepository,Types $traitement,ManagerRegistry $doctine ): Response
+    public function new(TableauAmmortissementDemandeService $ammortissement,EntityManagerInterface $em,Request $request,PatrimoineCreditRepository $patrimoineCreditRepository, DemandeCreditRepository $demandeCreditRepository,Types $traitement,ManagerRegistry $doctine ): Response
     {
 
         /**
@@ -119,20 +120,25 @@ class DemandeCreditController extends AbstractController
             /***Amortissement simple */
            if($data->getTypeTranche() == "Lineaire")
            {
-                $traitement->amortissementSimple($data);
-                return $this->redirectToRoute('app_tableau_amortissement', [
+                // $traitement->Lineaire($data);
+                return $this->redirectToRoute('app_lineaire', [
                     'codecredit' => $codecredit,
                 ], Response::HTTP_SEE_OTHER);
            }
+        // if($data->getTypeTranche() == 'Lineaire'){
+        //     return $this->redirectToRoute('app_lineaire',[
+        //         'codecredit' => $codecredit,
+        //     ],Response::HTTP_SEE_OTHER);
+        // }
 
              /***Amortissement Degressif */
-             if($data->getTypeTranche() == "Degressif")
-             {
-                  $traitement->Degressif($data);
-                  return $this->redirectToRoute('app_degressif_ammortissement', [
-                      'codecredit' => $codecredit,
-                  ], Response::HTTP_SEE_OTHER);
-             } 
+            //  if($data->getTypeTranche() == "Degressif")
+            //  {
+            //       $traitement->Degressif($data);
+            //       return $this->redirectToRoute('app_degressif_ammortissement', [
+            //           'codecredit' => $codecredit,
+            //       ], Response::HTTP_SEE_OTHER);
+            //  } 
            
         }
 

@@ -6,7 +6,7 @@
 {% block body %}
     {{ include('modal.html.twig') }}
     <div class="card p-3">
-        {% for data in info %}
+        {# {% for data in info %}
             <div class="card">
                 <div class="row text-secondary m-3">
                     <div class="col-4 col-sm-4 col-sm-4">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-        {% endfor %}
+        {% endfor %} #}
         <table class="table table-bordered mt-2">
             <thead>
                 <tr>
@@ -35,17 +35,17 @@
                 </tr>
             </thead>
             <tbody>
-                {% for tab in amortissement %}
+                {% for demandeAmmortissement in demandeAmmortissement %}
                     <tr>
-                        <td> {{ tab.periode}} </td>
-                        <td>{{ tab.dateRemborsement|date("d/m/Y")}}</td>
-                        <td>{{ tab.principale }}</td>
-                        <td>{{ tab.interet }}</td>
-                        <td>{{ tab.montanttTotal }}</td>
-                        <td>{{ tab.MontantRestantDu }}</td>
-                        <td>{{ tab.InteretDu }}</td>
-                        <td>{{ tab.soldedu }}</td>
-                        <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td>
+                        <td> {{ demandeAmmortissement.periode}} </td>
+                        <td>{{ demandeAmmortissement.dateRemborsement|date("d/m/Y")}}</td>
+                        <td>{{ demandeAmmortissement.principale }}</td>
+                        <td>{{ demandeAmmortissement.interet }}</td>
+                        <td>{{ demandeAmmortissement.montanttTotal }}</td>
+                        <td>{{ demandeAmmortissement.MontantRestantDu }}</td>
+                        <td>{{ demandeAmmortissement.InteretDu }}</td>
+                        <td>{{ demandeAmmortissement.soldedu }}</td>
+                        {# <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td> #}
                     </tr>
                 {% endfor %}
                 <tr>

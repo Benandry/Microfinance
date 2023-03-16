@@ -50,17 +50,17 @@ class AmortissementController extends AbstractController
             return $this->redirectToRoute('app_demande_credit_new', [], Response::HTTP_SEE_OTHER);
 
         }
-        return $this->render('demande_credit/amortissement/index.html.twig', [
-            'info' => $info,
-            'amortissement' =>$tableau_amortissement,
-            'totalMontant' => $sumMontant,
-            'totalInteret' => $sumInteret,
-            'totalNet' => $sumNet,
-            'soldedu'=>$soldedu,
-            'InteretDu '=>$InteretDu,
-            'form' => $form->createView(),
-             'codecredit' => $codecredit,
-        ]);
+        // return $this->render('demande_credit/amortissement/index.html.twig', [
+        //     'info' => $info,
+        //     'amortissement' =>$tableau_amortissement,
+        //     'totalMontant' => $sumMontant,
+        //     'totalInteret' => $sumInteret,
+        //     'totalNet' => $sumNet,
+        //     'soldedu'=>$soldedu,
+        //     'InteretDu '=>$InteretDu,
+        //     'form' => $form->createView(),
+        //      'codecredit' => $codecredit,
+        // ]);
     }
 
     #[Route('/demandecredit/tableauamortissement/Degressif', name: 'app_degressif_ammortissement')]
