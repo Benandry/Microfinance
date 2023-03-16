@@ -39,8 +39,27 @@ $(document).ready(function(){
 
     // Chemin vers le decaissement
     if( path == '/decaissement/credit/crud/new/individuel'){
+
+                // Date automatique
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyy = today.getFullYear();
+        
+        
+              
+                today = mm + '/' + dd + '/' + yyy;
+                today = yyy +'-' +mm + '-' + dd;
+        
+                today=yyy+'-'+mm+'-'+dd;
+                $("#decaissement_dateDecaissement").val(today);
+        
+
+        $('#decaissement_NumeroCompteEpargne').val(0);
+
         $('#decaissement_idepargne').on('change',function(){
-            var idepargne=$('#decaissement_idepargne').val();
+            var idepargne=$('#decaissement_idepargne').val(0);
 
             // Recuperation du chemin qui contient les infos
             var url_id='/Epargne/Decaissement/Individuel/'+idepargne;
@@ -54,9 +73,7 @@ $(document).ready(function(){
                 success : function(compteerpagne){
                     for(let j=0;j<compteerpagne.length;j++){    
                         var compte=compteerpagne[j];
-                        console.log('Bonjour');
                         console.log(compte);
-
                         $('#decaissement_NumeroCompteEpargne').val(compte.codeepargne);
                     }
                 }

@@ -44,7 +44,7 @@ class Decaissement
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $refDecaissement = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 30, nullable: true)]
     private ?string $NumeroCompteEpargne = null;
 
     #[ORM\Column(length: 255, nullable: true)]

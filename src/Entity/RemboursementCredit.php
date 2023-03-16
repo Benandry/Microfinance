@@ -62,6 +62,12 @@ class RemboursementCredit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $CompteEpargne = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $Capital = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $Interet = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -260,6 +266,30 @@ class RemboursementCredit
     public function setCompteEpargne(?string $CompteEpargne): self
     {
         $this->CompteEpargne = $CompteEpargne;
+
+        return $this;
+    }
+
+    public function getCapital(): ?float
+    {
+        return $this->Capital;
+    }
+
+    public function setCapital(?float $Capital): self
+    {
+        $this->Capital = $Capital;
+
+        return $this;
+    }
+
+    public function getInteret(): ?float
+    {
+        return $this->Interet;
+    }
+
+    public function setInteret(?float $Interet): self
+    {
+        $this->Interet = $Interet;
 
         return $this;
     }

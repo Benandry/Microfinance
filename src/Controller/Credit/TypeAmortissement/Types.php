@@ -57,7 +57,7 @@ class Types
 
             $CRD-=$capitalDu;
             $MRD-=$netPayer;
-            $interetTotal-=$interet;
+            $IRD-=$interet;
 
            array_push($tableau_amort,[
                 'periode'=> $i+1,
@@ -67,7 +67,7 @@ class Types
                 'montantPayer'=>$netPayer,
                 "soldedu"=>$CRD,
                 "MontantRestantDu"=>$MRD,
-                "InteretDu"=>$interetTotal
+                "InteretDu"=>$IRD
             ]);
 
         }
@@ -118,6 +118,7 @@ class Types
          $interetTotal = $data->getTauxInteretAnnuel();
          $interetDu = $interetTotal / $tranche;
          $CRD=$data->getMontant()-$capitalDu;
+        
 
             
                   
@@ -131,6 +132,7 @@ class Types
             $SommeInterets+=$interet;
             $SommI=$SommeInterets/2;
         }
+        // dd($SommI);
         /**
          * Somme des interet et capital
          */
@@ -139,6 +141,8 @@ class Types
         $MRD=$InteretCap-$MontantPayer;
         // dd($InteretCap);
 
+        // Interet du
+        $IRD= $SommI-$interet;
         // dd($SommI);
 
          $tableau_amort = [
@@ -150,6 +154,7 @@ class Types
                  "montantPayer" =>$MontantPayer,
                  "soldedu"=>$CRD,
                  "MontantRestantDu"=>$MRD,
+                 "InteretDu"=>$IRD
              ],
          ]; 
 
@@ -165,6 +170,7 @@ class Types
              $interet=$CRD*$interetDu/100;
              $MontantPayer=$capitalDu+$interet;
              $MRD-=$MontantPayer;
+             $IRD-=$interet;
  
             array_push($tableau_amort,[
                  'periode'=> $i+1,
@@ -174,6 +180,7 @@ class Types
                  'montantPayer'=>$MontantPayer,
                  "soldedu"=>$CRD,
                  "MontantRestantDu"=>$MRD,
+                 "InteretDu"=>$IRD
              ]);
 
  
@@ -196,6 +203,8 @@ class Types
              $amortissement->setTypeamortissement('Degressif');
              $amortissement->setSoldedu($tableau_amort[$i]['soldedu']);
              $amortissement->setMontantRestantDu($tableau_amort[$i]['MontantRestantDu']);
+             $amortissement->setInteretDu($tableau_amort[$i]['InteretDu']);
+
              
              $entityManager->persist($amortissement);
              $entityManager->flush();

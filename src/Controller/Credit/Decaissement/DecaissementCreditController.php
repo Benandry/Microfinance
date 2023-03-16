@@ -18,7 +18,7 @@ class DecaissementCreditController extends AbstractController
         $prenomclient=$request->query->get('prenomclient');
         $numerocredit=$request->query->get('numerocredit');
         $montantcredit=$request->query->get('montantcredit');
-        dd($Client,$nomclient,$prenomclient,$numerocredit,$montantcredit);
+        // dd($Client,$nomclient,$prenomclient,$numerocredit,$montantcredit);
 
         $listeDemandeApprouver = $decaissementRepository->decaissementApprouverIndividuel($Client);
         // dd($listeDemandeApprouver);

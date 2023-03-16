@@ -257,4 +257,12 @@ class ApiCreditController extends AbstractController
     }
 
 
+    #[Route('/Reechelonnement/Modal/{idcredit}',name:'app_modal_reechelonnement')]
+    public function ReechelonnementModal(DecaissementRepository $decaissementRepository,$idcredit)
+    {
+        $reechelonnement=$decaissementRepository->ReechelonnementModal($idcredit);
+        
+        return new JsonResponse($reechelonnement);
+    }
+
 }

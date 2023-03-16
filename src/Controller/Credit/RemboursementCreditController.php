@@ -42,6 +42,8 @@ class RemboursementCreditController extends AbstractController
         $TotalRembourser=$request->query->get('TotalRembourser');
         $TotalaRembourser=$request->query->get('TotalaRembourser');
         $Mode=$request->query->get('Mode');
+        $capital=$request->query->get('capital');
+        $interet=$request->query->get('interet');
         
         // dd($Mode);
 
@@ -69,6 +71,12 @@ class RemboursementCreditController extends AbstractController
 
             $montantrembourser = $remboursementCredit->getMontantTotalPaye();
 
+            // Recuperation capitale
+            $capitalrembourser=$montantrembourser-$interet;
+
+            // Recuperation interet
+            $interetrembourser=$montantrembourser-$capitalrembourser;
+
             if ($montantrembourser > $echeance && $restemontant == 0) {
                 $periodeactuel=$remboursementCredit->getPeriode();
                 $commentaire='ANTICIPE';
@@ -78,7 +86,8 @@ class RemboursementCreditController extends AbstractController
                 // dd($resteperiode); 
 
 
-                // Regle de 3
+                // Regle de 3 pour calculer le nombre de tranche reqtant
+
                 $tranche=$montantrembourser*$resteperiode/$TotalaRembourser;
                 // dd($tranche);
 
@@ -98,7 +107,9 @@ class RemboursementCreditController extends AbstractController
                         'Periode' => $periodeactuel++,
                         'Penalite' => $remboursementCredit->getPenalite(),
                         'Commentaire' => $commentaire,
-                        'TypeClient'=>$typeclient
+                        'TypeClient'=>$typeclient,
+                        'Capital'=>$capitalrembourser,
+                        'Interet'=>$interetrembourser
 
                     ]
                 ];
@@ -119,7 +130,9 @@ class RemboursementCreditController extends AbstractController
                         'Periode' => $periodeactuel++,
                         'Penalite' => $remboursementCredit->getPenalite(),
                         'Commentaire' => $commentaire,
-                        'TypeClient'=>$typeclient
+                        'TypeClient'=>$typeclient,
+                        'Capital'=>$capitalrembourser,
+                        'Interet'=>$interetrembourser
                     ]);
 
                 }
@@ -143,6 +156,8 @@ class RemboursementCreditController extends AbstractController
                     $ant->setPenalite($montant['Penalite']);
                     $ant->setCommentaire($montant['Commentaire']);
                     $ant->setTypeClient($montant['TypeClient']);
+                    $ant->setCapital($montant['Capital']);
+                    $ant->setInteret($montant['Interet']);
 
                     $em->persist($ant);
                     $em->flush();
@@ -215,6 +230,9 @@ class RemboursementCreditController extends AbstractController
                             'Commentaire' => $remboursementCredit->getCommentaire(),
                             'TypeClient'=>$typeclient,
                             'PenalitePaye'=>$penalitearemb,
+                            'Capital'=>$capitalrembourser,
+                            'Interet'=>$interetrembourser
+    
                         ),
                         // ligne 2
                         array(
@@ -231,6 +249,9 @@ class RemboursementCreditController extends AbstractController
                             'Commentaire' => $remboursementCredit->getCommentaire(),
                             'TypeClient'=>$typeclient,
                             'PenalitePaye'=>$penal,
+                            'Capital'=>$capitalrembourser,
+                            'Interet'=>$interetrembourser
+    
                         ),
 
                     ];
@@ -254,6 +275,9 @@ class RemboursementCreditController extends AbstractController
                         $remb->setCommentaire($remboursementData['Commentaire']);
                         $remb->setTypeClient($remboursementData['TypeClient']);
                         $remb->setPenalitePaye($remboursementData['PenalitePaye']);
+                        $remb->setCapital($remboursementData['Capital']);
+                        $remb->setInteret($remboursementData['Interet']);
+    
 
                         $em->persist($remb);
 
@@ -284,7 +308,10 @@ class RemboursementCreditController extends AbstractController
                             'Periode' => $remboursementCredit->getPeriode()-1,
                             'Penalite' => $remboursementCredit->getPenalite(),
                             'Commentaire' => $remboursementCredit->getCommentaire(),
-                            'TypeClient'=>$typeclient
+                            'TypeClient'=>$typeclient,
+                            'Capital'=>$capitalrembourser,
+                            'Interet'=>$interetrembourser
+    
 
                         ),
                         // ligne 2
@@ -300,7 +327,9 @@ class RemboursementCreditController extends AbstractController
                             'Periode' => $remboursementCredit->getPeriode(),
                             'Penalite' => $penalite,
                             'Commentaire' => $Commentaire,
-                            'TypeClient'=>$typeclient
+                            'TypeClient'=>$typeclient,
+                            'Capital'=>$capitalrembourser,
+                            'Interet'=>$interetrembourser    
                         ),
 
                     ];
@@ -323,6 +352,9 @@ class RemboursementCreditController extends AbstractController
                         $rembRetardDouble->setPenalite($remboursementData['Penalite']);
                         $rembRetardDouble->setCommentaire($remboursementData['Commentaire']);
                         $rembRetardDouble->setTypeClient($remboursementData['TypeClient']);
+                        $rembRetardDouble->setCapital($remboursementData['Capital']);
+                        $rembRetardDouble->setInteret($remboursementData['Interet']);
+
 
                         $em->persist($rembRetardDouble);
 
@@ -367,6 +399,10 @@ class RemboursementCreditController extends AbstractController
                 $TypeClient=$remboursementCredit->getTypeClient();
                 $remboursementCredit->setTypeClient($TypeClient);
 
+                $remboursementCredit->setCapital($capitalrembourser);
+
+                $remboursementCredit->setInteret($interetrembourser);
+
                 $entityManager->persist($remboursementCredit);
             }
             $entityManager->flush();
@@ -393,7 +429,7 @@ class RemboursementCreditController extends AbstractController
             'numerocredit'=>$numerocredit,
             'totalperiode'=>$totalperiode,
             'form' => $form,
-            'Mode'=>$Mode
+            'Mode'=>$Mode,
         ]);
     }
 

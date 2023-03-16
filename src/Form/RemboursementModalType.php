@@ -20,7 +20,8 @@ class RemboursementModalType extends AbstractType
     {
         $builder
             ->add('typeclient',ChoiceType::class,[
-                'placeholder'=>'Type Client',
+                'placeholder'=>'Choisir type Client',
+                'label'=>'Type cllent',
                 'choices'=>[
                     'INDIVIDUEL'=>'INDIVIDUEL',
                     'GROUPE'=>'GROUPE',
@@ -28,6 +29,7 @@ class RemboursementModalType extends AbstractType
             ])
             ->add('codecredit',EntityType::class,[
                 'class'=>Decaissement::class,
+                'label'=>'Numero Credit',
                 'placeholder'=>'Choisir client',
                 'choice_label'=>function($remboursement){
                     return $remboursement->getNumeroCredit();
@@ -73,6 +75,8 @@ class RemboursementModalType extends AbstractType
             ->add('TotalPeriode',TextType::class,[
                 'required'=>false
             ])
+            ->add('capital')
+            ->add('interet')
             ;
     }
 

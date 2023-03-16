@@ -43,8 +43,8 @@
                     </div>
                 {% if Mode == 'ESPECE' %}
                     <div class="col-sm-3" style="margin-top:25px;margin-left:100px">
-                        <div s>{{ form_row(form.TransactionEnLiquide) }}</div>
-                        <div>{{ form_row(form.Caisse) }}</div>
+                        <div>{{ form_row(form.TransactionEnLiquide) }}</div>
+                        <div id="caisse">{{ form_row(form.Caisse) }}</div>
                         <div style="display:none;">{{ form_row(form.TransfertEpargne) }}</div>
                         <div style="display:none;">{{ form_row(form.CompteEpargne) }}</div>
 
@@ -80,7 +80,9 @@
                                     <th scope="col">Date defini</th>
                                     <th scope="col">Date de remboursement</th>
                                     <th scope="col">Periode</th>
-                                    <th scope="col">Montant du</th>
+                                    <th scope="col">Capital</th>
+                                    <th scope="col">Interet</th>
+                                    {# <th scope="col">Montant du</th> #}
                                     <th scope="col">Payement</th>
                                     <th scope="col">Penalite</th>
                                 </tr>
@@ -92,7 +94,9 @@
                                         <td>{{ AmortissementFixe.dateRemborsement|date('Y-m-d') }}</td>
                                         <td>{{ AmortissementFixe.dateremb|date('Y-m-d') }}</td>
                                         <td>{{ AmortissementFixe.perioderemboursement }}</td>
-                                        <td>{{ AmortissementFixe.montanttTotal }}</td>
+                                        <td>{{ AmortissementFixe.Capital }}</td>
+                                        <td>{{ AmortissementFixe.Interet }}</td>
+                                        {# <td>{{ AmortissementFixe.montanttTotal }}</td> #}
                                         <td>{{ AmortissementFixe.montantrembourse }}</td>
                                         <td>{{ AmortissementFixe.penaliteremboursement }}</td>
                                     </tr>
@@ -101,6 +105,8 @@
                                         <td>{{ AmortissementFixe.dateRemborsement|date('Y-m-d') }}</td>
                                         <td>{{ AmortissementFixe.dateremb|date('Y-m-d') }}</td>
                                         <td>{{ AmortissementFixe.perioderemboursement }}</td>
+                                        <td>{{ AmortissementFixe.Capital }}</td>
+                                        <td>{{ AmortissementFixe.Interet }}</td>
                                         <td>{{ AmortissementFixe.montanttTotal }}</td>
                                         <td>{{ AmortissementFixe.montantrembourse }}</td>
                                         <td>{{ AmortissementFixe.penaliteremboursement }}</td>

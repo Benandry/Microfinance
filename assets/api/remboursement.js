@@ -15,6 +15,7 @@ $(document).ready(function(){
              */
             $('#remboursement_modal_typeclient').on('change',function(){
                 var typeclient=$('#remboursement_modal_typeclient').val();
+                console.log('Bonjour a vous');
                 // Une fois le client choisir sur type
                     $('#remboursement_modal_codecredit').show();                
 
@@ -104,7 +105,8 @@ $(document).ready(function(){
                                             console.log(remboursementmodal.perioderemboursementModal);
                                             $('#remboursement_modal_periode').val(remboursementmodal.perioderemboursementModal);
                                         }
-                                        $('#remboursement_modal_TotalPeriode').val(remboursementmodal.NombreTranche);
+                                        $('#remboursement_modal_capital').val(remboursementmodal.principale);
+                                        $('#remboursement_modal_interet').val(remboursementmodal.interet);
                                         $('.btn').show();
                                         
                                         
@@ -144,20 +146,21 @@ $(document).ready(function(){
      */
 
     if( path == '/remboursement/credit/new'){
-        console.log('path');
         // var reste= document.getElementById('reste').innerHTML;
+
+        $('.btn').hide();
   
         // Date automatique
 
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
+        var yyy = today.getFullYear();
 
 
       
-        today = mm + '/' + dd + '/' + yyyy;
-        today = yyyy +'-' +mm + '-' + dd;
+        today = mm + '/' + dd + '/' + yyy;
+        today = yyy +'-' +mm + '-' + dd;
 
         today=yyy+'-'+mm+'-'+dd;
         $("#remboursement_credit_DateRemboursement").val(today);
@@ -169,17 +172,17 @@ $(document).ready(function(){
 
         // On va afficher le numero credit du client individuel
         $('#remboursement_credit_TransactionEnLiquide').on('click',function(){
-            $('#caisse').show();
+            var transactionliquide= $('#remboursement_credit_TransactionEnLiquide').val();
+            if(transactionliquide == 1){
+                $('#caisse').show();
+            }
+            else if(transactionliquide == 0){
+                $('#caisse').hide();
+            }
         });
-
-        $('#remboursement_credit_MontantTotalPaye').on('blur',function(){
-            console.log('Poinsa');
-        });
-
         
         $('#remboursement_credit_MontantTotalPaye').on('blur',function(){
 
-            console.log('Bonjour');
             
             // On recupere le montant a payer par le client
             var montant = $('#remboursement_credit_MontantTotalPaye').val();
@@ -195,6 +198,7 @@ $(document).ready(function(){
                 periode++;
                 // url
                 var url_api='/remboursement/periode/'+codecredit+'/'+periode;
+                // console.log(url_api);
 
                 $.ajax({
                     url:url_api,
@@ -205,7 +209,7 @@ $(document).ready(function(){
                     success : function(content){
                         for(let j=0;j<content.length;j++){
                             var remboursement=content[j];
-
+                            // console.log(remboursement);
                             document.getElementById('periode').innerHTML=remboursement.maxperiode;
 
                             // Si remboursement égal a null
@@ -215,7 +219,8 @@ $(document).ready(function(){
                             {
                                 $('#remboursement_credit_periode').val(remboursement.periode);
 
-                                    var url_api_ammortissement='/remboursement/ammortissement/'+codecredit+'/'+periode;                                
+                                    var url_api_ammortissement='/remboursement/ammortissement/'+codecredit+'/'+periode;
+                                    // console.log(url_api_ammortissement);                                
 
                                 $.ajax({
                                     url:url_api_ammortissement,
@@ -227,7 +232,11 @@ $(document).ready(function(){
                                         // console.log('hello world')
                                         for(let j=0;j<content.length;j++){
                                             var ammortissement=content[j];
-                                            // console.log(ammortissement);
+
+                                            // On affiche le bouton
+                                            $('.btn').show();
+
+                                            // console.log("test"+ammortissement);
                                             $('#remboursement_credit_MontantEcheance').val(ammortissement.montanttTotal);
 
                                             // on met la periode 1
