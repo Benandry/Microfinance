@@ -25,6 +25,7 @@ import './api/remboursement';
 import './api/penalitecredit';
 import './api/Decaissement';
 import './api/Reechelonnement';
+import './api/approbation';
 import './api/agence';
 import './api/jquery-3.6.0';
 import './api/jquery-ui';

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau d'amortissement {% endblock %}
+{% block title %}Tableau d'amortissement{% endblock %}
 {% block head %}Tableau d'amortissement {% endblock %}
 
 {% block body %}
@@ -37,23 +37,23 @@
             <tbody>
                 {% for tableau in tableau %}
                     <tr>
-                        <td> {{ tableau.Periode}} </td>
-                        <td>{{ tableau.DateDemande|date("d/m/Y")}}</td>
-                        <td>{{ tableau.Capital }}</td>
-                        <td>{{ tableau.Interet }}</td>
-                        <td>{{ tableau.Echeance }}</td>
-                        <td>{{ tableau.CapitalRD }}</td>
-                        <td>{{ tableau.IRD }}</td>
-                        <td>{{ tableau.CRD }}</td>
-                        {# <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tab.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td> #}
+                        <td> {{ tableau.periode}} </td>
+                        <td>{{ tableau.dateRemborsement|date("d/m/Y")}}</td>
+                        <td>{{ tableau.principale }}</td>
+                        <td>{{ tableau.interet }}</td>
+                        <td>{{ tableau.montanttTotal }}</td>
+                        <td>{{ tableau.soldedu }}</td>
+                        <td>{{ tableau.InteretDu }}</td>
+                        <td>{{ tableau.MontantRestantDu }}</td>
+                        {# <td> <a href="{{ path('app_amortissement_fixe_edit',{'id': tableau.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td> #}
                     </tr>
                 {% endfor %}
-                {# <tr>
+                <tr>
                     <th colspan="2">Total </th>
-                    <th> {{ totalMontant }} </th>
-                    <th> {{ totalInteret }} </th>
-                    <th> {{ totalNet}} </th>
-                </tr> #}
+                    <th> {{ SommeCapital }} </th>
+                    <th> {{ SommeInteret }} </th>
+                    <th> {{ SommeCredit}} </th>
+                </tr>
             </tbody>
         </table>
         {# <div class="d-flex justify-content-center">

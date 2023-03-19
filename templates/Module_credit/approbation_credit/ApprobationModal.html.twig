@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Approbation
+{% endblock %}
+
+{% block head %}
+    Approbation
+{% endblock %}
+
+{% block body %}
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                <div class="modal-header titre_modal">
+                    <h4 class="modal-title text-center">Approbation </h4>
+                </div>
+                {{ form_start(form) }} 
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                {{ form_widget(form.CodeCredit) }}
+                            </div>
+                            <div class="col-12 col-sm-12" style="display:">
+                                {{ form_row(form.NumeroCredit) }}
+                                {{ form_row(form.Cycle) }}
+                                {{ form_row(form.TauxInteretAnnuel) }}
+                                {{ form_row(form.NombreTranche) }}
+                                {{ form_row(form.TypeTranche) }}
+                                {{ form_row(form.Montant) }}
+                                {{ form_row(form.CodeClient) }}
+                                {{ form_row(form.NomClient) }}
+                                {{ form_row(form.PrenomClient) }}
+                            </div>
+                        </div> 
+
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer mb-0">
+                        <input type="submit" value="valider" class="btn btn-primary">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div> 
+{% endblock %}

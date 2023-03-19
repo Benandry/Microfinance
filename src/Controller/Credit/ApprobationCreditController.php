@@ -2,9 +2,11 @@
 
 namespace App\Controller\Credit;
 
+use App\Entity\AmortissementFixe;
 use App\Entity\ApprobationCredit;
 use App\Form\ApprobationCreditType;
 use App\Repository\ApprobationCreditRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,28 +39,192 @@ class ApprobationCreditController extends AbstractController
         ]);
     }
 
+    #[Route('/Approbation/Ammortissement/',name:'app_ammortissement_approbation')]
+    public function ApprobationAmmortissement(Request $request,EntityManagerInterface $entityManager){
+
+        $DateApprobation = date('Y/m/d');
+        $DateApprobation = date("Y-m-d", strtotime($DateApprobation.'+ 1 month'));
+
+        $MontantApprouvee=$request->query->get('MontantApprouvee');
+        $CodeClient=$request->query->get('CodeClient');
+        $NumeroCredit=$request->query->get('NumeroCredit');
+        $TauxInteretAnnuel=$request->query->get('TauxInteretAnnuel');
+        $InteretAnnuel=$MontantApprouvee*($TauxInteretAnnuel/100);
+        $Periode=$request->query->get('NombreTranche');
+        $DateApprobation=$request->query->get('DateApprobation');
+
+        // dd($CodeClient.' '.$NumeroCredit);
+
+                // Calcul capital
+                $Capital=$MontantApprouvee/$Periode;
+                // Calcum Interet
+                $Interet=$InteretAnnuel/$Periode;
+                // Total credit
+                $Credit=$Capital+$Interet;
+                // Grand total
+                $GrandTotalCredit=$MontantApprouvee+$InteretAnnuel;
+                // Echeance
+                $Echeance=$Credit;
+                // Capital restant du
+                $CapitalRD=$MontantApprouvee-$Capital;
+                // Interet Restant du
+                $IRD=$InteretAnnuel-$Interet;
+                // Credit restant du
+                $CRD=$GrandTotalCredit-$Echeance;
+                
+        
+                // Stocker dans une tableau les donnees
+                $tableau=[[
+        
+                    'periode'=>1,
+                    'dateRemborsement'=>$DateApprobation,
+                    'principale'=>$Capital,
+                    'interet'=>$Interet,
+                    'montanttTotal'=>$Echeance,
+                    'soldedu'=>$CapitalRD,
+                    'InteretDu'=>$IRD,
+                    'MontantRestantDu'=>$CRD,
+                    ]
+                ];
+                
+                // Creation du tableau d'ammortissement
+
+                // Somme des Capital
+                $SommeCapital=$Capital;
+                // Somme interet
+                $SommeInteret=$Interet;
+                // Somme credit
+                $SommeCredit=$Echeance;
+                for($i=1;$i < $Periode;$i++)
+                {
+                    // Date demande +1
+                    // $DateDemande = date('Y/m/d');
+                    $DateApprobation= date("Y-m-d", strtotime($DateApprobation.'+ 1 month'));
+                    $CapitalRD-=$Capital;
+                    $IRD-=$Interet;
+                    $CRD-=$Echeance;
+                    // Somme des Capital
+                    $SommeCapital+=$Capital;
+                    // Somme interet
+                    $SommeInteret+=$Interet;
+                    // Somme credit
+                    $SommeCredit+=$Echeance;
+        
+                    array_push($tableau,[
+                        'periode'=>$i+1,
+                        'dateRemborsement'=>$DateApprobation,
+                        'principale'=>$Capital,
+                        'interet'=>$Interet,
+                        'montanttTotal'=>$Echeance,
+                        'soldedu'=>$CapitalRD,
+                        'InteretDu'=>$IRD,
+                        'MontantRestantDu'=>$CRD,
+                        'SommeCapital'=>$SommeCapital,
+                        'SommeInteret'=>$SommeInteret,
+                        'SommeCredit'=>$SommeCredit
+                        ]
+                    );
+                }
+
+                for ($i=0; $i < $Periode; $i++) { 
+                    $amortissement = new AmortissementFixe();
+                    $amortissement->setDateRemborsement(date_create($tableau[$i]['dateRemborsement']));
+                    $amortissement->setPrincipale($tableau[$i]['principale']);
+                    $amortissement->setInteret($tableau[$i]['interet']);
+                    $amortissement->setMontanttTotal($tableau[$i]['montanttTotal']);
+                    $amortissement->setPeriode($tableau[$i]['periode']);
+                    $amortissement->setCodeclient($CodeClient);
+                    $amortissement->setCodecredit($NumeroCredit);
+                    $amortissement->setTypeamortissement('Lineaire');
+                    $amortissement->setSoldedu($tableau[$i]['soldedu']);
+                    $amortissement->setMontantRestantDu($tableau[$i]['MontantRestantDu']);
+                    $amortissement->setInteretDu($tableau[$i]['InteretDu']);
+                    
+                    $entityManager->persist($amortissement);
+                    $entityManager->flush();
+        
+                } 
+
+        // Retourner vers le template du tableau d'ammortissement
+                
+        return $this->render('Module_credit/approbation_credit/TableauAmmortissement.html.twig', [
+            'codeclientdemande'=>$CodeClient,
+            // 'TypeClientDemande'=>$TypeClientDemande,
+            'MontantDemande'=>$MontantApprouvee,
+            'InteretA'=>$TauxInteretAnnuel,
+            'Periode' => $Periode,
+            'DateDemande' =>$DateApprobation,
+            'Capital' => $Capital,
+            'Interet' => $Interet,
+            'Echeance' => $Echeance,
+            'CapitalRD'=>$CapitalRD,
+            'IRD '=>$IRD,
+            'CRD'=>$CRD,
+            'codecredit' => $NumeroCredit,
+            'SommeCapital'=>$SommeCapital,
+            'SommeInteret'=>$SommeInteret,
+            'SommeCredit'=>$SommeCredit,
+            'tableau'=>$tableau
+        ]);
+
+    }
+
     #[Route('/new/individuel', name: 'app_approbation_credit_new_individuel', methods: ['GET', 'POST'])]
     public function newIndividuel(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
-    {
-        $demande = $request->query->all();
+    {   
 
-        $codeclient = $demande['demande']['codeclient'];
-        $cycles = $approbationCreditRepository->findCycle($codeclient)[0][1];
+        // Recuperation des donnees venant du formulaire modal
+        $CodeClient=$request->query->get('CodeClient');
+        $Montant=$request->query->get('Montant');
+        $NumeroCredit=$request->query->get('NumeroCredit');
+        $Cycle=$request->query->get('Cycle');
+        $TauxInteretAnnuel=$request->query->get('TauxInteretAnnuel');
+        $NombreTranche=$request->query->get('NombreTranche');
+        $TypeTranche=$request->query->get('TypeTranche');
+        $NomClient=$request->query->get('NomClient');
+        $PrenomClient=$request->query->get('PrenomClient');
+
+
+        // $demande = $request->query->all();
+
+        // $codeclient = $demande['demande']['codeclient'];
+        // $cycles = $approbationCreditRepository->findCycle($codeclient)[0][1];
         $approbationCredit = new ApprobationCredit();
         $form = $this->createForm(ApprobationCreditType::class, $approbationCredit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Recuperation du montant approuvée par l'administrateur
+            $MontantApprouvee=$approbationCredit->getMontant();
+            $DateApprobation=$approbationCredit->getDateApprobation();
+
             $approbationCreditRepository->add($approbationCredit, true);
             $this->addFlash('success', "Le demande de credit ".$approbationCredit->getCodecredit()." est ".$approbationCredit->getStatusApprobation());
-            return $this->redirectToRoute('app_approbation_credit_individuel', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_ammortissement_approbation',
+             [
+                'CodeClient'=>$CodeClient,
+                'NumeroCredit'=>$NumeroCredit,
+                'DateApprobation'=>$DateApprobation,
+                'MontantApprouvee'=>$MontantApprouvee,
+                'TauxInteretAnnuel'=>$TauxInteretAnnuel,
+                'NombreTranche'=>$NombreTranche,
+
+             ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Module_credit/approbation_credit/approIndividuel.html.twig', [
             'approbation_credit' => $approbationCredit,
-            'demandes' => $demande,
+            'CodeClient'=>$CodeClient,
+            'Montant'=>$Montant,
+            'NumeroCredit'=>$NumeroCredit,
+            'Cycle'=>$Cycle,
+            'NombreTranche'=>$NombreTranche,
+            'TypeTranche'=>$TypeTranche,
+            'NomClient' => $NomClient,
+            'TauxInteretAnnuel'=>$TauxInteretAnnuel,
+            'PrenomClient' =>$PrenomClient,
             'form' => $form,
-            'cycle' =>$cycles,
         ]);
     }
 

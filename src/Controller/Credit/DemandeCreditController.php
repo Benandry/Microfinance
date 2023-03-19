@@ -33,11 +33,7 @@ class DemandeCreditController extends AbstractController
 
     #[Route('/ammortissement/Demande/',name: 'app_ammortissement')]
     public function AmmortissementDemandeCredit(TableauAmmortissementDemandeService $service,DemandeCreditRepository $demandeCreditRepository,Request $request)
-    {   
-
-        
-        $data=new DemandeCredit();
-        
+    {           
         $DateDemande = date('Y/m/d');
         $DateDemande = date("Y-m-d", strtotime($DateDemande.'+ 1 month'));
         $codecredit=$request->query->get('codecredit');
@@ -54,21 +50,22 @@ class DemandeCreditController extends AbstractController
          * Creation de la tableau d'ammortissement
          */
 
-
-        // Calcul capital
-        $Capital=$MontantDemande/$Periode;
-        // Calcum Interet
-        $Interet=$InteretAnnuel/$Periode;
-        // Total credit
-        $Credit=$Capital+$Interet;
-        // Echeance
-        $Echeance=$Credit/$Periode;
-        // Capital restant du
-        $CapitalRD=$MontantDemande-$Capital;
-        // Interet Restant du
-        $IRD=$InteretAnnuel-$Interet;
-        // Credit restant du
-        $CRD=$Credit-$Echeance;
+          // Calcul capital
+          $Capital=$MontantDemande/$Periode;
+          // Calcum Interet
+          $Interet=$InteretAnnuel/$Periode;
+          // Total credit
+          $Credit=$Capital+$Interet;
+          // Grand total
+          $GrandTotalCredit=$MontantDemande+$InteretAnnuel;
+          // Echeance
+          $Echeance=$Credit;
+          // Capital restant du
+          $CapitalRD=$MontantDemande-$Capital;
+          // Interet Restant du
+          $IRD=$InteretAnnuel-$Interet;
+          // Credit restant du
+          $CRD=$GrandTotalCredit-$Echeance;
 
         // Stocker dans une tableau les donnees
         $tableau=[[

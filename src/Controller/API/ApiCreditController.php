@@ -3,6 +3,7 @@
 namespace App\Controller\API;
 
 use App\Repository\AmortissementFixeRepository;
+use App\Repository\ApprobationCreditRepository;
 use App\Repository\CompteEpargneRepository;
 use App\Repository\ConfigurationCreditRepository;
 use App\Repository\CreditIndividuelRepository;
@@ -256,7 +257,13 @@ class ApiCreditController extends AbstractController
         return new JsonResponse($DecaissementIndividuel);
     }
 
-
+    /**
+     * @method mixed ReechelonnementModal()
+     * 
+     * @param mixed $decaissementRepository
+     * @param mixed $idcredit
+     * @return Json
+     */
     #[Route('/Reechelonnement/Modal/{idcredit}',name:'app_modal_reechelonnement')]
     public function ReechelonnementModal(DecaissementRepository $decaissementRepository,$idcredit)
     {
@@ -265,5 +272,18 @@ class ApiCreditController extends AbstractController
         return new JsonResponse($reechelonnement);
     }
     
+    /**
+     * @method mixed ApprobationModal()
+     * 
+     * @param mixed $approbationCreditRepository
+     * @param mixed $idcredit
+     */
+    #[Route('/Approbation/ModalApprobation/Credit/{idcredit}',name:'app_approbation_demande_credit')]
+    public function ApprobationModal(ApprobationCreditRepository $approbationCreditRepository,$idcredit)
+    {
+        $ApprobationModal=$approbationCreditRepository->ApprobationDemande($idcredit);
+
+        return new JsonResponse($ApprobationModal);
+    }
 
 }
