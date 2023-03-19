@@ -195,7 +195,7 @@ class ApiCreditController extends AbstractController
     #[Route('/modalindividuel/{NumeroCredit}',name:'app_imodal')]
     public function InformationModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
     {
-        $infodemandegroupe=$demandeCreditRepository->InfoClientModalIndividuel($NumeroCredit);
+        $infodemandegroupe=$demandeCreditRepository->Ammortissement($NumeroCredit);
 
         return new JsonResponse($infodemandegroupe);
     }
@@ -264,5 +264,6 @@ class ApiCreditController extends AbstractController
         
         return new JsonResponse($reechelonnement);
     }
+    
 
 }

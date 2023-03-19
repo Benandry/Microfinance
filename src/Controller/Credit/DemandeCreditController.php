@@ -18,6 +18,7 @@ use App\Form\PatrimoineCreditType;
 use App\Repository\PatrimoineCreditRepository;
 use App\Service\TableauAmmortissementDemandeService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/demande/credit')]
 class DemandeCreditController extends AbstractController
@@ -28,6 +29,109 @@ class DemandeCreditController extends AbstractController
         return $this->render('demande_credit/index.html.twig', [
             'demande_credits' => $demandeCreditRepository->findAll(),
         ]);
+    }
+
+    #[Route('/ammortissement/Demande/',name: 'app_ammortissement')]
+    public function AmmortissementDemandeCredit(TableauAmmortissementDemandeService $service,DemandeCreditRepository $demandeCreditRepository,Request $request)
+    {   
+
+        
+        $data=new DemandeCredit();
+        
+        $DateDemande = date('Y/m/d');
+        $DateDemande = date("Y-m-d", strtotime($DateDemande.'+ 1 month'));
+        $codecredit=$request->query->get('codecredit');
+        $codeclientdemande=$request->query->get('codeclientdemande');
+        $TypeClientDemande=$request->query->get('TypeClientDemande');
+        $DateDemande=$request->query->get('DateDemande');
+        $MontantDemande=$request->query->get('MontantDemande');
+        $InteretA=$request->query->get('InteretAnnuel');
+        $InteretAnnuel=$MontantDemande*($InteretA/100);
+        $Periode=$request->query->get('Periode');
+        $TypeTranche=$request->query->get('TypeTranche');
+
+        /**
+         * Creation de la tableau d'ammortissement
+         */
+
+
+        // Calcul capital
+        $Capital=$MontantDemande/$Periode;
+        // Calcum Interet
+        $Interet=$InteretAnnuel/$Periode;
+        // Total credit
+        $Credit=$Capital+$Interet;
+        // Echeance
+        $Echeance=$Credit/$Periode;
+        // Capital restant du
+        $CapitalRD=$MontantDemande-$Capital;
+        // Interet Restant du
+        $IRD=$InteretAnnuel-$Interet;
+        // Credit restant du
+        $CRD=$Credit-$Echeance;
+
+        // Stocker dans une tableau les donnees
+        $tableau=[[
+
+            'Periode'=>1,
+            'DateDemande'=>$DateDemande,
+            'Capital'=>$Capital,
+            'Interet'=>$Interet,
+            'Echeance'=>$Echeance,
+            'CapitalRD'=>$CapitalRD,
+            'IRD'=>$IRD,
+            'CRD'=>$CRD,
+            ]
+        ];
+        
+        // Creation du tableau d'ammortissement
+        for($i=1;$i < $Periode;$i++)
+        {
+            // Date demande +1
+            // $DateDemande = date('Y/m/d');
+            $DateDemande= date("Y-m-d", strtotime($DateDemande.'+ 1 month'));
+            $CapitalRD-=$Capital;
+            $IRD-=$Interet;
+            $CRD-=$Echeance;
+
+            array_push($tableau,[
+                'Periode'=>$i+1,
+                'DateDemande'=>$DateDemande,
+                'Capital'=>$Capital,
+                'Interet'=>$Interet,
+                'Echeance'=>$Echeance,
+                'CapitalRD'=>$CapitalRD,
+                'IRD'=>$IRD,
+                'CRD'=>$CRD,
+                ]
+            );
+        }
+
+        // dd($tableau);
+
+
+        // // dd($NumeroCredit);
+        // $infodemandegroupe=$demandeCreditRepository->Ammortissement($NumeroCredit);
+
+        // return new JsonResponse($tableau);
+
+        return $this->render('demande_credit/amortissement/index.html.twig', [
+            'codeclientdemande'=>$codeclientdemande,
+            'TypeClientDemande'=>$TypeClientDemande,
+            'MontantDemande'=>$MontantDemande,
+            'InteretA'=>$InteretA,
+            'Periode' => $Periode,
+            'DateDemande' =>$DateDemande,
+            'Capital' => $Capital,
+            'Interet' => $Interet,
+            'Echeance' => $Echeance,
+            'CapitalRD'=>$CapitalRD,
+            'IRD '=>$IRD,
+            'CRD'=>$CRD,
+            'codecredit' => $codecredit,
+            'tableau'=>$tableau
+        ]);
+
     }
 
     #[Route('/new', name: 'app_demande_credit_new', methods: ['GET', 'POST'])]
@@ -45,6 +149,7 @@ class DemandeCreditController extends AbstractController
         $codeclient=$request->query->get('codeclient');
         $codecreditindividuelprecedent=$request->query->get('codecreditindividuelprecedent');
         $nombrecreditindividuel=$request->query->get('nombrecreditindividuel');
+
 
         // dd($TypeClient,$CodeClient,$nom,$prenom,$codeclient);
 
@@ -109,20 +214,43 @@ class DemandeCreditController extends AbstractController
             $em->persist($patrimoinecredit);
 
             // Demande credit
+            // Recuperation des donnees venant du formulaire
 
            $data = $form->getData();
 
            $demandeCredit->setStatusApp("en attente ");
+
            $codecredit = $demandeCredit->getNumeroCredit();
+
+           $codeclientdemande=$demandeCredit->getCodeclient();
+
+           $TypeClientDemande=$demandeCredit->getTypeClient();
+
+           $DateDemande=$demandeCredit->getDateDemande();
+
+           $MontantDemande=$demandeCredit->getMontant();
+
+           $InteretAnnuel=$demandeCredit->getTauxInteretAnnuel();
+
+           $Periode=$demandeCredit->getNombreTranche();
+
+           $TypeTranche=$demandeCredit->getTypeTranche();
 
            $demandeCreditRepository->add($demandeCredit, true);
 
             /***Amortissement simple */
            if($data->getTypeTranche() == "Lineaire")
            {
-                // $traitement->Lineaire($data);
-                return $this->redirectToRoute('app_lineaire', [
+                return $this->redirectToRoute('app_ammortissement', [
                     'codecredit' => $codecredit,
+                    'codeclient'=>$codeclientdemande,
+                    'TypeClient'=>$TypeClientDemande,
+                    'DateDemande'=>$DateDemande,
+                    'MontantDemande'=>$MontantDemande,
+                    'InteretAnnuel'=>$InteretAnnuel,
+                    'Periode'=>$Periode,
+                    'TypeTranche'=>$TypeTranche
+            
                 ], Response::HTTP_SEE_OTHER);
            }
         // if($data->getTypeTranche() == 'Lineaire'){

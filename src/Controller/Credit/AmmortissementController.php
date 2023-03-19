@@ -10,15 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AmmortissementController extends AbstractController
 {
-    #[Route('/ammortissement/{codecredit}', name: 'app_ammortissement')]
-    public function index(DemandeCreditRepository $demandeCreditRepository,$codecredit)
-    {
-        $demande=$demandeCreditRepository->Ammortissement($codecredit);
+   
 
-        return new JsonResponse($demande);
-        // return $this->json([
-        //     'message' => 'Welcome to your new controller!',
-        //     'path' => 'src/Controller/AmmortissementController.php',
-        // ]);
-    }
+
+
 }
