@@ -5,11 +5,13 @@ const path=window.location.pathname;
 $(document).ready(function(){
     if( path == '/Approbation/Modal/')
     {   
+        $('.btn').hide();
+        
         $('#approbation_modal_CodeCredit').on('change',function(){
             // Recuperation de l'id credit taper par l'utilisateur
             var codecredit=$('#approbation_modal_CodeCredit').val();
             // console.log(codecredit);
-
+            
             var url_approbation='/Approbation/ModalApprobation/Credit/'+codecredit;
 
             $.ajax({
@@ -31,9 +33,28 @@ $(document).ready(function(){
                         $('#approbation_modal_CodeClient').val(approbation.codeclient);
                         $('#approbation_modal_NomClient').val(approbation.nom_client);
                         $('#approbation_modal_PrenomClient').val(approbation.prenom_client);
+                        $('.btn').show();
                     }
                 }
             });
         });
+    }
+    if( path == '/approbation/credit/new/individuel' ){
+                // Date automatique
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyy = today.getFullYear();
+        
+        
+              
+                today = mm + '/' + dd + '/' + yyy;
+                today = yyy +'-' +mm + '-' + dd;
+        
+                today=yyy+'-'+mm+'-'+dd;
+                $("#approbation_credit_dateApprobation").val(today);
+              
+        
     }
 });
