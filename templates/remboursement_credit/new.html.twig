@@ -12,9 +12,8 @@
 
     {# /***************Messages succes ******************/#}
     
-         {% for message in app.flashes('success') %}
-                {{ message }}
-        {% endfor %}
+            {{ include('modal.html.twig') }}
+
     {# *************************************#}
 
     <div class="card p-3">
@@ -28,7 +27,7 @@
                 </div>
                  <div class="col-sm-4 col-xl-4">
                     <p> <b>periode precedent  : </b><span id="periodeprecedent">{{ periode }}</span></p>
-                    {# <p> <b>periode  : </b><span id="periode"></span></p> #}
+                    <p> <b>periode  : </b><span id="periode"></span></p>
                     <p> <b>Total credit  : </b><span id="crd">{{ crd }}</span></p>
                 </div>
                  <div class="col-sm-4 col-xl-4">

@@ -207,4 +207,19 @@ class RapportCreditController extends AbstractController
             'listeDecaisser' => $listeDecaissement,
         ]);
     }
+
+    #[Route('/FicheCredit/Credit/',name:'app_fiche_credit')]
+    public function FicheCredit(Request $request,DemandeCreditRepository $demandeCreditRepository)
+    {   
+        // Recuperer le code credit
+        $codecredit=$request->query->get('CodeCredit');
+        // dd($codecredit);
+
+        $ficheCredit=$demandeCreditRepository->FicheCredit($codecredit);
+
+
+        return $this->render('Module_credit/rapportCredit/FicheCredit.html.twig',[
+            'ficheCredit'=>$ficheCredit
+        ]);
+    }
 }

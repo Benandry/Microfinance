@@ -75,7 +75,7 @@ class RemboursementCreditController extends AbstractController
             $capitalrembourser=$montantrembourser-$interet;
 
             // Recuperation interet
-            $interetrembourser=$montantrembourser-$capitalrembourser;
+            $interetrembourser=$montantrembourser-$capital;
 
             if ($montantrembourser > $echeance && $restemontant == 0) {
                 $periodeactuel=$remboursementCredit->getPeriode();

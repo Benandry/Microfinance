@@ -96,6 +96,40 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
     }
 
+        /**
+     * Undocumented function
+     *@method mixed InfoDemandeCreditModal():Methode permet d'afficher les informations individuel sur le modal demande credit
+     * @param [type] $id: id client
+     * @return void
+     */
+    public function InfoRemboursementModal($id)
+    {
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+        'SELECT
+            individuel.codeclient,
+            individuel.nom_client,
+            individuel.prenom_client,
+            demande.NumeroCredit
+            FROM
+                App\Entity\IndividuelClient individuel
+                LEFT JOIN
+                App\Entity\DemandeCredit demande
+                WITH
+                individuel.codeclient=demande.codeclient
+            WHERE
+            demande.id = :id
+            ORDER BY demande.id DESC
+        '
+        )
+        ->setParameter('id',$id)
+        ->setMaxResults(1);
+
+        return $query->getResult();
+    }
+
+
     /**
      * Undocumented function
      *@method mixed InfoDemandeCreditModal():Methode permet d'afficher les informations individuel sur le modal demande credit
@@ -119,7 +153,7 @@ class DemandeCreditRepository extends ServiceEntityRepository
                 WITH
                 individuel.codeclient=demande.codeclient
             WHERE
-                demande.id = :id
+            individuel.id = :id
             ORDER BY demande.id DESC
         '
         )
@@ -356,7 +390,12 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
         return $statement;
     }
-
+    /**
+     * Undocumented function
+     *
+     * @param [type] $codeclient
+     * @return void
+     */
     public function getCycleCredit($codeclient)
     {
         $query = " SELECT COUNT(d.codeclient) nombre
@@ -366,5 +405,72 @@ class DemandeCreditRepository extends ServiceEntityRepository
         $statement = $this->getEntityManager()->createQuery($query)->execute();
 
         return $statement;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @method mixed FicheCredit():Methode permet de recuperer les donnees pour dresser une fiche de credit
+     * @param [type] $idcredit
+     * @return void
+     */
+    public function FicheCredit(int $idcredit){
+
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+            -- demande credit
+                demande.NumeroCredit demandeNumeroCredit,
+                demande.DateDemande demandeDateDemande,
+                demande.Montant demandeMontant,
+                demande.TauxInteretAnnuel demandeTauxInteretAnnuel,
+                demande.cycles demandecycles,
+                demande.NombreTranche demandeNombreTranche,
+            -- Remboursement credit
+                remboursement.DateRemboursement remboursementDateRemboursement,
+                remboursement.MontantTotalPaye remboursementMontantTotalPaye,
+                remboursement.penalite remboursementpenalite,
+                remboursement.Capital remboursementCapital,
+                remboursement.Interet remboursementInteret,
+                -- Approbation
+                approbation.dateApprobation approbationdateApprobation,
+                approbation.description approbationdescription,
+                approbation.montant approbationmontant,
+                -- Ammmortissement
+                amortissement.periode amortissementperiode,
+                amortissement.dateRemborsement amortissementdateRemborsement,
+                amortissement.principale amortissementprincipale,
+                amortissement.interet amortissementinteret,
+                amortissement.montanttTotal amortissementmontanttTotal,
+                amortissement.penalite amortissementpenalite,
+                amortissement.typeamortissement amortissementtypeamortissement,
+                amortissement.soldedu amortissementsoldedu,
+                amortissement.MontantRestantDu amortissementMontantRestantDu,
+                amortissement.InteretDu amortissementInteretDu
+            FROM
+                App\Entity\DemandeCredit demande
+                INNER JOIN
+                App\Entity\RemboursementCredit remboursement
+                WITH
+                demande.NumeroCredit=remboursement.NumeroCredit
+
+                INNER JOIN
+                App\Entity\ApprobationCredit approbation
+                WITH
+                approbation.codecredit=demande.NumeroCredit
+
+                INNER JOIN
+                App\Entity\AmortissementFixe amortissement
+                WITH
+                amortissement.codecredit=demande.NumeroCredit
+
+            WHERE
+                demande.id = idcredit
+            '
+        )
+        ->setParameters('idcredit',$idcredit);
+
+        return $query->getResult();
     }
 }
