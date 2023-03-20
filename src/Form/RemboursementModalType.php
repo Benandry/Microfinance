@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Decaissement;
+use App\Entity\DemandeCredit;
+use App\Entity\Individuelclient;
 use App\Entity\RemboursementCredit;
 use App\Repository\DecaissementRepository;
+use App\Repository\DemandeCreditRepository;
 use App\Repository\RemboursementCreditRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,13 +31,13 @@ class RemboursementModalType extends AbstractType
                 ]
             ])
             ->add('codecredit',EntityType::class,[
-                'class'=>Decaissement::class,
+                'class'=>DemandeCredit::class,
                 'label'=>'Numero Credit',
                 'placeholder'=>'Choisir client',
                 'choice_label'=>function($remboursement){
                     return $remboursement->getNumeroCredit();
                 },
-                'query_builder'=>function(DecaissementRepository $remboursement){
+                'query_builder'=>function(DemandeCreditRepository $remboursement){
                     return $remboursement->createQueryBuilder('r')
                             ->setMaxResults(5);
                 },

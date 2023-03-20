@@ -193,10 +193,10 @@ class ApiCreditController extends AbstractController
      *@param mixed $codegroupe:code client groupe
      * @return json
     */
-    #[Route('/modalindividuel/{NumeroCredit}',name:'app_imodal')]
-    public function InformationModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$NumeroCredit):Response
+    #[Route('/modalindividuel/{id}',name:'app_imodal')]
+    public function InformationModalIndividuel(DemandeCreditRepository $demandeCreditRepository,$id):Response
     {
-        $infodemandegroupe=$demandeCreditRepository->Ammortissement($NumeroCredit);
+        $infodemandegroupe=$demandeCreditRepository->InfoDemandeCreditModal($id);
 
         return new JsonResponse($infodemandegroupe);
     }

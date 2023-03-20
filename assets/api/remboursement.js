@@ -22,6 +22,8 @@ $(document).ready(function(){
                 $('#remboursement_modal_codecredit').on('change',function(){
 
                     var numerocredit=$('#remboursement_modal_codecredit').val();
+                    
+                    console.log(numerocredit);
 
                     if(typeclient == 'INDIVIDUEL'){
                         var url_individuel="/modalindividuel/"+numerocredit;
@@ -35,7 +37,7 @@ $(document).ready(function(){
                                 for(let j=0;j<content.length;j++){
                                     var individuel=content[j];
     
-                                    console.log(individuel);
+                                    // console.log(individuel);
                                     var nomclient=individuel.nom_client;
                                     var prenomclient=individuel.prenom_client;
     

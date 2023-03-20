@@ -119,7 +119,7 @@ class DemandeCreditRepository extends ServiceEntityRepository
                 WITH
                 individuel.codeclient=demande.codeclient
             WHERE
-                individuel.id = :id
+                demande.id = :id
             ORDER BY demande.id DESC
         '
         )
