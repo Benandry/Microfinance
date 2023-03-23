@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReechelonnementCreditRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReechelonnementCreditRepository::class)]
@@ -30,6 +31,12 @@ class ReechelonnementCredit
 
     #[ORM\Column(nullable: true)]
     private ?int $ResteInteret = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $DateDuJour = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $DateReechelonner = null;
 
     public function getId(): ?int
     {
@@ -104,6 +111,30 @@ class ReechelonnementCredit
     public function setResteInteret(?int $ResteInteret): self
     {
         $this->ResteInteret = $ResteInteret;
+
+        return $this;
+    }
+
+    public function getDateDuJour(): ?\DateTimeInterface
+    {
+        return $this->DateDuJour;
+    }
+
+    public function setDateDuJour(?\DateTimeInterface $DateDuJour): self
+    {
+        $this->DateDuJour = $DateDuJour;
+
+        return $this;
+    }
+
+    public function getDateReechelonner(): ?\DateTimeInterface
+    {
+        return $this->DateReechelonner;
+    }
+
+    public function setDateReechelonner(?\DateTimeInterface $DateReechelonner): self
+    {
+        $this->DateReechelonner = $DateReechelonner;
 
         return $this;
     }

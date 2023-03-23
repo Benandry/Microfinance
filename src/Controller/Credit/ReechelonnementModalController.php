@@ -31,6 +31,14 @@ class ReechelonnementModalController extends AbstractController
             $nom=$data['nom'];
             $prenom=$data['prenom'];
             $codeclient=$data['codeclient'];
+            $NumeroCredit=$data['NumeroCredit'];
+            $SommeDejaRembourser=$data['SommeDejaRembourser'];
+            $MontantDecaisser=$data['MontantDecaisser'];
+            $InteretCredit=$data['InteretCredit'];
+            $Periode=$data['Periode'];
+            $DernierPeriode=$data['DernierPeriode'];
+            $ResteCapital=$data['ResteCapital'];
+            $ResteInteret=$data['ResteInteret'];
 
             return $this->redirectToRoute('app_reechelonnement_controller',
                 [
@@ -38,6 +46,15 @@ class ReechelonnementModalController extends AbstractController
                     'nom'=>$nom,
                     'prenom'=>$prenom,
                     'codeclient'=>$codeclient,
+                    'NumeroCredit'=>$NumeroCredit,
+                    'SommeDejaRembourser'=>$SommeDejaRembourser,
+                    'MontantDecaisser'=>$MontantDecaisser,
+                    'InteretCredit'=>$InteretCredit,
+                    'Periode'=>$Periode,
+                    'DernierPeriode'=>$DernierPeriode,
+                    'ResteCapital'=>$ResteCapital,
+                    'ResteInteret'=>$ResteInteret,
+
                 ],Response::HTTP_SEE_OTHER);
         }
 

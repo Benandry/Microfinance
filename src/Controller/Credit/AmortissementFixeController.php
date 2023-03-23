@@ -48,7 +48,7 @@ class AmortissementFixeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_amortissement_fixe_edit', methods: ['GET', 'POST'])]
+    #[Route('/{periode}/edit', name: 'app_amortissement_fixe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, AmortissementFixe $amortissementFixe, AmortissementFixeRepository $amortissementFixeRepository): Response
     {
         $form = $this->createForm(AmortissementFixeType::class, $amortissementFixe);

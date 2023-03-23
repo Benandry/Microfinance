@@ -39,6 +39,30 @@ class ReechelonnementModalType extends AbstractType
         ->add('codeclient',TextType::class,[
             'required'=>false
         ])
+        ->add('NumeroCredit',TextType::class,[
+            'required'=>false
+        ])
+        ->add('ResteCapital',TextType::class,[
+            'required'=>false
+        ])
+        ->add('ResteInteret',TextType::class,[
+            'required'=>false
+        ])
+        ->add('SommeDejaRembourser',TextType::class,[
+            'required'=>false
+        ])
+        ->add('Periode',TextType::class,[
+            'required'=>false
+        ])
+        ->add('DernierPeriode',TextType::class,[
+            'required'=>false
+        ])
+        ->add('MontantDecaisser',TextType::class,[
+            'required'=>false
+        ])
+        ->add('InteretCredit',TextType::class,[
+            'required'=>false
+        ])
         ;
     }
 

@@ -4,7 +4,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class TableauAmmortissementDemandeService
+class ReechelonnementService
 {
     /**
      * Undocumented function
@@ -12,44 +12,25 @@ class TableauAmmortissementDemandeService
      * @param [type] $data
      * @return void
      */
-    public function Lineaire($data)
+    public function Reechelonner($ResteCredit,$ResteCapital,$ResteInteret,$PeriodeDu,$DateDemande)
     {
-
-        // $DateDemande = date('Y/m/d');
-        // $DateDemande = date("Y-m-d", strtotime($DateDemande.'+ 1 month'));
-        /**
-         * Recuperation des donnees venant de la base de donnees DemandeCredit.php 
-         */
-        $DateDemande = date('Y/m/d');
-        $DateDemande = date("Y-m-d", strtotime($DateDemande.'+ 1 month'));
-        $codeclient=$data->getCodeclient();
-        $TypeClient=$data->getTypeClient();
-        $NumeroCredit=$data->getNumeroCredit();
-        $DateDemande=$data->getDateDemande();
-        $MontantDemande=$data->getMontant();
-        $InteretAnnuel=$MontantDemande*($data->getTauxInteretAnnuel()/100);
-        $Periode=$data->getNombreTranche();
-        $TypeTranche=$data->getTypeTranche();
-
-        /**
-         * Creation de la tableau d'ammortissement
-         */
-
-
-        // Calcul capital
-        $Capital=$MontantDemande/$Periode;
-        // Calcum Interet
-        $Interet=$InteretAnnuel/$Periode;
-        // Total credit
-        $Credit=$Capital+$Interet;
+        $Periode=$PeriodeDu;
         // Echeance
-        $Echeance=$Credit/$Periode;
+        $Echeance=$ResteCredit/$PeriodeDu;
+        // Capital
+        $Capital=$ResteCapital/$PeriodeDu;
+        // Interet
+        $Interet=$ResteInteret/$PeriodeDu;
+
+        // Interet  restant du
+        $IRD=$ResteInteret-$Interet;
+
         // Capital restant du
-        $CapitalRD=$MontantDemande-$Capital;
-        // Interet Restant du
-        $IRD=$InteretAnnuel-$Interet;
+        $CapitalRD=$ResteCapital-$Capital;
+
         // Credit restant du
-        $CRD=$Credit-$Echeance;
+        $CRD=$ResteCredit-$Echeance;
+
 
         // Stocker dans une tableau les donnees
         $tableau=[[

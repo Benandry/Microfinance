@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau d'amortissement{% endblock %}
-{% block head %}Tableau d'amortissement {% endblock %}
+{% block title %}Tableau d'amortissement Reechelonnement{% endblock %}
+{% block head %}Tableau d'amortissement Reechelonnement{% endblock %}
 
 {% block body %}
     {{ include('modal.html.twig') }}
@@ -10,11 +10,11 @@
              <div class="card">
                 <div class="row text-secondary m-3">
                     <div class="col-4 col-sm-4 col-sm-4">
-                        <p class="fw-bold">Montant credit : {{ MontantDemande }}  </p>
-                        <p class="fw-bold"> Taux annuelle : {{ InteretA }} % </p>
+                        <p class="fw-bold">Reste Credit : {{ ResteCredit }}  </p>
+                        <p class="fw-bold"> Reste Interet : {{ ResteInteret }} </p>
                     </div>
                     <div class="col-4 col-sm-4 col-sm-4">
-                        <p class="fw-bold">Code credit : {{ codecredit }} </p>
+                        <p class="fw-bold">Code credit : {{ NumeroCredit }} </p>
                         <p class="fw-bold"> Nombre tranche : {{ Periode }} </p>
                     </div>
                 </div>

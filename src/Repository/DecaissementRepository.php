@@ -39,24 +39,89 @@ class DecaissementRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Undocumented function
+     *
+     * @method mixed ReechelonnementSommeCreditRembourser():Cette methode permet de recuperer les sommes des credit deja remburser et recuperer dans le modal
+     * @param [type] $idcredit
+     * @return void
+     */
+    public function ReechelonnementSommeCreditRembourser($idcredit){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT DISTINCT
+                demande.NombreTranche,
+                SUM(remboursement.MontantTotalPaye) sommerembourser,
+                SUM(remboursement.Capital) totalcapital,
+                SUM(remboursement.Interet) totalinteret
+            FROM
+            App\Entity\DemandeCredit demande
+            LEFT JOIN
+             App\Entity\RemboursementCredit remboursement
+            WITH
+             remboursement.NumeroCredit=demande.NumeroCredit
+            WHERE
+            demande.id = :idcredit
+            ORDER BY demande.NombreTranche DESC
+            '
+        )
+        ->setParameter(':idcredit',$idcredit);
+
+        return $query->getResult();
+
+
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @method mixed ReechelonnementModal():Permet de recuperer les donnees sur le modal
+     * @param [type] $idcredit
+     * @return void
+     */
     public function ReechelonnementModal($idcredit){
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
-            'SELECT
-                reechelonement.numeroCredit,
-                demande
+            'SELECT DISTINCT
+                decaissement.numeroCredit,
+                decaissement.montantCredit,
+                demande.TauxInteretAnnuel,
+                remboursement.periode dernierperioderemb,
+                amortissement.periode totalperiode,
+                individuel.nom_client,
+                individuel.prenom_client
             FROM
             App\Entity\DemandeCredit demande
+            LEFT JOIN
+            App\Entity\Decaissement decaissement
+            WITH
+             demande.NumeroCredit=decaissement.numeroCredit
+
             INNER JOIN
-             App\Entity\Decaissement reechelonement
-             WITH
-             demande.NumeroCredit=reechelonement.numeroCredit
+             App\Entity\RemboursementCredit remboursement
+            WITH
+             remboursement.NumeroCredit=decaissement.numeroCredit
+
+            LEFT JOIN
+             App\Entity\IndividuelClient individuel
+            WITH
+            individuel.codeclient=demande.codeclient
+
+            LEFT JOIN
+            App\Entity\AmortissementFixe amortissement
+            WITH
+            amortissement.codecredit=decaissement.numeroCredit
+
             WHERE
             demande.id = :idcredit
-            '
+            -- GROUP BY remboursement.MontantTotalPaye
+            ORDER BY remboursement.periode DESC   
+             '
         )
-        ->setParameter(':idcredit',$idcredit);
+        ->setParameter(':idcredit',$idcredit)
+        ->setMaxResults(1);
 
         return $query->getResult();
 

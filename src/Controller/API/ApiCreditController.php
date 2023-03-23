@@ -271,6 +271,23 @@ class ApiCreditController extends AbstractController
         
         return new JsonResponse($reechelonnement);
     }
+
+    /**
+     * @method mixed ReechelonnementSommeCreditRembourser()
+     * 
+     * @param mixed $decaissementRepository
+     * @param mixed $idcredit
+     * @return Json
+     */
+    #[Route('/sommecredit/Modal/{idcredit}',name:'app_modal_sommecredit_reechelonnement')]
+    public function ReechelonnementSommeCreditRembourser(DecaissementRepository $decaissementRepository,$idcredit)
+    {
+        $sommecredit=$decaissementRepository->ReechelonnementSommeCreditRembourser($idcredit);
+        
+        return new JsonResponse($sommecredit);
+    }
+
+
     
     /**
      * @method mixed ApprobationModal()

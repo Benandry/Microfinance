@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reechelonnement{% endblock %}
+{% block head %}Reechelonnement {% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+    <div class="card p-3">
+            <div class="card mb-3">
+                <div class="row text-secondary m-3">
+                    <div class="col-sm-4 col-xl-4">
+                        <p class="fw-bold"> Nom du client : <span>{{ nom }}</span> </p>
+                        <p class="fw-bold"> Prenom du client : <span> {{ prenom }}</span> </p>
+                    </div>
+                    <div class="col-sm-4 col-xl-4">
+                        <p class="fw-bold"> Code Client : <span id="codeclient">{{ codeclient }}</span> </p>
+                        <p class="fw-bold"> Numero Credit : <span id="codecredit">{{ NumeroCredit }}</span> </p>
+                    </div>
+                    <div class="col-sm-4 col-xl-4">
+                        <p class="fw-bold"> Total Credit : <span id="total_credit" >{{ TotalCredit }}</span> </p>
+                        <p class="fw-bold"> Reste Credit : <span id="montant_credit" >{{ ResteCredit }}</span> </p>
+                    </div>
+                </div>
+            </div>
+        {{ include('Module_credit/Reechelonnement/_form.html.twig') }}
+    </div>
+
+{% endblock %}
