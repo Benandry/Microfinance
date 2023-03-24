@@ -144,6 +144,7 @@ class DecaissementRepository extends ServiceEntityRepository
         demande.codeclient,
         demande.NumeroCredit,
         demande.Montant,
+        demande.TauxInteretAnnuel,
         decaissement.numeroCredit,
         decaissement.NumeroCompteEpargne
 

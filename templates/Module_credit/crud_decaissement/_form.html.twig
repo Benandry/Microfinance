@@ -6,31 +6,30 @@
         {% if Mode == 'DAV' %}
             <div style="display:none">
                 {{ form_row(form.numeroCredit) }}
-                {{ form_row(form.montantCredit) }}
             </div>
                 {{ form_row(form.dateDecaissement) }}
                 {{ form_row(form.idepargne) }}
+                {{ form_row(form.pieceComptable) }}
         {% else %}
             <div style="display:none">
                 {{ form_row(form.numeroCredit) }}
                 {{ form_row(form.idepargne) }}
             </div>
                 {{ form_row(form.dateDecaissement) }}
-                {{ form_row(form.montantCredit) }}
-
+                {{ form_row(form.pieceComptable) }}
         {% endif %}
         {#  #}
             <div class="row">
             </div>
         </div>
         <div class="col-sm-4 col-xl-4">
-            {{ form_row(form.OrigineFond) }}
-            {{ form_row(form.pieceComptable) }}
+            {{ form_row(form.commissionCredit) }}
+            {{ form_row(form.fraisDeDeveloppement) }}
         </div>
         <div class="col-sm-4 col-xl-4">
-            {{ form_row(form.fraisDeDeveloppement) }}
-            {{ form_row(form.commissionCredit) }}
+            {{ form_row(form.OrigineFond) }}
             <div style="display:none">{{ form_row(form.NumeroCompteEpargne) }}</div>
+            <div style="display:none">{{ form_row(form.montantCredit) }}</div>
         </div>
     </div>
 

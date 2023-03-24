@@ -24,6 +24,7 @@ class DecaissementIndividuelModalController extends AbstractController
             $prenomclient=$form->get('prenomclient')->getData();
             $numerocredit=$form->get('numerocredit')->getData();
             $montantcredit=$form->get('montantcredit')->getData();
+            $Interet=$form->get('Interet')->getData();
 
             return $this->redirectToRoute('app_crud_decaissement_new_individuel',[
 
@@ -32,6 +33,7 @@ class DecaissementIndividuelModalController extends AbstractController
                 'prenomclient'=>$prenomclient,
                 'numerocredit'=>$numerocredit,
                 'montantcredit'=>$montantcredit,
+                'Interet'=>$Interet,
                 'Mode'=>$Mode,
             ],Response::HTTP_SEE_OTHER
         );

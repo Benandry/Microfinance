@@ -47,6 +47,7 @@ class DecaissementIndividuelModalType extends AbstractType
         ->add('prenomclient')
         ->add('numerocredit')
         ->add('montantcredit')
+        ->add('Interet')
             
         ->add('Mode',ChoiceType::class,[
             'placeholder'=>'Mode de payement',

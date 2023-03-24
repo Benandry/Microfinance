@@ -4,6 +4,7 @@ namespace App\Controller\Credit;
 
 use App\Entity\AmortissementFixe;
 use App\Entity\ApprobationCredit;
+use App\Entity\FicheDeCredit;
 use App\Form\ApprobationCreditType;
 use App\Repository\ApprobationCreditRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -170,7 +171,7 @@ class ApprobationCreditController extends AbstractController
     }
 
     #[Route('/new/individuel', name: 'app_approbation_credit_new_individuel', methods: ['GET', 'POST'])]
-    public function newIndividuel(Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
+    public function newIndividuel(EntityManagerInterface $em,Request $request, ApprobationCreditRepository $approbationCreditRepository): Response
     {   
 
         // Recuperation des donnees venant du formulaire modal
@@ -190,6 +191,10 @@ class ApprobationCreditController extends AbstractController
         // $codeclient = $demande['demande']['codeclient'];
         // $cycles = $approbationCreditRepository->findCycle($codeclient)[0][1];
         $approbationCredit = new ApprobationCredit();
+
+        // Fiche de credit
+        $fichedecredit=new FicheDeCredit();
+
         $form = $this->createForm(ApprobationCreditType::class, $approbationCredit);
         $form->handleRequest($request);
 
@@ -200,6 +205,22 @@ class ApprobationCreditController extends AbstractController
             $DateApprobation=$approbationCredit->getDateApprobation();
 
             $approbationCreditRepository->add($approbationCredit, true);
+
+            // Fiche de credit
+            $fichedecredit->setDateTransaction($DateApprobation);
+            $fichedecredit->setTransaction('Approbation');
+            $fichedecredit->setCapital($MontantApprouvee);
+            // interet
+            $InteretDemande=($MontantApprouvee*($TauxInteretAnnuel/100));
+            $fichedecredit->setInteret($InteretDemande);
+            // Total
+            $TotalCreditDemande=$InteretDemande+$MontantApprouvee;
+            $fichedecredit->setTotal($TotalCreditDemande);
+
+            $em->persist($fichedecredit);
+            $em->flush();
+        
+        
             $this->addFlash('success', "Le demande de credit ".$approbationCredit->getCodecredit()." est ".$approbationCredit->getStatusApprobation());
             return $this->redirectToRoute('app_ammortissement_approbation',
              [

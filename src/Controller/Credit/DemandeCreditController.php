@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Controller\Credit\TypeAmortissement\Types;
+use App\Entity\FicheDeCredit;
 use App\Entity\PatrimoineCredit;
 use App\Form\PatrimoineCreditType;
 use App\Repository\PatrimoineCreditRepository;
@@ -163,6 +164,9 @@ class DemandeCreditController extends AbstractController
 
         // Demande credit
         $demandeCredit = new DemandeCredit();
+
+        // Fiche de Credit
+        $fichedecredit=new FicheDeCredit();
         
         $form = $this->createForm(DemandeCreditType::class, $demandeCredit);
 
@@ -235,6 +239,21 @@ class DemandeCreditController extends AbstractController
 
            $demandeCreditRepository->add($demandeCredit, true);
 
+
+        // Fiche de credit
+            $fichedecredit->setDateTransaction($DateDemande);
+            $fichedecredit->setTransaction('Demande');
+            $fichedecredit->setCapital($MontantDemande);
+            // interet
+            $InteretDemande=($MontantDemande*($InteretAnnuel/100));
+            $fichedecredit->setInteret($InteretDemande);
+            // Total
+            $TotalCreditDemande=$InteretDemande+$MontantDemande;
+            $fichedecredit->setTotal($TotalCreditDemande);
+
+            $em->persist($fichedecredit);
+            $em->flush();
+
             /***Amortissement simple */
            if($data->getTypeTranche() == "Lineaire")
            {
@@ -250,20 +269,6 @@ class DemandeCreditController extends AbstractController
             
                 ], Response::HTTP_SEE_OTHER);
            }
-        // if($data->getTypeTranche() == 'Lineaire'){
-        //     return $this->redirectToRoute('app_lineaire',[
-        //         'codecredit' => $codecredit,
-        //     ],Response::HTTP_SEE_OTHER);
-        // }
-
-             /***Amortissement Degressif */
-            //  if($data->getTypeTranche() == "Degressif")
-            //  {
-            //       $traitement->Degressif($data);
-            //       return $this->redirectToRoute('app_degressif_ammortissement', [
-            //           'codecredit' => $codecredit,
-            //       ], Response::HTTP_SEE_OTHER);
-            //  } 
            
         }
 

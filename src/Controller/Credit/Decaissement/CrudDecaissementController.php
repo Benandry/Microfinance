@@ -4,6 +4,7 @@ namespace App\Controller\Credit\Decaissement;
 
 use App\Controller\Comptabilite\TraitementCompta\ComptaDecaissement;
 use App\Entity\Decaissement;
+use App\Entity\FicheDeCredit;
 use App\Entity\Transaction;
 use App\Form\DecaissementType;
 use App\Repository\DecaissementRepository;
@@ -34,12 +35,21 @@ class CrudDecaissementController extends AbstractController
         $prenomclient=$request->query->get('prenomclient');
         $numerocredit=$request->query->get('numerocredit');
         $montantcredit=$request->query->get('montantcredit');
+        $Interet=$request->query->get('Interet');
+        // dd($Interet);
         // dd($Client,$nomclient,$prenomclient,$numerocredit,$montantcredit);
 
+        // Calcule Interet
+        $InteretDecaisser=$montantcredit*$Interet/100;
+
+        // Calcul Total Credit
+        $TotalCreditDecaisser=$montantcredit+$InteretDecaisser;
 
         $demandeApprouver = $request->query->all();
         $decaissement = new Decaissement();
         $transaction= new Transaction();
+        // Fiche de credit
+        $fichedecredit=new FicheDeCredit();
         // dd($demandeApprouver);
 
         // $codecredit = $demandeApprouver['liste']['codeclient'];
@@ -59,13 +69,12 @@ class CrudDecaissementController extends AbstractController
             $datedecaissement=$decaissement->getDateDecaissement();
             $transaction->setDateTransaction($datedecaissement);
 
-            $montant=$decaissement->getMontantCredit();
-            $transaction->setMontant($montant);
-
+            $transaction->setMontant($TotalCreditDecaisser);
+            
 
             $transaction->setTypeClient("INDIVIDUEL");
-
-            $transaction->setSolde($montant);
+            
+            $transaction->setSolde($TotalCreditDecaisser);
 
             $codetransaction=random_int(2,1000000000);
             $transaction->setCodetransaction($codetransaction);
@@ -73,14 +82,17 @@ class CrudDecaissementController extends AbstractController
             $codeepargne=$decaissement->getNumeroCompteEpargne();
             $transaction->setCodeepargneclient($codeepargne);
 
-
+            
             $em->persist($transaction);
             $em->flush();
 
 
-
+            
             // dd($decaissement->getNumeroCredit());
             $decaissement->setRefDecaissement($codetransaction);
+            $decaissement->setMontantCredit($TotalCreditDecaisser);
+            $decaissement->setCapital($montantcredit);
+            $decaissement->setInteret($InteretDecaisser);
 
             $em=$doctrine->getManager();
             
@@ -88,8 +100,25 @@ class CrudDecaissementController extends AbstractController
             // $credit = $form->get('credit')->getData();
             // dd($debit);
             // $compta->decaissement($em,$decaissement);
-
+            
             $decaissementRepository->add($decaissement, true);
+            
+            // Fiche de credit
+                $fichedecredit->setNumeroCredit($numerocredit);
+                $fichedecredit->setDateTransaction($datedecaissement);
+                $fichedecredit->setTransaction('Decaissement');
+                $montant=$decaissement->getMontantCredit();
+                $fichedecredit->setCapital($montantcredit);
+                // interet
+                $fichedecredit->setInteret($InteretDecaisser);
+                // Total
+                $fichedecredit->setTotal($TotalCreditDecaisser);
+    
+                $em->persist($fichedecredit);
+                $em->flush();
+    
+            
+
             $this->addFlash('success', "Décaissement de credit  ".$decaissement->getNumeroCredit()." reuissite .Réferences : ".$decaissement->getRefDecaissement());
             return $this->redirectToRoute('app_decaissement_credit_individuel', [], Response::HTTP_SEE_OTHER);
         }
@@ -99,10 +128,11 @@ class CrudDecaissementController extends AbstractController
             'nomclient'=>$nomclient,
            'prenomclient'=>$prenomclient,
             'numerocredit'=>$numerocredit,
-            'montantcredit'=>$montantcredit,    
+            'montantcredit'=>$TotalCreditDecaisser,    
             'form' => $form,
             'demandes' => $demandeApprouver,
-            'Mode'=>$Mode
+            'Mode'=>$Mode,
+            'TotalCreditDecaisser'=>$TotalCreditDecaisser
                 ]);
     }
 

@@ -29,6 +29,7 @@ $(document).ready(function(){
                         $('#decaissement_individuel_modal_prenomclient').val(infoindividuel.prenom_client);
                         $('#decaissement_individuel_modal_numerocredit').val(infoindividuel.NumeroCredit);
                         $('#decaissement_individuel_modal_montantcredit').val(infoindividuel.Montant);
+                        $('#decaissement_individuel_modal_Interet').val(infoindividuel.TauxInteretAnnuel);
                         $('.btn').show();
                     }
                 }
