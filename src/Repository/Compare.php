@@ -39,30 +39,6 @@ class ApprobationCreditRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return ApprobationCredit[] Returns an array of ApprobationCredit objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ApprobationCredit
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
     /**
      * Undocumented function
      *
@@ -100,7 +76,6 @@ class ApprobationCreditRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
-
 
 
 // Liste des demande client Individuel
