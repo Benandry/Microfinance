@@ -51,13 +51,21 @@ class DecaissementRepository extends ServiceEntityRepository
 
         $query=$entityManager->createQuery(
             'SELECT DISTINCT
-                demande.NumeroCredit
+                demande.NumeroCredit,
+                individuel.nom_client,
+                individuel.prenom_client,
+                demande.codeclient
             FROM
                 App\Entity\DemandeCredit demande
                     INNER JOIN
                 App\Entity\FicheDeCredit fiche
                     WITH
                 demande.NumeroCredit=fiche.NumeroCredit
+
+                LEFT JOIN
+                    App\Entity\IndividuelClient individuel
+                WITH
+                    individuel.codeclient=demande.codeclient
             WHERE
                 demande.id= :idcredit
             '

@@ -27,7 +27,11 @@ class FicheCreditModalType extends AbstractType
             },
             'autocomplete'=>true
         ])
-        ->add('NumeroCredit');
+        ->add('NumeroCredit')
+        ->add('NomClient')
+        ->add('PrenomClient')
+        ->add('Codecredit')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

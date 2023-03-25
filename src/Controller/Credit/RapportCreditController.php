@@ -211,30 +211,31 @@ class RapportCreditController extends AbstractController
         ]);
     }
 
+    /**
+     * Fiche de credit
+     *
+     * @param Request $request
+     * @param DemandeCreditRepository $demandeCreditRepository
+     * @return void
+     */
     #[Route('/FicheCredit/Credit/',name:'app_fiche_credit')]
     public function FicheCredit(Request $request,DemandeCreditRepository $demandeCreditRepository)
-    {   
-        $Fiche=$demandeCreditRepository->Fiche();
+    {  
+        // Recuperer les donnees venant du modal
 
-        $showFiche=false;
-        // $CodeClient=[];
-        // $Fiche= '';
+        $NumeroCredit=$request->query->get('NumeroCredit');
+        $NomClient=$request->query->get('NomClient');
+        $PrenomClient=$request->query->get('PrenomClient');
+        $Codecredit=$request->query->get('Codecredit');
 
-        $form=$this->createForm(FicheCreditModalType::class);
-        $form->handleRequest($request);
+        $Fiche=$demandeCreditRepository->FicheCredit($NumeroCredit);
+        
 
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $showFiche=true;
-            $CodeClient=$form->getData()['NumeroCredit'];
-
-            $Fiche=$demandeCreditRepository->FicheCredit($CodeClient);
-        }
-
-        return $this->renderForm('Module_credit/rapportCredit/FicheCredit.html.twig',[
-            'form'=>$form,
-            // 'CodeClient'=>$CodeClient,
-            'showFiche'=>$showFiche,
+        return $this->render('Module_credit/rapportCredit/FicheCredit.html.twig',[
+            'Codecredit'=>$Codecredit,
+            'NomClient'=>$NomClient,
+            'NumeroCredit'=>$NumeroCredit,
+            'PrenomClient'=>$PrenomClient,
             'Fiche'=>$Fiche
         ]);
     }

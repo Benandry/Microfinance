@@ -19,10 +19,16 @@ class FicheCreditModalController extends  AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $data= $form->getData();
 
-            $CodeCredit=$data['CodeCredit'];
+            $NumeroCredit=$data['NumeroCredit'];
+            $NomClient=$data['NomClient'];
+            $PrenomClient=$data['PrenomClient'];
+            $Codecredit=$data['Codecredit'];
 
             return $this->redirectToRoute('app_fiche_credit',[
-                'CodeCredit'=>$CodeCredit,
+                'NumeroCredit'=>$NumeroCredit,
+                'NomClient'=>$NomClient,
+                'PrenomClient'=>$PrenomClient,
+                'Codecredit'=>$Codecredit,
             ]);
         }
 

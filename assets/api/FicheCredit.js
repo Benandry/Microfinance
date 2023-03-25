@@ -3,7 +3,7 @@ import $ from 'jquery'
 const path = window.location.pathname;
 
 $(document).ready(function(){
-   if(path == '/FicheCredit/Credit/') {
+   if(path == '/Modal/Fiche') {
         $('.btn').hide();
         $('#fiche_credit_modal_CodeCredit').on('change',function(){
             // Recuperation dans le champ
@@ -24,6 +24,9 @@ $(document).ready(function(){
                         var fiche=content[j];
 
                        $('#fiche_credit_modal_NumeroCredit').val(fiche.NumeroCredit);
+                       $('#fiche_credit_modal_NomClient').val(fiche.nom_client);
+                       $('#fiche_credit_modal_PrenomClient').val(fiche.prenom_client);
+                       $('#fiche_credit_modal_Codecredit').val(fiche.codeclient);
                        $('.btn').show();
                     }
                 }

@@ -6,23 +6,25 @@
 {% block body %}
     {{ include('modal.html.twig') }}
     
-    {% if showFiche == false %}
+    {# {% if showFiche == false %}
         {{ include('Module_credit/rapportCredit/FicheCreditModal.html.twig') }}
-    {% else %}
+    {% else %} #}
         <div class="card p-3">
         {# {% for tableau in tableau %} #}
-             {# <div class="card">
+             <div class="card">
                 <div class="row text-secondary m-3">
-                    <div class="col-4 col-sm-4 col-sm-4">
-                        <p class="fw-bold">Montant credit : {{ MontantDemande }}  </p>
-                        <p class="fw-bold"> Taux annuelle : {{ InteretA }} % </p>
+                    <div class="col-2 col-sm-2 col-sm-2">
                     </div>
                     <div class="col-4 col-sm-4 col-sm-4">
-                        <p class="fw-bold">Code credit : {{ codecredit }} </p>
-                        <p class="fw-bold"> Nombre tranche : {{ Periode }} </p>
+                        <p class="fw-bold">Nom : {{ NomClient }}</p>
+                        <p class="fw-bold"> Prenom :  {{ PrenomClient }} </p>
+                    </div>
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold">Code Client : {{ Codecredit }} </p>
+                        <p class="fw-bold"> Code Credit : {{ NumeroCredit }} </p>
                     </div>
                 </div>
-            </div> #}
+            </div>
         {# {% endfor %} #}
         <table class="table table-bordered mt-2">
             <thead>
@@ -50,6 +52,6 @@
             </tbody>
         </table>
     </div>
-    {% endif %}
+    {# {% endif %} #}
 
 {% endblock %}

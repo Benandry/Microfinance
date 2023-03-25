@@ -1,9 +1,9 @@
-    {# {% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block title %}Fiche de Credit{% endblock %}
 {% block head %}Fiche de Credit{% endblock %}
 
-{% block body %} #}
+{% block body %}
 
     <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -20,8 +20,11 @@
                             <div class="col-12 col-sm-12">
                                 {{ form_row(form.CodeCredit) }}
                             </div>
-                            <div class="col-12 col-sm-12" style="display:">
+                            <div class="col-12 col-sm-12" style="display:none">
                                 {{ form_row(form.NumeroCredit) }}
+                                {{ form_row(form.NomClient) }}
+                                {{ form_row(form.PrenomClient) }}
+                                {{ form_row(form.Codecredit) }}
                             </div>
                         </div>
 
@@ -36,5 +39,5 @@
         </div>
     </div> 
 
-    {# {% endblock %} #}
+    {% endblock %}
 
