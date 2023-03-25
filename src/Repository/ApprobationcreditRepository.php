@@ -77,31 +77,6 @@ class ApprobationCreditRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-//    /**
-//     * @return ApprobationCredit[] Returns an array of ApprobationCredit objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ApprobationCredit
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
 
 // Liste des demande client Individuel
     public function findDemandeNonApprouver()
