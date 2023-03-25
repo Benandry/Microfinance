@@ -5,7 +5,11 @@
 
 {% block body %}
     {{ include('modal.html.twig') }}
-    <div class="card p-3">
+    
+    {% if showFiche == false %}
+        {{ include('Module_credit/rapportCredit/FicheCreditModal.html.twig') }}
+    {% else %}
+        <div class="card p-3">
         {# {% for tableau in tableau %} #}
              {# <div class="card">
                 <div class="row text-secondary m-3">
@@ -22,59 +26,30 @@
         {# {% endfor %} #}
         <table class="table table-bordered mt-2">
             <thead>
-                    <tr>
-                    <th>Numero Credit</th>
-                    <th>Date Demande</th>
-                    <th>Montant Demande</th>
-                    <th>Interet</th>
-                    <th>Tranche </th>
-                </tr>
                 <tr>
-                    <th>Numero Credit</th>
-                    <th>Date de remboursement</th>
-                    <th>Capital </th>
-                    <th>Interet </th>
-                    {# <th>Remboursement </th>
-                    <th>Capital restant du </th>
-                    <th>Interet Restant du</th>
-                    <th>Montant Restant du </th> #}
+                    <th>Date transaction</th>
+                    <th>Transaction</th>
+                    <th>Capital</th>
+                    <th>Credit</th>
+                    <th>Total</th>
+                    <th>Penalite</th>
                 </tr>
+              
             </thead>
             <tbody>
-              {% for ficheCredit in ficheCredit %}
-                    <tr>
-                        <td> {{ ficheCredit.demandeNumeroCredit}} </td>
-                        <td>{{ ficheCredit.demandeDateDemande|date("d/m/Y")}}</td>
-                        <td>{{ ficheCredit.demandeMontant }}</td>
-                        <td>{{ ficheCredit.demandeTauxInteretAnnuel }}</td>
-                        <td>{{ ficheCredit.demandeNombreTranche }}</td>
-                        {# <td> <a href="{{ path('app_amortissement_fixe_edit',{'periode': tableau.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td> #}
-                    </tr>
-                    <tr>
-                        <td> {{ ficheCredit.demandeNumeroCredit}} </td>
-                        <td>{{ ficheCredit.remboursementDateRemboursement|date("d/m/Y")}}</td>
-                        <td>{{ ficheCredit.remboursementMontantTotalPaye }}</td>
-                        <td>{{ ficheCredit.remboursementInteret }}</td>
-                        {# <td>{{ ficheCredit.montanttTotal }}</td>
-                        <td>{{ ficheCredit.soldedu }}</td>
-                        <td>{{ ficheCredit.InteretDu }}</td>
-                        <td>{{ ficheCredit.MontantRestantDu }}</td> #}
-                        {# <td> <a href="{{ path('app_amortissement_fixe_edit',{'periode': tableau.id}) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a></td> #}
-                    </tr>
+            {% for ficheCredit in Fiche %}
+                <tr>
+                    <td>{{ ficheCredit.DateTransaction|date("d/m/Y")}}</td>
+                    <td>{{ ficheCredit.Transaction }}</td>
+                    <td>{{ ficheCredit.Capital }}</td>
+                    <td>{{ ficheCredit.Interet }}</td>
+                    <td>{{ ficheCredit.Total }}</td>
+                    <td>{{ ficheCredit.Penalite }}</td>
+                </tr>
                 {% endfor %}
-                {# <tr>
-                    <th colspan="2">Total </th>
-                    <th> {{ SommeCapital }} </th>
-                    <th> {{ SommeInteret }} </th>
-                    <th> {{ SommeCredit}} </th>
-                </tr> #}
             </tbody>
         </table>
-        {# <div class="d-flex justify-content-center">
-            {{ form_start(form)}}
-                {{ form_widget(form) }}
-            {{ form_end(form)}}
-        </div> #}
     </div>
+    {% endif %}
 
 {% endblock %}

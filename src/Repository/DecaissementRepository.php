@@ -40,6 +40,34 @@ class DecaissementRepository extends ServiceEntityRepository
     }
 
     /**
+     * @method mixed FicheCreditModal():Methode utilisé pour le modal fiche credit
+     * 
+     * @param mixed $idcredit
+     * @return mixed array
+     */
+
+    public function FicheCreditModal($idcredit){
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT DISTINCT
+                demande.NumeroCredit
+            FROM
+                App\Entity\DemandeCredit demande
+                    INNER JOIN
+                App\Entity\FicheDeCredit fiche
+                    WITH
+                demande.NumeroCredit=fiche.NumeroCredit
+            WHERE
+                demande.id= :idcredit
+            '
+        )
+        ->setParameter(':idcredit',$idcredit);
+
+        return $query->getResult();
+    }
+
+    /**
      * Undocumented function
      *
      * @method mixed ReechelonnementSommeCreditRembourser():Cette methode permet de recuperer les sommes des credit deja remburser et recuperer dans le modal

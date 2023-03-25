@@ -2,6 +2,7 @@
 
 namespace App\Controller\Credit;
 
+use App\Entity\FicheDeCredit;
 use App\Entity\RemboursementCredit;
 use App\Form\RemboursementCreditType;
 use App\Repository\RemboursementCreditRepository;
@@ -52,6 +53,9 @@ class RemboursementCreditController extends AbstractController
 
         
         $remboursementCredit = new RemboursementCredit();
+
+        // Fiche de credit
+        $fichedecredit=new FicheDeCredit();
 
         $form = $this->createForm(RemboursementCreditType::class, $remboursementCredit);
         $form->handleRequest($request);
@@ -404,6 +408,23 @@ class RemboursementCreditController extends AbstractController
                 $remboursementCredit->setInteret($interetrembourser);
 
                 $entityManager->persist($remboursementCredit);
+
+                // Fiche de credit
+                $fichedecredit->setNumeroCredit($numerocredit);
+                $fichedecredit->setDateTransaction($dateremboursement);
+                $fichedecredit->setTransaction('Remboursement');
+                $fichedecredit->setCapital($capitalrembourser);
+                // interet
+                $fichedecredit->setInteret($interetrembourser);
+                // Total
+                $fichedecredit->setTotal($montantTotalPayes);
+                $fichedecredit->setPenalite($penalite);
+    
+                $em->persist($fichedecredit);
+                $em->flush();
+            
+
+
             }
             $entityManager->flush();
 

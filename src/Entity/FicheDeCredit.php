@@ -35,6 +35,9 @@ class FicheDeCredit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $NumeroCredit = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $Periode = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class FicheDeCredit
     public function setNumeroCredit(?string $NumeroCredit): self
     {
         $this->NumeroCredit = $NumeroCredit;
+
+        return $this;
+    }
+
+    public function getPeriode(): ?int
+    {
+        return $this->Periode;
+    }
+
+    public function setPeriode(?int $Periode): self
+    {
+        $this->Periode = $Periode;
 
         return $this;
     }

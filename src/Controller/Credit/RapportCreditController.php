@@ -11,6 +11,9 @@ use App\Form\RapportCreditType;
 use App\Repository\DecaissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\Credit\Filtrer\Traitement;
+use App\Form\FicheCreditModalType;
+
+use function PHPSTORM_META\type;
 
 class RapportCreditController extends AbstractController
 {
@@ -198,7 +201,7 @@ class RapportCreditController extends AbstractController
         ]);
     }
 
-    #[Route('/rapport/credit/decaissement', name: 'app_rapport_credit_decaissement')]
+    #[Route('/rapport/credit/decaissement/', name: 'app_rapport_credit_decaissement')]
     public function decaissement(DecaissementRepository $decaissementRepository): Response
     {
         $listeDecaissement = $decaissementRepository->rapportDecaissement();
@@ -211,15 +214,28 @@ class RapportCreditController extends AbstractController
     #[Route('/FicheCredit/Credit/',name:'app_fiche_credit')]
     public function FicheCredit(Request $request,DemandeCreditRepository $demandeCreditRepository)
     {   
-        // Recuperer le code credit
-        $codecredit=$request->query->get('CodeCredit');
-        // dd($codecredit);
+        $Fiche=$demandeCreditRepository->Fiche();
 
-        $ficheCredit=$demandeCreditRepository->FicheCredit($codecredit);
+        $showFiche=false;
+        // $CodeClient=[];
+        // $Fiche= '';
 
+        $form=$this->createForm(FicheCreditModalType::class);
+        $form->handleRequest($request);
 
-        return $this->render('Module_credit/rapportCredit/FicheCredit.html.twig',[
-            'ficheCredit'=>$ficheCredit
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $showFiche=true;
+            $CodeClient=$form->getData()['NumeroCredit'];
+
+            $Fiche=$demandeCreditRepository->FicheCredit($CodeClient);
+        }
+
+        return $this->renderForm('Module_credit/rapportCredit/FicheCredit.html.twig',[
+            'form'=>$form,
+            // 'CodeClient'=>$CodeClient,
+            'showFiche'=>$showFiche,
+            'Fiche'=>$Fiche
         ]);
     }
 }

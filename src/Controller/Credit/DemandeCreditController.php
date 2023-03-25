@@ -241,6 +241,7 @@ class DemandeCreditController extends AbstractController
 
 
         // Fiche de credit
+            $fichedecredit->setNumeroCredit($codecredit);
             $fichedecredit->setDateTransaction($DateDemande);
             $fichedecredit->setTransaction('Demande');
             $fichedecredit->setCapital($MontantDemande);

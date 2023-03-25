@@ -24,6 +24,7 @@ import './api/DemandeCredit';
 import './api/remboursement';
 import './api/penalitecredit';
 import './api/Decaissement';
+import './api/FicheCredit';
 import './api/Reechelonnement';
 import './api/approbation';
 import './api/agence';

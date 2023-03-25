@@ -1,14 +1,10 @@
-{% extends "base.html.twig" %}
+    {# {% extends 'base.html.twig' %}
 
-{% block title %}
-    Fiche de credit
-{% endblock %}
+{% block title %}Fiche de Credit{% endblock %}
+{% block head %}Fiche de Credit{% endblock %}
 
-{% block head %}
-    Fiche de credit
-{% endblock %}
+{% block body %} #}
 
-{% block body %}
     <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -24,12 +20,14 @@
                             <div class="col-12 col-sm-12">
                                 {{ form_row(form.CodeCredit) }}
                             </div>
-                
+                            <div class="col-12 col-sm-12" style="display:">
+                                {{ form_row(form.NumeroCredit) }}
+                            </div>
                         </div>
 
                     </div>
             
-                    <!-- Modal footer -->
+                   <!-- Modal footer -->
                     <div class="modal-footer mb-0">
                         <input type="submit" value="valider" class="btn btn-primary">
                     </div>
@@ -37,4 +35,6 @@
             </div>
         </div>
     </div> 
-{% endblock %}
+
+    {# {% endblock %} #}
+

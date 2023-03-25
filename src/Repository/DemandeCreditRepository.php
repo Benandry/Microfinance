@@ -406,7 +406,6 @@ class DemandeCreditRepository extends ServiceEntityRepository
 
         return $statement;
     }
-
     /**
      * Undocumented function
      *
@@ -414,62 +413,31 @@ class DemandeCreditRepository extends ServiceEntityRepository
      * @param [type] $idcredit
      * @return void
      */
-    public function FicheCredit(int $idcredit){
+    public function FicheCredit($NumeroCredit){
 
         $entityManager=$this->getEntityManager();
 
         $query=$entityManager->createQuery(
             'SELECT
-            -- demande credit
-                demande.NumeroCredit demandeNumeroCredit,
-                demande.DateDemande demandeDateDemande,
-                demande.Montant demandeMontant,
-                demande.TauxInteretAnnuel demandeTauxInteretAnnuel,
-                demande.cycles demandecycles,
-                demande.NombreTranche demandeNombreTranche,
-            -- Remboursement credit
-                remboursement.DateRemboursement remboursementDateRemboursement,
-                remboursement.MontantTotalPaye remboursementMontantTotalPaye,
-                remboursement.penalite remboursementpenalite,
-                remboursement.Capital remboursementCapital,
-                remboursement.Interet remboursementInteret,
-                -- Approbation
-                approbation.dateApprobation approbationdateApprobation,
-                approbation.description approbationdescription,
-                approbation.montant approbationmontant,
-                -- Ammmortissement
-                amortissement.periode amortissementperiode,
-                amortissement.dateRemborsement amortissementdateRemborsement,
-                amortissement.principale amortissementprincipale,
-                amortissement.interet amortissementinteret,
-                amortissement.montanttTotal amortissementmontanttTotal,
-                amortissement.penalite amortissementpenalite,
-                amortissement.typeamortissement amortissementtypeamortissement,
-                amortissement.soldedu amortissementsoldedu,
-                amortissement.MontantRestantDu amortissementMontantRestantDu,
-                amortissement.InteretDu amortissementInteretDu
+                fiche.Periode,
+                fiche.NumeroCredit,
+                fiche.DateTransaction,
+                fiche.Transaction,
+                fiche.Capital,
+                fiche.Interet,
+                fiche.Total,
+                fiche.Penalite
             FROM
-                App\Entity\DemandeCredit demande
-                INNER JOIN
-                App\Entity\RemboursementCredit remboursement
-                WITH
-                demande.NumeroCredit=remboursement.NumeroCredit
-
-                INNER JOIN
-                App\Entity\ApprobationCredit approbation
-                WITH
-                approbation.codecredit=demande.NumeroCredit
-
-                INNER JOIN
-                App\Entity\AmortissementFixe amortissement
-                WITH
-                amortissement.codecredit=demande.NumeroCredit
-
+                App\Entity\FicheDeCredit fiche
+                -- LEFT JOIN
+                -- App\Entity\DemandeCredit demande
+                -- WITH demande.NumeroCredit=fiche.NumeroCredit
             WHERE
-                demande.id = idcredit
+            fiche.NumeroCredit = :NumeroCredit
+            -- GROUP BY fiche.id
             '
         )
-        ->setParameters('idcredit',$idcredit);
+        ->setParameter(':NumeroCredit',$NumeroCredit);
 
         return $query->getResult();
     }

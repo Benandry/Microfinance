@@ -207,6 +207,7 @@ class ApprobationCreditController extends AbstractController
             $approbationCreditRepository->add($approbationCredit, true);
 
             // Fiche de credit
+            $fichedecredit->setNumeroCredit($NumeroCredit);
             $fichedecredit->setDateTransaction($DateApprobation);
             $fichedecredit->setTransaction('Approbation');
             $fichedecredit->setCapital($MontantApprouvee);

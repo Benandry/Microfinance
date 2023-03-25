@@ -26,7 +26,8 @@ class FicheCreditModalType extends AbstractType
                     ->setMaxResults(5);
             },
             'autocomplete'=>true
-        ]);
+        ])
+        ->add('NumeroCredit');
     }
 
     public function configureOptions(OptionsResolver $resolver)

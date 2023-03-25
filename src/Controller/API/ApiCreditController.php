@@ -303,4 +303,19 @@ class ApiCreditController extends AbstractController
         return new JsonResponse($ApprobationModal);
     }
 
+    /**
+     * @method mixed FicheCreditModal()
+     * 
+     * @param mixed $decaissementRepository
+     * @param mixed $idcredit
+     * @return mixed Json
+     */
+    #[Route('/Fiche/Credit/Modal/{idcredit}',name:'app_fiche_modal')]
+    public function FicheCreditModal(DecaissementRepository $decaissementRepository,$idcredit)
+    {
+        $ficheModal=$decaissementRepository->FicheCreditModal($idcredit);
+
+        return new JsonResponse($ficheModal);
+    }
+
 }
