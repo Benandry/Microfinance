@@ -81,8 +81,23 @@ class ConfigurationCredit
     #[ORM\Column]
     private ?int $idProduit = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $InteretRetard = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?float $InteretRetard = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PenaliteAnticipe = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PenalitePourcentage = null;
+
+    // #[ORM\Column(nullable: true)]
+    // private ?bool $PenaliteCapital = null;
+
+    // #[ORM\Column(nullable: true)]
+    // private ?bool $PenaliteInteret = null;
+
+    // #[ORM\Column(nullable: true)]
+    // private ?bool $PenaliteCRD = null;
 
     public function getId(): ?int
     {
@@ -354,14 +369,74 @@ class ConfigurationCredit
         return $this;
     }
 
-    public function getInteretRetard(): ?float
+    // public function getInteretRetard(): ?float
+    // {
+    //     return $this->InteretRetard;
+    // }
+
+    // public function setInteretRetard(?float $InteretRetard): self
+    // {
+    //     $this->InteretRetard = $InteretRetard;
+
+    //     return $this;
+    // }
+
+    // public function isPenaliteCapital(): ?bool
+    // {
+    //     return $this->PenaliteCapital;
+    // }
+
+    // public function setPenaliteCapital(?bool $PenaliteCapital): self
+    // {
+    //     $this->PenaliteCapital = $PenaliteCapital;
+
+    //     return $this;
+    // }
+
+    // public function isPenaliteInteret(): ?bool
+    // {
+    //     return $this->PenaliteInteret;
+    // }
+
+    // public function setPenaliteInteret(?bool $PenaliteInteret): self
+    // {
+    //     $this->PenaliteInteret = $PenaliteInteret;
+
+    //     return $this;
+    // }
+
+    // public function isPenaliteCRD(): ?bool
+    // {
+    //     return $this->PenaliteCRD;
+    // }
+
+    // public function setPenaliteCRD(?bool $PenaliteCRD): self
+    // {
+    //     $this->PenaliteCRD = $PenaliteCRD;
+
+    //     return $this;
+    // }
+
+    public function getPenaliteAnticipe(): ?string
     {
-        return $this->InteretRetard;
+        return $this->PenaliteAnticipe;
     }
 
-    public function setInteretRetard(?float $InteretRetard): self
+    public function setPenaliteAnticipe(?string $PenaliteAnticipe): self
     {
-        $this->InteretRetard = $InteretRetard;
+        $this->PenaliteAnticipe = $PenaliteAnticipe;
+
+        return $this;
+    }
+
+    public function getPenalitePourcentage(): ?string
+    {
+        return $this->PenalitePourcentage;
+    }
+
+    public function setPenalitePourcentage(?string $PenalitePourcentage): self
+    {
+        $this->PenalitePourcentage = $PenalitePourcentage;
 
         return $this;
     }

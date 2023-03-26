@@ -6,11 +6,11 @@
 {{ form_start(form) }}
   <ul class="nav nav-tabs">
       <li class="nav-item"> <a class="nav-link {{ activer|default(' ') }}" data-bs-toggle="tab" href="#General">General</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Interet">Interet</a></li>
+      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Interet">Interet</a></li> #}
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Garantie">Garantie</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Frais">Frais</a></li>
       <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Penalite">Penalite</a></li>
-      <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Promotion">Promotion</a></li>
+      {# <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Promotion">Promotion</a></li> #}
   </ul>
   <div class="tab-content">
 
@@ -19,22 +19,24 @@
             <div class="col-12 col-sm-12 col-md-12">
               <h6 class="text-center text-primary">General</h6>
               <div class="row">
-                  <div class="col-6 col-sm-6 col-md-6">
+                  <div class="col-4 col-sm-4 col-md-4">
                        {# {{ form_row(form.ProduitCredit) }} #}
                       {{ form_row(form.Methode) }}
                       {{ form_row(form.Montant) }}
                   </div>
-                  <div class="col-6 col-sm-6 col-md-6">
+                  <div class="col-4 col-sm-4 col-md-4">
                       {{ form_row(form.MontantMin) }}
                       {{ form_row(form.Tranche) }}
                   </div>
-
+                    <div class="col-4 col-sm-4 col-md-4">
+                      {{ form_row(form.InteretNormal) }}
+                    </div>
               </div>
             </div>
         </div>
       </div>
 
-      <div class="tab-pane" id="Interet">
+      {# <div class="tab-pane" id="Interet">
         <div class="row shadow-sm p-1">
             <div class="col-12 col-sm-12 col-md-12">
                 <h6 class="text-center text-primary">Interet</h6>
@@ -48,7 +50,7 @@
                 </div>
             </div>
         </div>
-      </div>
+      </div> #}
 
       <div class="tab-pane" id="Garantie">
         <div class="row shadow-sm p-1">
@@ -91,16 +93,19 @@
             <div class="col-12">
               <h6 class="text-center text-primary">Penalite </h6>
                   <div class="row">                
-                      <div class="col-6 col-sm-6">
-                        {{ form_row(form.PenalitePayementAntcp) }}
-                        {{ form_row(form.RetardPourcentage) }}
+                      <div class="col-6 col-sm-6 col-md-6">
+                         {{ form_row(form.PenaliteAnticipe) }}
+                        <div id="anticipe">{{ form_row(form.PenalitePayementAntcp) }}</div>
+                      </div>
+                      <div class="col-4 col-sm-4">
+                        {#{{ form_row(form.PenaliteInteret) }}
+                        {{ form_row(form.PenaliteCRD) }} #}
                         {{ form_row(form.RetardForfaitaire) }}
                       </div>
-                      <div class="col-6 col-sm-6">
-                        {# {{ form_row(form.PayementAnticipe) }} #}
-                        {{ form_row(form.RetardPeriodeJour) }}
-                        {{ form_row(form.RetardPeriodeMois) }}
-                          {{ form_row(form.RetardPeriode) }}
+                      <div class="col-6 col-sm-6 col-md-6">
+                        {{ form_row(form.PenalitePourcentage) }}
+                        <div id="pourcentage">{{ form_row(form.RetardPourcentage) }}</div>
+                       {# {{ form_row(form.InteretRetard) }} #}
                       </div>
                   </div>
             </div>

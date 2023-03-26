@@ -6,6 +6,7 @@ use App\Entity\ConfigurationCredit;
 use App\Entity\ProduitCredit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
@@ -23,7 +24,7 @@ class ConfigurationCreditType extends AbstractType
                     'Lineaire'=>'Lineaire',
                     'Degressif'=>'Degressif'
                 ]
-                            ])
+            ])
             ->add('Montant',IntegerType::class,[
                 'label'=>'Montant Maximum',
                 'required'=>false,
@@ -36,18 +37,18 @@ class ConfigurationCreditType extends AbstractType
                 'required'=>false,
             ])
             ->add('InteretNormal',IntegerType::class,[
-                'label'=>'Interet Normal',
+                'label'=>'Interet Annuel',
                 'required'=>false,
             ])
-            ->add('InteretRetard',IntegerType::class,[
-                'label'=>'Interet de retard',
-                'required'=>false
-            ])
-            ->add('GarantieMoral',RadioType::class,[
+            // ->add('InteretRetard',IntegerType::class,[
+            //     'label'=>'Interet de retard',
+            //     'required'=>false
+            // ])
+            ->add('GarantieMoral',CheckboxType::class,[
                 'label'=>'Garantie Moral',
                 'required'=>false,
             ])
-            ->add('GarantieMaterielle',RadioType::class,[
+            ->add('GarantieMaterielle',CheckBoxType::class,[
                 'label'=>'Garantie Materielle',
                 'required'=>false,
             ])
@@ -71,31 +72,51 @@ class ConfigurationCreditType extends AbstractType
                 'required'=>false,
             ])
             ->add('PenalitePayementAntcp',IntegerType::class,[
-                'label'=>'Penalite Payement Anticipé(deduit dans tous les credits)',
+                'label'=>'Penalite Payement Anticipé (Pourcentage)',
                 'required'=>false,
             ])
             ->add('RetardPourcentage',IntegerType::class,[
-                'label'=>'Penalite par pourcentage(deduit dans tous les credits)',
+                'label'=>'Penalite par pourcentage (Pourcentage)',
                 'required'=>false
             ])
-            // ->add('PayementAnticipe',IntegerType::class,[
-            //     'label'=>'P'
+            ->add('PenaliteAnticipe',ChoiceType::class,[
+                'label'=>'Penalite deduit par :',
+                'placeholder'=>'Penalite Anticipe',
+                'choices'=>[
+                    'Capital'=>'Capital',
+                    'Interet'=>'Interet',
+                    'Credit Restant'=>'Credit Restant',
+                ],
+                'required'=>false,
+            ])
+            ->add('PenalitePourcentage',ChoiceType::class,[
+                'label'=>'Penalite deduit par :',
+                'placeholder'=>'Penalite Pourcentage',
+                'choices'=>[
+                    'Capital'=>'Capital',
+                    'Interet'=>'Interet',
+                    'Credit Restant'=>'Credit Restant',
+                ],
+                'required'=>false,
+            ])
+            // ->add('PenaliteCapital',RadioType::class,[
+            //     'label'=>'Penalite deduit par la capital',
+            //     'mapped'=>false,
+            //     'required'=>false
+            // ])
+            // ->add('PenaliteInteret',RadioType::class,[
+            //     'label'=>'Penalite deduit par l\'interet',
+            //     'mapped'=>false,
+            //     'required'=>false
+            // ])
+            // ->add('PenaliteCRD',RadioType::class,[
+            //     'label'=>'Penalite deduit par le credit restant du',
+            //     'mapped'=>false,
+            //     'required'=>false
             // ])
             ->add('RetardForfaitaire',IntegerType::class,[
                 'label'=>'Forfaitaire',
                 'required'=>false
-            ])
-            ->add('RetardPeriode',IntegerType::class,[
-                'label'=>'Retard par periode(Deduit dans tous les credits)',
-                'required'=>false
-            ])
-            ->add('RetardPeriodeJour',RadioType::class,[
-                'label'=>'Retard Periode Jour',
-                'required'=>false,
-            ])
-            ->add('RetardPeriodeMois',RadioType::class,[
-                'label'=>'Retard Periode Mois',
-                'required'=>false,
             ])
         ;
     }
