@@ -39,43 +39,30 @@ class ApprobationCreditRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * Undocumented function
-     *
-     * @method mixed ApprobationDemande():Recuperer les donnees pour approuver une demande credit
-     * 
-     * @param [type] $idcredit
-     * @return void
-     */
-    public function ApprobationDemande($idcreditDemande)
-    {
-        $entityManager=$this->getEntityManager();
+//    /**
+//     * @return ApprobationCredit[] Returns an array of ApprobationCredit objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->andWhere('a.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('a.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-        $query=$entityManager->createQuery(
-            'SELECT
-                demande.codeclient,
-                demande.TypeClient,
-                demande.NumeroCredit,
-                demande.cycles,
-                demande.NombreTranche,
-                demande.TauxInteretAnnuel,
-                demande.TypeTranche,
-                demande.Montant,
-                individuel.nom_client,
-                individuel.prenom_client
-            FROM
-                App\Entity\DemandeCredit demande
-                INNER JOIN
-                App\Entity\IndividuelClient individuel
-                WITH
-                demande.codeclient=individuel.codeclient
-            WHERE
-               demande.id = :idcreditDemande'
-        )
-        ->setParameter(':idcreditDemande',$idcreditDemande);
-
-        return $query->getResult();
-    }
+//    public function findOneBySomeField($value): ?ApprobationCredit
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->andWhere('a.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 
 
 // Liste des demande client Individuel
