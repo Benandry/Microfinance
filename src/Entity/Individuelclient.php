@@ -28,7 +28,7 @@ class Individuelclient
     #[ORM\Column(length: 100)]
     private ?string $cin = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $nomConjoint = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -49,10 +49,10 @@ class Individuelclient
     #[ORM\Column(length: 255)]
     private ?string $profession = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $nb_enfant = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $nb_personne_charge = null;
 
     #[ORM\Column(length: 255,nullable:true)]
@@ -127,6 +127,10 @@ class Individuelclient
 
     #[ORM\ManyToOne(inversedBy: 'individuelclients')]
     private ?Commune $commune = null;
+
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $nom_conjoint = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $PrenomConjoint = null;
@@ -782,6 +786,18 @@ class Individuelclient
 
         return $this;
     }
+
+    // public function getNomConjoint(): ?string
+    // {
+    //     return $this->NomConjoint;
+    // }
+
+    // public function setNomConjoint(?string $NomConjoint): self
+    // {
+    //     $this->NomConjoint = $NomConjoint;
+
+    //     return $this;
+    // }
 
     public function getPrenomConjoint(): ?string
     {

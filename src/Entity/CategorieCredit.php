@@ -57,25 +57,25 @@ class CategorieCredit
         return $this->demandeCredits;
     }
 
-    public function addDemandeCredit(DemandeCredit $demandeCredit): self
-    {
-        if (!$this->demandeCredits->contains($demandeCredit)) {
-            $this->demandeCredits->add($demandeCredit);
-            $demandeCredit->setCategorieCredit($this);
-        }
+    // public function addDemandeCredit(DemandeCredit $demandeCredit): self
+    // {
+    //     if (!$this->demandeCredits->contains($demandeCredit)) {
+    //         $this->demandeCredits->add($demandeCredit);
+    //         $demandeCredit->setCategorieCredit($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeDemandeCredit(DemandeCredit $demandeCredit): self
-    {
-        if ($this->demandeCredits->removeElement($demandeCredit)) {
-            // set the owning side to null (unless already changed)
-            if ($demandeCredit->getCategorieCredit() === $this) {
-                $demandeCredit->setCategorieCredit(null);
-            }
-        }
+    // public function removeDemandeCredit(DemandeCredit $demandeCredit): self
+    // {
+    //     if ($this->demandeCredits->removeElement($demandeCredit)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($demandeCredit->getCategorieCredit() === $this) {
+    //             $demandeCredit->setCategorieCredit(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

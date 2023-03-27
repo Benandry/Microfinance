@@ -10,7 +10,7 @@ $(document).ready(() =>{
                 
         last_client++;
             
-        var pad_last_client = last_client.toString().padStart(7,0)
+        var pad_last_client = last_client.toString().padStart(7,0);
 
         // MAnova an ilay agence   
         var get_agence_id = parseInt($('#agence_id').text());

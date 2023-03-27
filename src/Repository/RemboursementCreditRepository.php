@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\RemboursementCredit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Config\Framework\HttpClient\DefaultOptions\RetryFailedConfig;
 
 /**
  * @extends ServiceEntityRepository<RemboursementCredit>
@@ -37,6 +38,38 @@ class RemboursementCreditRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Methode utilise sur le modal passée en perte
+     *
+     * @method mixed PerteDonnees()
+     * @param [type] $idcredit
+     * @return void
+     */
+    public function PerteDonnees($idcredit)
+    {
+        $entityManager=$this->getEntityManager();
+
+        $query=$entityManager->createQuery(
+            'SELECT
+                demande.NumeroCredit,
+                individuel.codeclient,
+                individuel.nom_client,
+                individuel.prenom_client
+            FROM
+                App\Entity\DemandeCredit demande
+                    INNER JOIN
+                App\Entity\IndividuelClient individuel
+                WITH
+                    demande.codeclient=individuel.codeclient
+            WHERE
+                demande.id=:idcredit
+            '
+        )
+        ->setParameter('idcredit',$idcredit);
+
+        return $query->getResult();
     }
 
     /**
@@ -102,8 +135,13 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 remboursement.periode perioderemboursement,
                 remboursement.MontantTotalPaye montantrembourse,
                 remboursement.penalite penaliteremboursement,
-                remboursement.NumeroCredit
-
+                remboursement.NumeroCredit,
+                -- Configuration
+                configurationc.RetardPourcentage,
+                configurationc.RetardForfaitaire,
+                configurationc.PenalitePayementAntcp,
+                configurationc.PenaliteAnticipe,
+                configurationc.PenalitePourcentage
             FROM
 
                 App\Entity\AmortissementFixe amortissement
@@ -118,6 +156,16 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 App\Entity\DemandeCredit demande
             WITH
                 amortissement.codecredit = demande.NumeroCredit
+
+                INNER JOIN
+                App\Entity\ProduitCredit produitc
+                WITH
+                produitc.id=demande.ProduitCredit
+
+                INNER JOIN
+                App\Entity\ConfigurationCredit configurationc
+                WITH
+                produitc.id=configurationc.idProduit
 
             WHERE
                 amortissement.codecredit = :numerocredit
@@ -212,7 +260,13 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 amortissement.penalite,
                 amortissement.commission,
                 amortissement.codecredit,
-                amortissement.typeamortissement
+                amortissement.typeamortissement,
+                -- Configuration
+                configurationc.RetardPourcentage,
+                configurationc.RetardForfaitaire,
+                configurationc.PenalitePayementAntcp,
+                configurationc.PenaliteAnticipe,
+                configurationc.PenalitePourcentage
 
             FROM
                 App\Entity\AmortissementFixe amortissement
@@ -220,6 +274,17 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 App\Entity\DemandeCredit demande
                 WITH
                 demande.NumeroCredit=amortissement.codecredit
+
+                INNER JOIN
+                App\Entity\ProduitCredit produitc
+                WITH
+                produitc.id=demande.ProduitCredit
+
+                INNER JOIN
+                App\Entity\ConfigurationCredit configurationc
+                WITH
+                produitc.id=configurationc.idProduit
+
             WHERE
             amortissement.codecredit= :numerocredit
                 AND

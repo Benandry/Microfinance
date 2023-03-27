@@ -317,5 +317,20 @@ class ApiCreditController extends AbstractController
 
         return new JsonResponse($ficheModal);
     }
+    
+    /**
+     * Credit passée en perte
+     * 
+     * @method mixed perteCredit()
+     * @param mixed $remboursementCreditRepository
+     * @param mixed $idcredit
+     */
+    #[Route('/Perte/Credit/{idcredit}',name:'app_perte_credit')]
+    public function perteCredit(RemboursementCreditRepository $remboursementCreditRepository,$idcredit)
+    {
+        $perte=$remboursementCreditRepository->PerteDonnees($idcredit);
+
+        return new JsonResponse($perte);
+    }
 
 }

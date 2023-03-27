@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de Credit{% endblock %}
+{% block head %}Fiche de Credit{% endblock %}
+
+{% block body %}
+    {{ include('modal.html.twig') }}
+
+        <div class="card p-3">
+             <div class="card">
+                <div class="row text-secondary m-3">
+                    <div class="col-2 col-sm-2 col-sm-2">
+                    </div>
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold">Nom : {{ NomClient }}</p>
+                        <p class="fw-bold"> Prenom :  {{ PrenomClient }} </p>
+                    </div>
+                    <div class="col-4 col-sm-4 col-sm-4">
+                        <p class="fw-bold">Code Client : {{ CodeClient }} </p>
+                        <p class="fw-bold"> Code Credit :<span id="codecredit">{{ CodeCredit }}</span></p>
+                    </div>
+                </div>
+            </div>
+    </div>
+        {{ include('Module_credit/Perte/_form.html.twig') }}
+
+{% endblock %}

@@ -41,28 +41,35 @@ class IndividuelclientType extends AbstractType
                     'width'=>'5',
                 ],
                 'label'=>'Nom',
+                'required'=>false,
+
             ])
             ->add('prenom_client',TextType::class,[
                 'label'=>'Prenom',
             ])
             ->add('nomConjoint',TextType::class,[
                 'label'=>'Nom Conjoint',
+                'required'=>false,
             ])
             ->add('PrenomConjoint',TextType::class,[
-                'label'=>'Prenom Conjoint'
+                'label'=>'Prenom Conjoint',
+                'required'=>false,
             ])
             ->add('DateNaissanceConjoint',DateType::class,[
-                'widget'=>'single_text'
+                'widget'=>'single_text',
+                'required'=>false,
             ])
             ->add('CINConjoint',TextType::class,[
                 'label'=>'CIN Conjoint',
                 'attr'=>[
                     'minlength'=>12,
                     'maxlength'=>12,
-                ]
+                ],
+                'required'=>false,
             ])
             ->add('ProfessionConjoint',TextType::class,[
-                'label'=>'Profession Conjoint'
+                'label'=>'Profession Conjoint',
+                'required'=>false,
             ])
             ->add('date_inscription',DateType::class,[
                 'widget'=>'single_text',
@@ -122,8 +129,14 @@ class IndividuelclientType extends AbstractType
                 'mapped' => true,
                 'autocomplete' => true,
             ])
-            ->add('FormationProfessionnelle')
-            ->add('Information')
+            ->add('FormationProfessionnelle',TextType::class,[
+                'label'=>'Formation Professionnelle',
+                'required'=>false,
+            ])
+            ->add('Information',TextType::class,[
+                'label'=>'Information',
+                'required'=>false,
+            ])
             ->add('titre',EntityType::class,[
                 'class'=>Titre::class,
                 'choice_label'=>'titre',
@@ -133,28 +146,48 @@ class IndividuelclientType extends AbstractType
             ])
             ->add('nb_enfant',IntegerType::class,[
                 'label'=>'Nombre enfant',
+                'required'=>false,
             ])
             ->add('nb_personne_charge',IntegerType::class,[
                 'label'=>'Nombre de personne en charge',
+                'required'=>false,
             ])
             ->add('parent_nom',TextType::class,[
                 'label'=>'Nom parent',
+                'required'=>false,
             ])
             ->add('parent_adresse',TextType::class,[
                 'label'=>'Parent adresse',
+                'required'=>false,
             ])
-            ->add('PrenomParent')
+            ->add('PrenomParent',TextType::class,[
+                'label'=>'Prenom parent',
+                'required'=>false,
+            ])
             ->add('CINParent',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control',
                     'maxLength' =>12,
                     'minLength' =>12,
-                ]
+                ],
+                'required'=>false,
             ])
-            ->add('FokontanyParent')
-            ->add('CommuneParent')
-            ->add('DistrictParent')
-            ->add('RegionParent')
+            ->add('FokontanyParent',TextType::class,[
+                'label'=>'Fokontant Parent',
+                'required'=>false,
+            ])
+            ->add('CommuneParent',TextType::class,[
+                'label'=>'Commune Parent',
+                'required'=>false,
+            ])
+            ->add('DistrictParent',TextType::class,[
+                'label'=>'Disctrict parent',
+                'required'=>false,
+            ])
+            ->add('RegionParent',TextType::class,[
+                'label'=>'Region parent',
+                'required'=>false,
+            ])
             ->add('MembreGroupe',EntityType::class,[
                 'class'=>Groupe::class,
                 'choice_label'=>function($mg){
@@ -182,7 +215,8 @@ class IndividuelclientType extends AbstractType
                 ],
                 'attr'=>[
                     'class'=>'form-control'
-                ]
+                ],
+                'required'=>false,
             ])
             ->add('dateadhesion',DateType::class,[
                 'widget'=>'single_text',
@@ -249,36 +283,121 @@ class IndividuelclientType extends AbstractType
                     return $c->getNom(). ' '.$c->getPrenom(); 
                 }
             ])       
-            ->add('garant') 
-            ->add('Activite')
-            ->add('SecteurActivite')
-            ->add('LibelleMoyenProduction')
-            ->add('MontantMoyenProduction')
-            ->add('LibelleMoyenProduction2')
-            ->add('MontantMoyenProduction2')
-            ->add('LibelleMoyenProduction3')
-            ->add('MontantMoyenProduction3')
-            ->add('LibelleMoyenProduction4')
-            ->add('MontantMoyenProduction4')
-            ->add('EmployeTemporaire')
-            ->add('CoutEmployeTemporaire')
-            ->add('EmployePermanant')
-            ->add('CoutEmployePermanent')
+            ->add('garant',CheckboxType::class,[
+                'required'=>false
+            ]) 
+            ->add('Activite',TextType::class,[
+                'required'=>false,
+            ])
+            ->add('SecteurActivite',TextType::class,[
+                'label'=>'Secteur d\'activite',
+                'required'=>false,
+            ])
+            ->add('LibelleMoyenProduction',TextType::class,[
+                'label'=>'Libelle 1',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProduction',IntegerType::class,[
+                'label'=>'Cout moyen de production 1',
+                'required'=>false,
+            ])
+            ->add('LibelleMoyenProduction2',TextType::class,[
+                'label'=>'Libelle 2',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProduction2',IntegerType::class,[
+                'label'=>'Cout moyen de production 2',
+                'required'=>false,
+            ])
+            ->add('LibelleMoyenProduction3',TextType::class,[
+                'label'=>'Secteur d\'activite',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProduction3',IntegerType::class,[
+                'label'=>'Cout moyen de production 3',
+                'required'=>false,
+            ])
+            ->add('LibelleMoyenProduction4',TextType::class,[
+                'label'=>'Libelle 4',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProduction4',IntegerType::class,[
+                'label'=>'Cout moyen de production 4',
+                'required'=>false,
+            ])
+            ->add('EmployeTemporaire',TextType::class,[
+                'label'=>'Employe temporaire',
+                'required'=>false,
+            ])
+            ->add('CoutEmployeTemporaire',IntegerType::class,[
+                'label'=>'Cout employe temporaire',
+                'required'=>false,
+            ])
+            ->add('EmployePermanant',TextType::class,[
+                'label'=>'Employe permanant',
+                'required'=>false,
+            ])
+            ->add('CoutEmployePermanent',IntegerType::class,[
+                'label'=>'Cout employe permanant',
+                'required'=>false,
+            ])
             
-            ->add('ActiviteComplementaire')
-            ->add('SecteurActvtComplmtr')
-            ->add('LibellMoyenProdCmplmtr')
-            ->add('MontantMoyenProdCmplmtr')
-            ->add('LibellMoyenProdCmplmtr2')
-            ->add('MontantMoyenProdCmplmtr2')
-            ->add('LibellMoyenProdCmplmtr3')
-            ->add('MontantMoyenProdCmplmtr3')
-            ->add('LibellMoyenProdCmplmtr4')
-            ->add('MontantMoyenProdCmplmtr4')
-            ->add('EmployeTemprarCmplt')
-            ->add('CoutEmployeTmprCmplmt')
-            ->add('EmployePermntCmpltmt')
-            ->add('CoutEmployePermntCmpltmt')
+            ->add('ActiviteComplementaire',TextType::class,[
+                'label'=>'Activite complementaire',
+                'required'=>false,
+            ])
+            ->add('SecteurActvtComplmtr',TextType::class,[
+                'label'=>'Secteur d\'activite complementaire',
+                'required'=>false,
+            ])
+            ->add('LibellMoyenProdCmplmtr',TextType::class,[
+                'label'=>'Libelle moyen de production 1',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProdCmplmtr',IntegerType::class,[
+                'label'=>'Montant moyen de production 1',
+                'required'=>false,
+            ])
+            ->add('LibellMoyenProdCmplmtr2',TextType::class,[
+                'label'=>'Libelle moyen de production 2',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProdCmplmtr2',IntegerType::class,[
+                'label'=>'Montant moyen de production 2',
+                'required'=>false,
+            ])
+            ->add('LibellMoyenProdCmplmtr3',TextType::class,[
+                'label'=>'Libelle moyen de production 3',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProdCmplmtr3',IntegerType::class,[
+                'label'=>'Montant moyen de production 3',
+                'required'=>false,
+            ])
+            ->add('LibellMoyenProdCmplmtr4',TextType::class,[
+                'label'=>'Libelle moyen de production 4',
+                'required'=>false,
+            ])
+            ->add('MontantMoyenProdCmplmtr4',IntegerType::class,[
+                'label'=>'Montant moyen de production 4',
+                'required'=>false,
+            ])
+            ->add('EmployeTemprarCmplt',TextType::class,[
+                'label'=>'Employe temporaire',
+                'required'=>false,
+            ])
+            ->add('CoutEmployeTmprCmplmt',IntegerType::class,[
+                'label'=>'Cout Employe temporaire',
+                'required'=>false,
+            ])
+            ->add('EmployePermntCmpltmt',TextType::class,[
+                'label'=>'Employe permanant',
+                'required'=>false,
+            ])
+            ->add('CoutEmployePermntCmpltmt',IntegerType::class,[
+                'label'=>'Cout Employe permanant',
+                'required'=>false,
+            ])
         ;
     }
 

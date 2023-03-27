@@ -234,6 +234,7 @@ $(document).ready(function(){
                                         // console.log('hello world')
                                         for(let j=0;j<content.length;j++){
                                             var ammortissement=content[j];
+                                            console.log(ammortissement);
 
                                             // On affiche le bouton
                                             $('.btn').show();
@@ -249,12 +250,55 @@ $(document).ready(function(){
                                                 var montantexigerammortissement=ammortissement.montanttTotal;
                                                 
                                                 console.log(montantexigerammortissement);
-                                                var penaliteammortissement=((ammortissement.montanttTotal*2/100))
+                                                
+                                                // Les 3 types de penalites
+                                                // Anticipe
+                                                var penalitecapital=(ammortissement.principale*ammortissement.PenalitePayementAntcp/100);
+                                                var penaliteammortissementEcheance=((ammortissement.montanttTotal*ammortissement.PenalitePayementAntcp/100));
+                                                var penaliteinteret=((ammortissement.interet*ammortissement.PenalitePayementAntcp/100));
+                                                // Pourcentage
+                                                var penalitecapitalp=(ammortissement.principale*ammortissement.RetardPourcentage/100);
+                                                var penaliteammortissementEcheancep=((ammortissement.montanttTotal*ammortissement.RetardPourcentage/100));
+                                                var penaliteinteretp=((ammortissement.interet*ammortissement.RetardPourcentage/100));
+
+                                                
 
                                                 if(montant < montantexigerammortissement )
                                                 {
-                                                    $('#remboursement_credit_penalite').val(penaliteammortissement);
-                                                    $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    // Pour l'anticipe
+                                                    // Si penalite pourcentage == Capital
+                                                    if(ammortissement.PenaliteAnticipe == "Capital"){
+                                                        $('#remboursement_credit_penalite').val(penalitecapital);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                     // Si penalite pourcentage == Interet
+                                                    else if(ammortissement.PenaliteAnticipe == "Interet"){
+                                                        $('#remboursement_credit_penalite').val(penaliteinteret);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                    // Si penalite pourcentage == Credit Restant
+                                                    else if(ammortissement.PenaliteAnticipe == "Credit Restant"){
+                                                        $('#remboursement_credit_penalite').val(penaliteammortissementEcheance);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+
+                                                    // Pour le pourcentage
+                                                      // Si penalite pourcentage == Capital
+                                                      if(ammortissement.PenalitePourcentage == "Capital"){
+                                                        $('#remboursement_credit_penalite').val(penalitecapitalp);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                     // Si penalite pourcentage == Interet
+                                                    else if(ammortissement.PenalitePourcentage == "Interet"){
+                                                        $('#remboursement_credit_penalite').val(penaliteinteretp);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                    // Si penalite pourcentage == Credit Restant
+                                                    else if(ammortissement.PenalitePourcentage == "Credit Restant"){
+                                                        $('#remboursement_credit_penalite').val(penaliteammortissementEcheancep);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+
                                                 }
                                                 else{
                                                     $('#remboursement_credit_penalite').val(0);
@@ -288,13 +332,58 @@ $(document).ready(function(){
 
                                             var periodepenalite=remboursement.perioderemboursement;
                                             periodepenalite++;
+
+                                            // Les 3 types de penalites
+                                            // Anticipe
+                                            var penalitecapital=(remboursement.principale*remboursement.PenalitePayementAntcp/100);
+                                            var penaliteammortissementEcheance=((remboursement.montanttTotal*remboursement.PenalitePayementAntcp/100));
+                                            var penaliteinteret=((remboursement.interet*remboursement.PenalitePayementAntcp/100));
+                                            // Pourcentage
+                                            var penalitecapitalp=(remboursement.principale*remboursement.RetardPourcentage/100);
+                                            var penaliteammortissementEcheancep=((remboursement.montanttTotal*remboursement.RetardPourcentage/100));
+                                            var penaliteinteretp=((remboursement.interet*remboursement.RetardPourcentage/100));
+
+                                                                                                // Pour l'anticipe
+                                                    // Si penalite pourcentage == Capital
+                                                    if(remboursement.PenaliteAnticipe == "Capital"){
+                                                        $('#remboursement_credit_penalite').val(penalitecapital);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                     // Si penalite pourcentage == Interet
+                                                    else if(remboursement.PenaliteAnticipe == "Interet"){
+                                                        $('#remboursement_credit_penalite').val(penaliteinteret);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                    // Si penalite pourcentage == Credit Restant
+                                                    else if(remboursement.PenaliteAnticipe == "Credit Restant"){
+                                                        $('#remboursement_credit_penalite').val(penaliteammortissementEcheance);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+
+                                                    // Pour le pourcentage
+                                                      // Si penalite pourcentage == Capital
+                                                      if(remboursement.PenalitePourcentage == "Capital"){
+                                                        $('#remboursement_credit_penalite').val(penalitecapitalp);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                     // Si penalite pourcentage == Interet
+                                                    else if(remboursement.PenalitePourcentage == "Interet"){
+                                                        $('#remboursement_credit_penalite').val(penaliteinteretp);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+                                                    // Si penalite pourcentage == Credit Restant
+                                                    else if(remboursement.PenalitePourcentage == "Credit Restant"){
+                                                        $('#remboursement_credit_penalite').val(penaliteammortissementEcheancep);
+                                                        $('#remboursement_credit_Commentaire').val('RETARD');
+                                                    }
+
                                             
-                                            var penalite=((remboursement.montanttTotal*2/100));
+                                            // var penalite=((remboursement.montanttTotal*2/100));
                                             
-                                            $('#remboursement_credit_penalite').val(penalite);
+                                            // $('#remboursement_credit_penalite').val(penalite);
                                             $('#remboursement_credit_periode').val(periodepenalite);
                                             document.getElementById('periode').innerHTML=periodepenalite;
-                                            $('#remboursement_credit_Commentaire').val('RETARD');
+                                            // $('#remboursement_credit_Commentaire').val('RETARD');
 
                                         }
                                             // Sinon on complete le remboursement ,
