@@ -49,4 +49,16 @@ class CompteCaisseRepository extends ServiceEntityRepository
 
         return $statement;
     }
+
+    public function findCaisseByUser($responsable){
+                $query = "SELECT
+                User.responsabilite
+            FROM App\Entity\User User
+            WHERE User.id= :responsable
+            ";
+
+            $statement = $this->getEntityManager()->createQuery($query)->setParameter(':responsable',$responsable)->execute();
+
+            return $statement;
+            }
 }

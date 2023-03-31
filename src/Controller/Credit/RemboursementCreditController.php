@@ -45,6 +45,8 @@ class RemboursementCreditController extends AbstractController
         $Mode=$request->query->get('Mode');
         $capital=$request->query->get('capital');
         $interet=$request->query->get('interet');
+        $soldecapital=$request->query->get('soldecapital');
+        $soldeinteret=$request->query->get('soldeinteret');
         
         // dd($Mode);
 
@@ -81,6 +83,9 @@ class RemboursementCreditController extends AbstractController
             // Recuperation interet
             $interetrembourser=$montantrembourser-$capital;
 
+            // Solde restant du
+
+
             if ($montantrembourser > $echeance && $restemontant == 0) {
                 $periodeactuel=$remboursementCredit->getPeriode();
                 $commentaire='ANTICIPE';
@@ -98,6 +103,15 @@ class RemboursementCreditController extends AbstractController
                 // Montant anticipé
                 $montantrembourseranticipe=$montantrembourser/$tranche;
 
+                // Capitale anticipe
+                $InteretA=$montantrembourseranticipe-$capital;
+
+                // Interet Anticipe
+                $CapitaleA=$montantrembourseranticipe-$InteretA;
+
+                // $InteretA=$
+
+
                 $montant=[
                     [
                         'NumeroCredit' => $remboursementCredit->getNumeroCredit(),
@@ -112,11 +126,12 @@ class RemboursementCreditController extends AbstractController
                         'Penalite' => $remboursementCredit->getPenalite(),
                         'Commentaire' => $commentaire,
                         'TypeClient'=>$typeclient,
-                        'Capital'=>$capitalrembourser,
-                        'Interet'=>$interetrembourser
+                        'Capital'=>$CapitaleA,
+                        'Interet'=>$InteretA
 
                     ]
                 ];
+
 
                 for($i=1 ; $i < $tranche ;$i++){
 
@@ -135,13 +150,12 @@ class RemboursementCreditController extends AbstractController
                         'Penalite' => $remboursementCredit->getPenalite(),
                         'Commentaire' => $commentaire,
                         'TypeClient'=>$typeclient,
-                        'Capital'=>$capitalrembourser,
-                        'Interet'=>$interetrembourser
+                        'Capital'=>$CapitaleA,
+                        'Interet'=>$InteretA
                     ]);
-
+                    dd($montant);
                 }
 
-                // dd($montant);
 
                 // On inserer dans la base de donnees
                 foreach($montant as $montant){
@@ -168,6 +182,82 @@ class RemboursementCreditController extends AbstractController
 
                 }
 
+            // Fiche de credit
+            // $fiche=[
+            //     [
+            //         'DateTransaction'=>$remboursementCredit->getDateRemboursement(),
+            //         'Transaction'=>"Remboursment",
+            //         'CapitalDu'=>$capital+$resteprecedent,
+            //         'InteretDu'=>$interet,
+            //         'CreditDu'=>$capital+$resteprecedent+$interet,
+            //         'Capital'=>$capitalrembourser,
+            //         'Interet'=>$interetrembourser,
+            //         'Total'=>$montantrembourseranticipe,
+            //         'Penalite'=>$remboursementCredit->getPenalite(),
+            //         'NumeroCredit'=>$remboursementCredit->getNumeroCredit(),
+            //         'Periode'=>$periodeactuel++
+            //     ]
+            //     ];
+
+            //     for($i=1;$i<$tranche;$i++){
+            //         array_push($fiche,[
+            //             'DateTransaction'=>$remboursementCredit->getDateRemboursement(),
+            //             'Transaction'=>"Remboursment",
+            //             'CapitalDu'=>$capital+$resteprecedent,
+            //             'InteretDu'=>$interet,
+            //             'CreditDu'=>$capital+$resteprecedent+$interet,
+            //             'Capital'=>$capitalrembourser,
+            //             'Interet'=>$interetrembourser,
+            //             'Total'=>$montantrembourseranticipe,
+            //             'Penalite'=>$remboursementCredit->getPenalite(),
+            //             'NumeroCredit'=>$remboursementCredit->getNumeroCredit(),
+            //             'Periode'=>$periodeactuel++
+            //         ]);
+            //     }
+
+            //     foreach($fiche as $fiche){
+            //         // Fiche de credit
+            //     $fichedecredit->setNumeroCredit($montant['NumeroCredit']);
+            //     $fichedecredit->setDateTransaction($remboursementCredit->getDateRemboursement());
+            //     $fichedecredit->setTransaction('Remboursement');
+            //     $fichedecredit->setCapital($capitalrembourser);
+            //     // Capital Du
+            //     $fichedecredit->setCapitalDu($capital+$resteprecedent);
+            //     // Interet
+            //     $fichedecredit->setInteretDu($interet);
+            //     // interet
+            //     $fichedecredit->setInteret($interetrembourser);
+            //     // Total
+            //     $fichedecredit->setTotal($montantrembourseranticipe);
+            //     $fichedecredit->setPenalite($montant['Penalite']);
+    
+            //     $em->persist($fichedecredit);
+            //     $em->flush();
+                
+            //     // dd($montant);
+
+            //     }
+                
+                
+
+                // Fiche de credit
+                // $fichedecredit->setNumeroCredit($numerocredit);
+                // $fichedecredit->setDateTransaction($dateremboursement);
+                // $fichedecredit->setTransaction('Remboursement');
+                // $fichedecredit->setCapital($capitalrembourser);
+                // // Capital Du
+                // $fichedecredit->setCapitalDu($capital+$resteprecedent);
+                // // Interet
+                // $fichedecredit->setInteretDu($interet);
+                // // interet
+                // $fichedecredit->setInteret($interetrembourser);
+                // // Total
+                // $fichedecredit->setTotal($montantTotalPayes);
+                // $fichedecredit->setPenalite($penalite);
+    
+                // $em->persist($fichedecredit);
+                // $em->flush();
+                
                 // dd($montant);
 
             }
@@ -414,11 +504,21 @@ class RemboursementCreditController extends AbstractController
                 $fichedecredit->setDateTransaction($dateremboursement);
                 $fichedecredit->setTransaction('Remboursement');
                 $fichedecredit->setCapital($capitalrembourser);
+                // Capital Du
+                $fichedecredit->setCapitalDu($capital+$resteprecedent);
+                // Interet Du
+                $fichedecredit->setInteretDu($interet);
+                // Credit Du
+                $CreditDu=$capital+$resteprecedent+$interet;
+                $fichedecredit->setCreditDu($CreditDu);
                 // interet
                 $fichedecredit->setInteret($interetrembourser);
+                // Solde credit
+                $fichedecredit->setSoldeCourant($TotalRembourser);
                 // Total
-                $fichedecredit->setTotal($montantTotalPayes);
+                $fichedecredit->setTotal($montantTotalPayes++);
                 $fichedecredit->setPenalite($penalite);
+
     
                 $em->persist($fichedecredit);
                 $em->flush();

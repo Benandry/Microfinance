@@ -469,17 +469,25 @@
                                 </div>
                                 <div class="col-6 col-xl-6">
                                     <div class="d-flex justify-content-end">
-                                        <p class="m-3"><i class="fa fa-home"></i> Agence : {{ app.user.agence.NomAgence }} </p>
-                                        <p class="m-3"> Code : {{ app.user.agence.codeAgence }} </p>
+                                        <p class="m-3"><i class="fa fa-home"></i> Agence :
+                                         {{ app.user.agence.NomAgence }}
+                                          </p>
+                                        <p class="m-3"> Code : 
+                                        {{ app.user.agence.codeAgence }}
+                                         </p>
                                             <!-- Deconnection  et inscription  -->
                                         <div class="dropdown m-3">
                                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span class="d-none d-sm-inline mx-1 lien">{{ app.user.prenom }} ({{ app.user.responsabilite }})</span>
+                                                <span class="d-none d-sm-inline mx-1 lien">
+                                                {{ app.user.prenom }} ({{ app.user.responsabilite }})
+                                                </span>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-primary text-small shadow dropmenu" aria-labelledby="dropdownUser1">
                                             {% if app.user.getRoles[0] == 'ROLE_ADMIN' %}
                                                 <li>
-                                                    <a class="dropdown-item down" href="{{path('app_liste_user')}}" >Gestion d'utilisateur <p style="display: none;" id="utilisateur">{{ app.user.prenom }} </p> 
+                                                    <a class="dropdown-item down" href="{{path('app_liste_user')}}" >Gestion d'utilisateur <p style="display: none;" id="utilisateur">
+                                                    {{ app.user.prenom }}
+                                                     </p> 
                                                         <div class="fw-bold">
                                                             ({{ app.user.responsabilite }})
                                                         </div> 

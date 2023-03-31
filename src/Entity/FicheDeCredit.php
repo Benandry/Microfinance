@@ -20,6 +20,16 @@ class FicheDeCredit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Transaction = null;
 
+    
+    #[ORM\Column(nullable: true)]
+    private ?float $CapitalDu = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $InteretDu = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $CreditDu = null;
+
     #[ORM\Column(nullable: true)]
     private ?float $Capital = null;
 
@@ -30,6 +40,13 @@ class FicheDeCredit
     private ?float $Total = null;
 
     #[ORM\Column(nullable: true)]
+    private ?float $SoldeCourant = null;
+
+    // #[ORM\Column(nullable: true)]
+    // private ?float $InteretRD = null;
+
+
+    #[ORM\Column(nullable: true)]
     private ?float $Penalite = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -37,6 +54,7 @@ class FicheDeCredit
 
     #[ORM\Column(nullable: true)]
     private ?int $Periode = null;
+
 
     public function getId(): ?int
     {
@@ -66,6 +84,43 @@ class FicheDeCredit
 
         return $this;
     }
+
+    public function getCapitalDu(): ?float
+    {
+        return $this->CapitalDu;
+    }
+
+    public function setCapitalDu(?float $CapitalDu): self
+    {
+        $this->CapitalDu = $CapitalDu;
+
+        return $this;
+    }
+
+    public function getInteretDu(): ?float
+    {
+        return $this->InteretDu;
+    }
+
+    public function setInteretDu(?float $InteretDu): self
+    {
+        $this->InteretDu = $InteretDu;
+
+        return $this;
+    }
+
+    public function getCreditDu(): ?float
+    {
+        return $this->CreditDu;
+    }
+
+    public function setCreditDu(?float $CreditDu): self
+    {
+        $this->CreditDu = $CreditDu;
+
+        return $this;
+    }
+
 
     public function getCapital(): ?float
     {
@@ -138,4 +193,29 @@ class FicheDeCredit
 
         return $this;
     }
+
+    public function getSoldeCourant(): ?float
+    {
+        return $this->SoldeCourant;
+    }
+
+    public function setSoldeCourant(?float $SoldeCourant): self
+    {
+        $this->SoldeCourant = $SoldeCourant;
+
+        return $this;
+    }
+
+    // public function getInteretRD(): ?float
+    // {
+    //     return $this->InteretRD;
+    // }
+
+    // public function setInteretRD(?float $InteretRD): self
+    // {
+    //     $this->InteretRD = $InteretRD;
+
+    //     return $this;
+    // }
+
 }

@@ -395,7 +395,9 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 remboursement.TransactionEnLiquide,
                 remboursement.TransfertEpargne,
                 remboursement.Commentaire,
-                remboursement.PieceCompteble
+                remboursement.PieceCompteble,
+                -- Decaissement
+                (decaissement.Capital+decaissement.Interet) creditdu
             FROM
                 App\Entity\DemandeCredit demande
                 INNER JOIN
@@ -407,6 +409,12 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 App\Entity\RemboursementCredit remboursement
                 WITH
                 amortissement.codecredit = remboursement.NumeroCredit
+
+                LEFT JOIN
+                App\Entity\Decaissement decaissement
+                WITH
+                decaissement.numeroCredit=demande.NumeroCredit
+
 
             WHERE
             demande.id = :numerocredit
@@ -434,8 +442,16 @@ class RemboursementCreditRepository extends ServiceEntityRepository
             'SELECT DISTINCT
             -- amortissement
                 (demande.Montant+(demande.Montant*demande.TauxInteretAnnuel/100)) crd,
+            -- Capital du
+                demande.Montant capitaldu,
+            -- Interet du
+                demande.TauxInteretAnnuel interetdu,
             -- credit deja rembourser
                 SUM(remboursement.MontantTotalPaye) TotalRembourser,
+            -- Capital deja rembourser
+                SUM(remboursement.Capital) soldecapital,
+            -- Interet deja rembourser
+                SUM(remboursement.Interet) soldeinteret,
             -- credit pas encore rembourser
             (demande.Montant+(demande.Montant*demande.TauxInteretAnnuel/100))-SUM(remboursement.MontantTotalPaye) TotalARembourser
 
@@ -496,11 +512,12 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 remboursement.DateRemboursement dateremb,
                 remboursement.Capital,
                 remboursement.Interet
-            FROM
+
+                FROM
                 App\Entity\AmortissementFixe amortissement
                 INNER JOIN
                 App\Entity\RemboursementCredit remboursement
-            WITH
+                WITH
                 amortissement.codecredit = remboursement.NumeroCredit
                 AND
                  amortissement.periode = remboursement.periode
@@ -510,8 +527,8 @@ class RemboursementCreditRepository extends ServiceEntityRepository
                 WITH
                 demande.NumeroCredit=amortissement.codecredit
 
-            WHERE
-            amortissement.codecredit= :codecredit          
+                WHERE
+                amortissement.codecredit= :codecredit          
             '
         )
         ->setParameter(':codecredit',$codecredit);

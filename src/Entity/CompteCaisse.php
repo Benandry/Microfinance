@@ -3,6 +3,8 @@
 namespace App\Entity;
     
 use App\Repository\CompteCaisseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CompteCaisseRepository::class)]
@@ -55,17 +57,17 @@ class CompteCaisse {
         return $this;
     }
 
-    public function getCodecaisse(): ?string
-    {
-        return $this->codecaisse;
-    }
+    // public function getCodecaisse(): ?string
+    // {
+    //     return $this->codecaisse;
+    // }
 
-    public function setCodecaisse(string $codecaisse): self
-    {
-        $this->codecaisse = $codecaisse;
+    // public function setCodecaisse(string $codecaisse): self
+    // {
+    //     $this->codecaisse = $codecaisse;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getAgence(): ?Agence
     {
@@ -112,22 +114,22 @@ class CompteCaisse {
         return $this->users;
     }
 
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addCaisse($this);
-        }
+    // public function addUser(User $user): self
+    // {
+    //     if (!$this->users->contains($user)) {
+    //         $this->users->add($user);
+    //         $user->addCaisse($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeCaisse($this);
-        }
+    // public function removeUser(User $user): self
+    // {
+    //     if ($this->users->removeElement($user)) {
+    //         $user->removeCaisse($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

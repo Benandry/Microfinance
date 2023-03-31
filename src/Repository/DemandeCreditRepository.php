@@ -147,7 +147,7 @@ class DemandeCreditRepository extends ServiceEntityRepository
             individuel.prenom_client,
             demande.NumeroCredit
             FROM
-                App\Entity\IndividuelClient individuel
+                App\Entity\Individuelclient individuel
                 LEFT JOIN
                 App\Entity\DemandeCredit demande
                 WITH
@@ -422,11 +422,15 @@ class DemandeCreditRepository extends ServiceEntityRepository
                 fiche.Periode,
                 fiche.NumeroCredit,
                 fiche.DateTransaction,
+                fiche.CapitalDu,
+                fiche.InteretDu,
+                fiche.CreditDu,
                 fiche.Transaction,
                 fiche.Capital,
                 fiche.Interet,
                 fiche.Total,
-                fiche.Penalite
+                fiche.Penalite,
+                fiche.SoldeCourant
             FROM
                 App\Entity\FicheDeCredit fiche
                 -- LEFT JOIN

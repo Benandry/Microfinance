@@ -20,6 +20,7 @@ class dashboard extends AbstractController
         $nombreCompteEpargne = $repoEtude->nombreEpargne();
         $nombreAgence = $repoEtude->nombreAgence();
         $compteCredit = $repoEtude->nombreCompteCredit();
+        // dd($nombreAgence);
 
         // dd($compteCredit);
         

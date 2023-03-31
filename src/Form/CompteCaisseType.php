@@ -57,7 +57,7 @@ class CompteCaisseType extends AbstractType
                 'label' => "Plan Comptable : ",
                 'placeholder' => "Plan comptable : "
             ])
-            ->add('codecaisse')
+            // ->add('codecaisse')
         ;
     }
 

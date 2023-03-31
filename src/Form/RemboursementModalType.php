@@ -80,6 +80,8 @@ class RemboursementModalType extends AbstractType
             ])
             ->add('capital')
             ->add('interet')
+            ->add('soldecapital')
+            ->add('soldeinteret')
             ;
     }
 

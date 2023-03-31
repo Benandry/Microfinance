@@ -44,15 +44,15 @@ $(document).ready(function(){
         // Afficher sur la formulaire
         $('#passe_en_perte_NumeroCredit').val(CodeCredit);
 
-        $('#passe_en_perte_NumeroCredit').hide();
+        // $('#passe_en_perte_NumeroCredit').hide();
 
-        $('#passe_en_perte_PasseEnPerte').on('click',function(){
-            var boutonpasseenperte=$('#passe_en_perte_PasseEnPerte').val();
-            if( boutonpasseenperte == 1 ){
-                $('#passe_en_perte_NumeroCredit').show();
-            }else{
-                $('#passe_en_perte_NumeroCredit').hide();
-            }
-        });
+        // $('#passe_en_perte_PasseEnPerte').on('click',function(){
+        //     var boutonpasseenperte=$('#passe_en_perte_PasseEnPerte').val();
+        //     if( boutonpasseenperte == 1 ){
+        //         $('#passe_en_perte_NumeroCredit').show();
+        //     }else{
+        //         $('#passe_en_perte_NumeroCredit').hide();
+        //     }
+        // });
     }
 });

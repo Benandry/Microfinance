@@ -31,7 +31,6 @@ class IndividuelclientType extends AbstractType
     {
         $builder
             ->add('photo',FileType::class,[
-                'mapped'=>false,
                 'required'=>false,
             ])
             ->add('nom_client',TextType::class,[
@@ -86,7 +85,9 @@ class IndividuelclientType extends AbstractType
                 'widget'=>'single_text',
                 'label'=>'Date de naissance',
             ])
-            ->add('lieu_naissance')
+            ->add('lieu_naissance',TextType::class,[
+                'required'=>false
+            ])
             ->add('numeroMobile',TextType::class,[
                 'label'=>'Numero telephone',
                 'attr' => [
@@ -95,7 +96,9 @@ class IndividuelclientType extends AbstractType
                     'minLength' =>10,
                 ]
             ])
-            ->add('profession')
+            ->add('profession',TextType::class,[
+                'required'=>false
+            ])
             ->add('adressephysique',TextType::class,[
                 'label'=>'Adresse physique',
             ])
@@ -109,11 +112,21 @@ class IndividuelclientType extends AbstractType
                 },
                 'attr'=>['class'=>'form-control']
                 ])
-                ->add('Fokontany')
-                ->add('District')
-                ->add('Region')
-                ->add('Longitude')
-                ->add('Latitude')
+                ->add('Fokontany',TextType::class,[
+                    'required'=>false
+                ])
+                ->add('District',TextType::class,[
+                    'required'=>false
+                ])
+                ->add('Region',TextType::class,[
+                    'required'=>false
+                ])
+                ->add('Longitude',TextType::class,[
+                    'required'=>false
+                ])
+                ->add('Latitude',TextType::class,[
+                    'required'=>false
+                ])
             ->add('etatcivile',EntityType::class,[
                 'class'=>Etatcivile::class,
                 'choice_label'=>'etatcivile',
@@ -216,7 +229,6 @@ class IndividuelclientType extends AbstractType
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'required'=>false,
             ])
             ->add('dateadhesion',DateType::class,[
                 'widget'=>'single_text',

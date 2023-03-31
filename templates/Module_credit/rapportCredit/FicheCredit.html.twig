@@ -6,11 +6,7 @@
 {% block body %}
     {{ include('modal.html.twig') }}
     
-    {# {% if showFiche == false %}
-        {{ include('Module_credit/rapportCredit/FicheCreditModal.html.twig') }}
-    {% else %} #}
         <div class="card p-3">
-        {# {% for tableau in tableau %} #}
              <div class="card">
                 <div class="row text-secondary m-3">
                     <div class="col-2 col-sm-2 col-sm-2">
@@ -25,15 +21,18 @@
                     </div>
                 </div>
             </div>
-        {# {% endfor %} #}
         <table class="table table-bordered mt-2">
             <thead>
                 <tr>
                     <th>Date transaction</th>
                     <th>Transaction</th>
+                    <th>Capital du</th>
+                    <th>Interet du</th>
+                    <th>Montant du</th>
                     <th>Capital</th>
                     <th>Credit</th>
                     <th>Total</th>
+                    <th>Solde Credit</th>
                     <th>Penalite</th>
                 </tr>
               
@@ -43,9 +42,13 @@
                 <tr>
                     <td>{{ ficheCredit.DateTransaction|date("d/m/Y")}}</td>
                     <td>{{ ficheCredit.Transaction }}</td>
+                    <td>{{ ficheCredit.CapitalDu }}</td>
+                    <td>{{ ficheCredit.InteretDu }}</td>
+                    <td>{{ ficheCredit.CreditDu }}</td>
                     <td>{{ ficheCredit.Capital }}</td>
                     <td>{{ ficheCredit.Interet }}</td>
                     <td>{{ ficheCredit.Total }}</td>
+                    <td>{{ ficheCredit.SoldeCourant }}</td>
                     <td>{{ ficheCredit.Penalite }}</td>
                 </tr>
                 {% endfor %}

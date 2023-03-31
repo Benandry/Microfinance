@@ -132,6 +132,8 @@ $(document).ready(function(){
                                 $('#remboursement_modal_crd').val(sommecredit.crd);
                                 $('#remboursement_modal_TotalRembourser').val(sommecredit.TotalRembourser);
                                 $('#remboursement_modal_TotalaRembourser').val(sommecredit.TotalARembourser);
+                                $('#remboursement_modal_soldecapital').val(sommecredit.soldecapital);
+                                $('#remboursement_modal_soldeinteret').val(sommecredit.soldeinteret);
                             }
                         }
                     })

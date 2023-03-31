@@ -56,6 +56,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->individuelclients = new ArrayCollection();
         $this->demandeCredits = new ArrayCollection();
+        $this->caisse = new ArrayCollection();
+        $this->agence = new ArrayCollection();
     }
 
     public function __toString()

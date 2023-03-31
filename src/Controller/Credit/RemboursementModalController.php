@@ -34,6 +34,8 @@ class RemboursementModalController extends AbstractController
             $Mode=$data['Mode'];
             $capital=$data['capital'];
             $interet=$data['interet'];
+            $soldecapital=$data['soldecapital'];
+            $soldeinteret=$data['soldeinteret'];
             // dd($codecredit);
 
             return $this->redirectToRoute('app_remboursement_credit_new',
@@ -52,7 +54,9 @@ class RemboursementModalController extends AbstractController
                 'TotalPeriode'=>$TotalPeriode,
                 'Mode'=>$Mode,
                 'capital'=>$capital,
-                'interet'=>$interet
+                'interet'=>$interet,
+                'soldecapital'=>$soldecapital,
+                'soldeinteret'=>$soldeinteret
 
             ],Response::HTTP_SEE_OTHER);
 
@@ -73,6 +77,8 @@ class RemboursementModalController extends AbstractController
             'Mode'=>'Mode',
             'capital'=>'capital',
             'interet'=>'interet',
+            'soldecapital'=>'soldecapital',
+            'soldeinteret'=>'soldeinteret',
             'form'=>$form
         ]);
     }

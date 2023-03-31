@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Agence;
+use App\Entity\CompteCaisse;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -119,7 +120,10 @@ class RegistrationFormType extends AbstractType
             ->add('caisse',EntityType::class,[
                 'class' => CompteCaisse::class,
                 'choice_label' => function($caisse){
-                    return $caisse->getCodecaisse()." ".$caisse->getNomCaisse();
+                    return $caisse->getNomCaisse();
+                },
+                'query_builder'=>function($caisse){
+                    return $caisse->createQueryBuilder('c');
                 },
                 'label' => 'Compte Caisse :',
                  'multiple' => true,

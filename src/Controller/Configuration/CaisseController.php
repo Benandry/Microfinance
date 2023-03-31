@@ -37,8 +37,8 @@ class CaisseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $codecaisse = $caisse->getPlanComptable()->getNumeroCompte()."".$caisse->getCodecaisse();
-            $caisse->setCodecaisse($codecaisse);
+            // $codecaisse = $caisse->getPlanComptable()->getNumeroCompte()."".$caisse->getCodecaisse();
+            // $caisse->setCodecaisse($codecaisse);
 
             // Verifier si le client a de compte caisse 
             $reponsable = $caisse->getResponsable();
@@ -50,7 +50,7 @@ class CaisseController extends AbstractController
             }else {
                 // On peut creer un compte caissr
                 $compteCaisseRepository->save($caisse, true);
-                $this->addFlash('primary',"Nouveau compte caisse est ajouter : ".$caisse->getCodecaisse()." ".$caisse->getNomCaisse());
+                $this->addFlash('primary',"Nouveau compte caisse est ajouter : ".$caisse->getNomCaisse());
             }
             return $this->redirectToRoute('app_compte_caisse_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -79,7 +79,7 @@ class CaisseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $compteCaisseRepository->save($caisse, true);
             
-            $this->addFlash('info',"Le compte caisse : ".$caisse->getCodecaisse()." ".$caisse->getNomCaisse()." est modifie ");
+            $this->addFlash('info',"Le compte caisse :".$caisse->getNomCaisse()." est modifie ");
             return $this->redirectToRoute('app_compte_caisse_index', [], Response::HTTP_SEE_OTHER);
         }
 
