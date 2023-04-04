@@ -262,7 +262,7 @@ $(document).ready(function(){
                         var config=content[j];
                         // console.log(config);
 
-                        // Recuperation du taux garantie financiere
+                        // Recuperation du taux garantie financiere-
                         var tauxgarantiefinanciere=config.TauxGarantieFinanciere;
 
 

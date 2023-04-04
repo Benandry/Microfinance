@@ -34,6 +34,11 @@ class TransactionType extends AbstractType
                     return $caisse->getCodecaisse()." -- ".$caisse->getNomCaisse();
                 },
                 'placeholder' => "Choisissez le compte caisse ",
+                'query_builder'=>function($caisse){
+                    return $caisse->createQueryBuilder('c')
+                                ->join('c.users','u')
+                                ->where('u.id = c.users');
+                },
                 'label' => "Compte caisse ",
                 'autocomplete' => true,
                 'attr' => [

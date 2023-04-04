@@ -109,6 +109,7 @@ $(document).ready(function(){
                                         }
                                         $('#remboursement_modal_capital').val(remboursementmodal.principale);
                                         $('#remboursement_modal_interet').val(remboursementmodal.interet);
+                                        $('#remboursement_modal_TotalPeriode').val(remboursementmodal.NombreTranche);
                                         $('.btn').show();
                                         
                                         
@@ -130,8 +131,12 @@ $(document).ready(function(){
                             for(let j=0;j<content.length;j++){
                                 var sommecredit=content[j];
                                 $('#remboursement_modal_crd').val(sommecredit.crd);
+                                if(sommecredit.TotalARembourser == null){
+                                    $('#remboursement_modal_TotalaRembourser').val(sommecredit.crd);
+                                }else{
+                                    $('#remboursement_modal_TotalaRembourser').val(sommecredit.TotalARembourser);
+                                }
                                 $('#remboursement_modal_TotalRembourser').val(sommecredit.TotalRembourser);
-                                $('#remboursement_modal_TotalaRembourser').val(sommecredit.TotalARembourser);
                                 $('#remboursement_modal_soldecapital').val(sommecredit.soldecapital);
                                 $('#remboursement_modal_soldeinteret').val(sommecredit.soldeinteret);
                             }

@@ -94,7 +94,6 @@ class RemboursementCreditController extends AbstractController
                 $resteperiode=$totalperiode-$periode;
                 // dd($resteperiode); 
 
-
                 // Regle de 3 pour calculer le nombre de tranche reqtant
 
                 $tranche=$montantrembourser*$resteperiode/$TotalaRembourser;

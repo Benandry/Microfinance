@@ -147,7 +147,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('Information',TextType::class,[
-                'label'=>'Information',
+                'label'=>'Atelier',
                 'required'=>false,
             ])
             ->add('titre',EntityType::class,[
@@ -310,7 +310,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProduction',IntegerType::class,[
-                'label'=>'Cout moyen de production 1',
+                'label'=>'Valeur de production',
                 'required'=>false,
             ])
             ->add('LibelleMoyenProduction2',TextType::class,[
@@ -318,7 +318,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProduction2',IntegerType::class,[
-                'label'=>'Cout moyen de production 2',
+                'label'=>'Valeur de production 2',
                 'required'=>false,
             ])
             ->add('LibelleMoyenProduction3',TextType::class,[
@@ -326,7 +326,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProduction3',IntegerType::class,[
-                'label'=>'Cout moyen de production 3',
+                'label'=>'Valeur de production 3',
                 'required'=>false,
             ])
             ->add('LibelleMoyenProduction4',TextType::class,[
@@ -334,7 +334,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProduction4',IntegerType::class,[
-                'label'=>'Cout moyen de production 4',
+                'label'=>'Valeur de production 4',
                 'required'=>false,
             ])
             ->add('EmployeTemporaire',TextType::class,[
@@ -367,7 +367,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProdCmplmtr',IntegerType::class,[
-                'label'=>'Montant moyen de production 1',
+                'label'=>'Valeur de production 1',
                 'required'=>false,
             ])
             ->add('LibellMoyenProdCmplmtr2',TextType::class,[
@@ -375,7 +375,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProdCmplmtr2',IntegerType::class,[
-                'label'=>'Montant moyen de production 2',
+                'label'=>'Valeur de production 2',
                 'required'=>false,
             ])
             ->add('LibellMoyenProdCmplmtr3',TextType::class,[
@@ -383,7 +383,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProdCmplmtr3',IntegerType::class,[
-                'label'=>'Montant moyen de production 3',
+                'label'=>'Valeur de production 3',
                 'required'=>false,
             ])
             ->add('LibellMoyenProdCmplmtr4',TextType::class,[
@@ -391,7 +391,7 @@ class IndividuelclientType extends AbstractType
                 'required'=>false,
             ])
             ->add('MontantMoyenProdCmplmtr4',IntegerType::class,[
-                'label'=>'Montant moyen de production 4',
+                'label'=>'Valeur de production 4',
                 'required'=>false,
             ])
             ->add('EmployeTemprarCmplt',TextType::class,[
